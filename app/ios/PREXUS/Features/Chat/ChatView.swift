@@ -69,15 +69,29 @@ struct ChatView: View {
             sensitivitySegmentedPicker(
                 localOnly: "Local Only",
                 localPreferred: "Local Preferred",
-                escalationAllowed: "Escalation Allowed"
+                escalationAllowed: "Escalation Allowed",
+                providerRestricted: "Provider Restricted"
             )
 
             sensitivitySegmentedPicker(
                 localOnly: "Local",
                 localPreferred: "Prefer",
-                escalationAllowed: "Escalate"
+                escalationAllowed: "Escalate",
+                providerRestricted: "Restricted"
             )
+
+            sensitivityMenuPicker
         }
+    }
+
+    private var sensitivityMenuPicker: some View {
+        Picker("Sensitivity", selection: $viewModel.selectedSensitivity) {
+            ForEach(SensitivityLevel.allCases, id: \.self) { level in
+                Text(level.displayLabel).tag(level)
+            }
+        }
+        .pickerStyle(.menu)
+        .padding(.horizontal, 2)
     }
 
     private var sensitivityDescription: LocalizedStringKey {
@@ -89,7 +103,7 @@ struct ChatView: View {
         case .escalationAllowed:
             return "Allow cloud escalation when it helps."
         case .providerRestricted:
-            return "Use approved providers only."
+            return "Use only approved providers (currently local-only fallback)."
         }
     }
 
@@ -146,12 +160,14 @@ struct ChatView: View {
     private func sensitivitySegmentedPicker(
         localOnly: LocalizedStringKey,
         localPreferred: LocalizedStringKey,
-        escalationAllowed: LocalizedStringKey
+        escalationAllowed: LocalizedStringKey,
+        providerRestricted: LocalizedStringKey
     ) -> some View {
         Picker("Sensitivity", selection: $viewModel.selectedSensitivity) {
             Text(localOnly).tag(SensitivityLevel.localOnly)
             Text(localPreferred).tag(SensitivityLevel.localPreferred)
             Text(escalationAllowed).tag(SensitivityLevel.escalationAllowed)
+            Text(providerRestricted).tag(SensitivityLevel.providerRestricted)
         }
         .pickerStyle(.segmented)
     }

@@ -7,11 +7,24 @@ enum RuntimeModality: String {
     case sensor
 }
 
-enum SensitivityLevel: String, Codable {
+enum SensitivityLevel: String, Codable, CaseIterable {
     case localOnly
     case localPreferred
     case escalationAllowed
     case providerRestricted
+
+    var displayLabel: String {
+        switch self {
+        case .localOnly:
+            return "Local Only"
+        case .localPreferred:
+            return "Local Preferred"
+        case .escalationAllowed:
+            return "Escalation Allowed"
+        case .providerRestricted:
+            return "Provider Restricted"
+        }
+    }
 }
 
 struct RuntimeRequest {
