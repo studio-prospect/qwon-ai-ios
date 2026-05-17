@@ -28,6 +28,10 @@ struct SettingsView: View {
                         in: 256...8192,
                         step: 256
                     )
+
+                    TextField("OpenAI Model", text: $settings.config.openAIModel)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
                 }
 
                 Section("API Keys") {

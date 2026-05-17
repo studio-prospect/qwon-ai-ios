@@ -27,7 +27,8 @@ final class PREXUSTests: XCTestCase {
         let runtime = RuntimeContainer.live(
             config: .default,
             apiKeyStore: InMemoryAPIKeyStore(),
-            memoryStore: InMemoryEpisodicMemoryStore()
+            memoryStore: InMemoryEpisodicMemoryStore(),
+            cloudModel: MockCloudModelClient()
         )
         let transcript = [
             ChatMessage(role: .system, content: "PREXUS runtime initialized."),
@@ -50,7 +51,8 @@ final class PREXUSTests: XCTestCase {
         let runtime = RuntimeContainer.live(
             config: .default,
             apiKeyStore: apiKeyStore,
-            memoryStore: InMemoryEpisodicMemoryStore()
+            memoryStore: InMemoryEpisodicMemoryStore(),
+            cloudModel: MockCloudModelClient()
         )
 
         let output = try await runtime.runTurn(
@@ -66,7 +68,8 @@ final class PREXUSTests: XCTestCase {
         let runtime = RuntimeContainer.live(
             config: .default,
             apiKeyStore: InMemoryAPIKeyStore(),
-            memoryStore: InMemoryEpisodicMemoryStore()
+            memoryStore: InMemoryEpisodicMemoryStore(),
+            cloudModel: MockCloudModelClient()
         )
 
         let output = try await runtime.runTurn(
@@ -153,7 +156,8 @@ final class PREXUSTests: XCTestCase {
 
         settings.config = AppConfig(
             allowsCloudEscalation: false,
-            maxCloudContextTokens: 512
+            maxCloudContextTokens: 512,
+            openAIModel: "gpt-5.1"
         )
         settings.openAIKey = "  openai-test-key  "
         settings.anthropicKey = ""
@@ -164,7 +168,8 @@ final class PREXUSTests: XCTestCase {
             reloaded.config,
             AppConfig(
                 allowsCloudEscalation: false,
-                maxCloudContextTokens: 512
+                maxCloudContextTokens: 512,
+                openAIModel: "gpt-5.1"
             )
         )
         XCTAssertEqual(apiKeyStore.apiKey(for: .openAI), "openai-test-key")
@@ -205,5 +210,95 @@ final class PREXUSTests: XCTestCase {
 
         viewModel.clearAll()
         XCTAssertTrue(viewModel.memories.isEmpty)
+    }
+
+    func testOpenAIResponsesClientBuildsRequestAndParsesOutput() async throws {
+        let transport = MockHTTPTransport(
+            responseData: """
+            {
+              "output": [
+                {
+                  "content": [
+                    {
+                      "type": "output_text",
+                      "text": "Escalated answer."
+                    }
+                  ]
+                }
+              ]
+            }
+            """.data(using: .utf8)!,
+            statusCode: 200
+        )
+        let client = OpenAIResponsesClient(
+            transport: transport,
+            model: "gpt-5-mini"
+        )
+
+        let output = try await client.generate(
+            prompt: "Intent route: code_task\n\nUser:\nReview this Swift code",
+            apiKey: "secret-key"
+        )
+
+        XCTAssertEqual(output, "Escalated answer.")
+        XCTAssertEqual(transport.lastRequest?.httpMethod, "POST")
+        XCTAssertEqual(transport.lastRequest?.value(forHTTPHeaderField: "Authorization"), "Bearer secret-key")
+
+        let requestBody = try XCTUnwrap(transport.lastRequest?.httpBody)
+        let json = try XCTUnwrap(JSONSerialization.jsonObject(with: requestBody) as? [String: Any])
+        XCTAssertEqual(json["model"] as? String, "gpt-5-mini")
+        XCTAssertEqual(json["input"] as? String, "Intent route: code_task\n\nUser:\nReview this Swift code")
+        XCTAssertEqual(json["store"] as? Bool, false)
+        XCTAssertNotNil(json["instructions"] as? String)
+    }
+
+    func testOpenAIResponsesClientSurfacesProviderErrors() async throws {
+        let transport = MockHTTPTransport(
+            responseData: """
+            {
+              "error": {
+                "message": "Invalid authentication credentials."
+              }
+            }
+            """.data(using: .utf8)!,
+            statusCode: 401
+        )
+        let client = OpenAIResponsesClient(
+            transport: transport,
+            model: "gpt-5-mini"
+        )
+
+        do {
+            _ = try await client.generate(prompt: "Hello", apiKey: "bad-key")
+            XCTFail("Expected provider failure")
+        } catch let error as CloudModelError {
+            XCTAssertEqual(
+                error,
+                .providerFailure(statusCode: 401, message: "Invalid authentication credentials.")
+            )
+        }
+    }
+}
+
+private final class MockHTTPTransport: HTTPTransport {
+    private let responseData: Data
+    private let statusCode: Int
+
+    private(set) var lastRequest: URLRequest?
+
+    init(responseData: Data, statusCode: Int) {
+        self.responseData = responseData
+        self.statusCode = statusCode
+    }
+
+    func data(for request: URLRequest) async throws -> (Data, HTTPURLResponse) {
+        lastRequest = request
+        let response = HTTPURLResponse(
+            url: try XCTUnwrap(request.url),
+            statusCode: statusCode,
+            httpVersion: nil,
+            headerFields: nil
+        )!
+        return (responseData, response)
     }
 }

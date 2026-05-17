@@ -237,9 +237,12 @@ For v0.1, the user-configurable runtime policy surface is intentionally small:
 
 - `allowsCloudEscalation`
 - `maxCloudContextTokens`
+- `openAIModel`
 - provider API key presence
 
 If a route selects a cloud provider but the required key is missing, the runtime falls back to the local model instead of failing the turn. This preserves low-friction operation while keeping cloud access explicit.
+
+The current OpenAI path also prefers privacy-preserving defaults by sending only the compressed runtime prompt and requesting stateless execution instead of relying on provider-side conversation storage.
 - RAG-based narrowing
 
 Cloud models should receive only the minimum context required.

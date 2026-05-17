@@ -11,7 +11,8 @@ struct RuntimeContainer {
     static func live(
         config: AppConfig,
         apiKeyStore: APIKeyStore,
-        memoryStore: EpisodicMemoryStore
+        memoryStore: EpisodicMemoryStore,
+        cloudModel: CloudModelClient? = nil
     ) -> RuntimeContainer {
         let policy = ExecutionPolicy(
             allowsCloudEscalation: config.allowsCloudEscalation,
@@ -20,7 +21,12 @@ struct RuntimeContainer {
         let classifier = HeuristicIntentClassifier()
         let compressor = HeuristicContextCompressor()
         let localModel = MockLocalModelClient()
-        let cloudModel = MockCloudModelClient()
+        let cloudModel = cloudModel ?? DefaultCloudModelClient(
+            openAIClient: OpenAIResponsesClient(
+                transport: URLSessionHTTPTransport(),
+                model: config.openAIModel
+            )
+        )
         let router = DefaultRoutingEngine(
             classifier: classifier,
             policy: policy

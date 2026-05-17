@@ -38,7 +38,7 @@ This is a routing preference, not a hardcoded rule.
 The OpenAI integration layer should support:
 
 - authenticated request execution
-- streaming responses
+- compact text generation over the Responses API
 - structured prompt packaging
 - provider-specific error handling
 - retry and fallback signaling to the orchestrator
@@ -77,6 +77,19 @@ Before sending a request to OpenAI, PREXUS should try:
 
 Only the minimum required context should be transmitted.
 
+## Current Implementation Status
+
+The current iOS scaffold now includes a live OpenAI request path for Tier 3 escalation:
+
+- uses `POST /v1/responses`
+- sends a single compact PREXUS prompt instead of raw conversation replay
+- uses user-supplied API keys from Keychain
+- sets `store: false` for a stateless default
+- extracts `output_text` content parts from the provider response
+- falls back to local generation if the OpenAI request fails
+
+This means OpenAI is no longer purely mocked in the runtime boundary, although Anthropic and Gemini remain placeholder integrations.
+
 ## Security Requirements
 
 - User API keys must be user-supplied
@@ -100,12 +113,13 @@ For MVP, OpenAI integration should include:
 
 - user API key configuration
 - basic authenticated requests
-- streaming response support
 - routing from PREXUS orchestrator
 - compressed context packaging
+- local fallback when cloud execution fails
 
 MVP does not need:
 
 - broad provider feature coverage
 - complex background job orchestration
 - advanced provider-specific optimizations beyond routing relevance
+- streaming event handling on day one

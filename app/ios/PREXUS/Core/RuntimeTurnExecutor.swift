@@ -31,22 +31,38 @@ extension RuntimeContainer {
         case .local:
             response = try await localModel.generate(prompt: prompt)
         case .openAI:
-            if apiKeyStore.apiKey(for: .openAI) == nil {
-                response = "OpenAI API key is missing. Local fallback used.\n\n" + (try await localModel.generate(prompt: prompt))
+            if let apiKey = apiKeyStore.apiKey(for: .openAI) {
+                do {
+                    response = try await cloudModel.generate(
+                        prompt: prompt,
+                        provider: .openAI,
+                        apiKey: apiKey
+                    )
+                } catch {
+                    response = "OpenAI request failed. Local fallback used.\n\n" + (try await localModel.generate(prompt: prompt))
+                }
             } else {
-                response = try await cloudModel.generate(prompt: prompt, provider: .openAI)
+                response = "OpenAI API key is missing. Local fallback used.\n\n" + (try await localModel.generate(prompt: prompt))
             }
         case .anthropic:
-            if apiKeyStore.apiKey(for: .anthropic) == nil {
-                response = "Anthropic API key is missing. Local fallback used.\n\n" + (try await localModel.generate(prompt: prompt))
+            if let apiKey = apiKeyStore.apiKey(for: .anthropic) {
+                response = try await cloudModel.generate(
+                    prompt: prompt,
+                    provider: .anthropic,
+                    apiKey: apiKey
+                )
             } else {
-                response = try await cloudModel.generate(prompt: prompt, provider: .anthropic)
+                response = "Anthropic API key is missing. Local fallback used.\n\n" + (try await localModel.generate(prompt: prompt))
             }
         case .gemini:
-            if apiKeyStore.apiKey(for: .gemini) == nil {
-                response = "Gemini API key is missing. Local fallback used.\n\n" + (try await localModel.generate(prompt: prompt))
+            if let apiKey = apiKeyStore.apiKey(for: .gemini) {
+                response = try await cloudModel.generate(
+                    prompt: prompt,
+                    provider: .gemini,
+                    apiKey: apiKey
+                )
             } else {
-                response = try await cloudModel.generate(prompt: prompt, provider: .gemini)
+                response = "Gemini API key is missing. Local fallback used.\n\n" + (try await localModel.generate(prompt: prompt))
             }
         }
 
