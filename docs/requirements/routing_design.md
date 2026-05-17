@@ -174,6 +174,26 @@ Examples:
 
 In the current iOS scaffold, sensitivity is also exposed as a per-turn user override so routing behavior can be tested explicitly without changing the global runtime policy.
 
+Current sensitivity intent:
+
+- `local_only`: never send the turn to a cloud provider
+- `local_preferred`: prefer on-device handling, but allow cloud escalation if routing and policy gates justify it
+- `escalation_allowed`: allow normal local-vs-cloud routing behavior
+- `provider_restricted`: allow cloud execution only through an explicit provider allowlist defined by product policy
+
+Definition of "approved providers":
+
+- "approved providers" means the subset of cloud providers explicitly allowed for the current turn, user, workspace, or data class by product policy
+- this is narrower than "configured providers" or "providers with valid API keys"
+- a provider is not approved merely because PREXUS can technically reach it
+
+Current scaffold behavior:
+
+- PREXUS does not yet implement a provider allowlist or provider-scoped policy object for `provider_restricted`
+- until that policy layer exists, `provider_restricted` must fail closed
+- in the current iOS implementation, `provider_restricted` routes to local execution with the reason code `provider_restricted`
+- UI copy should describe this as a current local-only fallback, not as an active cloud restriction feature
+
 ## Complexity Scoring
 
 The router should estimate request complexity using lightweight local analysis.
