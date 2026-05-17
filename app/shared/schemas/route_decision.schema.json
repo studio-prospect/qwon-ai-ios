@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RouteDecision",
+  "type": "object",
+  "required": ["tier", "target", "reasonCodes"],
+  "properties": {
+    "tier": {
+      "type": "string",
+      "enum": ["tier1", "tier2", "tier3"]
+    },
+    "target": {
+      "type": "string",
+      "enum": ["local", "openAI", "anthropic", "gemini"]
+    },
+    "reasonCodes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}
