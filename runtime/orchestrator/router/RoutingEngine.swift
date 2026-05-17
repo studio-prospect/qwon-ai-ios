@@ -19,6 +19,14 @@ struct DefaultRoutingEngine: RoutingEngine {
             )
         }
 
+        if request.sensitivity == .providerRestricted {
+            return RouteDecision(
+                tier: .tier2,
+                target: .local,
+                reasonCodes: [intent.rawValue, "provider_restricted"]
+            )
+        }
+
         if !policy.allowsCloudEscalation {
             return RouteDecision(
                 tier: .tier2,

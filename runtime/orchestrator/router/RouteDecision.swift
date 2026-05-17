@@ -90,6 +90,8 @@ struct RouteDecision {
             return "Local-only policy"
         case "local_default":
             return "Local default"
+        case "provider_restricted":
+            return "Provider restricted"
         case "cloud_disabled":
             return "Cloud disabled"
         case "high_complexity":

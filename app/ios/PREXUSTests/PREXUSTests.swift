@@ -23,6 +23,29 @@ final class PREXUSTests: XCTestCase {
         XCTAssertEqual(decision.tier, .tier2)
     }
 
+    func testProviderRestrictedRequestsStayLocal() {
+        let router = DefaultRoutingEngine(
+            classifier: HeuristicIntentClassifier(),
+            policy: ExecutionPolicy(
+                allowsCloudEscalation: true,
+                maxCloudContextTokens: 2_048
+            )
+        )
+
+        let decision = router.route(
+            request: RuntimeRequest(
+                text: "Review this code path",
+                modality: .text,
+                sensitivity: .providerRestricted
+            )
+        )
+
+        XCTAssertEqual(decision.target, .local)
+        XCTAssertEqual(decision.tier, .tier2)
+        XCTAssertEqual(decision.reasonCodes, ["codeAnalysis", "provider_restricted"])
+        XCTAssertEqual(decision.displayReasonSummary, "Code analysis | Provider restricted")
+    }
+
     func testRunTurnUsesLocalModelForGeneralChat() async throws {
         let runtime = RuntimeContainer.live(
             config: .default,
