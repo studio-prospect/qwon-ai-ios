@@ -34,12 +34,26 @@ struct SettingsView: View {
                         .autocorrectionDisabled()
                 }
 
-                Section("Local Runtime") {
+                Section {
+                    providerAvailabilityRow("OpenAI", provider: .openAI)
+                    providerAvailabilityRow("Anthropic", provider: .anthropic)
+                    providerAvailabilityRow("Gemini", provider: .gemini)
+                } header: {
+                    Text("Provider Availability")
+                } footer: {
+                    Text("When a provider is not ready, PREXUS keeps the request on the local runtime instead of attempting cloud escalation.")
+                }
+
+                Section {
                     Picker("Backend", selection: $settings.config.localModelBackend) {
                         ForEach(LocalModelBackend.allCases, id: \.self) { backend in
                             Text(backend.displayName).tag(backend)
                         }
                     }
+                } header: {
+                    Text("Local Runtime")
+                } footer: {
+                    Text("Automatic uses a simulator stub on Simulator and the device runtime bridge on hardware.")
                 }
 
                 Section("API Keys") {
@@ -64,6 +78,25 @@ struct SettingsView: View {
                     }
                 }
             }
+        }
+    }
+
+    @ViewBuilder
+    private func providerAvailabilityRow(_ title: String, provider: CloudProvider) -> some View {
+        LabeledContent(title) {
+            Text(settings.availabilityStatus(for: provider).label)
+                .foregroundStyle(color(for: settings.availabilityStatus(for: provider)))
+        }
+    }
+
+    private func color(for status: ProviderAvailabilityStatus) -> Color {
+        switch status {
+        case .cloudReady:
+            return .green
+        case .localPrimary:
+            return .orange
+        case .disabled:
+            return .secondary
         }
     }
 }

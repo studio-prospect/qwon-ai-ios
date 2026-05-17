@@ -191,6 +191,30 @@ final class PREXUSTests: XCTestCase {
     }
 
     @MainActor
+    func testAppSettingsStoreReportsProviderAvailability() {
+        let suiteName = "PREXUSTests.ProviderAvailability.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defaults.removePersistentDomain(forName: suiteName)
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+
+        let apiKeyStore = InMemoryAPIKeyStore()
+        let settings = AppSettingsStore(defaults: defaults, apiKeyStore: apiKeyStore)
+
+        XCTAssertEqual(settings.availabilityStatus(for: .openAI), .localPrimary)
+
+        settings.openAIKey = "test-openai-key"
+        XCTAssertEqual(settings.availabilityStatus(for: .openAI), .cloudReady)
+
+        settings.config = AppConfig(
+            allowsCloudEscalation: false,
+            maxCloudContextTokens: 2_048,
+            openAIModel: "gpt-5-mini",
+            localModelBackend: .automatic
+        )
+        XCTAssertEqual(settings.availabilityStatus(for: .openAI), .disabled)
+    }
+
+    @MainActor
     func testMemoryLibraryViewModelRefreshesAfterMutations() {
         let store = InMemoryEpisodicMemoryStore()
         let viewModel = MemoryLibraryViewModel(memoryStore: store)

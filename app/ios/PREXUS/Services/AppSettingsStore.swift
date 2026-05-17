@@ -1,5 +1,22 @@
 import Foundation
 
+enum ProviderAvailabilityStatus: Equatable {
+    case cloudReady
+    case localPrimary
+    case disabled
+
+    var label: String {
+        switch self {
+        case .cloudReady:
+            return "Cloud Ready"
+        case .localPrimary:
+            return "Local Primary"
+        case .disabled:
+            return "Disabled"
+        }
+    }
+}
+
 @MainActor
 final class AppSettingsStore: ObservableObject {
     @Published var config: AppConfig {
@@ -41,6 +58,25 @@ final class AppSettingsStore: ObservableObject {
     private func persistConfig() {
         guard let data = try? JSONEncoder().encode(config) else { return }
         defaults.set(data, forKey: configKey)
+    }
+
+    func availabilityStatus(for provider: CloudProvider) -> ProviderAvailabilityStatus {
+        if !config.allowsCloudEscalation {
+            return .disabled
+        }
+
+        return apiKey(for: provider).isEmpty ? .localPrimary : .cloudReady
+    }
+
+    func apiKey(for provider: CloudProvider) -> String {
+        switch provider {
+        case .openAI:
+            return openAIKey.trimmingCharacters(in: .whitespacesAndNewlines)
+        case .anthropic:
+            return anthropicKey.trimmingCharacters(in: .whitespacesAndNewlines)
+        case .gemini:
+            return geminiKey.trimmingCharacters(in: .whitespacesAndNewlines)
+        }
     }
 
     private func persistAPIKey(_ value: String, provider: CloudProvider) {
