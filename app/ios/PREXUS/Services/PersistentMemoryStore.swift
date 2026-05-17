@@ -20,8 +20,22 @@ final class PersistentMemoryStore: EpisodicMemoryStore {
         persist()
     }
 
+    func all() -> [EpisodicMemory] {
+        storage.sorted { $0.createdAt > $1.createdAt }
+    }
+
     func recent(limit: Int) -> [EpisodicMemory] {
         Array(storage.suffix(limit))
+    }
+
+    func delete(id: UUID) {
+        storage.removeAll { $0.id == id }
+        persist()
+    }
+
+    func removeAll() {
+        storage.removeAll()
+        persist()
     }
 
     private func persist() {

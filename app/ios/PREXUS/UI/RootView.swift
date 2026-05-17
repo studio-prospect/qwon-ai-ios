@@ -18,7 +18,10 @@ struct RootView: View {
                 }
         }
         .sheet(isPresented: $isPresentingSettings) {
-            SettingsView(settings: environment.settings)
+            SettingsView(
+                settings: environment.settings,
+                memoryLibrary: environment.memoryLibrary
+            )
         }
     }
 }

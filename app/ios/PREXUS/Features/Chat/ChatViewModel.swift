@@ -29,6 +29,7 @@ final class ChatViewModel: ObservableObject {
                 \(output.response)
                 """
                 messages.append(ChatMessage(role: .assistant, content: response))
+                environment.memoryLibrary.refresh()
             } catch {
                 messages.append(
                     ChatMessage(

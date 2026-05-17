@@ -110,6 +110,37 @@ final class PREXUSTests: XCTestCase {
         )
     }
 
+    func testPersistentMemoryStoreSupportsDeletionAndClear() {
+        let suiteName = "PREXUSTests.PersistentMemory.Delete.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defaults.removePersistentDomain(forName: suiteName)
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+
+        let store = PersistentMemoryStore(defaults: defaults)
+        let first = EpisodicMemory(
+            id: UUID(),
+            summary: "Keep the OCR routing local.",
+            sensitivity: .localPreferred,
+            createdAt: Date(timeIntervalSince1970: 1_715_900_100)
+        )
+        let second = EpisodicMemory(
+            id: UUID(),
+            summary: "Escalate only after compression.",
+            sensitivity: .escalationAllowed,
+            createdAt: Date(timeIntervalSince1970: 1_715_900_200)
+        )
+
+        store.save(first)
+        store.save(second)
+        store.delete(id: first.id)
+
+        XCTAssertEqual(store.all().map(\.summary), ["Escalate only after compression."])
+
+        store.removeAll()
+
+        XCTAssertTrue(store.all().isEmpty)
+    }
+
     @MainActor
     func testAppSettingsStorePersistsConfigAndKeys() {
         let suiteName = "PREXUSTests.Settings.\(UUID().uuidString)"
@@ -138,5 +169,41 @@ final class PREXUSTests: XCTestCase {
         )
         XCTAssertEqual(apiKeyStore.apiKey(for: .openAI), "openai-test-key")
         XCTAssertNil(apiKeyStore.apiKey(for: .anthropic))
+    }
+
+    @MainActor
+    func testMemoryLibraryViewModelRefreshesAfterMutations() {
+        let store = InMemoryEpisodicMemoryStore()
+        let viewModel = MemoryLibraryViewModel(memoryStore: store)
+        let first = EpisodicMemory(
+            id: UUID(),
+            summary: "User prefers local-first mode.",
+            sensitivity: .localOnly,
+            createdAt: Date(timeIntervalSince1970: 1_715_900_300)
+        )
+        let second = EpisodicMemory(
+            id: UUID(),
+            summary: "Battery-sensitive tasks should stay lightweight.",
+            sensitivity: .localPreferred,
+            createdAt: Date(timeIntervalSince1970: 1_715_900_400)
+        )
+
+        store.save(first)
+        store.save(second)
+        viewModel.refresh()
+
+        XCTAssertEqual(
+            viewModel.memories.map(\.summary),
+            [
+                "Battery-sensitive tasks should stay lightweight.",
+                "User prefers local-first mode."
+            ]
+        )
+
+        viewModel.delete(second)
+        XCTAssertEqual(viewModel.memories.map(\.summary), ["User prefers local-first mode."])
+
+        viewModel.clearAll()
+        XCTAssertTrue(viewModel.memories.isEmpty)
     }
 }

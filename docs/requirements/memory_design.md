@@ -219,6 +219,13 @@ Possible retention classes:
 
 Memory must remain user-controllable.
 
+Minimum controls for the app surface:
+
+- inspect stored memory summaries
+- delete individual memory records
+- clear all local memory
+- keep secret material out of memory records entirely
+
 ## Current v0.1 Implementation Notes
 
 The current scaffold uses `PersistentMemoryStore` backed by `UserDefaults` as a lightweight local-only episodic store. This is not the long-term target storage engine, but it is useful for proving:
@@ -226,6 +233,7 @@ The current scaffold uses `PersistentMemoryStore` backed by `UserDefaults` as a 
 - memory writes happen outside the UI layer
 - recent local memories can be recalled into prompt construction
 - memory survives app relaunch without any cloud dependency
+- users can inspect and remove local episodic records from the settings flow
 
 The implementation deliberately stores only compact `EpisodicMemory` records:
 

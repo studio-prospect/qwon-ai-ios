@@ -3,6 +3,7 @@ import Foundation
 @MainActor
 final class AppEnvironment: ObservableObject {
     let settings: AppSettingsStore
+    let memoryLibrary: MemoryLibraryViewModel
     private let apiKeyStore: APIKeyStore
     private let memoryStore: EpisodicMemoryStore
 
@@ -27,6 +28,7 @@ final class AppEnvironment: ObservableObject {
 
     init(settings: AppSettingsStore, apiKeyStore: APIKeyStore, memoryStore: EpisodicMemoryStore) {
         self.settings = settings
+        self.memoryLibrary = MemoryLibraryViewModel(memoryStore: memoryStore)
         self.apiKeyStore = apiKeyStore
         self.memoryStore = memoryStore
     }

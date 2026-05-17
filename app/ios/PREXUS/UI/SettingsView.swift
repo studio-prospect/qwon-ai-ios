@@ -2,11 +2,23 @@ import SwiftUI
 
 struct SettingsView: View {
     @ObservedObject var settings: AppSettingsStore
+    @ObservedObject var memoryLibrary: MemoryLibraryViewModel
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         NavigationStack {
             Form {
+                Section("Memory") {
+                    NavigationLink {
+                        MemoryLibraryView(viewModel: memoryLibrary)
+                    } label: {
+                        LabeledContent("Stored Episodes") {
+                            Text("\(memoryLibrary.memories.count)")
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                }
+
                 Section("Cloud") {
                     Toggle("Allow Cloud Escalation", isOn: $settings.config.allowsCloudEscalation)
 
