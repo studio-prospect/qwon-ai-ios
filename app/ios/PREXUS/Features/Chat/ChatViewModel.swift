@@ -3,6 +3,7 @@ import Foundation
 @MainActor
 final class ChatViewModel: ObservableObject {
     @Published var selectedSensitivity: SensitivityLevel = .localPreferred
+    @Published var draftText = ""
     @Published private(set) var messages: [ChatMessage] = [
         ChatMessage(role: .system, content: "PREXUS runtime initialized.")
     ]
@@ -15,11 +16,20 @@ final class ChatViewModel: ObservableObject {
         self.environment = environment
     }
 
+    var previewRoute: RouteDecision? {
+        let trimmed = draftText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return nil }
+        return environment.runtime.previewRoute(
+            input: .text(trimmed, sensitivity: selectedSensitivity)
+        )
+    }
+
     func send(text: String) {
         let userMessage = ChatMessage(role: .user, content: text)
         let sensitivity = selectedSensitivity
         messages.append(userMessage)
         isSending = true
+        draftText = ""
 
         let transcript = messages
         Task {

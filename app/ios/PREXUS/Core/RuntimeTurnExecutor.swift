@@ -64,13 +64,23 @@ struct RuntimeTurnOutput {
 }
 
 extension RuntimeContainer {
+    func previewRoute(input: RuntimeTurnInput) -> RouteDecision {
+        let request = RuntimeRequest(
+            text: input.userText,
+            modality: input.modality,
+            sensitivity: input.sensitivity
+        )
+
+        return effectiveRoute(for: router.route(request: request))
+    }
+
     func runTurn(input: RuntimeTurnInput, transcript: [ChatMessage]) async throws -> RuntimeTurnOutput {
         let request = RuntimeRequest(
             text: input.userText,
             modality: input.modality,
             sensitivity: input.sensitivity
         )
-        let route = effectiveRoute(for: router.route(request: request))
+        let route = previewRoute(input: input)
         let compressedContext = compressor.compress(messages: transcript)
         let memoryContext = memoryStore.recent(limit: 3).map(\.summary).joined(separator: "\n")
 

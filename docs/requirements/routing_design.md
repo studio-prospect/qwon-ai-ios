@@ -13,6 +13,8 @@ Routing is the core product capability of PREXUS. The system should decide, with
 
 The routing layer exists to avoid naive behavior such as sending every request and the full conversation history to a cloud LLM.
 
+The current scaffold also exposes a preflight route preview in the chat surface so the planned local/cloud path can be inspected before execution.
+
 ## Routing Responsibilities
 
 The router must decide:

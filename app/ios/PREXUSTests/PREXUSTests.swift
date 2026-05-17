@@ -48,6 +48,23 @@ final class PREXUSTests: XCTestCase {
         XCTAssertTrue(output.response.contains("Local runtime handled"))
     }
 
+    func testPreviewRouteReroutesToLocalWhenKeyIsMissing() {
+        let runtime = RuntimeContainer.live(
+            config: .default,
+            apiKeyStore: InMemoryAPIKeyStore(),
+            memoryStore: InMemoryEpisodicMemoryStore(),
+            localModel: MockLocalModelClient(),
+            cloudModel: MockCloudModelClient()
+        )
+
+        let route = runtime.previewRoute(
+            input: .text("Review this Swift code for a bug", sensitivity: .escalationAllowed)
+        )
+
+        XCTAssertEqual(route.target, .local)
+        XCTAssertTrue(route.reasonCodes.contains("openai_key_unavailable"))
+    }
+
     func testRunTurnHonorsLocalOnlySensitivityForCodeRequests() async throws {
         let apiKeyStore = InMemoryAPIKeyStore()
         apiKeyStore.setAPIKey("test-key", for: .openAI)

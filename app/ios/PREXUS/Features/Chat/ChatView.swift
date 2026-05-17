@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct ChatView: View {
-    @State private var draft = ""
     @StateObject private var viewModel: ChatViewModel
 
     init(viewModel: ChatViewModel) {
@@ -36,6 +35,10 @@ struct ChatView: View {
             Divider()
 
             VStack(alignment: .leading, spacing: 10) {
+                if let route = viewModel.previewRoute {
+                    previewRouteBanner(route)
+                }
+
                 Picker("Sensitivity", selection: $viewModel.selectedSensitivity) {
                     Text("Local Only").tag(SensitivityLevel.localOnly)
                     Text("Local Preferred").tag(SensitivityLevel.localPreferred)
@@ -44,15 +47,14 @@ struct ChatView: View {
                 .pickerStyle(.segmented)
 
                 HStack(alignment: .bottom, spacing: 12) {
-                    TextField("Ask PREXUS", text: $draft, axis: .vertical)
+                    TextField("Ask PREXUS", text: $viewModel.draftText, axis: .vertical)
                         .textFieldStyle(.roundedBorder)
                         .lineLimit(1...6)
 
                     Button("Send") {
-                        let text = draft.trimmingCharacters(in: .whitespacesAndNewlines)
+                        let text = viewModel.draftText.trimmingCharacters(in: .whitespacesAndNewlines)
                         guard !text.isEmpty else { return }
                         viewModel.send(text: text)
-                        draft = ""
                     }
                     .buttonStyle(.borderedProminent)
                     .disabled(viewModel.isSending)
@@ -85,6 +87,32 @@ struct ChatView: View {
         .padding(.horizontal)
         .padding(.vertical, 10)
         .background(.bar)
+    }
+
+    @ViewBuilder
+    private func previewRouteBanner(_ route: RouteDecision) -> some View {
+        HStack(alignment: .top, spacing: 10) {
+            Image(systemName: route.target == .local ? "arrow.triangle.branch" : "arrow.up.right.square")
+                .font(.caption)
+                .foregroundStyle(route.target == .local ? .green : .blue)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Planned Route")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                Text("\(route.target.rawValue) | \(route.tier.rawValue)")
+                    .font(.footnote)
+                    .foregroundStyle(.primary)
+                Text(route.reasonSummary)
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(2)
+            }
+
+            Spacer(minLength: 0)
+        }
+        .padding(10)
+        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 12))
     }
 
     private func iconName(for mode: RuntimeExecutionMode) -> String {
