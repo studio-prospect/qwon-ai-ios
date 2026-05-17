@@ -83,13 +83,13 @@ struct ChatView: View {
     private var sensitivityDescription: LocalizedStringKey {
         switch viewModel.selectedSensitivity {
         case .localOnly:
-            return "Keep this request on device."
+            return "Run only on device."
         case .localPreferred:
-            return "Prefer on-device handling, but allow safe fallback when needed."
+            return "Prefer on-device handling, with fallback if needed."
         case .escalationAllowed:
-            return "Allow cloud escalation when the task benefits from it."
+            return "Allow cloud escalation when it helps."
         case .providerRestricted:
-            return "Restrict execution to approved providers."
+            return "Use approved providers only."
         }
     }
 
