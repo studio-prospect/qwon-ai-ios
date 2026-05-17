@@ -77,8 +77,8 @@ extension RuntimeContainer {
             execution = RuntimeExecutionMetadata(
                 mode: .local,
                 provider: nil,
-                model: nil,
-                detail: "Handled on device."
+                model: localModel.descriptor.name,
+                detail: localModel.descriptor.summary
             )
         case .openAI:
             if let apiKey = apiKeyStore.apiKey(for: .openAI) {
@@ -99,8 +99,8 @@ extension RuntimeContainer {
                     execution = RuntimeExecutionMetadata(
                         mode: .fallback,
                         provider: .openAI,
-                        model: nil,
-                        detail: "Cloud request failed."
+                        model: localModel.descriptor.name,
+                        detail: "Cloud request failed. \(localModel.descriptor.summary)"
                     )
                 }
             } else {
@@ -108,8 +108,8 @@ extension RuntimeContainer {
                 execution = RuntimeExecutionMetadata(
                     mode: .fallback,
                     provider: .openAI,
-                    model: nil,
-                    detail: "API key missing."
+                    model: localModel.descriptor.name,
+                    detail: "API key missing. \(localModel.descriptor.summary)"
                 )
             }
         case .anthropic:
@@ -130,8 +130,8 @@ extension RuntimeContainer {
                 execution = RuntimeExecutionMetadata(
                     mode: .fallback,
                     provider: .anthropic,
-                    model: nil,
-                    detail: "API key missing."
+                    model: localModel.descriptor.name,
+                    detail: "API key missing. \(localModel.descriptor.summary)"
                 )
             }
         case .gemini:
@@ -152,8 +152,8 @@ extension RuntimeContainer {
                 execution = RuntimeExecutionMetadata(
                     mode: .fallback,
                     provider: .gemini,
-                    model: nil,
-                    detail: "API key missing."
+                    model: localModel.descriptor.name,
+                    detail: "API key missing. \(localModel.descriptor.summary)"
                 )
             }
         }

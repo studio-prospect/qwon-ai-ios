@@ -4,21 +4,25 @@ struct AppConfig: Codable, Equatable {
     var allowsCloudEscalation: Bool
     var maxCloudContextTokens: Int
     var openAIModel: String
+    var localModelBackend: LocalModelBackend
 
     enum CodingKeys: String, CodingKey {
         case allowsCloudEscalation
         case maxCloudContextTokens
         case openAIModel
+        case localModelBackend
     }
 
     init(
         allowsCloudEscalation: Bool,
         maxCloudContextTokens: Int,
-        openAIModel: String
+        openAIModel: String,
+        localModelBackend: LocalModelBackend
     ) {
         self.allowsCloudEscalation = allowsCloudEscalation
         self.maxCloudContextTokens = maxCloudContextTokens
         self.openAIModel = openAIModel
+        self.localModelBackend = localModelBackend
     }
 
     init(from decoder: Decoder) throws {
@@ -26,11 +30,13 @@ struct AppConfig: Codable, Equatable {
         allowsCloudEscalation = try container.decode(Bool.self, forKey: .allowsCloudEscalation)
         maxCloudContextTokens = try container.decode(Int.self, forKey: .maxCloudContextTokens)
         openAIModel = try container.decodeIfPresent(String.self, forKey: .openAIModel) ?? AppConfig.default.openAIModel
+        localModelBackend = try container.decodeIfPresent(LocalModelBackend.self, forKey: .localModelBackend) ?? AppConfig.default.localModelBackend
     }
 
     static let `default` = AppConfig(
         allowsCloudEscalation: true,
         maxCloudContextTokens: 2_048,
-        openAIModel: "gpt-5-mini"
+        openAIModel: "gpt-5-mini",
+        localModelBackend: .automatic
     )
 }

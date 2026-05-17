@@ -28,6 +28,7 @@ final class PREXUSTests: XCTestCase {
             config: .default,
             apiKeyStore: InMemoryAPIKeyStore(),
             memoryStore: InMemoryEpisodicMemoryStore(),
+            localModel: MockLocalModelClient(),
             cloudModel: MockCloudModelClient()
         )
         let transcript = [
@@ -42,6 +43,7 @@ final class PREXUSTests: XCTestCase {
 
         XCTAssertEqual(output.route.target, .local)
         XCTAssertEqual(output.execution.mode, .local)
+        XCTAssertEqual(output.execution.model, "Mock Local Runtime")
         XCTAssertTrue(output.prompt.contains("Context:"))
         XCTAssertTrue(output.response.contains("Local runtime handled"))
     }
@@ -53,6 +55,7 @@ final class PREXUSTests: XCTestCase {
             config: .default,
             apiKeyStore: apiKeyStore,
             memoryStore: InMemoryEpisodicMemoryStore(),
+            localModel: MockLocalModelClient(),
             cloudModel: MockCloudModelClient()
         )
 
@@ -73,6 +76,7 @@ final class PREXUSTests: XCTestCase {
             config: .default,
             apiKeyStore: InMemoryAPIKeyStore(),
             memoryStore: InMemoryEpisodicMemoryStore(),
+            localModel: MockLocalModelClient(),
             cloudModel: MockCloudModelClient()
         )
 
@@ -84,7 +88,8 @@ final class PREXUSTests: XCTestCase {
         XCTAssertEqual(output.route.target, .openAI)
         XCTAssertEqual(output.execution.mode, .fallback)
         XCTAssertEqual(output.execution.provider, .openAI)
-        XCTAssertEqual(output.execution.detail, "API key missing.")
+        XCTAssertEqual(output.execution.model, "Mock Local Runtime")
+        XCTAssertTrue(output.execution.detail?.contains("API key missing.") == true)
         XCTAssertTrue(output.response.contains("Local fallback used"))
     }
 
@@ -164,7 +169,8 @@ final class PREXUSTests: XCTestCase {
         settings.config = AppConfig(
             allowsCloudEscalation: false,
             maxCloudContextTokens: 512,
-            openAIModel: "gpt-5.1"
+            openAIModel: "gpt-5.1",
+            localModelBackend: .embeddedHeuristic
         )
         settings.openAIKey = "  openai-test-key  "
         settings.anthropicKey = ""
@@ -176,7 +182,8 @@ final class PREXUSTests: XCTestCase {
             AppConfig(
                 allowsCloudEscalation: false,
                 maxCloudContextTokens: 512,
-                openAIModel: "gpt-5.1"
+                openAIModel: "gpt-5.1",
+                localModelBackend: .embeddedHeuristic
             )
         )
         XCTAssertEqual(apiKeyStore.apiKey(for: .openAI), "openai-test-key")
@@ -284,6 +291,18 @@ final class PREXUSTests: XCTestCase {
                 .providerFailure(statusCode: 401, message: "Invalid authentication credentials.")
             )
         }
+    }
+
+    func testLocalModelFactoryUsesSimulatorBackendForAutomaticMode() {
+        let client = LocalModelFactory.makeClient(preferred: .automatic)
+        XCTAssertEqual(client.descriptor.backend, .simulatorMock)
+        XCTAssertEqual(client.descriptor.name, "Simulator Mock Runtime")
+    }
+
+    func testLocalModelFactoryHonorsExplicitEmbeddedBackend() {
+        let client = LocalModelFactory.makeClient(preferred: .embeddedHeuristic)
+        XCTAssertEqual(client.descriptor.backend, .embeddedHeuristic)
+        XCTAssertEqual(client.descriptor.name, "Embedded Heuristic Runtime")
     }
 }
 

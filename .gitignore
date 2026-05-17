@@ -5,6 +5,7 @@ build/
 *.xcuserstate
 *.xcworkspace/xcuserdata/
 *.xcodeproj/xcuserdata/
+app/ios/PREXUS.xcodeproj/xcuserdata/
 *.swiftpm/
 .env
 .env.*

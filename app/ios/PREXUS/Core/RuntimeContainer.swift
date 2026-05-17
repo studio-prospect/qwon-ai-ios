@@ -13,6 +13,7 @@ struct RuntimeContainer {
         config: AppConfig,
         apiKeyStore: APIKeyStore,
         memoryStore: EpisodicMemoryStore,
+        localModel: LocalModelClient? = nil,
         cloudModel: CloudModelClient? = nil
     ) -> RuntimeContainer {
         let policy = ExecutionPolicy(
@@ -21,7 +22,7 @@ struct RuntimeContainer {
         )
         let classifier = HeuristicIntentClassifier()
         let compressor = HeuristicContextCompressor()
-        let localModel = MockLocalModelClient()
+        let localModel = localModel ?? LocalModelFactory.makeClient(preferred: config.localModelBackend)
         let cloudModel = cloudModel ?? DefaultCloudModelClient(
             openAIClient: OpenAIResponsesClient(
                 transport: URLSessionHTTPTransport(),

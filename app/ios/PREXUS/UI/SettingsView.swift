@@ -34,6 +34,14 @@ struct SettingsView: View {
                         .autocorrectionDisabled()
                 }
 
+                Section("Local Runtime") {
+                    Picker("Backend", selection: $settings.config.localModelBackend) {
+                        ForEach(LocalModelBackend.allCases, id: \.self) { backend in
+                            Text(backend.displayName).tag(backend)
+                        }
+                    }
+                }
+
                 Section("API Keys") {
                     SecureField("OpenAI API Key", text: $settings.openAIKey)
                         .textInputAutocapitalization(.never)
