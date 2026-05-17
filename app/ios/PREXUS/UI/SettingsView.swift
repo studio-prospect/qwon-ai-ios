@@ -3,11 +3,23 @@ import SwiftUI
 struct SettingsView: View {
     @ObservedObject var settings: AppSettingsStore
     @ObservedObject var memoryLibrary: MemoryLibraryViewModel
+    @ObservedObject var runtimeDiagnostics: RuntimeDiagnosticsStore
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         NavigationStack {
             Form {
+                Section("Diagnostics") {
+                    NavigationLink {
+                        RuntimeDiagnosticsView(diagnostics: runtimeDiagnostics)
+                    } label: {
+                        LabeledContent("Recent Runtime Decisions") {
+                            Text("\(runtimeDiagnostics.entries.count)")
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                }
+
                 Section("Memory") {
                     NavigationLink {
                         MemoryLibraryView(viewModel: memoryLibrary)

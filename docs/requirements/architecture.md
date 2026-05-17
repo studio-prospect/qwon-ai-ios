@@ -230,6 +230,7 @@ The current iOS scaffold already reflects several runtime boundaries from this d
 - `KeychainAPIKeyStore` keeps provider secrets out of app config payloads
 - chat UI exposes the latest runtime execution path so local, cloud, and fallback behavior is inspectable during development
 - settings UI exposes provider availability so cloud-ready vs local-primary behavior is visible before a turn runs
+- settings UI also keeps a lightweight recent diagnostics history for route and execution inspection
 
 This keeps model routing and persistence concerns out of `View` code while still allowing the UI to expose settings and state.
 

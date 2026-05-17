@@ -32,6 +32,11 @@ final class ChatViewModel: ObservableObject {
                 """
                 messages.append(ChatMessage(role: .assistant, content: response))
                 latestExecution = output.execution
+                environment.runtimeDiagnostics.record(
+                    route: output.route,
+                    execution: output.execution,
+                    userText: text
+                )
                 environment.memoryLibrary.refresh()
             } catch {
                 latestExecution = nil

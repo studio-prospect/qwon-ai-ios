@@ -281,6 +281,31 @@ final class PREXUSTests: XCTestCase {
         XCTAssertTrue(viewModel.memories.isEmpty)
     }
 
+    @MainActor
+    func testRuntimeDiagnosticsStoreKeepsRecentEntries() {
+        let store = RuntimeDiagnosticsStore(maxEntries: 2)
+        let route = RouteDecision(
+            tier: .tier2,
+            target: .local,
+            reasonCodes: ["local_default"]
+        )
+        let localExecution = RuntimeExecutionMetadata(
+            mode: .local,
+            provider: nil,
+            model: "Embedded Heuristic Runtime",
+            detail: "Handled on device."
+        )
+
+        store.record(route: route, execution: localExecution, userText: "First")
+        store.record(route: route, execution: localExecution, userText: "Second")
+        store.record(route: route, execution: localExecution, userText: "Third")
+
+        XCTAssertEqual(store.entries.map(\.userText), ["Third", "Second"])
+
+        store.clear()
+        XCTAssertTrue(store.entries.isEmpty)
+    }
+
     func testOpenAIResponsesClientBuildsRequestAndParsesOutput() async throws {
         let transport = MockHTTPTransport(
             responseData: """

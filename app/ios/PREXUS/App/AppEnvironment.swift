@@ -4,6 +4,7 @@ import Foundation
 final class AppEnvironment: ObservableObject {
     let settings: AppSettingsStore
     let memoryLibrary: MemoryLibraryViewModel
+    let runtimeDiagnostics: RuntimeDiagnosticsStore
     private let apiKeyStore: APIKeyStore
     private let memoryStore: EpisodicMemoryStore
 
@@ -29,6 +30,7 @@ final class AppEnvironment: ObservableObject {
     init(settings: AppSettingsStore, apiKeyStore: APIKeyStore, memoryStore: EpisodicMemoryStore) {
         self.settings = settings
         self.memoryLibrary = MemoryLibraryViewModel(memoryStore: memoryStore)
+        self.runtimeDiagnostics = RuntimeDiagnosticsStore()
         self.apiKeyStore = apiKeyStore
         self.memoryStore = memoryStore
     }

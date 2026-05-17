@@ -20,7 +20,8 @@ struct RootView: View {
         .sheet(isPresented: $isPresentingSettings) {
             SettingsView(
                 settings: environment.settings,
-                memoryLibrary: environment.memoryLibrary
+                memoryLibrary: environment.memoryLibrary,
+                runtimeDiagnostics: environment.runtimeDiagnostics
             )
         }
     }
