@@ -63,6 +63,8 @@ final class PREXUSTests: XCTestCase {
 
         XCTAssertEqual(route.target, .local)
         XCTAssertTrue(route.reasonCodes.contains("openai_key_unavailable"))
+        XCTAssertEqual(route.statusSummary, "Local | Tier 2")
+        XCTAssertEqual(route.displayReasonSummary, "Code analysis | High complexity | OpenAI key unavailable")
     }
 
     func testRunTurnHonorsLocalOnlySensitivityForCodeRequests() async throws {
@@ -346,7 +348,8 @@ final class PREXUSTests: XCTestCase {
 
         XCTAssertEqual(store.entries.map(\.userText), ["Third", "Second"])
         XCTAssertEqual(store.entries.first?.executionStatusSummary, "Local runtime | Embedded Heuristic Runtime | Handled on device.")
-        XCTAssertEqual(store.entries.first?.routeSummary, "Route: local | Tier: tier2")
+        XCTAssertEqual(store.entries.first?.routeSummary, "Route: Local | Tier: Tier 2")
+        XCTAssertEqual(store.entries.first?.reasonSummary, "Local default")
 
         let reloaded = RuntimeDiagnosticsStore(defaults: defaults, maxEntries: 2)
         XCTAssertEqual(reloaded.entries.map(\.userText), ["Third", "Second"])

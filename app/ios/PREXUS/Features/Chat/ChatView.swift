@@ -39,12 +39,7 @@ struct ChatView: View {
                     previewRouteBanner(route)
                 }
 
-                Picker("Sensitivity", selection: $viewModel.selectedSensitivity) {
-                    Text("Local Only").tag(SensitivityLevel.localOnly)
-                    Text("Local Preferred").tag(SensitivityLevel.localPreferred)
-                    Text("Escalation Allowed").tag(SensitivityLevel.escalationAllowed)
-                }
-                .pickerStyle(.segmented)
+                sensitivityPicker
 
                 HStack(alignment: .bottom, spacing: 12) {
                     TextField("Ask PREXUS", text: $viewModel.draftText, axis: .vertical)
@@ -63,6 +58,23 @@ struct ChatView: View {
             .padding()
         }
         .navigationTitle("PREXUS")
+    }
+
+    @ViewBuilder
+    private var sensitivityPicker: some View {
+        ViewThatFits(in: .horizontal) {
+            sensitivitySegmentedPicker(
+                localOnly: "Local Only",
+                localPreferred: "Local Preferred",
+                escalationAllowed: "Escalation Allowed"
+            )
+
+            sensitivitySegmentedPicker(
+                localOnly: "Local",
+                localPreferred: "Prefer",
+                escalationAllowed: "Escalate"
+            )
+        }
     }
 
     @ViewBuilder
@@ -100,10 +112,10 @@ struct ChatView: View {
                 Text("Planned Route")
                     .font(.caption)
                     .foregroundStyle(.secondary)
-                Text("\(route.target.rawValue) | \(route.tier.rawValue)")
+                Text(route.statusSummary)
                     .font(.footnote)
                     .foregroundStyle(.primary)
-                Text(route.reasonSummary)
+                Text(route.displayReasonSummary)
                     .font(.caption2)
                     .foregroundStyle(.secondary)
                     .lineLimit(2)
@@ -113,6 +125,19 @@ struct ChatView: View {
         }
         .padding(10)
         .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 12))
+    }
+
+    private func sensitivitySegmentedPicker(
+        localOnly: LocalizedStringKey,
+        localPreferred: LocalizedStringKey,
+        escalationAllowed: LocalizedStringKey
+    ) -> some View {
+        Picker("Sensitivity", selection: $viewModel.selectedSensitivity) {
+            Text(localOnly).tag(SensitivityLevel.localOnly)
+            Text(localPreferred).tag(SensitivityLevel.localPreferred)
+            Text(escalationAllowed).tag(SensitivityLevel.escalationAllowed)
+        }
+        .pickerStyle(.segmented)
     }
 
     private func iconName(for mode: RuntimeExecutionMode) -> String {

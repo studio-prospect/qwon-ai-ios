@@ -39,8 +39,8 @@ final class ChatViewModel: ObservableObject {
                     transcript: transcript
                 )
                 let response = """
-                Route: \(output.route.target.rawValue) | Tier: \(output.route.tier.rawValue)
-                Reason: \(output.route.reasonSummary)
+                Route: \(output.route.statusSummary)
+                Reason: \(output.route.displayReasonSummary)
                 Execution: \(output.execution.statusSummary)
 
                 \(output.response)

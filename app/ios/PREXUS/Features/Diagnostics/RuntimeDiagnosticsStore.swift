@@ -15,8 +15,8 @@ struct RuntimeDiagnosticEntry: Identifiable, Codable {
     init(id: UUID, timestamp: Date, route: RouteDecision, execution: RuntimeExecutionMetadata, userText: String) {
         self.id = id
         self.timestamp = timestamp
-        self.routeTier = route.tier.rawValue
-        self.routeTarget = route.target.rawValue
+        self.routeTier = route.tierLabel
+        self.routeTarget = route.targetLabel
         self.routeReasons = route.reasonCodes
         self.executionMode = execution.mode.rawValue
         self.executionProvider = execution.provider?.rawValue
@@ -30,7 +30,9 @@ struct RuntimeDiagnosticEntry: Identifiable, Codable {
     }
 
     var reasonSummary: String {
-        routeReasons.joined(separator: ", ")
+        routeReasons
+            .map(RouteDecision.displayLabel(forReasonCode:))
+            .joined(separator: " | ")
     }
 
     var executionStatusSummary: String {
