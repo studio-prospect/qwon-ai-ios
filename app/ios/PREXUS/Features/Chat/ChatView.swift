@@ -35,19 +35,28 @@ struct ChatView: View {
 
             Divider()
 
-            HStack(alignment: .bottom, spacing: 12) {
-                TextField("Ask PREXUS", text: $draft, axis: .vertical)
-                    .textFieldStyle(.roundedBorder)
-                    .lineLimit(1...6)
-
-                Button("Send") {
-                    let text = draft.trimmingCharacters(in: .whitespacesAndNewlines)
-                    guard !text.isEmpty else { return }
-                    viewModel.send(text: text)
-                    draft = ""
+            VStack(alignment: .leading, spacing: 10) {
+                Picker("Sensitivity", selection: $viewModel.selectedSensitivity) {
+                    Text("Local Only").tag(SensitivityLevel.localOnly)
+                    Text("Local Preferred").tag(SensitivityLevel.localPreferred)
+                    Text("Escalation Allowed").tag(SensitivityLevel.escalationAllowed)
                 }
-                .buttonStyle(.borderedProminent)
-                .disabled(viewModel.isSending)
+                .pickerStyle(.segmented)
+
+                HStack(alignment: .bottom, spacing: 12) {
+                    TextField("Ask PREXUS", text: $draft, axis: .vertical)
+                        .textFieldStyle(.roundedBorder)
+                        .lineLimit(1...6)
+
+                    Button("Send") {
+                        let text = draft.trimmingCharacters(in: .whitespacesAndNewlines)
+                        guard !text.isEmpty else { return }
+                        viewModel.send(text: text)
+                        draft = ""
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .disabled(viewModel.isSending)
+                }
             }
             .padding()
         }

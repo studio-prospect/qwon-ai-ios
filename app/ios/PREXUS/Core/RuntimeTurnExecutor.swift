@@ -1,5 +1,19 @@
 import Foundation
 
+struct RuntimeTurnInput {
+    let userText: String
+    let modality: RuntimeModality
+    let sensitivity: SensitivityLevel
+
+    static func text(_ userText: String, sensitivity: SensitivityLevel = .localPreferred) -> RuntimeTurnInput {
+        RuntimeTurnInput(
+            userText: userText,
+            modality: .text,
+            sensitivity: sensitivity
+        )
+    }
+}
+
 enum RuntimeExecutionMode: String, Equatable {
     case local
     case cloud
@@ -50,11 +64,11 @@ struct RuntimeTurnOutput {
 }
 
 extension RuntimeContainer {
-    func runTurn(userText: String, transcript: [ChatMessage]) async throws -> RuntimeTurnOutput {
+    func runTurn(input: RuntimeTurnInput, transcript: [ChatMessage]) async throws -> RuntimeTurnOutput {
         let request = RuntimeRequest(
-            text: userText,
-            modality: .text,
-            sensitivity: .localPreferred
+            text: input.userText,
+            modality: input.modality,
+            sensitivity: input.sensitivity
         )
         let route = effectiveRoute(for: router.route(request: request))
         let compressedContext = compressor.compress(messages: transcript)
@@ -64,7 +78,7 @@ extension RuntimeContainer {
             route: route,
             memoryContext: memoryContext,
             compressedContext: compressedContext,
-            userText: userText
+            userText: input.userText
         )
 
         let response: String
@@ -159,7 +173,7 @@ extension RuntimeContainer {
         memoryStore.save(
             EpisodicMemory(
                 id: UUID(),
-                summary: userText,
+                summary: input.userText,
                 sensitivity: request.sensitivity,
                 createdAt: Date()
             )
@@ -170,6 +184,13 @@ extension RuntimeContainer {
             prompt: prompt,
             response: response,
             execution: execution
+        )
+    }
+
+    func runTurn(userText: String, transcript: [ChatMessage]) async throws -> RuntimeTurnOutput {
+        try await runTurn(
+            input: .text(userText),
+            transcript: transcript
         )
     }
 

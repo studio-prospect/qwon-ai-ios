@@ -170,6 +170,8 @@ Examples:
 - code from a confidential repo may be `provider_restricted`
 - generic public questions may be `escalation_allowed`
 
+In the current iOS scaffold, sensitivity is also exposed as a per-turn user override so routing behavior can be tested explicitly without changing the global runtime policy.
+
 ## Complexity Scoring
 
 The router should estimate request complexity using lightweight local analysis.

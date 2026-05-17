@@ -48,6 +48,31 @@ final class PREXUSTests: XCTestCase {
         XCTAssertTrue(output.response.contains("Local runtime handled"))
     }
 
+    func testRunTurnHonorsLocalOnlySensitivityForCodeRequests() async throws {
+        let apiKeyStore = InMemoryAPIKeyStore()
+        apiKeyStore.setAPIKey("test-key", for: .openAI)
+        let runtime = RuntimeContainer.live(
+            config: .default,
+            apiKeyStore: apiKeyStore,
+            memoryStore: InMemoryEpisodicMemoryStore(),
+            localModel: MockLocalModelClient(),
+            cloudModel: MockCloudModelClient()
+        )
+
+        let output = try await runtime.runTurn(
+            input: RuntimeTurnInput(
+                userText: "Review this Swift code for a bug",
+                modality: .text,
+                sensitivity: .localOnly
+            ),
+            transcript: [ChatMessage(role: .user, content: "Previous context")]
+        )
+
+        XCTAssertEqual(output.route.target, .local)
+        XCTAssertEqual(output.execution.mode, .local)
+        XCTAssertTrue(output.route.reasonCodes.contains("local_only"))
+    }
+
     func testRunTurnEscalatesCodeRequestsToOpenAI() async throws {
         let apiKeyStore = InMemoryAPIKeyStore()
         apiKeyStore.setAPIKey("test-key", for: .openAI)
