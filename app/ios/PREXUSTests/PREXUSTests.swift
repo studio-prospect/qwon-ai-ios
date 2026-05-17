@@ -71,7 +71,7 @@ final class PREXUSTests: XCTestCase {
         XCTAssertTrue(output.response.contains("openAI handled"))
     }
 
-    func testRunTurnFallsBackLocallyWhenCloudKeyIsMissing() async throws {
+    func testRunTurnUsesLocalPrimaryWhenCloudKeyIsMissing() async throws {
         let runtime = RuntimeContainer.live(
             config: .default,
             apiKeyStore: InMemoryAPIKeyStore(),
@@ -85,12 +85,12 @@ final class PREXUSTests: XCTestCase {
             transcript: [ChatMessage(role: .user, content: "Previous context")]
         )
 
-        XCTAssertEqual(output.route.target, .openAI)
-        XCTAssertEqual(output.execution.mode, .fallback)
-        XCTAssertEqual(output.execution.provider, .openAI)
+        XCTAssertEqual(output.route.target, .local)
+        XCTAssertEqual(output.execution.mode, .local)
+        XCTAssertNil(output.execution.provider)
         XCTAssertEqual(output.execution.model, "Mock Local Runtime")
-        XCTAssertTrue(output.execution.detail?.contains("API key missing.") == true)
-        XCTAssertTrue(output.response.contains("Local fallback used"))
+        XCTAssertTrue(output.route.reasonCodes.contains("openai_key_unavailable"))
+        XCTAssertFalse(output.response.contains("Local fallback used"))
     }
 
     func testPersistentMemoryStoreReloadsSavedEpisodes() {

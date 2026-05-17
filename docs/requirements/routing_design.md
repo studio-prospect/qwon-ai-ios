@@ -203,6 +203,8 @@ Cloud escalation should happen only if all gates pass:
 
 If any gate fails, the runtime should fall back to the best available local response rather than failing silently.
 
+In the current scaffold, provider availability includes API key presence. If a cloud provider is selected but the corresponding user key is unavailable, PREXUS should reroute to local execution before making a cloud request attempt.
+
 ## Context Packaging
 
 Before executing a cloud route, the router should produce a compact package:

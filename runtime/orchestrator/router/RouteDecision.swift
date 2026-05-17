@@ -41,4 +41,12 @@ struct RouteDecision {
     var reasonSummary: String {
         reasonCodes.joined(separator: ", ")
     }
+
+    func reroutedToLocal(appending reasonCode: String) -> RouteDecision {
+        RouteDecision(
+            tier: .tier2,
+            target: .local,
+            reasonCodes: reasonCodes + [reasonCode]
+        )
+    }
 }

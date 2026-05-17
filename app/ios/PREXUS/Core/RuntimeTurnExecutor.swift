@@ -56,7 +56,7 @@ extension RuntimeContainer {
             modality: .text,
             sensitivity: .localPreferred
         )
-        let route = router.route(request: request)
+        let route = effectiveRoute(for: router.route(request: request))
         let compressedContext = compressor.compress(messages: transcript)
         let memoryContext = memoryStore.recent(limit: 3).map(\.summary).joined(separator: "\n")
 
@@ -173,5 +173,24 @@ extension RuntimeContainer {
             response: response,
             execution: execution
         )
+    }
+
+    private func effectiveRoute(for route: RouteDecision) -> RouteDecision {
+        switch route.target {
+        case .local:
+            return route
+        case .openAI:
+            return apiKeyStore.apiKey(for: .openAI) == nil
+                ? route.reroutedToLocal(appending: "openai_key_unavailable")
+                : route
+        case .anthropic:
+            return apiKeyStore.apiKey(for: .anthropic) == nil
+                ? route.reroutedToLocal(appending: "anthropic_key_unavailable")
+                : route
+        case .gemini:
+            return apiKeyStore.apiKey(for: .gemini) == nil
+                ? route.reroutedToLocal(appending: "gemini_key_unavailable")
+                : route
+        }
     }
 }
