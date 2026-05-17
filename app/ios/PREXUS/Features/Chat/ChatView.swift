@@ -40,6 +40,9 @@ struct ChatView: View {
                 }
 
                 sensitivityPicker
+                Text(sensitivityDescription)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
 
                 HStack(alignment: .bottom, spacing: 12) {
                     TextField("Ask PREXUS", text: $viewModel.draftText, axis: .vertical)
@@ -74,6 +77,19 @@ struct ChatView: View {
                 localPreferred: "Prefer",
                 escalationAllowed: "Escalate"
             )
+        }
+    }
+
+    private var sensitivityDescription: LocalizedStringKey {
+        switch viewModel.selectedSensitivity {
+        case .localOnly:
+            return "Keep this request on device."
+        case .localPreferred:
+            return "Prefer on-device handling, but allow safe fallback when needed."
+        case .escalationAllowed:
+            return "Allow cloud escalation when the task benefits from it."
+        case .providerRestricted:
+            return "Restrict execution to approved providers."
         }
     }
 
