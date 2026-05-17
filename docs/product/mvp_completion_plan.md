@@ -1,13 +1,13 @@
-# MVC Completion Plan
+# MVP Completion Plan
 
 ## Purpose
 
 This document summarizes:
 
 - what has already been implemented in the current PREXUS iOS scaffold
-- what remains to reach the next "MVC completion" checkpoint
+- what remains to reach the next "MVP completion" checkpoint
 
-For this plan, "MVC completion" means the current mobile runtime scaffold is coherent end-to-end across:
+For this plan, "MVP completion" means the current mobile runtime scaffold is coherent end-to-end across:
 
 - Chat UI
 - routing and sensitivity policy
@@ -60,7 +60,7 @@ It does **not** mean PREXUS is feature-complete as a cognitive runtime. It marks
 | Most recent local verification | `xcodebuild -project app/ios/PREXUS.xcodeproj -scheme PREXUS -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' test` |
 | Current test count | 18 passing tests |
 
-## Current MVC Scope
+## Current MVP Scope
 
 The current scaffold already covers:
 
@@ -74,7 +74,7 @@ The current scaffold already covers:
 
 The scaffold is still incomplete in several product and runtime areas below.
 
-## Remaining Tasks To MVC Completion
+## Remaining Tasks To MVP Completion
 
 ### Plan table
 
@@ -115,7 +115,7 @@ The scaffold is still incomplete in several product and runtime areas below.
 
 ## Completion Criteria
 
-The current MVC checkpoint should be considered complete when all of the following are true:
+The current MVP checkpoint should be considered complete when all of the following are true:
 
 | Criterion | Required state |
 |---|---|
