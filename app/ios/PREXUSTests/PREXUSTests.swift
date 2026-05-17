@@ -283,7 +283,9 @@ final class PREXUSTests: XCTestCase {
 
     @MainActor
     func testRuntimeDiagnosticsStoreKeepsRecentEntries() {
-        let store = RuntimeDiagnosticsStore(maxEntries: 2)
+        let defaults = UserDefaults(suiteName: #function)!
+        defaults.removePersistentDomain(forName: #function)
+        let store = RuntimeDiagnosticsStore(defaults: defaults, maxEntries: 2)
         let route = RouteDecision(
             tier: .tier2,
             target: .local,
@@ -301,9 +303,15 @@ final class PREXUSTests: XCTestCase {
         store.record(route: route, execution: localExecution, userText: "Third")
 
         XCTAssertEqual(store.entries.map(\.userText), ["Third", "Second"])
+        XCTAssertEqual(store.entries.first?.executionStatusSummary, "Local runtime | Embedded Heuristic Runtime | Handled on device.")
+        XCTAssertEqual(store.entries.first?.routeSummary, "Route: local | Tier: tier2")
+
+        let reloaded = RuntimeDiagnosticsStore(defaults: defaults, maxEntries: 2)
+        XCTAssertEqual(reloaded.entries.map(\.userText), ["Third", "Second"])
 
         store.clear()
         XCTAssertTrue(store.entries.isEmpty)
+        XCTAssertTrue(RuntimeDiagnosticsStore(defaults: defaults, maxEntries: 2).entries.isEmpty)
     }
 
     func testOpenAIResponsesClientBuildsRequestAndParsesOutput() async throws {

@@ -20,13 +20,19 @@ struct RuntimeDiagnosticsView: View {
                             .foregroundStyle(.primary)
                             .lineLimit(2)
 
-                        Text(entry.execution.statusSummary)
+                        Text(entry.executionStatusSummary)
                             .font(.footnote)
                             .foregroundStyle(.secondary)
 
-                        Text("Route: \(entry.route.target.rawValue) | Tier: \(entry.route.tier.rawValue)")
+                        Text(entry.routeSummary)
                             .font(.caption)
                             .foregroundStyle(.secondary)
+
+                        if !entry.reasonSummary.isEmpty {
+                            Text(entry.reasonSummary)
+                                .font(.caption2)
+                                .foregroundStyle(.tertiary)
+                        }
 
                         Text(entry.timestamp.formatted(date: .abbreviated, time: .shortened))
                             .font(.caption2)

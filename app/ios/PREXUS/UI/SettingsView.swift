@@ -9,7 +9,7 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Diagnostics") {
+                Section {
                     NavigationLink {
                         RuntimeDiagnosticsView(diagnostics: runtimeDiagnostics)
                     } label: {
@@ -18,6 +18,10 @@ struct SettingsView: View {
                                 .foregroundStyle(.secondary)
                         }
                     }
+                } header: {
+                    Text("Diagnostics")
+                } footer: {
+                    Text("PREXUS keeps a small local-only diagnostics history for route inspection and trims older entries automatically.")
                 }
 
                 Section("Memory") {
