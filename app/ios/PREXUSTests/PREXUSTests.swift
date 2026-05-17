@@ -71,6 +71,37 @@ final class PREXUSTests: XCTestCase {
         XCTAssertTrue(output.response.contains("openAI handled"))
     }
 
+    func testRunTurnTrimsCloudPromptToConfiguredBudget() async throws {
+        let apiKeyStore = InMemoryAPIKeyStore()
+        apiKeyStore.setAPIKey("test-key", for: .openAI)
+        let runtime = RuntimeContainer.live(
+            config: AppConfig(
+                allowsCloudEscalation: true,
+                maxCloudContextTokens: 64,
+                openAIModel: "gpt-5-mini",
+                localModelBackend: .automatic
+            ),
+            apiKeyStore: apiKeyStore,
+            memoryStore: InMemoryEpisodicMemoryStore(),
+            localModel: MockLocalModelClient(),
+            cloudModel: MockCloudModelClient()
+        )
+        let longMessage = String(repeating: "A very long context line. ", count: 40)
+
+        let output = try await runtime.runTurn(
+            userText: "Review this Swift code for a bug",
+            transcript: [
+                ChatMessage(role: .user, content: longMessage),
+                ChatMessage(role: .assistant, content: longMessage),
+                ChatMessage(role: .user, content: longMessage)
+            ]
+        )
+
+        XCTAssertEqual(output.execution.mode, .cloud)
+        XCTAssertTrue(output.prompt.contains("...[trimmed]"))
+        XCTAssertLessThanOrEqual(output.prompt.count, 64 * 4 + 32)
+    }
+
     func testRunTurnUsesLocalPrimaryWhenCloudKeyIsMissing() async throws {
         let runtime = RuntimeContainer.live(
             config: .default,

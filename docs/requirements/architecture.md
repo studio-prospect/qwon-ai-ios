@@ -248,6 +248,8 @@ If a route selects a cloud provider but the required key is missing, the runtime
 The current OpenAI path also prefers privacy-preserving defaults by sending only the compressed runtime prompt and requesting stateless execution instead of relying on provider-side conversation storage.
 
 For local execution, the current scaffold also exposes an explicit backend selection surface so Simulator, embedded heuristic fallback, and future device runtime integration can be separated cleanly.
+
+Cloud-bound prompts are additionally trimmed against `maxCloudContextTokens` before execution so the runtime setting acts as an actual guardrail, not only a UI preference.
 - RAG-based narrowing
 
 Cloud models should receive only the minimum context required.

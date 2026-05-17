@@ -60,14 +60,12 @@ extension RuntimeContainer {
         let compressedContext = compressor.compress(messages: transcript)
         let memoryContext = memoryStore.recent(limit: 3).map(\.summary).joined(separator: "\n")
 
-        let prompt = [
-            "Intent route: \(route.reasonSummary)",
-            memoryContext.isEmpty ? nil : "Memory:\n\(memoryContext)",
-            compressedContext.isEmpty ? nil : "Context:\n\(compressedContext)",
-            "User:\n\(userText)"
-        ]
-        .compactMap { $0 }
-        .joined(separator: "\n\n")
+        let prompt = promptForExecution(
+            route: route,
+            memoryContext: memoryContext,
+            compressedContext: compressedContext,
+            userText: userText
+        )
 
         let response: String
         let execution: RuntimeExecutionMetadata
@@ -175,6 +173,34 @@ extension RuntimeContainer {
         )
     }
 
+    private func promptForExecution(
+        route: RouteDecision,
+        memoryContext: String,
+        compressedContext: String,
+        userText: String
+    ) -> String {
+        let shouldBudgetForCloud = route.target != .local
+        let budgetedMemory = shouldBudgetForCloud
+            ? trimToApproximateTokenBudget(memoryContext, maxTokens: config.maxCloudContextTokens / 4)
+            : memoryContext
+        let budgetedContext = shouldBudgetForCloud
+            ? trimToApproximateTokenBudget(compressedContext, maxTokens: config.maxCloudContextTokens / 2)
+            : compressedContext
+
+        let prompt = [
+            "Intent route: \(route.reasonSummary)",
+            budgetedMemory.isEmpty ? nil : "Memory:\n\(budgetedMemory)",
+            budgetedContext.isEmpty ? nil : "Context:\n\(budgetedContext)",
+            "User:\n\(userText)"
+        ]
+        .compactMap { $0 }
+        .joined(separator: "\n\n")
+
+        return shouldBudgetForCloud
+            ? trimToApproximateTokenBudget(prompt, maxTokens: config.maxCloudContextTokens)
+            : prompt
+    }
+
     private func effectiveRoute(for route: RouteDecision) -> RouteDecision {
         switch route.target {
         case .local:
@@ -192,5 +218,16 @@ extension RuntimeContainer {
                 ? route.reroutedToLocal(appending: "gemini_key_unavailable")
                 : route
         }
+    }
+
+    private func trimToApproximateTokenBudget(_ text: String, maxTokens: Int) -> String {
+        guard !text.isEmpty else { return text }
+        let safeBudget = max(32, maxTokens)
+        let maxCharacters = safeBudget * 4
+
+        guard text.count > maxCharacters else { return text }
+
+        let trimmedPrefix = text.prefix(max(0, maxCharacters - 24))
+        return String(trimmedPrefix) + "\n...[trimmed]"
     }
 }
