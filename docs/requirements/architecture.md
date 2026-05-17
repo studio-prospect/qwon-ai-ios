@@ -218,6 +218,28 @@ Before a request reaches a cloud provider, the runtime should try:
 - duplicate removal
 - recent history summarization
 - memory recall filtering
+
+## Current v0.1 Implementation Notes
+
+The current iOS scaffold already reflects several runtime boundaries from this document:
+
+- `AppEnvironment` owns configuration and secret wiring
+- `RuntimeContainer` builds the runtime graph from config, stores, and adapters
+- `RuntimeTurnExecutor` runs the turn pipeline outside the SwiftUI view layer
+- `AppSettingsStore` persists runtime policy toggles in `UserDefaults`
+- `KeychainAPIKeyStore` keeps provider secrets out of app config payloads
+
+This keeps model routing and persistence concerns out of `View` code while still allowing the UI to expose settings and state.
+
+## Runtime Policy Surface
+
+For v0.1, the user-configurable runtime policy surface is intentionally small:
+
+- `allowsCloudEscalation`
+- `maxCloudContextTokens`
+- provider API key presence
+
+If a route selects a cloud provider but the required key is missing, the runtime falls back to the local model instead of failing the turn. This preserves low-friction operation while keeping cloud access explicit.
 - RAG-based narrowing
 
 Cloud models should receive only the minimum context required.

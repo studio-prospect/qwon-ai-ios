@@ -219,6 +219,34 @@ Possible retention classes:
 
 Memory must remain user-controllable.
 
+## Current v0.1 Implementation Notes
+
+The current scaffold uses `PersistentMemoryStore` backed by `UserDefaults` as a lightweight local-only episodic store. This is not the long-term target storage engine, but it is useful for proving:
+
+- memory writes happen outside the UI layer
+- recent local memories can be recalled into prompt construction
+- memory survives app relaunch without any cloud dependency
+
+The implementation deliberately stores only compact `EpisodicMemory` records:
+
+- `id`
+- `summary`
+- `sensitivity`
+- `createdAt`
+
+This matches the product goal of preserving compact context, not full transcripts.
+
+## Planned Evolution
+
+`UserDefaults` is acceptable only as a bootstrap persistence layer. The intended path remains:
+
+- durable local storage for episodic records
+- separate embedding and vector indexes
+- pruning and retention policies
+- inspection and deletion controls in the app
+
+As the memory layer grows, persistence should move to a store better suited for bounded queries and compaction, such as SQLite plus a local vector index.
+
 Minimum controls:
 
 - inspect stored memory

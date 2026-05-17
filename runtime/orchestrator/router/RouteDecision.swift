@@ -7,7 +7,7 @@ enum RuntimeModality: String {
     case sensor
 }
 
-enum SensitivityLevel: String {
+enum SensitivityLevel: String, Codable {
     case localOnly
     case localPreferred
     case escalationAllowed

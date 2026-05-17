@@ -6,8 +6,13 @@ struct RuntimeContainer {
     let localModel: LocalModelClient
     let cloudModel: CloudModelClient
     let memoryStore: EpisodicMemoryStore
+    let apiKeyStore: APIKeyStore
 
-    static func live(config: AppConfig) -> RuntimeContainer {
+    static func live(
+        config: AppConfig,
+        apiKeyStore: APIKeyStore,
+        memoryStore: EpisodicMemoryStore
+    ) -> RuntimeContainer {
         let policy = ExecutionPolicy(
             allowsCloudEscalation: config.allowsCloudEscalation,
             maxCloudContextTokens: config.maxCloudContextTokens
@@ -16,7 +21,6 @@ struct RuntimeContainer {
         let compressor = HeuristicContextCompressor()
         let localModel = MockLocalModelClient()
         let cloudModel = MockCloudModelClient()
-        let memoryStore = InMemoryEpisodicMemoryStore()
         let router = DefaultRoutingEngine(
             classifier: classifier,
             policy: policy
@@ -27,7 +31,8 @@ struct RuntimeContainer {
             compressor: compressor,
             localModel: localModel,
             cloudModel: cloudModel,
-            memoryStore: memoryStore
+            memoryStore: memoryStore,
+            apiKeyStore: apiKeyStore
         )
     }
 }

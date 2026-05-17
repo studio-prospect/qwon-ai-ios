@@ -12,6 +12,6 @@ protocol CloudModelClient {
 
 struct MockCloudModelClient: CloudModelClient {
     func generate(prompt: String, provider: CloudProvider) async throws -> String {
-        "\(provider.rawValue)-response"
+        "\(provider.rawValue) handled the escalated request."
     }
 }

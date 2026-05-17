@@ -1,6 +1,6 @@
 import Foundation
 
-struct EpisodicMemory {
+struct EpisodicMemory: Codable, Equatable {
     let id: UUID
     let summary: String
     let sensitivity: SensitivityLevel

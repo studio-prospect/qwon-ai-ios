@@ -43,6 +43,7 @@ struct ChatView: View {
                     draft = ""
                 }
                 .buttonStyle(.borderedProminent)
+                .disabled(viewModel.isSending)
             }
             .padding()
         }

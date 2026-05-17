@@ -6,6 +6,6 @@ protocol LocalModelClient {
 
 struct MockLocalModelClient: LocalModelClient {
     func generate(prompt: String) async throws -> String {
-        "local-response"
+        "Local runtime handled the request with compressed context."
     }
 }

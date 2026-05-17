@@ -1,8 +1,8 @@
 import Foundation
 
-struct AppConfig {
-    let allowsCloudEscalation: Bool
-    let maxCloudContextTokens: Int
+struct AppConfig: Codable, Equatable {
+    var allowsCloudEscalation: Bool
+    var maxCloudContextTokens: Int
 
     static let `default` = AppConfig(
         allowsCloudEscalation: true,
