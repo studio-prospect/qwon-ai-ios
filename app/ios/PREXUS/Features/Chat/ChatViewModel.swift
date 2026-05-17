@@ -6,6 +6,7 @@ final class ChatViewModel: ObservableObject {
         ChatMessage(role: .system, content: "PREXUS runtime initialized.")
     ]
     @Published private(set) var isSending = false
+    @Published private(set) var latestExecution: RuntimeExecutionMetadata?
 
     private let environment: AppEnvironment
 
@@ -25,12 +26,15 @@ final class ChatViewModel: ObservableObject {
                 let response = """
                 Route: \(output.route.target.rawValue) | Tier: \(output.route.tier.rawValue)
                 Reason: \(output.route.reasonSummary)
+                Execution: \(output.execution.statusSummary)
 
                 \(output.response)
                 """
                 messages.append(ChatMessage(role: .assistant, content: response))
+                latestExecution = output.execution
                 environment.memoryLibrary.refresh()
             } catch {
+                latestExecution = nil
                 messages.append(
                     ChatMessage(
                         role: .assistant,

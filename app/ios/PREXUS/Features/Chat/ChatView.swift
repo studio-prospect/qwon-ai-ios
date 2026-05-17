@@ -10,6 +10,10 @@ struct ChatView: View {
 
     var body: some View {
         VStack(spacing: 0) {
+            if let execution = viewModel.latestExecution {
+                runtimeStatusBanner(execution)
+            }
+
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 12) {
                     ForEach(viewModel.messages) { message in
@@ -48,5 +52,51 @@ struct ChatView: View {
             .padding()
         }
         .navigationTitle("PREXUS")
+    }
+
+    @ViewBuilder
+    private func runtimeStatusBanner(_ execution: RuntimeExecutionMetadata) -> some View {
+        HStack(alignment: .top, spacing: 10) {
+            Image(systemName: iconName(for: execution.mode))
+                .font(.caption)
+                .foregroundStyle(accentColor(for: execution.mode))
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Runtime Status")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                Text(execution.statusSummary)
+                    .font(.footnote)
+                    .foregroundStyle(.primary)
+                    .textSelection(.enabled)
+            }
+
+            Spacer(minLength: 0)
+        }
+        .padding(.horizontal)
+        .padding(.vertical, 10)
+        .background(.bar)
+    }
+
+    private func iconName(for mode: RuntimeExecutionMode) -> String {
+        switch mode {
+        case .local:
+            return "iphone"
+        case .cloud:
+            return "cloud"
+        case .fallback:
+            return "arrow.trianglehead.clockwise"
+        }
+    }
+
+    private func accentColor(for mode: RuntimeExecutionMode) -> Color {
+        switch mode {
+        case .local:
+            return .green
+        case .cloud:
+            return .blue
+        case .fallback:
+            return .orange
+        }
     }
 }

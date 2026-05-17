@@ -41,6 +41,7 @@ final class PREXUSTests: XCTestCase {
         )
 
         XCTAssertEqual(output.route.target, .local)
+        XCTAssertEqual(output.execution.mode, .local)
         XCTAssertTrue(output.prompt.contains("Context:"))
         XCTAssertTrue(output.response.contains("Local runtime handled"))
     }
@@ -61,6 +62,9 @@ final class PREXUSTests: XCTestCase {
         )
 
         XCTAssertEqual(output.route.target, .openAI)
+        XCTAssertEqual(output.execution.mode, .cloud)
+        XCTAssertEqual(output.execution.provider, .openAI)
+        XCTAssertEqual(output.execution.model, "gpt-5-mini")
         XCTAssertTrue(output.response.contains("openAI handled"))
     }
 
@@ -78,6 +82,9 @@ final class PREXUSTests: XCTestCase {
         )
 
         XCTAssertEqual(output.route.target, .openAI)
+        XCTAssertEqual(output.execution.mode, .fallback)
+        XCTAssertEqual(output.execution.provider, .openAI)
+        XCTAssertEqual(output.execution.detail, "API key missing.")
         XCTAssertTrue(output.response.contains("Local fallback used"))
     }
 

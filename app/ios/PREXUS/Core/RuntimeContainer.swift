@@ -1,6 +1,7 @@
 import Foundation
 
 struct RuntimeContainer {
+    let config: AppConfig
     let router: RoutingEngine
     let compressor: ContextCompressor
     let localModel: LocalModelClient
@@ -33,6 +34,7 @@ struct RuntimeContainer {
         )
 
         return RuntimeContainer(
+            config: config,
             router: router,
             compressor: compressor,
             localModel: localModel,
