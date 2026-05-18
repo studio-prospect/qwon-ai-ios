@@ -29,6 +29,7 @@ Verified repeatedly during the polish pass:
 - test suite remains green after each visual refinement pass
 - XCTest screenshot smoke now traverses Chat → Settings → Diagnostics → Memory automatically
 - seeded XCTest screenshot smoke now captures non-empty Diagnostics and Memory states
+- the capture-refresh wrapper now regenerates the committed iPhone 16 capture set end to end
 
 Validation command:
 
@@ -55,6 +56,7 @@ Evidence:
 - live simulator launch completed
 - screenshot capture succeeded first for the Chat surface
 - full runtime-surface screenshot automation later succeeded for Chat / Settings / Diagnostics / Memory
+- the capture-refresh wrapper now regenerates the committed SE-width capture set end to end
 - compact-width support is therefore backed by both code fallbacks and automated simulator evidence
 
 ## Live Screenshot Coverage
