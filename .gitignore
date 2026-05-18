@@ -9,6 +9,8 @@ app/ios/PREXUS.xcodeproj/xcuserdata/
 *.swiftpm/
 .env
 .env.*
+.codex/
+.omx/
 node_modules/
 coverage/
 dist/
