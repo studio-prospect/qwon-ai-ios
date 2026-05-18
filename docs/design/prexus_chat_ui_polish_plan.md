@@ -28,6 +28,7 @@ As of 2026-05-18, the current iOS scaffold has completed the first wave of polis
 - compact-width fallbacks added for summary cards and previews
 - branded empty states added for Diagnostics and Memory
 - secondary runtime surfaces now begin with a screen intro instead of raw card lists
+- live compact-width verification completed on iPhone SE (3rd generation)
 
 This means the original Phase 1–4 chat polish scope is functionally complete, and the current work has expanded into app-level surface consistency.
 
@@ -247,7 +248,7 @@ Status:
 
 - completed for the current iPhone 16-targeted scaffold
 - compact-width code fallbacks are implemented
-- live SE-class simulator verification is still pending because CoreSimulatorService has been intermittently unavailable in the current environment
+- live SE-class simulator verification completed on 2026-05-18
 
 ### Phase 5 — Cross-surface consistency
 
@@ -278,7 +279,22 @@ Expected outcome:
 
 Status:
 
-- pending live simulator availability
+- compact-width live verification completed on iPhone SE (3rd generation)
+- additional screenshot capture for Settings / Diagnostics / Memory is still optional
+
+## Live Verification Notes
+
+Verified on 2026-05-18:
+
+- iPhone 16 simulator regression checks remained green through the full polish pass
+- iPhone SE (3rd generation) live launch confirmed that the chat header, system bubble, sensitivity control, helper text, input field, and send button fit without layout breakage
+- compact-width fallback behavior is now backed by both code paths and live simulator evidence
+
+Observed note:
+
+- the SE simulator screenshots showed black bands above and below the rendered app surface during this session
+- a temporary full-height `ChatView` experiment did not change that behavior and was reverted
+- treat that as a separate simulator/runtime presentation issue rather than a blocker on the current UI polish pass
 
 ## Constraints
 
@@ -308,8 +324,6 @@ Additional current criteria:
 
 ## Suggested Next Step
 
-Once CoreSimulatorService is stable again:
-
-1. verify the current polish pass on an SE-class simulator
-2. capture updated screenshots for the design docs
-3. decide whether Settings should receive a fully custom PREXUS header like Chat, or remain system-sheet styled
+1. capture updated screenshots for Settings / Diagnostics / Memory so the docs reflect the current app-wide visual language
+2. decide whether Settings should receive a fully custom PREXUS header like Chat, or remain system-sheet styled
+3. if the black-band simulator behavior recurs, investigate it as a separate presentation issue rather than mixing it into UI polish work
