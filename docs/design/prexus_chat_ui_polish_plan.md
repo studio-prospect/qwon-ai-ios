@@ -28,6 +28,7 @@ As of 2026-05-18, the current iOS scaffold has completed the first wave of polis
 - compact-width fallbacks added for summary cards and previews
 - branded empty states added for Diagnostics and Memory
 - secondary runtime surfaces now begin with a screen intro instead of raw card lists
+- Settings now opens with a branded runtime intro and descriptive PREXUS section headers
 - live compact-width verification completed on iPhone SE (3rd generation)
 
 This means the original Phase 1–4 chat polish scope is functionally complete, and the current work has expanded into app-level surface consistency.
@@ -264,6 +265,7 @@ Expected outcome:
 Status:
 
 - largely completed in the current scaffold
+- Settings has also been pulled closer to the shared product language through a branded intro card and descriptive section headers
 
 ### Phase 6 — Visual verification and final tuning
 
@@ -281,6 +283,7 @@ Status:
 
 - compact-width live verification completed on iPhone SE (3rd generation)
 - additional screenshot capture for Settings / Diagnostics / Memory is still optional
+- automated live capture for those secondary surfaces is currently blocked by environment-level interaction limits rather than missing UI implementation
 
 ## Live Verification Notes
 
@@ -289,12 +292,14 @@ Verified on 2026-05-18:
 - iPhone 16 simulator regression checks remained green through the full polish pass
 - iPhone SE (3rd generation) live launch confirmed that the chat header, system bubble, sensitivity control, helper text, input field, and send button fit without layout breakage
 - compact-width fallback behavior is now backed by both code paths and live simulator evidence
+- Settings has been further polished with a branded runtime intro and descriptive PREXUS section headers, with code validation complete
 
 Observed note:
 
 - the SE simulator screenshots showed black bands above and below the rendered app surface during this session
 - a temporary full-height `ChatView` experiment did not change that behavior and was reverted
 - treat that as a separate simulator/runtime presentation issue rather than a blocker on the current UI polish pass
+- secondary-surface live screenshots are not blocked by layout regressions; they are blocked by the current session's inability to perform reliable in-app pointer automation for nested navigation
 
 ## Constraints
 
@@ -327,3 +332,4 @@ Additional current criteria:
 1. capture updated screenshots for Settings / Diagnostics / Memory so the docs reflect the current app-wide visual language
 2. decide whether Settings should receive a fully custom PREXUS header like Chat, or remain system-sheet styled
 3. if the black-band simulator behavior recurs, investigate it as a separate presentation issue rather than mixing it into UI polish work
+4. if live screenshots for secondary surfaces become important, treat interaction automation as a separate tooling task rather than coupling it to UI polish implementation
