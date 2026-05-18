@@ -23,39 +23,47 @@ As of 2026-05-18, the current environment can reliably do the following:
 - launch PREXUS in the simulator
 - run test/build verification before capture
 - take screenshots of the currently visible app surface
+- export screenshots from the first XCTest smoke out of `.xcresult`
 
-This was enough to verify:
+This is now enough to verify or refresh:
 
 - compact-width Chat on iPhone SE (3rd generation)
+- iPhone 16 runtime-surface captures for Chat / Settings / Diagnostics / Memory
 
 ## Current Unreliable / Blocked Scope
 
 The current environment does **not** yet provide a reliable way to:
 
-- tap through nested in-app navigation for screenshot capture
-- drive Settings -> Diagnostics -> Memory interactions automatically
 - use coordinate-based GUI automation consistently from the current session
+- export non-empty seeded Diagnostics / Memory screenshots automatically
+- cover additional devices beyond the first iPhone 16 smoke without extra automation work
 
 Known constraints:
 
-- `simctl` does not expose a direct tap API for this workflow
+- `simctl` still does not expose a direct tap API for ad-hoc workflow driving outside XCTest
 - `osascript` coordinate clicks are blocked by accessibility limitations in the current environment
-- because of that, secondary-surface screenshots are currently a tooling problem, not a confirmed product problem
+- seeded multi-state capture remains a tooling problem, not a confirmed product problem
 
 ## Recommended Capture Sequence
 
 When you need new live screenshots:
 
-1. Run the standard iPhone 16 regression command first:
-   - `xcodebuild -project app/ios/PREXUS.xcodeproj -scheme PREXUS -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' test`
-2. Boot the target simulator device with `simctl`
-3. Launch PREXUS
-4. Capture the currently visible surface
-5. Record:
+1. Run the first UI smoke:
+   - `xcodebuild -project app/ios/PREXUS.xcodeproj -scheme PREXUS -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' -only-testing:PREXUSUITests test`
+2. Export the attachments into a deterministic directory:
+   - `ruby tools/scripts/export_prexus_xcuitest_screenshots.rb --xcresult '<xcresult-path>' --output-dir docs/design/runtime-surface-captures/iphone16`
+3. Record:
    - device class
    - date
-   - what was actually visible
-   - whether navigation was possible or blocked
+   - which `.xcresult` the images came from
+   - whether the captures reflect empty or populated runtime state
+
+The export script normalizes the attachment names to:
+
+- `prexus-chat-iphone16.png`
+- `prexus-settings-iphone16.png`
+- `prexus-diagnostics-iphone16.png`
+- `prexus-memory-iphone16.png`
 
 ## When To Open a Separate Tooling Task
 
@@ -65,6 +73,8 @@ Create a separate tooling / automation task if you need:
 - repeatable Diagnostics screenshots
 - repeatable Memory screenshots
 - multi-screen visual documentation updates in one pass
+- seeded non-empty screenshot variants
+- deterministic export for additional device classes
 
 That task should focus on:
 

@@ -22,6 +22,7 @@ Current first-pass behavior:
 - captures Chat, Settings, Diagnostics, and Memory in order
 - uses stable screen identifiers where exposed
 - uses visible-label row matching for the nested Settings navigation rows
+- can now be exported from `.xcresult` through `tools/scripts/export_prexus_xcuitest_screenshots.rb`
 
 This keeps the initial automation path small and navigation-focused while the broader screenshot/export workflow remains a follow-on task.
 
