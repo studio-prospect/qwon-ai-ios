@@ -8,178 +8,208 @@ struct SettingsView: View {
 
     var body: some View {
         NavigationStack {
-            Form {
-                Section {
-                    summarySurface
-                        .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
-                        .listRowBackground(Color.clear)
-                }
+            VStack(spacing: 0) {
+                header
 
-                Section {
-                    NavigationLink {
-                        RuntimeDiagnosticsView(diagnostics: runtimeDiagnostics)
-                    } label: {
-                        settingsNavigationRow(
-                            title: "Recent Runtime Decisions",
-                            subtitle: "Inspect recent route and execution outcomes.",
-                            value: "\(runtimeDiagnostics.entries.count)"
-                        )
+                Form {
+                    Section {
+                        summarySurface
+                            .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
+                            .listRowBackground(Color.clear)
                     }
 
-                    NavigationLink {
-                        MemoryLibraryView(viewModel: memoryLibrary)
-                    } label: {
-                        settingsNavigationRow(
-                            title: "Stored Episodes",
-                            subtitle: "Review compact local memory snapshots.",
-                            value: "\(memoryLibrary.memories.count)"
-                        )
-                    }
-                } header: {
-                    PREXUSFormSectionHeader(
-                        title: "Workspace",
-                        detail: "Inspect the local runtime history PREXUS keeps on device."
-                    )
-                } footer: {
-                    Text("PREXUS keeps local-only summaries for memory and runtime inspection, and trims older diagnostics automatically.")
-                }
-
-                Section {
-                    settingSummaryRow(
-                        "Escalation",
-                        subtitle: "Controls whether PREXUS may leave the on-device runtime.",
-                        accessory: AnyView(
-                            PREXUSStatusChip(
-                                settings.config.allowsCloudEscalation ? "Enabled" : "Local Only",
-                                tint: settings.config.allowsCloudEscalation ? .blue : .secondary
+                    Section {
+                        NavigationLink {
+                            RuntimeDiagnosticsView(diagnostics: runtimeDiagnostics)
+                        } label: {
+                            settingsNavigationRow(
+                                title: "Recent Runtime Decisions",
+                                subtitle: "Inspect recent route and execution outcomes.",
+                                value: "\(runtimeDiagnostics.entries.count)"
                             )
-                        )
-                    )
-
-                    settingSummaryRow(
-                        "Restricted Mode",
-                        subtitle: restrictedProviderSummary,
-                        accessory: AnyView(
-                            PREXUSStatusChip(
-                                settings.config.approvedProvidersForRestrictedMode.isEmpty ? "Local fallback" : "Allowlist active",
-                                tint: settings.config.approvedProvidersForRestrictedMode.isEmpty ? .orange : .green
-                            )
-                        )
-                    )
-
-                    settingSummaryRow(
-                        "Cloud-Ready Providers",
-                        subtitle: readyProviderSummary,
-                        accessory: AnyView(
-                            PREXUSStatusChip(readyProviderCountLabel, tint: readyProviderCount > 0 ? .green : .secondary)
-                        )
-                    )
-                } header: {
-                    PREXUSFormSectionHeader(
-                        title: "Routing Policy",
-                        detail: "Define when PREXUS may escalate beyond the on-device runtime."
-                    )
-                } footer: {
-                    Text("Cloud escalation must be enabled before PREXUS can leave the local runtime. Provider Restricted turns may use only the approved providers below, and providers without valid keys still fall back to local execution.")
-                }
-
-                Section {
-                    Toggle("Allow Cloud Escalation", isOn: $settings.config.allowsCloudEscalation)
-
-                    Stepper(
-                        "Max Cloud Context Tokens: \(settings.config.maxCloudContextTokens)",
-                        value: $settings.config.maxCloudContextTokens,
-                        in: 256...8192,
-                        step: 256
-                    )
-
-                    TextField("OpenAI Model", text: $settings.config.openAIModel)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled()
-                } header: {
-                    PREXUSFormSectionHeader(
-                        title: "Cloud",
-                        detail: "Configure the default cloud routing budget and primary OpenAI model."
-                    )
-                }
-
-                Section {
-                    ForEach(CloudProvider.allCases, id: \.self) { provider in
-                        Toggle(
-                            provider.displayLabel,
-                            isOn: Binding(
-                                get: { settings.isApprovedForRestrictedMode(provider) },
-                                set: { settings.setApprovedForRestrictedMode($0, provider: provider) }
-                            )
-                        )
-                    }
-                } header: {
-                    PREXUSFormSectionHeader(
-                        title: "Provider-Restricted Mode",
-                        detail: "Limit restricted turns to an explicit provider allowlist."
-                    )
-                } footer: {
-                    Text("These providers are the only cloud targets allowed when a turn uses Provider Restricted sensitivity. If none are approved, PREXUS keeps the turn local.")
-                }
-
-                Section {
-                    providerAvailabilityRow("OpenAI", provider: .openAI)
-                    providerAvailabilityRow("Anthropic", provider: .anthropic)
-                    providerAvailabilityRow("Gemini", provider: .gemini)
-                } header: {
-                    PREXUSFormSectionHeader(
-                        title: "Provider Availability",
-                        detail: "See which providers are actually ready for cloud execution."
-                    )
-                } footer: {
-                    Text("When a provider is not ready, PREXUS keeps the request on the local runtime instead of attempting cloud escalation.")
-                }
-
-                Section {
-                    Picker("Backend", selection: $settings.config.localModelBackend) {
-                        ForEach(LocalModelBackend.allCases, id: \.self) { backend in
-                            Text(backend.displayName).tag(backend)
                         }
+
+                        NavigationLink {
+                            MemoryLibraryView(viewModel: memoryLibrary)
+                        } label: {
+                            settingsNavigationRow(
+                                title: "Stored Episodes",
+                                subtitle: "Review compact local memory snapshots.",
+                                value: "\(memoryLibrary.memories.count)"
+                            )
+                        }
+                    } header: {
+                        PREXUSFormSectionHeader(
+                            title: "Workspace",
+                            detail: "Inspect the local runtime history PREXUS keeps on device."
+                        )
+                    } footer: {
+                        Text("PREXUS keeps local-only summaries for memory and runtime inspection, and trims older diagnostics automatically.")
                     }
-                } header: {
-                    PREXUSFormSectionHeader(
-                        title: "Local Runtime",
-                        detail: "Select the on-device backend PREXUS should favor locally."
-                    )
-                } footer: {
-                    Text("Automatic uses a simulator stub on Simulator and the device runtime bridge on hardware.")
+
+                    Section {
+                        settingSummaryRow(
+                            "Escalation",
+                            subtitle: "Controls whether PREXUS may leave the on-device runtime.",
+                            accessory: AnyView(
+                                PREXUSStatusChip(
+                                    settings.config.allowsCloudEscalation ? "Enabled" : "Local Only",
+                                    tint: settings.config.allowsCloudEscalation ? .blue : .secondary
+                                )
+                            )
+                        )
+
+                        settingSummaryRow(
+                            "Restricted Mode",
+                            subtitle: restrictedProviderSummary,
+                            accessory: AnyView(
+                                PREXUSStatusChip(
+                                    settings.config.approvedProvidersForRestrictedMode.isEmpty ? "Local fallback" : "Allowlist active",
+                                    tint: settings.config.approvedProvidersForRestrictedMode.isEmpty ? .orange : .green
+                                )
+                            )
+                        )
+
+                        settingSummaryRow(
+                            "Cloud-Ready Providers",
+                            subtitle: readyProviderSummary,
+                            accessory: AnyView(
+                                PREXUSStatusChip(readyProviderCountLabel, tint: readyProviderCount > 0 ? .green : .secondary)
+                            )
+                        )
+                    } header: {
+                        PREXUSFormSectionHeader(
+                            title: "Routing Policy",
+                            detail: "Define when PREXUS may escalate beyond the on-device runtime."
+                        )
+                    } footer: {
+                        Text("Cloud escalation must be enabled before PREXUS can leave the local runtime. Provider Restricted turns may use only the approved providers below, and providers without valid keys still fall back to local execution.")
+                    }
+
+                    Section {
+                        Toggle("Allow Cloud Escalation", isOn: $settings.config.allowsCloudEscalation)
+
+                        Stepper(
+                            "Max Cloud Context Tokens: \(settings.config.maxCloudContextTokens)",
+                            value: $settings.config.maxCloudContextTokens,
+                            in: 256...8192,
+                            step: 256
+                        )
+
+                        TextField("OpenAI Model", text: $settings.config.openAIModel)
+                            .textInputAutocapitalization(.never)
+                            .autocorrectionDisabled()
+                    } header: {
+                        PREXUSFormSectionHeader(
+                            title: "Cloud",
+                            detail: "Configure the default cloud routing budget and primary OpenAI model."
+                        )
+                    }
+
+                    Section {
+                        ForEach(CloudProvider.allCases, id: \.self) { provider in
+                            Toggle(
+                                provider.displayLabel,
+                                isOn: Binding(
+                                    get: { settings.isApprovedForRestrictedMode(provider) },
+                                    set: { settings.setApprovedForRestrictedMode($0, provider: provider) }
+                                )
+                            )
+                        }
+                    } header: {
+                        PREXUSFormSectionHeader(
+                            title: "Provider-Restricted Mode",
+                            detail: "Limit restricted turns to an explicit provider allowlist."
+                        )
+                    } footer: {
+                        Text("These providers are the only cloud targets allowed when a turn uses Provider Restricted sensitivity. If none are approved, PREXUS keeps the turn local.")
+                    }
+
+                    Section {
+                        providerAvailabilityRow("OpenAI", provider: .openAI)
+                        providerAvailabilityRow("Anthropic", provider: .anthropic)
+                        providerAvailabilityRow("Gemini", provider: .gemini)
+                    } header: {
+                        PREXUSFormSectionHeader(
+                            title: "Provider Availability",
+                            detail: "See which providers are actually ready for cloud execution."
+                        )
+                    } footer: {
+                        Text("When a provider is not ready, PREXUS keeps the request on the local runtime instead of attempting cloud escalation.")
+                    }
+
+                    Section {
+                        Picker("Backend", selection: $settings.config.localModelBackend) {
+                            ForEach(LocalModelBackend.allCases, id: \.self) { backend in
+                                Text(backend.displayName).tag(backend)
+                            }
+                        }
+                    } header: {
+                        PREXUSFormSectionHeader(
+                            title: "Local Runtime",
+                            detail: "Select the on-device backend PREXUS should favor locally."
+                        )
+                    } footer: {
+                        Text("Automatic uses a simulator stub on Simulator and the device runtime bridge on hardware.")
+                    }
+
+                    Section {
+                        SecureField("OpenAI API Key", text: $settings.openAIKey)
+                            .textInputAutocapitalization(.never)
+                            .autocorrectionDisabled()
+
+                        SecureField("Anthropic API Key", text: $settings.anthropicKey)
+                            .textInputAutocapitalization(.never)
+                            .autocorrectionDisabled()
+
+                        SecureField("Gemini API Key", text: $settings.geminiKey)
+                            .textInputAutocapitalization(.never)
+                            .autocorrectionDisabled()
+                    } header: {
+                        PREXUSFormSectionHeader(
+                            title: "API Keys",
+                            detail: "Store provider credentials locally so PREXUS can verify cloud readiness."
+                        )
+                    }
                 }
-
-                Section {
-                    SecureField("OpenAI API Key", text: $settings.openAIKey)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled()
-
-                    SecureField("Anthropic API Key", text: $settings.anthropicKey)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled()
-
-                    SecureField("Gemini API Key", text: $settings.geminiKey)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled()
-                } header: {
-                    PREXUSFormSectionHeader(
-                        title: "API Keys",
-                        detail: "Store provider credentials locally so PREXUS can verify cloud readiness."
-                    )
-                }
+                .scrollContentBackground(.hidden)
+                .background(Color(uiColor: .systemGroupedBackground))
             }
-            .scrollContentBackground(.hidden)
+            .toolbar(.hidden, for: .navigationBar)
             .background(Color(uiColor: .systemGroupedBackground))
-            .navigationTitle("Settings")
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("Done") {
-                        dismiss()
-                    }
-                }
-            }
         }
+    }
+
+    private var header: some View {
+        HStack(alignment: .firstTextBaseline, spacing: 16) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Settings")
+                    .font(.largeTitle.weight(.semibold))
+                    .tracking(-0.8)
+
+                Text("Runtime control")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
+            Spacer(minLength: 0)
+
+            Button("Done") {
+                dismiss()
+            }
+            .font(.headline.weight(.medium))
+            .foregroundStyle(.blue)
+            .padding(.horizontal, 14)
+            .padding(.vertical, 10)
+            .background(
+                Capsule(style: .continuous)
+                    .fill(.thinMaterial)
+            )
+        }
+        .padding(.horizontal)
+        .padding(.top, 12)
+        .padding(.bottom, 8)
+        .background(Color(uiColor: .systemGroupedBackground))
     }
 
     private var summarySurface: some View {
