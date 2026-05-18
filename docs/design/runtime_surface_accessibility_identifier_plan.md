@@ -165,5 +165,6 @@ This note does **not** require:
 ## Related Notes
 
 - `docs/design/runtime_surface_automation_backlog.md`
+- `docs/design/runtime_surface_xctest_screenshot_spec.md`
 - `docs/design/runtime_surface_capture_workflow.md`
 - `docs/design/runtime_surface_verification_notes.md`

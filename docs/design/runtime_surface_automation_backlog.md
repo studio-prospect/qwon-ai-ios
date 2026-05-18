@@ -112,6 +112,7 @@ Related documents:
 
 - `docs/design/prexus_chat_ui_polish_plan.md`
 - `docs/design/runtime_surface_accessibility_identifier_plan.md`
+- `docs/design/runtime_surface_xctest_screenshot_spec.md`
 - `docs/design/runtime_surface_verification_notes.md`
 - `docs/design/runtime_surface_capture_workflow.md`
 - `docs/design/simulator_presentation_issue_note.md`
