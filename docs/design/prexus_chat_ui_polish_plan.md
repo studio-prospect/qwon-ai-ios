@@ -16,6 +16,21 @@ The goal is not decorative redesign. The goal is to make the current routing-awa
 - more Apple-like
 - more coherent with PREXUS as a runtime, not a generic chat app
 
+## Current Implementation Status
+
+As of 2026-05-18, the current iOS scaffold has completed the first wave of polish work:
+
+- chat composer consolidated into a single control surface
+- system / user / assistant conversation hierarchy tuned
+- runtime status and route preview converted to chip-based summaries
+- custom chat header added to reduce dead space and strengthen branding
+- shared `PREXUSSurfaceCard` / `PREXUSStatusChip` primitives adopted across Chat, Settings, Diagnostics, and Memory
+- compact-width fallbacks added for summary cards and previews
+- branded empty states added for Diagnostics and Memory
+- secondary runtime surfaces now begin with a screen intro instead of raw card lists
+
+This means the original Phase 1–4 chat polish scope is functionally complete, and the current work has expanded into app-level surface consistency.
+
 ## Design Intent
 
 The polished chat surface should communicate three layers clearly:
@@ -182,6 +197,10 @@ Expected outcome:
 
 - bottom control surface feels intentionally designed
 
+Status:
+
+- completed
+
 ### Phase 2 — Message hierarchy
 
 Scope:
@@ -192,6 +211,10 @@ Scope:
 Expected outcome:
 
 - conversation becomes easier to scan
+
+Status:
+
+- completed
 
 ### Phase 3 — Runtime and route chips
 
@@ -204,6 +227,10 @@ Expected outcome:
 
 - routing awareness remains visible without feeling technical
 
+Status:
+
+- completed
+
 ### Phase 4 — Final spacing pass
 
 Scope:
@@ -215,6 +242,43 @@ Scope:
 Expected outcome:
 
 - the whole screen feels cohesive
+
+Status:
+
+- completed for the current iPhone 16-targeted scaffold
+- compact-width code fallbacks are implemented
+- live SE-class simulator verification is still pending because CoreSimulatorService has been intermittently unavailable in the current environment
+
+### Phase 5 — Cross-surface consistency
+
+Scope:
+
+- unify card, chip, empty-state, and intro patterns across Settings, Diagnostics, and Memory
+- reduce “mixed system UI vs product UI” feel in secondary surfaces
+
+Expected outcome:
+
+- the app feels like one product instead of one polished chat screen plus utility screens
+
+Status:
+
+- largely completed in the current scaffold
+
+### Phase 6 — Visual verification and final tuning
+
+Scope:
+
+- re-run live simulator checks once CoreSimulatorService is stable
+- validate compact layouts on SE-class devices
+- capture final screenshots for design docs if needed
+
+Expected outcome:
+
+- implementation evidence matches the intended polish direction across device sizes
+
+Status:
+
+- pending live simulator availability
 
 ## Constraints
 
@@ -236,8 +300,16 @@ The polish pass is successful when:
 - iPhone 16 layout remains clean
 - narrow-width fallback still works
 
+Additional current criteria:
+
+- Settings, Diagnostics, and Memory should share the same visual language as Chat
+- empty states should feel branded rather than default-system
+- secondary surfaces should explain their purpose before showing raw runtime data
+
 ## Suggested Next Step
 
-Implement **Phase 1 — Composer consolidation** first.
+Once CoreSimulatorService is stable again:
 
-That gives the highest visual improvement with the lowest architectural risk.
+1. verify the current polish pass on an SE-class simulator
+2. capture updated screenshots for the design docs
+3. decide whether Settings should receive a fully custom PREXUS header like Chat, or remain system-sheet styled
