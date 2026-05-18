@@ -66,14 +66,7 @@ final class ChatViewModel: ObservableObject {
                     input: .text(text, sensitivity: sensitivity),
                     transcript: transcript
                 )
-                let response = """
-                Route: \(output.route.statusSummary)
-                Reason: \(output.route.displayReasonSummary)
-                Execution: \(output.execution.statusSummary)
-
-                \(output.response)
-                """
-                messages.append(ChatMessage(role: .assistant, content: response))
+                messages.append(ChatMessage(role: .assistant, content: output.response))
                 latestExecution = output.execution
                 environment.runtimeDiagnostics.record(
                     route: output.route,

@@ -20,9 +20,10 @@ struct ChatView: View {
             }
 
             ScrollView {
-                LazyVStack(alignment: .leading, spacing: 12) {
-                    ForEach(viewModel.messages) { message in
+                LazyVStack(alignment: .leading, spacing: 0) {
+                    ForEach(Array(viewModel.messages.enumerated()), id: \.element.id) { index, message in
                         messageBubble(message)
+                            .padding(.bottom, spacingAfterMessage(at: index))
                     }
                 }
                 .padding()
@@ -167,15 +168,18 @@ struct ChatView: View {
     @ViewBuilder
     private func messageBubble(_ message: ChatMessage) -> some View {
         VStack(alignment: bubbleAlignment(for: message.role), spacing: 4) {
-            Text(message.role.label)
-                .font(.caption)
-                .foregroundStyle(roleLabelStyle(for: message.role))
+            if message.role == .system {
+                Text(message.role.label)
+                    .font(.caption)
+                    .foregroundStyle(roleLabelStyle(for: message.role))
+            }
 
             Text(message.content)
-                .font(message.role == .system ? .title3 : .body)
+                .font(font(for: message.role))
                 .foregroundStyle(messageTextStyle(for: message.role))
                 .textSelection(.enabled)
         }
+        .frame(maxWidth: bubbleMaxWidth(for: message.role), alignment: containerAlignment(for: message.role))
         .frame(
             maxWidth: .infinity,
             alignment: containerAlignment(for: message.role)
@@ -324,6 +328,40 @@ struct ChatView: View {
         switch role {
         case .system, .assistant, .user:
             return AnyShapeStyle(.primary)
+        }
+    }
+
+    private func font(for role: ChatMessage.Role) -> Font {
+        switch role {
+        case .system:
+            return .headline
+        case .assistant, .user:
+            return .body
+        }
+    }
+
+    private func bubbleMaxWidth(for role: ChatMessage.Role) -> CGFloat? {
+        switch role {
+        case .system:
+            return nil
+        case .assistant, .user:
+            return 320
+        }
+    }
+
+    private func spacingAfterMessage(at index: Int) -> CGFloat {
+        guard index < viewModel.messages.count - 1 else { return 0 }
+
+        let currentRole = viewModel.messages[index].role
+        let nextRole = viewModel.messages[index + 1].role
+
+        switch (currentRole, nextRole) {
+        case (.system, _), (_, .system):
+            return 18
+        case let (lhs, rhs) where lhs == rhs:
+            return 8
+        default:
+            return 12
         }
     }
 
