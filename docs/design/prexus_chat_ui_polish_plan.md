@@ -7,6 +7,7 @@ This document turns the current wireframe concept into an implementation-ready U
 Reference wireframe:
 
 - `docs/design/prexus-chat-wireframe-v1.png`
+- operational verification notes: `docs/design/runtime_surface_verification_notes.md`
 
 The goal is not decorative redesign. The goal is to make the current routing-aware chat UI feel:
 
@@ -28,7 +29,7 @@ As of 2026-05-18, the current iOS scaffold has completed the first wave of polis
 - compact-width fallbacks added for summary cards and previews
 - branded empty states added for Diagnostics and Memory
 - secondary runtime surfaces now begin with a screen intro instead of raw card lists
-- Settings now opens with a branded runtime intro and descriptive PREXUS section headers
+- Settings now opens with a branded runtime intro, descriptive PREXUS section headers, and a custom PREXUS-owned header
 - live compact-width verification completed on iPhone SE (3rd generation)
 
 This means the original Phase 1–4 chat polish scope is functionally complete, and the current work has expanded into app-level surface consistency.
@@ -265,7 +266,7 @@ Expected outcome:
 Status:
 
 - largely completed in the current scaffold
-- Settings has also been pulled closer to the shared product language through a branded intro card and descriptive section headers
+- Settings has also been pulled closer to the shared product language through a branded intro card, descriptive section headers, and a custom header that matches Chat more closely
 
 ### Phase 6 — Visual verification and final tuning
 
@@ -292,7 +293,7 @@ Verified on 2026-05-18:
 - iPhone 16 simulator regression checks remained green through the full polish pass
 - iPhone SE (3rd generation) live launch confirmed that the chat header, system bubble, sensitivity control, helper text, input field, and send button fit without layout breakage
 - compact-width fallback behavior is now backed by both code paths and live simulator evidence
-- Settings has been further polished with a branded runtime intro and descriptive PREXUS section headers, with code validation complete
+- Settings has been further polished with a branded runtime intro, descriptive PREXUS section headers, and a custom header, with code validation complete
 
 Observed note:
 
@@ -330,6 +331,6 @@ Additional current criteria:
 ## Suggested Next Step
 
 1. capture updated screenshots for Settings / Diagnostics / Memory so the docs reflect the current app-wide visual language
-2. decide whether Settings should receive a fully custom PREXUS header like Chat, or remain system-sheet styled
-3. if the black-band simulator behavior recurs, investigate it as a separate presentation issue rather than mixing it into UI polish work
-4. if live screenshots for secondary surfaces become important, treat interaction automation as a separate tooling task rather than coupling it to UI polish implementation
+2. if the black-band simulator behavior recurs, investigate it as a separate presentation issue rather than mixing it into UI polish work
+3. if live screenshots for secondary surfaces become important, treat interaction automation as a separate tooling task rather than coupling it to UI polish implementation
+4. keep this plan focused on design state, and move operational verification detail into dedicated notes
