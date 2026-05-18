@@ -163,10 +163,7 @@ struct SettingsView: View {
 
     private var summarySurface: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Runtime Overview")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-                .padding(.horizontal, 16)
+            settingsIntroCard
 
             ViewThatFits(in: .horizontal) {
                 HStack(spacing: 12) {
@@ -209,6 +206,37 @@ struct SettingsView: View {
                 tint: settings.config.allowsCloudEscalation ? .green : .secondary
             )
         }
+    }
+
+    private var settingsIntroCard: some View {
+        PREXUSSurfaceCard(borderTint: Color.blue.opacity(0.16)) {
+            VStack(alignment: .leading, spacing: 12) {
+                PREXUSScreenIntro(
+                    eyebrow: "Runtime control",
+                    title: "Settings",
+                    message: "Tune how PREXUS routes work between the on-device runtime, approved cloud providers, diagnostics, and local memory."
+                )
+
+                ViewThatFits(in: .horizontal) {
+                    HStack(spacing: 8) {
+                        PREXUSStatusChip(settings.config.allowsCloudEscalation ? "Cloud available" : "Local only", tint: settings.config.allowsCloudEscalation ? .blue : .secondary)
+                        PREXUSStatusChip(settings.config.approvedProvidersForRestrictedMode.isEmpty ? "Restricted → Local" : "Restricted allowlist", tint: settings.config.approvedProvidersForRestrictedMode.isEmpty ? .orange : .green)
+                        PREXUSStatusChip(readyProviderCountLabel, tint: readyProviderCount > 0 ? .green : .secondary)
+                    }
+
+                    VStack(alignment: .leading, spacing: 8) {
+                        HStack(spacing: 8) {
+                            PREXUSStatusChip(settings.config.allowsCloudEscalation ? "Cloud available" : "Local only", tint: settings.config.allowsCloudEscalation ? .blue : .secondary)
+                            PREXUSStatusChip(readyProviderCountLabel, tint: readyProviderCount > 0 ? .green : .secondary)
+                        }
+
+                        PREXUSStatusChip(settings.config.approvedProvidersForRestrictedMode.isEmpty ? "Restricted → Local" : "Restricted allowlist", tint: settings.config.approvedProvidersForRestrictedMode.isEmpty ? .orange : .green)
+                    }
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .padding(.horizontal, 16)
     }
 
     private func summaryCard(title: String, value: String, caption: String, tint: Color) -> some View {
