@@ -87,7 +87,7 @@ The scaffold is still incomplete in several product and runtime areas below.
 | Done | Settings UX | Expose route policy explanation near cloud/provider settings | Users can see policy context without inferring it from toggles | Settings summarize escalation, restricted providers, and cloud readiness together |
 | Done | Runtime contract | Formalize route decision payload shape and reason-code vocabulary | Route payload and reason vocabulary are now explicit in docs | Route fields and reason-code categories are documented in routing requirements |
 | Done | Memory policy | Define whether sensitive turns may be stored in episodic memory by mode | Sensitive turns now have explicit auto-retention behavior | Memory policy is documented and enforced per sensitivity level |
-| P2 | Multimodal routing | Extend the same sensitivity semantics to OCR, image, and future audio paths | Current flow is strongest in text chat; multimodal consistency is not yet complete | Non-text requests obey the same sensitivity and fallback rules |
+| Done | Multimodal routing | Extend the same sensitivity semantics to OCR, image, and future audio paths | Current runtime inputs now document and test shared routing semantics across modalities | Non-text requests obey the same sensitivity and fallback rules |
 | P2 | Evaluation | Track routing quality metrics in a repeatable checklist | The scaffold works, but there is no stable evaluation loop yet | A lightweight evaluation checklist exists for local ratio, fallback frequency, and escalation correctness |
 
 ## Recommended Execution Order
@@ -107,7 +107,7 @@ The scaffold is still incomplete in several product and runtime areas below.
 ### Phase C: Close runtime consistency gaps
 
 1. Completed: specify memory retention policy by sensitivity level
-2. Extend sensitivity semantics to OCR / image / audio paths
+2. Completed: extend sensitivity semantics to OCR / image / audio paths
 3. Add a lightweight routing evaluation checklist
 
 ## Completion Criteria

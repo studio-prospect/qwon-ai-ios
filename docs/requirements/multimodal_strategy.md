@@ -195,6 +195,17 @@ Examples:
 - a complex diagram understanding task may escalate
 - a camera frame containing sensitive information may be marked local-only
 
+Current scaffold contract:
+
+- `RuntimeTurnInput` accepts `text`, `image`, `audio`, and `sensor` modalities
+- the same sensitivity modes used by chat routing also apply to non-text requests:
+  - `localOnly` forces local routing
+  - `localPreferred` and `escalationAllowed` follow normal policy and fallback checks
+  - `providerRestricted` may escalate only through the approved-provider allowlist and otherwise fails closed
+- image requests currently classify as `visionReasoning`
+- OCR-like requests classify as `ocrExtraction` when the text signal indicates extraction intent
+- audio and sensor inputs currently rely on the same routing policy surface even though modality-specific preprocessing remains lightweight in this scaffold
+
 ## Integration With Memory
 
 Multimodal outputs may become memory candidates when they are durable and useful.
@@ -206,6 +217,12 @@ Examples:
 - recurring device or workflow context
 
 Memory writes should store compressed semantic results, not raw sensor streams by default.
+
+Current scaffold memory policy:
+
+- non-text requests follow the same automatic episodic-memory retention rule as text requests
+- `localOnly` and `providerRestricted` turns are not auto-saved to episodic memory
+- `localPreferred` and `escalationAllowed` may be auto-saved as compact summaries
 
 ## Performance Constraints
 

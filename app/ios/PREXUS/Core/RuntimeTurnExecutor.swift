@@ -12,6 +12,30 @@ struct RuntimeTurnInput {
             sensitivity: sensitivity
         )
     }
+
+    static func image(_ userText: String, sensitivity: SensitivityLevel = .localPreferred) -> RuntimeTurnInput {
+        RuntimeTurnInput(
+            userText: userText,
+            modality: .image,
+            sensitivity: sensitivity
+        )
+    }
+
+    static func audio(_ userText: String, sensitivity: SensitivityLevel = .localPreferred) -> RuntimeTurnInput {
+        RuntimeTurnInput(
+            userText: userText,
+            modality: .audio,
+            sensitivity: sensitivity
+        )
+    }
+
+    static func sensor(_ userText: String, sensitivity: SensitivityLevel = .localPreferred) -> RuntimeTurnInput {
+        RuntimeTurnInput(
+            userText: userText,
+            modality: .sensor,
+            sensitivity: sensitivity
+        )
+    }
 }
 
 enum RuntimeExecutionMode: String, Equatable {

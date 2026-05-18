@@ -100,6 +100,73 @@ final class PREXUSTests: XCTestCase {
         XCTAssertEqual(decision.displayReasonSummary, "Code analysis | Provider restricted")
     }
 
+    func testLocalOnlyImageRequestsStayLocal() {
+        let router = DefaultRoutingEngine(
+            classifier: HeuristicIntentClassifier(),
+            policy: ExecutionPolicy(
+                allowsCloudEscalation: true,
+                maxCloudContextTokens: 2_048,
+                approvedProvidersForRestrictedMode: [.gemini]
+            )
+        )
+
+        let decision = router.route(
+            request: RuntimeRequest(
+                text: "Inspect this diagram",
+                modality: .image,
+                sensitivity: .localOnly
+            )
+        )
+
+        XCTAssertEqual(decision.target, .local)
+        XCTAssertEqual(decision.reasonCodes, ["visionReasoning", "local_only"])
+    }
+
+    func testProviderRestrictedImageRequestsUseApprovedGeminiRoute() {
+        let router = DefaultRoutingEngine(
+            classifier: HeuristicIntentClassifier(),
+            policy: ExecutionPolicy(
+                allowsCloudEscalation: true,
+                maxCloudContextTokens: 2_048,
+                approvedProvidersForRestrictedMode: [.gemini]
+            )
+        )
+
+        let decision = router.route(
+            request: RuntimeRequest(
+                text: "Inspect this wiring diagram",
+                modality: .image,
+                sensitivity: .providerRestricted
+            )
+        )
+
+        XCTAssertEqual(decision.target, .gemini)
+        XCTAssertEqual(decision.tier, .tier3)
+        XCTAssertEqual(decision.reasonCodes, ["visionReasoning", "provider_restricted"])
+    }
+
+    func testProviderRestrictedOCRRequestsStayLocalByDefault() {
+        let router = DefaultRoutingEngine(
+            classifier: HeuristicIntentClassifier(),
+            policy: ExecutionPolicy(
+                allowsCloudEscalation: true,
+                maxCloudContextTokens: 2_048,
+                approvedProvidersForRestrictedMode: [.openAI, .gemini]
+            )
+        )
+
+        let decision = router.route(
+            request: RuntimeRequest(
+                text: "Extract text from this receipt with OCR",
+                modality: .text,
+                sensitivity: .providerRestricted
+            )
+        )
+
+        XCTAssertEqual(decision.target, .local)
+        XCTAssertEqual(decision.reasonCodes, ["ocrExtraction", "provider_restricted", "local_default"])
+    }
+
     func testRunTurnUsesLocalModelForGeneralChat() async throws {
         let runtime = RuntimeContainer.live(
             config: .default,
@@ -319,6 +386,27 @@ final class PREXUSTests: XCTestCase {
 
         XCTAssertEqual(memoryStore.all().map(\.summary), ["Remember this local-first preference"])
         XCTAssertEqual(memoryStore.all().first?.sensitivity, .localPreferred)
+    }
+
+    func testAudioInputUsesSameSensitivityRetentionPolicy() async throws {
+        let memoryStore = InMemoryEpisodicMemoryStore()
+        let runtime = RuntimeContainer.live(
+            config: .default,
+            apiKeyStore: InMemoryAPIKeyStore(),
+            memoryStore: memoryStore,
+            localModel: MockLocalModelClient(),
+            cloudModel: MockCloudModelClient()
+        )
+
+        _ = try await runtime.runTurn(
+            input: .audio(
+                "Remember this spoken reminder",
+                sensitivity: .providerRestricted
+            ),
+            transcript: []
+        )
+
+        XCTAssertTrue(memoryStore.all().isEmpty)
     }
 
     @MainActor
