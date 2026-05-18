@@ -79,6 +79,47 @@ struct RuntimeDiagnosticEntry: Identifiable, Codable {
 
         return path.isEmpty ? headline : "\(headline) | \(path)"
     }
+
+    var routeBadgeLabel: String {
+        "\(routeTarget) | \(routeTier)"
+    }
+
+    var executionBadgeLabel: String {
+        switch executionMode {
+        case RuntimeExecutionMode.local.rawValue:
+            return "Local runtime"
+        case RuntimeExecutionMode.cloud.rawValue:
+            return executionProvider ?? "Cloud"
+        case RuntimeExecutionMode.fallback.rawValue:
+            return "Fallback"
+        default:
+            return executionMode.capitalized
+        }
+    }
+
+    var routeTint: ColorToken {
+        routeTarget == RouteTarget.local.rawValue ? .green : .blue
+    }
+
+    var executionTint: ColorToken {
+        switch executionMode {
+        case RuntimeExecutionMode.local.rawValue:
+            return .green
+        case RuntimeExecutionMode.cloud.rawValue:
+            return .blue
+        case RuntimeExecutionMode.fallback.rawValue:
+            return .orange
+        default:
+            return .secondary
+        }
+    }
+}
+
+enum ColorToken {
+    case blue
+    case green
+    case orange
+    case secondary
 }
 
 @MainActor
