@@ -14,6 +14,7 @@ Use this document when:
 Related notes:
 
 - capture workflow: `docs/design/runtime_surface_capture_workflow.md`
+- automation backlog: `docs/design/runtime_surface_automation_backlog.md`
 - simulator presentation issue: `docs/design/simulator_presentation_issue_note.md`
 
 ## Verified So Far

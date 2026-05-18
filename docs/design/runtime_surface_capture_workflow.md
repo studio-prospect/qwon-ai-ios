@@ -10,6 +10,10 @@ Use this note when:
 - collecting evidence for UI polish changes
 - deciding whether a capture problem is a tooling problem or a layout problem
 
+Related note:
+
+- automation backlog: `docs/design/runtime_surface_automation_backlog.md`
+
 ## Current Reliable Capture Scope
 
 As of 2026-05-18, the current environment can reliably do the following:
@@ -68,3 +72,5 @@ That task should focus on:
 - reliable nested navigation control
 
 It should **not** be mixed into ordinary UI polish implementation unless the actual product UI is broken.
+
+Use `docs/design/runtime_surface_automation_backlog.md` as the starting scope for that separate task.
