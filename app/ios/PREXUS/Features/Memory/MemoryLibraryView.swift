@@ -19,6 +19,7 @@ struct MemoryLibraryView: View {
                         message: "PREXUS will keep compact local episodes here after eligible runtime turns.",
                         tint: .purple
                     )
+                    .accessibilityIdentifier(PREXUSAccessibilityID.Memory.empty)
                 }
                 .padding()
                 .padding(.top, 24)
@@ -50,12 +51,14 @@ struct MemoryLibraryView: View {
                     Button("Clear All", role: .destructive) {
                         viewModel.clearAll()
                     }
+                    .accessibilityIdentifier(PREXUSAccessibilityID.Memory.clearAll)
                 }
             }
         }
         .onAppear {
             viewModel.refresh()
         }
+        .accessibilityIdentifier(PREXUSAccessibilityID.Memory.screen)
     }
 
     private var screenIntro: some View {
@@ -84,6 +87,7 @@ struct MemoryLibraryView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .accessibilityIdentifier(PREXUSAccessibilityID.Memory.summary)
     }
 
     private func memoryCard(_ memory: EpisodicMemory) -> some View {

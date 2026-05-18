@@ -15,6 +15,7 @@ struct RuntimeDiagnosticsView: View {
                         message: "PREXUS will capture recent route and execution decisions here after the first runtime turn.",
                         tint: .blue
                     )
+                    .accessibilityIdentifier(PREXUSAccessibilityID.Diagnostics.empty)
                 }
                 .padding()
                 .padding(.top, 24)
@@ -39,9 +40,11 @@ struct RuntimeDiagnosticsView: View {
                     Button("Clear", role: .destructive) {
                         diagnostics.clear()
                     }
+                    .accessibilityIdentifier(PREXUSAccessibilityID.Diagnostics.clear)
                 }
             }
         }
+        .accessibilityIdentifier(PREXUSAccessibilityID.Diagnostics.screen)
     }
 
     private var screenIntro: some View {
@@ -70,6 +73,7 @@ struct RuntimeDiagnosticsView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .accessibilityIdentifier(PREXUSAccessibilityID.Diagnostics.summary)
     }
 
     private func diagnosticCard(_ entry: RuntimeDiagnosticEntry) -> some View {

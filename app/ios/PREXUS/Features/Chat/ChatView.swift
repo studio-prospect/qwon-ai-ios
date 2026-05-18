@@ -42,6 +42,7 @@ struct ChatView: View {
             .background(.bar)
         }
         .navigationBarBackButtonHidden()
+        .accessibilityIdentifier(PREXUSAccessibilityID.Chat.screen)
     }
 
     @ViewBuilder
@@ -131,6 +132,7 @@ struct ChatView: View {
             RoundedRectangle(cornerRadius: 22, style: .continuous)
                 .strokeBorder(.quaternary.opacity(0.6), lineWidth: 1)
         )
+        .accessibilityIdentifier(PREXUSAccessibilityID.Chat.composer)
     }
 
     private var header: some View {
@@ -159,6 +161,7 @@ struct ChatView: View {
             }
             .buttonStyle(.plain)
             .accessibilityLabel("Open Settings")
+            .accessibilityIdentifier(PREXUSAccessibilityID.Chat.openSettings)
         }
         .padding(.horizontal)
         .padding(.top, 12)
@@ -256,6 +259,7 @@ struct ChatView: View {
             RoundedRectangle(cornerRadius: 18, style: .continuous)
                 .strokeBorder(.quaternary.opacity(0.7), lineWidth: 1)
         )
+        .accessibilityIdentifier(PREXUSAccessibilityID.Chat.routePreview)
     }
 
     private func sensitivitySegmentedPicker(useCompactLabels: Bool) -> some View {

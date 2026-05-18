@@ -28,6 +28,7 @@ struct SettingsView: View {
                                 value: "\(runtimeDiagnostics.entries.count)"
                             )
                         }
+                        .accessibilityIdentifier(PREXUSAccessibilityID.Settings.openDiagnostics)
 
                         NavigationLink {
                             MemoryLibraryView(viewModel: memoryLibrary)
@@ -38,6 +39,7 @@ struct SettingsView: View {
                                 value: "\(memoryLibrary.memories.count)"
                             )
                         }
+                        .accessibilityIdentifier(PREXUSAccessibilityID.Settings.openMemory)
                     } header: {
                         PREXUSFormSectionHeader(
                             title: "Workspace",
@@ -177,6 +179,7 @@ struct SettingsView: View {
             }
             .toolbar(.hidden, for: .navigationBar)
             .background(Color(uiColor: .systemGroupedBackground))
+            .accessibilityIdentifier(PREXUSAccessibilityID.Settings.screen)
         }
     }
 
@@ -205,6 +208,7 @@ struct SettingsView: View {
                 Capsule(style: .continuous)
                     .fill(.thinMaterial)
             )
+            .accessibilityIdentifier(PREXUSAccessibilityID.Settings.done)
         }
         .padding(.horizontal)
         .padding(.top, 12)
@@ -257,6 +261,7 @@ struct SettingsView: View {
                 tint: settings.config.allowsCloudEscalation ? .green : .secondary
             )
         }
+        .accessibilityIdentifier(PREXUSAccessibilityID.Settings.summarySurface)
     }
 
     private var settingsIntroCard: some View {

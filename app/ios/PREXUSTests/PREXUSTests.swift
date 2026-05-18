@@ -30,6 +30,15 @@ final class PREXUSTests: XCTestCase {
         )
     }
 
+    func testPriorityOneAccessibilityIdentifiersStayStable() {
+        XCTAssertEqual(PREXUSAccessibilityID.Chat.openSettings, "chat.open-settings")
+        XCTAssertEqual(PREXUSAccessibilityID.Settings.done, "settings.done")
+        XCTAssertEqual(PREXUSAccessibilityID.Settings.openDiagnostics, "settings.open-diagnostics")
+        XCTAssertEqual(PREXUSAccessibilityID.Settings.openMemory, "settings.open-memory")
+        XCTAssertEqual(PREXUSAccessibilityID.Diagnostics.clear, "diagnostics.clear")
+        XCTAssertEqual(PREXUSAccessibilityID.Memory.clearAll, "memory.clear-all")
+    }
+
     func testSensitiveRequestsStayLocal() {
         let router = DefaultRoutingEngine(
             classifier: HeuristicIntentClassifier(),
