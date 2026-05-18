@@ -13,6 +13,7 @@ Use this note when:
 Related note:
 
 - automation backlog: `docs/design/runtime_surface_automation_backlog.md`
+- accessibility identifier plan: `docs/design/runtime_surface_accessibility_identifier_plan.md`
 
 ## Current Reliable Capture Scope
 

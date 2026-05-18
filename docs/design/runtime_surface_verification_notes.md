@@ -15,6 +15,7 @@ Related notes:
 
 - capture workflow: `docs/design/runtime_surface_capture_workflow.md`
 - automation backlog: `docs/design/runtime_surface_automation_backlog.md`
+- accessibility identifier plan: `docs/design/runtime_surface_accessibility_identifier_plan.md`
 - simulator presentation issue: `docs/design/simulator_presentation_issue_note.md`
 
 ## Verified So Far
