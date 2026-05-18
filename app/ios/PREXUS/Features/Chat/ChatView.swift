@@ -9,7 +9,9 @@ struct ChatView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            if let execution = viewModel.latestExecution {
+            if viewModel.isSending, let stateSummary = viewModel.sendStateSummary {
+                turnStateBanner(stateSummary)
+            } else if let execution = viewModel.latestExecution {
                 runtimeStatusBanner(execution)
             }
 
@@ -35,7 +37,7 @@ struct ChatView: View {
             Divider()
 
             VStack(alignment: .leading, spacing: 10) {
-                if let route = viewModel.previewRoute {
+                if let route = viewModel.displayedRoute {
                     previewRouteBanner(route)
                 }
 
@@ -48,11 +50,19 @@ struct ChatView: View {
                     TextField("Ask PREXUS", text: $viewModel.draftText, axis: .vertical)
                         .textFieldStyle(.roundedBorder)
                         .lineLimit(1...6)
+                        .disabled(viewModel.isSending)
 
-                    Button("Send") {
+                    Button {
                         let text = viewModel.draftText.trimmingCharacters(in: .whitespacesAndNewlines)
                         guard !text.isEmpty else { return }
                         viewModel.send(text: text)
+                    } label: {
+                        if viewModel.isSending {
+                            ProgressView()
+                                .progressViewStyle(.circular)
+                        } else {
+                            Text("Send")
+                        }
                     }
                     .buttonStyle(.borderedProminent)
                     .disabled(viewModel.isSending)
@@ -85,7 +95,30 @@ struct ChatView: View {
     }
 
     private var sensitivityDescription: LocalizedStringKey {
-        LocalizedStringKey(viewModel.selectedSensitivity.helperDescription)
+        LocalizedStringKey(viewModel.displayedSensitivity.helperDescription)
+    }
+
+    @ViewBuilder
+    private func turnStateBanner(_ summary: String) -> some View {
+        HStack(alignment: .top, spacing: 10) {
+            ProgressView()
+                .controlSize(.small)
+                .tint(.blue)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Turn In Progress")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                Text(summary)
+                    .font(.footnote)
+                    .foregroundStyle(.primary)
+            }
+
+            Spacer(minLength: 0)
+        }
+        .padding(.horizontal)
+        .padding(.vertical, 10)
+        .background(.bar)
     }
 
     @ViewBuilder
@@ -120,12 +153,15 @@ struct ChatView: View {
                 .foregroundStyle(route.target == .local ? .green : .blue)
 
             VStack(alignment: .leading, spacing: 2) {
-                Text("Planned Route")
+                Text(viewModel.routeBannerTitle)
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 Text(route.statusSummary)
                     .font(.footnote)
                     .foregroundStyle(.primary)
+                Text(viewModel.displayedSensitivity.displayLabel)
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
                 Text(route.displayReasonSummary)
                     .font(.caption2)
                     .foregroundStyle(.secondary)
@@ -146,6 +182,7 @@ struct ChatView: View {
             }
         }
         .pickerStyle(.segmented)
+        .disabled(viewModel.isSending)
     }
 
     private func iconName(for mode: RuntimeExecutionMode) -> String {

@@ -242,6 +242,44 @@ final class PREXUSTests: XCTestCase {
         XCTAssertFalse(output.response.contains("Local fallback used"))
     }
 
+    @MainActor
+    func testChatViewModelPinsActiveTurnStateWhileSending() async {
+        let suiteName = "PREXUSTests.ChatViewModel.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defaults.removePersistentDomain(forName: suiteName)
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+
+        let apiKeyStore = InMemoryAPIKeyStore()
+        let settings = AppSettingsStore(defaults: defaults, apiKeyStore: apiKeyStore)
+        let environment = AppEnvironment(
+            settings: settings,
+            apiKeyStore: apiKeyStore,
+            memoryStore: InMemoryEpisodicMemoryStore()
+        )
+        let viewModel = ChatViewModel(environment: environment)
+
+        viewModel.selectedSensitivity = .localOnly
+        viewModel.draftText = "Review this Swift code for a bug"
+
+        viewModel.send(text: "Review this Swift code for a bug")
+
+        XCTAssertTrue(viewModel.isSending)
+        XCTAssertEqual(viewModel.routeBannerTitle, "Executing Route")
+        XCTAssertEqual(viewModel.displayedSensitivity, .localOnly)
+        XCTAssertEqual(viewModel.activeTurnSensitivity, .localOnly)
+        XCTAssertEqual(viewModel.activeRoute?.statusSummary, "Local | Tier 2")
+        XCTAssertEqual(viewModel.displayedRoute?.statusSummary, "Local | Tier 2")
+        XCTAssertEqual(viewModel.sendStateSummary, "Local Only | Local | Tier 2")
+
+        while viewModel.isSending {
+            await Task.yield()
+        }
+
+        XCTAssertNil(viewModel.activeTurnSensitivity)
+        XCTAssertNil(viewModel.activeRoute)
+        XCTAssertEqual(viewModel.routeBannerTitle, "Planned Route")
+    }
+
     func testPersistentMemoryStoreReloadsSavedEpisodes() {
         let suiteName = "PREXUSTests.PersistentMemory.\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: suiteName)!

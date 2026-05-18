@@ -9,6 +9,8 @@ final class ChatViewModel: ObservableObject {
     ]
     @Published private(set) var isSending = false
     @Published private(set) var latestExecution: RuntimeExecutionMetadata?
+    @Published private(set) var activeTurnSensitivity: SensitivityLevel?
+    @Published private(set) var activeRoute: RouteDecision?
 
     private let environment: AppEnvironment
 
@@ -24,11 +26,37 @@ final class ChatViewModel: ObservableObject {
         )
     }
 
+    var displayedRoute: RouteDecision? {
+        isSending ? activeRoute : previewRoute
+    }
+
+    var displayedSensitivity: SensitivityLevel {
+        if isSending, let activeTurnSensitivity {
+            return activeTurnSensitivity
+        }
+
+        return selectedSensitivity
+    }
+
+    var routeBannerTitle: String {
+        isSending ? "Executing Route" : "Planned Route"
+    }
+
+    var sendStateSummary: String? {
+        guard isSending, let activeRoute else { return nil }
+        return "\(displayedSensitivity.displayLabel) | \(activeRoute.statusSummary)"
+    }
+
     func send(text: String) {
         let userMessage = ChatMessage(role: .user, content: text)
         let sensitivity = selectedSensitivity
+        let route = environment.runtime.previewRoute(
+            input: .text(text, sensitivity: sensitivity)
+        )
         messages.append(userMessage)
         isSending = true
+        activeTurnSensitivity = sensitivity
+        activeRoute = route
         draftText = ""
 
         let transcript = messages
@@ -63,6 +91,8 @@ final class ChatViewModel: ObservableObject {
                 )
             }
 
+            activeTurnSensitivity = nil
+            activeRoute = nil
             isSending = false
         }
     }
