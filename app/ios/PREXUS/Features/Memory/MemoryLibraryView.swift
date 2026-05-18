@@ -10,12 +10,14 @@ struct MemoryLibraryView: View {
     var body: some View {
         ScrollView {
             if viewModel.memories.isEmpty {
-                ContentUnavailableView(
-                    "No Local Memory Yet",
+                PREXUSEmptyState(
+                    title: "No Local Memory Yet",
                     systemImage: "memorychip",
-                    description: Text("PREXUS will keep compact local episodes here after runtime turns.")
+                    message: "PREXUS will keep compact local episodes here after eligible runtime turns.",
+                    tint: .purple
                 )
-                .padding(.top, 80)
+                .padding()
+                .padding(.top, 56)
             } else {
                 LazyVStack(alignment: .leading, spacing: 14) {
                     summaryCard
@@ -118,6 +120,12 @@ struct MemoryLibraryView: View {
 #Preview("Compact") {
     MemoryLibraryView.preview()
         .frame(width: 320, height: 760)
+}
+
+#Preview("Empty") {
+    NavigationStack {
+        MemoryLibraryView(viewModel: MemoryLibraryViewModel(memoryStore: InMemoryEpisodicMemoryStore()))
+    }
 }
 
 private extension MemoryLibraryView {

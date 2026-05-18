@@ -386,6 +386,53 @@ struct PREXUSStatusChip: View {
     }
 }
 
+struct PREXUSEmptyState: View {
+    let title: String
+    let systemImage: String
+    let message: String
+    let tint: Color
+
+    init(title: String, systemImage: String, message: String, tint: Color = .blue) {
+        self.title = title
+        self.systemImage = systemImage
+        self.message = message
+        self.tint = tint
+    }
+
+    var body: some View {
+        PREXUSSurfaceCard(borderTint: tint.opacity(0.18)) {
+            VStack(alignment: .leading, spacing: 12) {
+                HStack(spacing: 10) {
+                    Image(systemName: systemImage)
+                        .font(.title3.weight(.semibold))
+                        .foregroundStyle(tint)
+                        .frame(width: 36, height: 36)
+                        .background(
+                            Circle()
+                                .fill(tint.opacity(0.12))
+                        )
+
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(title)
+                            .font(.headline)
+                            .foregroundStyle(.primary)
+
+                        Text("PREXUS surface")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+
+                Text(message)
+                    .font(.body)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+}
+
 #if DEBUG
 #Preview {
     SettingsView.preview()

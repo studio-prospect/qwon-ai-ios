@@ -6,12 +6,14 @@ struct RuntimeDiagnosticsView: View {
     var body: some View {
         ScrollView {
             if diagnostics.entries.isEmpty {
-                ContentUnavailableView(
-                    "No Runtime Diagnostics Yet",
+                PREXUSEmptyState(
+                    title: "No Runtime Diagnostics Yet",
                     systemImage: "waveform.path.ecg",
-                    description: Text("PREXUS will capture recent route and execution decisions here.")
+                    message: "PREXUS will capture recent route and execution decisions here after the first runtime turn.",
+                    tint: .blue
                 )
-                .padding(.top, 80)
+                .padding()
+                .padding(.top, 56)
             } else {
                 LazyVStack(alignment: .leading, spacing: 14) {
                     diagnosticsSummaryCard
@@ -136,6 +138,12 @@ struct RuntimeDiagnosticsView: View {
 #Preview("Compact") {
     RuntimeDiagnosticsView.preview()
         .frame(width: 320, height: 760)
+}
+
+#Preview("Empty") {
+    NavigationStack {
+        RuntimeDiagnosticsView(diagnostics: RuntimeDiagnosticsStore(defaults: UserDefaults(suiteName: "PREXUS.DiagnosticsEmptyPreview.\(UUID().uuidString)")!))
+    }
 }
 
 private extension RuntimeDiagnosticsView {
