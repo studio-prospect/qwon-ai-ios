@@ -18,6 +18,26 @@ final class ChatViewModel: ObservableObject {
         self.environment = environment
     }
 
+    init(
+        environment: AppEnvironment,
+        selectedSensitivity: SensitivityLevel,
+        draftText: String,
+        messages: [ChatMessage],
+        isSending: Bool,
+        latestExecution: RuntimeExecutionMetadata?,
+        activeTurnSensitivity: SensitivityLevel?,
+        activeRoute: RouteDecision?
+    ) {
+        self.environment = environment
+        self.selectedSensitivity = selectedSensitivity
+        self.draftText = draftText
+        self.messages = messages
+        self.isSending = isSending
+        self.latestExecution = latestExecution
+        self.activeTurnSensitivity = activeTurnSensitivity
+        self.activeRoute = activeRoute
+    }
+
     var previewRoute: RouteDecision? {
         let trimmed = draftText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return nil }
@@ -90,3 +110,92 @@ final class ChatViewModel: ObservableObject {
         }
     }
 }
+
+#if DEBUG
+extension ChatViewModel {
+    static func previewPlannedRoute() -> ChatViewModel {
+        let environment = previewEnvironment()
+        return ChatViewModel(
+            environment: environment,
+            selectedSensitivity: .escalationAllowed,
+            draftText: "Review this runtime policy change for edge cases.",
+            messages: [
+                ChatMessage(role: .system, content: "PREXUS runtime initialized."),
+                ChatMessage(role: .user, content: "Can you help audit the routing policy?"),
+                ChatMessage(role: .assistant, content: "Yes — I can review the policy and call out escalation and fallback risks.")
+            ],
+            isSending: false,
+            latestExecution: RuntimeExecutionMetadata(
+                mode: .local,
+                provider: nil,
+                model: "On-device runtime",
+                detail: "Recent turns stayed local."
+            ),
+            activeTurnSensitivity: nil,
+            activeRoute: nil
+        )
+    }
+
+    static func previewInFlight() -> ChatViewModel {
+        let environment = previewEnvironment()
+        return ChatViewModel(
+            environment: environment,
+            selectedSensitivity: .providerRestricted,
+            draftText: "",
+            messages: [
+                ChatMessage(role: .system, content: "PREXUS runtime initialized."),
+                ChatMessage(role: .user, content: "Inspect this code path for concurrency issues.")
+            ],
+            isSending: true,
+            latestExecution: nil,
+            activeTurnSensitivity: .providerRestricted,
+            activeRoute: RouteDecision(
+                tier: .tier3,
+                target: .openAI,
+                reasonCodes: ["codeAnalysis", "provider_restricted"]
+            )
+        )
+    }
+
+    static func previewConversation() -> ChatViewModel {
+        let environment = previewEnvironment()
+        return ChatViewModel(
+            environment: environment,
+            selectedSensitivity: .localPreferred,
+            draftText: "",
+            messages: [
+                ChatMessage(role: .system, content: "PREXUS runtime initialized."),
+                ChatMessage(role: .user, content: "Summarize the latest routing changes."),
+                ChatMessage(role: .assistant, content: "The runtime now treats restricted providers as an allowlist policy, keeps local-only turns on device, and surfaces routing reasons through compact status chips."),
+                ChatMessage(role: .user, content: "What should we polish next?"),
+                ChatMessage(role: .assistant, content: "The next highest-value pass is visual: tighten the message rhythm, keep runtime state compact, and verify the composer still reads as one control surface.")
+            ],
+            isSending: false,
+            latestExecution: RuntimeExecutionMetadata(
+                mode: .fallback,
+                provider: .openAI,
+                model: "gpt-5-mini",
+                detail: "Cloud key unavailable, local fallback used."
+            ),
+            activeTurnSensitivity: nil,
+            activeRoute: nil
+        )
+    }
+
+    private static func previewEnvironment() -> AppEnvironment {
+        let apiKeyStore = InMemoryAPIKeyStore()
+        let suiteName = "PREXUS.ChatViewModelPreview.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defaults.removePersistentDomain(forName: suiteName)
+        let settings = AppSettingsStore(defaults: defaults, apiKeyStore: apiKeyStore)
+        settings.config.allowsCloudEscalation = true
+        settings.config.approvedProvidersForRestrictedMode = [.openAI]
+        apiKeyStore.setAPIKey("preview-openai-key", for: .openAI)
+        return AppEnvironment(
+            settings: settings,
+            apiKeyStore: apiKeyStore,
+            memoryStore: InMemoryEpisodicMemoryStore()
+        )
+    }
+}
+#endif

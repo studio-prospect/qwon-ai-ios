@@ -481,3 +481,23 @@ struct ChatView: View {
         )
     }
 }
+
+#if DEBUG
+#Preview("Planned Route") {
+    NavigationStack {
+        ChatView(viewModel: .previewPlannedRoute())
+    }
+}
+
+#Preview("Turn In Progress") {
+    NavigationStack {
+        ChatView(viewModel: .previewInFlight())
+    }
+}
+
+#Preview("Conversation") {
+    NavigationStack {
+        ChatView(viewModel: .previewConversation())
+    }
+}
+#endif

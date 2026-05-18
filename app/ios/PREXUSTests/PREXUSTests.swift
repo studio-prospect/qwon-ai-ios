@@ -447,6 +447,36 @@ final class PREXUSTests: XCTestCase {
         XCTAssertEqual(viewModel.routeBannerTitle, "Planned Route")
     }
 
+    @MainActor
+    func testChatViewModelKeepsAssistantReplyConversationOnly() async {
+        let suiteName = "PREXUSTests.ChatViewModelConversation.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defaults.removePersistentDomain(forName: suiteName)
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+
+        let apiKeyStore = InMemoryAPIKeyStore()
+        let settings = AppSettingsStore(defaults: defaults, apiKeyStore: apiKeyStore)
+        let environment = AppEnvironment(
+            settings: settings,
+            apiKeyStore: apiKeyStore,
+            memoryStore: InMemoryEpisodicMemoryStore()
+        )
+        let viewModel = ChatViewModel(environment: environment)
+
+        viewModel.send(text: "Summarize this quickly")
+
+        while viewModel.isSending {
+            await Task.yield()
+        }
+
+        let assistantMessages = viewModel.messages.filter { $0.role == .assistant }
+        XCTAssertEqual(assistantMessages.count, 1)
+        XCTAssertFalse(assistantMessages[0].content.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+        XCTAssertFalse(assistantMessages[0].content.contains("Route:"))
+        XCTAssertFalse(assistantMessages[0].content.contains("Reason:"))
+        XCTAssertFalse(assistantMessages[0].content.contains("Execution:"))
+    }
+
     func testPersistentMemoryStoreReloadsSavedEpisodes() {
         let suiteName = "PREXUSTests.PersistentMemory.\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: suiteName)!
