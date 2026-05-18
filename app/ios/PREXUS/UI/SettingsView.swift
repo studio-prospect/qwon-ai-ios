@@ -35,6 +35,27 @@ struct SettingsView: View {
                     }
                 }
 
+                Section {
+                    LabeledContent("Escalation") {
+                        Text(settings.config.allowsCloudEscalation ? "Enabled" : "Local Only")
+                            .foregroundStyle(settings.config.allowsCloudEscalation ? .primary : .secondary)
+                    }
+
+                    LabeledContent("Restricted Mode") {
+                        Text(restrictedProviderSummary)
+                            .foregroundStyle(.secondary)
+                    }
+
+                    LabeledContent("Cloud-Ready Providers") {
+                        Text(readyProviderSummary)
+                            .foregroundStyle(.secondary)
+                    }
+                } header: {
+                    Text("Routing Policy")
+                } footer: {
+                    Text("Cloud escalation must be enabled before PREXUS can leave the local runtime. Provider Restricted turns may use only the approved providers below, and any provider without a valid key still falls back to local execution.")
+                }
+
                 Section("Cloud") {
                     Toggle("Allow Cloud Escalation", isOn: $settings.config.allowsCloudEscalation)
 
@@ -130,5 +151,23 @@ struct SettingsView: View {
         case .disabled:
             return .secondary
         }
+    }
+
+    private var restrictedProviderSummary: String {
+        let approved = CloudProvider.allCases.filter(settings.isApprovedForRestrictedMode)
+        guard !approved.isEmpty else {
+            return "No approved providers"
+        }
+
+        return approved.map(\.displayLabel).joined(separator: ", ")
+    }
+
+    private var readyProviderSummary: String {
+        let ready = CloudProvider.allCases.filter { settings.availabilityStatus(for: $0) == .cloudReady }
+        guard !ready.isEmpty else {
+            return settings.config.allowsCloudEscalation ? "None" : "Disabled"
+        }
+
+        return ready.map(\.displayLabel).joined(separator: ", ")
     }
 }
