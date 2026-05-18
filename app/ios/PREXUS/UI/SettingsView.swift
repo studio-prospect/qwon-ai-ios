@@ -36,7 +36,10 @@ struct SettingsView: View {
                         )
                     }
                 } header: {
-                    Text("Workspace")
+                    PREXUSFormSectionHeader(
+                        title: "Workspace",
+                        detail: "Inspect the local runtime history PREXUS keeps on device."
+                    )
                 } footer: {
                     Text("PREXUS keeps local-only summaries for memory and runtime inspection, and trims older diagnostics automatically.")
                 }
@@ -72,7 +75,10 @@ struct SettingsView: View {
                         )
                     )
                 } header: {
-                    Text("Routing Policy")
+                    PREXUSFormSectionHeader(
+                        title: "Routing Policy",
+                        detail: "Define when PREXUS may escalate beyond the on-device runtime."
+                    )
                 } footer: {
                     Text("Cloud escalation must be enabled before PREXUS can leave the local runtime. Provider Restricted turns may use only the approved providers below, and providers without valid keys still fall back to local execution.")
                 }
@@ -91,7 +97,10 @@ struct SettingsView: View {
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
                 } header: {
-                    Text("Cloud")
+                    PREXUSFormSectionHeader(
+                        title: "Cloud",
+                        detail: "Configure the default cloud routing budget and primary OpenAI model."
+                    )
                 }
 
                 Section {
@@ -105,7 +114,10 @@ struct SettingsView: View {
                         )
                     }
                 } header: {
-                    Text("Provider-Restricted Mode")
+                    PREXUSFormSectionHeader(
+                        title: "Provider-Restricted Mode",
+                        detail: "Limit restricted turns to an explicit provider allowlist."
+                    )
                 } footer: {
                     Text("These providers are the only cloud targets allowed when a turn uses Provider Restricted sensitivity. If none are approved, PREXUS keeps the turn local.")
                 }
@@ -115,7 +127,10 @@ struct SettingsView: View {
                     providerAvailabilityRow("Anthropic", provider: .anthropic)
                     providerAvailabilityRow("Gemini", provider: .gemini)
                 } header: {
-                    Text("Provider Availability")
+                    PREXUSFormSectionHeader(
+                        title: "Provider Availability",
+                        detail: "See which providers are actually ready for cloud execution."
+                    )
                 } footer: {
                     Text("When a provider is not ready, PREXUS keeps the request on the local runtime instead of attempting cloud escalation.")
                 }
@@ -127,7 +142,10 @@ struct SettingsView: View {
                         }
                     }
                 } header: {
-                    Text("Local Runtime")
+                    PREXUSFormSectionHeader(
+                        title: "Local Runtime",
+                        detail: "Select the on-device backend PREXUS should favor locally."
+                    )
                 } footer: {
                     Text("Automatic uses a simulator stub on Simulator and the device runtime bridge on hardware.")
                 }
@@ -145,7 +163,10 @@ struct SettingsView: View {
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
                 } header: {
-                    Text("API Keys")
+                    PREXUSFormSectionHeader(
+                        title: "API Keys",
+                        detail: "Store provider credentials locally so PREXUS can verify cloud readiness."
+                    )
                 }
             }
             .scrollContentBackground(.hidden)
@@ -487,6 +508,33 @@ struct PREXUSScreenIntro: View {
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+struct PREXUSFormSectionHeader: View {
+    let title: String
+    let detail: String
+
+    init(title: String, detail: String) {
+        self.title = title
+        self.detail = detail
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(title)
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(.primary)
+                .textCase(nil)
+
+            Text(detail)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+                .textCase(nil)
+        }
+        .padding(.top, 4)
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
