@@ -59,7 +59,7 @@ It does **not** mean PREXUS is feature-complete as a cognitive runtime. It marks
 | iPhone 16 simulator check | Route labels and sensitivity UI verified |
 | Unit test suite | Passing |
 | Most recent local verification | `xcodebuild -project app/ios/PREXUS.xcodeproj -scheme PREXUS -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' test` |
-| Current test count | 22 passing tests |
+| Current test count | 30 passing tests |
 
 ## Current MVP Scope
 
@@ -82,13 +82,13 @@ The scaffold is still incomplete in several product and runtime areas below.
 | Priority | Area | Task | Why it matters | Exit criteria |
 |---|---|---|---|---|
 | Done | Tests | Added regression coverage for 4-mode sensitivity labels and helper descriptions | Sensitivity UI paths now have repeatable behavior checks | `SensitivityLevel` labels and descriptions are test-covered |
-| P1 | Chat UX | Improve send-state and mode-state clarity during in-flight execution | The routing preview exists, but mode/state transitions are still minimal | User can clearly tell selected sensitivity, planned route, and execution state during a turn |
+| Done | Chat UX | Improve send-state and mode-state clarity during in-flight execution | In-flight turns now keep route and sensitivity state visible | User can clearly tell selected sensitivity, planned route, and execution state during a turn |
 | Done | Diagnostics | Distinguish primary routing cause from secondary reasons | Multi-reason routes are easier to scan during debugging | Diagnostics highlight a dominant cause before secondary labels |
 | Done | Settings UX | Expose route policy explanation near cloud/provider settings | Users can see policy context without inferring it from toggles | Settings summarize escalation, restricted providers, and cloud readiness together |
 | Done | Runtime contract | Formalize route decision payload shape and reason-code vocabulary | Route payload and reason vocabulary are now explicit in docs | Route fields and reason-code categories are documented in routing requirements |
 | Done | Memory policy | Define whether sensitive turns may be stored in episodic memory by mode | Sensitive turns now have explicit auto-retention behavior | Memory policy is documented and enforced per sensitivity level |
 | Done | Multimodal routing | Extend the same sensitivity semantics to OCR, image, and future audio paths | Current runtime inputs now document and test shared routing semantics across modalities | Non-text requests obey the same sensitivity and fallback rules |
-| P2 | Evaluation | Track routing quality metrics in a repeatable checklist | The scaffold works, but there is no stable evaluation loop yet | A lightweight evaluation checklist exists for local ratio, fallback frequency, and escalation correctness |
+| Done | Evaluation | Track routing quality metrics in a repeatable checklist | The scaffold now has a lightweight routing review loop | A lightweight evaluation checklist exists for local ratio, fallback frequency, and escalation correctness |
 
 ## Recommended Execution Order
 
@@ -100,7 +100,7 @@ The scaffold is still incomplete in several product and runtime areas below.
 
 ### Phase B: Close UI gaps
 
-1. Improve Chat sensitivity affordance and execution-state clarity
+1. Completed: improve Chat sensitivity affordance and execution-state clarity
 2. Completed: improve diagnostics readability for multi-reason routes
 3. Completed: improve Settings explanations around routing and provider policy
 
@@ -108,7 +108,7 @@ The scaffold is still incomplete in several product and runtime areas below.
 
 1. Completed: specify memory retention policy by sensitivity level
 2. Completed: extend sensitivity semantics to OCR / image / audio paths
-3. Add a lightweight routing evaluation checklist
+3. Completed: add a lightweight routing evaluation checklist
 
 ## Completion Criteria
 
@@ -123,6 +123,7 @@ The current MVP checkpoint should be considered complete when all of the followi
 | Settings | Cloud escalation and provider policy behavior are understandable from the UI |
 | Tests | Current runtime and sensitivity behavior are covered by repeatable tests |
 | Docs | Routing, sensitivity, and provider restriction behavior are documented in requirements and architecture docs |
+| Evaluation | A repeatable routing checklist exists for local ratio, fallback frequency, and escalation correctness |
 
 ## Risks If Left Incomplete
 
@@ -139,3 +140,4 @@ The current MVP checkpoint should be considered complete when all of the followi
 - This plan intentionally favors local-first, privacy-preserving defaults.
 - Any future cloud restriction feature should fail closed until policy data is present.
 - The scaffold is already viable for iterative runtime work, but policy and docs must stay ahead of UX claims.
+- The current routing evaluation loop is documented in [routing_evaluation_checklist.md](./routing_evaluation_checklist.md).
