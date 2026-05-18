@@ -103,7 +103,7 @@ struct ChatView: View {
         case .escalationAllowed:
             return "Allow cloud escalation when it helps."
         case .providerRestricted:
-            return "Use only approved providers (currently local-only fallback)."
+            return "Allow cloud use only through approved providers."
         }
     }
 

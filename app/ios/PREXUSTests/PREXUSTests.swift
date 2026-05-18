@@ -7,7 +7,8 @@ final class PREXUSTests: XCTestCase {
             classifier: HeuristicIntentClassifier(),
             policy: ExecutionPolicy(
                 allowsCloudEscalation: true,
-                maxCloudContextTokens: 2_048
+                maxCloudContextTokens: 2_048,
+                approvedProvidersForRestrictedMode: []
             )
         )
 
@@ -28,7 +29,8 @@ final class PREXUSTests: XCTestCase {
             classifier: HeuristicIntentClassifier(),
             policy: ExecutionPolicy(
                 allowsCloudEscalation: true,
-                maxCloudContextTokens: 2_048
+                maxCloudContextTokens: 2_048,
+                approvedProvidersForRestrictedMode: []
             )
         )
 
@@ -42,6 +44,30 @@ final class PREXUSTests: XCTestCase {
 
         XCTAssertEqual(decision.target, .local)
         XCTAssertEqual(decision.tier, .tier2)
+        XCTAssertEqual(decision.reasonCodes, ["codeAnalysis", "provider_restricted", "provider_not_approved"])
+        XCTAssertEqual(decision.displayReasonSummary, "Code analysis | Provider restricted | Provider not approved")
+    }
+
+    func testProviderRestrictedRequestsUseApprovedProvider() {
+        let router = DefaultRoutingEngine(
+            classifier: HeuristicIntentClassifier(),
+            policy: ExecutionPolicy(
+                allowsCloudEscalation: true,
+                maxCloudContextTokens: 2_048,
+                approvedProvidersForRestrictedMode: [.openAI]
+            )
+        )
+
+        let decision = router.route(
+            request: RuntimeRequest(
+                text: "Review this code path",
+                modality: .text,
+                sensitivity: .providerRestricted
+            )
+        )
+
+        XCTAssertEqual(decision.target, .openAI)
+        XCTAssertEqual(decision.tier, .tier3)
         XCTAssertEqual(decision.reasonCodes, ["codeAnalysis", "provider_restricted"])
         XCTAssertEqual(decision.displayReasonSummary, "Code analysis | Provider restricted")
     }
@@ -146,7 +172,8 @@ final class PREXUSTests: XCTestCase {
                 allowsCloudEscalation: true,
                 maxCloudContextTokens: 64,
                 openAIModel: "gpt-5-mini",
-                localModelBackend: .automatic
+                localModelBackend: .automatic,
+                approvedProvidersForRestrictedMode: []
             ),
             apiKeyStore: apiKeyStore,
             memoryStore: InMemoryEpisodicMemoryStore(),
@@ -268,7 +295,8 @@ final class PREXUSTests: XCTestCase {
             allowsCloudEscalation: false,
             maxCloudContextTokens: 512,
             openAIModel: "gpt-5.1",
-            localModelBackend: .embeddedHeuristic
+            localModelBackend: .embeddedHeuristic,
+            approvedProvidersForRestrictedMode: [.openAI, .gemini]
         )
         settings.openAIKey = "  openai-test-key  "
         settings.anthropicKey = ""
@@ -281,7 +309,8 @@ final class PREXUSTests: XCTestCase {
                 allowsCloudEscalation: false,
                 maxCloudContextTokens: 512,
                 openAIModel: "gpt-5.1",
-                localModelBackend: .embeddedHeuristic
+                localModelBackend: .embeddedHeuristic,
+                approvedProvidersForRestrictedMode: [.openAI, .gemini]
             )
         )
         XCTAssertEqual(apiKeyStore.apiKey(for: .openAI), "openai-test-key")
@@ -307,9 +336,29 @@ final class PREXUSTests: XCTestCase {
             allowsCloudEscalation: false,
             maxCloudContextTokens: 2_048,
             openAIModel: "gpt-5-mini",
-            localModelBackend: .automatic
+            localModelBackend: .automatic,
+            approvedProvidersForRestrictedMode: []
         )
         XCTAssertEqual(settings.availabilityStatus(for: .openAI), .disabled)
+    }
+
+    @MainActor
+    func testAppSettingsStorePersistsRestrictedProviderApprovals() {
+        let suiteName = "PREXUSTests.RestrictedProviders.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defaults.removePersistentDomain(forName: suiteName)
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+
+        let settings = AppSettingsStore(defaults: defaults, apiKeyStore: InMemoryAPIKeyStore())
+        settings.setApprovedForRestrictedMode(true, provider: .openAI)
+        settings.setApprovedForRestrictedMode(true, provider: .gemini)
+        settings.setApprovedForRestrictedMode(false, provider: .openAI)
+
+        let reloaded = AppSettingsStore(defaults: defaults, apiKeyStore: InMemoryAPIKeyStore())
+
+        XCTAssertFalse(reloaded.isApprovedForRestrictedMode(.openAI))
+        XCTAssertFalse(reloaded.isApprovedForRestrictedMode(.anthropic))
+        XCTAssertTrue(reloaded.isApprovedForRestrictedMode(.gemini))
     }
 
     @MainActor

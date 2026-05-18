@@ -18,7 +18,8 @@ struct RuntimeContainer {
     ) -> RuntimeContainer {
         let policy = ExecutionPolicy(
             allowsCloudEscalation: config.allowsCloudEscalation,
-            maxCloudContextTokens: config.maxCloudContextTokens
+            maxCloudContextTokens: config.maxCloudContextTokens,
+            approvedProvidersForRestrictedMode: Set(config.approvedProvidersForRestrictedMode)
         )
         let classifier = HeuristicIntentClassifier()
         let compressor = HeuristicContextCompressor()

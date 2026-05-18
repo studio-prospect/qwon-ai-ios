@@ -79,6 +79,23 @@ final class AppSettingsStore: ObservableObject {
         }
     }
 
+    func isApprovedForRestrictedMode(_ provider: CloudProvider) -> Bool {
+        config.approvedProvidersForRestrictedMode.contains(provider)
+    }
+
+    func setApprovedForRestrictedMode(_ approved: Bool, provider: CloudProvider) {
+        var providers = config.approvedProvidersForRestrictedMode
+        if approved {
+            if !providers.contains(provider) {
+                providers.append(provider)
+            }
+        } else {
+            providers.removeAll { $0 == provider }
+        }
+
+        config.approvedProvidersForRestrictedMode = CloudProvider.allCases.filter(providers.contains)
+    }
+
     private func persistAPIKey(_ value: String, provider: CloudProvider) {
         let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
         if trimmed.isEmpty {

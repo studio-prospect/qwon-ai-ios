@@ -51,6 +51,22 @@ struct SettingsView: View {
                 }
 
                 Section {
+                    ForEach(CloudProvider.allCases, id: \.self) { provider in
+                        Toggle(
+                            provider.displayLabel,
+                            isOn: Binding(
+                                get: { settings.isApprovedForRestrictedMode(provider) },
+                                set: { settings.setApprovedForRestrictedMode($0, provider: provider) }
+                            )
+                        )
+                    }
+                } header: {
+                    Text("Provider-Restricted Mode")
+                } footer: {
+                    Text("These providers are the only cloud targets allowed when a turn uses Provider Restricted sensitivity. If none are approved, PREXUS keeps the turn local.")
+                }
+
+                Section {
                     providerAvailabilityRow("OpenAI", provider: .openAI)
                     providerAvailabilityRow("Anthropic", provider: .anthropic)
                     providerAvailabilityRow("Gemini", provider: .gemini)

@@ -30,7 +30,7 @@ It does **not** mean PREXUS is feature-complete as a cognitive runtime. It marks
 | Diagnostics history | Done | Persisted recent runtime decisions and exposed them in Settings |
 | Cloud prompt budgeting | Done | Trimmed cloud prompt packaging to configured token budget |
 | Provider key fallback | Done | Rerouted cloud selections to local when provider keys are unavailable |
-| Provider-restricted fail-closed behavior | Done | `providerRestricted` currently routes locally with explicit reason code |
+| Provider-restricted policy path | Done | `providerRestricted` now evaluates an explicit approved-provider allowlist and fails closed to local when no approved provider matches |
 | Sensitivity UI fallback | Done | Added short segmented labels and a menu fallback for narrow layouts |
 | Sensitivity helper copy | Done | Added and refined helper text for each sensitivity mode |
 | Provider-restricted policy docs | Done | Documented current behavior and approved-provider meaning in routing docs |
@@ -80,8 +80,6 @@ The scaffold is still incomplete in several product and runtime areas below.
 
 | Priority | Area | Task | Why it matters | Exit criteria |
 |---|---|---|---|---|
-| P0 | Routing policy | Introduce explicit provider allowlist model for `providerRestricted` | Current behavior is intentionally fail-closed, but the product concept is only partially implemented | `providerRestricted` can evaluate an explicit approved-provider policy instead of always collapsing to local |
-| P0 | Settings / policy | Add UI or config surface for provider restriction policy | The mode exists in Chat UI, but there is no way to define approved providers | User or workspace policy can declare which providers are allowed |
 | P0 | Documentation | Update architecture and settings docs to mention sensitivity policy ownership | Routing policy is now spread across runtime, Chat UI, and docs | `architecture.md` and settings-facing docs describe where sensitivity policy lives |
 | P0 | Tests | Add tests for menu fallback picker behavior and 4-mode sensitivity selection | The new UI path is runtime-safe, but UI-level regression coverage is still thin | UI behavior for segmented and menu fallback is covered by tests or snapshot checks |
 | P1 | Chat UX | Improve send-state and mode-state clarity during in-flight execution | The routing preview exists, but mode/state transitions are still minimal | User can clearly tell selected sensitivity, planned route, and execution state during a turn |
@@ -97,9 +95,8 @@ The scaffold is still incomplete in several product and runtime areas below.
 ### Phase A: Close policy gaps
 
 1. Define the provider allowlist data model
-2. Connect `providerRestricted` to that policy model
-3. Document policy ownership in architecture and settings docs
-4. Add regression tests for provider-restricted behavior
+2. Document policy ownership in architecture and settings docs
+3. Add regression tests for provider-restricted behavior
 
 ### Phase B: Close UI gaps
 
@@ -120,7 +117,7 @@ The current MVP checkpoint should be considered complete when all of the followi
 | Criterion | Required state |
 |---|---|
 | Routing policy | Sensitivity modes are implemented, documented, and test-covered |
-| Provider restriction | `providerRestricted` is backed by an explicit policy model, or intentionally documented as local-only with no ambiguity |
+| Provider restriction | `providerRestricted` is backed by an explicit policy model and fails closed when no approved provider matches |
 | Chat UI | All sensitivity modes are selectable and understandable on narrow and standard layouts |
 | Diagnostics | Recent runtime decisions are readable and useful for debugging |
 | Settings | Cloud escalation and provider policy behavior are understandable from the UI |
@@ -131,7 +128,7 @@ The current MVP checkpoint should be considered complete when all of the followi
 
 | Risk | Impact |
 |---|---|
-| `providerRestricted` remains conceptual only | Product language drifts away from actual runtime behavior |
+| `providerRestricted` policy is underdocumented | Product language may drift away from actual runtime behavior |
 | Sensitivity policy stays UI-led instead of policy-led | Runtime and Settings behavior become harder to reason about |
 | Diagnostics stay flat | Debugging route selection becomes slower as reason vocabulary grows |
 | Memory policy remains undefined | Sensitive content handling may become inconsistent later |

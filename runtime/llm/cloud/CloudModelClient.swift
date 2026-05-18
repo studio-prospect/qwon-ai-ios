@@ -1,9 +1,20 @@
 import Foundation
 
-enum CloudProvider: String {
+enum CloudProvider: String, Codable, CaseIterable {
     case openAI
     case anthropic
     case gemini
+
+    var displayLabel: String {
+        switch self {
+        case .openAI:
+            return "OpenAI"
+        case .anthropic:
+            return "Anthropic"
+        case .gemini:
+            return "Gemini"
+        }
+    }
 }
 
 enum CloudModelError: LocalizedError, Equatable {

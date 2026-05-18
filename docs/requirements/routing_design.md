@@ -189,10 +189,12 @@ Definition of "approved providers":
 
 Current scaffold behavior:
 
-- PREXUS does not yet implement a provider allowlist or provider-scoped policy object for `provider_restricted`
-- until that policy layer exists, `provider_restricted` must fail closed
-- in the current iOS implementation, `provider_restricted` routes to local execution with the reason code `provider_restricted`
-- UI copy should describe this as a current local-only fallback, not as an active cloud restriction feature
+- the current iOS implementation includes a provider allowlist for `provider_restricted`
+- the allowlist is configured in Settings as the approved providers for restricted mode
+- for cloud-eligible intents, PREXUS may escalate only if the preferred provider is included in that allowlist
+- if the preferred provider is not approved, PREXUS must fail closed to local execution with the reason code `provider_not_approved`
+- if no approved provider is configured, restricted turns remain local by default
+- general local-default intents may still remain local even when providers are approved
 
 ## Complexity Scoring
 

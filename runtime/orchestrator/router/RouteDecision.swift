@@ -105,6 +105,8 @@ struct RouteDecision {
             return "Local default"
         case "provider_restricted":
             return "Provider restricted"
+        case "provider_not_approved":
+            return "Provider not approved"
         case "cloud_disabled":
             return "Cloud disabled"
         case "high_complexity":

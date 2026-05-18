@@ -20,11 +20,7 @@ struct DefaultRoutingEngine: RoutingEngine {
         }
 
         if request.sensitivity == .providerRestricted {
-            return RouteDecision(
-                tier: .tier2,
-                target: .local,
-                reasonCodes: [intent.rawValue, "provider_restricted"]
-            )
+            return restrictedRoute(for: intent)
         }
 
         if !policy.allowsCloudEscalation {
@@ -44,6 +40,62 @@ struct DefaultRoutingEngine: RoutingEngine {
             return RouteDecision(tier: .tier3, target: .gemini, reasonCodes: [intent.rawValue, "multimodal_candidate"])
         case .generalChat, .summarization, .ocrExtraction:
             return RouteDecision(tier: .tier2, target: .local, reasonCodes: [intent.rawValue, "local_default"])
+        }
+    }
+
+    private func restrictedRoute(for intent: RuntimeIntent) -> RouteDecision {
+        guard policy.allowsCloudEscalation else {
+            return RouteDecision(
+                tier: .tier2,
+                target: .local,
+                reasonCodes: [intent.rawValue, "provider_restricted", "cloud_disabled"]
+            )
+        }
+
+        guard let preferredProvider = preferredCloudProvider(for: intent) else {
+            return RouteDecision(
+                tier: .tier2,
+                target: .local,
+                reasonCodes: [intent.rawValue, "provider_restricted", "local_default"]
+            )
+        }
+
+        guard policy.approvedProvidersForRestrictedMode.contains(preferredProvider) else {
+            return RouteDecision(
+                tier: .tier2,
+                target: .local,
+                reasonCodes: [intent.rawValue, "provider_restricted", "provider_not_approved"]
+            )
+        }
+
+        return RouteDecision(
+            tier: .tier3,
+            target: routeTarget(for: preferredProvider),
+            reasonCodes: [intent.rawValue, "provider_restricted"]
+        )
+    }
+
+    private func preferredCloudProvider(for intent: RuntimeIntent) -> CloudProvider? {
+        switch intent {
+        case .codeAnalysis:
+            return .openAI
+        case .creativeWriting:
+            return .anthropic
+        case .visionReasoning:
+            return .gemini
+        case .generalChat, .summarization, .ocrExtraction:
+            return nil
+        }
+    }
+
+    private func routeTarget(for provider: CloudProvider) -> RouteTarget {
+        switch provider {
+        case .openAI:
+            return .openAI
+        case .anthropic:
+            return .anthropic
+        case .gemini:
+            return .gemini
         }
     }
 }
