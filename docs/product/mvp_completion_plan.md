@@ -35,21 +35,28 @@ It does **not** mean PREXUS is feature-complete as a cognitive runtime. It marks
 | Sensitivity helper copy | Done | Added and refined helper text for each sensitivity mode |
 | Provider-restricted policy docs | Done | Documented current behavior and approved-provider meaning in routing docs |
 | Sensitivity policy ownership docs | Done | Documented runtime-vs-UI ownership for sensitivity policy in architecture docs |
+| Diagnostics prioritization | Done | Surfaced primary routing cause ahead of secondary reasons in runtime diagnostics |
+| In-flight Chat state | Done | Kept active route and sensitivity visible while a turn is executing |
+| Memory retention policy | Done | Enforced sensitivity-based episodic memory retention rules |
+| Multimodal sensitivity contract | Done | Aligned image / OCR / audio routing with the same sensitivity and fallback rules |
+| Routing evaluation loop | Done | Added a repeatable MVP routing evaluation checklist |
 
 ### Relevant recent commits
 
 | Commit | Summary |
 |---|---|
+| `f1d85c4` | Add routing evaluation checklist |
+| `2542131` | Align multimodal sensitivity routing |
+| `8a3e0cf` | Enforce sensitivity-based memory retention |
+| `5f029d8` | Clarify in-flight chat routing state |
+| `7a7f4d7` | Document route decision contract |
+| `314d457` | Prioritize primary diagnostics reasons |
+| `ea05853` | Clarify routing policy in settings |
+| `231ca9e` | Unify sensitivity labels and test coverage |
+| `8125549` | Document sensitivity policy ownership |
+| `0b5a14c` | Add provider restriction allowlist policy |
 | `70b79f8` | Document provider-restricted routing policy |
 | `43e0577` | Merge PR for provider-restricted sensitivity UI improvements |
-| `5679c29` | Handle provider-restricted routes locally |
-| `9f7ad08` | Refine sensitivity helper copy |
-| `a41df4a` | Clarify sensitivity mode descriptions |
-| `b28b42d` | Improve route status display labels |
-| `b80528a` | Add planned route preview |
-| `6bf5bdb` | Add per-turn routing sensitivity controls |
-| `81705fe` | Persist runtime diagnostics history |
-| `a7fa2a2` | Enforce cloud prompt budget limits |
 
 ### Current verified state
 
@@ -60,6 +67,7 @@ It does **not** mean PREXUS is feature-complete as a cognitive runtime. It marks
 | Unit test suite | Passing |
 | Most recent local verification | `xcodebuild -project app/ios/PREXUS.xcodeproj -scheme PREXUS -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' test` |
 | Current test count | 30 passing tests |
+| Current MVP checkpoint | Achieved for the present iOS routing scaffold |
 
 ## Current MVP Scope
 
@@ -73,9 +81,11 @@ The current scaffold already covers:
 - runtime diagnostics persistence
 - settings-based runtime configuration
 
-The scaffold is still incomplete in several product and runtime areas below.
+The scaffold is coherent for the current MVP checkpoint. Remaining work now sits mostly beyond this checkpoint, not inside it.
 
 ## Remaining Tasks To MVP Completion
+
+Current status: no blocking tasks remain for the current MVP completion checkpoint.
 
 ### Plan table
 
@@ -91,6 +101,8 @@ The scaffold is still incomplete in several product and runtime areas below.
 | Done | Evaluation | Track routing quality metrics in a repeatable checklist | The scaffold now has a lightweight routing review loop | A lightweight evaluation checklist exists for local ratio, fallback frequency, and escalation correctness |
 
 ## Recommended Execution Order
+
+The original execution order is retained below as a record of how the checkpoint was closed.
 
 ### Phase A: Close policy gaps
 
@@ -125,7 +137,14 @@ The current MVP checkpoint should be considered complete when all of the followi
 | Docs | Routing, sensitivity, and provider restriction behavior are documented in requirements and architecture docs |
 | Evaluation | A repeatable routing checklist exists for local ratio, fallback frequency, and escalation correctness |
 
+Current result:
+
+- all completion criteria above are satisfied for the present scaffold
+- future work should be tracked as post-MVP expansion, not as unresolved MVP closure work
+
 ## Risks If Left Incomplete
+
+The items below are now primarily future-regression risks rather than current checkpoint blockers.
 
 | Risk | Impact |
 |---|---|

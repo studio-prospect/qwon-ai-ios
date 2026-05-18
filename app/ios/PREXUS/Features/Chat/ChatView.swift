@@ -41,34 +41,10 @@ struct ChatView: View {
                     previewRouteBanner(route)
                 }
 
-                sensitivityPicker
-                Text(sensitivityDescription)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-
-                HStack(alignment: .bottom, spacing: 12) {
-                    TextField("Ask PREXUS", text: $viewModel.draftText, axis: .vertical)
-                        .textFieldStyle(.roundedBorder)
-                        .lineLimit(1...6)
-                        .disabled(viewModel.isSending)
-
-                    Button {
-                        let text = viewModel.draftText.trimmingCharacters(in: .whitespacesAndNewlines)
-                        guard !text.isEmpty else { return }
-                        viewModel.send(text: text)
-                    } label: {
-                        if viewModel.isSending {
-                            ProgressView()
-                                .progressViewStyle(.circular)
-                        } else {
-                            Text("Send")
-                        }
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .disabled(viewModel.isSending)
-                }
+                composerCard
             }
             .padding()
+            .background(.bar)
         }
         .navigationTitle("PREXUS")
     }
@@ -96,6 +72,70 @@ struct ChatView: View {
 
     private var sensitivityDescription: LocalizedStringKey {
         LocalizedStringKey(viewModel.displayedSensitivity.helperDescription)
+    }
+
+    private var composerCard: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Sensitivity")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+
+                sensitivityPicker
+
+                Text(sensitivityDescription)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            HStack(alignment: .bottom, spacing: 12) {
+                TextField("Ask PREXUS", text: $viewModel.draftText, axis: .vertical)
+                    .font(.body)
+                    .lineLimit(1...6)
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 12)
+                    .background(
+                        RoundedRectangle(cornerRadius: 16, style: .continuous)
+                            .fill(.background)
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16, style: .continuous)
+                            .strokeBorder(.quaternary, lineWidth: 1)
+                    )
+                    .disabled(viewModel.isSending)
+
+                Button {
+                    let text = viewModel.draftText.trimmingCharacters(in: .whitespacesAndNewlines)
+                    guard !text.isEmpty else { return }
+                    viewModel.send(text: text)
+                } label: {
+                    Group {
+                        if viewModel.isSending {
+                            ProgressView()
+                                .progressViewStyle(.circular)
+                                .tint(.white)
+                        } else {
+                            Text("Send")
+                                .fontWeight(.medium)
+                        }
+                    }
+                    .frame(minWidth: 74)
+                    .frame(height: 44)
+                }
+                .buttonStyle(.borderedProminent)
+                .disabled(viewModel.isSending)
+            }
+        }
+        .padding(14)
+        .background(
+            RoundedRectangle(cornerRadius: 22, style: .continuous)
+                .fill(.thinMaterial)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 22, style: .continuous)
+                .strokeBorder(.quaternary.opacity(0.6), lineWidth: 1)
+        )
     }
 
     @ViewBuilder
