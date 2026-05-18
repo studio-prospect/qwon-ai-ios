@@ -123,6 +123,63 @@ struct RouteDecision {
         )
     }
 
+    static func primaryReasonCode(from codes: [String]) -> String? {
+        let uniqueCodes = deduplicatedReasonCodes(from: codes)
+        guard !uniqueCodes.isEmpty else { return nil }
+
+        let rankedCodes = Dictionary(
+            uniqueKeysWithValues: uniqueCodes.enumerated().map { index, code in
+                (code, (rank: reasonPriority(for: code), index: index))
+            }
+        )
+
+        return uniqueCodes.min { lhs, rhs in
+            guard let lhsMetadata = rankedCodes[lhs], let rhsMetadata = rankedCodes[rhs] else {
+                return false
+            }
+
+            if lhsMetadata.rank == rhsMetadata.rank {
+                return lhsMetadata.index < rhsMetadata.index
+            }
+
+            return lhsMetadata.rank < rhsMetadata.rank
+        }
+    }
+
+    private static func deduplicatedReasonCodes(from codes: [String]) -> [String] {
+        var seen = Set<String>()
+        var orderedCodes: [String] = []
+
+        for code in codes where seen.insert(code).inserted {
+            orderedCodes.append(code)
+        }
+
+        return orderedCodes
+    }
+
+    private static func reasonPriority(for code: String) -> Int {
+        switch code {
+        case "provider_not_approved":
+            return 0
+        case "cloud_disabled":
+            return 1
+        case "openai_key_unavailable", "anthropic_key_unavailable", "gemini_key_unavailable":
+            return 2
+        case "local_only":
+            return 3
+        case "provider_restricted":
+            return 4
+        case "high_complexity", "quality_preferred", "multimodal_candidate":
+            return 5
+        case "local_default":
+            return 6
+        case "generalChat", "summarization", "ocrExtraction", "codeAnalysis", "creativeWriting", "visionReasoning":
+            return 100
+        default:
+            return 50
+        }
+    }
+
     static func displayLabel(forReasonCode code: String) -> String {
         switch code {
         case "local_only":

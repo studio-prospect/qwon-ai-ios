@@ -29,10 +29,29 @@ struct RuntimeDiagnosticEntry: Identifiable, Codable {
         "Route: \(routeTarget) | Tier: \(routeTier)"
     }
 
-    var reasonSummary: String {
-        routeReasons
+    var primaryReasonSummary: String {
+        guard let primaryReasonCode = RouteDecision.primaryReasonCode(from: routeReasons) else {
+            return ""
+        }
+
+        return RouteDecision.displayLabel(forReasonCode: primaryReasonCode)
+    }
+
+    var secondaryReasonSummary: String {
+        guard let primaryReasonCode = RouteDecision.primaryReasonCode(from: routeReasons) else {
+            return ""
+        }
+
+        return routeReasons
+            .filter { $0 != primaryReasonCode }
             .map(RouteDecision.displayLabel(forReasonCode:))
             .joined(separator: " | ")
+    }
+
+    var reasonSummary: String {
+        guard !primaryReasonSummary.isEmpty else { return "" }
+        guard !secondaryReasonSummary.isEmpty else { return primaryReasonSummary }
+        return "\(primaryReasonSummary) | \(secondaryReasonSummary)"
     }
 
     var executionStatusSummary: String {

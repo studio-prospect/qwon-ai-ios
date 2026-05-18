@@ -28,8 +28,14 @@ struct RuntimeDiagnosticsView: View {
                             .font(.caption)
                             .foregroundStyle(.secondary)
 
-                        if !entry.reasonSummary.isEmpty {
-                            Text(entry.reasonSummary)
+                        if !entry.primaryReasonSummary.isEmpty {
+                            Text(entry.primaryReasonSummary)
+                                .font(.caption)
+                                .foregroundStyle(.primary)
+                        }
+
+                        if !entry.secondaryReasonSummary.isEmpty {
+                            Text(entry.secondaryReasonSummary)
                                 .font(.caption2)
                                 .foregroundStyle(.tertiary)
                         }

@@ -455,6 +455,33 @@ final class PREXUSTests: XCTestCase {
         XCTAssertTrue(RuntimeDiagnosticsStore(defaults: defaults, maxEntries: 2).entries.isEmpty)
     }
 
+    @MainActor
+    func testRuntimeDiagnosticsStoreSurfacesPrimaryRouteReason() {
+        let defaults = UserDefaults(suiteName: #function)!
+        defaults.removePersistentDomain(forName: #function)
+        let store = RuntimeDiagnosticsStore(defaults: defaults, maxEntries: 1)
+        let route = RouteDecision(
+            tier: .tier2,
+            target: .local,
+            reasonCodes: ["codeAnalysis", "provider_restricted", "provider_not_approved"]
+        )
+        let execution = RuntimeExecutionMetadata(
+            mode: .fallback,
+            provider: nil,
+            model: nil,
+            detail: "Restricted mode fell back to local execution."
+        )
+
+        store.record(route: route, execution: execution, userText: "Review this code")
+
+        XCTAssertEqual(store.entries.first?.primaryReasonSummary, "Provider not approved")
+        XCTAssertEqual(store.entries.first?.secondaryReasonSummary, "Code analysis | Provider restricted")
+        XCTAssertEqual(
+            store.entries.first?.reasonSummary,
+            "Provider not approved | Code analysis | Provider restricted"
+        )
+    }
+
     func testOpenAIResponsesClientBuildsRequestAndParsesOutput() async throws {
         let transport = MockHTTPTransport(
             responseData: """
