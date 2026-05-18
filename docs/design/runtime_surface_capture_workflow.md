@@ -9,6 +9,7 @@ Use this note when:
 - updating visual docs
 - collecting evidence for UI polish changes
 - deciding whether a capture problem is a tooling problem or a layout problem
+- refreshing the committed capture set after a runtime-surface UI change
 
 Related note:
 
@@ -49,6 +50,26 @@ Known constraints:
 - broader multi-state capture remains a tooling problem, not a confirmed product problem
 
 ## Recommended Capture Sequence
+
+### One-command refresh
+
+When you want to refresh the committed captures for the supported device classes, use:
+
+- `ruby tools/scripts/refresh_prexus_runtime_surface_captures.rb --all`
+
+That wrapper:
+
+- runs the PREXUS UI smoke for each supported device slug
+- writes a dedicated `.xcresult` bundle in a temporary directory
+- exports deterministic screenshots into `docs/design/runtime-surface-captures/<device-slug>/`
+- refreshes the per-device `manifest.json` alongside the exported PNGs
+
+Supported slugs today:
+
+- `iphone16`
+- `iphonese3`
+
+### Manual / stepwise refresh
 
 When you need new live screenshots:
 

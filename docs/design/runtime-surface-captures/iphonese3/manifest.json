@@ -1,0 +1,48 @@
+{
+  "sourceXCResult": "/var/folders/hf/f4zpppsd16d7070vt3bhwrsw0000gn/T/prexus-runtime-captures-iphonese3-20260519-37047-i3nf2j/PREXUS-iphonese3.xcresult",
+  "exportedAt": "2026-05-19T08:41:15+09:00",
+  "attachments": [
+    {
+      "testIdentifier": "PREXUSUITests/testRuntimeSurfacesCanBeCapturedViaNavigation()",
+      "deviceName": "iPhone SE (3rd generation)",
+      "sourceFileName": "0BDBBAC8-ACE3-4508-B8E2-1EEB64589064.png",
+      "exportedFileName": "prexus-chat-iphonese3.png",
+      "timestamp": 1779147633.412
+    },
+    {
+      "testIdentifier": "PREXUSUITests/testRuntimeSurfacesCanBeCapturedViaNavigation()",
+      "deviceName": "iPhone SE (3rd generation)",
+      "sourceFileName": "07FB5AE5-DB5B-4A9B-A436-B0B40DB4E236.png",
+      "exportedFileName": "prexus-diagnostics-iphonese3.png",
+      "timestamp": 1779147642.687
+    },
+    {
+      "testIdentifier": "PREXUSUITests/testSeededRuntimeSurfacesShowNonEmptyDiagnosticsAndMemory()",
+      "deviceName": "iPhone SE (3rd generation)",
+      "sourceFileName": "6D90A6B1-5839-4BA1-B0E0-A3498B8443D9.png",
+      "exportedFileName": "prexus-diagnostics-seeded-iphonese3.png",
+      "timestamp": 1779147663.647
+    },
+    {
+      "testIdentifier": "PREXUSUITests/testRuntimeSurfacesCanBeCapturedViaNavigation()",
+      "deviceName": "iPhone SE (3rd generation)",
+      "sourceFileName": "D28AEEBD-DCD1-4FA9-96CA-8D824B1AEC94.png",
+      "exportedFileName": "prexus-memory-iphonese3.png",
+      "timestamp": 1779147647.983
+    },
+    {
+      "testIdentifier": "PREXUSUITests/testSeededRuntimeSurfacesShowNonEmptyDiagnosticsAndMemory()",
+      "deviceName": "iPhone SE (3rd generation)",
+      "sourceFileName": "ABE8F32B-8BCD-4B97-9FEE-FDF2A0169F58.png",
+      "exportedFileName": "prexus-memory-seeded-iphonese3.png",
+      "timestamp": 1779147670.637
+    },
+    {
+      "testIdentifier": "PREXUSUITests/testRuntimeSurfacesCanBeCapturedViaNavigation()",
+      "deviceName": "iPhone SE (3rd generation)",
+      "sourceFileName": "D0B658C1-D9C0-44FD-9F85-D10F4920B1AC.png",
+      "exportedFileName": "prexus-settings-iphonese3.png",
+      "timestamp": 1779147636.566
+    }
+  ]
+}

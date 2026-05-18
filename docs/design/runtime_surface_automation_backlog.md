@@ -30,11 +30,14 @@ The current environment can already:
 - capture the currently visible surface
 - run a first XCTest smoke that traverses Chat → Settings → Diagnostics → Memory
 
-The remaining gap is turning that first smoke into a more production-ready capture workflow with:
+The remaining gap is no longer the first capture loop itself. That path now has:
 
 - exported screenshot files outside `.xcresult`
 - optional seeded states for non-empty Diagnostics / Memory captures
-- device matrix expansion beyond the first iPhone 16 pass
+- iPhone 16 and iPhone SE (3rd generation) coverage
+- a wrapper command that refreshes the committed capture set
+
+The remaining work is about broadening and hardening that workflow further.
 
 ## Candidate Automation Paths
 
@@ -65,12 +68,14 @@ Current state:
 - **implemented as the preferred first pass**
 - the initial smoke lives in `app/ios/PREXUSUITests/PREXUSUITests.swift`
 - it is intentionally navigation-only and light on assertions
+- `tools/scripts/refresh_prexus_runtime_surface_captures.rb` now wraps the current smoke + export flow for the supported device slugs
 
 Potential focus:
 
 - route and settings accessibility identifiers
 - stable screenshot naming
 - separation between regression UI tests and design-capture flows
+- extending the device matrix beyond `iphone16` and `iphonese3`
 
 ### Option 3 — Temporary debug navigation hooks
 
@@ -104,7 +109,7 @@ with:
 - date recorded
 - minimal manual intervention
 
-The first XCTest smoke satisfies only the navigation proof. The backlog remains open until capture/export handling is ergonomic enough for design-document refreshes.
+The first XCTest smoke and refresh wrapper now satisfy the current design-doc refresh loop for iPhone 16 and iPhone SE (3rd generation). The backlog remains open only for broader device coverage, richer seeded states, or stricter visual assertions.
 
 ## Non-Goals
 
