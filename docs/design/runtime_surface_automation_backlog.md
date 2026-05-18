@@ -28,12 +28,13 @@ The current environment can already:
 - launch PREXUS
 - run the standard iPhone 16 regression loop
 - capture the currently visible surface
+- run a first XCTest smoke that traverses Chat → Settings → Diagnostics → Memory
 
-The missing part is reliable navigation through:
+The remaining gap is turning that first smoke into a more production-ready capture workflow with:
 
-- Settings
-- Diagnostics
-- Memory
+- exported screenshot files outside `.xcresult`
+- optional seeded states for non-empty Diagnostics / Memory captures
+- device matrix expansion beyond the first iPhone 16 pass
 
 ## Candidate Automation Paths
 
@@ -58,6 +59,12 @@ Add a dedicated UI automation target or screenshot-oriented UI tests that can:
 - launch PREXUS
 - navigate to each secondary surface
 - capture screenshots in a deterministic order
+
+Current state:
+
+- **implemented as the preferred first pass**
+- the initial smoke lives in `app/ios/PREXUSUITests/PREXUSUITests.swift`
+- it is intentionally navigation-only and light on assertions
 
 Potential focus:
 
@@ -96,6 +103,8 @@ with:
 - device class recorded
 - date recorded
 - minimal manual intervention
+
+The first XCTest smoke satisfies only the navigation proof. The backlog remains open until capture/export handling is ergonomic enough for design-document refreshes.
 
 ## Non-Goals
 

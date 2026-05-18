@@ -10,6 +10,21 @@ Use this document when:
 - converting the current automation backlog into executable XCTest work
 - deciding which screens and assertions are required for the first stable capture pass
 
+## Current Status
+
+The first screenshot smoke is now implemented in:
+
+- `app/ios/PREXUSUITests/PREXUSUITests.swift`
+
+Current first-pass behavior:
+
+- launches PREXUS
+- captures Chat, Settings, Diagnostics, and Memory in order
+- uses stable screen identifiers where exposed
+- uses visible-label row matching for the nested Settings navigation rows
+
+This keeps the initial automation path small and navigation-focused while the broader screenshot/export workflow remains a follow-on task.
+
 ## Scope
 
 The first XCTest screenshot flow should cover:
@@ -136,6 +151,10 @@ This should come before:
 - multiple seeded states
 - device matrix expansion
 - behavioral form interaction coverage
+
+Status:
+
+- achieved for the current iPhone 16 smoke path on 2026-05-18
 
 ## Non-Goals
 

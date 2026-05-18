@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A10000000000000000000001 /* PREXUSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000004 /* PREXUSUITests.swift */; };
+		A10000000000000000000002 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A99CC9F298F217F7DE28D75 /* Foundation.framework */; };
 		027CE3C5D6EF313B380E5FAF /* PersistentMemoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE977C7A1C3B0146E353A71 /* PersistentMemoryStore.swift */; };
 		0F9C85F7B46105A919689A69 /* SensorSignalProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E59251EF9DD8CCDAC3DE204 /* SensorSignalProvider.swift */; };
 		10C1A1AF7B664461356B19A9 /* AppSettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F046805AE72FEE5D0E855F /* AppSettingsStore.swift */; };
@@ -51,6 +53,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A10000000000000000000003 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2DB27CA9BD61AECDA903F2C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 56338E8775E68DA05DEE65E6;
+			remoteInfo = PREXUS;
+		};
 		50FB145D0C8F35FEA2F1BD29 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F2DB27CA9BD61AECDA903F2C /* Project object */;
@@ -61,6 +70,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A10000000000000000000004 /* PREXUSUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PREXUSUITests.swift; sourceTree = "<group>"; };
+		A10000000000000000000005 /* PREXUSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = PREXUSUITests.xctest; path = PREXUSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0258044C5A822C0F7FF06B0D /* EpisodicMemoryStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EpisodicMemoryStore.swift; sourceTree = "<group>"; };
 		10816039431B7B010FF78F5E /* RankingEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RankingEngine.swift; sourceTree = "<group>"; };
 		112A572B0B29732C86A48B96 /* RootView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -106,6 +117,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A10000000000000000000006 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000000000000000000002 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5713B2A5CA24482D257ED0CF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -240,6 +259,7 @@
 				B0C2DBBBD5300EA02AA9D951 /* runtime */,
 				86F02AC7791CB2967FAB3229 /* shared */,
 				A4EB5F49835682A48A495C16 /* PREXUSTests */,
+				A10000000000000000000007 /* PREXUSUITests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -409,6 +429,15 @@
 			path = ocr;
 			sourceTree = "<group>";
 		};
+		A10000000000000000000007 /* PREXUSUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000004 /* PREXUSUITests.swift */,
+			);
+			name = PREXUSUITests;
+			path = PREXUSUITests;
+			sourceTree = "<group>";
+		};
 		A4EB5F49835682A48A495C16 /* PREXUSTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -524,6 +553,7 @@
 			children = (
 				9B7AFF8DE0EA0FD57DA025BC /* PREXUS.app */,
 				1611C227E5DC6836D4CE44C2 /* PREXUSTests.xctest */,
+				A10000000000000000000005 /* PREXUSUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -551,6 +581,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A10000000000000000000008 /* PREXUSUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1000000000000000000000E /* Build configuration list for PBXNativeTarget "PREXUSUITests" */;
+			buildPhases = (
+				A1000000000000000000000A /* Sources */,
+				A10000000000000000000006 /* Frameworks */,
+				A10000000000000000000009 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A1000000000000000000000B /* PBXTargetDependency */,
+			);
+			name = PREXUSUITests;
+			productName = PREXUSUITests;
+			productReference = A10000000000000000000005 /* PREXUSUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		29FF6A7FD9C00049CB05849E /* PREXUSTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 60CF20B751B9FAB032F8DE7C /* Build configuration list for PBXNativeTarget "PREXUSTests" */;
@@ -612,11 +660,19 @@
 			targets = (
 				56338E8775E68DA05DEE65E6 /* PREXUS */,
 				29FF6A7FD9C00049CB05849E /* PREXUSTests */,
+				A10000000000000000000008 /* PREXUSUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A10000000000000000000009 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1B1F8FC6F7C3D2A82E12232A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -634,6 +690,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A1000000000000000000000A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000000000000000000001 /* PREXUSUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C3402FA2BCB5D4568CD5F2AF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -690,6 +754,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A1000000000000000000000B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PREXUS;
+			target = 56338E8775E68DA05DEE65E6 /* PREXUS */;
+			targetProxy = A10000000000000000000003 /* PBXContainerItemProxy */;
+		};
 		40C4590E9AD2E77F56AA17A5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = PREXUS;
@@ -699,6 +769,37 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		A1000000000000000000000C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.prexus.ios.uitests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = PREXUS;
+			};
+			name = Debug;
+		};
+		A1000000000000000000000D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.prexus.ios.uitests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = PREXUS;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		041978127941E3DEF15EAB1A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -891,6 +992,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A1000000000000000000000E /* Build configuration list for PBXNativeTarget "PREXUSUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1000000000000000000000D /* Release */,
+				A1000000000000000000000C /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		5B1EB1B22C6B7037BB496640 /* Build configuration list for PBXNativeTarget "PREXUS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
