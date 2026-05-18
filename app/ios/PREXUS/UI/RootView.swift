@@ -6,16 +6,13 @@ struct RootView: View {
 
     var body: some View {
         NavigationStack {
-            ChatView(viewModel: ChatViewModel(environment: environment))
-                .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button {
-                            isPresentingSettings = true
-                        } label: {
-                            Image(systemName: "gearshape")
-                        }
-                    }
+            ChatView(
+                viewModel: ChatViewModel(environment: environment),
+                onOpenSettings: {
+                    isPresentingSettings = true
                 }
+            )
+            .toolbar(.hidden, for: .navigationBar)
         }
         .sheet(isPresented: $isPresentingSettings) {
             SettingsView(
