@@ -243,6 +243,7 @@ For v0.1, the user-configurable runtime policy surface is intentionally small:
 - `maxCloudContextTokens`
 - `openAIModel`
 - `localModelBackend`
+- `approvedProvidersForRestrictedMode`
 - provider API key presence
 
 If a route selects a cloud provider but the required key is missing, the runtime falls back to the local model instead of failing the turn. This preserves low-friction operation while keeping cloud access explicit.
@@ -253,6 +254,22 @@ For local execution, the current scaffold also exposes an explicit backend selec
 
 Cloud-bound prompts are additionally trimmed against `maxCloudContextTokens` before execution so the runtime setting acts as an actual guardrail, not only a UI preference.
 - RAG-based narrowing
+
+### Sensitivity Policy Ownership
+
+Sensitivity policy is split intentionally across three layers:
+
+- `ChatView` and `ChatViewModel` expose a per-turn sensitivity override so routing behavior can be inspected and tested interactively
+- `AppSettingsStore` owns persisted runtime policy such as cloud escalation, token budget, and the approved-provider allowlist used by restricted routing
+- `RuntimeContainer` converts persisted settings into `ExecutionPolicy`, and `RoutingEngine` remains the final authority for route selection
+
+This means the UI may select a sensitivity mode, but the runtime still decides the actual route after applying policy checks, provider restrictions, and fallback rules.
+
+Current ownership rules:
+
+- UI labels and picker affordances may describe sensitivity modes, but they must not define routing behavior on their own
+- `providerRestricted` must be enforced by runtime policy, not by view-level conditionals
+- if no approved provider matches a restricted turn, the runtime must fail closed to local execution
 
 Cloud models should receive only the minimum context required.
 

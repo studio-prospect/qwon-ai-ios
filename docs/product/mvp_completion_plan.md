@@ -34,6 +34,7 @@ It does **not** mean PREXUS is feature-complete as a cognitive runtime. It marks
 | Sensitivity UI fallback | Done | Added short segmented labels and a menu fallback for narrow layouts |
 | Sensitivity helper copy | Done | Added and refined helper text for each sensitivity mode |
 | Provider-restricted policy docs | Done | Documented current behavior and approved-provider meaning in routing docs |
+| Sensitivity policy ownership docs | Done | Documented runtime-vs-UI ownership for sensitivity policy in architecture docs |
 
 ### Relevant recent commits
 
@@ -80,7 +81,6 @@ The scaffold is still incomplete in several product and runtime areas below.
 
 | Priority | Area | Task | Why it matters | Exit criteria |
 |---|---|---|---|---|
-| P0 | Documentation | Update architecture and settings docs to mention sensitivity policy ownership | Routing policy is now spread across runtime, Chat UI, and docs | `architecture.md` and settings-facing docs describe where sensitivity policy lives |
 | P0 | Tests | Add tests for menu fallback picker behavior and 4-mode sensitivity selection | The new UI path is runtime-safe, but UI-level regression coverage is still thin | UI behavior for segmented and menu fallback is covered by tests or snapshot checks |
 | P1 | Chat UX | Improve send-state and mode-state clarity during in-flight execution | The routing preview exists, but mode/state transitions are still minimal | User can clearly tell selected sensitivity, planned route, and execution state during a turn |
 | P1 | Diagnostics | Distinguish primary routing cause from secondary reasons | Reason labels are readable now, but still flat lists | Diagnostics can identify the dominant routing decision reason without parsing all codes |
@@ -95,8 +95,7 @@ The scaffold is still incomplete in several product and runtime areas below.
 ### Phase A: Close policy gaps
 
 1. Define the provider allowlist data model
-2. Document policy ownership in architecture and settings docs
-3. Add regression tests for provider-restricted behavior
+2. Add regression tests for provider-restricted behavior
 
 ### Phase B: Close UI gaps
 
