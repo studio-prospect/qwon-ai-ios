@@ -10,6 +10,7 @@ Reference wireframe:
 - operational verification notes: `docs/design/runtime_surface_verification_notes.md`
 - capture workflow note: `docs/design/runtime_surface_capture_workflow.md`
 - simulator presentation issue note: `docs/design/simulator_presentation_issue_note.md`
+- current exported runtime captures: `docs/design/runtime-surface-captures/iphone16/`
 
 The goal is not decorative redesign. The goal is to make the current routing-aware chat UI feel:
 

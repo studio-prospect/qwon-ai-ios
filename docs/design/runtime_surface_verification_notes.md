@@ -27,6 +27,8 @@ Verified repeatedly during the polish pass:
 - Chat surface builds and renders with the current PREXUS visual language
 - Settings, Diagnostics, and Memory changes compile cleanly through the main regression loop
 - test suite remains green after each visual refinement pass
+- XCTest screenshot smoke now traverses Chat → Settings → Diagnostics → Memory automatically
+- seeded XCTest screenshot smoke now captures non-empty Diagnostics and Memory states
 
 Validation command:
 
@@ -53,19 +55,35 @@ Evidence:
 Currently captured live:
 
 - Chat on iPhone SE (3rd generation)
+- Chat on iPhone 16
+- Settings on iPhone 16
+- Diagnostics on iPhone 16
+- Memory on iPhone 16
+- Seeded Diagnostics on iPhone 16
+- Seeded Memory on iPhone 16
+
+Saved exports:
+
+- `docs/design/runtime-surface-captures/iphone16/prexus-chat-iphone16.png`
+- `docs/design/runtime-surface-captures/iphone16/prexus-settings-iphone16.png`
+- `docs/design/runtime-surface-captures/iphone16/prexus-diagnostics-iphone16.png`
+- `docs/design/runtime-surface-captures/iphone16/prexus-memory-iphone16.png`
+- `docs/design/runtime-surface-captures/iphone16/prexus-diagnostics-seeded-iphone16.png`
+- `docs/design/runtime-surface-captures/iphone16/prexus-memory-seeded-iphone16.png`
 
 Not yet captured live:
 
-- Settings
-- Diagnostics
-- Memory
+- Settings on iPhone SE-width
+- Diagnostics on iPhone SE-width
+- Memory on iPhone SE-width
+- Seeded variants on iPhone SE-width
 
 Reason:
 
 - the current environment can boot devices, launch apps, and take screenshots with `simctl`
-- however, it does not currently provide a reliable in-app interaction path for nested navigation inside PREXUS
-- `simctl` does not expose direct tap automation for this workflow
-- coordinate-based `osascript` clicking is blocked by accessibility limitations in the current session
+- iPhone 16 nested navigation is now covered by XCTest UI automation
+- `simctl` still does not expose direct tap automation for ad-hoc non-XCTest workflows
+- coordinate-based `osascript` clicking remains blocked by accessibility limitations in the current session
 
 This is a **tooling / automation gap**, not evidence of a UI regression.
 
