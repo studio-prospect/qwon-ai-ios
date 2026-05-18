@@ -8,6 +8,8 @@ Reference wireframe:
 
 - `docs/design/prexus-chat-wireframe-v1.png`
 - operational verification notes: `docs/design/runtime_surface_verification_notes.md`
+- capture workflow note: `docs/design/runtime_surface_capture_workflow.md`
+- simulator presentation issue note: `docs/design/simulator_presentation_issue_note.md`
 
 The goal is not decorative redesign. The goal is to make the current routing-aware chat UI feel:
 
@@ -288,6 +290,12 @@ Status:
 
 ## Live Verification Notes
 
+For current operational details, use:
+
+- `docs/design/runtime_surface_verification_notes.md`
+- `docs/design/runtime_surface_capture_workflow.md`
+- `docs/design/simulator_presentation_issue_note.md`
+
 Verified on 2026-05-18:
 
 - iPhone 16 simulator regression checks remained green through the full polish pass
@@ -331,6 +339,6 @@ Additional current criteria:
 ## Suggested Next Step
 
 1. capture updated screenshots for Settings / Diagnostics / Memory so the docs reflect the current app-wide visual language
-2. if the black-band simulator behavior recurs, investigate it as a separate presentation issue rather than mixing it into UI polish work
-3. if live screenshots for secondary surfaces become important, treat interaction automation as a separate tooling task rather than coupling it to UI polish implementation
+2. if live screenshots for secondary surfaces become important, use `runtime_surface_capture_workflow.md` as the operational source of truth and treat interaction automation as a separate tooling task rather than coupling it to UI polish implementation
+3. if the black-band simulator behavior recurs, investigate it through `simulator_presentation_issue_note.md` rather than mixing it into UI polish work
 4. keep this plan focused on design state, and move operational verification detail into dedicated notes
