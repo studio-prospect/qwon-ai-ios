@@ -168,19 +168,36 @@ struct SettingsView: View {
                 .foregroundStyle(.secondary)
                 .padding(.horizontal, 16)
 
-            HStack(spacing: 12) {
-                summaryCard(
-                    title: "Diagnostics",
-                    value: "\(runtimeDiagnostics.entries.count)",
-                    caption: "Recent route decisions",
-                    tint: .blue
-                )
-                summaryCard(
-                    title: "Memory",
-                    value: "\(memoryLibrary.memories.count)",
-                    caption: "Stored local episodes",
-                    tint: .purple
-                )
+            ViewThatFits(in: .horizontal) {
+                HStack(spacing: 12) {
+                    summaryCard(
+                        title: "Diagnostics",
+                        value: "\(runtimeDiagnostics.entries.count)",
+                        caption: "Recent route decisions",
+                        tint: .blue
+                    )
+                    summaryCard(
+                        title: "Memory",
+                        value: "\(memoryLibrary.memories.count)",
+                        caption: "Stored local episodes",
+                        tint: .purple
+                    )
+                }
+
+                VStack(spacing: 12) {
+                    summaryCard(
+                        title: "Diagnostics",
+                        value: "\(runtimeDiagnostics.entries.count)",
+                        caption: "Recent route decisions",
+                        tint: .blue
+                    )
+                    summaryCard(
+                        title: "Memory",
+                        value: "\(memoryLibrary.memories.count)",
+                        caption: "Stored local episodes",
+                        tint: .purple
+                    )
+                }
             }
 
             summaryCard(
@@ -357,6 +374,9 @@ struct PREXUSStatusChip: View {
         }
         .font(.caption.weight(.medium))
         .foregroundStyle(tint)
+        .lineLimit(1)
+        .minimumScaleFactor(0.82)
+        .allowsTightening(true)
         .padding(.horizontal, 10)
         .padding(.vertical, 6)
         .background(
@@ -369,6 +389,11 @@ struct PREXUSStatusChip: View {
 #if DEBUG
 #Preview {
     SettingsView.preview()
+}
+
+#Preview("Compact") {
+    SettingsView.preview()
+        .frame(width: 320, height: 760)
 }
 
 private extension SettingsView {

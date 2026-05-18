@@ -481,4 +481,11 @@ struct ChatView: View {
         ChatView(viewModel: .previewConversation())
     }
 }
+
+#Preview("Compact Conversation") {
+    NavigationStack {
+        ChatView(viewModel: .previewConversation())
+    }
+    .frame(width: 320, height: 760)
+}
 #endif

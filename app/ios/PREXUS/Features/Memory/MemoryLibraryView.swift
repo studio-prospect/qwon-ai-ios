@@ -115,6 +115,11 @@ struct MemoryLibraryView: View {
     MemoryLibraryView.preview()
 }
 
+#Preview("Compact") {
+    MemoryLibraryView.preview()
+        .frame(width: 320, height: 760)
+}
+
 private extension MemoryLibraryView {
     static func preview() -> MemoryLibraryView {
         let store = InMemoryEpisodicMemoryStore()

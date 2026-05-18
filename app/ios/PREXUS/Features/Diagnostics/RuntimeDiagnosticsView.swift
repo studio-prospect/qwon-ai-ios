@@ -133,6 +133,11 @@ struct RuntimeDiagnosticsView: View {
     RuntimeDiagnosticsView.preview()
 }
 
+#Preview("Compact") {
+    RuntimeDiagnosticsView.preview()
+        .frame(width: 320, height: 760)
+}
+
 private extension RuntimeDiagnosticsView {
     static func preview() -> RuntimeDiagnosticsView {
         let suiteName = "PREXUS.DiagnosticsPreview.\(UUID().uuidString)"
