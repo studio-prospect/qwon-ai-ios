@@ -36,25 +36,37 @@ Validation command:
 
 ### iPhone SE (3rd generation) Simulator
 
-Verified on 2026-05-18:
+Verified on 2026-05-18 and expanded on 2026-05-19:
 
 - PREXUS launched successfully on an SE-width simulator
 - the Chat header fit within compact width
 - the system bubble fit without clipping
 - the composer card fit without layout breakage
 - the sensitivity control, helper text, text field, and send button all remained usable at compact width
+- XCTest screenshot smoke now traverses Chat → Settings → Diagnostics → Memory automatically on SE width
+- seeded XCTest screenshot smoke now captures non-empty Diagnostics and Memory states on SE width
+
+Validation command:
+
+- `xcodebuild -project app/ios/PREXUS.xcodeproj -scheme PREXUS -destination 'platform=iOS Simulator,name=iPhone SE (3rd generation),OS=18.2' -only-testing:PREXUSUITests test`
 
 Evidence:
 
 - live simulator launch completed
-- screenshot capture succeeded for the Chat surface
-- compact-width support is therefore backed by both code fallbacks and live simulator evidence
+- screenshot capture succeeded first for the Chat surface
+- full runtime-surface screenshot automation later succeeded for Chat / Settings / Diagnostics / Memory
+- compact-width support is therefore backed by both code fallbacks and automated simulator evidence
 
 ## Live Screenshot Coverage
 
 Currently captured live:
 
 - Chat on iPhone SE (3rd generation)
+- Settings on iPhone SE (3rd generation)
+- Diagnostics on iPhone SE (3rd generation)
+- Memory on iPhone SE (3rd generation)
+- Seeded Diagnostics on iPhone SE (3rd generation)
+- Seeded Memory on iPhone SE (3rd generation)
 - Chat on iPhone 16
 - Settings on iPhone 16
 - Diagnostics on iPhone 16
@@ -70,22 +82,18 @@ Saved exports:
 - `docs/design/runtime-surface-captures/iphone16/prexus-memory-iphone16.png`
 - `docs/design/runtime-surface-captures/iphone16/prexus-diagnostics-seeded-iphone16.png`
 - `docs/design/runtime-surface-captures/iphone16/prexus-memory-seeded-iphone16.png`
+- `docs/design/runtime-surface-captures/iphonese3/prexus-chat-iphonese3.png`
+- `docs/design/runtime-surface-captures/iphonese3/prexus-settings-iphonese3.png`
+- `docs/design/runtime-surface-captures/iphonese3/prexus-diagnostics-iphonese3.png`
+- `docs/design/runtime-surface-captures/iphonese3/prexus-memory-iphonese3.png`
+- `docs/design/runtime-surface-captures/iphonese3/prexus-diagnostics-seeded-iphonese3.png`
+- `docs/design/runtime-surface-captures/iphonese3/prexus-memory-seeded-iphonese3.png`
 
-Not yet captured live:
+Remaining limitation:
 
-- Settings on iPhone SE-width
-- Diagnostics on iPhone SE-width
-- Memory on iPhone SE-width
-- Seeded variants on iPhone SE-width
+- ad-hoc non-XCTest nested navigation is still awkward in the current session because `simctl` does not expose direct tap automation and `osascript` coordinate clicking remains accessibility-bound
 
-Reason:
-
-- the current environment can boot devices, launch apps, and take screenshots with `simctl`
-- iPhone 16 nested navigation is now covered by XCTest UI automation
-- `simctl` still does not expose direct tap automation for ad-hoc non-XCTest workflows
-- coordinate-based `osascript` clicking remains blocked by accessibility limitations in the current session
-
-This is a **tooling / automation gap**, not evidence of a UI regression.
+This is now a **tooling convenience gap**, not evidence of missing runtime-surface coverage.
 
 ## Known Separate Issue
 
@@ -109,6 +117,6 @@ Current interpretation:
 
 ## Recommended Follow-up
 
-1. If visual documentation becomes important, add a dedicated automation task for secondary-surface screenshot capture.
+1. Extend the current UI smoke to additional device classes only when a new breakpoint or layout class needs explicit evidence beyond iPhone 16 and SE.
 2. If black bands recur in future captures, open a separate issue or note focused on simulator presentation behavior.
-3. Keep the main polish plan focused on design intent and implementation state; keep environment-level evidence and blockers here.
+3. Keep the main polish plan focused on design intent and implementation state; keep environment-level evidence and capture operations here.

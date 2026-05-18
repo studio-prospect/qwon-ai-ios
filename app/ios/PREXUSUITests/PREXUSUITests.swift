@@ -16,18 +16,19 @@ final class PREXUSUITests: XCTestCase {
     }
 
     func testRuntimeSurfacesCanBeCapturedViaNavigation() {
+        let deviceSlug = currentDeviceSlug()
         let app = makeApp()
         app.launch()
 
         XCTAssertTrue(element(UIID.chatScreen, in: app).waitForExistence(timeout: 5))
-        attachScreenshot(named: "prexus-chat-iphone16")
+        attachScreenshot(named: "prexus-chat-\(deviceSlug)")
 
         let openSettingsButton = app.buttons["Open Settings"]
         XCTAssertTrue(openSettingsButton.waitForExistence(timeout: 2))
         openSettingsButton.tap()
 
         XCTAssertTrue(element(UIID.settingsScreen, in: app).waitForExistence(timeout: 5))
-        attachScreenshot(named: "prexus-settings-iphone16")
+        attachScreenshot(named: "prexus-settings-\(deviceSlug)")
 
         app.swipeUp()
 
@@ -36,7 +37,7 @@ final class PREXUSUITests: XCTestCase {
         diagnosticsLink.tap()
 
         XCTAssertTrue(element(UIID.diagnosticsScreen, in: app).waitForExistence(timeout: 5))
-        attachScreenshot(named: "prexus-diagnostics-iphone16")
+        attachScreenshot(named: "prexus-diagnostics-\(deviceSlug)")
 
         let backFromDiagnostics = app.navigationBars.buttons.element(boundBy: 0)
         XCTAssertTrue(backFromDiagnostics.waitForExistence(timeout: 2))
@@ -47,10 +48,11 @@ final class PREXUSUITests: XCTestCase {
         memoryLink.tap()
 
         XCTAssertTrue(element(UIID.memoryScreen, in: app).waitForExistence(timeout: 5))
-        attachScreenshot(named: "prexus-memory-iphone16")
+        attachScreenshot(named: "prexus-memory-\(deviceSlug)")
     }
 
     func testSeededRuntimeSurfacesShowNonEmptyDiagnosticsAndMemory() {
+        let deviceSlug = currentDeviceSlug()
         let app = makeApp(seedPopulatedRuntimeSurfaces: true)
         app.launch()
 
@@ -69,7 +71,7 @@ final class PREXUSUITests: XCTestCase {
 
         XCTAssertTrue(element(UIID.diagnosticsScreen, in: app).waitForExistence(timeout: 5))
         XCTAssertTrue(element(UIID.diagnosticsSummary, in: app).waitForExistence(timeout: 2))
-        attachScreenshot(named: "prexus-diagnostics-seeded-iphone16")
+        attachScreenshot(named: "prexus-diagnostics-seeded-\(deviceSlug)")
 
         let backFromDiagnostics = app.navigationBars.buttons.element(boundBy: 0)
         XCTAssertTrue(backFromDiagnostics.waitForExistence(timeout: 2))
@@ -81,7 +83,7 @@ final class PREXUSUITests: XCTestCase {
 
         XCTAssertTrue(element(UIID.memoryScreen, in: app).waitForExistence(timeout: 5))
         XCTAssertTrue(element(UIID.memorySummary, in: app).waitForExistence(timeout: 2))
-        attachScreenshot(named: "prexus-memory-seeded-iphone16")
+        attachScreenshot(named: "prexus-memory-seeded-\(deviceSlug)")
     }
 
     private func makeApp(seedPopulatedRuntimeSurfaces: Bool = false) -> XCUIApplication {
@@ -100,6 +102,21 @@ final class PREXUSUITests: XCTestCase {
         app.descendants(matching: .any)
             .matching(NSPredicate(format: "label == %@", label))
             .firstMatch
+    }
+
+    private func currentDeviceSlug(processInfo: ProcessInfo = .processInfo) -> String {
+        let deviceName = processInfo.environment["SIMULATOR_DEVICE_NAME"] ?? "simulator"
+        switch deviceName {
+        case "iPhone 16":
+            return "iphone16"
+        case "iPhone SE (3rd generation)":
+            return "iphonese3"
+        default:
+            return deviceName
+                .lowercased()
+                .replacingOccurrences(of: "[^a-z0-9]+", with: "-", options: .regularExpression)
+                .trimmingCharacters(in: CharacterSet(charactersIn: "-"))
+        }
     }
 
     private func attachScreenshot(named name: String) {

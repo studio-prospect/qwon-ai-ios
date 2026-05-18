@@ -103,6 +103,11 @@ Suggested pattern:
 - `prexus-diagnostics-<device>.png`
 - `prexus-memory-<device>.png`
 
+Current normalized slugs:
+
+- `iphone16`
+- `iphonese3`
+
 If date stamping is needed, append it outside the logical screen name:
 
 - `prexus-chat-iphone16-2026-05-18.png`
@@ -157,6 +162,7 @@ This should come before:
 Status:
 
 - achieved for the current iPhone 16 smoke path on 2026-05-18
+- expanded to device-aware screenshot naming on 2026-05-19 so the same flow can run on iPhone SE width
 
 ## Non-Goals
 

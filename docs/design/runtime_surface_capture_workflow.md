@@ -17,19 +17,22 @@ Related note:
 
 ## Current Reliable Capture Scope
 
-As of 2026-05-18, the current environment can reliably do the following:
+As of 2026-05-19, the current environment can reliably do the following:
 
 - boot an iOS simulator with `simctl`
 - launch PREXUS in the simulator
 - run test/build verification before capture
 - take screenshots of the currently visible app surface
-- export screenshots from the first XCTest smoke out of `.xcresult`
+- run XCTest UI smoke for the supported device classes
+- export screenshots from the UI smoke out of `.xcresult`
 
 This is now enough to verify or refresh:
 
-- compact-width Chat on iPhone SE (3rd generation)
+- compact-width runtime surfaces on iPhone SE (3rd generation)
 - iPhone 16 runtime-surface captures for Chat / Settings / Diagnostics / Memory
 - iPhone 16 seeded Diagnostics / Memory captures for non-empty docs refreshes
+- iPhone SE (3rd generation) runtime-surface captures for Chat / Settings / Diagnostics / Memory
+- iPhone SE (3rd generation) seeded Diagnostics / Memory captures for non-empty docs refreshes
 
 ## Current Unreliable / Blocked Scope
 
@@ -70,6 +73,18 @@ When the seeded UI smoke is present in the same `.xcresult`, it also exports:
 
 - `prexus-diagnostics-seeded-iphone16.png`
 - `prexus-memory-seeded-iphone16.png`
+
+The same UI smoke now emits device-aware names, so SE-width runs will export:
+
+- `prexus-chat-iphonese3.png`
+- `prexus-settings-iphonese3.png`
+- `prexus-diagnostics-iphonese3.png`
+- `prexus-memory-iphonese3.png`
+
+When the seeded UI smoke is present in the same SE-width `.xcresult`, it also exports:
+
+- `prexus-diagnostics-seeded-iphonese3.png`
+- `prexus-memory-seeded-iphonese3.png`
 
 ## When To Open a Separate Tooling Task
 

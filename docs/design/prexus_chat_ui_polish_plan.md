@@ -10,7 +10,9 @@ Reference wireframe:
 - operational verification notes: `docs/design/runtime_surface_verification_notes.md`
 - capture workflow note: `docs/design/runtime_surface_capture_workflow.md`
 - simulator presentation issue note: `docs/design/simulator_presentation_issue_note.md`
-- current exported runtime captures: `docs/design/runtime-surface-captures/iphone16/`
+- current exported runtime captures:
+  - `docs/design/runtime-surface-captures/iphone16/`
+  - `docs/design/runtime-surface-captures/iphonese3/`
 
 The goal is not decorative redesign. The goal is to make the current routing-aware chat UI feel:
 
@@ -22,7 +24,7 @@ The goal is not decorative redesign. The goal is to make the current routing-awa
 
 ## Current Implementation Status
 
-As of 2026-05-18, the current iOS scaffold has completed the first wave of polish work:
+As of 2026-05-19, the current iOS scaffold has completed the first wave of polish work:
 
 - chat composer consolidated into a single control surface
 - system / user / assistant conversation hierarchy tuned
@@ -34,6 +36,7 @@ As of 2026-05-18, the current iOS scaffold has completed the first wave of polis
 - secondary runtime surfaces now begin with a screen intro instead of raw card lists
 - Settings now opens with a branded runtime intro, descriptive PREXUS section headers, and a custom PREXUS-owned header
 - live compact-width verification completed on iPhone SE (3rd generation)
+- exported runtime-surface captures now exist for both iPhone 16 and iPhone SE (3rd generation)
 
 This means the original Phase 1–4 chat polish scope is functionally complete, and the current work has expanded into app-level surface consistency.
 
@@ -286,8 +289,8 @@ Expected outcome:
 Status:
 
 - compact-width live verification completed on iPhone SE (3rd generation)
-- additional screenshot capture for Settings / Diagnostics / Memory is still optional
-- automated live capture for those secondary surfaces is currently blocked by environment-level interaction limits rather than missing UI implementation
+- automated runtime-surface capture is now in place for both iPhone 16 and iPhone SE (3rd generation)
+- additional devices remain optional unless a new layout class needs dedicated evidence
 
 ## Live Verification Notes
 
@@ -297,11 +300,11 @@ For current operational details, use:
 - `docs/design/runtime_surface_capture_workflow.md`
 - `docs/design/simulator_presentation_issue_note.md`
 
-Verified on 2026-05-18:
+Verified on 2026-05-19:
 
 - iPhone 16 simulator regression checks remained green through the full polish pass
-- iPhone SE (3rd generation) live launch confirmed that the chat header, system bubble, sensitivity control, helper text, input field, and send button fit without layout breakage
-- compact-width fallback behavior is now backed by both code paths and live simulator evidence
+- iPhone SE (3rd generation) live and automated captures confirmed that the chat header, system bubble, sensitivity control, helper text, input field, and send button fit without layout breakage
+- compact-width fallback behavior is now backed by both code paths and exported simulator captures
 - Settings has been further polished with a branded runtime intro, descriptive PREXUS section headers, and a custom header, with code validation complete
 
 Observed note:
@@ -309,7 +312,7 @@ Observed note:
 - the SE simulator screenshots showed black bands above and below the rendered app surface during this session
 - a temporary full-height `ChatView` experiment did not change that behavior and was reverted
 - treat that as a separate simulator/runtime presentation issue rather than a blocker on the current UI polish pass
-- secondary-surface live screenshots are not blocked by layout regressions; they are blocked by the current session's inability to perform reliable in-app pointer automation for nested navigation
+- secondary-surface live screenshots are now covered by XCTest UI automation for iPhone 16 and iPhone SE (3rd generation)
 
 ## Constraints
 
@@ -339,7 +342,7 @@ Additional current criteria:
 
 ## Suggested Next Step
 
-1. capture updated screenshots for Settings / Diagnostics / Memory so the docs reflect the current app-wide visual language
-2. if live screenshots for secondary surfaces become important, use `runtime_surface_capture_workflow.md` as the operational source of truth and treat interaction automation as a separate tooling task rather than coupling it to UI polish implementation
+1. use `runtime_surface_capture_workflow.md` to refresh exported screenshots whenever a surface materially changes
+2. if a new device class matters, extend the current UI smoke rather than reintroducing ad-hoc manual capture steps
 3. if the black-band simulator behavior recurs, investigate it through `simulator_presentation_issue_note.md` rather than mixing it into UI polish work
 4. keep this plan focused on design state, and move operational verification detail into dedicated notes
