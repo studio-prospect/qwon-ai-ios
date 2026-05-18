@@ -51,6 +51,15 @@ enum SensitivityLevel: String, Codable, CaseIterable {
             return "Allow cloud use only through approved providers."
         }
     }
+
+    var allowsAutomaticEpisodicMemory: Bool {
+        switch self {
+        case .localOnly, .providerRestricted:
+            return false
+        case .localPreferred, .escalationAllowed:
+            return true
+        }
+    }
 }
 
 struct RuntimeRequest {

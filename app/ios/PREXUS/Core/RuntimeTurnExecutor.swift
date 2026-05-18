@@ -180,14 +180,16 @@ extension RuntimeContainer {
             }
         }
 
-        memoryStore.save(
-            EpisodicMemory(
-                id: UUID(),
-                summary: input.userText,
-                sensitivity: request.sensitivity,
-                createdAt: Date()
+        if request.sensitivity.allowsAutomaticEpisodicMemory {
+            memoryStore.save(
+                EpisodicMemory(
+                    id: UUID(),
+                    summary: input.userText,
+                    sensitivity: request.sensitivity,
+                    createdAt: Date()
+                )
             )
-        )
+        }
 
         return RuntimeTurnOutput(
             route: route,

@@ -24,6 +24,10 @@ final class PREXUSTests: XCTestCase {
                 "Allow cloud use only through approved providers."
             ]
         )
+        XCTAssertEqual(
+            SensitivityLevel.allCases.map(\.allowsAutomaticEpisodicMemory),
+            [false, true, true, false]
+        )
     }
 
     func testSensitiveRequestsStayLocal() {
@@ -240,6 +244,81 @@ final class PREXUSTests: XCTestCase {
         XCTAssertEqual(output.execution.model, "Mock Local Runtime")
         XCTAssertTrue(output.route.reasonCodes.contains("openai_key_unavailable"))
         XCTAssertFalse(output.response.contains("Local fallback used"))
+    }
+
+    func testRunTurnSkipsAutomaticMemoryForLocalOnlySensitivity() async throws {
+        let memoryStore = InMemoryEpisodicMemoryStore()
+        let runtime = RuntimeContainer.live(
+            config: .default,
+            apiKeyStore: InMemoryAPIKeyStore(),
+            memoryStore: memoryStore,
+            localModel: MockLocalModelClient(),
+            cloudModel: MockCloudModelClient()
+        )
+
+        _ = try await runtime.runTurn(
+            input: RuntimeTurnInput(
+                userText: "Store nothing from this private note",
+                modality: .text,
+                sensitivity: .localOnly
+            ),
+            transcript: []
+        )
+
+        XCTAssertTrue(memoryStore.all().isEmpty)
+    }
+
+    func testRunTurnSkipsAutomaticMemoryForProviderRestrictedSensitivity() async throws {
+        let apiKeyStore = InMemoryAPIKeyStore()
+        apiKeyStore.setAPIKey("test-key", for: .openAI)
+        let memoryStore = InMemoryEpisodicMemoryStore()
+        let runtime = RuntimeContainer.live(
+            config: AppConfig(
+                allowsCloudEscalation: true,
+                maxCloudContextTokens: 2_048,
+                openAIModel: "gpt-5-mini",
+                localModelBackend: .automatic,
+                approvedProvidersForRestrictedMode: [.openAI]
+            ),
+            apiKeyStore: apiKeyStore,
+            memoryStore: memoryStore,
+            localModel: MockLocalModelClient(),
+            cloudModel: MockCloudModelClient()
+        )
+
+        _ = try await runtime.runTurn(
+            input: RuntimeTurnInput(
+                userText: "Review this restricted code path",
+                modality: .text,
+                sensitivity: .providerRestricted
+            ),
+            transcript: []
+        )
+
+        XCTAssertTrue(memoryStore.all().isEmpty)
+    }
+
+    func testRunTurnStoresAutomaticMemoryForLocalPreferredSensitivity() async throws {
+        let memoryStore = InMemoryEpisodicMemoryStore()
+        let runtime = RuntimeContainer.live(
+            config: .default,
+            apiKeyStore: InMemoryAPIKeyStore(),
+            memoryStore: memoryStore,
+            localModel: MockLocalModelClient(),
+            cloudModel: MockCloudModelClient()
+        )
+
+        _ = try await runtime.runTurn(
+            input: RuntimeTurnInput(
+                userText: "Remember this local-first preference",
+                modality: .text,
+                sensitivity: .localPreferred
+            ),
+            transcript: []
+        )
+
+        XCTAssertEqual(memoryStore.all().map(\.summary), ["Remember this local-first preference"])
+        XCTAssertEqual(memoryStore.all().first?.sensitivity, .localPreferred)
     }
 
     @MainActor

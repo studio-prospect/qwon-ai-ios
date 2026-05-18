@@ -244,6 +244,14 @@ The implementation deliberately stores only compact `EpisodicMemory` records:
 
 This matches the product goal of preserving compact context, not full transcripts.
 
+Current scaffold retention policy:
+
+- automatic episodic writes are enabled for `localPreferred` and `escalationAllowed`
+- automatic episodic writes are disabled for `localOnly` and `providerRestricted`
+- this policy is conservative because the current scaffold stores a compact summary derived directly from the user turn, not a reviewed memory extraction
+- highly sensitive turns may still be processed locally for the response itself, but they are not automatically retained in long-lived episodic storage
+- future user-pinned memory flows may allow explicit saving of otherwise non-retained turns
+
 ## Planned Evolution
 
 `UserDefaults` is acceptable only as a bootstrap persistence layer. The intended path remains:
