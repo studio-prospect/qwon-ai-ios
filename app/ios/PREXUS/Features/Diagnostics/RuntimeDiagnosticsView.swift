@@ -37,108 +37,81 @@ struct RuntimeDiagnosticsView: View {
     }
 
     private var diagnosticsSummaryCard: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("Recent Runtime Decisions")
-                .font(.caption)
-                .foregroundStyle(.secondary)
+        PREXUSSurfaceCard {
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Recent Runtime Decisions")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
 
-            HStack(spacing: 8) {
-                statusChip("\(diagnostics.entries.count) kept", tint: .blue)
-                statusChip("Local-only history", tint: .secondary)
-            }
+                HStack(spacing: 8) {
+                    PREXUSStatusChip("\(diagnostics.entries.count) kept", tint: .blue)
+                    PREXUSStatusChip("Local-only history", tint: .secondary)
+                }
 
-            Text("Entries show the route target, execution path, and primary reason first so you can scan policy behavior without opening raw logs.")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(14)
-        .background(
-            RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .fill(.thinMaterial)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .strokeBorder(.quaternary.opacity(0.8), lineWidth: 1)
-        )
-    }
-
-    private func diagnosticCard(_ entry: RuntimeDiagnosticEntry) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text(entry.userText)
-                .font(.body)
-                .foregroundStyle(.primary)
-                .lineLimit(3)
-
-            diagnosticChipRow(entry)
-
-            if !entry.secondaryReasonSummary.isEmpty {
-                Text(entry.secondaryReasonSummary)
+                Text("Entries show the route target, execution path, and primary reason first so you can scan policy behavior without opening raw logs.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
 
-            HStack(alignment: .center, spacing: 8) {
-                if let detail = entry.executionDetail, !detail.isEmpty {
-                    Text(detail)
+    private func diagnosticCard(_ entry: RuntimeDiagnosticEntry) -> some View {
+        PREXUSSurfaceCard(borderTint: Color(uiColor: .quaternaryLabel)) {
+            VStack(alignment: .leading, spacing: 10) {
+                Text(entry.userText)
+                    .font(.body)
+                    .foregroundStyle(.primary)
+                    .lineLimit(3)
+
+                diagnosticChipRow(entry)
+
+                if !entry.secondaryReasonSummary.isEmpty {
+                    Text(entry.secondaryReasonSummary)
                         .font(.caption)
                         .foregroundStyle(.secondary)
-                        .lineLimit(2)
                 }
 
-                Spacer(minLength: 0)
+                HStack(alignment: .center, spacing: 8) {
+                    if let detail = entry.executionDetail, !detail.isEmpty {
+                        Text(detail)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .lineLimit(2)
+                    }
 
-                Text(entry.timestamp.formatted(date: .abbreviated, time: .shortened))
-                    .font(.caption2)
-                    .foregroundStyle(.tertiary)
+                    Spacer(minLength: 0)
+
+                    Text(entry.timestamp.formatted(date: .abbreviated, time: .shortened))
+                        .font(.caption2)
+                        .foregroundStyle(.tertiary)
+                }
             }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(14)
-        .background(
-            RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .fill(.background)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .strokeBorder(.quaternary.opacity(0.8), lineWidth: 1)
-        )
     }
 
     private func diagnosticChipRow(_ entry: RuntimeDiagnosticEntry) -> some View {
         ViewThatFits(in: .horizontal) {
             HStack(spacing: 8) {
-                statusChip(entry.executionBadgeLabel, tint: color(for: entry.executionTint))
-                statusChip(entry.routeBadgeLabel, tint: color(for: entry.routeTint))
+                PREXUSStatusChip(entry.executionBadgeLabel, tint: color(for: entry.executionTint))
+                PREXUSStatusChip(entry.routeBadgeLabel, tint: color(for: entry.routeTint))
 
                 if !entry.primaryReasonSummary.isEmpty {
-                    statusChip(entry.primaryReasonSummary, tint: .secondary)
+                    PREXUSStatusChip(entry.primaryReasonSummary, tint: .secondary)
                 }
             }
 
             VStack(alignment: .leading, spacing: 6) {
                 HStack(spacing: 8) {
-                    statusChip(entry.executionBadgeLabel, tint: color(for: entry.executionTint))
-                    statusChip(entry.routeBadgeLabel, tint: color(for: entry.routeTint))
+                    PREXUSStatusChip(entry.executionBadgeLabel, tint: color(for: entry.executionTint))
+                    PREXUSStatusChip(entry.routeBadgeLabel, tint: color(for: entry.routeTint))
                 }
 
                 if !entry.primaryReasonSummary.isEmpty {
-                    statusChip(entry.primaryReasonSummary, tint: .secondary)
+                    PREXUSStatusChip(entry.primaryReasonSummary, tint: .secondary)
                 }
             }
         }
-    }
-
-    private func statusChip(_ title: String, tint: Color) -> some View {
-        Text(title)
-            .font(.caption.weight(.medium))
-            .foregroundStyle(tint)
-            .padding(.horizontal, 10)
-            .padding(.vertical, 6)
-            .background(
-                Capsule(style: .continuous)
-                    .fill(tint.opacity(0.12))
-            )
     }
 
     private func color(for token: ColorToken) -> Color {

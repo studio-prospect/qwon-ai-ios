@@ -46,7 +46,7 @@ struct SettingsView: View {
                         "Escalation",
                         subtitle: "Controls whether PREXUS may leave the on-device runtime.",
                         accessory: AnyView(
-                            statusChip(
+                            PREXUSStatusChip(
                                 settings.config.allowsCloudEscalation ? "Enabled" : "Local Only",
                                 tint: settings.config.allowsCloudEscalation ? .blue : .secondary
                             )
@@ -57,7 +57,7 @@ struct SettingsView: View {
                         "Restricted Mode",
                         subtitle: restrictedProviderSummary,
                         accessory: AnyView(
-                            statusChip(
+                            PREXUSStatusChip(
                                 settings.config.approvedProvidersForRestrictedMode.isEmpty ? "Local fallback" : "Allowlist active",
                                 tint: settings.config.approvedProvidersForRestrictedMode.isEmpty ? .orange : .green
                             )
@@ -68,7 +68,7 @@ struct SettingsView: View {
                         "Cloud-Ready Providers",
                         subtitle: readyProviderSummary,
                         accessory: AnyView(
-                            statusChip(readyProviderCountLabel, tint: readyProviderCount > 0 ? .green : .secondary)
+                            PREXUSStatusChip(readyProviderCountLabel, tint: readyProviderCount > 0 ? .green : .secondary)
                         )
                     )
                 } header: {
@@ -195,27 +195,20 @@ struct SettingsView: View {
     }
 
     private func summaryCard(title: String, value: String, caption: String, tint: Color) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text(title)
-                .font(.caption)
-                .foregroundStyle(.secondary)
-            Text(value)
-                .font(.headline)
-                .foregroundStyle(.primary)
-            Text(caption)
-                .font(.caption)
-                .foregroundStyle(.secondary)
+        PREXUSSurfaceCard(borderTint: tint.opacity(0.18)) {
+            VStack(alignment: .leading, spacing: 6) {
+                Text(title)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                Text(value)
+                    .font(.headline)
+                    .foregroundStyle(.primary)
+                Text(caption)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(14)
-        .background(
-            RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .fill(.thinMaterial)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .strokeBorder(tint.opacity(0.18), lineWidth: 1)
-        )
         .padding(.horizontal, 16)
     }
 
@@ -225,7 +218,7 @@ struct SettingsView: View {
                 Text(title)
                     .foregroundStyle(.primary)
                 Spacer(minLength: 0)
-                statusChip(value, tint: .secondary)
+                PREXUSStatusChip(value, tint: .secondary)
             }
 
             Text(subtitle)
@@ -260,7 +253,7 @@ struct SettingsView: View {
                 Text(title)
                     .foregroundStyle(.primary)
                 Spacer(minLength: 0)
-                statusChip(status.label, tint: color(for: status))
+                PREXUSStatusChip(status.label, tint: color(for: status))
             }
 
             Text(providerAvailabilityDescription(for: status))
@@ -279,18 +272,6 @@ struct SettingsView: View {
         case .disabled:
             return "Cloud escalation is disabled at the policy level."
         }
-    }
-
-    private func statusChip(_ title: String, tint: Color) -> some View {
-        Text(title)
-            .font(.caption.weight(.medium))
-            .foregroundStyle(tint)
-            .padding(.horizontal, 10)
-            .padding(.vertical, 6)
-            .background(
-                Capsule(style: .continuous)
-                    .fill(tint.opacity(0.12))
-            )
     }
 
     private func color(for status: ProviderAvailabilityStatus) -> Color {
@@ -328,6 +309,60 @@ struct SettingsView: View {
 
     private var readyProviderCountLabel: String {
         readyProviderCount == 1 ? "1 ready" : "\(readyProviderCount) ready"
+    }
+}
+
+struct PREXUSSurfaceCard<Content: View>: View {
+    let borderTint: Color
+    @ViewBuilder let content: () -> Content
+
+    init(borderTint: Color = Color(uiColor: .quaternaryLabel), @ViewBuilder content: @escaping () -> Content) {
+        self.borderTint = borderTint
+        self.content = content
+    }
+
+    var body: some View {
+        content()
+            .padding(14)
+            .background(
+                RoundedRectangle(cornerRadius: 18, style: .continuous)
+                    .fill(.thinMaterial)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 18, style: .continuous)
+                    .strokeBorder(borderTint, lineWidth: 1)
+            )
+    }
+}
+
+struct PREXUSStatusChip: View {
+    let title: String
+    let systemImage: String?
+    let tint: Color
+
+    init(_ title: String, systemImage: String? = nil, tint: Color) {
+        self.title = title
+        self.systemImage = systemImage
+        self.tint = tint
+    }
+
+    var body: some View {
+        Group {
+            if let systemImage {
+                Label(title, systemImage: systemImage)
+                    .labelStyle(.titleAndIcon)
+            } else {
+                Text(title)
+            }
+        }
+        .font(.caption.weight(.medium))
+        .foregroundStyle(tint)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 6)
+        .background(
+            Capsule(style: .continuous)
+                .fill(tint.opacity(0.12))
+        )
     }
 }
 

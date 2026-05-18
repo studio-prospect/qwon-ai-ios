@@ -196,8 +196,8 @@ struct ChatView: View {
                     .controlSize(.small)
                     .tint(.blue)
 
-                statusChip("Turn In Progress", tint: .blue)
-                statusChip(viewModel.displayedSensitivity.compactDisplayLabel, tint: .secondary)
+                PREXUSStatusChip("Turn In Progress", tint: .blue)
+                PREXUSStatusChip(viewModel.displayedSensitivity.compactDisplayLabel, tint: .secondary)
             }
 
             Text(summary)
@@ -390,27 +390,27 @@ struct ChatView: View {
     private func runtimeBadgeRow(for execution: RuntimeExecutionMetadata) -> some View {
         ViewThatFits(in: .horizontal) {
             HStack(spacing: 8) {
-                statusChip(executionModeLabel(for: execution.mode), systemImage: iconName(for: execution.mode), tint: accentColor(for: execution.mode))
+                PREXUSStatusChip(executionModeLabel(for: execution.mode), systemImage: iconName(for: execution.mode), tint: accentColor(for: execution.mode))
 
                 if let provider = execution.provider?.rawValue {
-                    statusChip(provider, tint: .secondary)
+                    PREXUSStatusChip(provider, tint: .secondary)
                 }
 
                 if let model = execution.model, !model.isEmpty {
-                    statusChip(model, tint: .secondary)
+                    PREXUSStatusChip(model, tint: .secondary)
                 }
             }
 
             VStack(alignment: .leading, spacing: 6) {
-                statusChip(executionModeLabel(for: execution.mode), systemImage: iconName(for: execution.mode), tint: accentColor(for: execution.mode))
+                PREXUSStatusChip(executionModeLabel(for: execution.mode), systemImage: iconName(for: execution.mode), tint: accentColor(for: execution.mode))
 
                 HStack(spacing: 8) {
                     if let provider = execution.provider?.rawValue {
-                        statusChip(provider, tint: .secondary)
+                        PREXUSStatusChip(provider, tint: .secondary)
                     }
 
                     if let model = execution.model, !model.isEmpty {
-                        statusChip(model, tint: .secondary)
+                        PREXUSStatusChip(model, tint: .secondary)
                     }
                 }
             }
@@ -420,26 +420,26 @@ struct ChatView: View {
     private func routeBadgeRow(for route: RouteDecision) -> some View {
         ViewThatFits(in: .horizontal) {
             HStack(spacing: 8) {
-                statusChip(route.targetLabel, systemImage: route.target == .local ? "arrow.triangle.branch" : "arrow.up.right.square", tint: route.target == .local ? .green : .blue)
-                statusChip(route.tierLabel, tint: .secondary)
-                statusChip(viewModel.displayedSensitivity.compactDisplayLabel, tint: .secondary)
+                PREXUSStatusChip(route.targetLabel, systemImage: route.target == .local ? "arrow.triangle.branch" : "arrow.up.right.square", tint: route.target == .local ? .green : .blue)
+                PREXUSStatusChip(route.tierLabel, tint: .secondary)
+                PREXUSStatusChip(viewModel.displayedSensitivity.compactDisplayLabel, tint: .secondary)
 
                 if let primaryReason = RouteDecision.primaryReasonCode(from: route.reasonCodes) {
-                    statusChip(RouteDecision.displayLabel(forReasonCode: primaryReason), tint: .secondary)
+                    PREXUSStatusChip(RouteDecision.displayLabel(forReasonCode: primaryReason), tint: .secondary)
                 }
             }
 
             VStack(alignment: .leading, spacing: 6) {
                 HStack(spacing: 8) {
-                    statusChip(route.targetLabel, systemImage: route.target == .local ? "arrow.triangle.branch" : "arrow.up.right.square", tint: route.target == .local ? .green : .blue)
-                    statusChip(route.tierLabel, tint: .secondary)
+                    PREXUSStatusChip(route.targetLabel, systemImage: route.target == .local ? "arrow.triangle.branch" : "arrow.up.right.square", tint: route.target == .local ? .green : .blue)
+                    PREXUSStatusChip(route.tierLabel, tint: .secondary)
                 }
 
                 HStack(spacing: 8) {
-                    statusChip(viewModel.displayedSensitivity.compactDisplayLabel, tint: .secondary)
+                    PREXUSStatusChip(viewModel.displayedSensitivity.compactDisplayLabel, tint: .secondary)
 
                     if let primaryReason = RouteDecision.primaryReasonCode(from: route.reasonCodes) {
-                        statusChip(RouteDecision.displayLabel(forReasonCode: primaryReason), tint: .secondary)
+                        PREXUSStatusChip(RouteDecision.displayLabel(forReasonCode: primaryReason), tint: .secondary)
                     }
                 }
             }
@@ -460,25 +460,6 @@ struct ChatView: View {
         case .fallback:
             return "Fallback"
         }
-    }
-
-    private func statusChip(_ title: String, systemImage: String? = nil, tint: Color) -> some View {
-        Label {
-            Text(title)
-        } icon: {
-            if let systemImage {
-                Image(systemName: systemImage)
-            }
-        }
-        .labelStyle(.titleAndIcon)
-        .font(.caption.weight(.medium))
-        .foregroundStyle(tint)
-        .padding(.horizontal, 10)
-        .padding(.vertical, 6)
-        .background(
-            Capsule(style: .continuous)
-                .fill(tint.opacity(0.12))
-        )
     }
 }
 
