@@ -267,6 +267,65 @@ fallback_plan
 
 This enables debugging, evaluation, and future model tuning.
 
+### Current iOS scaffold contract
+
+In the current iOS implementation, the route decision payload is represented by `RouteDecision` and the execution result is represented separately by `RuntimeExecutionMetadata`.
+
+Current route fields:
+
+- `tier`: one of `tier1`, `tier2`, `tier3`
+- `target`: one of `local`, `openAI`, `anthropic`, `gemini`
+- `reasonCodes`: ordered internal reason-code list used for prompt packaging, diagnostics, and preview UI
+
+Current execution fields:
+
+- `mode`: one of `local`, `cloud`, `fallback`
+- `provider`: selected cloud provider when applicable
+- `model`: display-facing model identifier or local runtime label
+- `detail`: short execution note such as escalation, fallback, or local runtime summary
+
+Contract notes:
+
+- `reasonCodes` are ordered from route context toward enforcement/fallback detail, but diagnostics may highlight a later code as the dominant user-facing cause
+- `reasonCodes` are internal stable tokens; UI labels are derived from them and should not become the source of truth
+- API-key fallback happens after the initial route selection, so effective route reasons may append provider-unavailable codes before execution
+- local execution and cloud execution status are intentionally kept out of `RouteDecision`; they belong to execution metadata
+
+### Current reason-code vocabulary
+
+Intent / task-shape codes:
+
+- `generalChat`
+- `summarization`
+- `ocrExtraction`
+- `codeAnalysis`
+- `creativeWriting`
+- `visionReasoning`
+
+Policy / routing codes:
+
+- `local_only`
+- `local_default`
+- `provider_restricted`
+- `cloud_disabled`
+- `high_complexity`
+- `quality_preferred`
+- `multimodal_candidate`
+
+Fallback / enforcement codes:
+
+- `provider_not_approved`
+- `openai_key_unavailable`
+- `anthropic_key_unavailable`
+- `gemini_key_unavailable`
+
+Vocabulary guidance:
+
+- intent codes explain what kind of request PREXUS believed it was handling
+- policy / routing codes explain why the router preferred a given path
+- fallback / enforcement codes explain why the effective route or execution path tightened after the initial choice
+- new reason codes should fit one of these categories and be documented here before UI copy depends on them
+
 ## Failure and Fallback Strategy
 
 Routing must degrade gracefully.

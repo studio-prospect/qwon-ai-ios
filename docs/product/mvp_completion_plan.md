@@ -59,7 +59,7 @@ It does **not** mean PREXUS is feature-complete as a cognitive runtime. It marks
 | iPhone 16 simulator check | Route labels and sensitivity UI verified |
 | Unit test suite | Passing |
 | Most recent local verification | `xcodebuild -project app/ios/PREXUS.xcodeproj -scheme PREXUS -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' test` |
-| Current test count | 18 passing tests |
+| Current test count | 22 passing tests |
 
 ## Current MVP Scope
 
@@ -81,11 +81,11 @@ The scaffold is still incomplete in several product and runtime areas below.
 
 | Priority | Area | Task | Why it matters | Exit criteria |
 |---|---|---|---|---|
-| P0 | Tests | Add tests for menu fallback picker behavior and 4-mode sensitivity selection | The new UI path is runtime-safe, but UI-level regression coverage is still thin | UI behavior for segmented and menu fallback is covered by tests or snapshot checks |
+| Done | Tests | Added regression coverage for 4-mode sensitivity labels and helper descriptions | Sensitivity UI paths now have repeatable behavior checks | `SensitivityLevel` labels and descriptions are test-covered |
 | P1 | Chat UX | Improve send-state and mode-state clarity during in-flight execution | The routing preview exists, but mode/state transitions are still minimal | User can clearly tell selected sensitivity, planned route, and execution state during a turn |
-| P1 | Diagnostics | Distinguish primary routing cause from secondary reasons | Reason labels are readable now, but still flat lists | Diagnostics can identify the dominant routing decision reason without parsing all codes |
-| P1 | Settings UX | Expose route policy explanation near cloud/provider settings | Users can toggle cloud settings without understanding routing consequences | Settings explain how cloud escalation, provider keys, and sensitivity interact |
-| P1 | Runtime contract | Formalize route decision payload shape and reason-code vocabulary | Human-readable labels exist, but the contract is still implicit | Route fields and reason codes are documented as a stable internal contract |
+| Done | Diagnostics | Distinguish primary routing cause from secondary reasons | Multi-reason routes are easier to scan during debugging | Diagnostics highlight a dominant cause before secondary labels |
+| Done | Settings UX | Expose route policy explanation near cloud/provider settings | Users can see policy context without inferring it from toggles | Settings summarize escalation, restricted providers, and cloud readiness together |
+| Done | Runtime contract | Formalize route decision payload shape and reason-code vocabulary | Route payload and reason vocabulary are now explicit in docs | Route fields and reason-code categories are documented in routing requirements |
 | P2 | Memory policy | Define whether sensitive turns may be stored in episodic memory by mode | Sensitivity affects routing, but memory retention semantics are still underdefined | Memory policy is documented and enforced per sensitivity level |
 | P2 | Multimodal routing | Extend the same sensitivity semantics to OCR, image, and future audio paths | Current flow is strongest in text chat; multimodal consistency is not yet complete | Non-text requests obey the same sensitivity and fallback rules |
 | P2 | Evaluation | Track routing quality metrics in a repeatable checklist | The scaffold works, but there is no stable evaluation loop yet | A lightweight evaluation checklist exists for local ratio, fallback frequency, and escalation correctness |
@@ -94,14 +94,15 @@ The scaffold is still incomplete in several product and runtime areas below.
 
 ### Phase A: Close policy gaps
 
-1. Define the provider allowlist data model
-2. Add regression tests for provider-restricted behavior
+1. Completed: define the provider allowlist data model
+2. Completed: add regression tests for provider-restricted behavior
+3. Completed: document the route payload and reason-code contract
 
 ### Phase B: Close UI gaps
 
 1. Improve Chat sensitivity affordance and execution-state clarity
-2. Improve diagnostics readability for multi-reason routes
-3. Improve Settings explanations around routing and provider policy
+2. Completed: improve diagnostics readability for multi-reason routes
+3. Completed: improve Settings explanations around routing and provider policy
 
 ### Phase C: Close runtime consistency gaps
 
