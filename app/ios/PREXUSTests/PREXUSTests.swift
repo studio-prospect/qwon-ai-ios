@@ -2,6 +2,30 @@ import XCTest
 @testable import PREXUS
 
 final class PREXUSTests: XCTestCase {
+    func testSensitivityLevelsExposeConsistentLabelsAndDescriptions() {
+        XCTAssertEqual(
+            SensitivityLevel.allCases,
+            [.localOnly, .localPreferred, .escalationAllowed, .providerRestricted]
+        )
+        XCTAssertEqual(
+            SensitivityLevel.allCases.map(\.displayLabel),
+            ["Local Only", "Local Preferred", "Escalation Allowed", "Provider Restricted"]
+        )
+        XCTAssertEqual(
+            SensitivityLevel.allCases.map(\.compactDisplayLabel),
+            ["Local", "Prefer", "Escalate", "Restricted"]
+        )
+        XCTAssertEqual(
+            SensitivityLevel.allCases.map(\.helperDescription),
+            [
+                "Run only on device.",
+                "Prefer on-device handling, with fallback if needed.",
+                "Allow cloud escalation when it helps.",
+                "Allow cloud use only through approved providers."
+            ]
+        )
+    }
+
     func testSensitiveRequestsStayLocal() {
         let router = DefaultRoutingEngine(
             classifier: HeuristicIntentClassifier(),

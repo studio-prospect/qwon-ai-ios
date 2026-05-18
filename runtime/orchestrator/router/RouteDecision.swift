@@ -25,6 +25,32 @@ enum SensitivityLevel: String, Codable, CaseIterable {
             return "Provider Restricted"
         }
     }
+
+    var compactDisplayLabel: String {
+        switch self {
+        case .localOnly:
+            return "Local"
+        case .localPreferred:
+            return "Prefer"
+        case .escalationAllowed:
+            return "Escalate"
+        case .providerRestricted:
+            return "Restricted"
+        }
+    }
+
+    var helperDescription: String {
+        switch self {
+        case .localOnly:
+            return "Run only on device."
+        case .localPreferred:
+            return "Prefer on-device handling, with fallback if needed."
+        case .escalationAllowed:
+            return "Allow cloud escalation when it helps."
+        case .providerRestricted:
+            return "Allow cloud use only through approved providers."
+        }
+    }
 }
 
 struct RuntimeRequest {

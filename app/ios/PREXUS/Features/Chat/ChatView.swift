@@ -66,19 +66,9 @@ struct ChatView: View {
     @ViewBuilder
     private var sensitivityPicker: some View {
         ViewThatFits(in: .horizontal) {
-            sensitivitySegmentedPicker(
-                localOnly: "Local Only",
-                localPreferred: "Local Preferred",
-                escalationAllowed: "Escalation Allowed",
-                providerRestricted: "Provider Restricted"
-            )
+            sensitivitySegmentedPicker(useCompactLabels: false)
 
-            sensitivitySegmentedPicker(
-                localOnly: "Local",
-                localPreferred: "Prefer",
-                escalationAllowed: "Escalate",
-                providerRestricted: "Restricted"
-            )
+            sensitivitySegmentedPicker(useCompactLabels: true)
 
             sensitivityMenuPicker
         }
@@ -95,16 +85,7 @@ struct ChatView: View {
     }
 
     private var sensitivityDescription: LocalizedStringKey {
-        switch viewModel.selectedSensitivity {
-        case .localOnly:
-            return "Run only on device."
-        case .localPreferred:
-            return "Prefer on-device handling, with fallback if needed."
-        case .escalationAllowed:
-            return "Allow cloud escalation when it helps."
-        case .providerRestricted:
-            return "Allow cloud use only through approved providers."
-        }
+        LocalizedStringKey(viewModel.selectedSensitivity.helperDescription)
     }
 
     @ViewBuilder
@@ -157,17 +138,12 @@ struct ChatView: View {
         .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 12))
     }
 
-    private func sensitivitySegmentedPicker(
-        localOnly: LocalizedStringKey,
-        localPreferred: LocalizedStringKey,
-        escalationAllowed: LocalizedStringKey,
-        providerRestricted: LocalizedStringKey
-    ) -> some View {
+    private func sensitivitySegmentedPicker(useCompactLabels: Bool) -> some View {
         Picker("Sensitivity", selection: $viewModel.selectedSensitivity) {
-            Text(localOnly).tag(SensitivityLevel.localOnly)
-            Text(localPreferred).tag(SensitivityLevel.localPreferred)
-            Text(escalationAllowed).tag(SensitivityLevel.escalationAllowed)
-            Text(providerRestricted).tag(SensitivityLevel.providerRestricted)
+            ForEach(SensitivityLevel.allCases, id: \.self) { level in
+                Text(useCompactLabels ? level.compactDisplayLabel : level.displayLabel)
+                    .tag(level)
+            }
         }
         .pickerStyle(.segmented)
     }
