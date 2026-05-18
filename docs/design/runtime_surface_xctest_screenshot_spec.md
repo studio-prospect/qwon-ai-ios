@@ -23,6 +23,7 @@ Current first-pass behavior:
 - uses stable screen identifiers where exposed
 - uses visible-label row matching for the nested Settings navigation rows
 - can now be exported from `.xcresult` through `tools/scripts/export_prexus_xcuitest_screenshots.rb`
+- includes a seeded variant for non-empty Diagnostics and Memory captures
 
 This keeps the initial automation path small and navigation-focused while the broader screenshot/export workflow remains a follow-on task.
 
@@ -171,10 +172,13 @@ The first screenshot spec should **not** try to:
 
 After the first stable flow works, later additions may include:
 
-- seeded populated screenshots for Diagnostics and Memory
 - SE-width screenshot variants
 - screenshot artifact export into `docs/design/`
 - visual regression comparison if needed
+
+Current follow-on priority:
+
+- broaden seeded coverage beyond the current Diagnostics / Memory pair
 
 ## Related Notes
 

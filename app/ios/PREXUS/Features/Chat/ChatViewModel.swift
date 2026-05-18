@@ -191,10 +191,12 @@ extension ChatViewModel {
         settings.config.allowsCloudEscalation = true
         settings.config.approvedProvidersForRestrictedMode = [.openAI]
         apiKeyStore.setAPIKey("preview-openai-key", for: .openAI)
+        let diagnosticsStore = RuntimeDiagnosticsStore(defaults: defaults)
         return AppEnvironment(
             settings: settings,
             apiKeyStore: apiKeyStore,
-            memoryStore: InMemoryEpisodicMemoryStore()
+            memoryStore: InMemoryEpisodicMemoryStore(),
+            runtimeDiagnosticsStore: diagnosticsStore
         )
     }
 }

@@ -29,20 +29,21 @@ This is now enough to verify or refresh:
 
 - compact-width Chat on iPhone SE (3rd generation)
 - iPhone 16 runtime-surface captures for Chat / Settings / Diagnostics / Memory
+- iPhone 16 seeded Diagnostics / Memory captures for non-empty docs refreshes
 
 ## Current Unreliable / Blocked Scope
 
 The current environment does **not** yet provide a reliable way to:
 
 - use coordinate-based GUI automation consistently from the current session
-- export non-empty seeded Diagnostics / Memory screenshots automatically
 - cover additional devices beyond the first iPhone 16 smoke without extra automation work
+- broaden seeded screenshots beyond the current first-pass Diagnostics / Memory examples
 
 Known constraints:
 
 - `simctl` still does not expose a direct tap API for ad-hoc workflow driving outside XCTest
 - `osascript` coordinate clicks are blocked by accessibility limitations in the current environment
-- seeded multi-state capture remains a tooling problem, not a confirmed product problem
+- broader multi-state capture remains a tooling problem, not a confirmed product problem
 
 ## Recommended Capture Sequence
 
@@ -64,6 +65,11 @@ The export script normalizes the attachment names to:
 - `prexus-settings-iphone16.png`
 - `prexus-diagnostics-iphone16.png`
 - `prexus-memory-iphone16.png`
+
+When the seeded UI smoke is present in the same `.xcresult`, it also exports:
+
+- `prexus-diagnostics-seeded-iphone16.png`
+- `prexus-memory-seeded-iphone16.png`
 
 ## When To Open a Separate Tooling Task
 

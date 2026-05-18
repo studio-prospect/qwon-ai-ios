@@ -39,6 +39,16 @@ final class PREXUSTests: XCTestCase {
         XCTAssertEqual(PREXUSAccessibilityID.Memory.clearAll, "memory.clear-all")
     }
 
+    @MainActor
+    func testSeededRuntimeSurfaceScenarioPreloadsDiagnosticsAndMemory() {
+        let environment = AppEnvironment.bootstrap(launchScenario: .seededRuntimeSurfaces)
+
+        XCTAssertEqual(environment.runtimeDiagnostics.entries.count, 2)
+        XCTAssertEqual(environment.memoryLibrary.memories.count, 2)
+        XCTAssertFalse(environment.runtimeDiagnostics.entries[0].primaryReasonSummary.isEmpty)
+        XCTAssertFalse(environment.memoryLibrary.memories[0].summary.isEmpty)
+    }
+
     func testSensitiveRequestsStayLocal() {
         let router = DefaultRoutingEngine(
             classifier: HeuristicIntentClassifier(),
@@ -427,10 +437,12 @@ final class PREXUSTests: XCTestCase {
 
         let apiKeyStore = InMemoryAPIKeyStore()
         let settings = AppSettingsStore(defaults: defaults, apiKeyStore: apiKeyStore)
+        let diagnosticsStore = RuntimeDiagnosticsStore(defaults: defaults)
         let environment = AppEnvironment(
             settings: settings,
             apiKeyStore: apiKeyStore,
-            memoryStore: InMemoryEpisodicMemoryStore()
+            memoryStore: InMemoryEpisodicMemoryStore(),
+            runtimeDiagnosticsStore: diagnosticsStore
         )
         let viewModel = ChatViewModel(environment: environment)
 
@@ -465,10 +477,12 @@ final class PREXUSTests: XCTestCase {
 
         let apiKeyStore = InMemoryAPIKeyStore()
         let settings = AppSettingsStore(defaults: defaults, apiKeyStore: apiKeyStore)
+        let diagnosticsStore = RuntimeDiagnosticsStore(defaults: defaults)
         let environment = AppEnvironment(
             settings: settings,
             apiKeyStore: apiKeyStore,
-            memoryStore: InMemoryEpisodicMemoryStore()
+            memoryStore: InMemoryEpisodicMemoryStore(),
+            runtimeDiagnosticsStore: diagnosticsStore
         )
         let viewModel = ChatViewModel(environment: environment)
 
@@ -478,9 +492,9 @@ final class PREXUSTests: XCTestCase {
             await Task.yield()
         }
 
-        let assistantMessages = viewModel.messages.filter { $0.role == .assistant }
+        let assistantMessages: [ChatMessage] = viewModel.messages.filter { $0.role == ChatMessage.Role.assistant }
         XCTAssertEqual(assistantMessages.count, 1)
-        XCTAssertFalse(assistantMessages[0].content.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+        XCTAssertFalse(assistantMessages[0].content.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty)
         XCTAssertFalse(assistantMessages[0].content.contains("Route:"))
         XCTAssertFalse(assistantMessages[0].content.contains("Reason:"))
         XCTAssertFalse(assistantMessages[0].content.contains("Execution:"))
