@@ -11,6 +11,11 @@ Use this document when:
 - recording capture blockers that are tooling-related rather than product-related
 - isolating known presentation issues that should not be mixed into normal UI polish work
 
+Related notes:
+
+- capture workflow: `docs/design/runtime_surface_capture_workflow.md`
+- simulator presentation issue: `docs/design/simulator_presentation_issue_note.md`
+
 ## Verified So Far
 
 ### iPhone 16 Simulator
