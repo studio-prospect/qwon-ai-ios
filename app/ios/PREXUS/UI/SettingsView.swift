@@ -433,6 +433,36 @@ struct PREXUSEmptyState: View {
     }
 }
 
+struct PREXUSScreenIntro: View {
+    let eyebrow: String
+    let title: String
+    let message: String
+
+    init(eyebrow: String, title: String, message: String) {
+        self.eyebrow = eyebrow
+        self.title = title
+        self.message = message
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(eyebrow)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+
+            Text(title)
+                .font(.title3.weight(.semibold))
+                .foregroundStyle(.primary)
+
+            Text(message)
+                .font(.body)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
 #if DEBUG
 #Preview {
     SettingsView.preview()

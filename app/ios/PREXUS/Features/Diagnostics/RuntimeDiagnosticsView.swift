@@ -6,16 +6,22 @@ struct RuntimeDiagnosticsView: View {
     var body: some View {
         ScrollView {
             if diagnostics.entries.isEmpty {
-                PREXUSEmptyState(
-                    title: "No Runtime Diagnostics Yet",
-                    systemImage: "waveform.path.ecg",
-                    message: "PREXUS will capture recent route and execution decisions here after the first runtime turn.",
-                    tint: .blue
-                )
+                LazyVStack(alignment: .leading, spacing: 14) {
+                    screenIntro
+
+                    PREXUSEmptyState(
+                        title: "No Runtime Diagnostics Yet",
+                        systemImage: "waveform.path.ecg",
+                        message: "PREXUS will capture recent route and execution decisions here after the first runtime turn.",
+                        tint: .blue
+                    )
+                }
                 .padding()
-                .padding(.top, 56)
+                .padding(.top, 24)
             } else {
                 LazyVStack(alignment: .leading, spacing: 14) {
+                    screenIntro
+
                     diagnosticsSummaryCard
 
                     ForEach(diagnostics.entries) { entry in
@@ -36,6 +42,14 @@ struct RuntimeDiagnosticsView: View {
                 }
             }
         }
+    }
+
+    private var screenIntro: some View {
+        PREXUSScreenIntro(
+            eyebrow: "Runtime visibility",
+            title: "Diagnostics",
+            message: "Review how PREXUS routed and executed recent turns without dropping into raw logs."
+        )
     }
 
     private var diagnosticsSummaryCard: some View {
