@@ -482,6 +482,7 @@ final class PREXUSTests: XCTestCase {
         viewModel.send(text: "First turn")
         await capturingLocalModel.waitUntilHolding()
         viewModel.send(text: "Second turn")
+        await capturingLocalModel.waitUntilHolding()
         capturingLocalModel.releaseActiveTurn()
 
         while viewModel.isSending {
