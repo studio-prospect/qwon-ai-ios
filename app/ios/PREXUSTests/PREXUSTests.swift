@@ -480,8 +480,10 @@ final class PREXUSTests: XCTestCase {
         let viewModel = ChatViewModel(environment: environment)
 
         viewModel.send(text: "First turn")
-        await Task.yield()
+        await capturingLocalModel.waitUntilHolding()
         viewModel.send(text: "Second turn")
+        await capturingLocalModel.waitUntilHolding()
+        capturingLocalModel.releaseActiveTurn()
 
         while viewModel.isSending {
             await Task.yield()
@@ -927,12 +929,63 @@ private final class CapturingLocalModelClient: LocalModelClient {
         summary: "Test-only local runtime that records prompts."
     )
 
+    private let lock = NSLock()
+    private var releaseContinuation: CheckedContinuation<Void, Never>?
+    /// True only after `releaseContinuation` is installed; `waitUntilHolding()` waits on this.
+    private var isHoldingReady = false
+
     private(set) var lastPrompt: String?
 
     func generate(prompt: String) async throws -> String {
+        lock.lock()
         lastPrompt = prompt
-        try await Task.sleep(nanoseconds: 200_000_000)
+        lock.unlock()
+
+        try await withTaskCancellationHandler {
+            try await holdUntilReleased()
+        } onCancel: {
+            self.resumeHold()
+        }
+
+        try Task.checkCancellation()
         return "Captured local runtime response."
+    }
+
+    func waitUntilHolding() async {
+        while true {
+            lock.lock()
+            let ready = isHoldingReady
+            lock.unlock()
+            if ready { return }
+            await Task.yield()
+        }
+    }
+
+    func releaseActiveTurn() {
+        resumeHold()
+    }
+
+    private func holdUntilReleased() async throws {
+        try await withCheckedContinuation { continuation in
+            lock.lock()
+            releaseContinuation = continuation
+            isHoldingReady = true
+            lock.unlock()
+        }
+
+        lock.lock()
+        isHoldingReady = false
+        releaseContinuation = nil
+        lock.unlock()
+    }
+
+    private func resumeHold() {
+        lock.lock()
+        let continuation = releaseContinuation
+        releaseContinuation = nil
+        isHoldingReady = false
+        lock.unlock()
+        continuation?.resume()
     }
 }
 
