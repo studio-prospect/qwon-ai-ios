@@ -441,6 +441,37 @@ final class PREXUSTests: XCTestCase {
     }
 
     @MainActor
+    func testChatViewModelIgnoresStaleSendResults() async {
+        let suiteName = "PREXUSTests.ChatViewModelStale.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defaults.removePersistentDomain(forName: suiteName)
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+
+        let apiKeyStore = InMemoryAPIKeyStore()
+        let settings = AppSettingsStore(defaults: defaults, apiKeyStore: apiKeyStore)
+        settings.config.localModelBackend = .embeddedHeuristic
+        let environment = AppEnvironment(
+            settings: settings,
+            apiKeyStore: apiKeyStore,
+            memoryStore: InMemoryEpisodicMemoryStore(),
+            runtimeDiagnosticsStore: RuntimeDiagnosticsStore(defaults: defaults)
+        )
+        let viewModel = ChatViewModel(environment: environment)
+
+        viewModel.send(text: "First turn")
+        viewModel.send(text: "Second turn")
+
+        while viewModel.isSending {
+            await Task.yield()
+        }
+
+        let assistantMessages = viewModel.messages.filter { $0.role == .assistant }
+        XCTAssertEqual(assistantMessages.count, 1)
+        XCTAssertTrue(assistantMessages[0].content.contains("second turn"))
+        XCTAssertFalse(assistantMessages[0].content.contains("first turn"))
+    }
+
+    @MainActor
     func testChatViewModelPinsActiveTurnStateWhileSending() async {
         let suiteName = "PREXUSTests.ChatViewModel.\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: suiteName)!
@@ -510,6 +541,34 @@ final class PREXUSTests: XCTestCase {
         XCTAssertFalse(assistantMessages[0].content.contains("Route:"))
         XCTAssertFalse(assistantMessages[0].content.contains("Reason:"))
         XCTAssertFalse(assistantMessages[0].content.contains("Execution:"))
+    }
+
+    func testEpisodicMemoryRecentReturnsNewestEpisodes() {
+        let store = InMemoryEpisodicMemoryStore()
+        let oldest = EpisodicMemory(
+            id: UUID(),
+            summary: "Oldest episode",
+            sensitivity: .localPreferred,
+            createdAt: Date(timeIntervalSince1970: 1_715_900_100)
+        )
+        let middle = EpisodicMemory(
+            id: UUID(),
+            summary: "Middle episode",
+            sensitivity: .localPreferred,
+            createdAt: Date(timeIntervalSince1970: 1_715_900_200)
+        )
+        let newest = EpisodicMemory(
+            id: UUID(),
+            summary: "Newest episode",
+            sensitivity: .localPreferred,
+            createdAt: Date(timeIntervalSince1970: 1_715_900_300)
+        )
+
+        store.save(oldest)
+        store.save(middle)
+        store.save(newest)
+
+        XCTAssertEqual(store.recent(limit: 2).map(\.summary), ["Newest episode", "Middle episode"])
     }
 
     func testPersistentMemoryStoreReloadsSavedEpisodes() {

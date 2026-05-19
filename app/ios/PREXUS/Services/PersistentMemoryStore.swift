@@ -25,7 +25,7 @@ final class PersistentMemoryStore: EpisodicMemoryStore {
     }
 
     func recent(limit: Int) -> [EpisodicMemory] {
-        Array(storage.suffix(limit))
+        Array(all().prefix(max(0, limit)))
     }
 
     func delete(id: UUID) {

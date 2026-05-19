@@ -1,12 +1,6 @@
 import Foundation
 import Security
 
-protocol APIKeyStore {
-    func apiKey(for provider: CloudProvider) -> String?
-    func setAPIKey(_ apiKey: String, for provider: CloudProvider)
-    func removeAPIKey(for provider: CloudProvider)
-}
-
 struct KeychainAPIKeyStore: APIKeyStore {
     private let service = "com.prexus.api-keys"
 
@@ -53,21 +47,5 @@ struct KeychainAPIKeyStore: APIKeyStore {
             kSecAttrAccount: provider.rawValue
         ]
         SecItemDelete(query as CFDictionary)
-    }
-}
-
-final class InMemoryAPIKeyStore: APIKeyStore {
-    private var storage: [CloudProvider: String] = [:]
-
-    func apiKey(for provider: CloudProvider) -> String? {
-        storage[provider]
-    }
-
-    func setAPIKey(_ apiKey: String, for provider: CloudProvider) {
-        storage[provider] = apiKey
-    }
-
-    func removeAPIKey(for provider: CloudProvider) {
-        storage.removeValue(forKey: provider)
     }
 }
