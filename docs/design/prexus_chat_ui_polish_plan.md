@@ -7,6 +7,7 @@ This document turns the current wireframe concept into an implementation-ready U
 Reference wireframe:
 
 - `docs/design/prexus-chat-wireframe-v1.png`
+- Liquid Glass adoption strategy: `docs/design/liquid_glass_adoption_strategy.md`
 - operational verification notes: `docs/design/runtime_surface_verification_notes.md`
 - capture workflow note: `docs/design/runtime_surface_capture_workflow.md`
 - capture index: `docs/design/runtime_surface_capture_index.md`

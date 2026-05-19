@@ -84,6 +84,19 @@ PREXUS の差別化ポイントは次の通り。
 - iPhone のカメラ、マイク、センサーを活かしたマルチモーダル設計
 - 個人専用の知能レイヤとして育つ構造
 
+## UIデザインの方向性
+
+PREXUS の UI は Apple プラットフォームらしさを強く持ってよいが、見た目の主役は常に content ではなく runtime の使いやすさであるべきである。
+
+そのため、Liquid Glass の採用方針は全面適用ではなく、操作レイヤーへの選択的適用を基本とする。
+
+- navigation と control surfaces には採用しうる
+- 長文コンテンツ面や高密度情報面には過剰適用しない
+
+詳細は `docs/design/liquid_glass_adoption_strategy.md` を参照。
+
+アプリアイコンの方向性は `docs/design/prexus_app_icon_strategy.md` を参照。
+
 ## 成功の定義
 
 PREXUS が成功している状態は、次の条件を満たしていること。
