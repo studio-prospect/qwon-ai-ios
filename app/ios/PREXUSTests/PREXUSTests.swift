@@ -480,8 +480,9 @@ final class PREXUSTests: XCTestCase {
         let viewModel = ChatViewModel(environment: environment)
 
         viewModel.send(text: "First turn")
-        await Task.yield()
+        await capturingLocalModel.waitUntilHolding()
         viewModel.send(text: "Second turn")
+        capturingLocalModel.releaseActiveTurn()
 
         while viewModel.isSending {
             await Task.yield()
@@ -927,12 +928,61 @@ private final class CapturingLocalModelClient: LocalModelClient {
         summary: "Test-only local runtime that records prompts."
     )
 
+    private let lock = NSLock()
+    private var releaseContinuation: CheckedContinuation<Void, Never>?
+    private var isHoldingTurn = false
+
     private(set) var lastPrompt: String?
 
     func generate(prompt: String) async throws -> String {
+        lock.lock()
         lastPrompt = prompt
-        try await Task.sleep(nanoseconds: 200_000_000)
+        isHoldingTurn = true
+        lock.unlock()
+
+        defer {
+            lock.lock()
+            isHoldingTurn = false
+            lock.unlock()
+        }
+
+        try await withTaskCancellationHandler {
+            try await holdUntilReleased()
+        } onCancel: {
+            self.resumeHold()
+        }
+
+        try Task.checkCancellation()
         return "Captured local runtime response."
+    }
+
+    func waitUntilHolding() async {
+        while true {
+            lock.lock()
+            let holding = isHoldingTurn
+            lock.unlock()
+            if holding { return }
+            await Task.yield()
+        }
+    }
+
+    func releaseActiveTurn() {
+        resumeHold()
+    }
+
+    private func holdUntilReleased() async throws {
+        try await withCheckedContinuation { continuation in
+            lock.lock()
+            releaseContinuation = continuation
+            lock.unlock()
+        }
+    }
+
+    private func resumeHold() {
+        lock.lock()
+        releaseContinuation?.resume()
+        releaseContinuation = nil
+        lock.unlock()
     }
 }
 

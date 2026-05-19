@@ -28,21 +28,27 @@ struct ChatView: View {
                 }
                 .padding()
             }
+            .background(Color(uiColor: .systemGroupedBackground))
 
-            Divider()
-
-            VStack(alignment: .leading, spacing: 10) {
-                if let route = viewModel.displayedRoute {
-                    previewRouteBanner(route)
-                }
-
-                composerCard
-            }
-            .padding()
-            .background(.bar)
+            controlDock
         }
         .navigationBarBackButtonHidden()
+        .background(Color(uiColor: .systemGroupedBackground))
         .accessibilityIdentifier(PREXUSAccessibilityID.Chat.screen)
+    }
+
+    private var controlDock: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            if let route = viewModel.displayedRoute {
+                previewRouteBanner(route)
+            }
+
+            composerCard
+        }
+        .padding(.horizontal, 12)
+        .padding(.top, 8)
+        .padding(.bottom, 12)
+        .background(.bar)
     }
 
     @ViewBuilder
@@ -74,7 +80,7 @@ struct ChatView: View {
         VStack(alignment: .leading, spacing: 14) {
             VStack(alignment: .leading, spacing: 8) {
                 Text("Sensitivity")
-                    .font(.caption)
+                    .font(.caption.weight(.semibold))
                     .foregroundStyle(.secondary)
 
                 sensitivityPicker
@@ -93,11 +99,11 @@ struct ChatView: View {
                     .padding(.vertical, 12)
                     .background(
                         RoundedRectangle(cornerRadius: 16, style: .continuous)
-                            .fill(.background)
+                            .fill(Color(uiColor: .secondarySystemGroupedBackground))
                     )
                     .overlay(
                         RoundedRectangle(cornerRadius: 16, style: .continuous)
-                            .strokeBorder(.quaternary, lineWidth: 1)
+                            .strokeBorder(.quaternary.opacity(0.7), lineWidth: 0.5)
                     )
                     .disabled(viewModel.isSending)
 
@@ -113,10 +119,10 @@ struct ChatView: View {
                                 .tint(.white)
                         } else {
                             Text("Send")
-                                .fontWeight(.medium)
+                                .fontWeight(.semibold)
                         }
                     }
-                    .frame(minWidth: 74)
+                    .frame(minWidth: 72)
                     .frame(height: 44)
                 }
                 .buttonStyle(.borderedProminent)
@@ -124,23 +130,16 @@ struct ChatView: View {
             }
         }
         .padding(14)
-        .background(
-            RoundedRectangle(cornerRadius: 22, style: .continuous)
-                .fill(.thinMaterial)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 22, style: .continuous)
-                .strokeBorder(.quaternary.opacity(0.6), lineWidth: 1)
-        )
+        .prexusControlGlass(shape: .roundedRect(cornerRadius: 20), fallbackMaterial: .thinMaterial)
         .accessibilityIdentifier(PREXUSAccessibilityID.Chat.composer)
     }
 
     private var header: some View {
-        HStack(alignment: .firstTextBaseline, spacing: 16) {
+        HStack(alignment: .center, spacing: 12) {
             VStack(alignment: .leading, spacing: 2) {
                 Text("PREXUS")
-                    .font(.largeTitle.weight(.semibold))
-                    .tracking(-0.8)
+                    .font(.title2.weight(.semibold))
+                    .tracking(-0.4)
 
                 Text("Local-first runtime")
                     .font(.caption)
@@ -151,21 +150,18 @@ struct ChatView: View {
 
             Button(action: onOpenSettings) {
                 Image(systemName: "gearshape")
-                    .font(.title3.weight(.medium))
-                    .foregroundStyle(.blue)
-                    .frame(width: 40, height: 40)
-                    .background(
-                        Circle()
-                            .fill(.thinMaterial)
-                    )
+                    .font(.body.weight(.semibold))
+                    .foregroundStyle(.primary)
+                    .frame(width: 36, height: 36)
+                    .prexusControlGlass(shape: .capsule, fallbackMaterial: .ultraThinMaterial)
             }
             .buttonStyle(.plain)
             .accessibilityLabel("Open Settings")
             .accessibilityIdentifier(PREXUSAccessibilityID.Chat.openSettings)
         }
-        .padding(.horizontal)
-        .padding(.top, 12)
-        .padding(.bottom, 8)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 10)
+        .prexusControlGlass(shape: .roundedRect(cornerRadius: 0), fallbackMaterial: .bar)
     }
 
     @ViewBuilder
@@ -193,53 +189,63 @@ struct ChatView: View {
 
     @ViewBuilder
     private func turnStateBanner(_ summary: String) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack(spacing: 8) {
-                ProgressView()
-                    .controlSize(.small)
-                    .tint(.blue)
+        PREXUSRuntimeStrip {
+            ViewThatFits(in: .horizontal) {
+                HStack(spacing: 8) {
+                    ProgressView()
+                        .controlSize(.small)
+                        .tint(.blue)
 
-                PREXUSStatusChip("Turn In Progress", tint: .blue)
-                PREXUSStatusChip(viewModel.displayedSensitivity.compactDisplayLabel, tint: .secondary)
+                    PREXUSStatusChip("In Progress", tint: .blue, appearance: .controlSurface)
+                    PREXUSStatusChip(viewModel.displayedSensitivity.compactDisplayLabel, tint: .secondary, appearance: .controlSurface)
+
+                    Text(summary)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                }
+
+                VStack(alignment: .leading, spacing: 6) {
+                    HStack(spacing: 8) {
+                        ProgressView()
+                            .controlSize(.small)
+                            .tint(.blue)
+
+                        PREXUSStatusChip("In Progress", tint: .blue, appearance: .controlSurface)
+                        PREXUSStatusChip(viewModel.displayedSensitivity.compactDisplayLabel, tint: .secondary, appearance: .controlSurface)
+                    }
+
+                    Text(summary)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                }
             }
-
-            Text(summary)
-                .font(.footnote)
-                .foregroundStyle(.primary)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal)
-        .padding(.vertical, 12)
-        .background(.bar)
     }
 
     @ViewBuilder
     private func runtimeStatusBanner(_ execution: RuntimeExecutionMetadata) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("Runtime Status")
-                .font(.caption)
-                .foregroundStyle(.secondary)
+        PREXUSRuntimeStrip {
+            VStack(alignment: .leading, spacing: 8) {
+                runtimeBadgeRow(for: execution)
 
-            runtimeBadgeRow(for: execution)
-
-            if let detail = runtimeDetailSummary(for: execution) {
-                Text(detail)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .textSelection(.enabled)
+                if let detail = runtimeDetailSummary(for: execution) {
+                    Text(detail)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                        .textSelection(.enabled)
+                }
             }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal)
-        .padding(.vertical, 12)
-        .background(.bar)
     }
 
     @ViewBuilder
     private func previewRouteBanner(_ route: RouteDecision) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(viewModel.routeBannerTitle)
-                .font(.caption)
+                .font(.caption.weight(.semibold))
                 .foregroundStyle(.secondary)
 
             routeBadgeRow(for: route)
@@ -251,14 +257,7 @@ struct ChatView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(12)
-        .background(
-            RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .fill(.thinMaterial)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .strokeBorder(.quaternary.opacity(0.7), lineWidth: 1)
-        )
+        .prexusControlGlass(shape: .roundedRect(cornerRadius: 16), fallbackMaterial: .ultraThinMaterial)
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier(PREXUSAccessibilityID.Chat.routePreview)
     }
@@ -306,16 +305,16 @@ struct ChatView: View {
         switch role {
         case .system:
             RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .fill(.thinMaterial)
+                .fill(Color(uiColor: .tertiarySystemGroupedBackground))
         case .assistant:
             RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .fill(.regularMaterial)
+                .fill(Color(uiColor: .secondarySystemGroupedBackground))
         case .user:
             RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .fill(Color.primary.opacity(0.08))
+                .fill(Color(uiColor: .systemBackground))
                 .overlay(
                     RoundedRectangle(cornerRadius: 18, style: .continuous)
-                        .strokeBorder(.quaternary, lineWidth: 1)
+                        .strokeBorder(.quaternary.opacity(0.8), lineWidth: 0.5)
                 )
         }
     }
@@ -395,27 +394,37 @@ struct ChatView: View {
     private func runtimeBadgeRow(for execution: RuntimeExecutionMetadata) -> some View {
         ViewThatFits(in: .horizontal) {
             HStack(spacing: 8) {
-                PREXUSStatusChip(executionModeLabel(for: execution.mode), systemImage: iconName(for: execution.mode), tint: accentColor(for: execution.mode))
+                PREXUSStatusChip(
+                    executionModeLabel(for: execution.mode),
+                    systemImage: iconName(for: execution.mode),
+                    tint: accentColor(for: execution.mode),
+                    appearance: .controlSurface
+                )
 
                 if let provider = execution.provider?.rawValue {
-                    PREXUSStatusChip(provider, tint: .secondary)
+                    PREXUSStatusChip(provider, tint: .secondary, appearance: .controlSurface)
                 }
 
                 if let model = execution.model, !model.isEmpty {
-                    PREXUSStatusChip(model, tint: .secondary)
+                    PREXUSStatusChip(model, tint: .secondary, appearance: .controlSurface)
                 }
             }
 
             VStack(alignment: .leading, spacing: 6) {
-                PREXUSStatusChip(executionModeLabel(for: execution.mode), systemImage: iconName(for: execution.mode), tint: accentColor(for: execution.mode))
+                PREXUSStatusChip(
+                    executionModeLabel(for: execution.mode),
+                    systemImage: iconName(for: execution.mode),
+                    tint: accentColor(for: execution.mode),
+                    appearance: .controlSurface
+                )
 
                 HStack(spacing: 8) {
                     if let provider = execution.provider?.rawValue {
-                        PREXUSStatusChip(provider, tint: .secondary)
+                        PREXUSStatusChip(provider, tint: .secondary, appearance: .controlSurface)
                     }
 
                     if let model = execution.model, !model.isEmpty {
-                        PREXUSStatusChip(model, tint: .secondary)
+                        PREXUSStatusChip(model, tint: .secondary, appearance: .controlSurface)
                     }
                 }
             }
@@ -425,26 +434,44 @@ struct ChatView: View {
     private func routeBadgeRow(for route: RouteDecision) -> some View {
         ViewThatFits(in: .horizontal) {
             HStack(spacing: 8) {
-                PREXUSStatusChip(route.targetLabel, systemImage: route.target == .local ? "arrow.triangle.branch" : "arrow.up.right.square", tint: route.target == .local ? .green : .blue)
-                PREXUSStatusChip(route.tierLabel, tint: .secondary)
-                PREXUSStatusChip(viewModel.displayedSensitivity.compactDisplayLabel, tint: .secondary)
+                PREXUSStatusChip(
+                    route.targetLabel,
+                    systemImage: route.target == .local ? "arrow.triangle.branch" : "arrow.up.right.square",
+                    tint: route.target == .local ? .green : .blue,
+                    appearance: .controlSurface
+                )
+                PREXUSStatusChip(route.tierLabel, tint: .secondary, appearance: .controlSurface)
+                PREXUSStatusChip(viewModel.displayedSensitivity.compactDisplayLabel, tint: .secondary, appearance: .controlSurface)
 
                 if let primaryReason = RouteDecision.primaryReasonCode(from: route.reasonCodes) {
-                    PREXUSStatusChip(RouteDecision.displayLabel(forReasonCode: primaryReason), tint: .secondary)
+                    PREXUSStatusChip(
+                        RouteDecision.displayLabel(forReasonCode: primaryReason),
+                        tint: .secondary,
+                        appearance: .controlSurface
+                    )
                 }
             }
 
             VStack(alignment: .leading, spacing: 6) {
                 HStack(spacing: 8) {
-                    PREXUSStatusChip(route.targetLabel, systemImage: route.target == .local ? "arrow.triangle.branch" : "arrow.up.right.square", tint: route.target == .local ? .green : .blue)
-                    PREXUSStatusChip(route.tierLabel, tint: .secondary)
+                    PREXUSStatusChip(
+                        route.targetLabel,
+                        systemImage: route.target == .local ? "arrow.triangle.branch" : "arrow.up.right.square",
+                        tint: route.target == .local ? .green : .blue,
+                        appearance: .controlSurface
+                    )
+                    PREXUSStatusChip(route.tierLabel, tint: .secondary, appearance: .controlSurface)
                 }
 
                 HStack(spacing: 8) {
-                    PREXUSStatusChip(viewModel.displayedSensitivity.compactDisplayLabel, tint: .secondary)
+                    PREXUSStatusChip(viewModel.displayedSensitivity.compactDisplayLabel, tint: .secondary, appearance: .controlSurface)
 
                     if let primaryReason = RouteDecision.primaryReasonCode(from: route.reasonCodes) {
-                        PREXUSStatusChip(RouteDecision.displayLabel(forReasonCode: primaryReason), tint: .secondary)
+                        PREXUSStatusChip(
+                            RouteDecision.displayLabel(forReasonCode: primaryReason),
+                            tint: .secondary,
+                            appearance: .controlSurface
+                        )
                     }
                 }
             }

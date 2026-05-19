@@ -7,300 +7,468 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0952454B3B30E6975C29C9E3 /* RuntimeContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF842761CA8464F0D11FE89F /* RuntimeContainer.swift */; };
-		18B98BFD3BA7F3899B9C9D36 /* MemoryRetrieval.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2882F1289D1758CF43CD47 /* MemoryRetrieval.swift */; };
-		18C34CFE0128C9FC570AC783 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F5DDD5048C15A08D809D27 /* ChatView.swift */; };
-		1D40728D195A04B9B5651A8E /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9870E36A6B4DA14787677FF /* ChatMessage.swift */; };
-		352E29860ECC74D5DC35A977 /* IntentClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1873EBC39C1C1E330DCAA0 /* IntentClassifier.swift */; };
-		35913066032D7817CDDDF05D /* RankingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF999D9D88761DBDC0A759B0 /* RankingEngine.swift */; };
-		38F4F39A6B5AABF7FB42C586 /* RouteDecision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561D62B5B9F54D97F368E004 /* RouteDecision.swift */; };
-		3927346D34004A0BC4E30D1B /* KeychainAPIKeyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A3F5EB24C361223CC3FAE4 /* KeychainAPIKeyStore.swift */; };
-		3B129DC980B953448F549DF0 /* EmbeddingProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089194636A48F77419C52C4B /* EmbeddingProvider.swift */; };
-		3B9FD332DC24036B4CFEC26D /* OCRProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5C6FBB0A9C800980C4461 /* OCRProcessor.swift */; };
-		3D8B9074B56213DDD27C04C2 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAA780A2D8817C6C81E03CD /* ChatViewModel.swift */; };
-		45D926E613C526F03EA1056B /* RuntimeMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA7F6F2A4CCB983600A5681 /* RuntimeMessage.swift */; };
-		4809D4A1485B8989629D4C34 /* ChatRuntimeTranscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5ABD4718AC98788017AFFF /* ChatRuntimeTranscript.swift */; };
-		48DC40C08DDC980125A6C312 /* RoutingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA35A5A935D80ACB550986F8 /* RoutingEngine.swift */; };
-		4AFC4124111E0FC7287E3017 /* CloudModelClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B16D151DD76277231BFCC26 /* CloudModelClient.swift */; };
-		4D27A4960556CCF6B5132E04 /* ContextCompressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F767178E9CC22C0098D96DBB /* ContextCompressor.swift */; };
-		502AEE86DCD3BA3C201EBD7A /* PersistentMemoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505D36C3DEF4800EFE787CD3 /* PersistentMemoryStore.swift */; };
-		5051A42D98C3D1DE1EC19757 /* DocumentIndexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78A06143C911EB37786E1CA /* DocumentIndexer.swift */; };
-		5595C4EF99E065D5642B1179 /* EpisodicMemoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2268AAA5E4EA5EE373C015 /* EpisodicMemoryStore.swift */; };
-		5BF423D7510F5F6F5F9ABDDB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1E35F6F900675B3C22FB54 /* Foundation.framework */; };
-		616CA7EDF6726E8C5CAB3758 /* PREXUSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9BDC698389BF89D5D6FD76 /* PREXUSTests.swift */; };
-		6DF088236E76E18C1F97D6EA /* PromptTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092970261CE635F3FB9EB4D1 /* PromptTemplate.swift */; };
-		72A9D5ED97E2DE59ED84AB70 /* ProviderAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F87985B981F69EFC822A66 /* ProviderAdapter.swift */; };
-		736A8FAD6109321B820AA9A6 /* APIKeyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8C7EA91F7C7150A5B56CAB /* APIKeyStore.swift */; };
-		7CFE8E89AAF19732DF9E714D /* PREXUSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8BB28A418316C5E4EBD6B3 /* PREXUSApp.swift */; };
-		7D71A74C55B7E3323C26002D /* VisionAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505513460F028E54EA0BF20C /* VisionAnalyzer.swift */; };
-		85ECAE2BC2A8CBA7D90317E1 /* RetrievalEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3880BCD57190653DB145389E /* RetrievalEngine.swift */; };
-		912762B1B297260B3C492FAC /* ChatMessage+Runtime.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B6008B267D6BE75F53731A /* ChatMessage+Runtime.swift */; };
-		9B54F30434F04A5F5BD221F1 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0554601FF27F28BD34B0C3 /* RootView.swift */; };
-		9F92DB61A3C679D621C46BB9 /* AppSettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0756B7A33C1E15029E0F3 /* AppSettingsStore.swift */; };
-		A2A1825FF606C23A29B0C7DA /* LocalModelClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B116D626CE17CFD7095616B /* LocalModelClient.swift */; };
-		AE605ED23AF96791FC13F982 /* RuntimeTurnExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4185F5346F24935CA00804 /* RuntimeTurnExecutor.swift */; };
-		B2803CAF7D003BFF0E9ACC8F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1E35F6F900675B3C22FB54 /* Foundation.framework */; };
-		B4DD9FD536CF9BAEB35CD7B8 /* MemoryLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B396644CF79B80B4CD026A /* MemoryLibraryView.swift */; };
-		C309E116673CA5AEC56DC2B6 /* RuntimeDiagnosticsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A0673232685336457E8E78 /* RuntimeDiagnosticsStore.swift */; };
-		C42287319D867DBF5A16C643 /* PREXUSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440B9550FA4061532C17674 /* PREXUSUITests.swift */; };
-		D0F661A31C325250E8EB2EB7 /* AudioInputProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119E7CFA322A528ADF22BB24 /* AudioInputProcessor.swift */; };
-		D4EE1B43E61E7BE62EFE21A3 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF485CC4CA51C797E7D0BA7 /* AppEnvironment.swift */; };
-		D67B5FEE00094EE7DEFE2384 /* RuntimeDiagnosticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B062231A9EE93AE60F1B7460 /* RuntimeDiagnosticsView.swift */; };
-		D709F28D19D6F25230BF5273 /* EscalationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304E28CD1DA60987C1F793B /* EscalationCoordinator.swift */; };
-		D77035CC9DA02F4479FD2C06 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAD7AB35CA37AA80761C55 /* AppConfig.swift */; };
-		D8D4CA5EC90F6AC52432B6C8 /* HTTPTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D248918C46C6117248FD9DF /* HTTPTransport.swift */; };
-		DD359B231ADDEAC5B9E97143 /* MemoryLibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7A5468CB4EFD29A66C554F /* MemoryLibraryViewModel.swift */; };
-		E27374C39B539F01B7C31AB3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A1AB8777E0CD24D7A88368 /* SettingsView.swift */; };
-		F746854A802001739872DBB4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1E35F6F900675B3C22FB54 /* Foundation.framework */; };
-		FC87D2A84A27275530030C67 /* SensorSignalProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFB1F90457C3153A5632786 /* SensorSignalProvider.swift */; };
-		FDF3F25A95A26A8312C2D777 /* ExecutionPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03448F4B6B5117E17C0AD46A /* ExecutionPolicy.swift */; };
+		038AE948B7DE4C68CBA63A30 /* RuntimeDiagnosticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C75754A504F9CE21ED187C /* RuntimeDiagnosticsView.swift */; };
+		0801DEC17B2D45A3FD095DFC /* EmbeddingProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0071F029008C8AFD79ACC13 /* EmbeddingProvider.swift */; };
+		09A28666438A717F3620769E /* AppSettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13215160761C9F07EAFD309 /* AppSettingsStore.swift */; };
+		0CFDAA0DD9F4839D1B62E90A /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CB15D7DDB884B1F9997A2E /* ChatMessage.swift */; };
+		0F02DA3B41B1C5B25B2B803A /* RuntimeTurnExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19B86E536088B555F1BEB9B /* RuntimeTurnExecutor.swift */; };
+		1320AA284BE5F36AEA46B07C /* RuntimeDiagnosticsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41AD95F9FE57F5510357934 /* RuntimeDiagnosticsStore.swift */; };
+		1C9919455C0EAC5ADA82B225 /* PREXUSLiquidGlass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2536071F00B9027FD2D8FED8 /* PREXUSLiquidGlass.swift */; };
+		1D619FE03C863303C5037B7E /* PersistentMemoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525721A7BE0B27203B6BFFE3 /* PersistentMemoryStore.swift */; };
+		2081110E2FB1F9246AD4C1BE /* MemoryRetrieval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4722DADB5DFF1F441F8239 /* MemoryRetrieval.swift */; };
+		293EE02AC03AC09CAE8EA905 /* ProviderAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D929AB7FC26D2E4EB804665 /* ProviderAdapter.swift */; };
+		2CEA14CA7B552BC47A8D8F95 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA62C6FECE0FD05500208641 /* AppEnvironment.swift */; };
+		3152CCDEA25E0C9C2A33BD23 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0040BE78C73675368FCACFD /* SettingsView.swift */; };
+		3513875F608D8D1A583E3C08 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD172D80CC5A9E5DCD543B91 /* RootView.swift */; };
+		3BE9E3E64F6FD80C1E24ADFE /* DocumentIndexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3571D24F4F6EE3E4FE0CB600 /* DocumentIndexer.swift */; };
+		4018F11D1D73D0CB84C47798 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF006A11D57007AE7B5CC2D /* Foundation.framework */; };
+		46B549C4953060579668D6B2 /* ChatRuntimeTranscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = C866A832D50A5E6CDB532F71 /* ChatRuntimeTranscript.swift */; };
+		479C22947BEF80539BA66037 /* RetrievalEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C62D93AE39CCC8F961BBBF /* RetrievalEngine.swift */; };
+		483A1A4C2D06DF317CB89B71 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF006A11D57007AE7B5CC2D /* Foundation.framework */; };
+		57B462707F586A9FB3388C15 /* ChatMessage+Runtime.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FD5B94F7DEB6BBE26A8DC0 /* ChatMessage+Runtime.swift */; };
+		5CFA871B41C69415DC03E912 /* PREXUSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A328852402E0B2CC8CFA6E /* PREXUSApp.swift */; };
+		5E152C373AA1E9E51C31D520 /* RankingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E852DABF309406198BB3C /* RankingEngine.swift */; };
+		63982F94ADCD0700F0B5EE5D /* APIKeyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2161E950957B585DAB94FFE4 /* APIKeyStore.swift */; };
+		67B3EA03D7836EE0AA471511 /* EscalationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B41804626FD9FFBBBCAFCD /* EscalationCoordinator.swift */; };
+		6FCF9D5BAF92E12A41877B72 /* SensorSignalProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7023C12E898AC44BF75A38B2 /* SensorSignalProvider.swift */; };
+		70BC14B955331164C798FF16 /* RoutingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F977BCAACF48D89B3AC52A67 /* RoutingEngine.swift */; };
+		734F4889BF43913F101EC3BC /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C7697BB4C69110D51E81FB /* ChatView.swift */; };
+		78DBA061ED03C46C1469777A /* HTTPTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10600AED09A2CC8179817E04 /* HTTPTransport.swift */; };
+		83E2C1BE1B53A2955B2E6BB5 /* IntentClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B67C24D24E3855877493AB /* IntentClassifier.swift */; };
+		88DB866833185E0A557FB2F9 /* VisionAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA39537E74788D4DCA8EBA33 /* VisionAnalyzer.swift */; };
+		9D13C6DFBA58258E4FC4AFF5 /* EpisodicMemoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E298A1121EC243D05E95F2 /* EpisodicMemoryStore.swift */; };
+		AE77538E065CA2134D9CF282 /* CloudModelClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1735E4DC7EF2B260607A8BD /* CloudModelClient.swift */; };
+		BB1EB87EAB9DFAE262686EAC /* AudioInputProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36B1AC20C245A751AE9B74A /* AudioInputProcessor.swift */; };
+		BBD4E2F848129475CF74A7FF /* MemoryLibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB7E16BCC3D56BEEF294437 /* MemoryLibraryViewModel.swift */; };
+		BC2115C79967AE31975784C6 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE5CD430949E72A2A445CAF /* AppConfig.swift */; };
+		C3E904829B2CD548587F7683 /* MemoryLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660E19F880094AFC78FB6B3B /* MemoryLibraryView.swift */; };
+		CB2155E80E8384F1F73A25B7 /* PREXUSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4A1D0E376697EEAC564396 /* PREXUSTests.swift */; };
+		D28AEBC99AC17E845D930BF4 /* KeychainAPIKeyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF780578929E226FA6DDA6D /* KeychainAPIKeyStore.swift */; };
+		D570E4BD96D585B3230C20C6 /* ContextCompressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A788BBF956FA9A569CA10A66 /* ContextCompressor.swift */; };
+		D9E7D364B6A7AF9335DADDEF /* PREXUSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E3B027C4B30FDA117898B6 /* PREXUSUITests.swift */; };
+		DF7D3AF29C63A3C6A7EC5CB3 /* RuntimeContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D200E8E2E2692A978B5891 /* RuntimeContainer.swift */; };
+		E3CF9490862BA0FC95443432 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF006A11D57007AE7B5CC2D /* Foundation.framework */; };
+		E6221BE857FE5C598DDB6F0C /* LocalModelClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55B78FBD2B813E0E9B6A397 /* LocalModelClient.swift */; };
+		EDC859B237A566126C5E3F32 /* PromptTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846BB7570A4E9834427F0396 /* PromptTemplate.swift */; };
+		F32798952E0A292F71A65AD6 /* OCRProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619A14AB2AEC9FAF17DEB1F2 /* OCRProcessor.swift */; };
+		F58D6B4017CE12E089538632 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78D43BAC26D0D3E5931CCA /* ChatViewModel.swift */; };
+		F631BDFCA6CA31AE3B625D2C /* RouteDecision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0912E6209C65687EC6E1BAC0 /* RouteDecision.swift */; };
+		F9FBBE552C37CD92D1B1E203 /* RuntimeMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B8BF4794CD9ED054715E8D /* RuntimeMessage.swift */; };
+		FD8B413FD3BBBF5EF67EA826 /* ExecutionPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF82DFFAC0EA0770058B6D6 /* ExecutionPolicy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		84DAA8AC4E6FD61D2FBD9B0A /* PBXContainerItemProxy */ = {
+		086780581D51F8FC106BBB93 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 0ABA5748A0553853730E2FEF /* Project object */;
+			containerPortal = 2ECD1E9E05272AB1AD4EB55E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 9324221C10D0CD2C99F41B4D;
+			remoteGlobalIDString = A2FE42A38ACC3F39957E7284;
 			remoteInfo = PREXUS;
 		};
-		C46842A538BDFA6CF8207CBF /* PBXContainerItemProxy */ = {
+		816A5C79E73248305338FFB5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 0ABA5748A0553853730E2FEF /* Project object */;
+			containerPortal = 2ECD1E9E05272AB1AD4EB55E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 9324221C10D0CD2C99F41B4D;
+			remoteGlobalIDString = A2FE42A38ACC3F39957E7284;
 			remoteInfo = PREXUS;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		03448F4B6B5117E17C0AD46A /* ExecutionPolicy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ExecutionPolicy.swift; sourceTree = "<group>"; };
-		089194636A48F77419C52C4B /* EmbeddingProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EmbeddingProvider.swift; sourceTree = "<group>"; };
-		092970261CE635F3FB9EB4D1 /* PromptTemplate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PromptTemplate.swift; sourceTree = "<group>"; };
-		0A0554601FF27F28BD34B0C3 /* RootView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
-		0AFB1F90457C3153A5632786 /* SensorSignalProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SensorSignalProvider.swift; sourceTree = "<group>"; };
-		0EF485CC4CA51C797E7D0BA7 /* AppEnvironment.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
-		119E7CFA322A528ADF22BB24 /* AudioInputProcessor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AudioInputProcessor.swift; sourceTree = "<group>"; };
-		19C0756B7A33C1E15029E0F3 /* AppSettingsStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppSettingsStore.swift; sourceTree = "<group>"; };
-		29A3F5EB24C361223CC3FAE4 /* KeychainAPIKeyStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = KeychainAPIKeyStore.swift; sourceTree = "<group>"; };
-		2B16D151DD76277231BFCC26 /* CloudModelClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CloudModelClient.swift; sourceTree = "<group>"; };
-		2B8C7EA91F7C7150A5B56CAB /* APIKeyStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = APIKeyStore.swift; sourceTree = "<group>"; };
-		2D9BDC698389BF89D5D6FD76 /* PREXUSTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PREXUSTests.swift; sourceTree = "<group>"; };
-		3304E28CD1DA60987C1F793B /* EscalationCoordinator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EscalationCoordinator.swift; sourceTree = "<group>"; };
-		3880BCD57190653DB145389E /* RetrievalEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RetrievalEngine.swift; sourceTree = "<group>"; };
-		3D248918C46C6117248FD9DF /* HTTPTransport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HTTPTransport.swift; sourceTree = "<group>"; };
-		436D3B9E8FA4D01D7F1B4D95 /* PREXUSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = PREXUSTests.xctest; path = PREXUSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		462161BC09306F909652B91B /* PREXUS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = PREXUS.app; path = PREXUS.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D2268AAA5E4EA5EE373C015 /* EpisodicMemoryStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EpisodicMemoryStore.swift; sourceTree = "<group>"; };
-		505513460F028E54EA0BF20C /* VisionAnalyzer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VisionAnalyzer.swift; sourceTree = "<group>"; };
-		505D36C3DEF4800EFE787CD3 /* PersistentMemoryStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PersistentMemoryStore.swift; sourceTree = "<group>"; };
-		561D62B5B9F54D97F368E004 /* RouteDecision.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RouteDecision.swift; sourceTree = "<group>"; };
-		65F5DDD5048C15A08D809D27 /* ChatView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
-		6D4185F5346F24935CA00804 /* RuntimeTurnExecutor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RuntimeTurnExecutor.swift; sourceTree = "<group>"; };
-		71A5BFA287A2AD901CB5D6F9 /* PREXUSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = PREXUSUITests.xctest; path = PREXUSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		72A1AB8777E0CD24D7A88368 /* SettingsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		7B116D626CE17CFD7095616B /* LocalModelClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LocalModelClient.swift; sourceTree = "<group>"; };
-		7B8BB28A418316C5E4EBD6B3 /* PREXUSApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PREXUSApp.swift; sourceTree = "<group>"; };
-		8440B9550FA4061532C17674 /* PREXUSUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PREXUSUITests.swift; sourceTree = "<group>"; };
-		8C7A5468CB4EFD29A66C554F /* MemoryLibraryViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MemoryLibraryViewModel.swift; sourceTree = "<group>"; };
-		9A1E35F6F900675B3C22FB54 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		ADD5C6FBB0A9C800980C4461 /* OCRProcessor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OCRProcessor.swift; sourceTree = "<group>"; };
-		AF999D9D88761DBDC0A759B0 /* RankingEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RankingEngine.swift; sourceTree = "<group>"; };
-		B062231A9EE93AE60F1B7460 /* RuntimeDiagnosticsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RuntimeDiagnosticsView.swift; sourceTree = "<group>"; };
-		BA35A5A935D80ACB550986F8 /* RoutingEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RoutingEngine.swift; sourceTree = "<group>"; };
-		C9F87985B981F69EFC822A66 /* ProviderAdapter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ProviderAdapter.swift; sourceTree = "<group>"; };
-		CA1873EBC39C1C1E330DCAA0 /* IntentClassifier.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntentClassifier.swift; sourceTree = "<group>"; };
-		CC5ABD4718AC98788017AFFF /* ChatRuntimeTranscript.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatRuntimeTranscript.swift; sourceTree = "<group>"; };
-		D4B396644CF79B80B4CD026A /* MemoryLibraryView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MemoryLibraryView.swift; sourceTree = "<group>"; };
-		E9870E36A6B4DA14787677FF /* ChatMessage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
-		EC2882F1289D1758CF43CD47 /* MemoryRetrieval.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MemoryRetrieval.swift; sourceTree = "<group>"; };
-		EEAA780A2D8817C6C81E03CD /* ChatViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
-		EF842761CA8464F0D11FE89F /* RuntimeContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RuntimeContainer.swift; sourceTree = "<group>"; };
-		EFA7F6F2A4CCB983600A5681 /* RuntimeMessage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RuntimeMessage.swift; sourceTree = "<group>"; };
-		F767178E9CC22C0098D96DBB /* ContextCompressor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ContextCompressor.swift; sourceTree = "<group>"; };
-		F78A06143C911EB37786E1CA /* DocumentIndexer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DocumentIndexer.swift; sourceTree = "<group>"; };
-		F7A0673232685336457E8E78 /* RuntimeDiagnosticsStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RuntimeDiagnosticsStore.swift; sourceTree = "<group>"; };
-		F9B6008B267D6BE75F53731A /* ChatMessage+Runtime.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "ChatMessage+Runtime.swift"; sourceTree = "<group>"; };
-		FEDAD7AB35CA37AA80761C55 /* AppConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		040E852DABF309406198BB3C /* RankingEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RankingEngine.swift; sourceTree = "<group>"; };
+		08B8BF4794CD9ED054715E8D /* RuntimeMessage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RuntimeMessage.swift; sourceTree = "<group>"; };
+		0912E6209C65687EC6E1BAC0 /* RouteDecision.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RouteDecision.swift; sourceTree = "<group>"; };
+		0FE5CD430949E72A2A445CAF /* AppConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		10600AED09A2CC8179817E04 /* HTTPTransport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HTTPTransport.swift; sourceTree = "<group>"; };
+		1A4A1D0E376697EEAC564396 /* PREXUSTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PREXUSTests.swift; sourceTree = "<group>"; };
+		1EF006A11D57007AE7B5CC2D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		2161E950957B585DAB94FFE4 /* APIKeyStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = APIKeyStore.swift; sourceTree = "<group>"; };
+		2536071F00B9027FD2D8FED8 /* PREXUSLiquidGlass.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PREXUSLiquidGlass.swift; sourceTree = "<group>"; };
+		27B41804626FD9FFBBBCAFCD /* EscalationCoordinator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EscalationCoordinator.swift; sourceTree = "<group>"; };
+		3571D24F4F6EE3E4FE0CB600 /* DocumentIndexer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DocumentIndexer.swift; sourceTree = "<group>"; };
+		4F236886868EAD6750E952BE /* PREXUSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = PREXUSUITests.xctest; path = PREXUSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		51A328852402E0B2CC8CFA6E /* PREXUSApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PREXUSApp.swift; sourceTree = "<group>"; };
+		525721A7BE0B27203B6BFFE3 /* PersistentMemoryStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PersistentMemoryStore.swift; sourceTree = "<group>"; };
+		53CB15D7DDB884B1F9997A2E /* ChatMessage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		55C62D93AE39CCC8F961BBBF /* RetrievalEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RetrievalEngine.swift; sourceTree = "<group>"; };
+		619A14AB2AEC9FAF17DEB1F2 /* OCRProcessor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OCRProcessor.swift; sourceTree = "<group>"; };
+		660E19F880094AFC78FB6B3B /* MemoryLibraryView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MemoryLibraryView.swift; sourceTree = "<group>"; };
+		6C4722DADB5DFF1F441F8239 /* MemoryRetrieval.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MemoryRetrieval.swift; sourceTree = "<group>"; };
+		6D929AB7FC26D2E4EB804665 /* ProviderAdapter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ProviderAdapter.swift; sourceTree = "<group>"; };
+		7023C12E898AC44BF75A38B2 /* SensorSignalProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SensorSignalProvider.swift; sourceTree = "<group>"; };
+		75E3B027C4B30FDA117898B6 /* PREXUSUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PREXUSUITests.swift; sourceTree = "<group>"; };
+		77E298A1121EC243D05E95F2 /* EpisodicMemoryStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EpisodicMemoryStore.swift; sourceTree = "<group>"; };
+		7EF82DFFAC0EA0770058B6D6 /* ExecutionPolicy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ExecutionPolicy.swift; sourceTree = "<group>"; };
+		813803963461497BBE0FBD1C /* PREXUSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = PREXUSTests.xctest; path = PREXUSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		846BB7570A4E9834427F0396 /* PromptTemplate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PromptTemplate.swift; sourceTree = "<group>"; };
+		87D200E8E2E2692A978B5891 /* RuntimeContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RuntimeContainer.swift; sourceTree = "<group>"; };
+		8F5CD2093C819808832D74DD /* PREXUS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = PREXUS.app; path = PREXUS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A19B86E536088B555F1BEB9B /* RuntimeTurnExecutor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RuntimeTurnExecutor.swift; sourceTree = "<group>"; };
+		A41AD95F9FE57F5510357934 /* RuntimeDiagnosticsStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RuntimeDiagnosticsStore.swift; sourceTree = "<group>"; };
+		A55B78FBD2B813E0E9B6A397 /* LocalModelClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LocalModelClient.swift; sourceTree = "<group>"; };
+		A788BBF956FA9A569CA10A66 /* ContextCompressor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ContextCompressor.swift; sourceTree = "<group>"; };
+		ACF780578929E226FA6DDA6D /* KeychainAPIKeyStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = KeychainAPIKeyStore.swift; sourceTree = "<group>"; };
+		B36B1AC20C245A751AE9B74A /* AudioInputProcessor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AudioInputProcessor.swift; sourceTree = "<group>"; };
+		C0040BE78C73675368FCACFD /* SettingsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		C6FD5B94F7DEB6BBE26A8DC0 /* ChatMessage+Runtime.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "ChatMessage+Runtime.swift"; sourceTree = "<group>"; };
+		C866A832D50A5E6CDB532F71 /* ChatRuntimeTranscript.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatRuntimeTranscript.swift; sourceTree = "<group>"; };
+		C8C75754A504F9CE21ED187C /* RuntimeDiagnosticsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RuntimeDiagnosticsView.swift; sourceTree = "<group>"; };
+		CA39537E74788D4DCA8EBA33 /* VisionAnalyzer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VisionAnalyzer.swift; sourceTree = "<group>"; };
+		D13215160761C9F07EAFD309 /* AppSettingsStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppSettingsStore.swift; sourceTree = "<group>"; };
+		D1735E4DC7EF2B260607A8BD /* CloudModelClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CloudModelClient.swift; sourceTree = "<group>"; };
+		D2C7697BB4C69110D51E81FB /* ChatView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		DD172D80CC5A9E5DCD543B91 /* RootView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		DD78D43BAC26D0D3E5931CCA /* ChatViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		F0071F029008C8AFD79ACC13 /* EmbeddingProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EmbeddingProvider.swift; sourceTree = "<group>"; };
+		F1B67C24D24E3855877493AB /* IntentClassifier.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntentClassifier.swift; sourceTree = "<group>"; };
+		F977BCAACF48D89B3AC52A67 /* RoutingEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RoutingEngine.swift; sourceTree = "<group>"; };
+		FA62C6FECE0FD05500208641 /* AppEnvironment.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
+		FCB7E16BCC3D56BEEF294437 /* MemoryLibraryViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MemoryLibraryViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3991AF471D332BC5D859C221 /* Frameworks */ = {
+		0008AE284AA23AFAD06E39CE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BF423D7510F5F6F5F9ABDDB /* Foundation.framework in Frameworks */,
+				4018F11D1D73D0CB84C47798 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5CCB5B86407C8E0F8103F1AC /* Frameworks */ = {
+		79BB027AA27DAC13F54AE930 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F746854A802001739872DBB4 /* Foundation.framework in Frameworks */,
+				483A1A4C2D06DF317CB89B71 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		721AB2723F72EFD262A37E2C /* Frameworks */ = {
+		F15765849E2754220EDA034B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2803CAF7D003BFF0E9ACC8F /* Foundation.framework in Frameworks */,
+				E3CF9490862BA0FC95443432 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		041266661FDB6F1BD78243C5 /* audio */ = {
+		02141779E7A7B6877C7A0FBA /* runtime */ = {
 			isa = PBXGroup;
 			children = (
-				119E7CFA322A528ADF22BB24 /* AudioInputProcessor.swift */,
+				6A4C37AD1120E33B85FD059B /* llm */,
+				63020B21CAE96685DDEA5751 /* memory */,
+				739578DF291B319ADDECE594 /* config */,
+				0722FD9DDC31AD2A3236271A /* rag */,
+				2ED33D9AA7CA235527C32B83 /* multimodal */,
+				5A69DA9598A4C5A157FFE137 /* orchestrator */,
 			);
-			name = audio;
-			path = audio;
+			name = runtime;
+			path = ../../runtime;
 			sourceTree = "<group>";
 		};
-		144D52ACC53DEFA32FBA2F80 /* vector_store */ = {
+		04B4335DDA483B41710AC433 /* embeddings */ = {
 			isa = PBXGroup;
 			children = (
-				EC2882F1289D1758CF43CD47 /* MemoryRetrieval.swift */,
+				F0071F029008C8AFD79ACC13 /* EmbeddingProvider.swift */,
 			);
-			name = vector_store;
-			path = vector_store;
+			name = embeddings;
+			path = embeddings;
 			sourceTree = "<group>";
 		};
-		145D94C8666E324565F2E6B8 /* router */ = {
+		05433EAB66556B245EA7523A /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				561D62B5B9F54D97F368E004 /* RouteDecision.swift */,
-				BA35A5A935D80ACB550986F8 /* RoutingEngine.swift */,
+				C0040BE78C73675368FCACFD /* SettingsView.swift */,
+				DD172D80CC5A9E5DCD543B91 /* RootView.swift */,
+				2536071F00B9027FD2D8FED8 /* PREXUSLiquidGlass.swift */,
 			);
-			name = router;
-			path = router;
+			name = UI;
+			path = UI;
 			sourceTree = "<group>";
 		};
-		19455085EA6A7C23DCE41401 /* adapters */ = {
+		0722FD9DDC31AD2A3236271A /* rag */ = {
 			isa = PBXGroup;
 			children = (
-				C9F87985B981F69EFC822A66 /* ProviderAdapter.swift */,
+				1DC274636B07948AFEFB2FE2 /* ranking */,
+				ED3B3D238941F8841666E8E9 /* retrieval */,
+				3A6052E84706F0A6722F5E7A /* indexing */,
 			);
-			name = adapters;
-			path = adapters;
+			name = rag;
+			path = rag;
 			sourceTree = "<group>";
 		};
-		1BE8E81ABDF32DD3C05782DB /* PREXUSUITests */ = {
+		1DC274636B07948AFEFB2FE2 /* ranking */ = {
 			isa = PBXGroup;
 			children = (
-				8440B9550FA4061532C17674 /* PREXUSUITests.swift */,
-			);
-			name = PREXUSUITests;
-			path = PREXUSUITests;
-			sourceTree = "<group>";
-		};
-		2337886A04DD4D196E210561 /* compression */ = {
-			isa = PBXGroup;
-			children = (
-				F767178E9CC22C0098D96DBB /* ContextCompressor.swift */,
-			);
-			name = compression;
-			path = compression;
-			sourceTree = "<group>";
-		};
-		23E3CE5C4A3EC0BF6D6C1522 /* Diagnostics */ = {
-			isa = PBXGroup;
-			children = (
-				F7A0673232685336457E8E78 /* RuntimeDiagnosticsStore.swift */,
-				B062231A9EE93AE60F1B7460 /* RuntimeDiagnosticsView.swift */,
-			);
-			name = Diagnostics;
-			path = Diagnostics;
-			sourceTree = "<group>";
-		};
-		3445B7FF76705F5C4B73518D /* Features */ = {
-			isa = PBXGroup;
-			children = (
-				3F550E86BC44F94126DB14D1 /* Memory */,
-				703BF9F755ACD6779FDD5654 /* Chat */,
-				23E3CE5C4A3EC0BF6D6C1522 /* Diagnostics */,
-			);
-			name = Features;
-			path = Features;
-			sourceTree = "<group>";
-		};
-		34DAF9ECAB14C9D7CE2E0A80 /* PREXUSTests */ = {
-			isa = PBXGroup;
-			children = (
-				2D9BDC698389BF89D5D6FD76 /* PREXUSTests.swift */,
-			);
-			name = PREXUSTests;
-			path = PREXUSTests;
-			sourceTree = "<group>";
-		};
-		3B2B535AA27B7BAD7D317019 /* llm */ = {
-			isa = PBXGroup;
-			children = (
-				F06181D8CC6F027C6C957D94 /* local */,
-				19455085EA6A7C23DCE41401 /* adapters */,
-				DE839107E0365BC0EEEF37FD /* cloud */,
-				FD8E2F0833BCC286390443A1 /* prompts */,
-			);
-			name = llm;
-			path = llm;
-			sourceTree = "<group>";
-		};
-		3F550E86BC44F94126DB14D1 /* Memory */ = {
-			isa = PBXGroup;
-			children = (
-				8C7A5468CB4EFD29A66C554F /* MemoryLibraryViewModel.swift */,
-				D4B396644CF79B80B4CD026A /* MemoryLibraryView.swift */,
-			);
-			name = Memory;
-			path = Memory;
-			sourceTree = "<group>";
-		};
-		4203E0B2B0430438F4707719 /* policies */ = {
-			isa = PBXGroup;
-			children = (
-				03448F4B6B5117E17C0AD46A /* ExecutionPolicy.swift */,
-			);
-			name = policies;
-			path = policies;
-			sourceTree = "<group>";
-		};
-		430A6E2FAB856756C00C9016 /* PREXUS */ = {
-			isa = PBXGroup;
-			children = (
-				A2B572C32E8F75749BD4351E /* UI */,
-				87EE52A8F03E7C6AF0E4C62C /* App */,
-				3445B7FF76705F5C4B73518D /* Features */,
-				751FEBCB7A72B9ED6E78D306 /* Models */,
-				889E027CDFC5222700A31827 /* Services */,
-				B2148EDE5A64ECD987FC2183 /* Resources */,
-			);
-			name = PREXUS;
-			path = PREXUS;
-			sourceTree = "<group>";
-		};
-		4A12FA4C9F209707164D8AF4 /* ocr */ = {
-			isa = PBXGroup;
-			children = (
-				ADD5C6FBB0A9C800980C4461 /* OCRProcessor.swift */,
-			);
-			name = ocr;
-			path = ocr;
-			sourceTree = "<group>";
-		};
-		4C35830F8EC2ED8258C0EDE2 /* ranking */ = {
-			isa = PBXGroup;
-			children = (
-				AF999D9D88761DBDC0A759B0 /* RankingEngine.swift */,
+				040E852DABF309406198BB3C /* RankingEngine.swift */,
 			);
 			name = ranking;
 			path = ranking;
 			sourceTree = "<group>";
 		};
-		4FB23DABADBB6B6C9B75718A /* shared */ = {
+		2B091F3271BCDF2C0F63395D /* episodic */ = {
+			isa = PBXGroup;
+			children = (
+				77E298A1121EC243D05E95F2 /* EpisodicMemoryStore.swift */,
+			);
+			name = episodic;
+			path = episodic;
+			sourceTree = "<group>";
+		};
+		2D49DFD390C0F965BD9875F5 /* compression */ = {
+			isa = PBXGroup;
+			children = (
+				A788BBF956FA9A569CA10A66 /* ContextCompressor.swift */,
+			);
+			name = compression;
+			path = compression;
+			sourceTree = "<group>";
+		};
+		2ED33D9AA7CA235527C32B83 /* multimodal */ = {
+			isa = PBXGroup;
+			children = (
+				5E355FC5DE5E1307BB9BE48D /* sensors */,
+				F677F71A9195D5A2469E6766 /* ocr */,
+				6A39DDEACB375DBCEF2A74E8 /* vision */,
+				B7DC3E2A7C5792B946437377 /* audio */,
+			);
+			name = multimodal;
+			path = multimodal;
+			sourceTree = "<group>";
+		};
+		31FD40C9E3CE6528EBB186D1 /* vector_store */ = {
+			isa = PBXGroup;
+			children = (
+				6C4722DADB5DFF1F441F8239 /* MemoryRetrieval.swift */,
+			);
+			name = vector_store;
+			path = vector_store;
+			sourceTree = "<group>";
+		};
+		37842FA2A3D7B97A3F4B0171 /* intent */ = {
+			isa = PBXGroup;
+			children = (
+				F1B67C24D24E3855877493AB /* IntentClassifier.swift */,
+			);
+			name = intent;
+			path = intent;
+			sourceTree = "<group>";
+		};
+		3A6052E84706F0A6722F5E7A /* indexing */ = {
+			isa = PBXGroup;
+			children = (
+				3571D24F4F6EE3E4FE0CB600 /* DocumentIndexer.swift */,
+			);
+			name = indexing;
+			path = indexing;
+			sourceTree = "<group>";
+		};
+		3C42778F8F257967F5382A5C /* policies */ = {
+			isa = PBXGroup;
+			children = (
+				7EF82DFFAC0EA0770058B6D6 /* ExecutionPolicy.swift */,
+			);
+			name = policies;
+			path = policies;
+			sourceTree = "<group>";
+		};
+		3ED9D348F4902FD018ADCB65 /* cloud */ = {
+			isa = PBXGroup;
+			children = (
+				10600AED09A2CC8179817E04 /* HTTPTransport.swift */,
+				2161E950957B585DAB94FFE4 /* APIKeyStore.swift */,
+				D1735E4DC7EF2B260607A8BD /* CloudModelClient.swift */,
+			);
+			name = cloud;
+			path = cloud;
+			sourceTree = "<group>";
+		};
+		44B44F5AD84A2573E7827933 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				51A328852402E0B2CC8CFA6E /* PREXUSApp.swift */,
+				FA62C6FECE0FD05500208641 /* AppEnvironment.swift */,
+			);
+			name = App;
+			path = App;
+			sourceTree = "<group>";
+		};
+		4C3A191DB0A670D6CCEAE8AE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				53CB15D7DDB884B1F9997A2E /* ChatMessage.swift */,
+				C6FD5B94F7DEB6BBE26A8DC0 /* ChatMessage+Runtime.swift */,
+			);
+			name = Models;
+			path = Models;
+			sourceTree = "<group>";
+		};
+		57A04355BBACCEB3C245D100 /* prompts */ = {
+			isa = PBXGroup;
+			children = (
+				846BB7570A4E9834427F0396 /* PromptTemplate.swift */,
+			);
+			name = prompts;
+			path = prompts;
+			sourceTree = "<group>";
+		};
+		598CFE7F601C815210CE4C76 /* router */ = {
+			isa = PBXGroup;
+			children = (
+				0912E6209C65687EC6E1BAC0 /* RouteDecision.swift */,
+				F977BCAACF48D89B3AC52A67 /* RoutingEngine.swift */,
+			);
+			name = router;
+			path = router;
+			sourceTree = "<group>";
+		};
+		5A69DA9598A4C5A157FFE137 /* orchestrator */ = {
+			isa = PBXGroup;
+			children = (
+				87D200E8E2E2692A978B5891 /* RuntimeContainer.swift */,
+				3C42778F8F257967F5382A5C /* policies */,
+				A19B86E536088B555F1BEB9B /* RuntimeTurnExecutor.swift */,
+				37842FA2A3D7B97A3F4B0171 /* intent */,
+				F03B3C2F66078A17A4788AAD /* escalation */,
+				08B8BF4794CD9ED054715E8D /* RuntimeMessage.swift */,
+				598CFE7F601C815210CE4C76 /* router */,
+			);
+			name = orchestrator;
+			path = orchestrator;
+			sourceTree = "<group>";
+		};
+		5E355FC5DE5E1307BB9BE48D /* sensors */ = {
+			isa = PBXGroup;
+			children = (
+				7023C12E898AC44BF75A38B2 /* SensorSignalProvider.swift */,
+			);
+			name = sensors;
+			path = sensors;
+			sourceTree = "<group>";
+		};
+		63020B21CAE96685DDEA5751 /* memory */ = {
+			isa = PBXGroup;
+			children = (
+				04B4335DDA483B41710AC433 /* embeddings */,
+				2B091F3271BCDF2C0F63395D /* episodic */,
+				31FD40C9E3CE6528EBB186D1 /* vector_store */,
+				2D49DFD390C0F965BD9875F5 /* compression */,
+			);
+			name = memory;
+			path = memory;
+			sourceTree = "<group>";
+		};
+		6A39DDEACB375DBCEF2A74E8 /* vision */ = {
+			isa = PBXGroup;
+			children = (
+				CA39537E74788D4DCA8EBA33 /* VisionAnalyzer.swift */,
+			);
+			name = vision;
+			path = vision;
+			sourceTree = "<group>";
+		};
+		6A4C37AD1120E33B85FD059B /* llm */ = {
+			isa = PBXGroup;
+			children = (
+				AC6EFD47B45452C91AE8564B /* local */,
+				8EA7255F7903125B9FB3ADF9 /* adapters */,
+				3ED9D348F4902FD018ADCB65 /* cloud */,
+				57A04355BBACCEB3C245D100 /* prompts */,
+			);
+			name = llm;
+			path = llm;
+			sourceTree = "<group>";
+		};
+		6D716562E0A77DC8DE751714 /* PREXUSTests */ = {
+			isa = PBXGroup;
+			children = (
+				1A4A1D0E376697EEAC564396 /* PREXUSTests.swift */,
+			);
+			name = PREXUSTests;
+			path = PREXUSTests;
+			sourceTree = "<group>";
+		};
+		72656956CD297092454E744A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8F5CD2093C819808832D74DD /* PREXUS.app */,
+				813803963461497BBE0FBD1C /* PREXUSTests.xctest */,
+				4F236886868EAD6750E952BE /* PREXUSUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7336358A749BB06DCB17C12B /* PREXUS */ = {
+			isa = PBXGroup;
+			children = (
+				05433EAB66556B245EA7523A /* UI */,
+				44B44F5AD84A2573E7827933 /* App */,
+				FE6F3927FCE47B6C2D1C6C00 /* Features */,
+				4C3A191DB0A670D6CCEAE8AE /* Models */,
+				9FFBE6D22321AEDEAD0A436E /* Services */,
+				D1894D5917AE357536AF426F /* Resources */,
+			);
+			name = PREXUS;
+			path = PREXUS;
+			sourceTree = "<group>";
+		};
+		739578DF291B319ADDECE594 /* config */ = {
+			isa = PBXGroup;
+			children = (
+				0FE5CD430949E72A2A445CAF /* AppConfig.swift */,
+			);
+			name = config;
+			path = config;
+			sourceTree = "<group>";
+		};
+		8DD81464910034ACE7AB2DD0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B28E7D21E116EB70A0AEAE95 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8EA7255F7903125B9FB3ADF9 /* adapters */ = {
+			isa = PBXGroup;
+			children = (
+				6D929AB7FC26D2E4EB804665 /* ProviderAdapter.swift */,
+			);
+			name = adapters;
+			path = adapters;
+			sourceTree = "<group>";
+		};
+		9FFBE6D22321AEDEAD0A436E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D13215160761C9F07EAFD309 /* AppSettingsStore.swift */,
+				525721A7BE0B27203B6BFFE3 /* PersistentMemoryStore.swift */,
+				ACF780578929E226FA6DDA6D /* KeychainAPIKeyStore.swift */,
+			);
+			name = Services;
+			path = Services;
+			sourceTree = "<group>";
+		};
+		AC6EFD47B45452C91AE8564B /* local */ = {
+			isa = PBXGroup;
+			children = (
+				A55B78FBD2B813E0E9B6A397 /* LocalModelClient.swift */,
+			);
+			name = local;
+			path = local;
+			sourceTree = "<group>";
+		};
+		B28E7D21E116EB70A0AEAE95 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				1EF006A11D57007AE7B5CC2D /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		B4DF9FCAE7A89A6F86C05E06 /* shared */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -308,176 +476,27 @@
 			path = ../shared;
 			sourceTree = "<group>";
 		};
-		703BF9F755ACD6779FDD5654 /* Chat */ = {
+		B7DC3E2A7C5792B946437377 /* audio */ = {
 			isa = PBXGroup;
 			children = (
-				EEAA780A2D8817C6C81E03CD /* ChatViewModel.swift */,
-				CC5ABD4718AC98788017AFFF /* ChatRuntimeTranscript.swift */,
-				65F5DDD5048C15A08D809D27 /* ChatView.swift */,
+				B36B1AC20C245A751AE9B74A /* AudioInputProcessor.swift */,
+			);
+			name = audio;
+			path = audio;
+			sourceTree = "<group>";
+		};
+		C78062B433B79C48803D8B38 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				DD78D43BAC26D0D3E5931CCA /* ChatViewModel.swift */,
+				C866A832D50A5E6CDB532F71 /* ChatRuntimeTranscript.swift */,
+				D2C7697BB4C69110D51E81FB /* ChatView.swift */,
 			);
 			name = Chat;
 			path = Chat;
 			sourceTree = "<group>";
 		};
-		751FEBCB7A72B9ED6E78D306 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				E9870E36A6B4DA14787677FF /* ChatMessage.swift */,
-				F9B6008B267D6BE75F53731A /* ChatMessage+Runtime.swift */,
-			);
-			name = Models;
-			path = Models;
-			sourceTree = "<group>";
-		};
-		773882F644052F9E4DD1BAE7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				462161BC09306F909652B91B /* PREXUS.app */,
-				436D3B9E8FA4D01D7F1B4D95 /* PREXUSTests.xctest */,
-				71A5BFA287A2AD901CB5D6F9 /* PREXUSUITests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		7920B5F8AE0D26EB5E884F3F /* config */ = {
-			isa = PBXGroup;
-			children = (
-				FEDAD7AB35CA37AA80761C55 /* AppConfig.swift */,
-			);
-			name = config;
-			path = config;
-			sourceTree = "<group>";
-		};
-		87EE52A8F03E7C6AF0E4C62C /* App */ = {
-			isa = PBXGroup;
-			children = (
-				7B8BB28A418316C5E4EBD6B3 /* PREXUSApp.swift */,
-				0EF485CC4CA51C797E7D0BA7 /* AppEnvironment.swift */,
-			);
-			name = App;
-			path = App;
-			sourceTree = "<group>";
-		};
-		889E027CDFC5222700A31827 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				19C0756B7A33C1E15029E0F3 /* AppSettingsStore.swift */,
-				505D36C3DEF4800EFE787CD3 /* PersistentMemoryStore.swift */,
-				29A3F5EB24C361223CC3FAE4 /* KeychainAPIKeyStore.swift */,
-			);
-			name = Services;
-			path = Services;
-			sourceTree = "<group>";
-		};
-		8B207CDF282AE0206D8E9C1B = {
-			isa = PBXGroup;
-			children = (
-				773882F644052F9E4DD1BAE7 /* Products */,
-				E62DA9D6A4606DC87860814C /* Frameworks */,
-				430A6E2FAB856756C00C9016 /* PREXUS */,
-				A858378AEAB61A85B6ECCF5F /* runtime */,
-				4FB23DABADBB6B6C9B75718A /* shared */,
-				34DAF9ECAB14C9D7CE2E0A80 /* PREXUSTests */,
-				1BE8E81ABDF32DD3C05782DB /* PREXUSUITests */,
-			);
-			sourceTree = "<group>";
-		};
-		8F8C4E59B5BFC9F78CE7A2A0 /* orchestrator */ = {
-			isa = PBXGroup;
-			children = (
-				EF842761CA8464F0D11FE89F /* RuntimeContainer.swift */,
-				4203E0B2B0430438F4707719 /* policies */,
-				6D4185F5346F24935CA00804 /* RuntimeTurnExecutor.swift */,
-				A0422714AC748A2879CDAD7B /* intent */,
-				94569216CDE62F1ADC565DA5 /* escalation */,
-				EFA7F6F2A4CCB983600A5681 /* RuntimeMessage.swift */,
-				145D94C8666E324565F2E6B8 /* router */,
-			);
-			name = orchestrator;
-			path = orchestrator;
-			sourceTree = "<group>";
-		};
-		94569216CDE62F1ADC565DA5 /* escalation */ = {
-			isa = PBXGroup;
-			children = (
-				3304E28CD1DA60987C1F793B /* EscalationCoordinator.swift */,
-			);
-			name = escalation;
-			path = escalation;
-			sourceTree = "<group>";
-		};
-		9AC23DA720A1763C00FA1DA7 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				9A1E35F6F900675B3C22FB54 /* Foundation.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		9EDC5F8754304DD390B5C9E1 /* embeddings */ = {
-			isa = PBXGroup;
-			children = (
-				089194636A48F77419C52C4B /* EmbeddingProvider.swift */,
-			);
-			name = embeddings;
-			path = embeddings;
-			sourceTree = "<group>";
-		};
-		A0422714AC748A2879CDAD7B /* intent */ = {
-			isa = PBXGroup;
-			children = (
-				CA1873EBC39C1C1E330DCAA0 /* IntentClassifier.swift */,
-			);
-			name = intent;
-			path = intent;
-			sourceTree = "<group>";
-		};
-		A2B572C32E8F75749BD4351E /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				72A1AB8777E0CD24D7A88368 /* SettingsView.swift */,
-				0A0554601FF27F28BD34B0C3 /* RootView.swift */,
-			);
-			name = UI;
-			path = UI;
-			sourceTree = "<group>";
-		};
-		A858378AEAB61A85B6ECCF5F /* runtime */ = {
-			isa = PBXGroup;
-			children = (
-				3B2B535AA27B7BAD7D317019 /* llm */,
-				D972FCA78A78B67BEA284057 /* memory */,
-				7920B5F8AE0D26EB5E884F3F /* config */,
-				B3511259E4AF83743490DF83 /* rag */,
-				ADBD652882224589FD87F604 /* multimodal */,
-				8F8C4E59B5BFC9F78CE7A2A0 /* orchestrator */,
-			);
-			name = runtime;
-			path = ../../runtime;
-			sourceTree = "<group>";
-		};
-		ADBD652882224589FD87F604 /* multimodal */ = {
-			isa = PBXGroup;
-			children = (
-				B9B7DC04B4B9EDB1BC483C03 /* sensors */,
-				4A12FA4C9F209707164D8AF4 /* ocr */,
-				AFF8BC8EDDA8918F45108EC6 /* vision */,
-				041266661FDB6F1BD78243C5 /* audio */,
-			);
-			name = multimodal;
-			path = multimodal;
-			sourceTree = "<group>";
-		};
-		AFF8BC8EDDA8918F45108EC6 /* vision */ = {
-			isa = PBXGroup;
-			children = (
-				505513460F028E54EA0BF20C /* VisionAnalyzer.swift */,
-			);
-			name = vision;
-			path = vision;
-			sourceTree = "<group>";
-		};
-		B2148EDE5A64ECD987FC2183 /* Resources */ = {
+		D1894D5917AE357536AF426F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -485,112 +504,114 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		B3511259E4AF83743490DF83 /* rag */ = {
+		D98C9A50405F8AD0A7EFEDF8 /* Diagnostics */ = {
 			isa = PBXGroup;
 			children = (
-				4C35830F8EC2ED8258C0EDE2 /* ranking */,
-				D2DC86202F7CB6DB2AA3790D /* retrieval */,
-				F1D79271CE2A7B9843F71401 /* indexing */,
+				A41AD95F9FE57F5510357934 /* RuntimeDiagnosticsStore.swift */,
+				C8C75754A504F9CE21ED187C /* RuntimeDiagnosticsView.swift */,
 			);
-			name = rag;
-			path = rag;
+			name = Diagnostics;
+			path = Diagnostics;
 			sourceTree = "<group>";
 		};
-		B9B7DC04B4B9EDB1BC483C03 /* sensors */ = {
+		DB86F399EDBF342DEA6D5368 = {
 			isa = PBXGroup;
 			children = (
-				0AFB1F90457C3153A5632786 /* SensorSignalProvider.swift */,
+				72656956CD297092454E744A /* Products */,
+				8DD81464910034ACE7AB2DD0 /* Frameworks */,
+				7336358A749BB06DCB17C12B /* PREXUS */,
+				02141779E7A7B6877C7A0FBA /* runtime */,
+				B4DF9FCAE7A89A6F86C05E06 /* shared */,
+				6D716562E0A77DC8DE751714 /* PREXUSTests */,
+				FEDC70A35CA329D4DEB5D36F /* PREXUSUITests */,
 			);
-			name = sensors;
-			path = sensors;
 			sourceTree = "<group>";
 		};
-		D2DC86202F7CB6DB2AA3790D /* retrieval */ = {
+		ED3B3D238941F8841666E8E9 /* retrieval */ = {
 			isa = PBXGroup;
 			children = (
-				3880BCD57190653DB145389E /* RetrievalEngine.swift */,
+				55C62D93AE39CCC8F961BBBF /* RetrievalEngine.swift */,
 			);
 			name = retrieval;
 			path = retrieval;
 			sourceTree = "<group>";
 		};
-		D972FCA78A78B67BEA284057 /* memory */ = {
+		F03B3C2F66078A17A4788AAD /* escalation */ = {
 			isa = PBXGroup;
 			children = (
-				9EDC5F8754304DD390B5C9E1 /* embeddings */,
-				F096CB08603E70A91794A7DA /* episodic */,
-				144D52ACC53DEFA32FBA2F80 /* vector_store */,
-				2337886A04DD4D196E210561 /* compression */,
+				27B41804626FD9FFBBBCAFCD /* EscalationCoordinator.swift */,
 			);
-			name = memory;
-			path = memory;
+			name = escalation;
+			path = escalation;
 			sourceTree = "<group>";
 		};
-		DE839107E0365BC0EEEF37FD /* cloud */ = {
+		F677F71A9195D5A2469E6766 /* ocr */ = {
 			isa = PBXGroup;
 			children = (
-				3D248918C46C6117248FD9DF /* HTTPTransport.swift */,
-				2B8C7EA91F7C7150A5B56CAB /* APIKeyStore.swift */,
-				2B16D151DD76277231BFCC26 /* CloudModelClient.swift */,
+				619A14AB2AEC9FAF17DEB1F2 /* OCRProcessor.swift */,
 			);
-			name = cloud;
-			path = cloud;
+			name = ocr;
+			path = ocr;
 			sourceTree = "<group>";
 		};
-		E62DA9D6A4606DC87860814C /* Frameworks */ = {
+		F6F3F68263224DB4EA26800B /* Memory */ = {
 			isa = PBXGroup;
 			children = (
-				9AC23DA720A1763C00FA1DA7 /* iOS */,
+				FCB7E16BCC3D56BEEF294437 /* MemoryLibraryViewModel.swift */,
+				660E19F880094AFC78FB6B3B /* MemoryLibraryView.swift */,
 			);
-			name = Frameworks;
+			name = Memory;
+			path = Memory;
 			sourceTree = "<group>";
 		};
-		F06181D8CC6F027C6C957D94 /* local */ = {
+		FE6F3927FCE47B6C2D1C6C00 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				7B116D626CE17CFD7095616B /* LocalModelClient.swift */,
+				F6F3F68263224DB4EA26800B /* Memory */,
+				C78062B433B79C48803D8B38 /* Chat */,
+				D98C9A50405F8AD0A7EFEDF8 /* Diagnostics */,
 			);
-			name = local;
-			path = local;
+			name = Features;
+			path = Features;
 			sourceTree = "<group>";
 		};
-		F096CB08603E70A91794A7DA /* episodic */ = {
+		FEDC70A35CA329D4DEB5D36F /* PREXUSUITests */ = {
 			isa = PBXGroup;
 			children = (
-				4D2268AAA5E4EA5EE373C015 /* EpisodicMemoryStore.swift */,
+				75E3B027C4B30FDA117898B6 /* PREXUSUITests.swift */,
 			);
-			name = episodic;
-			path = episodic;
-			sourceTree = "<group>";
-		};
-		F1D79271CE2A7B9843F71401 /* indexing */ = {
-			isa = PBXGroup;
-			children = (
-				F78A06143C911EB37786E1CA /* DocumentIndexer.swift */,
-			);
-			name = indexing;
-			path = indexing;
-			sourceTree = "<group>";
-		};
-		FD8E2F0833BCC286390443A1 /* prompts */ = {
-			isa = PBXGroup;
-			children = (
-				092970261CE635F3FB9EB4D1 /* PromptTemplate.swift */,
-			);
-			name = prompts;
-			path = prompts;
+			name = PREXUSUITests;
+			path = PREXUSUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9324221C10D0CD2C99F41B4D /* PREXUS */ = {
+		4576AB204D0018914DD98F62 /* PREXUSUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0F8A8FACC93F152584DC3AE6 /* Build configuration list for PBXNativeTarget "PREXUS" */;
+			buildConfigurationList = 790FEC25C9434BC39A287C80 /* Build configuration list for PBXNativeTarget "PREXUSUITests" */;
 			buildPhases = (
-				368BE7050639DB8F0B63F268 /* Sources */,
-				3991AF471D332BC5D859C221 /* Frameworks */,
-				19ABCC1A7BB66EE30C2A3D7D /* Resources */,
+				6F870475414EF6FE746077E9 /* Sources */,
+				0008AE284AA23AFAD06E39CE /* Frameworks */,
+				C75ECC4BCB342BBFA4851BE4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2EDED0D55102AB521F78331F /* PBXTargetDependency */,
+			);
+			name = PREXUSUITests;
+			productName = PREXUSUITests;
+			productReference = 4F236886868EAD6750E952BE /* PREXUSUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		A2FE42A38ACC3F39957E7284 /* PREXUS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 56F069D3613C7C3AD8FB0B7B /* Build configuration list for PBXNativeTarget "PREXUS" */;
+			buildPhases = (
+				925AE17848DE8759E24C8B22 /* Sources */,
+				F15765849E2754220EDA034B /* Frameworks */,
+				221CAD8C362E888A477363A5 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -598,55 +619,37 @@
 			);
 			name = PREXUS;
 			productName = PREXUS;
-			productReference = 462161BC09306F909652B91B /* PREXUS.app */;
+			productReference = 8F5CD2093C819808832D74DD /* PREXUS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A3DB1DE639A539E394054871 /* PREXUSTests */ = {
+		E0A0C9A3D2645B2E5E046A35 /* PREXUSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C98C15D6AE82D0D1FD74DB3A /* Build configuration list for PBXNativeTarget "PREXUSTests" */;
+			buildConfigurationList = 0D4C8649708FDE1D42A69C37 /* Build configuration list for PBXNativeTarget "PREXUSTests" */;
 			buildPhases = (
-				FA3F6386B12A99683635EAD0 /* Sources */,
-				721AB2723F72EFD262A37E2C /* Frameworks */,
-				DCDF7E5A8A39E8E9FB89E3D0 /* Resources */,
+				880501C59D15DAEAD841E587 /* Sources */,
+				79BB027AA27DAC13F54AE930 /* Frameworks */,
+				83DF5DAD9555AFBB491ABD7A /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				6BD72B56C27DD26B1C1BA9A3 /* PBXTargetDependency */,
+				0424BBB0D14A25D2812A4EC1 /* PBXTargetDependency */,
 			);
 			name = PREXUSTests;
 			productName = PREXUSTests;
-			productReference = 436D3B9E8FA4D01D7F1B4D95 /* PREXUSTests.xctest */;
+			productReference = 813803963461497BBE0FBD1C /* PREXUSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		F50641E57314F0542D7B2C86 /* PREXUSUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D5D92EB0BD26950F0EBF1223 /* Build configuration list for PBXNativeTarget "PREXUSUITests" */;
-			buildPhases = (
-				764E9331393999479CACC619 /* Sources */,
-				5CCB5B86407C8E0F8103F1AC /* Frameworks */,
-				A8280906B41C0FBC83EC7E36 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2AA0C7353C691D93D0DDAC0F /* PBXTargetDependency */,
-			);
-			name = PREXUSUITests;
-			productName = PREXUSUITests;
-			productReference = 71A5BFA287A2AD901CB5D6F9 /* PREXUSUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		0ABA5748A0553853730E2FEF /* Project object */ = {
+		2ECD1E9E05272AB1AD4EB55E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1600;
 			};
-			buildConfigurationList = 7A7646EEFEA9CD0C0E04809B /* Build configuration list for PBXProject "PREXUS" */;
+			buildConfigurationList = 8093F277EB3B83627C7D3160 /* Build configuration list for PBXProject "PREXUS" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -654,36 +657,36 @@
 				en,
 				Base,
 			);
-			mainGroup = 8B207CDF282AE0206D8E9C1B;
+			mainGroup = DB86F399EDBF342DEA6D5368;
 			minimizedProjectReferenceProxies = 0;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 773882F644052F9E4DD1BAE7 /* Products */;
+			productRefGroup = 72656956CD297092454E744A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9324221C10D0CD2C99F41B4D /* PREXUS */,
-				A3DB1DE639A539E394054871 /* PREXUSTests */,
-				F50641E57314F0542D7B2C86 /* PREXUSUITests */,
+				A2FE42A38ACC3F39957E7284 /* PREXUS */,
+				E0A0C9A3D2645B2E5E046A35 /* PREXUSTests */,
+				4576AB204D0018914DD98F62 /* PREXUSUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		19ABCC1A7BB66EE30C2A3D7D /* Resources */ = {
+		221CAD8C362E888A477363A5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A8280906B41C0FBC83EC7E36 /* Resources */ = {
+		83DF5DAD9555AFBB491ABD7A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DCDF7E5A8A39E8E9FB89E3D0 /* Resources */ = {
+		C75ECC4BCB342BBFA4851BE4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -693,90 +696,91 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		368BE7050639DB8F0B63F268 /* Sources */ = {
+		6F870475414EF6FE746077E9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E27374C39B539F01B7C31AB3 /* SettingsView.swift in Sources */,
-				9B54F30434F04A5F5BD221F1 /* RootView.swift in Sources */,
-				7CFE8E89AAF19732DF9E714D /* PREXUSApp.swift in Sources */,
-				D4EE1B43E61E7BE62EFE21A3 /* AppEnvironment.swift in Sources */,
-				DD359B231ADDEAC5B9E97143 /* MemoryLibraryViewModel.swift in Sources */,
-				B4DD9FD536CF9BAEB35CD7B8 /* MemoryLibraryView.swift in Sources */,
-				3D8B9074B56213DDD27C04C2 /* ChatViewModel.swift in Sources */,
-				4809D4A1485B8989629D4C34 /* ChatRuntimeTranscript.swift in Sources */,
-				18C34CFE0128C9FC570AC783 /* ChatView.swift in Sources */,
-				C309E116673CA5AEC56DC2B6 /* RuntimeDiagnosticsStore.swift in Sources */,
-				D67B5FEE00094EE7DEFE2384 /* RuntimeDiagnosticsView.swift in Sources */,
-				1D40728D195A04B9B5651A8E /* ChatMessage.swift in Sources */,
-				912762B1B297260B3C492FAC /* ChatMessage+Runtime.swift in Sources */,
-				9F92DB61A3C679D621C46BB9 /* AppSettingsStore.swift in Sources */,
-				502AEE86DCD3BA3C201EBD7A /* PersistentMemoryStore.swift in Sources */,
-				3927346D34004A0BC4E30D1B /* KeychainAPIKeyStore.swift in Sources */,
-				A2A1825FF606C23A29B0C7DA /* LocalModelClient.swift in Sources */,
-				72A9D5ED97E2DE59ED84AB70 /* ProviderAdapter.swift in Sources */,
-				D8D4CA5EC90F6AC52432B6C8 /* HTTPTransport.swift in Sources */,
-				736A8FAD6109321B820AA9A6 /* APIKeyStore.swift in Sources */,
-				4AFC4124111E0FC7287E3017 /* CloudModelClient.swift in Sources */,
-				6DF088236E76E18C1F97D6EA /* PromptTemplate.swift in Sources */,
-				3B129DC980B953448F549DF0 /* EmbeddingProvider.swift in Sources */,
-				5595C4EF99E065D5642B1179 /* EpisodicMemoryStore.swift in Sources */,
-				18B98BFD3BA7F3899B9C9D36 /* MemoryRetrieval.swift in Sources */,
-				4D27A4960556CCF6B5132E04 /* ContextCompressor.swift in Sources */,
-				D77035CC9DA02F4479FD2C06 /* AppConfig.swift in Sources */,
-				35913066032D7817CDDDF05D /* RankingEngine.swift in Sources */,
-				85ECAE2BC2A8CBA7D90317E1 /* RetrievalEngine.swift in Sources */,
-				5051A42D98C3D1DE1EC19757 /* DocumentIndexer.swift in Sources */,
-				FC87D2A84A27275530030C67 /* SensorSignalProvider.swift in Sources */,
-				3B9FD332DC24036B4CFEC26D /* OCRProcessor.swift in Sources */,
-				7D71A74C55B7E3323C26002D /* VisionAnalyzer.swift in Sources */,
-				D0F661A31C325250E8EB2EB7 /* AudioInputProcessor.swift in Sources */,
-				0952454B3B30E6975C29C9E3 /* RuntimeContainer.swift in Sources */,
-				FDF3F25A95A26A8312C2D777 /* ExecutionPolicy.swift in Sources */,
-				AE605ED23AF96791FC13F982 /* RuntimeTurnExecutor.swift in Sources */,
-				352E29860ECC74D5DC35A977 /* IntentClassifier.swift in Sources */,
-				D709F28D19D6F25230BF5273 /* EscalationCoordinator.swift in Sources */,
-				45D926E613C526F03EA1056B /* RuntimeMessage.swift in Sources */,
-				38F4F39A6B5AABF7FB42C586 /* RouteDecision.swift in Sources */,
-				48DC40C08DDC980125A6C312 /* RoutingEngine.swift in Sources */,
+				D9E7D364B6A7AF9335DADDEF /* PREXUSUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		764E9331393999479CACC619 /* Sources */ = {
+		880501C59D15DAEAD841E587 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C42287319D867DBF5A16C643 /* PREXUSUITests.swift in Sources */,
+				CB2155E80E8384F1F73A25B7 /* PREXUSTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FA3F6386B12A99683635EAD0 /* Sources */ = {
+		925AE17848DE8759E24C8B22 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				616CA7EDF6726E8C5CAB3758 /* PREXUSTests.swift in Sources */,
+				3152CCDEA25E0C9C2A33BD23 /* SettingsView.swift in Sources */,
+				3513875F608D8D1A583E3C08 /* RootView.swift in Sources */,
+				1C9919455C0EAC5ADA82B225 /* PREXUSLiquidGlass.swift in Sources */,
+				5CFA871B41C69415DC03E912 /* PREXUSApp.swift in Sources */,
+				2CEA14CA7B552BC47A8D8F95 /* AppEnvironment.swift in Sources */,
+				BBD4E2F848129475CF74A7FF /* MemoryLibraryViewModel.swift in Sources */,
+				C3E904829B2CD548587F7683 /* MemoryLibraryView.swift in Sources */,
+				F58D6B4017CE12E089538632 /* ChatViewModel.swift in Sources */,
+				46B549C4953060579668D6B2 /* ChatRuntimeTranscript.swift in Sources */,
+				734F4889BF43913F101EC3BC /* ChatView.swift in Sources */,
+				1320AA284BE5F36AEA46B07C /* RuntimeDiagnosticsStore.swift in Sources */,
+				038AE948B7DE4C68CBA63A30 /* RuntimeDiagnosticsView.swift in Sources */,
+				0CFDAA0DD9F4839D1B62E90A /* ChatMessage.swift in Sources */,
+				57B462707F586A9FB3388C15 /* ChatMessage+Runtime.swift in Sources */,
+				09A28666438A717F3620769E /* AppSettingsStore.swift in Sources */,
+				1D619FE03C863303C5037B7E /* PersistentMemoryStore.swift in Sources */,
+				D28AEBC99AC17E845D930BF4 /* KeychainAPIKeyStore.swift in Sources */,
+				E6221BE857FE5C598DDB6F0C /* LocalModelClient.swift in Sources */,
+				293EE02AC03AC09CAE8EA905 /* ProviderAdapter.swift in Sources */,
+				78DBA061ED03C46C1469777A /* HTTPTransport.swift in Sources */,
+				63982F94ADCD0700F0B5EE5D /* APIKeyStore.swift in Sources */,
+				AE77538E065CA2134D9CF282 /* CloudModelClient.swift in Sources */,
+				EDC859B237A566126C5E3F32 /* PromptTemplate.swift in Sources */,
+				0801DEC17B2D45A3FD095DFC /* EmbeddingProvider.swift in Sources */,
+				9D13C6DFBA58258E4FC4AFF5 /* EpisodicMemoryStore.swift in Sources */,
+				2081110E2FB1F9246AD4C1BE /* MemoryRetrieval.swift in Sources */,
+				D570E4BD96D585B3230C20C6 /* ContextCompressor.swift in Sources */,
+				BC2115C79967AE31975784C6 /* AppConfig.swift in Sources */,
+				5E152C373AA1E9E51C31D520 /* RankingEngine.swift in Sources */,
+				479C22947BEF80539BA66037 /* RetrievalEngine.swift in Sources */,
+				3BE9E3E64F6FD80C1E24ADFE /* DocumentIndexer.swift in Sources */,
+				6FCF9D5BAF92E12A41877B72 /* SensorSignalProvider.swift in Sources */,
+				F32798952E0A292F71A65AD6 /* OCRProcessor.swift in Sources */,
+				88DB866833185E0A557FB2F9 /* VisionAnalyzer.swift in Sources */,
+				BB1EB87EAB9DFAE262686EAC /* AudioInputProcessor.swift in Sources */,
+				DF7D3AF29C63A3C6A7EC5CB3 /* RuntimeContainer.swift in Sources */,
+				FD8B413FD3BBBF5EF67EA826 /* ExecutionPolicy.swift in Sources */,
+				0F02DA3B41B1C5B25B2B803A /* RuntimeTurnExecutor.swift in Sources */,
+				83E2C1BE1B53A2955B2E6BB5 /* IntentClassifier.swift in Sources */,
+				67B3EA03D7836EE0AA471511 /* EscalationCoordinator.swift in Sources */,
+				F9FBBE552C37CD92D1B1E203 /* RuntimeMessage.swift in Sources */,
+				F631BDFCA6CA31AE3B625D2C /* RouteDecision.swift in Sources */,
+				70BC14B955331164C798FF16 /* RoutingEngine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2AA0C7353C691D93D0DDAC0F /* PBXTargetDependency */ = {
+		0424BBB0D14A25D2812A4EC1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = PREXUS;
-			target = 9324221C10D0CD2C99F41B4D /* PREXUS */;
-			targetProxy = 84DAA8AC4E6FD61D2FBD9B0A /* PBXContainerItemProxy */;
+			target = A2FE42A38ACC3F39957E7284 /* PREXUS */;
+			targetProxy = 086780581D51F8FC106BBB93 /* PBXContainerItemProxy */;
 		};
-		6BD72B56C27DD26B1C1BA9A3 /* PBXTargetDependency */ = {
+		2EDED0D55102AB521F78331F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = PREXUS;
-			target = 9324221C10D0CD2C99F41B4D /* PREXUS */;
-			targetProxy = C46842A538BDFA6CF8207CBF /* PBXContainerItemProxy */;
+			target = A2FE42A38ACC3F39957E7284 /* PREXUS */;
+			targetProxy = 816A5C79E73248305338FFB5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		13967ECEE1AC0EA791DAFB05 /* Release */ = {
+		239A248B15080807100AC60E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -792,28 +796,22 @@
 			};
 			name = Release;
 		};
-		360D68DAF673D9373421371B /* Release */ = {
+		24427391161A8AD298B5332C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "";
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = PREXUS/Resources/Info.plist;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.prexus.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.prexus.ios.uitests;
 				SDKROOT = iphoneos;
-				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				VALIDATE_PRODUCT = YES;
+				TEST_TARGET_NAME = PREXUS;
 			};
-			name = Release;
+			name = Debug;
 		};
-		51811F19C1554FFAC03E3655 /* Debug */ = {
+		2629ABDB2A36F10A3722A7F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -874,22 +872,81 @@
 			};
 			name = Debug;
 		};
-		51B076C8FD32C67E77E01F3A /* Debug */ = {
+		69680D9D4808325ADEB91C4D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PREXUS/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.prexus.ios;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		B77359D139774B9716DFE3A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PREXUS/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.prexus.ios;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CAF759044B2FC5F8780F97C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.prexus.ios.uitests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.prexus.ios.tests;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_TARGET_NAME = PREXUS;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PREXUS.app/PREXUS";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CC16BCB24AD8D8176DB09D57 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.prexus.ios.tests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PREXUS.app/PREXUS";
 			};
 			name = Debug;
 		};
-		7EF2BE45F772A6FE76D186B2 /* Release */ = {
+		E229D17841856A4EB28DC585 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -943,99 +1000,46 @@
 			};
 			name = Release;
 		};
-		7F29122AEF883F20D556C759 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "";
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = PREXUS/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.prexus.ios;
-				SDKROOT = iphoneos;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Debug;
-		};
-		B0260B2CFA488E16F0C25708 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.prexus.ios.tests;
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PREXUS.app/PREXUS";
-			};
-			name = Debug;
-		};
-		CE15C79D4D11C3023326D631 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.prexus.ios.tests;
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PREXUS.app/PREXUS";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0F8A8FACC93F152584DC3AE6 /* Build configuration list for PBXNativeTarget "PREXUS" */ = {
+		0D4C8649708FDE1D42A69C37 /* Build configuration list for PBXNativeTarget "PREXUSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				360D68DAF673D9373421371B /* Release */,
-				7F29122AEF883F20D556C759 /* Debug */,
+				CAF759044B2FC5F8780F97C3 /* Release */,
+				CC16BCB24AD8D8176DB09D57 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7A7646EEFEA9CD0C0E04809B /* Build configuration list for PBXProject "PREXUS" */ = {
+		56F069D3613C7C3AD8FB0B7B /* Build configuration list for PBXNativeTarget "PREXUS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				51811F19C1554FFAC03E3655 /* Debug */,
-				7EF2BE45F772A6FE76D186B2 /* Release */,
+				B77359D139774B9716DFE3A1 /* Release */,
+				69680D9D4808325ADEB91C4D /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C98C15D6AE82D0D1FD74DB3A /* Build configuration list for PBXNativeTarget "PREXUSTests" */ = {
+		790FEC25C9434BC39A287C80 /* Build configuration list for PBXNativeTarget "PREXUSUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CE15C79D4D11C3023326D631 /* Release */,
-				B0260B2CFA488E16F0C25708 /* Debug */,
+				239A248B15080807100AC60E /* Release */,
+				24427391161A8AD298B5332C /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D5D92EB0BD26950F0EBF1223 /* Build configuration list for PBXNativeTarget "PREXUSUITests" */ = {
+		8093F277EB3B83627C7D3160 /* Build configuration list for PBXProject "PREXUS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				13967ECEE1AC0EA791DAFB05 /* Release */,
-				51B076C8FD32C67E77E01F3A /* Debug */,
+				2629ABDB2A36F10A3722A7F1 /* Debug */,
+				E229D17841856A4EB28DC585 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 0ABA5748A0553853730E2FEF /* Project object */;
+	rootObject = 2ECD1E9E05272AB1AD4EB55E /* Project object */;
 }

@@ -436,15 +436,29 @@ struct PREXUSSurfaceCard<Content: View>: View {
     }
 }
 
+enum PREXUSChipAppearance {
+    case standard
+    case controlSurface
+}
+
 struct PREXUSStatusChip: View {
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+
     let title: String
     let systemImage: String?
     let tint: Color
+    let appearance: PREXUSChipAppearance
 
-    init(_ title: String, systemImage: String? = nil, tint: Color) {
+    init(
+        _ title: String,
+        systemImage: String? = nil,
+        tint: Color,
+        appearance: PREXUSChipAppearance = .standard
+    ) {
         self.title = title
         self.systemImage = systemImage
         self.tint = tint
+        self.appearance = appearance
     }
 
     var body: some View {
@@ -463,10 +477,36 @@ struct PREXUSStatusChip: View {
         .allowsTightening(true)
         .padding(.horizontal, 10)
         .padding(.vertical, 6)
-        .background(
+        .background(chipBackground)
+    }
+
+    @ViewBuilder
+    private var chipBackground: some View {
+        switch appearance {
+        case .standard:
             Capsule(style: .continuous)
                 .fill(tint.opacity(0.12))
-        )
+        case .controlSurface:
+            if reduceTransparency {
+                Capsule(style: .continuous)
+                    .fill(Color(uiColor: .secondarySystemFill))
+                    .overlay(
+                        Capsule(style: .continuous)
+                            .strokeBorder(tint.opacity(0.22), lineWidth: 0.5)
+                    )
+            } else if #available(iOS 26.0, *) {
+                Capsule(style: .continuous)
+                    .fill(.clear)
+                    .glassEffect(in: .capsule)
+            } else {
+                Capsule(style: .continuous)
+                    .fill(.ultraThinMaterial)
+                    .overlay(
+                        Capsule(style: .continuous)
+                            .strokeBorder(tint.opacity(0.18), lineWidth: 0.5)
+                    )
+            }
+        }
     }
 }
 
