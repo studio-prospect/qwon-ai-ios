@@ -1,109 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Scheme
-   LastUpgradeVersion = "1600"
-   version = "1.7">
-   <BuildAction
-      parallelizeBuildables = "YES"
-      buildImplicitDependencies = "YES">
+<?xml version='1.0' encoding='UTF-8'?>
+<Scheme LastUpgradeVersion='1600' version='1.7'>
+   <BuildAction parallelizeBuildables='YES' buildImplicitDependencies='YES'>
       <BuildActionEntries>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "56338E8775E68DA05DEE65E6"
-               BuildableName = "PREXUS.app"
-               BlueprintName = "PREXUS"
-               ReferencedContainer = "container:PREXUS.xcodeproj">
-            </BuildableReference>
+         <BuildActionEntry buildForTesting='YES' buildForRunning='YES' buildForProfiling='YES' buildForArchiving='YES' buildForAnalyzing='YES'>
+            <BuildableReference BuildableIdentifier='primary' BlueprintIdentifier='9324221C10D0CD2C99F41B4D' BuildableName='PREXUS.app' BlueprintName='PREXUS' ReferencedContainer='container:PREXUS.xcodeproj'> </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
-   <TestAction
-      buildConfiguration = "Debug"
-      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+   <TestAction buildConfiguration='Debug' selectedDebuggerIdentifier='Xcode.DebuggerFoundation.Debugger.LLDB' selectedLauncherIdentifier='Xcode.DebuggerFoundation.Launcher.LLDB' shouldUseLaunchSchemeArgsEnv='YES'>
       <Testables>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "29FF6A7FD9C00049CB05849E"
-               BuildableName = "PREXUSTests.xctest"
-               BlueprintName = "PREXUSTests"
-               ReferencedContainer = "container:PREXUS.xcodeproj">
-            </BuildableReference>
+         <TestableReference skipped='NO' parallelizable='YES'>
+            <BuildableReference BuildableIdentifier='primary' BlueprintIdentifier='A3DB1DE639A539E394054871' BuildableName='PREXUSTests.xctest' BlueprintName='PREXUSTests' ReferencedContainer='container:PREXUS.xcodeproj'> </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A10000000000000000000008"
-               BuildableName = "PREXUSUITests.xctest"
-               BlueprintName = "PREXUSUITests"
-               ReferencedContainer = "container:PREXUS.xcodeproj">
-            </BuildableReference>
+         <TestableReference skipped='NO' parallelizable='NO'>
+            <BuildableReference BuildableIdentifier='primary' BlueprintIdentifier='F50641E57314F0542D7B2C86' BuildableName='PREXUSUITests.xctest' BlueprintName='PREXUSUITests' ReferencedContainer='container:PREXUS.xcodeproj'> </BuildableReference>
          </TestableReference>
       </Testables>
       <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "56338E8775E68DA05DEE65E6"
-            BuildableName = "PREXUS.app"
-            BlueprintName = "PREXUS"
-            ReferencedContainer = "container:PREXUS.xcodeproj">
-         </BuildableReference>
+         <BuildableReference BuildableIdentifier='primary' BlueprintIdentifier='9324221C10D0CD2C99F41B4D' BuildableName='PREXUS.app' BlueprintName='PREXUS' ReferencedContainer='container:PREXUS.xcodeproj'> </BuildableReference>
       </MacroExpansion>
    </TestAction>
-   <LaunchAction
-      buildConfiguration = "Debug"
-      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      launchStyle = "0"
-      useCustomWorkingDirectory = "NO"
-      ignoresPersistentStateOnLaunch = "NO"
-      debugDocumentVersioning = "YES"
-      debugServiceExtension = "internal"
-      allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "56338E8775E68DA05DEE65E6"
-            BuildableName = "PREXUS.app"
-            BlueprintName = "PREXUS"
-            ReferencedContainer = "container:PREXUS.xcodeproj">
-         </BuildableReference>
+   <LaunchAction buildConfiguration='Debug' selectedDebuggerIdentifier='Xcode.DebuggerFoundation.Debugger.LLDB' selectedLauncherIdentifier='Xcode.DebuggerFoundation.Launcher.LLDB' launchStyle='0' useCustomWorkingDirectory='NO' ignoresPersistentStateOnLaunch='NO' debugDocumentVersioning='YES' debugServiceExtension='internal' allowLocationSimulation='YES'>
+      <BuildableProductRunnable runnableDebuggingMode='0'>
+         <BuildableReference BuildableIdentifier='primary' BlueprintIdentifier='9324221C10D0CD2C99F41B4D' BuildableName='PREXUS.app' BlueprintName='PREXUS' ReferencedContainer='container:PREXUS.xcodeproj'> </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
-   <ProfileAction
-      buildConfiguration = "Release"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      savedToolIdentifier = ""
-      useCustomWorkingDirectory = "NO"
-      debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "56338E8775E68DA05DEE65E6"
-            BuildableName = "PREXUS.app"
-            BlueprintName = "PREXUS"
-            ReferencedContainer = "container:PREXUS.xcodeproj">
-         </BuildableReference>
+   <ProfileAction buildConfiguration='Release' shouldUseLaunchSchemeArgsEnv='YES' savedToolIdentifier='' useCustomWorkingDirectory='NO' debugDocumentVersioning='YES'>
+      <BuildableProductRunnable runnableDebuggingMode='0'>
+         <BuildableReference BuildableIdentifier='primary' BlueprintIdentifier='9324221C10D0CD2C99F41B4D' BuildableName='PREXUS.app' BlueprintName='PREXUS' ReferencedContainer='container:PREXUS.xcodeproj'> </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
-   <AnalyzeAction
-      buildConfiguration = "Debug">
-   </AnalyzeAction>
-   <ArchiveAction
-      buildConfiguration = "Release"
-      revealArchiveInOrganizer = "YES">
-   </ArchiveAction>
+   <AnalyzeAction buildConfiguration='Debug'> </AnalyzeAction>
+   <ArchiveAction buildConfiguration='Release' revealArchiveInOrganizer='YES'> </ArchiveAction>
 </Scheme>
