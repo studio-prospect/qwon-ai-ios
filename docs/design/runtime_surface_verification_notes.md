@@ -13,6 +13,7 @@ Use this document when:
 
 Related notes:
 
+- capture index: `docs/design/runtime_surface_capture_index.md`
 - capture workflow: `docs/design/runtime_surface_capture_workflow.md`
 - automation backlog: `docs/design/runtime_surface_automation_backlog.md`
 - accessibility identifier plan: `docs/design/runtime_surface_accessibility_identifier_plan.md`

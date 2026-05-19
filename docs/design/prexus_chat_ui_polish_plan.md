@@ -9,6 +9,7 @@ Reference wireframe:
 - `docs/design/prexus-chat-wireframe-v1.png`
 - operational verification notes: `docs/design/runtime_surface_verification_notes.md`
 - capture workflow note: `docs/design/runtime_surface_capture_workflow.md`
+- capture index: `docs/design/runtime_surface_capture_index.md`
 - simulator presentation issue note: `docs/design/simulator_presentation_issue_note.md`
 - current exported runtime captures:
   - `docs/design/runtime-surface-captures/iphone16/`

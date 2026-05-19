@@ -15,6 +15,7 @@ Related note:
 
 - automation backlog: `docs/design/runtime_surface_automation_backlog.md`
 - accessibility identifier plan: `docs/design/runtime_surface_accessibility_identifier_plan.md`
+- capture index: `docs/design/runtime_surface_capture_index.md`
 
 ## Current Reliable Capture Scope
 
