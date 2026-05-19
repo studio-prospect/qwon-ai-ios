@@ -9,6 +9,7 @@ Use this document when:
 - live screenshots for Settings, Diagnostics, or Memory become important
 - design docs need repeatable multi-screen visual evidence
 - simulator interaction automation needs to be scoped without mixing it into normal UI polish work
+- you need to understand which committed captures the automation flow is expected to refresh
 
 ## Why This Is Separate
 
@@ -36,6 +37,7 @@ The remaining gap is no longer the first capture loop itself. That path now has:
 - optional seeded states for non-empty Diagnostics / Memory captures
 - iPhone 16 and iPhone SE (3rd generation) coverage
 - a wrapper command that refreshes the committed capture set
+- a capture index that documents the expected exported evidence set
 
 The remaining work is about broadening and hardening that workflow further.
 
@@ -125,6 +127,7 @@ This task should **not** be used to:
 Related documents:
 
 - `docs/design/prexus_chat_ui_polish_plan.md`
+- `docs/design/runtime_surface_capture_index.md`
 - `docs/design/runtime_surface_accessibility_identifier_plan.md`
 - `docs/design/runtime_surface_xctest_screenshot_spec.md`
 - `docs/design/runtime_surface_verification_notes.md`

@@ -9,6 +9,7 @@ Use this document when:
 - preparing UI automation for Settings, Diagnostics, or Memory
 - adding accessibility identifiers to runtime surfaces
 - deciding which elements must be stable across visual polish work
+- checking which committed screenshots depend on a given navigation or anchor identifier
 
 ## Current State
 
@@ -164,6 +165,7 @@ This note does **not** require:
 
 ## Related Notes
 
+- `docs/design/runtime_surface_capture_index.md`
 - `docs/design/runtime_surface_automation_backlog.md`
 - `docs/design/runtime_surface_xctest_screenshot_spec.md`
 - `docs/design/runtime_surface_capture_workflow.md`

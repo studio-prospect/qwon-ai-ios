@@ -9,6 +9,7 @@ Use this document when:
 - starting a UI test target or screenshot-oriented UI test flow
 - converting the current automation backlog into executable XCTest work
 - deciding which screens and assertions are required for the first stable capture pass
+- connecting the implemented UI smoke to the committed screenshot set in `docs/design/`
 
 ## Current Status
 
@@ -24,6 +25,7 @@ Current first-pass behavior:
 - uses visible-label row matching for the nested Settings navigation rows
 - can now be exported from `.xcresult` through `tools/scripts/export_prexus_xcuitest_screenshots.rb`
 - includes a seeded variant for a route-aware Chat state plus non-empty Diagnostics and Memory captures
+- refreshes a committed screenshot set that is indexed in `docs/design/runtime_surface_capture_index.md`
 
 This keeps the initial automation path small and navigation-focused while the broader screenshot/export workflow remains a follow-on task.
 
@@ -195,6 +197,7 @@ Current follow-on priority:
 
 ## Related Notes
 
+- `docs/design/runtime_surface_capture_index.md`
 - `docs/design/runtime_surface_automation_backlog.md`
 - `docs/design/runtime_surface_accessibility_identifier_plan.md`
 - `docs/design/runtime_surface_capture_workflow.md`
