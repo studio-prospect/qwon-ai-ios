@@ -160,3 +160,4 @@ The items below are now primarily future-regression risks rather than current ch
 - Any future cloud restriction feature should fail closed until policy data is present.
 - The scaffold is already viable for iterative runtime work, but policy and docs must stay ahead of UX claims.
 - The current routing evaluation loop is documented in [routing_evaluation_checklist.md](./routing_evaluation_checklist.md).
+- The current Codex/Cursor delivery split is documented in [agent_collaboration_workflow.md](./agent_collaboration_workflow.md).
