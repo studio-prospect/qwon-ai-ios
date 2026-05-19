@@ -4,6 +4,8 @@
 
 PREXUS は段階的に「ローカル AI チャット」から「モバイル AI ランタイム」へ進める。優先順位は常に、機能数よりも runtime の質を取る。
 
+Delivery workflow (Codex / Cursor role split): [agent_collaboration_workflow.md](./agent_collaboration_workflow.md).
+
 ## Guiding Priorities
 
 - ローカル推論基盤
