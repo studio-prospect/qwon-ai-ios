@@ -930,21 +930,15 @@ private final class CapturingLocalModelClient: LocalModelClient {
 
     private let lock = NSLock()
     private var releaseContinuation: CheckedContinuation<Void, Never>?
-    private var isHoldingTurn = false
+    /// True only after `releaseContinuation` is installed; `waitUntilHolding()` waits on this.
+    private var isHoldingReady = false
 
     private(set) var lastPrompt: String?
 
     func generate(prompt: String) async throws -> String {
         lock.lock()
         lastPrompt = prompt
-        isHoldingTurn = true
         lock.unlock()
-
-        defer {
-            lock.lock()
-            isHoldingTurn = false
-            lock.unlock()
-        }
 
         try await withTaskCancellationHandler {
             try await holdUntilReleased()
@@ -959,9 +953,9 @@ private final class CapturingLocalModelClient: LocalModelClient {
     func waitUntilHolding() async {
         while true {
             lock.lock()
-            let holding = isHoldingTurn
+            let ready = isHoldingReady
             lock.unlock()
-            if holding { return }
+            if ready { return }
             await Task.yield()
         }
     }
@@ -974,15 +968,23 @@ private final class CapturingLocalModelClient: LocalModelClient {
         try await withCheckedContinuation { continuation in
             lock.lock()
             releaseContinuation = continuation
+            isHoldingReady = true
             lock.unlock()
         }
+
+        lock.lock()
+        isHoldingReady = false
+        releaseContinuation = nil
+        lock.unlock()
     }
 
     private func resumeHold() {
         lock.lock()
-        releaseContinuation?.resume()
+        let continuation = releaseContinuation
         releaseContinuation = nil
+        isHoldingReady = false
         lock.unlock()
+        continuation?.resume()
     }
 }
 
