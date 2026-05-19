@@ -12,8 +12,12 @@ app_sources = Dir.glob(IOS_ROOT.join("PREXUS", "**", "*.swift").to_s)
 runtime_sources = Dir.glob(ROOT.join("runtime", "**", "*.swift").to_s)
 test_sources = Dir.glob(IOS_ROOT.join("PREXUSTests", "**", "*.swift").to_s)
 ui_test_sources = Dir.glob(IOS_ROOT.join("PREXUSUITests", "**", "*.swift").to_s)
-resources = Dir.glob(IOS_ROOT.join("PREXUS", "Resources", "**", "*").to_s).reject do |path|
-  File.directory?(path) || File.basename(path) == "Info.plist"
+resource_root = IOS_ROOT.join("PREXUS", "Resources")
+asset_catalogs = Dir.glob(resource_root.join("**", "*.xcassets").to_s)
+resources = Dir.glob(resource_root.join("**", "*").to_s).reject do |path|
+  File.basename(path) == "Info.plist" ||
+    File.directory?(path) ||
+    asset_catalogs.any? { |catalog| path.start_with?("#{catalog}/") }
 end
 shared_resources = Dir.glob(IOS_ROOT.join("shared", "**", "*").to_s).reject { |path| File.directory?(path) }
 
@@ -71,8 +75,15 @@ ui_test_sources.each do |path|
 end
 
 resources_group = app_group["Resources"] || app_group.new_group("Resources", "Resources")
+asset_catalogs.each do |path|
+  group = ensure_groups(resources_group, path, resource_root)
+  file_ref = group.new_file(File.basename(path))
+  file_ref.last_known_file_type = "folder.assetcatalog"
+  app_target.resources_build_phase.add_file_reference(file_ref, true)
+end
+
 resources.each do |path|
-  group = ensure_groups(resources_group, path, IOS_ROOT.join("PREXUS", "Resources"))
+  group = ensure_groups(resources_group, path, resource_root)
   file_ref = group.new_file(File.basename(path))
   app_target.resources_build_phase.add_file_reference(file_ref, true)
 end
@@ -93,7 +104,7 @@ app_target.build_configurations.each do |config|
   config.build_settings["DEVELOPMENT_TEAM"] = ""
   config.build_settings["GENERATE_INFOPLIST_FILE"] = "NO"
   config.build_settings["SWIFT_EMIT_LOC_STRINGS"] = "NO"
-  config.build_settings["ASSETCATALOG_COMPILER_APPICON_NAME"] = ""
+  config.build_settings["ASSETCATALOG_COMPILER_APPICON_NAME"] = "AppIcon"
 end
 
 test_target.build_configurations.each do |config|
