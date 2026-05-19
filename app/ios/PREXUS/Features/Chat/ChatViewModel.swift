@@ -73,7 +73,12 @@ final class ChatViewModel: ObservableObject {
     }
 
     func send(text: String) {
+        let replacingInFlightTurn = isSending
         sendTask?.cancel()
+
+        if replacingInFlightTurn {
+            removeTrailingInFlightUserMessageIfNeeded()
+        }
 
         let userMessage = ChatMessage(role: .user, content: text)
         let sensitivity = selectedSensitivity
@@ -129,6 +134,11 @@ final class ChatViewModel: ObservableObject {
                 )
             }
         }
+    }
+
+    private func removeTrailingInFlightUserMessageIfNeeded() {
+        guard let lastMessage = messages.last, lastMessage.role == .user else { return }
+        messages.removeLast()
     }
 
 }
