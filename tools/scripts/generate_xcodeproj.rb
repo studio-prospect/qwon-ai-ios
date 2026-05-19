@@ -1,13 +1,17 @@
 require "pathname"
+require "rexml/document"
+require "rexml/xpath"
 require "xcodeproj"
 
 ROOT = Pathname.new(__dir__).join("..", "..").expand_path
 IOS_ROOT = ROOT.join("app", "ios")
 PROJECT_PATH = IOS_ROOT.join("PREXUS.xcodeproj")
+SCHEME_PATH = PROJECT_PATH.join("xcshareddata", "xcschemes", "PREXUS.xcscheme")
 
 app_sources = Dir.glob(IOS_ROOT.join("PREXUS", "**", "*.swift").to_s)
 runtime_sources = Dir.glob(ROOT.join("runtime", "**", "*.swift").to_s)
 test_sources = Dir.glob(IOS_ROOT.join("PREXUSTests", "**", "*.swift").to_s)
+ui_test_sources = Dir.glob(IOS_ROOT.join("PREXUSUITests", "**", "*.swift").to_s)
 resources = Dir.glob(IOS_ROOT.join("PREXUS", "Resources", "**", "*").to_s).reject do |path|
   File.directory?(path) || File.basename(path) == "Info.plist"
 end
@@ -19,16 +23,20 @@ project.root_object.attributes["LastUpgradeCheck"] = "1600"
 
 app_target = project.new_target(:application, "PREXUS", :ios, "17.0")
 test_target = project.new_target(:unit_test_bundle, "PREXUSTests", :ios, "17.0")
+ui_test_target = project.new_target(:ui_test_bundle, "PREXUSUITests", :ios, "17.0")
 test_target.add_dependency(app_target)
+ui_test_target.add_dependency(app_target)
 
 app_target.product_reference.name = "PREXUS.app"
 test_target.product_reference.name = "PREXUSTests.xctest"
+ui_test_target.product_reference.name = "PREXUSUITests.xctest"
 
 main_group = project.main_group
 app_group = main_group.new_group("PREXUS", "PREXUS")
 runtime_group = main_group.new_group("runtime", "../../runtime")
 shared_group = main_group.new_group("shared", "../shared")
 tests_group = main_group.new_group("PREXUSTests", "PREXUSTests")
+ui_tests_group = main_group.new_group("PREXUSUITests", "PREXUSUITests")
 
 def ensure_groups(parent_group, absolute_path, root_path)
   relative = Pathname.new(absolute_path).relative_path_from(root_path).to_s
@@ -56,6 +64,10 @@ end
 
 test_sources.each do |path|
   add_file(test_target, tests_group, path, IOS_ROOT.join("PREXUSTests"))
+end
+
+ui_test_sources.each do |path|
+  add_file(ui_test_target, ui_tests_group, path, IOS_ROOT.join("PREXUSUITests"))
 end
 
 resources_group = app_group["Resources"] || app_group.new_group("Resources", "Resources")
@@ -95,4 +107,39 @@ test_target.build_configurations.each do |config|
   config.build_settings["BUNDLE_LOADER"] = "$(TEST_HOST)"
 end
 
+ui_test_target.build_configurations.each do |config|
+  config.build_settings["PRODUCT_BUNDLE_IDENTIFIER"] = "com.prexus.ios.uitests"
+  config.build_settings["INFOPLIST_FILE"] = ""
+  config.build_settings["GENERATE_INFOPLIST_FILE"] = "YES"
+  config.build_settings["SWIFT_VERSION"] = "5.0"
+  config.build_settings["IPHONEOS_DEPLOYMENT_TARGET"] = "17.0"
+  config.build_settings["TARGETED_DEVICE_FAMILY"] = "1"
+  config.build_settings["TEST_TARGET_NAME"] = "PREXUS"
+  config.build_settings["CLANG_ENABLE_OBJC_WEAK"] = "NO"
+end
+
 project.save
+
+if SCHEME_PATH.exist?
+  scheme = REXML::Document.new(SCHEME_PATH.read)
+  targets_by_name = {
+    app_target.name => app_target,
+    test_target.name => test_target,
+    ui_test_target.name => ui_test_target
+  }
+
+  REXML::XPath.each(scheme, "//BuildableReference") do |reference|
+    target = targets_by_name[reference.attributes["BlueprintName"]]
+    next unless target
+
+    reference.attributes["BlueprintIdentifier"] = target.uuid
+    reference.attributes["BuildableName"] = target.product_reference.path || target.product_reference.name
+  end
+
+  formatter = REXML::Formatters::Pretty.new(3)
+  formatter.compact = true
+  output = +""
+  formatter.write(scheme, output)
+  output << "\n"
+  SCHEME_PATH.write(output)
+end
