@@ -1,48 +1,55 @@
 {
-  "sourceXCResult": "/var/folders/hf/f4zpppsd16d7070vt3bhwrsw0000gn/T/prexus-runtime-captures-iphonese3-20260519-42684-1xb2via/PREXUS-iphonese3.xcresult",
-  "exportedAt": "2026-05-19T08:47:30+09:00",
+  "sourceXCResult": "/var/folders/hf/f4zpppsd16d7070vt3bhwrsw0000gn/T/prexus-runtime-captures-iphonese3-20260519-95053-1w6c9ad/PREXUS-iphonese3.xcresult",
+  "exportedAt": "2026-05-19T09:30:52+09:00",
   "attachments": [
     {
       "testIdentifier": "PREXUSUITests/testRuntimeSurfacesCanBeCapturedViaNavigation()",
       "deviceName": "iPhone SE (3rd generation)",
-      "sourceFileName": "4A6000B6-D85D-4076-A1DF-2D796B67955C.png",
+      "sourceFileName": "AD1B786F-28FF-46C7-A3BB-266135FB315B.png",
       "exportedFileName": "prexus-chat-iphonese3.png",
-      "timestamp": 1779148006.653
+      "timestamp": 1779150613.596
+    },
+    {
+      "testIdentifier": "PREXUSUITests/testSeededRuntimeSurfacesShowNonEmptyDiagnosticsAndMemory()",
+      "deviceName": "iPhone SE (3rd generation)",
+      "sourceFileName": "35EBEE66-0D91-45F8-8AB6-D05123305BD4.png",
+      "exportedFileName": "prexus-chat-seeded-iphonese3.png",
+      "timestamp": 1779150633.046
     },
     {
       "testIdentifier": "PREXUSUITests/testRuntimeSurfacesCanBeCapturedViaNavigation()",
       "deviceName": "iPhone SE (3rd generation)",
-      "sourceFileName": "C3BF7E88-0A4D-4213-AA8A-8046E03B9F5E.png",
+      "sourceFileName": "D2C52EBB-56D3-460A-80A3-7882C54B7EE5.png",
       "exportedFileName": "prexus-diagnostics-iphonese3.png",
-      "timestamp": 1779148016.396
+      "timestamp": 1779150622.474
     },
     {
       "testIdentifier": "PREXUSUITests/testSeededRuntimeSurfacesShowNonEmptyDiagnosticsAndMemory()",
       "deviceName": "iPhone SE (3rd generation)",
-      "sourceFileName": "8E9E4658-59D8-4245-A11A-E16D9A5A1EF4.png",
+      "sourceFileName": "77FD9C83-2F07-4C7B-896A-940A23669576.png",
       "exportedFileName": "prexus-diagnostics-seeded-iphonese3.png",
-      "timestamp": 1779148039.368
+      "timestamp": 1779150642.656
     },
     {
       "testIdentifier": "PREXUSUITests/testRuntimeSurfacesCanBeCapturedViaNavigation()",
       "deviceName": "iPhone SE (3rd generation)",
-      "sourceFileName": "4EC2DA1C-2E1A-4060-8293-2DB023BFFCFC.png",
+      "sourceFileName": "3720F5B3-2AF7-4B8B-99D3-631DA7A7E9A8.png",
       "exportedFileName": "prexus-memory-iphonese3.png",
-      "timestamp": 1779148022.399
+      "timestamp": 1779150627.522
     },
     {
       "testIdentifier": "PREXUSUITests/testSeededRuntimeSurfacesShowNonEmptyDiagnosticsAndMemory()",
       "deviceName": "iPhone SE (3rd generation)",
-      "sourceFileName": "CD3D06C7-4414-49C0-B2AD-188DC7A0207E.png",
+      "sourceFileName": "B4F0F2EF-78FA-4F0D-83A4-F9268F93DFAB.png",
       "exportedFileName": "prexus-memory-seeded-iphonese3.png",
-      "timestamp": 1779148045.944
+      "timestamp": 1779150648.874
     },
     {
       "testIdentifier": "PREXUSUITests/testRuntimeSurfacesCanBeCapturedViaNavigation()",
       "deviceName": "iPhone SE (3rd generation)",
-      "sourceFileName": "18EE430F-7A88-4F08-AB39-750667E53A24.png",
+      "sourceFileName": "5EC3FBFE-C1B3-4B3C-B220-C956C4B2037F.png",
       "exportedFileName": "prexus-settings-iphonese3.png",
-      "timestamp": 1779148009.868
+      "timestamp": 1779150616.615
     }
   ]
 }

@@ -38,7 +38,7 @@ struct RootView: View {
     var body: some View {
         NavigationStack {
             ChatView(
-                viewModel: ChatViewModel(environment: environment),
+                viewModel: makeChatViewModel(),
                 onOpenSettings: {
                     isPresentingSettings = true
                 }
@@ -52,5 +52,13 @@ struct RootView: View {
                 runtimeDiagnostics: environment.runtimeDiagnostics
             )
         }
+    }
+
+    private func makeChatViewModel() -> ChatViewModel {
+        if environment.launchScenario == .seededRuntimeSurfaces {
+            return ChatViewModel.seededRuntimeSurfaces(environment: environment)
+        }
+
+        return ChatViewModel(environment: environment)
     }
 }

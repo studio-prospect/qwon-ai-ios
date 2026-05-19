@@ -259,6 +259,7 @@ struct ChatView: View {
             RoundedRectangle(cornerRadius: 18, style: .continuous)
                 .strokeBorder(.quaternary.opacity(0.7), lineWidth: 1)
         )
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier(PREXUSAccessibilityID.Chat.routePreview)
     }
 

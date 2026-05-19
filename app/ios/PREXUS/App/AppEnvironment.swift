@@ -16,6 +16,7 @@ final class AppEnvironment: ObservableObject {
     let settings: AppSettingsStore
     let memoryLibrary: MemoryLibraryViewModel
     let runtimeDiagnostics: RuntimeDiagnosticsStore
+    let launchScenario: AppLaunchScenario
     private let apiKeyStore: APIKeyStore
     private let memoryStore: EpisodicMemoryStore
 
@@ -50,7 +51,8 @@ final class AppEnvironment: ObservableObject {
             settings: settings,
             apiKeyStore: apiKeyStore,
             memoryStore: memoryStore,
-            runtimeDiagnosticsStore: diagnosticsStore
+            runtimeDiagnosticsStore: diagnosticsStore,
+            launchScenario: launchScenario
         )
     }
 
@@ -58,11 +60,13 @@ final class AppEnvironment: ObservableObject {
         settings: AppSettingsStore,
         apiKeyStore: APIKeyStore,
         memoryStore: EpisodicMemoryStore,
-        runtimeDiagnosticsStore: RuntimeDiagnosticsStore
+        runtimeDiagnosticsStore: RuntimeDiagnosticsStore,
+        launchScenario: AppLaunchScenario = .standard
     ) {
         self.settings = settings
         self.memoryLibrary = MemoryLibraryViewModel(memoryStore: memoryStore)
         self.runtimeDiagnostics = runtimeDiagnosticsStore
+        self.launchScenario = launchScenario
         self.apiKeyStore = apiKeyStore
         self.memoryStore = memoryStore
     }

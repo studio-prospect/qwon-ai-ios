@@ -23,7 +23,7 @@ Current first-pass behavior:
 - uses stable screen identifiers where exposed
 - uses visible-label row matching for the nested Settings navigation rows
 - can now be exported from `.xcresult` through `tools/scripts/export_prexus_xcuitest_screenshots.rb`
-- includes a seeded variant for non-empty Diagnostics and Memory captures
+- includes a seeded variant for a route-aware Chat state plus non-empty Diagnostics and Memory captures
 
 This keeps the initial automation path small and navigation-focused while the broader screenshot/export workflow remains a follow-on task.
 
@@ -141,7 +141,13 @@ The screenshot flow should tolerate either:
 
 That is why both summary and empty-state anchors are useful.
 
-Do **not** require seeding complex runtime data for the first navigation-only screenshot pass unless the docs explicitly need non-empty captures.
+Current seeded add-on captures:
+
+- a Chat surface with seeded route-aware state
+- non-empty Diagnostics
+- non-empty Memory
+
+Do **not** require seeding more complex runtime data unless the docs explicitly need a richer visual state than the current seeded Chat + populated secondary-surface set.
 
 ## First Implementation Goal
 
@@ -184,7 +190,7 @@ After the first stable flow works, later additions may include:
 
 Current follow-on priority:
 
-- broaden seeded coverage beyond the current Diagnostics / Memory pair
+- keep seeded coverage centered on route-aware Chat state plus populated Diagnostics / Memory unless another runtime surface needs explicit visual evidence
 
 ## Related Notes
 

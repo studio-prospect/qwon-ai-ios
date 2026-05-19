@@ -11,6 +11,7 @@ final class ChatViewModel: ObservableObject {
     @Published private(set) var latestExecution: RuntimeExecutionMetadata?
     @Published private(set) var activeTurnSensitivity: SensitivityLevel?
     @Published private(set) var activeRoute: RouteDecision?
+    @Published private(set) var forcedPreviewRoute: RouteDecision?
 
     private let environment: AppEnvironment
 
@@ -26,7 +27,8 @@ final class ChatViewModel: ObservableObject {
         isSending: Bool,
         latestExecution: RuntimeExecutionMetadata?,
         activeTurnSensitivity: SensitivityLevel?,
-        activeRoute: RouteDecision?
+        activeRoute: RouteDecision?,
+        forcedPreviewRoute: RouteDecision? = nil
     ) {
         self.environment = environment
         self.selectedSensitivity = selectedSensitivity
@@ -36,6 +38,7 @@ final class ChatViewModel: ObservableObject {
         self.latestExecution = latestExecution
         self.activeTurnSensitivity = activeTurnSensitivity
         self.activeRoute = activeRoute
+        self.forcedPreviewRoute = forcedPreviewRoute
     }
 
     var previewRoute: RouteDecision? {
@@ -47,7 +50,7 @@ final class ChatViewModel: ObservableObject {
     }
 
     var displayedRoute: RouteDecision? {
-        isSending ? activeRoute : previewRoute
+        isSending ? activeRoute : (forcedPreviewRoute ?? previewRoute)
     }
 
     var displayedSensitivity: SensitivityLevel {
@@ -75,6 +78,7 @@ final class ChatViewModel: ObservableObject {
         )
         messages.append(userMessage)
         isSending = true
+        forcedPreviewRoute = nil
         activeTurnSensitivity = sensitivity
         activeRoute = route
         draftText = ""
@@ -109,6 +113,34 @@ final class ChatViewModel: ObservableObject {
             isSending = false
         }
     }
+
+}
+
+extension ChatViewModel {
+    static func seededRuntimeSurfaces(environment: AppEnvironment) -> ChatViewModel {
+        let selectedSensitivity: SensitivityLevel = .providerRestricted
+        let draftText = "Review this runtime policy branch for fallback risks."
+
+        return ChatViewModel(
+            environment: environment,
+            selectedSensitivity: selectedSensitivity,
+            draftText: draftText,
+            messages: [
+                ChatMessage(role: .system, content: "PREXUS runtime initialized."),
+                ChatMessage(role: .user, content: "Give me a quick routing sanity check."),
+                ChatMessage(role: .assistant, content: "I can preview the route, show why it stays local or escalates, and keep the secondary runtime surfaces ready for capture.")
+            ],
+            isSending: false,
+            latestExecution: nil,
+            activeTurnSensitivity: nil,
+            activeRoute: nil,
+            forcedPreviewRoute: RouteDecision(
+                tier: .tier3,
+                target: .local,
+                reasonCodes: ["codeAnalysis", "provider_restricted", "provider_not_approved"]
+            )
+        )
+    }
 }
 
 #if DEBUG
@@ -132,7 +164,8 @@ extension ChatViewModel {
                 detail: "Recent turns stayed local."
             ),
             activeTurnSensitivity: nil,
-            activeRoute: nil
+            activeRoute: nil,
+            forcedPreviewRoute: nil
         )
     }
 
@@ -153,7 +186,8 @@ extension ChatViewModel {
                 tier: .tier3,
                 target: .openAI,
                 reasonCodes: ["codeAnalysis", "provider_restricted"]
-            )
+            ),
+            forcedPreviewRoute: nil
         )
     }
 
@@ -178,7 +212,8 @@ extension ChatViewModel {
                 detail: "Cloud key unavailable, local fallback used."
             ),
             activeTurnSensitivity: nil,
-            activeRoute: nil
+            activeRoute: nil,
+            forcedPreviewRoute: nil
         )
     }
 
@@ -196,7 +231,8 @@ extension ChatViewModel {
             settings: settings,
             apiKeyStore: apiKeyStore,
             memoryStore: InMemoryEpisodicMemoryStore(),
-            runtimeDiagnosticsStore: diagnosticsStore
+            runtimeDiagnosticsStore: diagnosticsStore,
+            launchScenario: .standard
         )
     }
 }

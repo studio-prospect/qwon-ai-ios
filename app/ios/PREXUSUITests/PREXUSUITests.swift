@@ -57,6 +57,7 @@ final class PREXUSUITests: XCTestCase {
         app.launch()
 
         XCTAssertTrue(element(UIID.chatScreen, in: app).waitForExistence(timeout: 5))
+        attachScreenshot(named: "prexus-chat-seeded-\(deviceSlug)")
 
         let openSettingsButton = app.buttons["Open Settings"]
         XCTAssertTrue(openSettingsButton.waitForExistence(timeout: 2))

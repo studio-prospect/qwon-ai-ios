@@ -49,6 +49,18 @@ final class PREXUSTests: XCTestCase {
         XCTAssertFalse(environment.memoryLibrary.memories[0].summary.isEmpty)
     }
 
+    @MainActor
+    func testSeededRuntimeSurfaceScenarioPreloadsChatRoutePreview() {
+        let environment = AppEnvironment.bootstrap(launchScenario: .seededRuntimeSurfaces)
+        let viewModel = ChatViewModel.seededRuntimeSurfaces(environment: environment)
+
+        XCTAssertEqual(viewModel.selectedSensitivity, .providerRestricted)
+        XCTAssertEqual(viewModel.messages.count, 3)
+        XCTAssertFalse(viewModel.draftText.isEmpty)
+        XCTAssertNotNil(viewModel.forcedPreviewRoute)
+        XCTAssertNotNil(viewModel.displayedRoute)
+    }
+
     func testSensitiveRequestsStayLocal() {
         let router = DefaultRoutingEngine(
             classifier: HeuristicIntentClassifier(),
