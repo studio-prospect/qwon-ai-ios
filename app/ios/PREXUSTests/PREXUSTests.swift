@@ -480,6 +480,7 @@ final class PREXUSTests: XCTestCase {
         let viewModel = ChatViewModel(environment: environment)
 
         viewModel.send(text: "First turn")
+        await Task.yield()
         viewModel.send(text: "Second turn")
 
         while viewModel.isSending {
@@ -930,7 +931,7 @@ private final class CapturingLocalModelClient: LocalModelClient {
 
     func generate(prompt: String) async throws -> String {
         lastPrompt = prompt
-        try await Task.sleep(nanoseconds: 50_000_000)
+        try await Task.sleep(nanoseconds: 200_000_000)
         return "Captured local runtime response."
     }
 }
