@@ -360,7 +360,7 @@ final class PREXUSTests: XCTestCase {
                 modality: .text,
                 sensitivity: .localOnly
             ),
-            transcript: []
+            transcript: [RuntimeMessage]()
         )
 
         XCTAssertTrue(memoryStore.all().isEmpty)
@@ -390,7 +390,7 @@ final class PREXUSTests: XCTestCase {
                 modality: .text,
                 sensitivity: .providerRestricted
             ),
-            transcript: []
+            transcript: [RuntimeMessage]()
         )
 
         XCTAssertTrue(memoryStore.all().isEmpty)
@@ -412,7 +412,7 @@ final class PREXUSTests: XCTestCase {
                 modality: .text,
                 sensitivity: .localPreferred
             ),
-            transcript: []
+            transcript: [RuntimeMessage]()
         )
 
         XCTAssertEqual(memoryStore.all().map(\.summary), ["Remember this local-first preference"])
@@ -434,10 +434,70 @@ final class PREXUSTests: XCTestCase {
                 "Remember this spoken reminder",
                 sensitivity: .providerRestricted
             ),
-            transcript: []
+            transcript: [RuntimeMessage]()
         )
 
         XCTAssertTrue(memoryStore.all().isEmpty)
+    }
+
+    func testRuntimeTranscriptExcludesCanceledInFlightUserTurn() {
+        let transcript = ChatRuntimeTranscript.messages(
+            from: [
+                ChatMessage(role: .system, content: "PREXUS runtime initialized."),
+                ChatMessage(role: .user, content: "First turn")
+            ],
+            replacingInFlightTurn: true
+        )
+
+        XCTAssertEqual(transcript.map(\.content), ["PREXUS runtime initialized."])
+    }
+
+    @MainActor
+    func testChatViewModelIgnoresStaleSendResults() async {
+        let suiteName = "PREXUSTests.ChatViewModelStale.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defaults.removePersistentDomain(forName: suiteName)
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+
+        let capturingLocalModel = CapturingLocalModelClient()
+        let apiKeyStore = InMemoryAPIKeyStore()
+        let settings = AppSettingsStore(defaults: defaults, apiKeyStore: apiKeyStore)
+        let memoryStore = InMemoryEpisodicMemoryStore()
+        let runtime = RuntimeContainer.live(
+            config: settings.config,
+            apiKeyStore: apiKeyStore,
+            memoryStore: memoryStore,
+            localModel: capturingLocalModel,
+            cloudModel: MockCloudModelClient()
+        )
+        let environment = AppEnvironment(
+            settings: settings,
+            apiKeyStore: apiKeyStore,
+            memoryStore: memoryStore,
+            runtimeDiagnosticsStore: RuntimeDiagnosticsStore(defaults: defaults),
+            runtimeOverride: runtime
+        )
+        let viewModel = ChatViewModel(environment: environment)
+
+        viewModel.send(text: "First turn")
+        await Task.yield()
+        viewModel.send(text: "Second turn")
+
+        while viewModel.isSending {
+            await Task.yield()
+        }
+
+        let userMessages = viewModel.messages.filter { $0.role == .user }
+        XCTAssertEqual(userMessages.map(\.content), ["Second turn"])
+
+        let assistantMessages = viewModel.messages.filter { $0.role == .assistant }
+        XCTAssertEqual(assistantMessages.count, 1)
+
+        guard let capturedPrompt = capturingLocalModel.lastPrompt else {
+            return XCTFail("Expected the active turn to capture a runtime prompt.")
+        }
+        XCTAssertTrue(capturedPrompt.contains("Second turn"))
+        XCTAssertFalse(capturedPrompt.contains("First turn"))
     }
 
     @MainActor
@@ -510,6 +570,34 @@ final class PREXUSTests: XCTestCase {
         XCTAssertFalse(assistantMessages[0].content.contains("Route:"))
         XCTAssertFalse(assistantMessages[0].content.contains("Reason:"))
         XCTAssertFalse(assistantMessages[0].content.contains("Execution:"))
+    }
+
+    func testEpisodicMemoryRecentReturnsNewestEpisodes() {
+        let store = InMemoryEpisodicMemoryStore()
+        let oldest = EpisodicMemory(
+            id: UUID(),
+            summary: "Oldest episode",
+            sensitivity: .localPreferred,
+            createdAt: Date(timeIntervalSince1970: 1_715_900_100)
+        )
+        let middle = EpisodicMemory(
+            id: UUID(),
+            summary: "Middle episode",
+            sensitivity: .localPreferred,
+            createdAt: Date(timeIntervalSince1970: 1_715_900_200)
+        )
+        let newest = EpisodicMemory(
+            id: UUID(),
+            summary: "Newest episode",
+            sensitivity: .localPreferred,
+            createdAt: Date(timeIntervalSince1970: 1_715_900_300)
+        )
+
+        store.save(oldest)
+        store.save(middle)
+        store.save(newest)
+
+        XCTAssertEqual(store.recent(limit: 2).map(\.summary), ["Newest episode", "Middle episode"])
     }
 
     func testPersistentMemoryStoreReloadsSavedEpisodes() {
@@ -829,6 +917,22 @@ final class PREXUSTests: XCTestCase {
         let client = LocalModelFactory.makeClient(preferred: .embeddedHeuristic)
         XCTAssertEqual(client.descriptor.backend, .embeddedHeuristic)
         XCTAssertEqual(client.descriptor.name, "Embedded Heuristic Runtime")
+    }
+}
+
+private final class CapturingLocalModelClient: LocalModelClient {
+    let descriptor = LocalModelDescriptor(
+        backend: .embeddedHeuristic,
+        name: "Capturing Local Runtime",
+        summary: "Test-only local runtime that records prompts."
+    )
+
+    private(set) var lastPrompt: String?
+
+    func generate(prompt: String) async throws -> String {
+        lastPrompt = prompt
+        try await Task.sleep(nanoseconds: 200_000_000)
+        return "Captured local runtime response."
     }
 }
 

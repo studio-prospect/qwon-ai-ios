@@ -19,9 +19,10 @@ final class AppEnvironment: ObservableObject {
     let launchScenario: AppLaunchScenario
     private let apiKeyStore: APIKeyStore
     private let memoryStore: EpisodicMemoryStore
+    private let runtimeOverride: RuntimeContainer?
 
     var runtime: RuntimeContainer {
-        RuntimeContainer.live(
+        runtimeOverride ?? RuntimeContainer.live(
             config: settings.config,
             apiKeyStore: apiKeyStore,
             memoryStore: memoryStore
@@ -61,7 +62,8 @@ final class AppEnvironment: ObservableObject {
         apiKeyStore: APIKeyStore,
         memoryStore: EpisodicMemoryStore,
         runtimeDiagnosticsStore: RuntimeDiagnosticsStore,
-        launchScenario: AppLaunchScenario = .standard
+        launchScenario: AppLaunchScenario = .standard,
+        runtimeOverride: RuntimeContainer? = nil
     ) {
         self.settings = settings
         self.memoryLibrary = MemoryLibraryViewModel(memoryStore: memoryStore)
@@ -69,6 +71,7 @@ final class AppEnvironment: ObservableObject {
         self.launchScenario = launchScenario
         self.apiKeyStore = apiKeyStore
         self.memoryStore = memoryStore
+        self.runtimeOverride = runtimeOverride
     }
 
     private static func seededMemoryStore() -> EpisodicMemoryStore {

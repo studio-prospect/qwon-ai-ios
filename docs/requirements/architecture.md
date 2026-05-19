@@ -224,8 +224,9 @@ Before a request reaches a cloud provider, the runtime should try:
 The current iOS scaffold already reflects several runtime boundaries from this document:
 
 - `AppEnvironment` owns configuration and secret wiring
-- `RuntimeContainer` builds the runtime graph from config, stores, and adapters
-- `RuntimeTurnExecutor` runs the turn pipeline outside the SwiftUI view layer
+- `RuntimeContainer` (in `runtime/orchestrator/`) builds the runtime graph from config, stores, and adapters
+- `RuntimeTurnExecutor` (in `runtime/orchestrator/`) runs the turn pipeline outside the SwiftUI view layer
+- `RuntimeMessage` is the neutral transcript type; `ChatMessage` converts at the app boundary
 - `AppSettingsStore` persists runtime policy toggles in `UserDefaults`
 - `KeychainAPIKeyStore` keeps provider secrets out of app config payloads
 - chat UI exposes the latest runtime execution path so local, cloud, and fallback behavior is inspectable during development

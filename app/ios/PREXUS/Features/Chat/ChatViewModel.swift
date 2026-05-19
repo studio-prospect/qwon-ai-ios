@@ -14,6 +14,8 @@ final class ChatViewModel: ObservableObject {
     @Published private(set) var forcedPreviewRoute: RouteDecision?
 
     private let environment: AppEnvironment
+    private var sendTask: Task<Void, Never>?
+    private var sendGeneration = 0
 
     init(environment: AppEnvironment) {
         self.environment = environment
@@ -71,6 +73,13 @@ final class ChatViewModel: ObservableObject {
     }
 
     func send(text: String) {
+        let replacingInFlightTurn = isSending
+        sendTask?.cancel()
+
+        if replacingInFlightTurn {
+            removeTrailingInFlightUserMessageIfNeeded()
+        }
+
         let userMessage = ChatMessage(role: .user, content: text)
         let sensitivity = selectedSensitivity
         let route = environment.runtime.previewRoute(
@@ -84,12 +93,25 @@ final class ChatViewModel: ObservableObject {
         draftText = ""
 
         let transcript = messages
-        Task {
+        let generation = sendGeneration + 1
+        sendGeneration = generation
+
+        sendTask = Task { @MainActor in
+            defer {
+                if sendGeneration == generation {
+                    activeTurnSensitivity = nil
+                    activeRoute = nil
+                    isSending = false
+                }
+            }
+
             do {
                 let output = try await environment.runtime.runTurn(
                     input: .text(text, sensitivity: sensitivity),
                     transcript: transcript
                 )
+                guard !Task.isCancelled, sendGeneration == generation else { return }
+
                 messages.append(ChatMessage(role: .assistant, content: output.response))
                 latestExecution = output.execution
                 environment.runtimeDiagnostics.record(
@@ -98,7 +120,11 @@ final class ChatViewModel: ObservableObject {
                     userText: text
                 )
                 environment.memoryLibrary.refresh()
+            } catch is CancellationError {
+                return
             } catch {
+                guard !Task.isCancelled, sendGeneration == generation else { return }
+
                 latestExecution = nil
                 messages.append(
                     ChatMessage(
@@ -107,11 +133,12 @@ final class ChatViewModel: ObservableObject {
                     )
                 )
             }
-
-            activeTurnSensitivity = nil
-            activeRoute = nil
-            isSending = false
         }
+    }
+
+    private func removeTrailingInFlightUserMessageIfNeeded() {
+        guard let lastMessage = messages.last, lastMessage.role == .user else { return }
+        messages.removeLast()
     }
 
 }

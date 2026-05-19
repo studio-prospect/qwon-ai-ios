@@ -98,7 +98,7 @@ extension RuntimeContainer {
         return effectiveRoute(for: router.route(request: request))
     }
 
-    func runTurn(input: RuntimeTurnInput, transcript: [ChatMessage]) async throws -> RuntimeTurnOutput {
+    func runTurn(input: RuntimeTurnInput, transcript: [RuntimeMessage]) async throws -> RuntimeTurnOutput {
         let request = RuntimeRequest(
             text: input.userText,
             modality: input.modality,
@@ -115,94 +115,10 @@ extension RuntimeContainer {
             userText: input.userText
         )
 
-        let response: String
-        let execution: RuntimeExecutionMetadata
-        switch route.target {
-        case .local:
-            response = try await localModel.generate(prompt: prompt)
-            execution = RuntimeExecutionMetadata(
-                mode: .local,
-                provider: nil,
-                model: localModel.descriptor.name,
-                detail: localModel.descriptor.summary
-            )
-        case .openAI:
-            if let apiKey = apiKeyStore.apiKey(for: .openAI) {
-                do {
-                    response = try await cloudModel.generate(
-                        prompt: prompt,
-                        provider: .openAI,
-                        apiKey: apiKey
-                    )
-                    execution = RuntimeExecutionMetadata(
-                        mode: .cloud,
-                        provider: .openAI,
-                        model: config.openAIModel,
-                        detail: "Escalated after local routing."
-                    )
-                } catch {
-                    response = "OpenAI request failed. Local fallback used.\n\n" + (try await localModel.generate(prompt: prompt))
-                    execution = RuntimeExecutionMetadata(
-                        mode: .fallback,
-                        provider: .openAI,
-                        model: localModel.descriptor.name,
-                        detail: "Cloud request failed. \(localModel.descriptor.summary)"
-                    )
-                }
-            } else {
-                response = "OpenAI API key is missing. Local fallback used.\n\n" + (try await localModel.generate(prompt: prompt))
-                execution = RuntimeExecutionMetadata(
-                    mode: .fallback,
-                    provider: .openAI,
-                    model: localModel.descriptor.name,
-                    detail: "API key missing. \(localModel.descriptor.summary)"
-                )
-            }
-        case .anthropic:
-            if let apiKey = apiKeyStore.apiKey(for: .anthropic) {
-                response = try await cloudModel.generate(
-                    prompt: prompt,
-                    provider: .anthropic,
-                    apiKey: apiKey
-                )
-                execution = RuntimeExecutionMetadata(
-                    mode: .cloud,
-                    provider: .anthropic,
-                    model: "Anthropic",
-                    detail: "Escalated after local routing."
-                )
-            } else {
-                response = "Anthropic API key is missing. Local fallback used.\n\n" + (try await localModel.generate(prompt: prompt))
-                execution = RuntimeExecutionMetadata(
-                    mode: .fallback,
-                    provider: .anthropic,
-                    model: localModel.descriptor.name,
-                    detail: "API key missing. \(localModel.descriptor.summary)"
-                )
-            }
-        case .gemini:
-            if let apiKey = apiKeyStore.apiKey(for: .gemini) {
-                response = try await cloudModel.generate(
-                    prompt: prompt,
-                    provider: .gemini,
-                    apiKey: apiKey
-                )
-                execution = RuntimeExecutionMetadata(
-                    mode: .cloud,
-                    provider: .gemini,
-                    model: "Gemini",
-                    detail: "Escalated after local routing."
-                )
-            } else {
-                response = "Gemini API key is missing. Local fallback used.\n\n" + (try await localModel.generate(prompt: prompt))
-                execution = RuntimeExecutionMetadata(
-                    mode: .fallback,
-                    provider: .gemini,
-                    model: localModel.descriptor.name,
-                    detail: "API key missing. \(localModel.descriptor.summary)"
-                )
-            }
-        }
+        let executionResult = try await execute(
+            route: route,
+            prompt: prompt
+        )
 
         if request.sensitivity.allowsAutomaticEpisodicMemory {
             memoryStore.save(
@@ -218,16 +134,119 @@ extension RuntimeContainer {
         return RuntimeTurnOutput(
             route: route,
             prompt: prompt,
-            response: response,
-            execution: execution
+            response: executionResult.response,
+            execution: executionResult.execution
         )
     }
 
-    func runTurn(userText: String, transcript: [ChatMessage]) async throws -> RuntimeTurnOutput {
+    func runTurn(userText: String, transcript: [RuntimeMessage]) async throws -> RuntimeTurnOutput {
         try await runTurn(
             input: .text(userText),
             transcript: transcript
         )
+    }
+
+    private struct TurnExecutionResult {
+        let response: String
+        let execution: RuntimeExecutionMetadata
+    }
+
+    private func execute(route: RouteDecision, prompt: String) async throws -> TurnExecutionResult {
+        switch route.target {
+        case .local:
+            return TurnExecutionResult(
+                response: try await localModel.generate(prompt: prompt),
+                execution: RuntimeExecutionMetadata(
+                    mode: .local,
+                    provider: nil,
+                    model: localModel.descriptor.name,
+                    detail: localModel.descriptor.summary
+                )
+            )
+        case .openAI, .anthropic, .gemini:
+            guard let provider = route.target.cloudProvider else {
+                return try await localExecution(prompt: prompt)
+            }
+            return try await executeCloud(provider: provider, prompt: prompt)
+        }
+    }
+
+    private func executeCloud(provider: CloudProvider, prompt: String) async throws -> TurnExecutionResult {
+        guard let apiKey = apiKeyStore.apiKey(for: provider) else {
+            return try await localFallback(
+                provider: provider,
+                prompt: prompt,
+                detail: "API key missing. \(localModel.descriptor.summary)"
+            )
+        }
+
+        do {
+            let response = try await cloudModel.generate(
+                prompt: prompt,
+                provider: provider,
+                apiKey: apiKey
+            )
+            return TurnExecutionResult(
+                response: response,
+                execution: RuntimeExecutionMetadata(
+                    mode: .cloud,
+                    provider: provider,
+                    model: cloudModelLabel(for: provider),
+                    detail: "Escalated after local routing."
+                )
+            )
+        } catch {
+            let fallbackResponse = try await localModel.generate(prompt: prompt)
+            return TurnExecutionResult(
+                response: "\(provider.displayLabel) request failed. Local fallback used.\n\n\(fallbackResponse)",
+                execution: RuntimeExecutionMetadata(
+                    mode: .fallback,
+                    provider: provider,
+                    model: localModel.descriptor.name,
+                    detail: "Cloud request failed. \(localModel.descriptor.summary)"
+                )
+            )
+        }
+    }
+
+    private func localExecution(prompt: String) async throws -> TurnExecutionResult {
+        TurnExecutionResult(
+            response: try await localModel.generate(prompt: prompt),
+            execution: RuntimeExecutionMetadata(
+                mode: .local,
+                provider: nil,
+                model: localModel.descriptor.name,
+                detail: localModel.descriptor.summary
+            )
+        )
+    }
+
+    private func localFallback(
+        provider: CloudProvider,
+        prompt: String,
+        detail: String
+    ) async throws -> TurnExecutionResult {
+        let response = try await localModel.generate(prompt: prompt)
+        return TurnExecutionResult(
+            response: "\(provider.displayLabel) API key is missing. Local fallback used.\n\n\(response)",
+            execution: RuntimeExecutionMetadata(
+                mode: .fallback,
+                provider: provider,
+                model: localModel.descriptor.name,
+                detail: detail
+            )
+        )
+    }
+
+    private func cloudModelLabel(for provider: CloudProvider) -> String {
+        switch provider {
+        case .openAI:
+            return config.openAIModel
+        case .anthropic:
+            return "Anthropic"
+        case .gemini:
+            return "Gemini"
+        }
     }
 
     private func promptForExecution(
@@ -286,5 +305,20 @@ extension RuntimeContainer {
 
         let trimmedPrefix = text.prefix(max(0, maxCharacters - 24))
         return String(trimmedPrefix) + "\n...[trimmed]"
+    }
+}
+
+private extension RouteTarget {
+    var cloudProvider: CloudProvider? {
+        switch self {
+        case .local:
+            return nil
+        case .openAI:
+            return .openAI
+        case .anthropic:
+            return .anthropic
+        case .gemini:
+            return .gemini
+        }
     }
 }
