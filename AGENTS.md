@@ -14,6 +14,8 @@ The project focuses on:
 The primary goal is NOT to build a generic chat app.
 The goal is to build a persistent cognitive runtime layer.
 
+For multi-agent delivery (Codex plans/reviews, Cursor implements), follow [docs/product/agent_collaboration_workflow.md](docs/product/agent_collaboration_workflow.md).
+
 ---
 
 # Core Philosophy
@@ -240,6 +242,20 @@ Before completing tasks:
 - run relevant tests
 - avoid introducing warnings
 - verify no obvious memory regressions
+
+When opening a PR, include concrete test-plan results in the PR body (see `.github/pull_request_template.md`).
+
+If iOS source files or test targets change, regenerate the Xcode project with `ruby tools/scripts/generate_xcodeproj.rb` before review.
+
+---
+
+# Agent Collaboration
+
+- Codex owns planning, architecture-sensitive decisions, PR review, and merge readiness.
+- Cursor owns implementation, fix iteration, branch maintenance, and PR preparation.
+- Escalate routing, memory retention, and privacy semantics to Codex instead of inventing policy in code.
+
+Full workflow: [docs/product/agent_collaboration_workflow.md](docs/product/agent_collaboration_workflow.md).
 
 ---
 

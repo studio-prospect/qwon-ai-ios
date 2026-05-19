@@ -140,6 +140,70 @@ That means:
 - Codex decides whether the PR is ready
 - Codex performs or authorizes the merge step
 
+## Branch Naming
+
+Use short, intent-first branch names:
+
+- `refactor/` for structural or boundary changes
+- `feat/` for user-visible product work
+- `fix/` for bug fixes
+- `chore/` for tooling, project generation, or CI-adjacent work
+- `docs/` for documentation-only updates
+
+Examples from recent PREXUS work:
+
+- `refactor/runtime-boundary-and-turn-hardening`
+- `chore/include-generated-ui-tests`
+
+## iOS Project Regeneration
+
+PREXUS uses `tools/scripts/generate_xcodeproj.rb` to recreate `app/ios/PREXUS.xcodeproj`.
+
+Cursor should run regeneration when a change touches any of:
+
+- files under `app/ios/PREXUS/`
+- files under `app/ios/PREXUSTests/` or `app/ios/PREXUSUITests/`
+- files under `runtime/` that are compiled into the iOS app target
+- test targets, bundle identifiers, or shared scheme test bundles
+
+The script also syncs `PREXUS.xcscheme` target UUIDs after regeneration. Do not hand-edit stale `BlueprintIdentifier` values.
+
+Suggested verification after regeneration:
+
+```bash
+ruby tools/scripts/generate_xcodeproj.rb
+xcodebuild -project app/ios/PREXUS.xcodeproj -scheme PREXUS \
+  -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' test
+```
+
+## PR Template
+
+Use `.github/pull_request_template.md` for every PR.
+
+Cursor fills in:
+
+- summary of the change
+- concrete test-plan results (commands run + pass/fail)
+- manual checks performed, if any
+
+Codex uses that section as part of the merge gate.
+
+## Implementation Assistance
+
+The default split is **Codex plans and reviews, Cursor implements**, but Cursor may also:
+
+- run local builds and tests
+- post test-plan results back into the PR
+- apply review fixes on the branch
+
+Codex still owns merge readiness, architecture-sensitive policy decisions, and the final merge decision.
+
+## Related Docs
+
+- [AGENTS.md](../../AGENTS.md) — repository engineering rules
+- [architecture.md](../requirements/architecture.md) — runtime architecture
+- [mvp_completion_plan.md](./mvp_completion_plan.md) — current MVP checkpoint status
+
 ## Notes
 
 - This workflow is intended to reduce design drift while keeping implementation throughput high.
