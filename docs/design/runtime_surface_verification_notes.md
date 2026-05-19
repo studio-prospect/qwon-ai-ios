@@ -70,11 +70,13 @@ Currently captured live:
 - Seeded Diagnostics on iPhone SE (3rd generation)
 - Seeded Memory on iPhone SE (3rd generation)
 - Seeded Chat on iPhone SE (3rd generation)
+- Seeded Settings on iPhone SE (3rd generation)
 - Chat on iPhone 16
 - Settings on iPhone 16
 - Diagnostics on iPhone 16
 - Memory on iPhone 16
 - Seeded Chat on iPhone 16
+- Seeded Settings on iPhone 16
 - Seeded Diagnostics on iPhone 16
 - Seeded Memory on iPhone 16
 
@@ -82,6 +84,7 @@ Saved exports:
 
 - `docs/design/runtime-surface-captures/iphone16/prexus-chat-iphone16.png`
 - `docs/design/runtime-surface-captures/iphone16/prexus-chat-seeded-iphone16.png`
+- `docs/design/runtime-surface-captures/iphone16/prexus-settings-seeded-iphone16.png`
 - `docs/design/runtime-surface-captures/iphone16/prexus-settings-iphone16.png`
 - `docs/design/runtime-surface-captures/iphone16/prexus-diagnostics-iphone16.png`
 - `docs/design/runtime-surface-captures/iphone16/prexus-memory-iphone16.png`
@@ -89,6 +92,7 @@ Saved exports:
 - `docs/design/runtime-surface-captures/iphone16/prexus-memory-seeded-iphone16.png`
 - `docs/design/runtime-surface-captures/iphonese3/prexus-chat-iphonese3.png`
 - `docs/design/runtime-surface-captures/iphonese3/prexus-chat-seeded-iphonese3.png`
+- `docs/design/runtime-surface-captures/iphonese3/prexus-settings-seeded-iphonese3.png`
 - `docs/design/runtime-surface-captures/iphonese3/prexus-settings-iphonese3.png`
 - `docs/design/runtime-surface-captures/iphonese3/prexus-diagnostics-iphonese3.png`
 - `docs/design/runtime-surface-captures/iphonese3/prexus-memory-iphonese3.png`

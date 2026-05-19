@@ -64,6 +64,7 @@ final class PREXUSUITests: XCTestCase {
         openSettingsButton.tap()
 
         XCTAssertTrue(element(UIID.settingsScreen, in: app).waitForExistence(timeout: 5))
+        attachScreenshot(named: "prexus-settings-seeded-\(deviceSlug)")
         app.swipeUp()
 
         let diagnosticsLink = labeledElement("Recent Runtime Decisions", in: app)

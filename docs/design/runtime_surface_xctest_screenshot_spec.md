@@ -144,6 +144,7 @@ That is why both summary and empty-state anchors are useful.
 Current seeded add-on captures:
 
 - a Chat surface with seeded route-aware state
+- a Settings surface with seeded runtime policy context
 - non-empty Diagnostics
 - non-empty Memory
 

@@ -33,9 +33,11 @@ This is now enough to verify or refresh:
 - iPhone 16 runtime-surface captures for Chat / Settings / Diagnostics / Memory
 - iPhone 16 seeded Diagnostics / Memory captures for non-empty docs refreshes
 - iPhone 16 seeded Chat capture for a route-aware docs refresh
+- iPhone 16 seeded Settings capture for a docs refresh with restricted/runtime policy context
 - iPhone SE (3rd generation) runtime-surface captures for Chat / Settings / Diagnostics / Memory
 - iPhone SE (3rd generation) seeded Diagnostics / Memory captures for non-empty docs refreshes
 - iPhone SE (3rd generation) seeded Chat capture for a route-aware docs refresh
+- iPhone SE (3rd generation) seeded Settings capture for a docs refresh with restricted/runtime policy context
 
 ## Current Unreliable / Blocked Scope
 
@@ -95,6 +97,7 @@ The export script normalizes the attachment names to:
 When the seeded UI smoke is present in the same `.xcresult`, it also exports:
 
 - `prexus-chat-seeded-iphone16.png`
+- `prexus-settings-seeded-iphone16.png`
 - `prexus-diagnostics-seeded-iphone16.png`
 - `prexus-memory-seeded-iphone16.png`
 
@@ -108,6 +111,7 @@ The same UI smoke now emits device-aware names, so SE-width runs will export:
 When the seeded UI smoke is present in the same SE-width `.xcresult`, it also exports:
 
 - `prexus-chat-seeded-iphonese3.png`
+- `prexus-settings-seeded-iphonese3.png`
 - `prexus-diagnostics-seeded-iphonese3.png`
 - `prexus-memory-seeded-iphonese3.png`
 

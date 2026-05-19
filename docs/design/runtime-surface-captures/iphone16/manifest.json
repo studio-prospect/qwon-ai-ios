@@ -1,55 +1,62 @@
 {
-  "sourceXCResult": "/var/folders/hf/f4zpppsd16d7070vt3bhwrsw0000gn/T/prexus-runtime-captures-iphone16-20260519-95053-1hbicld/PREXUS-iphone16.xcresult",
-  "exportedAt": "2026-05-19T09:29:18+09:00",
+  "sourceXCResult": "/var/folders/hf/f4zpppsd16d7070vt3bhwrsw0000gn/T/prexus-runtime-captures-iphone16-20260519-2671-36pxrm/PREXUS-iphone16.xcresult",
+  "exportedAt": "2026-05-19T09:35:10+09:00",
   "attachments": [
     {
       "testIdentifier": "PREXUSUITests/testRuntimeSurfacesCanBeCapturedViaNavigation()",
       "deviceName": "iPhone 16",
-      "sourceFileName": "7651AD1B-FED5-4169-90FE-3DFAC6BEB6D5.png",
+      "sourceFileName": "050B030B-5A09-49F5-AC4E-213F8652CB73.png",
       "exportedFileName": "prexus-chat-iphone16.png",
-      "timestamp": 1779150518.186
+      "timestamp": 1779150868.97
     },
     {
       "testIdentifier": "PREXUSUITests/testSeededRuntimeSurfacesShowNonEmptyDiagnosticsAndMemory()",
       "deviceName": "iPhone 16",
-      "sourceFileName": "C2E35BC0-585C-4A15-AF21-C7654867BBB8.png",
+      "sourceFileName": "243CF89B-B2CA-46C7-8770-363599AB853D.png",
       "exportedFileName": "prexus-chat-seeded-iphone16.png",
-      "timestamp": 1779150538.403
+      "timestamp": 1779150889.264
     },
     {
       "testIdentifier": "PREXUSUITests/testRuntimeSurfacesCanBeCapturedViaNavigation()",
       "deviceName": "iPhone 16",
-      "sourceFileName": "C9ABABC9-62BB-4724-A3D6-030068DB98F5.png",
+      "sourceFileName": "C85D9701-4E5C-4181-9B8F-0EB1F2950917.png",
       "exportedFileName": "prexus-diagnostics-iphone16.png",
-      "timestamp": 1779150527.333
+      "timestamp": 1779150877.86
     },
     {
       "testIdentifier": "PREXUSUITests/testSeededRuntimeSurfacesShowNonEmptyDiagnosticsAndMemory()",
       "deviceName": "iPhone 16",
-      "sourceFileName": "DC0C8814-4CC2-454A-88E1-26BEA1AC90E4.png",
+      "sourceFileName": "1D337B98-2577-4516-B794-CF749A3D6370.png",
       "exportedFileName": "prexus-diagnostics-seeded-iphone16.png",
-      "timestamp": 1779150548.102
+      "timestamp": 1779150899.34
     },
     {
       "testIdentifier": "PREXUSUITests/testRuntimeSurfacesCanBeCapturedViaNavigation()",
       "deviceName": "iPhone 16",
-      "sourceFileName": "82352EC2-0DD9-425A-866A-FF27307AA6A6.png",
+      "sourceFileName": "09995C8E-C6D5-4BD5-9B16-015258FBEB40.png",
       "exportedFileName": "prexus-memory-iphone16.png",
-      "timestamp": 1779150532.73
+      "timestamp": 1779150883.149
     },
     {
       "testIdentifier": "PREXUSUITests/testSeededRuntimeSurfacesShowNonEmptyDiagnosticsAndMemory()",
       "deviceName": "iPhone 16",
-      "sourceFileName": "1F2B8472-53D1-43DA-9083-4C0404570661.png",
+      "sourceFileName": "AC02B16B-D77B-446D-8D9C-4C02F23DC6D4.png",
       "exportedFileName": "prexus-memory-seeded-iphone16.png",
-      "timestamp": 1779150554.454
+      "timestamp": 1779150905.702
     },
     {
       "testIdentifier": "PREXUSUITests/testRuntimeSurfacesCanBeCapturedViaNavigation()",
       "deviceName": "iPhone 16",
-      "sourceFileName": "E14AFD8E-F803-45BF-B2EB-921880F049A0.png",
+      "sourceFileName": "FB984C02-5536-430A-9082-076E7536E095.png",
       "exportedFileName": "prexus-settings-iphone16.png",
-      "timestamp": 1779150521.199
+      "timestamp": 1779150872.153
+    },
+    {
+      "testIdentifier": "PREXUSUITests/testSeededRuntimeSurfacesShowNonEmptyDiagnosticsAndMemory()",
+      "deviceName": "iPhone 16",
+      "sourceFileName": "7C0084E4-89F9-488B-B65F-117CB2531B33.png",
+      "exportedFileName": "prexus-settings-seeded-iphone16.png",
+      "timestamp": 1779150892.08
     }
   ]
 }
