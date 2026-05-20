@@ -49,7 +49,7 @@ struct ChatView: View {
     }
 
     private var controlDock: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 8) {
             if let route = viewModel.displayedRoute {
                 previewRouteBanner(route)
             }
@@ -59,7 +59,7 @@ struct ChatView: View {
         .padding(.horizontal, 12)
         .padding(.top, 8)
         .padding(.bottom, 12)
-        .background(.bar)
+        .background(Color(uiColor: .systemGroupedBackground))
     }
 
     @ViewBuilder
