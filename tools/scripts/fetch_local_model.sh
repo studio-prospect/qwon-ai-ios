@@ -2,7 +2,10 @@
 # Download the default PREXUS local MVP GGUF model into models/ (gitignored).
 #
 # Default asset:
-#   SmolLM2-360M-Instruct Q4_K_M (~220MB)
+#   Qwen2.5-0.5B-Instruct Q4_K_M (~400MB, better multilingual QA than SmolLM2-360M)
+#
+# SmolLM2 fallback (smaller, English-biased demo):
+#   PREXUS_LOCAL_MODEL_URL=https://huggingface.co/bartowski/SmolLM2-360M-Instruct-GGUF/resolve/main/SmolLM2-360M-Instruct-Q4_K_M.gguf ./tools/scripts/fetch_local_model.sh
 #
 # Usage:
 #   ./tools/scripts/fetch_local_model.sh
@@ -15,7 +18,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 MODELS_DIR="$ROOT/models"
 OUTPUT="${PREXUS_LOCAL_MODEL_OUTPUT:-$MODELS_DIR/prexus-local-mvp.gguf}"
-URL="${PREXUS_LOCAL_MODEL_URL:-https://huggingface.co/bartowski/SmolLM2-360M-Instruct-GGUF/resolve/main/SmolLM2-360M-Instruct-Q4_K_M.gguf}"
+URL="${PREXUS_LOCAL_MODEL_URL:-https://huggingface.co/bartowski/Qwen2.5-0.5B-Instruct-GGUF/resolve/main/Qwen2.5-0.5B-Instruct-Q4_K_M.gguf}"
 
 mkdir -p "$MODELS_DIR"
 

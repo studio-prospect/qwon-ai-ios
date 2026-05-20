@@ -29,7 +29,8 @@ static std::string PREXUSFormattedChatPrompt(struct llama_model *model, NSString
     llama_chat_message messages[] = {
         {
             "system",
-            "You are PREXUS, a concise on-device assistant. Reply in the same language as the user."
+            "You are PREXUS, a helpful on-device assistant. Answer the user's question directly and factually. "
+            "Use the same language as the user. Keep answers short (one to three sentences)."
         },
         {
             "user",
@@ -114,6 +115,7 @@ static std::string PREXUSFormattedChatPrompt(struct llama_model *model, NSString
     llama_backend_init();
 
     llama_model_params modelParams = llama_model_default_params();
+    modelParams.n_gpu_layers = -1;
     _model = llama_model_load_from_file(modelPath.UTF8String, modelParams);
     if (_model == nullptr) {
         if (error) {
@@ -223,9 +225,11 @@ static std::string PREXUSFormattedChatPrompt(struct llama_model *model, NSString
 
     auto sparams = llama_sampler_chain_default_params();
     struct llama_sampler *sampler = llama_sampler_chain_init(sparams);
+    llama_sampler_chain_add(sampler, llama_sampler_init_penalties(64, 1.15f, 0.05f, 0.05f));
     llama_sampler_chain_add(sampler, llama_sampler_init_top_k(40));
-    llama_sampler_chain_add(sampler, llama_sampler_init_temp(0.7f));
-    llama_sampler_chain_add(sampler, llama_sampler_init_dist(LLAMA_DEFAULT_SEED));
+    llama_sampler_chain_add(sampler, llama_sampler_init_top_p(0.90f, 1));
+    llama_sampler_chain_add(sampler, llama_sampler_init_temp(0.20f));
+    llama_sampler_chain_add(sampler, llama_sampler_init_greedy());
 
     NSMutableString *output = [NSMutableString string];
     const NSInteger generationLimit = MAX(16, maxTokens);
@@ -249,7 +253,7 @@ static std::string PREXUSFormattedChatPrompt(struct llama_model *model, NSString
         }
 
         char piece[256];
-        const int32_t pieceLength = llama_token_to_piece(vocab, nextToken, piece, sizeof(piece), 0, true);
+        const int32_t pieceLength = llama_token_to_piece(vocab, nextToken, piece, sizeof(piece), 0, false);
         if (pieceLength > 0) {
             [output appendString:[[NSString alloc] initWithBytes:piece
                                                           length:(NSUInteger)pieceLength
@@ -269,6 +273,23 @@ static std::string PREXUSFormattedChatPrompt(struct llama_model *model, NSString
     }
 
     llama_sampler_free(sampler);
+
+    for (NSString *stopMarker in @[
+        @"<|im_end|>",
+        @"<|im_start|>",
+        @"<|endoftext|>"
+    ]) {
+        NSRange stopRange = [output rangeOfString:stopMarker];
+        if (stopRange.location != NSNotFound) {
+            [output deleteCharactersInRange:NSMakeRange(
+                stopRange.location,
+                output.length - stopRange.location
+            )];
+            break;
+        }
+    }
+    NSString *trimmed = [output stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    [output setString:trimmed ?: @""];
 
     if (output.length == 0) {
         if (error) {

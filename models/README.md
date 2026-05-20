@@ -7,7 +7,8 @@ GGUF weights are **not** committed to git.
 | Property | Value |
 | --- | --- |
 | File name | `prexus-local-mvp.gguf` |
-| Suggested quant | SmolLM2-360M-Instruct Q4_K_M |
+| Suggested quant | Qwen2.5-0.5B-Instruct Q4_K_M (default; ~400MB) |
+| Alternate (smaller) | SmolLM2-360M-Instruct Q4_K_M (~220MB; weaker Japanese QA) |
 | Download | `./tools/scripts/fetch_local_model.sh` |
 
 ## Placement contract

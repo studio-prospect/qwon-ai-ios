@@ -20,7 +20,7 @@ final class LlamaCppLocalModelClient: LocalModelClient {
     init(
         placement: LocalGGUFModelPlacement = LocalGGUFModelPlacement(),
         engine: LlamaCppInferenceEngine = LlamaCppInferenceEngine(),
-        maxGeneratedTokens: Int = 192
+        maxGeneratedTokens: Int = 96
     ) {
         self.placement = placement
         self.engine = engine
