@@ -6,7 +6,7 @@
 NSString * const PREXUSLlamaBridgeErrorDomain = @"PREXUSLlamaBridgeErrorDomain";
 
 #if PREXUS_LLAMA_CPP_AVAILABLE
-#import <llama.h>
+#import <llama/llama.h>
 #endif
 
 @implementation PREXUSLlamaCancellationToken {
