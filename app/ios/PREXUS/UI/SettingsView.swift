@@ -152,7 +152,7 @@ struct SettingsView: View {
                             detail: "Select the on-device backend PREXUS should favor locally."
                         )
                     } footer: {
-                        Text("Automatic uses a simulator stub on Simulator and the device runtime bridge on hardware.")
+                        Text("Automatic uses a simulator stub on Simulator and llama.cpp on A17 Pro-class iPhones when a GGUF model is present.")
                     }
 
                     Section {

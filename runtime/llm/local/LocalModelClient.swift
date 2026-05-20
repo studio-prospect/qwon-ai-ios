@@ -60,18 +60,6 @@ struct EmbeddedHeuristicLocalModelClient: LocalModelClient {
     }
 }
 
-struct DeviceRuntimeLocalModelClient: LocalModelClient {
-    let descriptor = LocalModelDescriptor(
-        backend: .deviceRuntime,
-        name: "Device Runtime Bridge",
-        summary: "On-device runtime slot reserved for MLX / Core ML / llama.cpp integration."
-    )
-
-    func generate(prompt: String) async throws -> String {
-        "On-device runtime bridge handled the request locally. A packaged LLM backend can be attached here."
-    }
-}
-
 struct MockLocalModelClient: LocalModelClient {
     let descriptor = LocalModelDescriptor(
         backend: .simulatorMock,
@@ -88,17 +76,21 @@ enum LocalModelFactory {
     static func makeClient(preferred backend: LocalModelBackend) -> LocalModelClient {
         switch resolvedBackend(for: backend) {
         case .automatic:
+            #if targetEnvironment(simulator)
+            return SimulatorMockLocalModelClient()
+            #else
             return EmbeddedHeuristicLocalModelClient()
+            #endif
         case .simulatorMock:
             return SimulatorMockLocalModelClient()
         case .embeddedHeuristic:
             return EmbeddedHeuristicLocalModelClient()
         case .deviceRuntime:
-            return DeviceRuntimeLocalModelClient()
+            return EmbeddedHeuristicLocalModelClient()
         }
     }
 
-    private static func resolvedBackend(for backend: LocalModelBackend) -> LocalModelBackend {
+    static func resolvedBackend(for backend: LocalModelBackend) -> LocalModelBackend {
         switch backend {
         case .automatic:
             #if targetEnvironment(simulator)

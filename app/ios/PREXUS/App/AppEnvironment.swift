@@ -25,7 +25,8 @@ final class AppEnvironment: ObservableObject {
         runtimeOverride ?? RuntimeContainer.live(
             config: settings.config,
             apiKeyStore: apiKeyStore,
-            memoryStore: memoryStore
+            memoryStore: memoryStore,
+            localModel: AppLocalModelFactory.makeClient(preferred: settings.config.localModelBackend)
         )
     }
 
