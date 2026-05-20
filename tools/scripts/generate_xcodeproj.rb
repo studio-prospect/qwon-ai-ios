@@ -3,6 +3,10 @@ require "rexml/document"
 require "rexml/xpath"
 require "xcodeproj"
 
+# Regenerates PREXUS.xcodeproj. Links llama.xcframework only when
+# vendor/llama-cpp-artifacts/llama.xcframework exists. Commit the output from a
+# machine without that artifact so clean checkouts can run PREXUSTests.
+
 ROOT = Pathname.new(__dir__).join("..", "..").expand_path
 IOS_ROOT = ROOT.join("app", "ios")
 PROJECT_PATH = IOS_ROOT.join("PREXUS.xcodeproj")

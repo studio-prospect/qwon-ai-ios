@@ -46,6 +46,10 @@ On device, `PREXUSLlamaBridge` applies the GGUF chat template via `llama_chat_ap
 - No large GGUF files in git.
 - See `models/README.md` and `tools/scripts/fetch_local_model.sh`.
 
+## Xcode project generation
+
+The committed `app/ios/PREXUS.xcodeproj` is generated **without** `llama.xcframework` so reviewers can run `PREXUSTests` on a clean checkout. After `./tools/scripts/build_llama_xcframework.sh`, run `ruby tools/scripts/generate_xcodeproj.rb` again to link the framework for on-device builds.
+
 ## Related docs
 
 - `docs/design/device_install_and_screenshot_workflow.md`
