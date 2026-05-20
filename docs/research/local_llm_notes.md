@@ -82,6 +82,23 @@ Research questions:
 - memory usage after conversion and packaging
 - integration complexity
 
+### Gemma-4-E2B-it direction
+
+Current status: evaluation candidate #1, not default. See [Gemma-4-E2B-it Evaluation Plan](./gemma4_e2b_evaluation_plan.md).
+
+Potential value:
+
+- compact instruction-tuned candidate for the Tier 2 profile
+- promising fit for local fallback, summarization, routing support, and context compression
+- aligned with mobile/edge model direction
+
+Research questions:
+
+- availability and stability of a suitable GGUF / quantized artifact under llama.cpp
+- first-token latency and decode throughput on A17 Pro+
+- Japanese short-form quality and deterministic JSON behavior under compact prompts
+- whether LiteRT-LM should become a separate backend evaluation if llama.cpp is unstable
+
 ### llama.cpp / CoreML-converted direction
 
 Potential value:
