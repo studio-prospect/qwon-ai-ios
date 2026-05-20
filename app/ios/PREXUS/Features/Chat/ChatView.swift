@@ -32,6 +32,11 @@ struct ChatView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .scrollDismissesKeyboard(.interactively)
+            .contentShape(Rectangle())
+            .onTapGesture {
+                isComposerFocused = false
+            }
+            .simultaneousGesture(dismissKeyboardDragGesture)
             .background(Color(uiColor: .systemGroupedBackground))
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -39,14 +44,6 @@ struct ChatView: View {
         .background(Color(uiColor: .systemGroupedBackground))
         .safeAreaInset(edge: .bottom, spacing: 0) {
             controlDock
-        }
-        .toolbar {
-            ToolbarItemGroup(placement: .keyboard) {
-                Spacer()
-                Button("Done") {
-                    isComposerFocused = false
-                }
-            }
         }
         .accessibilityIdentifier(PREXUSAccessibilityID.Chat.screen)
     }
@@ -512,6 +509,18 @@ struct ChatView: View {
         guard !text.isEmpty, !viewModel.isSending else { return }
         viewModel.send(text: text)
         isComposerFocused = false
+    }
+
+    /// Dismisses the composer keyboard when the user swipes down on the message area
+    /// (including when the transcript is too short to scroll).
+    private var dismissKeyboardDragGesture: some Gesture {
+        DragGesture(minimumDistance: 16, coordinateSpace: .local)
+            .onEnded { value in
+                let isDownward = value.translation.height > 28
+                let isMostlyVertical = abs(value.translation.height) > abs(value.translation.width)
+                guard isDownward, isMostlyVertical else { return }
+                isComposerFocused = false
+            }
     }
 }
 
