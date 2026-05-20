@@ -1,8 +1,20 @@
 import Foundation
 
 enum AppLocalModelFactory {
+    /// Maps persisted settings to the backend actually used on this platform.
+    static func effectiveBackend(for preferred: LocalModelBackend) -> LocalModelBackend {
+        #if targetEnvironment(simulator)
+        return preferred
+        #else
+        if preferred == .simulatorMock {
+            return .automatic
+        }
+        return preferred
+        #endif
+    }
+
     static func makeClient(preferred backend: LocalModelBackend) -> LocalModelClient {
-        switch LocalModelFactory.resolvedBackend(for: backend) {
+        switch LocalModelFactory.resolvedBackend(for: effectiveBackend(for: backend)) {
         case .simulatorMock:
             return SimulatorMockLocalModelClient()
         case .embeddedHeuristic:

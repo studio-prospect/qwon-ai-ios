@@ -142,7 +142,7 @@ struct SettingsView: View {
 
                     Section {
                         Picker("Backend", selection: $settings.config.localModelBackend) {
-                            ForEach(LocalModelBackend.allCases, id: \.self) { backend in
+                            ForEach(availableLocalModelBackends, id: \.self) { backend in
                                 Text(backend.displayName).tag(backend)
                             }
                         }
@@ -344,6 +344,14 @@ struct SettingsView: View {
                 .fixedSize(horizontal: false, vertical: true)
         }
         .padding(.vertical, 4)
+    }
+
+    private var availableLocalModelBackends: [LocalModelBackend] {
+        #if targetEnvironment(simulator)
+        LocalModelBackend.allCases
+        #else
+        LocalModelBackend.allCases.filter { $0 != .simulatorMock }
+        #endif
     }
 
     @ViewBuilder
