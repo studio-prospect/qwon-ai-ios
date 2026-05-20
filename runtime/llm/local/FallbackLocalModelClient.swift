@@ -15,6 +15,10 @@ struct FallbackLocalModelClient: LocalModelClient {
     func generate(prompt: String) async throws -> String {
         do {
             return try await primary.generate(prompt: prompt)
+        } catch is CancellationError {
+            throw CancellationError()
+        } catch LocalModelError.generationCancelled {
+            throw LocalModelError.generationCancelled
         } catch {
             return try await fallback.generate(prompt: prompt)
         }

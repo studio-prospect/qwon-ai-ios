@@ -9,6 +9,13 @@ NSString * const PREXUSLlamaBridgeErrorDomain = @"PREXUSLlamaBridgeErrorDomain";
 #if PREXUS_LLAMA_CPP_AVAILABLE
 #import <llama/llama.h>
 
+static void PREXUSEnsureLlamaBackendInitialized(void) {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        llama_backend_init();
+    });
+}
+
 static NSString *PREXUSExtractUserMessage(NSString *prompt) {
     NSString *marker = @"User:\n";
     NSRange range = [prompt rangeOfString:marker options:NSBackwardsSearch];
@@ -112,10 +119,10 @@ static std::string PREXUSFormattedChatPrompt(struct llama_model *model, NSString
     }
 
 #if PREXUS_LLAMA_CPP_AVAILABLE
-    llama_backend_init();
+    PREXUSEnsureLlamaBackendInitialized();
 
     llama_model_params modelParams = llama_model_default_params();
-    modelParams.n_gpu_layers = -1;
+    modelParams.n_gpu_layers = 99;
     _model = llama_model_load_from_file(modelPath.UTF8String, modelParams);
     if (_model == nullptr) {
         if (error) {
@@ -321,7 +328,6 @@ static std::string PREXUSFormattedChatPrompt(struct llama_model *model, NSString
         llama_model_free(_model);
         _model = nullptr;
     }
-    llama_backend_free();
 #endif
     _ready = NO;
 }
