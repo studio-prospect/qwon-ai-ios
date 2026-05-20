@@ -1,12 +1,73 @@
 #import "PREXUSLlamaBridge.h"
 
 #import <atomic>
+#import <string>
 #import <vector>
 
 NSString * const PREXUSLlamaBridgeErrorDomain = @"PREXUSLlamaBridgeErrorDomain";
 
 #if PREXUS_LLAMA_CPP_AVAILABLE
 #import <llama/llama.h>
+
+static NSString *PREXUSExtractUserMessage(NSString *prompt) {
+    NSString *marker = @"User:\n";
+    NSRange range = [prompt rangeOfString:marker options:NSBackwardsSearch];
+    if (range.location != NSNotFound) {
+        return [[prompt substringFromIndex:range.location + range.length]
+            stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    }
+    return [prompt stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+}
+
+static std::string PREXUSFormattedChatPrompt(struct llama_model *model, NSString *runtimePrompt) {
+    const char *templateText = llama_model_chat_template(model, nullptr);
+    if (templateText == nullptr || templateText[0] == '\0') {
+        return runtimePrompt.UTF8String;
+    }
+
+    NSString *userMessage = PREXUSExtractUserMessage(runtimePrompt);
+    llama_chat_message messages[] = {
+        {
+            "system",
+            "You are PREXUS, a concise on-device assistant. Reply in the same language as the user."
+        },
+        {
+            "user",
+            userMessage.UTF8String
+        }
+    };
+
+    std::vector<char> buffer(8192);
+    int32_t required = llama_chat_apply_template(
+        templateText,
+        messages,
+        sizeof(messages) / sizeof(messages[0]),
+        true,
+        buffer.data(),
+        static_cast<int32_t>(buffer.size())
+    );
+
+    if (required < 0) {
+        return runtimePrompt.UTF8String;
+    }
+
+    if (required >= static_cast<int32_t>(buffer.size())) {
+        buffer.resize(static_cast<size_t>(required) + 1);
+        required = llama_chat_apply_template(
+            templateText,
+            messages,
+            sizeof(messages) / sizeof(messages[0]),
+            true,
+            buffer.data(),
+            static_cast<int32_t>(buffer.size())
+        );
+        if (required < 0) {
+            return runtimePrompt.UTF8String;
+        }
+    }
+
+    return std::string(buffer.data(), static_cast<size_t>(required));
+}
 #endif
 
 @implementation PREXUSLlamaCancellationToken {
@@ -53,7 +114,7 @@ NSString * const PREXUSLlamaBridgeErrorDomain = @"PREXUSLlamaBridgeErrorDomain";
     llama_backend_init();
 
     llama_model_params modelParams = llama_model_default_params();
-    _model = llama_load_model_from_file(modelPath.UTF8String, modelParams);
+    _model = llama_model_load_from_file(modelPath.UTF8String, modelParams);
     if (_model == nullptr) {
         if (error) {
             *error = [NSError errorWithDomain:PREXUSLlamaBridgeErrorDomain
@@ -69,9 +130,9 @@ NSString * const PREXUSLlamaBridgeErrorDomain = @"PREXUSLlamaBridgeErrorDomain";
     contextParams.n_threads = 4;
     contextParams.n_threads_batch = 4;
 
-    _context = llama_new_context_with_model(_model, contextParams);
+    _context = llama_init_from_model(_model, contextParams);
     if (_context == nullptr) {
-        llama_free_model(_model);
+        llama_model_free(_model);
         _model = nullptr;
         if (error) {
             *error = [NSError errorWithDomain:PREXUSLlamaBridgeErrorDomain
@@ -120,16 +181,22 @@ NSString * const PREXUSLlamaBridgeErrorDomain = @"PREXUSLlamaBridgeErrorDomain";
         cancelFlag = token.atomicFlag;
     }
 
+    llama_memory_clear(llama_get_memory(_context), true);
+
+    const std::string formattedPrompt = PREXUSFormattedChatPrompt(_model, prompt);
+    const char *promptText = formattedPrompt.c_str();
+    const int32_t promptByteLength = static_cast<int32_t>(formattedPrompt.size());
+
     const struct llama_vocab *vocab = llama_model_get_vocab(_model);
     const int32_t maxPromptTokens = 1024;
     std::vector<llama_token> promptTokens(maxPromptTokens);
     const int32_t tokenizedCount = llama_tokenize(
         vocab,
-        prompt.UTF8String,
-        (int32_t)[prompt lengthOfBytesUsingEncoding:NSUTF8StringEncoding],
+        promptText,
+        promptByteLength,
         promptTokens.data(),
         maxPromptTokens,
-        true,
+        false,
         true
     );
 
@@ -156,8 +223,9 @@ NSString * const PREXUSLlamaBridgeErrorDomain = @"PREXUSLlamaBridgeErrorDomain";
 
     auto sparams = llama_sampler_chain_default_params();
     struct llama_sampler *sampler = llama_sampler_chain_init(sparams);
+    llama_sampler_chain_add(sampler, llama_sampler_init_top_k(40));
     llama_sampler_chain_add(sampler, llama_sampler_init_temp(0.7f));
-    llama_sampler_chain_add(sampler, llama_sampler_init_dist(0));
+    llama_sampler_chain_add(sampler, llama_sampler_init_dist(LLAMA_DEFAULT_SEED));
 
     NSMutableString *output = [NSMutableString string];
     const NSInteger generationLimit = MAX(16, maxTokens);
@@ -229,7 +297,7 @@ NSString * const PREXUSLlamaBridgeErrorDomain = @"PREXUSLlamaBridgeErrorDomain";
         _context = nullptr;
     }
     if (_model != nullptr) {
-        llama_free_model(_model);
+        llama_model_free(_model);
         _model = nullptr;
     }
     llama_backend_free();

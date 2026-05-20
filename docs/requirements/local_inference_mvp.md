@@ -23,6 +23,8 @@ AppEnvironment
 
 Simulator continues to use `SimulatorMockLocalModelClient` via `AppLocalModelFactory`.
 
+On device, `PREXUSLlamaBridge` applies the GGUF chat template (SmolLM2 ChatML) via `llama_chat_apply_template` before tokenization. Raw runtime routing prompts are not fed directly into the model.
+
 ## Cancellation and single-flight
 
 - `LocalModelGenerationCoordinator` serializes overlapping `generate` calls.
