@@ -1029,6 +1029,26 @@ final class PREXUSTests: XCTestCase {
         XCTAssertTrue(structured.text.contains("User:"))
     }
 
+    func testStructuredContextCompressorKeepsChronologicalOrderWhenAllBlocksFit() {
+        let messages = [
+            RuntimeMessage(role: .user, content: "first"),
+            RuntimeMessage(role: .assistant, content: "second"),
+            RuntimeMessage(role: .user, content: "third")
+        ]
+
+        let result = StructuredContextCompressor(recencyWindow: 8)
+            .compress(messages: messages, maxEstimatedTokens: 256)
+
+        XCTAssertEqual(
+            result.text,
+            """
+            User: first
+            Assistant: second
+            User: third
+            """
+        )
+    }
+
     func testStructuredContextCompressorRetainsNewestOversizedBlock() {
         let messages = [
             RuntimeMessage(role: .user, content: "older small message"),

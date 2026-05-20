@@ -72,7 +72,7 @@ struct StructuredContextCompressor: ContextCompressor {
         guard !blocks.isEmpty else { return ("", 0) }
 
         let newestBlock = truncateBlock(blocks[blocks.count - 1], maxCharacters: characterBudget)
-        var packed: [String] = []
+        var olderPacked: [String] = []
         var usedCharacters = newestBlock.count
 
         if blocks.count > 1 {
@@ -81,12 +81,12 @@ struct StructuredContextCompressor: ContextCompressor {
                 if usedCharacters + blockCost > characterBudget {
                     continue
                 }
-                packed.append(block)
+                olderPacked.append(block)
                 usedCharacters += blockCost
             }
         }
 
-        packed.append(newestBlock)
+        let packed = olderPacked.reversed() + [newestBlock]
         return (packed.joined(separator: "\n"), packed.count)
     }
 
