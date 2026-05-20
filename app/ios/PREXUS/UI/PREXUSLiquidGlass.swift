@@ -93,6 +93,6 @@ struct PREXUSRuntimeStrip<Content: View>: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .prexusControlGlass(shape: .roundedRect(cornerRadius: 16), fallbackMaterial: .ultraThinMaterial)
             .padding(.horizontal, 12)
-            .padding(.vertical, 6)
+            .padding(.vertical, 4)
     }
 }
