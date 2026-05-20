@@ -989,6 +989,74 @@ final class PREXUSTests: XCTestCase {
         _ = try? await coordinator.generate(prompt: "second") { _ in "second" }
         await first.value
     }
+
+    func testStructuredContextCompressorLabelsRolesAndDeduplicatesSystemLines() {
+        let compressor = StructuredContextCompressor(recencyWindow: 8)
+        let messages = [
+            RuntimeMessage(role: .system, content: "PREXUS runtime initialized."),
+            RuntimeMessage(role: .system, content: "PREXUS runtime initialized."),
+            RuntimeMessage(role: .user, content: "First question"),
+            RuntimeMessage(role: .assistant, content: "First answer"),
+            RuntimeMessage(role: .user, content: "Second question")
+        ]
+
+        let result = compressor.compress(messages: messages, maxEstimatedTokens: 256)
+
+        XCTAssertTrue(result.text.contains("System: PREXUS runtime initialized."))
+        XCTAssertTrue(result.text.contains("User: First question"))
+        XCTAssertTrue(result.text.contains("Assistant: First answer"))
+        XCTAssertEqual(result.metrics.deduplicatedMessageCount, 1)
+        XCTAssertEqual(result.metrics.includedMessageCount, 4)
+    }
+
+    func testStructuredContextCompressorReducesLongTranscriptsVersusSuffixFourBaseline() {
+        let messages = (1...20).map { index in
+            RuntimeMessage(
+                role: index.isMultiple(of: 2) ? .assistant : .user,
+                content: String(repeating: "a", count: 120) + " message \(index)"
+            )
+        }
+
+        let structured = StructuredContextCompressor(recencyWindow: 12)
+            .compress(messages: messages, maxEstimatedTokens: 96)
+        let legacy = LegacySuffixFourContextCompressor()
+            .compress(messages: messages, maxEstimatedTokens: 10_000)
+        let naiveJoin = messages.map(\.content).joined(separator: "\n")
+
+        XCTAssertLessThan(structured.metrics.outputCharacterCount, naiveJoin.count)
+        XCTAssertLessThan(structured.metrics.outputCharacterCount, legacy.text.count)
+        XCTAssertLessThanOrEqual(structured.metrics.estimatedTokenCount, 96)
+        XCTAssertTrue(structured.text.contains("User:"))
+    }
+
+    func testStructuredContextCompressorEnforcesTokenBudget() {
+        let messages = (1...6).map { index in
+            RuntimeMessage(role: .user, content: String(repeating: "x", count: 200) + " \(index)")
+        }
+
+        let result = StructuredContextCompressor(recencyWindow: 6)
+            .compress(messages: messages, maxEstimatedTokens: 48)
+
+        XCTAssertLessThanOrEqual(result.metrics.estimatedTokenCount, 48)
+        XCTAssertGreaterThan(result.metrics.includedMessageCount, 0)
+    }
+}
+
+private struct LegacySuffixFourContextCompressor: ContextCompressor {
+    func compress(messages: [RuntimeMessage], maxEstimatedTokens: Int) -> ContextCompressionResult {
+        let text = messages.suffix(4).map(\.content).joined(separator: "\n")
+        return ContextCompressionResult(
+            text: text,
+            metrics: ContextCompressionMetrics(
+                inputMessageCount: messages.count,
+                includedMessageCount: min(4, messages.count),
+                droppedMessageCount: max(0, messages.count - 4),
+                deduplicatedMessageCount: 0,
+                outputCharacterCount: text.count,
+                estimatedTokenCount: TokenEstimate.fromCharacterCount(text.count)
+            )
+        )
+    }
 }
 
 private final class CapturingLocalModelClient: LocalModelClient {

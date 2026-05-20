@@ -1,11 +1,14 @@
 import Foundation
 
 protocol ContextCompressor {
-    func compress(messages: [RuntimeMessage]) -> String
+    func compress(messages: [RuntimeMessage], maxEstimatedTokens: Int) -> ContextCompressionResult
 }
 
-struct HeuristicContextCompressor: ContextCompressor {
-    func compress(messages: [RuntimeMessage]) -> String {
-        messages.suffix(4).map(\.content).joined(separator: "\n")
+/// Default Phase 1 compressor (P1-2): structured blocks, dedup, and token budget.
+typealias HeuristicContextCompressor = StructuredContextCompressor
+
+extension ContextCompressor {
+    func compress(messages: [RuntimeMessage]) -> ContextCompressionResult {
+        compress(messages: messages, maxEstimatedTokens: 512)
     }
 }
