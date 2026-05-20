@@ -71,25 +71,23 @@ struct StructuredContextCompressor: ContextCompressor {
     private func packBlocks(_ blocks: [String], characterBudget: Int) -> (text: String, includedBlockCount: Int) {
         guard !blocks.isEmpty else { return ("", 0) }
 
-        var selected: [String] = []
-        var usedCharacters = 0
+        let newestBlock = truncateBlock(blocks[blocks.count - 1], maxCharacters: characterBudget)
+        var packed: [String] = []
+        var usedCharacters = newestBlock.count
 
-        for block in blocks.reversed() {
-            let separatorCost = selected.isEmpty ? 0 : 1
-            let blockCost = block.count + separatorCost
-            if usedCharacters + blockCost > characterBudget {
-                continue
+        if blocks.count > 1 {
+            for block in blocks.dropLast().reversed() {
+                let blockCost = block.count + 1
+                if usedCharacters + blockCost > characterBudget {
+                    continue
+                }
+                packed.append(block)
+                usedCharacters += blockCost
             }
-            selected.append(block)
-            usedCharacters += blockCost
         }
 
-        if selected.isEmpty, let last = blocks.last {
-            let truncated = truncateBlock(last, maxCharacters: max(characterBudget, 1))
-            return (truncated, 1)
-        }
-
-        return (selected.reversed().joined(separator: "\n"), selected.count)
+        packed.append(newestBlock)
+        return (packed.joined(separator: "\n"), packed.count)
     }
 
     private func truncateBlock(_ block: String, maxCharacters: Int) -> String {

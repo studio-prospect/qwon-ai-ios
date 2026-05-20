@@ -1029,6 +1029,22 @@ final class PREXUSTests: XCTestCase {
         XCTAssertTrue(structured.text.contains("User:"))
     }
 
+    func testStructuredContextCompressorRetainsNewestOversizedBlock() {
+        let messages = [
+            RuntimeMessage(role: .user, content: "older small message"),
+            RuntimeMessage(role: .assistant, content: "older assistant reply"),
+            RuntimeMessage(role: .user, content: String(repeating: "Z", count: 400))
+        ]
+
+        let result = StructuredContextCompressor(recencyWindow: 8)
+            .compress(messages: messages, maxEstimatedTokens: 24)
+
+        XCTAssertTrue(result.text.contains("Z"))
+        XCTAssertTrue(result.text.hasSuffix("Z") || result.text.contains("…[trimmed]"))
+        let lastLine = result.text.split(separator: "\n", omittingEmptySubsequences: false).last.map(String.init) ?? ""
+        XCTAssertTrue(lastLine.contains("Z") || lastLine.contains("trimmed"))
+    }
+
     func testStructuredContextCompressorEnforcesTokenBudget() {
         let messages = (1...6).map { index in
             RuntimeMessage(role: .user, content: String(repeating: "x", count: 200) + " \(index)")
