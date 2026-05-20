@@ -23,7 +23,17 @@ AppEnvironment
 
 Simulator continues to use `SimulatorMockLocalModelClient` via `AppLocalModelFactory`.
 
-On device, `PREXUSLlamaBridge` applies the GGUF chat template (SmolLM2 ChatML) via `llama_chat_apply_template` before tokenization. Raw runtime routing prompts are not fed directly into the model.
+On device, `PREXUSLlamaBridge` applies the GGUF chat template via `llama_chat_apply_template` before tokenization. Raw runtime routing prompts are not fed directly into the model. The system prompt includes the device-local calendar date.
+
+## Known limitations (P1-1 scope)
+
+| Topic | Expectation |
+| --- | --- |
+| Proof target | llama.cpp loads GGUF on A17 Pro-class hardware and returns coherent text |
+| Model class | Default `Qwen2.5-0.5B-Instruct` Q4_K_M (~400MB) — demo-grade, not encyclopedic |
+| Factual QA | Historical/scientific facts may hallucinate; system prompt tells the model to say "I don't know" when unsure |
+| Date questions | Grounded via injected local date in the system prompt |
+| Production accuracy | Requires larger local models, retrieval (P1-2+), or cloud escalation — out of P1-1 scope |
 
 ## Cancellation and single-flight
 

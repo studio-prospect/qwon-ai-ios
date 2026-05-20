@@ -16,6 +16,21 @@ static void PREXUSEnsureLlamaBackendInitialized(void) {
     });
 }
 
+static NSString *PREXUSLocalSystemPrompt(void) {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.locale = [NSLocale localeWithLocaleIdentifier:@"ja_JP"];
+    formatter.timeZone = [NSTimeZone localTimeZone];
+    formatter.dateFormat = @"yyyy年M月d日（EEEE）";
+    NSString *today = [formatter stringFromDate:[NSDate date]];
+
+    return [NSString stringWithFormat:
+        @"You are PREXUS, a helpful on-device assistant. Today's date is %@. "
+        @"Answer the user's question directly. Use the same language as the user. "
+        @"If you are not confident about a fact, say you do not know instead of inventing names or dates. "
+        @"Keep answers short (one to three sentences).",
+        today];
+}
+
 static NSString *PREXUSExtractUserMessage(NSString *prompt) {
     NSString *marker = @"User:\n";
     NSRange range = [prompt rangeOfString:marker options:NSBackwardsSearch];
@@ -32,12 +47,12 @@ static std::string PREXUSFormattedChatPrompt(struct llama_model *model, NSString
         return runtimePrompt.UTF8String;
     }
 
+    NSString *systemPrompt = PREXUSLocalSystemPrompt();
     NSString *userMessage = PREXUSExtractUserMessage(runtimePrompt);
     llama_chat_message messages[] = {
         {
             "system",
-            "You are PREXUS, a helpful on-device assistant. Answer the user's question directly and factually. "
-            "Use the same language as the user. Keep answers short (one to three sentences)."
+            systemPrompt.UTF8String
         },
         {
             "user",
