@@ -3,6 +3,10 @@ require "rexml/document"
 require "rexml/xpath"
 require "xcodeproj"
 
+# Regenerates PREXUS.xcodeproj. Links llama.xcframework only when
+# vendor/llama-cpp-artifacts/llama.xcframework exists. Commit the output from a
+# machine without that artifact so clean checkouts can run PREXUSTests.
+
 ROOT = Pathname.new(__dir__).join("..", "..").expand_path
 IOS_ROOT = ROOT.join("app", "ios")
 PROJECT_PATH = IOS_ROOT.join("PREXUS.xcodeproj")
@@ -20,6 +24,10 @@ resources = Dir.glob(resource_root.join("**", "*").to_s).reject do |path|
     asset_catalogs.any? { |catalog| path.start_with?("#{catalog}/") }
 end
 shared_resources = Dir.glob(IOS_ROOT.join("shared", "**", "*").to_s).reject { |path| File.directory?(path) }
+bridge_sources = Dir.glob(IOS_ROOT.join("PREXUS", "LlamaCppBridge", "*.{mm,h}").to_s)
+llama_xcframework = ROOT.join("vendor", "llama-cpp-artifacts", "llama.xcframework")
+llama_available = llama_xcframework.exist?
+bridging_header = IOS_ROOT.join("PREXUS", "LlamaCppBridge", "PREXUS-Bridging-Header.h")
 
 project = Xcodeproj::Project.new(PROJECT_PATH.to_s)
 project.root_object.attributes["LastSwiftUpdateCheck"] = "1600"
@@ -66,6 +74,10 @@ runtime_sources.each do |path|
   add_file(app_target, runtime_group, path, ROOT.join("runtime"))
 end
 
+bridge_sources.each do |path|
+  add_file(app_target, app_group, path, IOS_ROOT.join("PREXUS"))
+end
+
 test_sources.each do |path|
   add_file(test_target, tests_group, path, IOS_ROOT.join("PREXUSTests"))
 end
@@ -94,6 +106,20 @@ shared_resources.each do |path|
   app_target.resources_build_phase.add_file_reference(file_ref, true)
 end
 
+if llama_available
+  framework_ref = project.frameworks_group.new_file(llama_xcframework.to_s)
+  framework_ref.last_known_file_type = "wrapper.xcframework"
+  app_target.frameworks_build_phase.add_file_reference(framework_ref)
+
+  embed_frameworks_phase = app_target.copy_files_build_phases.find { |phase| phase.name == "Embed Frameworks" }
+  unless embed_frameworks_phase
+    embed_frameworks_phase = app_target.new_copy_files_build_phase("Embed Frameworks")
+    embed_frameworks_phase.symbol_dst_subfolder_spec = :frameworks
+  end
+  embed_build_file = embed_frameworks_phase.add_file_reference(framework_ref)
+  embed_build_file.settings = { "ATTRIBUTES" => %w[CodeSignOnCopy RemoveHeadersOnCopy] }
+end
+
 app_target.build_configurations.each do |config|
   config.build_settings["PRODUCT_BUNDLE_IDENTIFIER"] = "com.prexus.ios"
   config.build_settings["INFOPLIST_FILE"] = "PREXUS/Resources/Info.plist"
@@ -105,6 +131,25 @@ app_target.build_configurations.each do |config|
   config.build_settings["GENERATE_INFOPLIST_FILE"] = "NO"
   config.build_settings["SWIFT_EMIT_LOC_STRINGS"] = "NO"
   config.build_settings["ASSETCATALOG_COMPILER_APPICON_NAME"] = "AppIcon"
+  config.build_settings["CLANG_CXX_LANGUAGE_STANDARD"] = "gnu++17"
+  config.build_settings["SWIFT_OBJC_BRIDGING_HEADER"] = "PREXUS/LlamaCppBridge/PREXUS-Bridging-Header.h"
+  config.build_settings["OTHER_LDFLAGS"] = ["$(inherited)", "-lc++"]
+
+  next unless llama_available
+
+  config.build_settings["FRAMEWORK_SEARCH_PATHS"] = [
+    "$(inherited)",
+    llama_xcframework.dirname.to_s
+  ]
+  config.build_settings["OTHER_LDFLAGS"] << "-framework" << "llama"
+  config.build_settings["GCC_PREPROCESSOR_DEFINITIONS"] = [
+    "$(inherited)",
+    "PREXUS_LLAMA_CPP_AVAILABLE=1"
+  ]
+  config.build_settings["SWIFT_ACTIVE_COMPILATION_CONDITIONS"] = [
+    "$(inherited)",
+    "PREXUS_LLAMA_CPP_AVAILABLE"
+  ]
 end
 
 test_target.build_configurations.each do |config|

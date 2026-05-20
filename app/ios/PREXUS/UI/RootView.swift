@@ -44,6 +44,9 @@ struct RootView: View {
                 }
             )
             .toolbar(.hidden, for: .navigationBar)
+            .onAppear {
+                LocalLlamaModelPrewarm.startIfNeeded()
+            }
         }
         .sheet(isPresented: $isPresentingSettings) {
             SettingsView(

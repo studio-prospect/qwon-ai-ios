@@ -16,3 +16,7 @@ node_modules/
 coverage/
 dist/
 tmp/
+models/*.gguf
+vendor/llama-cpp-artifacts/
+vendor/llama.cpp/build-*/
+vendor/llama.cpp/build-apple/

@@ -45,7 +45,7 @@ final class AppSettingsStore: ObservableObject {
 
         if let data = defaults.data(forKey: configKey),
            let decoded = try? JSONDecoder().decode(AppConfig.self, from: data) {
-            config = decoded
+            config = Self.normalizedConfig(decoded)
         } else {
             config = .default
         }
@@ -56,8 +56,19 @@ final class AppSettingsStore: ObservableObject {
     }
 
     private func persistConfig() {
-        guard let data = try? JSONEncoder().encode(config) else { return }
+        let normalized = Self.normalizedConfig(config)
+        guard let data = try? JSONEncoder().encode(normalized) else { return }
         defaults.set(data, forKey: configKey)
+    }
+
+    private static func normalizedConfig(_ config: AppConfig) -> AppConfig {
+        var normalized = config
+        #if !targetEnvironment(simulator)
+        if normalized.localModelBackend == .simulatorMock {
+            normalized.localModelBackend = .automatic
+        }
+        #endif
+        return normalized
     }
 
     func availabilityStatus(for provider: CloudProvider) -> ProviderAvailabilityStatus {

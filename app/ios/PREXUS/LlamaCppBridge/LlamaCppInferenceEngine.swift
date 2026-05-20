@@ -1,0 +1,84 @@
+import Foundation
+
+final class LlamaCppCancellationHandle: @unchecked Sendable {
+    private let token = PREXUSLlamaCancellationToken()
+
+    func cancel() {
+        token.cancel()
+    }
+
+    var bridgeToken: PREXUSLlamaCancellationToken {
+        token
+    }
+}
+
+final class LlamaCppInferenceEngine: @unchecked Sendable {
+    private let lock = NSLock()
+    private var bridge: PREXUSLlamaBridge?
+    private var loadedModelPath: String?
+
+    var isReady: Bool {
+        lock.lock()
+        defer { lock.unlock() }
+        return bridge?.isReady ?? false
+    }
+
+    func prepare(modelPath: String) throws {
+        lock.lock()
+        defer { lock.unlock() }
+
+        if loadedModelPath == modelPath, bridge?.isReady == true {
+            return
+        }
+
+        bridge?.unload()
+        bridge = nil
+        loadedModelPath = nil
+
+        do {
+            let loadedBridge = try PREXUSLlamaBridge(modelPath: modelPath)
+            bridge = loadedBridge
+            loadedModelPath = modelPath
+        } catch {
+            throw LocalModelError.generationFailed(error.localizedDescription)
+        }
+    }
+
+    func generate(prompt: String, maxTokens: Int, cancellation: LlamaCppCancellationHandle) throws -> String {
+        lock.lock()
+        let activeBridge = bridge
+        lock.unlock()
+
+        guard let activeBridge, activeBridge.isReady else {
+            throw LocalModelError.backendUnavailable("llama.cpp bridge is not ready.")
+        }
+
+        do {
+            let output = try activeBridge.generate(
+                fromPrompt: prompt,
+                maxTokens: maxTokens,
+                cancellation: cancellation.bridgeToken
+            )
+
+            guard !output.isEmpty else {
+                throw LocalModelError.generationFailed("llama.cpp returned an empty completion.")
+            }
+
+            return output
+        } catch let error as NSError {
+            if error.domain == PREXUSLlamaBridgeErrorDomain,
+               error.code == PREXUSLlamaBridgeError.cancelled.rawValue {
+                throw LocalModelError.generationCancelled
+            }
+            throw LocalModelError.generationFailed(error.localizedDescription)
+        }
+    }
+
+    func unload() {
+        lock.lock()
+        bridge?.unload()
+        bridge = nil
+        loadedModelPath = nil
+        lock.unlock()
+    }
+}

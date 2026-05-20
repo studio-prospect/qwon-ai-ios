@@ -142,7 +142,7 @@ struct SettingsView: View {
 
                     Section {
                         Picker("Backend", selection: $settings.config.localModelBackend) {
-                            ForEach(LocalModelBackend.allCases, id: \.self) { backend in
+                            ForEach(availableLocalModelBackends, id: \.self) { backend in
                                 Text(backend.displayName).tag(backend)
                             }
                         }
@@ -152,7 +152,7 @@ struct SettingsView: View {
                             detail: "Select the on-device backend PREXUS should favor locally."
                         )
                     } footer: {
-                        Text("Automatic uses a simulator stub on Simulator and the device runtime bridge on hardware.")
+                        Text("Automatic uses a simulator stub on Simulator and llama.cpp on A17 Pro-class iPhones when a GGUF model is present.")
                     }
 
                     Section {
@@ -344,6 +344,14 @@ struct SettingsView: View {
                 .fixedSize(horizontal: false, vertical: true)
         }
         .padding(.vertical, 4)
+    }
+
+    private var availableLocalModelBackends: [LocalModelBackend] {
+        #if targetEnvironment(simulator)
+        LocalModelBackend.allCases
+        #else
+        LocalModelBackend.allCases.filter { $0 != .simulatorMock }
+        #endif
     }
 
     @ViewBuilder

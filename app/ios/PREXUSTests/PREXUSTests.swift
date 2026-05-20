@@ -921,6 +921,74 @@ final class PREXUSTests: XCTestCase {
         XCTAssertEqual(client.descriptor.backend, .embeddedHeuristic)
         XCTAssertEqual(client.descriptor.name, "Embedded Heuristic Runtime")
     }
+
+    func testLocalInferenceDeviceGateSupportsA17ProClassIdentifiers() {
+        XCTAssertEqual(
+            LocalInferenceDeviceGate.chipTier(machineIdentifier: "iPhone16,1"),
+            .a17ProOrNewer
+        )
+        XCTAssertEqual(
+            LocalInferenceDeviceGate.chipTier(machineIdentifier: "iPhone17,3"),
+            .a17ProOrNewer
+        )
+        XCTAssertEqual(
+            LocalInferenceDeviceGate.chipTier(machineIdentifier: "iPhone18,3"),
+            .a17ProOrNewer
+        )
+    }
+
+    func testLocalInferenceDeviceGateRejectsOlderPhones() {
+        XCTAssertEqual(
+            LocalInferenceDeviceGate.chipTier(machineIdentifier: "iPhone15,4"),
+            .unsupported
+        )
+        XCTAssertEqual(
+            LocalInferenceDeviceGate.chipTier(machineIdentifier: "iPhone14,5"),
+            .unsupported
+        )
+    }
+
+    func testFallbackLocalModelClientUsesFallbackWhenPrimaryFails() async throws {
+        struct FailingPrimary: LocalModelClient {
+            let descriptor = LocalModelDescriptor(
+                backend: .deviceRuntime,
+                name: "Failing",
+                summary: "Always fails"
+            )
+
+            func generate(prompt: String) async throws -> String {
+                throw LocalModelError.modelAssetUnavailable
+            }
+        }
+
+        let fallback = EmbeddedHeuristicLocalModelClient()
+        let client = FallbackLocalModelClient(primary: FailingPrimary(), fallback: fallback)
+        let response = try await client.generate(prompt: "User:\nReview routing policy")
+
+        XCTAssertTrue(response.localizedCaseInsensitiveContains("embedded local runtime"))
+    }
+
+    func testLocalModelGenerationCoordinatorCancelsSupersededTurn() async {
+        let coordinator = LocalModelGenerationCoordinator()
+        let firstStarted = expectation(description: "first started")
+
+        let first = Task {
+            do {
+                _ = try await coordinator.generate(prompt: "first") { _ in
+                    firstStarted.fulfill()
+                    try await Task.sleep(for: .seconds(2))
+                    return "first"
+                }
+                XCTFail("Expected cancellation")
+            } catch {
+                XCTAssertEqual(error as? LocalModelError, .generationCancelled)
+            }
+        }
+
+        await fulfillment(of: [firstStarted], timeout: 2)
+        _ = try? await coordinator.generate(prompt: "second") { _ in "second" }
+        await first.value
+    }
 }
 
 private final class CapturingLocalModelClient: LocalModelClient {
