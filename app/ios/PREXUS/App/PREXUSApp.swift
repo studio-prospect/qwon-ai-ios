@@ -7,6 +7,7 @@ struct PREXUSApp: App {
     var body: some Scene {
         WindowGroup {
             RootView(environment: environment)
+                .background(Color(uiColor: .systemGroupedBackground))
         }
     }
 }

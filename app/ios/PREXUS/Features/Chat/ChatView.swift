@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ChatView: View {
     @StateObject private var viewModel: ChatViewModel
+    @FocusState private var isComposerFocused: Bool
     private let onOpenSettings: () -> Void
 
     init(viewModel: ChatViewModel, onOpenSettings: @escaping () -> Void = {}) {
@@ -27,13 +28,26 @@ struct ChatView: View {
                     }
                 }
                 .padding()
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .scrollDismissesKeyboard(.interactively)
             .background(Color(uiColor: .systemGroupedBackground))
-
-            controlDock
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .navigationBarBackButtonHidden()
         .background(Color(uiColor: .systemGroupedBackground))
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            controlDock
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                Button("Done") {
+                    isComposerFocused = false
+                }
+            }
+        }
         .accessibilityIdentifier(PREXUSAccessibilityID.Chat.screen)
     }
 
@@ -95,6 +109,9 @@ struct ChatView: View {
                 TextField("Ask PREXUS", text: $viewModel.draftText, axis: .vertical)
                     .font(.body)
                     .lineLimit(1...6)
+                    .focused($isComposerFocused)
+                    .submitLabel(.send)
+                    .onSubmit(submitDraftIfPossible)
                     .padding(.horizontal, 14)
                     .padding(.vertical, 12)
                     .background(
@@ -107,11 +124,7 @@ struct ChatView: View {
                     )
                     .disabled(viewModel.isSending)
 
-                Button {
-                    let text = viewModel.draftText.trimmingCharacters(in: .whitespacesAndNewlines)
-                    guard !text.isEmpty else { return }
-                    viewModel.send(text: text)
-                } label: {
+                Button(action: submitDraftIfPossible) {
                     Group {
                         if viewModel.isSending {
                             ProgressView()
@@ -492,6 +505,13 @@ struct ChatView: View {
         case .fallback:
             return "Fallback"
         }
+    }
+
+    private func submitDraftIfPossible() {
+        let text = viewModel.draftText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !text.isEmpty, !viewModel.isSending else { return }
+        viewModel.send(text: text)
+        isComposerFocused = false
     }
 }
 
