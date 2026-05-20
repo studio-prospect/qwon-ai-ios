@@ -539,7 +539,8 @@ final class PREXUSTests: XCTestCase {
 
         XCTAssertNil(viewModel.activeTurnSensitivity)
         XCTAssertNil(viewModel.activeRoute)
-        XCTAssertEqual(viewModel.routeBannerTitle, "Planned Route")
+        XCTAssertEqual(viewModel.routeBannerTitle, "Executed Route")
+        XCTAssertEqual(viewModel.displayedRoute?.statusSummary, "Local | Tier 2")
     }
 
     @MainActor

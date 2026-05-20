@@ -11,11 +11,13 @@ final class ChatViewModel: ObservableObject {
     @Published private(set) var latestExecution: RuntimeExecutionMetadata?
     @Published private(set) var activeTurnSensitivity: SensitivityLevel?
     @Published private(set) var activeRoute: RouteDecision?
+    @Published private(set) var lastCommittedRoute: RouteDecision?
     @Published private(set) var forcedPreviewRoute: RouteDecision?
 
     private let environment: AppEnvironment
     private var sendTask: Task<Void, Never>?
     private var sendGeneration = 0
+    private static let minimumExecutingRouteDisplay: Duration = .milliseconds(400)
 
     init(environment: AppEnvironment) {
         self.environment = environment
@@ -30,6 +32,7 @@ final class ChatViewModel: ObservableObject {
         latestExecution: RuntimeExecutionMetadata?,
         activeTurnSensitivity: SensitivityLevel?,
         activeRoute: RouteDecision?,
+        lastCommittedRoute: RouteDecision? = nil,
         forcedPreviewRoute: RouteDecision? = nil
     ) {
         self.environment = environment
@@ -40,6 +43,7 @@ final class ChatViewModel: ObservableObject {
         self.latestExecution = latestExecution
         self.activeTurnSensitivity = activeTurnSensitivity
         self.activeRoute = activeRoute
+        self.lastCommittedRoute = lastCommittedRoute
         self.forcedPreviewRoute = forcedPreviewRoute
     }
 
@@ -52,7 +56,11 @@ final class ChatViewModel: ObservableObject {
     }
 
     var displayedRoute: RouteDecision? {
-        isSending ? activeRoute : (forcedPreviewRoute ?? previewRoute)
+        if isSending {
+            return activeRoute
+        }
+
+        return forcedPreviewRoute ?? previewRoute ?? lastCommittedRoute
     }
 
     var displayedSensitivity: SensitivityLevel {
@@ -64,7 +72,15 @@ final class ChatViewModel: ObservableObject {
     }
 
     var routeBannerTitle: String {
-        isSending ? "Executing Route" : "Planned Route"
+        if isSending {
+            return "Executing Route"
+        }
+
+        if previewRoute != nil || forcedPreviewRoute != nil {
+            return "Planned Route"
+        }
+
+        return "Executed Route"
     }
 
     var sendStateSummary: String? {
@@ -88,6 +104,7 @@ final class ChatViewModel: ObservableObject {
         messages.append(userMessage)
         isSending = true
         forcedPreviewRoute = nil
+        lastCommittedRoute = nil
         activeTurnSensitivity = sensitivity
         activeRoute = route
         draftText = ""
@@ -97,6 +114,8 @@ final class ChatViewModel: ObservableObject {
         sendGeneration = generation
 
         sendTask = Task { @MainActor in
+            let turnStartedAt = ContinuousClock.now
+
             defer {
                 if sendGeneration == generation {
                     activeTurnSensitivity = nil
@@ -112,8 +131,15 @@ final class ChatViewModel: ObservableObject {
                 )
                 guard !Task.isCancelled, sendGeneration == generation else { return }
 
+                let elapsed = turnStartedAt.duration(to: .now)
+                if elapsed < Self.minimumExecutingRouteDisplay {
+                    try await Task.sleep(for: Self.minimumExecutingRouteDisplay - elapsed)
+                }
+                guard !Task.isCancelled, sendGeneration == generation else { return }
+
                 messages.append(ChatMessage(role: .assistant, content: output.response))
                 latestExecution = output.execution
+                lastCommittedRoute = output.route
                 environment.runtimeDiagnostics.record(
                     route: output.route,
                     execution: output.execution,
@@ -126,6 +152,7 @@ final class ChatViewModel: ObservableObject {
                 guard !Task.isCancelled, sendGeneration == generation else { return }
 
                 latestExecution = nil
+                lastCommittedRoute = nil
                 messages.append(
                     ChatMessage(
                         role: .assistant,

@@ -1,5 +1,9 @@
 import SwiftUI
 
+private enum ChatScrollAnchor {
+    static let bottom = "chat.scroll.bottom"
+}
+
 struct ChatView: View {
     @StateObject private var viewModel: ChatViewModel
     @FocusState private var isComposerFocused: Bool
@@ -20,46 +24,64 @@ struct ChatView: View {
                 runtimeStatusBanner(execution)
             }
 
-            ScrollView {
-                LazyVStack(alignment: .leading, spacing: 0) {
-                    ForEach(Array(viewModel.messages.enumerated()), id: \.element.id) { index, message in
-                        messageBubble(message)
-                            .padding(.bottom, spacingAfterMessage(at: index))
+            ScrollViewReader { scrollProxy in
+                ScrollView {
+                    LazyVStack(alignment: .leading, spacing: 0) {
+                        ForEach(Array(viewModel.messages.enumerated()), id: \.element.id) { index, message in
+                            messageBubble(message)
+                                .padding(.bottom, spacingAfterMessage(at: index))
+                                .id(message.id)
+                        }
+
+                        Color.clear
+                            .frame(height: 1)
+                            .id(ChatScrollAnchor.bottom)
                     }
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                .padding()
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .scrollDismissesKeyboard(.interactively)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    isComposerFocused = false
+                }
+                .simultaneousGesture(dismissKeyboardDragGesture)
+                .background(Color(uiColor: .systemGroupedBackground))
+                .onChange(of: viewModel.messages.last?.id) { _, _ in
+                    scrollTranscriptToBottom(using: scrollProxy)
+                }
+                .onChange(of: viewModel.isSending) { wasSending, isSending in
+                    guard wasSending, !isSending else { return }
+                    scrollTranscriptToBottom(using: scrollProxy)
+                }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .scrollDismissesKeyboard(.interactively)
-            .contentShape(Rectangle())
-            .onTapGesture {
-                isComposerFocused = false
+
+            if let route = viewModel.displayedRoute {
+                previewRouteBanner(route)
+                    .padding(.horizontal, 12)
+                    .padding(.top, 8)
             }
-            .simultaneousGesture(dismissKeyboardDragGesture)
-            .background(Color(uiColor: .systemGroupedBackground))
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .navigationBarBackButtonHidden()
         .background(Color(uiColor: .systemGroupedBackground))
         .safeAreaInset(edge: .bottom, spacing: 0) {
-            controlDock
+            composerDock
         }
         .accessibilityIdentifier(PREXUSAccessibilityID.Chat.screen)
     }
 
-    private var controlDock: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            if let route = viewModel.displayedRoute {
-                previewRouteBanner(route)
+    private var composerDock: some View {
+        composerCard
+            .padding(.horizontal, 12)
+            .padding(.top, 8)
+            .padding(.bottom, 12)
+            .frame(maxWidth: .infinity)
+            .background {
+                Color(uiColor: .systemGroupedBackground)
+                    .ignoresSafeArea(edges: .bottom)
             }
-
-            composerCard
-        }
-        .padding(.horizontal, 12)
-        .padding(.top, 8)
-        .padding(.bottom, 12)
-        .background(Color(uiColor: .systemGroupedBackground))
     }
 
     @ViewBuilder
@@ -509,6 +531,17 @@ struct ChatView: View {
         guard !text.isEmpty, !viewModel.isSending else { return }
         viewModel.send(text: text)
         isComposerFocused = false
+    }
+
+    private func scrollTranscriptToBottom(using proxy: ScrollViewProxy) {
+        guard viewModel.messages.last != nil else { return }
+
+        Task { @MainActor in
+            await Task.yield()
+            withAnimation(.easeOut(duration: 0.25)) {
+                proxy.scrollTo(ChatScrollAnchor.bottom, anchor: .bottom)
+            }
+        }
     }
 
     /// Dismisses the composer keyboard when the user swipes down on the message area
