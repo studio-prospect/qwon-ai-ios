@@ -105,7 +105,12 @@ extension RuntimeContainer {
             sensitivity: input.sensitivity
         )
         let route = previewRoute(input: input)
-        let compressedContext = compressor.compress(messages: transcript)
+        let compressionBudgetTokens = max(64, config.maxCloudContextTokens / 2)
+        let compression = compressor.compress(
+            messages: transcript,
+            maxEstimatedTokens: compressionBudgetTokens
+        )
+        let compressedContext = compression.text
         let memoryContext = memoryStore.recent(limit: 3).map(\.summary).joined(separator: "\n")
 
         let prompt = promptForExecution(
@@ -117,7 +122,8 @@ extension RuntimeContainer {
 
         let executionResult = try await execute(
             route: route,
-            prompt: prompt
+            prompt: prompt,
+            compressionMetrics: compression.metrics
         )
 
         if request.sensitivity.allowsAutomaticEpisodicMemory {
@@ -151,7 +157,11 @@ extension RuntimeContainer {
         let execution: RuntimeExecutionMetadata
     }
 
-    private func execute(route: RouteDecision, prompt: String) async throws -> TurnExecutionResult {
+    private func execute(
+        route: RouteDecision,
+        prompt: String,
+        compressionMetrics: ContextCompressionMetrics
+    ) async throws -> TurnExecutionResult {
         switch route.target {
         case .local:
             return TurnExecutionResult(
@@ -167,11 +177,19 @@ extension RuntimeContainer {
             guard let provider = route.target.cloudProvider else {
                 return try await localExecution(prompt: prompt)
             }
-            return try await executeCloud(provider: provider, prompt: prompt)
+            return try await executeCloud(
+                provider: provider,
+                prompt: prompt,
+                compressionMetrics: compressionMetrics
+            )
         }
     }
 
-    private func executeCloud(provider: CloudProvider, prompt: String) async throws -> TurnExecutionResult {
+    private func executeCloud(
+        provider: CloudProvider,
+        prompt: String,
+        compressionMetrics: ContextCompressionMetrics
+    ) async throws -> TurnExecutionResult {
         guard let apiKey = apiKeyStore.apiKey(for: provider) else {
             return try await localFallback(
                 provider: provider,
@@ -192,7 +210,7 @@ extension RuntimeContainer {
                     mode: .cloud,
                     provider: provider,
                     model: cloudModelLabel(for: provider),
-                    detail: "Escalated after local routing."
+                    detail: compressionDetail(compressionMetrics, suffix: "Escalated after local routing.")
                 )
             )
         } catch {
@@ -294,6 +312,11 @@ extension RuntimeContainer {
                 ? route.reroutedToLocal(appending: "gemini_key_unavailable")
                 : route
         }
+    }
+
+    private func compressionDetail(_ metrics: ContextCompressionMetrics, suffix: String) -> String {
+        let summary = "Context compressed to ~\(metrics.estimatedTokenCount) tokens (\(metrics.inputMessageCount)→\(metrics.includedMessageCount) messages, \(metrics.deduplicatedMessageCount) deduped)."
+        return "\(summary) \(suffix)"
     }
 
     private func trimToApproximateTokenBudget(_ text: String, maxTokens: Int) -> String {

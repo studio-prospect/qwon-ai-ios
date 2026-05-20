@@ -22,7 +22,7 @@ struct RuntimeContainer {
             approvedProvidersForRestrictedMode: Set(config.approvedProvidersForRestrictedMode)
         )
         let classifier = HeuristicIntentClassifier()
-        let compressor = HeuristicContextCompressor()
+        let compressor = StructuredContextCompressor()
         let localModel = localModel ?? LocalModelFactory.makeClient(preferred: config.localModelBackend)
         let cloudModel = cloudModel ?? DefaultCloudModelClient(
             openAIClient: OpenAIResponsesClient(
