@@ -13,6 +13,7 @@ Use this note when:
 
 Related note:
 
+- **physical device install / manual QA screenshots:** `docs/design/device_install_and_screenshot_workflow.md`
 - automation backlog: `docs/design/runtime_surface_automation_backlog.md`
 - accessibility identifier plan: `docs/design/runtime_surface_accessibility_identifier_plan.md`
 - capture index: `docs/design/runtime_surface_capture_index.md`

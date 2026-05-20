@@ -198,9 +198,20 @@ The default split is **Codex plans and reviews, Cursor implements**, but Cursor 
 
 Codex still owns merge readiness, architecture-sensitive policy decisions, and the final merge decision.
 
+## Device and Screenshot Verification
+
+When a PR touches Chat layout, Liquid Glass, keyboard behavior, or iPhone safe-area presentation:
+
+- install on a physical device with `./tools/scripts/install_on_device.sh` (see `docs/design/device_install_and_screenshot_workflow.md`)
+- run the stable `PREXUSTests` command from that doc before requesting review
+- attach optional device QA PNGs under `docs/design/screenshots/device-qa/` and link them in the PR test plan
+
+Simulator runtime-surface refreshes remain separate: `docs/design/runtime_surface_capture_workflow.md`.
+
 ## Related Docs
 
 - [AGENTS.md](../../AGENTS.md) — repository engineering rules
+- [device_install_and_screenshot_workflow.md](../design/device_install_and_screenshot_workflow.md) — physical device install and QA captures
 - [architecture.md](../requirements/architecture.md) — runtime architecture
 - [mvp_completion_plan.md](./mvp_completion_plan.md) — current MVP checkpoint status
 

@@ -12,6 +12,7 @@ Use it when you want to:
 
 Related notes:
 
+- **physical device install / manual QA screenshots:** `docs/design/device_install_and_screenshot_workflow.md`
 - capture workflow: `docs/design/runtime_surface_capture_workflow.md`
 - verification notes: `docs/design/runtime_surface_verification_notes.md`
 - XCTest screenshot spec: `docs/design/runtime_surface_xctest_screenshot_spec.md`
