@@ -153,3 +153,101 @@ Implement the first Gemma-4-E2B-it evaluation slice.
 ## Review Gate
 
 Codex should not approve a backend switch in this task. Merge readiness should be based on whether the PR improves PREXUS' evidence about Gemma-4-E2B-it without destabilizing the current local inference path.
+
+---
+
+## Evaluation Results (2026-05-21)
+
+**Verdict:** Gemma-4-E2B-it **loads and decodes** through the pinned PREXUS llama.cpp path (`vendor/llama.cpp` @ `585080d`), but **coherent instruction-following output was not demonstrated** in this Mac-side pass. **Default model unchanged.** A17 Pro+ device validation is still required before any adoption decision.
+
+### Artifact and runtime
+
+| Item | Value |
+| --- | --- |
+| Model | `google/gemma-4-E2B-it` |
+| Quant / source | Q4_K_M, [bartowski/google_gemma-4-E2B-it-GGUF](https://huggingface.co/bartowski/google_gemma-4-E2B-it-GGUF) |
+| Local path pattern | `models/prexus-eval-gemma4-e2b-it.gguf` (gitignored) |
+| llama.cpp | `585080d` (same submodule pin as P1-1) |
+| PREXUS path | `LlamaCppLocalModelClient` → `PREXUSLlamaBridge` + `llama_chat_apply_template` |
+| Mac bench host | MacBook-class, AMD Radeon Pro 560X (4 GiB Metal working-set limit) |
+
+### Throughput (`llama-bench`, Metal, `-r 2`)
+
+| Model | Prompt processing (512 tok) | Token generation (64 tok) | File size |
+| --- | ---: | ---: | ---: |
+| Qwen2.5-0.5B Q4_K_M (default MVP) | 266.9 ± 11.6 t/s | 5.3 ± 1.5 t/s | 374 MiB |
+| Gemma-4-E2B-it Q4_K_M (candidate) | 90.2 ± 2.1 t/s | 2.4 ± 1.0 t/s | 3.21 GiB |
+
+Gemma is **~3.4× slower** on prompt processing and **~2.2× slower** on decode vs the current default on the same Mac host.
+
+### Latency and memory (`llama-cli -st`, first Japanese prompt)
+
+| Metric | Qwen 0.5B | Gemma-4-E2B Q4_K_M |
+| --- | ---: | ---: |
+| Wall time (cold load + 48 tok gen) | ~5 s | ~23 s |
+| Prompt throughput (cli) | ~168 t/s | ~35–40 t/s |
+| Decode throughput (cli) | ~8.4 t/s | ~3.4–3.7 t/s |
+| Peak RSS (`time -l`) | ~550 MiB | ~4.6 GiB |
+| Peak memory footprint | ~108 MiB | ~1.0 GiB |
+
+On iPhone 8 GiB class hardware, a **3.2 GiB** weight file plus KV/context overhead is **feasible but tight**; sustained decode at ~2–4 t/s implies **elevated thermal and battery risk** for interactive chat.
+
+### Quality notes (fixed prompt set)
+
+**Japanese fallback chat** — Qwen returned a coherent one-sentence Japanese answer. Gemma returned **multilingual token soup** (degenerate text) across multiple attempts:
+
+- raw `-p` prompt
+- `-sys` + `--reasoning off`
+- `--chat-template gemma`
+- `--chat-template-kwargs '{"enable_thinking":false}'`
+
+**Routing JSON** — Gemma `llama-cli` run **aborted** during chat parsing (`common_chat_peg_parse` / `<|channel>` token in model output). Not evaluated as reliable for deterministic JSON control-plane tasks in this pass.
+
+**Context compression prompt** — Not run to completion after routing crash; deferred to A17 Pro device pass with `PREXUS_LOCAL_INFERENCE_BENCHMARK=1`.
+
+### Assessment against PREXUS criteria
+
+| Criterion | Result |
+| --- | --- |
+| GGUF loads via llama.cpp | **Pass** (architecture `gemma4` recognized) |
+| Stable streaming output | **Fail** on Mac (garbled completions) |
+| First-token / decode latency | **Marginal** (2–4 t/s decode, slow cold start) |
+| Peak memory | **High** (~4.6 GiB RSS on Mac; tight on phone) |
+| Thermal / battery risk | **High** for interactive use at this size |
+| Japanese short-form quality | **Fail** in this pass |
+| Local fallback usefulness | **Not demonstrated** |
+| Privacy-preserving local mode | **Compatible in principle** (on-device GGUF, no cloud) |
+| Default model switch | **No** |
+
+### Blocker classification
+
+Primary blocker for adoption: **runtime output quality** on the current llama.cpp + bartowski Q4_K_M artifact (Mac validation). Secondary concerns: **memory footprint** and **decode speed**.
+
+This is **not** a model-format load failure. LiteRT-LM is **not** integrated; if A17 Pro device validation reproduces garbled output or OOM, record a **separate LiteRT-LM backend evaluation** (docs only — no backend switch in this PR).
+
+### PREXUS diagnostics added
+
+Set `PREXUS_LOCAL_INFERENCE_BENCHMARK=1` in the Xcode scheme to log:
+
+- `cold_load_ms`, `first_token_ms`, `total_gen_ms`, `generatedTokenCount`, `decode_tps`
+
+from `PREXUSLlamaBridge` / `LlamaCppInferenceEngine` during on-device runs.
+
+### Next steps
+
+1. **A17 Pro+ device run** with `PREXUS_LOCAL_MODEL_PATH` → `prexus-eval-gemma4-e2b-it.gguf` and benchmark env enabled.
+2. If device output is still degenerate, try **newer llama.cpp submodule** (Gemma 4 template/EOS fixes) or **alternate GGUF publisher** (e.g. ggml-org / unsloth builds) — evaluation only.
+3. If llama.cpp remains unstable on-device, open a **LiteRT-LM evaluation plan** doc (no runtime switch without explicit approval).
+4. Keep **Qwen 0.5B** as default until Gemma passes device quality + latency gates.
+
+### Reproduce (Mac)
+
+```bash
+./tools/scripts/fetch_gemma4_e2b_eval_model.sh
+cd vendor/llama.cpp
+cmake -B build-mac -DCMAKE_BUILD_TYPE=Release -DGGML_METAL=ON
+cmake --build build-mac -j --target llama-bench llama-cli
+./vendor/llama.cpp/build-mac/bin/llama-bench -m models/prexus-eval-gemma4-e2b-it.gguf -ngl 99 -p 512 -n 64 -r 2 -o md
+./tools/scripts/benchmark_local_gguf.sh models/prexus-eval-gemma4-e2b-it.gguf
+```
+

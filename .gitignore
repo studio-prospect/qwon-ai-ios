@@ -16,6 +16,7 @@ node_modules/
 coverage/
 dist/
 tmp/
+.eval-logs/
 models/*.gguf
 vendor/llama-cpp-artifacts/
 vendor/llama.cpp/build-*/

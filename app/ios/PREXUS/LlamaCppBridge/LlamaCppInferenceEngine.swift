@@ -64,6 +64,20 @@ final class LlamaCppInferenceEngine: @unchecked Sendable {
                 throw LocalModelError.generationFailed("llama.cpp returned an empty completion.")
             }
 
+            if let metrics = activeBridge.lastGenerationMetrics,
+               ProcessInfo.processInfo.environment["PREXUS_LOCAL_INFERENCE_BENCHMARK"] != nil {
+                print(
+                    """
+                    [PREXUS][local-inference-benchmark] \
+                    cold_load_ms=\(metrics.coldLoadMs) \
+                    first_token_ms=\(metrics.firstTokenLatencyMs) \
+                    total_gen_ms=\(metrics.totalGenerationMs) \
+                    tokens=\(metrics.generatedTokenCount) \
+                    decode_tps=\(String(format: "%.2f", metrics.decodeTokensPerSecond))
+                    """
+                )
+            }
+
             return output
         } catch let error as NSError {
             if error.domain == PREXUSLlamaBridgeErrorDomain,
