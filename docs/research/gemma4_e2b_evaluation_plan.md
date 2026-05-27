@@ -251,3 +251,41 @@ cmake --build build-mac -j --target llama-bench llama-cli
 ./tools/scripts/benchmark_local_gguf.sh models/prexus-eval-gemma4-e2b-it.gguf
 ```
 
+### Device evaluation (A17 Pro+, Wang / iPhone 17)
+
+**Status (2026-05-21):** Debug build succeeded; **install blocked** because the device was locked (`kAMDMobileImageMounterDeviceLocked`). Re-run when the phone is unlocked.
+
+```bash
+git submodule update --init vendor/llama.cpp
+./tools/scripts/build_llama_xcframework.sh
+ruby tools/scripts/generate_xcodeproj.rb
+./tools/scripts/fetch_gemma4_e2b_eval_model.sh
+./tools/scripts/eval_gemma4_on_device.sh "Wang"
+```
+
+The eval script:
+
+1. Installs Debug `PREXUS.app` via `devicectl`
+2. Copies `prexus-eval-gemma4-e2b-it.gguf` into `Documents/Models/` (does **not** overwrite default MVP filename)
+3. Prompts for manual chat turns + log capture
+
+`LocalGGUFModelPlacement` resolves the eval artifact when `prexus-local-mvp.gguf` is absent on device. Debug builds log `[PREXUS][local-inference-benchmark]` metrics to Console without requiring scheme env vars.
+
+Log capture:
+
+```bash
+log stream --device --predicate 'eventMessage CONTAINS "local-inference-benchmark"'
+```
+
+#### Device results (pending)
+
+| Metric | Value |
+| --- | --- |
+| Device | iPhone 17 (Wang), `iPhone18,3` |
+| Cold load | _pending_ |
+| First-token latency | _pending_ |
+| Decode t/s | _pending_ |
+| Peak memory | _pending_ |
+| Japanese quality | _pending_ |
+| Routing JSON | _pending_ |
+

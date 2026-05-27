@@ -158,7 +158,15 @@ static BOOL PREXUSLocalInferenceBenchmarkEnabled(void) {
 }
 
 static void PREXUSLogBenchmarkMetrics(PREXUSLlamaGenerationMetrics *metrics) {
-    if (!PREXUSLocalInferenceBenchmarkEnabled() || metrics == nil) {
+    if (metrics == nil) {
+        return;
+    }
+#if DEBUG
+    const BOOL shouldLog = YES;
+#else
+    const BOOL shouldLog = PREXUSLocalInferenceBenchmarkEnabled();
+#endif
+    if (!shouldLog) {
         return;
     }
     NSLog(

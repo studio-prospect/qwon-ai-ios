@@ -9,6 +9,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 MODEL="${PREXUS_LOCAL_MODEL_SOURCE:-$ROOT/models/prexus-local-mvp.gguf}"
+DEST="${PREXUS_LOCAL_MODEL_DEST:-prexus-local-mvp.gguf}"
 BUNDLE_ID="com.prexus.ios"
 DEVICE_FILTER="${1:-}"
 DEVICE_JSON="$(mktemp)"
@@ -61,12 +62,12 @@ DEVICE_ID="${DEVICE_RESOLUTION%%$'\t'*}"
 DEVICE_NAME="${DEVICE_RESOLUTION#*$'\t'}"
 
 echo "==> Copying model to $DEVICE_NAME ($DEVICE_ID)"
-echo "    $MODEL -> Documents/Models/prexus-local-mvp.gguf"
+echo "    $MODEL -> Documents/Models/$DEST"
 
 xcrun devicectl device copy to \
   --device "$DEVICE_ID" \
   --source "$MODEL" \
-  --destination "Documents/Models/prexus-local-mvp.gguf" \
+  --destination "Documents/Models/$DEST" \
   --domain-type appDataContainer \
   --domain-identifier "$BUNDLE_ID"
 

@@ -37,6 +37,16 @@ ruby tools/scripts/generate_xcodeproj.rb
 
 Copy `models/prexus-local-mvp.gguf` into the app sandbox `Documents/Models/` on first device run, or set `PREXUS_LOCAL_MODEL_PATH` in the Xcode scheme.
 
+Evaluation-only Gemma push (does not replace default filename):
+
+```bash
+PREXUS_LOCAL_MODEL_SOURCE=models/prexus-eval-gemma4-e2b-it.gguf \
+PREXUS_LOCAL_MODEL_DEST=prexus-eval-gemma4-e2b-it.gguf \
+./tools/scripts/push_local_model_to_device.sh "Wang"
+```
+
+Or run the full device eval workflow: `./tools/scripts/eval_gemma4_on_device.sh "Wang"`.
+
 ## Fallback behavior
 
 If the GGUF is missing, llama.cpp fails to load, or the device is below A17 Pro class, PREXUS falls back to `EmbeddedHeuristicLocalModelClient` without crashing.
