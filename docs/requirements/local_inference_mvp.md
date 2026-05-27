@@ -55,3 +55,4 @@ The committed `app/ios/PREXUS.xcodeproj` is generated **without** `llama.xcframe
 - `docs/design/device_install_and_screenshot_workflow.md`
 - `docs/product/phase1_remaining_tasks_design_memo.md`
 - `docs/research/local_llm_notes.md`
+- `docs/research/gemma4_e2b_evaluation_plan.md` (evaluation candidate #1; not default)

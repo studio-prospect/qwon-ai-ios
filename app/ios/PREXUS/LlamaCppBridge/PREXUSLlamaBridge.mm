@@ -2,6 +2,7 @@
 
 #import <atomic>
 #import <string>
+#import <string.h>
 #import <vector>
 
 NSString * const PREXUSLlamaBridgeErrorDomain = @"PREXUSLlamaBridgeErrorDomain";
@@ -93,6 +94,38 @@ static std::string PREXUSFormattedChatPrompt(struct llama_model *model, NSString
 }
 #endif
 
+@implementation PREXUSLlamaGenerationMetrics {
+    NSTimeInterval _coldLoadMs;
+    NSTimeInterval _firstTokenLatencyMs;
+    NSTimeInterval _totalGenerationMs;
+    NSInteger _generatedTokenCount;
+    double _decodeTokensPerSecond;
+}
+
+- (instancetype)initWithColdLoadMs:(NSTimeInterval)coldLoadMs
+                firstTokenLatencyMs:(NSTimeInterval)firstTokenLatencyMs
+                 totalGenerationMs:(NSTimeInterval)totalGenerationMs
+              generatedTokenCount:(NSInteger)generatedTokenCount
+            decodeTokensPerSecond:(double)decodeTokensPerSecond {
+    self = [super init];
+    if (self) {
+        _coldLoadMs = coldLoadMs;
+        _firstTokenLatencyMs = firstTokenLatencyMs;
+        _totalGenerationMs = totalGenerationMs;
+        _generatedTokenCount = generatedTokenCount;
+        _decodeTokensPerSecond = decodeTokensPerSecond;
+    }
+    return self;
+}
+
+- (NSTimeInterval)coldLoadMs { return _coldLoadMs; }
+- (NSTimeInterval)firstTokenLatencyMs { return _firstTokenLatencyMs; }
+- (NSTimeInterval)totalGenerationMs { return _totalGenerationMs; }
+- (NSInteger)generatedTokenCount { return _generatedTokenCount; }
+- (double)decodeTokensPerSecond { return _decodeTokensPerSecond; }
+
+@end
+
 @implementation PREXUSLlamaCancellationToken {
     std::atomic_bool _flag;
 }
@@ -119,12 +152,41 @@ static std::string PREXUSFormattedChatPrompt(struct llama_model *model, NSString
 
 @end
 
+static BOOL PREXUSLocalInferenceBenchmarkEnabled(void) {
+    const char *flag = getenv("PREXUS_LOCAL_INFERENCE_BENCHMARK");
+    return flag != nullptr && flag[0] != '\0' && strcmp(flag, "0") != 0;
+}
+
+static void PREXUSLogBenchmarkMetrics(PREXUSLlamaGenerationMetrics *metrics) {
+    if (metrics == nil) {
+        return;
+    }
+#if DEBUG
+    const BOOL shouldLog = YES;
+#else
+    const BOOL shouldLog = PREXUSLocalInferenceBenchmarkEnabled();
+#endif
+    if (!shouldLog) {
+        return;
+    }
+    NSLog(
+        @"[PREXUS][local-inference-benchmark] cold_load_ms=%.1f first_token_ms=%.1f total_gen_ms=%.1f tokens=%ld decode_tps=%.2f",
+        metrics.coldLoadMs,
+        metrics.firstTokenLatencyMs,
+        metrics.totalGenerationMs,
+        (long)metrics.generatedTokenCount,
+        metrics.decodeTokensPerSecond
+    );
+}
+
 @implementation PREXUSLlamaBridge {
 #if PREXUS_LLAMA_CPP_AVAILABLE
     struct llama_model *_model;
     struct llama_context *_context;
 #endif
     BOOL _ready;
+    PREXUSLlamaGenerationMetrics *_lastGenerationMetrics;
+    NSTimeInterval _coldLoadMs;
 }
 
 - (instancetype)initWithModelPath:(NSString *)modelPath error:(NSError **)error {
@@ -135,6 +197,8 @@ static std::string PREXUSFormattedChatPrompt(struct llama_model *model, NSString
 
 #if PREXUS_LLAMA_CPP_AVAILABLE
     PREXUSEnsureLlamaBackendInitialized();
+
+    const CFAbsoluteTime loadStart = CFAbsoluteTimeGetCurrent();
 
     llama_model_params modelParams = llama_model_default_params();
     modelParams.n_gpu_layers = 99;
@@ -166,6 +230,7 @@ static std::string PREXUSFormattedChatPrompt(struct llama_model *model, NSString
         return nil;
     }
 
+    _coldLoadMs = (CFAbsoluteTimeGetCurrent() - loadStart) * 1000.0;
     _ready = YES;
     return self;
 #else
@@ -180,6 +245,10 @@ static std::string PREXUSFormattedChatPrompt(struct llama_model *model, NSString
 
 - (BOOL)isReady {
     return _ready;
+}
+
+- (PREXUSLlamaGenerationMetrics *)lastGenerationMetrics {
+    return _lastGenerationMetrics;
 }
 
 - (NSString *)generateFromPrompt:(NSString *)prompt
@@ -255,6 +324,9 @@ static std::string PREXUSFormattedChatPrompt(struct llama_model *model, NSString
 
     NSMutableString *output = [NSMutableString string];
     const NSInteger generationLimit = MAX(16, maxTokens);
+    const CFAbsoluteTime generationStart = CFAbsoluteTimeGetCurrent();
+    CFAbsoluteTime firstTokenTime = 0;
+    NSInteger generatedTokenCount = 0;
 
     for (NSInteger index = 0; index < generationLimit; index++) {
         if (cancelFlag->load()) {
@@ -272,6 +344,11 @@ static std::string PREXUSFormattedChatPrompt(struct llama_model *model, NSString
 
         if (llama_vocab_is_eog(vocab, nextToken)) {
             break;
+        }
+
+        generatedTokenCount += 1;
+        if (firstTokenTime == 0) {
+            firstTokenTime = CFAbsoluteTimeGetCurrent();
         }
 
         char piece[256];
@@ -321,6 +398,26 @@ static std::string PREXUSFormattedChatPrompt(struct llama_model *model, NSString
         }
         return nil;
     }
+
+    const CFAbsoluteTime generationEnd = CFAbsoluteTimeGetCurrent();
+    const NSTimeInterval totalGenerationMs = (generationEnd - generationStart) * 1000.0;
+    const NSTimeInterval firstTokenLatencyMs = firstTokenTime > 0
+        ? (firstTokenTime - generationStart) * 1000.0
+        : totalGenerationMs;
+    const NSTimeInterval decodeWindowMs = firstTokenTime > 0
+        ? (generationEnd - firstTokenTime) * 1000.0
+        : totalGenerationMs;
+    const double decodeTokensPerSecond = decodeWindowMs > 0
+        ? (static_cast<double>(generatedTokenCount) * 1000.0) / decodeWindowMs
+        : 0.0;
+
+    _lastGenerationMetrics = [[PREXUSLlamaGenerationMetrics alloc]
+        initWithColdLoadMs:_coldLoadMs
+        firstTokenLatencyMs:firstTokenLatencyMs
+        totalGenerationMs:totalGenerationMs
+        generatedTokenCount:generatedTokenCount
+        decodeTokensPerSecond:decodeTokensPerSecond];
+    PREXUSLogBenchmarkMetrics(_lastGenerationMetrics);
 
     return output;
 #else

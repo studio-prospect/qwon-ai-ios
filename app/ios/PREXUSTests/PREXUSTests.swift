@@ -948,6 +948,38 @@ final class PREXUSTests: XCTestCase {
         )
     }
 
+    func testLocalGGUFModelPlacementPrefersDefaultThenEvaluationArtifact() throws {
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString, isDirectory: true)
+        let modelsDirectory = root.appendingPathComponent("Models", isDirectory: true)
+        try FileManager.default.createDirectory(at: modelsDirectory, withIntermediateDirectories: true)
+
+        let defaultModel = modelsDirectory.appendingPathComponent(LocalGGUFModelPlacement.defaultModelFileName)
+        let evaluationModel = modelsDirectory.appendingPathComponent(LocalGGUFModelPlacement.evaluationGemmaModelFileName)
+        try Data("default".utf8).write(to: defaultModel)
+        try Data("eval".utf8).write(to: evaluationModel)
+
+        let withDefault = LocalGGUFModelPlacement(
+            fileManager: .default,
+            environment: [:],
+            documentsDirectory: root
+        )
+        XCTAssertEqual(withDefault.resolvedModelURL?.lastPathComponent, LocalGGUFModelPlacement.defaultModelFileName)
+
+        try FileManager.default.removeItem(at: defaultModel)
+
+        let withEvaluationOnly = LocalGGUFModelPlacement(
+            fileManager: .default,
+            environment: [:],
+            documentsDirectory: root
+        )
+        XCTAssertEqual(
+            withEvaluationOnly.resolvedModelURL?.lastPathComponent,
+            LocalGGUFModelPlacement.evaluationGemmaModelFileName
+        )
+
+        try FileManager.default.removeItem(at: root)
+    }
+
     func testFallbackLocalModelClientUsesFallbackWhenPrimaryFails() async throws {
         struct FailingPrimary: LocalModelClient {
             let descriptor = LocalModelDescriptor(

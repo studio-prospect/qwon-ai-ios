@@ -139,7 +139,7 @@ app_target.build_configurations.each do |config|
 
   config.build_settings["FRAMEWORK_SEARCH_PATHS"] = [
     "$(inherited)",
-    llama_xcframework.dirname.to_s
+    "$(SRCROOT)/../../vendor/llama-cpp-artifacts"
   ]
   config.build_settings["OTHER_LDFLAGS"] << "-framework" << "llama"
   config.build_settings["GCC_PREPROCESSOR_DEFINITIONS"] = [
