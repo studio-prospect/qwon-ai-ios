@@ -30,4 +30,8 @@ enum LocalDeviceEvalLog {
         print("[PREXUS][device-eval-log] \(message)")
     }
 }
+#else
+enum LocalDeviceEvalLog {
+    static func append(_ message: String) {}
+}
 #endif

@@ -35,4 +35,8 @@ enum LocalLlamaDeviceEvalRunner {
         }
     }
 }
+#else
+enum LocalLlamaDeviceEvalRunner {
+    static func runLargeModelSmokeTestIfNeeded(modelURL: URL, engine: LlamaCppInferenceEngine) {}
+}
 #endif
