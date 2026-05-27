@@ -210,11 +210,11 @@ On iPhone 8 GiB class hardware, a **3.2 GiB** weight file plus KV/context overhe
 | Criterion | Result |
 | --- | --- |
 | GGUF loads via llama.cpp | **Pass** (architecture `gemma4` recognized) |
-| Stable streaming output | **Fail** on Mac (garbled completions) |
+| Stable streaming output | **Fail** on Mac and iPhone 17 (degenerate / 2-token output) |
 | First-token / decode latency | **Marginal** (2–4 t/s decode, slow cold start) |
 | Peak memory | **High** (~4.6 GiB RSS on Mac; tight on phone) |
 | Thermal / battery risk | **High** for interactive use at this size |
-| Japanese short-form quality | **Fail** in this pass |
+| Japanese short-form quality | **Fail** on Mac and iPhone 17 (`？` / token soup) |
 | Local fallback usefulness | **Not demonstrated** |
 | Privacy-preserving local mode | **Compatible in principle** (on-device GGUF, no cloud) |
 | Default model switch | **No** |
@@ -253,7 +253,7 @@ cmake --build build-mac -j --target llama-bench llama-cli
 
 ### Device evaluation (A17 Pro+, Wang / iPhone 17)
 
-**Status (2026-05-21):** Debug build succeeded; **install blocked** because the device was locked (`kAMDMobileImageMounterDeviceLocked`). Re-run when the phone is unlocked.
+**Status (2026-05-27):** Device smoke test completed on **Wang (iPhone 17 / `iPhone18,3`)**. Gemma loads via PREXUS bridge but **generation quality remains unusable** (2-token output `？`). Default model unchanged.
 
 ```bash
 git submodule update --init vendor/llama.cpp
@@ -277,15 +277,30 @@ Log capture:
 log stream --device --predicate 'eventMessage CONTAINS "local-inference-benchmark"'
 ```
 
-#### Device results (pending)
+#### Device results (Wang, iPhone 17, 2026-05-27)
+
+Captured via Debug smoke runner → `Documents/prexus-device-eval.log` → `./tools/scripts/fetch_device_eval_log.sh "Wang"`.
 
 | Metric | Value |
 | --- | --- |
-| Device | iPhone 17 (Wang), `iPhone18,3` |
-| Cold load | _pending_ |
-| First-token latency | _pending_ |
-| Decode t/s | _pending_ |
-| Peak memory | _pending_ |
-| Japanese quality | _pending_ |
-| Routing JSON | _pending_ |
+| Device | iPhone 17 (Wang), `iPhone18,3`, A19-class |
+| Model path on device | `Documents/Models/prexus-local-mvp.gguf` (Gemma Q4_K_M content, eval session) |
+| Cold load (`prewarm-ready`) | **8863 ms** |
+| Bridge `cold_load_ms` | **8783 ms** |
+| First-token latency | **95 ms** (after load; smoke prompt) |
+| Total generation | **169 ms**, **2 tokens** |
+| Decode throughput | **27.2 t/s** (misleading at 2 tokens) |
+| Japanese smoke response | **`？`** (degenerate / unusable) |
+| Routing JSON | Not run (smoke test only) |
+| App stability | **Pass** (no OOM after single-engine prewarm fix) |
+| Thermal / battery | Not instrumented; ~8.9 s cold load + short decode suggests **high cost per turn** at 3.2 GiB |
+
+**Device conclusion:** Gemma-4-E2B-it Q4_K_M **loads on A17 Pro+ hardware** through the existing PREXUS llama.cpp path with acceptable first-token latency **once loaded**, but **output quality is not viable** for local fallback (matches Mac-side garbled-output class). **Do not adopt as default.** Next options: llama.cpp Gemma 4 template/EOS fixes, alternate GGUF build, or separate **LiteRT-LM** evaluation (docs only).
+
+Restore default Qwen on device after eval:
+
+```bash
+./tools/scripts/fetch_local_model.sh
+PREXUS_LOCAL_MODEL_DEST=prexus-local-mvp.gguf ./tools/scripts/push_local_model_to_device.sh "Wang"
+```
 

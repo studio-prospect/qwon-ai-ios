@@ -71,8 +71,7 @@ final class LlamaCppInferenceEngine: @unchecked Sendable {
                 let shouldLogBenchmark = ProcessInfo.processInfo.environment["PREXUS_LOCAL_INFERENCE_BENCHMARK"] != nil
 #endif
                 if shouldLogBenchmark {
-                print(
-                    """
+                let line = """
                     [PREXUS][local-inference-benchmark] \
                     cold_load_ms=\(metrics.coldLoadMs) \
                     first_token_ms=\(metrics.firstTokenLatencyMs) \
@@ -80,7 +79,10 @@ final class LlamaCppInferenceEngine: @unchecked Sendable {
                     tokens=\(metrics.generatedTokenCount) \
                     decode_tps=\(String(format: "%.2f", metrics.decodeTokensPerSecond))
                     """
-                )
+                print(line)
+#if DEBUG && !targetEnvironment(simulator)
+                LocalDeviceEvalLog.append(line)
+#endif
                 }
             }
 
