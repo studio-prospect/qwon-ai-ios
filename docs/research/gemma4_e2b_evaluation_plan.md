@@ -304,3 +304,16 @@ Restore default Qwen on device after eval:
 PREXUS_LOCAL_MODEL_DEST=prexus-local-mvp.gguf ./tools/scripts/push_local_model_to_device.sh "Wang"
 ```
 
+#### Manual chat UI (Wang, 2026-05-27 ~18:45 JST)
+
+User executed the eval prompts in the PREXUS chat UI (screenshots `IMG_0895`, `IMG_0896`).
+
+| Prompt | Observed assistant output | Interpretation |
+| --- | --- | --- |
+| Japanese fallback (`明日の予定を整理する時…`) | Assistant bubble shows duplicated `User:` lines; **no coherent Japanese answer** | Consistent with degenerate Gemma output / prompt echo (smoke log returned `？` only) |
+| Routing JSON (`ルーティング JSON 用プロンプト`) | `Embedded local runtime handled … with compact on-device heuristics.` | **llama.cpp primary failed or returned unusable output** → `FallbackLocalModelClient` used `EmbeddedHeuristicLocalModelClient` |
+
+**UI nuance:** The status banner still reads **llama.cpp On-Device Runtime** because `RuntimeExecutionMetadata` uses `FallbackLocalModelClient.descriptor` (primary path). The **message body** is the reliable indicator of which backend actually answered.
+
+**Manual UI conclusion:** Interactive chat under Gemma eval conditions does **not** deliver usable local LLM answers. Routing JSON falls back to embedded heuristics, not structured JSON. This reinforces **no adoption** until Gemma 4 + llama.cpp output quality is fixed.
+
