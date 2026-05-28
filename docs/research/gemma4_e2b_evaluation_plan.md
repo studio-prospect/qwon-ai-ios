@@ -237,7 +237,7 @@ from `PREXUSLlamaBridge` / `LlamaCppInferenceEngine` during on-device runs.
 
 1. **A17 Pro+ device run** with `PREXUS_LOCAL_MODEL_PATH` → `prexus-eval-gemma4-e2b-it.gguf` and benchmark env enabled.
 2. If device output is still degenerate, try **newer llama.cpp submodule** (Gemma 4 template/EOS fixes) or **alternate GGUF publisher** (e.g. ggml-org / unsloth builds) — evaluation only.
-3. If llama.cpp remains unstable on-device, open a **LiteRT-LM evaluation plan** doc (no runtime switch without explicit approval).
+3. If llama.cpp remains unstable on-device, use the separate [LiteRT-LM evaluation plan](./litert_lm_evaluation_plan.md) (no runtime switch without explicit approval).
 4. Keep **Qwen 0.5B** as default until Gemma passes device quality + latency gates.
 
 ### Reproduce (Mac)
@@ -316,4 +316,3 @@ User executed the eval prompts in the PREXUS chat UI (screenshots `IMG_0895`, `I
 **UI nuance:** The status banner still reads **llama.cpp On-Device Runtime** because `RuntimeExecutionMetadata` uses `FallbackLocalModelClient.descriptor` (primary path). The **message body** is the reliable indicator of which backend actually answered.
 
 **Manual UI conclusion:** Interactive chat under Gemma eval conditions does **not** deliver usable local LLM answers. Routing JSON falls back to embedded heuristics, not structured JSON. This reinforces **no adoption** until Gemma 4 + llama.cpp output quality is fixed.
-

@@ -99,6 +99,25 @@ Research questions:
 - Japanese short-form quality and deterministic JSON behavior under compact prompts
 - whether LiteRT-LM should become a separate backend evaluation if llama.cpp is unstable
 
+### LiteRT-LM / Google AI Edge direction
+
+Current status: backend feasibility evaluation candidate, not production path. See [LiteRT-LM Evaluation Plan](./litert_lm_evaluation_plan.md).
+
+Potential value:
+
+- native iOS Swift API with Metal acceleration
+- `.litertlm` artifact path designed for on-device LLM deployment
+- possible better Gemma 4 behavior than the current GGUF llama.cpp path
+- future support surface for constrained decoding, session management, tool use, and multimodality
+
+Research questions:
+
+- whether the Early Preview Swift API is stable enough for PREXUS
+- whether model artifacts are available, license-compatible, and practical to distribute
+- cold load, memory, thermal, and package-size impact on iPhone
+- Japanese short-form quality and deterministic routing JSON reliability
+- whether a second backend abstraction is justified after feasibility is proven
+
 ### llama.cpp / CoreML-converted direction
 
 Potential value:
