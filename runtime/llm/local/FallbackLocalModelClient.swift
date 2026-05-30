@@ -14,13 +14,24 @@ struct FallbackLocalModelClient: LocalModelClient {
 
     func generate(prompt: String) async throws -> String {
         do {
-            return try await primary.generate(prompt: prompt)
+            let response = try await primary.generate(prompt: prompt)
+            LocalModelExecutionTrace.record(
+                respondingBackend: primary.descriptor.name,
+                primaryFailure: nil
+            )
+            return response
         } catch is CancellationError {
             throw CancellationError()
         } catch LocalModelError.generationCancelled {
             throw LocalModelError.generationCancelled
         } catch {
-            return try await fallback.generate(prompt: prompt)
+            let failure = String(describing: error)
+            let response = try await fallback.generate(prompt: prompt)
+            LocalModelExecutionTrace.record(
+                respondingBackend: fallback.descriptor.name,
+                primaryFailure: failure
+            )
+            return response
         }
     }
 }

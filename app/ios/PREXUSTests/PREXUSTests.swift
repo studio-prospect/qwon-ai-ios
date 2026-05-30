@@ -1000,6 +1000,72 @@ final class PREXUSTests: XCTestCase {
         XCTAssertTrue(response.localizedCaseInsensitiveContains("embedded local runtime"))
     }
 
+    func testFallbackLocalModelClientRecordsTraceOnPrimarySuccess() async throws {
+        struct SuccessPrimary: LocalModelClient {
+            let descriptor = LocalModelDescriptor(
+                backend: .deviceRuntime,
+                name: "Primary OK",
+                summary: "Succeeds"
+            )
+
+            func generate(prompt: String) async throws -> String {
+                "primary-response"
+            }
+        }
+
+        LocalModelExecutionTrace.reset()
+        let client = FallbackLocalModelClient(
+            primary: SuccessPrimary(),
+            fallback: EmbeddedHeuristicLocalModelClient()
+        )
+        _ = try await client.generate(prompt: "hello")
+
+        XCTAssertEqual(LocalModelExecutionTrace.current?.respondingBackend, "Primary OK")
+        XCTAssertNil(LocalModelExecutionTrace.current?.primaryFailure)
+    }
+
+    func testFallbackLocalModelClientRecordsTraceOnFallback() async throws {
+        struct FailingPrimary: LocalModelClient {
+            let descriptor = LocalModelDescriptor(
+                backend: .deviceRuntime,
+                name: "Primary Fail",
+                summary: "Fails"
+            )
+
+            func generate(prompt: String) async throws -> String {
+                throw LocalModelError.modelAssetUnavailable
+            }
+        }
+
+        LocalModelExecutionTrace.reset()
+        let fallback = EmbeddedHeuristicLocalModelClient()
+        let client = FallbackLocalModelClient(primary: FailingPrimary(), fallback: fallback)
+        _ = try await client.generate(prompt: "User:\nReview routing policy")
+
+        XCTAssertEqual(LocalModelExecutionTrace.current?.respondingBackend, fallback.descriptor.name)
+        XCTAssertTrue(LocalModelExecutionTrace.current?.primaryFailure?.contains("modelAssetUnavailable") == true)
+    }
+
+    func testLocalModelExecutionTraceFormattedDetailMergesBase() {
+        LocalModelExecutionTrace.record(
+            respondingBackend: "LiteRT-LM Prototype Runtime",
+            metricsDetail: "cold_load_ms=100.0 first_token_ms=50.0 total_ms=200.0"
+        )
+
+        let detail = LocalModelExecutionTrace.formattedDetail(base: "summary line")
+        XCTAssertTrue(detail?.contains("answered_by=LiteRT-LM Prototype Runtime") == true)
+        XCTAssertTrue(detail?.contains("cold_load_ms=100.0") == true)
+        XCTAssertTrue(detail?.contains("summary line") == true)
+        LocalModelExecutionTrace.reset()
+    }
+
+    func testLiteRTModelPlacementUsesEvalArtifactFileName() {
+        XCTAssertEqual(
+            LiteRTModelPlacement.evaluationModelFileName,
+            "prexus-eval-gemma4-e2b.litertlm"
+        )
+    }
+
     func testLocalModelGenerationCoordinatorCancelsSupersededTurn() async {
         let coordinator = LocalModelGenerationCoordinator()
         let firstStarted = expectation(description: "first started")

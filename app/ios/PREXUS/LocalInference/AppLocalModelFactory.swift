@@ -34,6 +34,13 @@ enum AppLocalModelFactory {
         #endif
     }
 
+    static func makeQwenFallbackChain() -> LocalModelClient {
+        FallbackLocalModelClient(
+            primary: LlamaCppLocalModelClient(),
+            fallback: EmbeddedHeuristicLocalModelClient()
+        )
+    }
+
     private static func makeDeviceRuntimeClient() -> LocalModelClient {
         #if targetEnvironment(simulator)
         return SimulatorMockLocalModelClient()
@@ -42,10 +49,18 @@ enum AppLocalModelFactory {
             return EmbeddedHeuristicLocalModelClient()
         }
 
-        return FallbackLocalModelClient(
-            primary: LlamaCppLocalModelClient(),
-            fallback: EmbeddedHeuristicLocalModelClient()
-        )
+        let qwenChain = makeQwenFallbackChain()
+
+        #if PREXUS_LITERT_LM_PROTOTYPE
+        if LiteRTPrototypeSettings.isRuntimeAvailable {
+            return FallbackLocalModelClient(
+                primary: LiteRTLocalModelClient(),
+                fallback: qwenChain
+            )
+        }
+        #endif
+
+        return qwenChain
         #endif
     }
 }

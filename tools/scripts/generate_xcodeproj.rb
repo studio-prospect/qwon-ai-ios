@@ -9,13 +9,23 @@ require "xcodeproj"
 #
 # Optional LiteRT-LM evaluation target (isolated app, does not link into PREXUS):
 #   PREXUS_LITERT_LM_EVAL=1 ruby tools/scripts/generate_xcodeproj.rb
+#
+# Optional LiteRT-LM debug prototype inside PREXUS (compile-gated, off by default):
+#   PREXUS_LITERT_LM_PROTOTYPE=1 ruby tools/scripts/generate_xcodeproj.rb
 
 ROOT = Pathname.new(__dir__).join("..", "..").expand_path
 IOS_ROOT = ROOT.join("app", "ios")
 PROJECT_PATH = IOS_ROOT.join("PREXUS.xcodeproj")
 SCHEME_PATH = PROJECT_PATH.join("xcshareddata", "xcschemes", "PREXUS.xcscheme")
 
-app_sources = Dir.glob(IOS_ROOT.join("PREXUS", "**", "*.swift").to_s)
+litert_prototype_only_source_names = %w[
+  LiteRTLocalModelClient.swift
+  LocalBackendComparisonRunner.swift
+].freeze
+
+app_sources = Dir.glob(IOS_ROOT.join("PREXUS", "**", "*.swift").to_s).reject do |path|
+  litert_prototype_only_source_names.include?(File.basename(path))
+end
 runtime_sources = Dir.glob(ROOT.join("runtime", "**", "*.swift").to_s)
 test_sources = Dir.glob(IOS_ROOT.join("PREXUSTests", "**", "*.swift").to_s)
 ui_test_sources = Dir.glob(IOS_ROOT.join("PREXUSUITests", "**", "*.swift").to_s)
@@ -255,6 +265,52 @@ if ENV["PREXUS_LITERT_LM_EVAL"] == "1"
   XML
 
   puts "Added PREXUSLiteRTEval target + LiteRT-LM Swift package (evaluation only)."
+end
+
+if ENV["PREXUS_LITERT_LM_PROTOTYPE"] == "1"
+  litert_prototype_sources = [
+    IOS_ROOT.join("PREXUS", "LocalInference", "LiteRTLocalModelClient.swift").to_s,
+    IOS_ROOT.join("PREXUS", "LocalInference", "LocalBackendComparisonRunner.swift").to_s
+  ]
+
+  litert_prototype_sources.each do |path|
+    next unless File.file?(path)
+    add_file(app_target, app_group, path, IOS_ROOT.join("PREXUS"))
+  end
+
+  litert_vendor = ROOT.join("vendor", "LiteRT-LM")
+  package_ref = if litert_vendor.join("Package.swift").exist?
+    ref = project.new(Xcodeproj::Project::Object::XCLocalSwiftPackageReference)
+    ref.relative_path = "../../vendor/LiteRT-LM"
+    puts "Using local LiteRT-LM package for PREXUS prototype at vendor/LiteRT-LM"
+    ref
+  else
+    ref = project.new(Xcodeproj::Project::Object::XCRemoteSwiftPackageReference)
+    ref.repositoryURL = "https://github.com/google-ai-edge/LiteRT-LM"
+    ref.requirement = {
+      "kind" => "upToNextMajorVersion",
+      "minimumVersion" => "0.12.0"
+    }
+    puts "Using remote LiteRT-LM package for PREXUS prototype (run ./tools/scripts/vendor_litert_lm.sh if needed)"
+    ref
+  end
+  project.root_object.package_references << package_ref unless project.root_object.package_references.any? { |existing|
+    existing.is_a?(Xcodeproj::Project::Object::XCLocalSwiftPackageReference) && existing.relative_path == "../../vendor/LiteRT-LM" ||
+      existing.is_a?(Xcodeproj::Project::Object::XCRemoteSwiftPackageReference) && existing.repositoryURL == "https://github.com/google-ai-edge/LiteRT-LM"
+  }
+
+  package_product = project.new(Xcodeproj::Project::Object::XCSwiftPackageProductDependency)
+  package_product.product_name = "LiteRTLM"
+  package_product.package = package_ref
+  app_target.package_product_dependencies << package_product
+
+  app_target.build_configurations.each do |config|
+    conditions = Array(config.build_settings["SWIFT_ACTIVE_COMPILATION_CONDITIONS"] || ["$(inherited)"])
+    conditions << "PREXUS_LITERT_LM_PROTOTYPE" unless conditions.include?("PREXUS_LITERT_LM_PROTOTYPE")
+    config.build_settings["SWIFT_ACTIVE_COMPILATION_CONDITIONS"] = conditions
+  end
+
+  puts "Linked LiteRT-LM Swift package into PREXUS (PREXUS_LITERT_LM_PROTOTYPE)."
 end
 
 project.save
