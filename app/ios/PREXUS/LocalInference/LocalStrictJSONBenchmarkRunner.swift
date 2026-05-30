@@ -248,7 +248,8 @@ enum LocalStrictJSONBenchmarkRunner {
     private static func csvEscape(_ value: String) -> String {
         let needsQuotes = value.contains(",") || value.contains("\"") || value.contains("\n")
         guard needsQuotes else { return value }
-        return "\"\(value.replacingOccurrences(of: "\"", with: "\"\"\"))\""
+        let escaped = value.replacingOccurrences(of: "\"", with: "\"\"")
+        return "\"\(escaped)\""
     }
 
     private static func writeLogs(detailCSV: String, summaryJSON: String) {
