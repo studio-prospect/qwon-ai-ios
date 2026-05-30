@@ -1024,6 +1024,40 @@ final class PREXUSTests: XCTestCase {
         XCTAssertNil(LocalModelExecutionTrace.current?.primaryFailure)
     }
 
+    func testFallbackLocalModelClientPreservesPrimaryMetricsDetail() async throws {
+        struct MetricsPrimary: LocalModelClient {
+            let descriptor = LocalModelDescriptor(
+                backend: .deviceRuntime,
+                name: "LiteRT-LM Prototype Runtime",
+                summary: "Records metrics before fallback wrapper re-records"
+            )
+
+            func generate(prompt: String) async throws -> String {
+                LocalModelExecutionTrace.record(
+                    respondingBackend: descriptor.name,
+                    metricsDetail: "cold_load_ms=1768.8 first_token_ms=591.2 total_ms=2671.0"
+                )
+                return "litert-response"
+            }
+        }
+
+        LocalModelExecutionTrace.reset()
+        let client = FallbackLocalModelClient(
+            primary: MetricsPrimary(),
+            fallback: EmbeddedHeuristicLocalModelClient()
+        )
+        _ = try await client.generate(prompt: "hello")
+
+        XCTAssertEqual(LocalModelExecutionTrace.current?.respondingBackend, "LiteRT-LM Prototype Runtime")
+        XCTAssertEqual(
+            LocalModelExecutionTrace.current?.metricsDetail,
+            "cold_load_ms=1768.8 first_token_ms=591.2 total_ms=2671.0"
+        )
+        let detail = LocalModelExecutionTrace.formattedDetail(base: nil)
+        XCTAssertTrue(detail?.contains("cold_load_ms=1768.8") == true)
+        LocalModelExecutionTrace.reset()
+    }
+
     func testFallbackLocalModelClientRecordsTraceOnFallback() async throws {
         struct FailingPrimary: LocalModelClient {
             let descriptor = LocalModelDescriptor(
