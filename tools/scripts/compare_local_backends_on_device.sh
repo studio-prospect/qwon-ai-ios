@@ -81,7 +81,7 @@ xcrun devicectl device copy to \
 echo "==> Launch PREXUS with comparison env"
 xcrun devicectl device process launch \
   --device "$DEVICE_ID" \
-  --environment-variables "PREXUS_RUN_BACKEND_COMPARISON=1" \
+  --environment-variables '{"PREXUS_RUN_BACKEND_COMPARISON":"1"}' \
   "$BUNDLE_ID"
 
 echo "==> Wait for comparison runner"

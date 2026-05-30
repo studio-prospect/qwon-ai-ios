@@ -15,7 +15,9 @@ final class LiteRTLocalModelClient: LocalModelClient {
     }
 
     func generate(prompt: String) async throws -> String {
-        guard LiteRTPrototypeSettings.isRuntimeAvailable else {
+        let comparisonRun = ProcessInfo.processInfo.environment["PREXUS_RUN_BACKEND_COMPARISON"] == "1"
+        guard LiteRTPrototypeSettings.meetsHardwareAndArtifactGates,
+              LiteRTPrototypeSettings.isRuntimeAvailable || comparisonRun else {
             throw LocalModelError.backendUnavailable("LiteRT prototype unavailable (toggle, device class, or model artifact).")
         }
 
