@@ -97,25 +97,80 @@ A blocked result is acceptable if the PR documents the blocker precisely. Valid 
 - memory, thermal, or startup cost too high for PREXUS MVP
 - output quality still unusable for Japanese or routing JSON
 
-## Local feasibility runs (historical — uncommitted artifacts)
+## Reproducible eval lane (on `main`)
 
-> **Reproducibility:** The runs below come from **Cursor-local P1-4 work** using an **uncommitted** isolated iOS eval app (`PREXUSLiteRTEval`), a shallow-vendored `vendor/LiteRT-LM`, and helper scripts under `tools/scripts/` that are **not on `main`** when this document merges via PR #15. Treat this section as **historical evidence**, not an executable workflow on a clean checkout. A follow-up **P1-4 implementation PR** should commit the eval target/scripts or replace this section with reproducible steps.
+Production **PREXUS** and **Qwen MVP** are unchanged. Evaluation uses a separate iOS app target and bundle id — not wired into `AppLocalModelFactory`.
 
-Production **PREXUS** and **Qwen MVP** were unchanged during these runs. The local spike used a separate bundle id and eval log file:
-
-| Item | Local run value |
+| Item | Value |
 | --- | --- |
-| App target | `PREXUSLiteRTEval` (Xcode target generated with `PREXUS_LITERT_LM_EVAL=1`; not on `main`) |
+| App sources | `app/ios/PREXUSLiteRTEval/` |
+| Xcode target | `PREXUSLiteRTEval` — added only when regenerating with `PREXUS_LITERT_LM_EVAL=1` |
+| Scheme | `PREXUSLiteRTEval.xcscheme` — generated alongside the eval target (gitignored; recreated by scripts) |
 | Bundle id | `com.prexus.ios.literteval` |
 | Model on device | `Documents/Models/prexus-eval-gemma4-e2b.litertlm` |
 | Eval log | `Documents/prexus-litert-device-eval.log` |
-| LiteRT-LM package | `LiteRT-LM` v0.12.0 (local shallow vendor; remote SPM checkout can fail on Android Git LFS prebuilts) |
+| LiteRT-LM package | Shallow vendor at `vendor/LiteRT-LM` (see `vendor_litert_lm.sh`) |
 
-**Next on `main`:** see [LiteRT-LM Adoption Decision Memo](./litert_lm_adoption_decision.md) for P1-4b prototype scope. Do not assume scripts or targets exist until that implementation PR lands.
+### Xcode project generation
 
-#### Device results (Matisse, iPhone XS Max, 2026-05-30)
+Committed `PREXUS.xcodeproj` stays **without** the LiteRT eval target so clean checkouts can run `PREXUSTests` without resolving LiteRT-LM.
 
-Captured during the local run: isolated eval app → `Documents/prexus-litert-device-eval.log` (pulled from the eval app container via `devicectl`).
+```bash
+# Default — production + unit tests only
+ruby tools/scripts/generate_xcodeproj.rb
+
+# Adds PREXUSLiteRTEval + LiteRT-LM Swift package (evaluation only)
+PREXUS_LITERT_LM_EVAL=1 ruby tools/scripts/generate_xcodeproj.rb
+```
+
+Eval scripts call the `PREXUS_LITERT_LM_EVAL=1` variant automatically. To restore a reviewer-clean project after local eval work:
+
+```bash
+ruby tools/scripts/generate_xcodeproj.rb
+```
+
+### SPM / Git LFS note
+
+Remote Swift Package Manager checkout of `LiteRT-LM` v0.12.0 can fail on Android LFS prebuilts (`remote missing object`). Use the vendor script first:
+
+```bash
+./tools/scripts/vendor_litert_lm.sh
+PREXUS_LITERT_LM_EVAL=1 ruby tools/scripts/generate_xcodeproj.rb
+```
+
+### Device workflow
+
+```bash
+./tools/scripts/fetch_litert_lm_eval_model.sh
+./tools/scripts/eval_litert_lm_on_device.sh "Wang"
+# runs uninstall → install → push → launch → wait → fetch log
+# output: .eval-logs/litert-device-eval-Wang.log (gitignored)
+```
+
+To re-fetch a log without re-running the full eval:
+
+```bash
+./tools/scripts/fetch_litert_device_eval_log.sh "Wang"
+```
+
+Pass a device name substring from `xcrun devicectl list devices` (e.g. `Wang`, `Matisse`). **A17 Pro+ recommended** for Gemma 4 E2B `.litertlm`.
+
+Helper scripts (all under `tools/scripts/`):
+
+| Script | Role |
+| --- | --- |
+| `vendor_litert_lm.sh` | Shallow-clone LiteRT-LM into `vendor/` (LFS smudge skipped) |
+| `fetch_litert_lm_eval_model.sh` | Download `models/prexus-eval-gemma4-e2b.litertlm` (gitignored) |
+| `install_litert_eval_on_device.sh` | Vendor + regenerate + build + install eval app (**does not launch**) |
+| `push_litert_lm_model_to_device.sh` | Copy `.litertlm` into eval app `Documents/Models/` |
+| `eval_litert_lm_on_device.sh` | End-to-end: uninstall → install → push → launch → wait → **fetch log** |
+| `fetch_litert_device_eval_log.sh` | Pull `prexus-litert-device-eval.log` only (optional re-fetch) |
+
+### Recorded device results (2026-05-30)
+
+#### Matisse (iPhone XS Max, 2026-05-30)
+
+Captured via `PREXUSLiteRTEval` → `Documents/prexus-litert-device-eval.log` → `./tools/scripts/fetch_litert_device_eval_log.sh "Matisse"`.
 
 | Metric | Value |
 | --- | --- |
@@ -130,9 +185,9 @@ Captured during the local run: isolated eval app → `Documents/prexus-litert-de
 
 **Matisse conclusion:** On **A12 / 4 GiB-class** hardware, Gemma 4 E2B `.litertlm` with Metal does **not** start. This is a valid **blocked** feasibility result for sub–A17 Pro devices; **does not disprove** LiteRT-LM on iPhone 17 / A17 Pro+.
 
-#### Device results (Wang, iPhone 17, 2026-05-30)
+#### Wang (iPhone 17, 2026-05-30)
 
-Captured during the local run: isolated eval app → `Documents/prexus-litert-device-eval.log` (pulled from the eval app container via `devicectl`).
+Captured via `PREXUSLiteRTEval` → `Documents/prexus-litert-device-eval.log` → `./tools/scripts/fetch_litert_device_eval_log.sh "Wang"`.
 
 | Metric | Value |
 | --- | --- |
@@ -162,18 +217,18 @@ Captured during the local run: isolated eval app → `Documents/prexus-litert-de
 
 ### Title
 
-`P1-4: Evaluate LiteRT-LM backend feasibility` — **feasibility recorded (historical local runs)**
+`P1-4: Evaluate LiteRT-LM backend feasibility` — **complete (reproducible eval lane on `main`)**
 
 ### Status
 
-Device evidence for Matisse (blocked) and Wang (pass) is captured above. **P1-4 feasibility is satisfied for decision purposes.** Remaining work is tracked in [LiteRT-LM Adoption Decision Memo](./litert_lm_adoption_decision.md) as **P1-4b** (reproducible prototype on `main`, head-to-head comparison).
+Device evidence for Matisse (blocked) and Wang (pass) is recorded above. The eval target and scripts are on `main`. **Next:** [LiteRT-LM Adoption Decision Memo](./litert_lm_adoption_decision.md) **P1-4b** — gated comparison inside PREXUS (not production routing).
 
-### Instructions (implementation PR — not PR #15)
+### Instructions (P1-4b and later)
 
 1. Keep the current Qwen + llama.cpp MVP path untouched.
-2. Commit the eval target/scripts **or** document an alternative reproducible path; do not wire LiteRT-LM into production routing in the feasibility PR.
-3. Do not commit model artifacts, `.litertlm` files, DerivedData, screenshots, or generated local logs.
-4. If iOS project files change, regenerate with `ruby tools/scripts/generate_xcodeproj.rb` and document any `PREXUS_LITERT_LM_EVAL` flag behavior.
+2. Do not wire LiteRT-LM into `AppLocalModelFactory` automatic mode without Codex adoption approval.
+3. Do not commit model artifacts, `.litertlm` files, DerivedData, screenshots, or `.eval-logs`.
+4. Regenerate with `PREXUS_LITERT_LM_EVAL=1` only when changing eval sources; commit default `ruby tools/scripts/generate_xcodeproj.rb` output for review.
 5. Record exact test-plan results in the PR body using the repository PR template.
 
 ## Codex Review Gate

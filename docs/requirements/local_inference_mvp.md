@@ -50,6 +50,15 @@ On device, `PREXUSLlamaBridge` applies the GGUF chat template via `llama_chat_ap
 
 The committed `app/ios/PREXUS.xcodeproj` is generated **without** `llama.xcframework` so reviewers can run `PREXUSTests` on a clean checkout. After `./tools/scripts/build_llama_xcframework.sh`, run `ruby tools/scripts/generate_xcodeproj.rb` again to link the framework for on-device builds.
 
+LiteRT-LM eval is **not** in the default generated project. To build the isolated eval app only:
+
+```bash
+./tools/scripts/vendor_litert_lm.sh
+PREXUS_LITERT_LM_EVAL=1 ruby tools/scripts/generate_xcodeproj.rb
+```
+
+See `docs/research/litert_lm_evaluation_plan.md`. This does not change the production `AppLocalModelFactory` path.
+
 ## Related docs
 
 - `docs/design/device_install_and_screenshot_workflow.md`

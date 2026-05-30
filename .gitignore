@@ -1,12 +1,14 @@
 .DS_Store
 DerivedData/
 .derivedData/
+.derivedData-litert-eval/
 build/
 .build/
 *.xcuserstate
 *.xcworkspace/xcuserdata/
 *.xcodeproj/xcuserdata/
 app/ios/PREXUS.xcodeproj/xcuserdata/
+app/ios/PREXUS.xcodeproj/xcshareddata/xcschemes/PREXUSLiteRTEval.xcscheme
 *.swiftpm/
 .env
 .env.*
@@ -18,6 +20,8 @@ dist/
 tmp/
 .eval-logs/
 models/*.gguf
+models/*.litertlm
+vendor/LiteRT-LM/
 vendor/llama-cpp-artifacts/
 vendor/llama.cpp/build-*/
 vendor/llama.cpp/build-apple/
