@@ -237,6 +237,42 @@ Required measurements:
 
 Exit condition: docs record whether LiteRT has a clear structured-output advantage large enough to justify candidate intent rows. No selector implementation.
 
+#### Wang results (2026-05-30, `generatedAt` 14:49:11Z)
+
+Command:
+
+```bash
+./tools/scripts/eval_strict_json_on_device.sh "Wang"
+```
+
+Artifacts (gitignored): `.eval-logs/litert-strict-json-Wang-detail.csv`, `.eval-logs/litert-strict-json-Wang-summary.json`
+
+Frozen prompt set: 12 prompts (`StrictJSONEvalPromptSet` — 4 routing, 4 summarization, 4 memory).
+
+Scorer contract (P1-4c-a): `JSONDecoder` payloads with **JSON booleans only** (`true`/`false`; rejects `1`, `"yes"`, etc.), required keys + enum validation, markdown-fence stripping, and **`semicolon_separator`** rejection when the model emits `;` between fields. Benchmark CSV now preserves commas in `response_prefix` (earlier runs falsely showed `;` because `sanitizeField` rewrote commas).
+
+| Backend | strict pass | required keys | enum valid | markdown fence | median total ms | failures | fallbacks |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| qwen_llama_cpp | **8/12 (66.7%)** | 66.7% | 66.7% | 8.3% | ~423 | 0 | 0 |
+| litert_lm_gemma4 | **12/12 (100%)** | 100% | 100% | **100%** | ~1162 | 0 | 0 |
+
+By category (strict pass rate):
+
+| Category | qwen_llama_cpp | litert_lm_gemma4 |
+| --- | --- | --- |
+| routingClassification | 4/4 | 4/4 |
+| summarizationMetadata | 4/4 | 4/4 |
+| memoryExtraction | **0/4** | 4/4 |
+
+Qwen memory failures (detail): `json_decode_error` (nested `memory_summary` object), `no_json_object` (truncated multi-object output), `empty_memory_summary`.
+
+Interpretation (evidence only):
+
+- LiteRT meets the strict JSON contract on all 12 prompts on Wang when fences are stripped; **always wraps JSON in markdown fences** (100% fence rate).
+- Qwen is fast (~423 ms median) but **fails all memory-extraction strict prompts** (schema mismatch: nested objects / empty summary). Routing and summarization pass with **comma-separated JSON** on this run (no `semicolon_separator` hits).
+- **No L2 selector implication:** tier-2 structured tasks are a plausible LiteRT candidate on A17 Pro+, but latency ~2.7× Qwen median and fence stripping remain product costs.
+- §7 row **#9** moves to **partial evidence** (Wang strict-JSON benchmark complete under RFC-style scorer). **#10** latency trade-off still **Needs evidence** (product ms budget).
+
 ### P1-4c-b: thermal and memory run
 
 Goal: determine whether LiteRT prototype sessions are operationally viable on Wang-class devices.

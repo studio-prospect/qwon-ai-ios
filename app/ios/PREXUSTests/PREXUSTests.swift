@@ -1144,6 +1144,86 @@ final class PREXUSTests: XCTestCase {
         )
     }
 
+    func testStrictJSONEvalPromptSetHasTwelveFrozenPrompts() {
+        XCTAssertEqual(StrictJSONEvalPromptSet.frozenPrompts.count, 12)
+        let categories = Set(StrictJSONEvalPromptSet.frozenPrompts.map(\.category))
+        XCTAssertEqual(categories, Set(StrictJSONEvalCategory.allCases))
+    }
+
+    func testStrictJSONScorerAcceptsValidRoutingJSON() {
+        let response = """
+        {"intent":"summarize","confidence":0.92,"needs_cloud":false}
+        """
+        let score = StrictJSONEvalScorer.score(response: response, category: .routingClassification)
+        XCTAssertTrue(score.strictPass)
+        XCTAssertFalse(score.hadMarkdownFence)
+    }
+
+    func testStrictJSONScorerRejectsSemicolonSeparatedJSON() {
+        let response = """
+        {
+          "intent": "tool_request";
+          "confidence": 0.9;
+          "needs_cloud": true
+        }
+        """
+        let score = StrictJSONEvalScorer.score(response: response, category: .routingClassification)
+        XCTAssertFalse(score.strictParsePass)
+        XCTAssertFalse(score.strictPass)
+        XCTAssertEqual(score.parseError, "semicolon_separator")
+    }
+
+    func testStrictJSONScorerRejectsWangStyleInlineSemicolonJSON() {
+        let response = #"{   "intent": "chat";   "confidence": 0.9;   "needs_cloud": true }"#
+        let score = StrictJSONEvalScorer.score(response: response, category: .routingClassification)
+        XCTAssertFalse(score.strictPass)
+        XCTAssertEqual(score.parseError, "semicolon_separator")
+    }
+
+    func testStrictJSONScorerStripsMarkdownFenceAndValidates() {
+        let response = """
+        ```json
+        {"intent":"chat","confidence":0.5,"needs_cloud":false}
+        ```
+        """
+        let score = StrictJSONEvalScorer.score(response: response, category: .routingClassification)
+        XCTAssertTrue(score.hadMarkdownFence)
+        XCTAssertTrue(score.strictPass)
+    }
+
+    func testStrictJSONScorerValidatesSummarizationMetadata() {
+        let response = """
+        {"summary":"Short recap","todos":["share doc","request review"],"local_sufficient":true}
+        """
+        let score = StrictJSONEvalScorer.score(response: response, category: .summarizationMetadata)
+        XCTAssertTrue(score.strictPass)
+    }
+
+    func testStrictJSONScorerValidatesMemoryExtractionSensitivityEnum() {
+        let response = """
+        {"should_write_memory":true,"memory_summary":"Meeting Wed 15:00","sensitivity":"localOnly"}
+        """
+        let score = StrictJSONEvalScorer.score(response: response, category: .memoryExtraction)
+        XCTAssertTrue(score.strictPass)
+    }
+
+    func testStrictJSONScorerRejectsNumericBooleanFields() {
+        let response = """
+        {"intent":"chat","confidence":0.9,"needs_cloud":1}
+        """
+        let score = StrictJSONEvalScorer.score(response: response, category: .routingClassification)
+        XCTAssertFalse(score.strictPass)
+        XCTAssertEqual(score.parseError, "json_decode_error")
+    }
+
+    func testStrictJSONScorerRejectsStringBooleanFields() {
+        let response = """
+        {"summary":"ok","todos":["a"],"local_sufficient":"yes"}
+        """
+        let score = StrictJSONEvalScorer.score(response: response, category: .summarizationMetadata)
+        XCTAssertFalse(score.strictPass)
+    }
+
     func testLocalModelGenerationCoordinatorCancelsSupersededTurn() async {
         let coordinator = LocalModelGenerationCoordinator()
         let firstStarted = expectation(description: "first started")
