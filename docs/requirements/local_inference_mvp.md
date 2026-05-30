@@ -76,3 +76,4 @@ Device comparison: `./tools/scripts/compare_local_backends_on_device.sh "Wang"`.
 - `docs/research/gemma4_e2b_evaluation_plan.md` (evaluation candidate #1; not default)
 - `docs/research/litert_lm_evaluation_plan.md` (P1-4 feasibility lane; not production path)
 - `docs/research/litert_lm_adoption_decision.md` (post-feasibility adoption conditions and P1-4b prototype scope)
+- `docs/research/litert_lm_routing_policy_evaluation.md` (post-P1-4b routing-policy evaluation; no production default change)

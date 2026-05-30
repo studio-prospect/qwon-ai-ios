@@ -7,6 +7,7 @@ This document defines the PREXUS evaluation lane for LiteRT-LM / Google AI Edge 
 LiteRT-LM is an evaluation candidate only. It is not the PREXUS production runtime, and it must not replace the current Qwen2.5-0.5B-Instruct Q4_K_M MVP default without a later adoption decision.
 
 **Adoption decision (post-feasibility):** see [LiteRT-LM Adoption Decision Memo](./litert_lm_adoption_decision.md).
+**Routing-policy evaluation (post-P1-4b):** see [LiteRT-LM Routing Policy Evaluation](./litert_lm_routing_policy_evaluation.md).
 
 ## Current Decision
 
@@ -223,7 +224,7 @@ Captured via `PREXUSLiteRTEval` → `Documents/prexus-litert-device-eval.log` �
 
 Device evidence for Matisse (blocked) and Wang (pass) is recorded above. The eval target and scripts are on `main`.
 
-**P1-4b (in progress):** gated comparison inside PREXUS main app — see [adoption memo](./litert_lm_adoption_decision.md) §6.
+**P1-4b (complete):** gated comparison inside PREXUS main app — see [adoption memo](./litert_lm_adoption_decision.md) §6.
 
 | Item | Command / artifact |
 | --- | --- |
@@ -232,6 +233,7 @@ Device evidence for Matisse (blocked) and Wang (pass) is recorded above. The eva
 | Head-to-head | `./tools/scripts/compare_local_backends_on_device.sh "Wang"` → `.eval-logs/litert-backend-comparison-*.log` |
 | Comparison prompts | Same as P1-4 eval (`ja_short`, `routing_json`) + `control_plane_medium` |
 | Production | Unchanged — `prexus-local-mvp.gguf` + llama.cpp automatic |
+| Next policy step | Review [LiteRT-LM Routing Policy Evaluation](./litert_lm_routing_policy_evaluation.md) before any L2 selector implementation |
 
 ### Instructions (P1-4b and later)
 
