@@ -143,7 +143,13 @@ PREXUS_LITERT_LM_EVAL=1 ruby tools/scripts/generate_xcodeproj.rb
 ```bash
 ./tools/scripts/fetch_litert_lm_eval_model.sh
 ./tools/scripts/eval_litert_lm_on_device.sh "Wang"
-# after smoke completes:
+# runs uninstall → install → push → launch → wait → fetch log
+# output: .eval-logs/litert-device-eval-Wang.log (gitignored)
+```
+
+To re-fetch a log without re-running the full eval:
+
+```bash
 ./tools/scripts/fetch_litert_device_eval_log.sh "Wang"
 ```
 
@@ -156,10 +162,9 @@ Helper scripts (all under `tools/scripts/`):
 | `vendor_litert_lm.sh` | Shallow-clone LiteRT-LM into `vendor/` (LFS smudge skipped) |
 | `fetch_litert_lm_eval_model.sh` | Download `models/prexus-eval-gemma4-e2b.litertlm` (gitignored) |
 | `install_litert_eval_on_device.sh` | Vendor + regenerate + build + install eval app (**does not launch**) |
-| `eval_litert_lm_on_device.sh` | Uninstall → install → push model → launch → fetch log |
 | `push_litert_lm_model_to_device.sh` | Copy `.litertlm` into eval app `Documents/Models/` |
-| `eval_litert_lm_on_device.sh` | End-to-end eval orchestration |
-| `fetch_litert_device_eval_log.sh` | Pull `prexus-litert-device-eval.log` from device |
+| `eval_litert_lm_on_device.sh` | End-to-end: uninstall → install → push → launch → wait → **fetch log** |
+| `fetch_litert_device_eval_log.sh` | Pull `prexus-litert-device-eval.log` only (optional re-fetch) |
 
 ### Recorded device results (2026-05-30)
 

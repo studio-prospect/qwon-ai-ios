@@ -44,30 +44,32 @@ print(matches[0][2])
 PY
 )"
 
-echo "==> Step 1/5: fresh install (uninstall prior eval app + UserDefaults)"
+echo "==> Step 1/6: fresh install (uninstall prior eval app + UserDefaults)"
 xcrun devicectl device uninstall app --device "$DEVICE_ID" com.prexus.ios.literteval 2>/dev/null || true
 
-echo "==> Step 2/5: regenerate Xcode project + build/install PREXUSLiteRTEval (no launch)"
+echo "==> Step 2/6: regenerate Xcode project + build/install PREXUSLiteRTEval (no launch)"
 "$ROOT/tools/scripts/install_litert_eval_on_device.sh" "$DEVICE_FILTER"
 
 echo ""
-echo "==> Step 3/5: push .litertlm eval artifact (~2.6 GiB — may take several minutes)"
+echo "==> Step 3/6: push .litertlm eval artifact (~2.6 GiB — may take several minutes)"
 "$ROOT/tools/scripts/push_litert_lm_model_to_device.sh" "$DEVICE_FILTER"
 
 echo ""
-echo "==> Step 4/5: launch eval app (smoke runs only after model is present)"
+echo "==> Step 4/6: launch eval app (smoke runs only after model is present)"
 xcrun devicectl device process launch --device "$DEVICE_ID" com.prexus.ios.literteval
 
 echo ""
-echo "==> Step 5/5: wait for smoke eval (cold load + prompts; ~1–3 min on A17 Pro+)"
+echo "==> Step 5/6: wait for smoke eval (cold load + prompts; ~1–3 min on A17 Pro+)"
 sleep 120
 
 echo ""
-echo "==> Fetch eval log"
-echo "Wait for cold load + two prompts to finish, then:"
-echo "  ./tools/scripts/fetch_litert_device_eval_log.sh \"$DEVICE_FILTER\""
+echo "==> Step 6/6: fetch eval log"
+LOG_OUT="$ROOT/.eval-logs/litert-device-eval-${DEVICE_FILTER}.log"
+PREXUS_LITERT_EVAL_LOG_OUTPUT="$LOG_OUT" "$ROOT/tools/scripts/fetch_litert_device_eval_log.sh" "$DEVICE_FILTER"
+
 echo ""
-echo "Look for: cold_load_ms, ja-first_token_ms, ja-response, routing-response"
+echo "Look for: cold_load_ms, ja-first_token_ms, ja-response, routing-response, eval-complete"
+echo "Log saved to: $LOG_OUT"
 echo "Record results in docs/research/litert_lm_evaluation_plan.md"
 echo ""
 echo "PREXUS production (Qwen MVP) is unchanged. Remove PREXUSLiteRTEval from device when done."

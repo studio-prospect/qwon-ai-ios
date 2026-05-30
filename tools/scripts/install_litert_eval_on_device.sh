@@ -94,6 +94,6 @@ xcrun devicectl device install app --device "$DEVICE_ID" "$APP"
 
 echo ""
 echo "Done (install only — do not launch before the model is on device)."
-echo "Next: push the .litertlm, then launch via:"
+echo "Next: run the full eval workflow (push, launch, wait, fetch log):"
 echo "  ./tools/scripts/eval_litert_lm_on_device.sh \"$DEVICE_FILTER\""
 echo "  # or manually: push_litert_lm_model_to_device.sh, then devicectl launch"
