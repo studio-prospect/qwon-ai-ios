@@ -187,6 +187,7 @@ ruby tools/scripts/generate_xcodeproj.rb
 | 2026-05-30 | LiteRT-LM **feasibility proven** on Wang; **not adopted** for production |
 | 2026-05-30 | **Matisse blocked** — do not assume A12 support |
 | 2026-05-30 | **P1-4b merged:** compile-gated `LiteRTLocalModelClient`, debug toggle, comparison runner + script; production Qwen path unchanged |
-| 2026-05-30 | **Next:** routing-policy evaluation before any L2 selector or adoption PR |
+| 2026-05-30 | **Routing policy separated:** PR #18 added L2 policy evaluation before any selector implementation |
+| 2026-05-30 | **Next:** P1-4c-a strict JSON benchmark and P1-4c-b thermal/memory eval; no L2 selector until checklist sign-off |
 
 **Owner split:** Cursor implements prototype and evidence; Codex owns adoption policy, routing semantics, and merge readiness.
