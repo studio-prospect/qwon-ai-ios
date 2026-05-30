@@ -141,6 +141,24 @@ struct StrictJSONEvalScore: Equatable {
     }
 }
 
+private struct RoutingClassificationPayload: Decodable {
+    let intent: String
+    let confidence: Double
+    let needs_cloud: Bool
+}
+
+private struct SummarizationMetadataPayload: Decodable {
+    let summary: String
+    let todos: [String]
+    let local_sufficient: Bool
+}
+
+private struct MemoryExtractionPayload: Decodable {
+    let should_write_memory: Bool
+    let memory_summary: String
+    let sensitivity: String
+}
+
 enum StrictJSONEvalScorer {
     static func score(response: String, category: StrictJSONEvalCategory) -> StrictJSONEvalScore {
         let trimmed = response.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -155,35 +173,65 @@ enum StrictJSONEvalScorer {
             )
         }
 
-        do {
-            let object = try JSONSerialization.jsonObject(with: data)
-            guard let dictionary = object as? [String: Any] else {
-                return StrictJSONEvalScore(
-                    hadMarkdownFence: fenceExtraction.hadMarkdownFence,
-                    strictParsePass: false,
-                    requiredKeysPass: false,
-                    enumValidityPass: false,
-                    parseError: "root_not_object"
-                )
-            }
-
-            let requiredKeysPass = hasRequiredKeys(dictionary, category: category)
-            let enumValidityPass = requiredKeysPass && validatesEnums(dictionary, category: category)
+        switch decodeStrictPayload(data: data, category: category) {
+        case .success(let enumValid):
             return StrictJSONEvalScore(
                 hadMarkdownFence: fenceExtraction.hadMarkdownFence,
                 strictParsePass: true,
-                requiredKeysPass: requiredKeysPass,
-                enumValidityPass: enumValidityPass,
+                requiredKeysPass: true,
+                enumValidityPass: enumValid,
                 parseError: nil
             )
-        } catch {
+        case .failure(let error):
             return StrictJSONEvalScore(
                 hadMarkdownFence: fenceExtraction.hadMarkdownFence,
                 strictParsePass: false,
                 requiredKeysPass: false,
                 enumValidityPass: false,
-                parseError: "json_parse_error"
+                parseError: error
             )
+        }
+    }
+
+    private enum DecodeOutcome {
+        case success(Bool)
+        case failure(String)
+    }
+
+    private static func decodeStrictPayload(
+        data: Data,
+        category: StrictJSONEvalCategory
+    ) -> DecodeOutcome {
+        let decoder = JSONDecoder()
+        do {
+            switch category {
+            case .routingClassification:
+                let payload = try decoder.decode(RoutingClassificationPayload.self, from: data)
+                guard payload.confidence >= 0, payload.confidence <= 1 else {
+                    return .failure("confidence_out_of_range")
+                }
+                let allowedIntents: Set<String> = [
+                    "chat", "summarize", "memory_write", "tool_request", "cloud_needed"
+                ]
+                return .success(allowedIntents.contains(payload.intent))
+            case .summarizationMetadata:
+                let payload = try decoder.decode(SummarizationMetadataPayload.self, from: data)
+                guard !payload.summary.isEmpty else {
+                    return .failure("empty_summary")
+                }
+                return .success(true)
+            case .memoryExtraction:
+                let payload = try decoder.decode(MemoryExtractionPayload.self, from: data)
+                guard !payload.memory_summary.isEmpty else {
+                    return .failure("empty_memory_summary")
+                }
+                let allowedSensitivity: Set<String> = [
+                    "localOnly", "localPreferred", "escalationAllowed", "providerRestricted"
+                ]
+                return .success(allowedSensitivity.contains(payload.sensitivity))
+            }
+        } catch {
+            return .failure("json_decode_error")
         }
     }
 
@@ -237,86 +285,4 @@ enum StrictJSONEvalScorer {
         ) != nil
     }
 
-    private static func hasRequiredKeys(_ object: [String: Any], category: StrictJSONEvalCategory) -> Bool {
-        switch category {
-        case .routingClassification:
-            return object.keys.contains("intent")
-                && object.keys.contains("confidence")
-                && object.keys.contains("needs_cloud")
-        case .summarizationMetadata:
-            return object.keys.contains("summary")
-                && object.keys.contains("todos")
-                && object.keys.contains("local_sufficient")
-        case .memoryExtraction:
-            return object.keys.contains("should_write_memory")
-                && object.keys.contains("memory_summary")
-                && object.keys.contains("sensitivity")
-        }
-    }
-
-    private static func validatesEnums(_ object: [String: Any], category: StrictJSONEvalCategory) -> Bool {
-        switch category {
-        case .routingClassification:
-            guard let intent = object["intent"] as? String,
-                  let confidence = parseConfidence(object["confidence"]),
-                  let needsCloud = parseBool(object["needs_cloud"]) else {
-                return false
-            }
-            let allowedIntents: Set<String> = [
-                "chat", "summarize", "memory_write", "tool_request", "cloud_needed"
-            ]
-            return allowedIntents.contains(intent)
-                && confidence >= 0 && confidence <= 1
-                && needsCloud != nil
-        case .summarizationMetadata:
-            guard let summary = object["summary"] as? String,
-                  !summary.isEmpty,
-                  let todos = object["todos"] as? [Any],
-                  parseBool(object["local_sufficient"]) != nil else {
-                return false
-            }
-            return todos.allSatisfy { $0 is String }
-        case .memoryExtraction:
-            guard parseBool(object["should_write_memory"]) != nil,
-                  let summary = object["memory_summary"] as? String,
-                  !summary.isEmpty,
-                  let sensitivity = object["sensitivity"] as? String else {
-                return false
-            }
-            let allowedSensitivity: Set<String> = [
-                "localOnly", "localPreferred", "escalationAllowed", "providerRestricted"
-            ]
-            return allowedSensitivity.contains(sensitivity)
-        }
-    }
-
-    private static func parseConfidence(_ value: Any?) -> Double? {
-        if let number = value as? NSNumber {
-            return number.doubleValue
-        }
-        if let string = value as? String, let parsed = Double(string) {
-            return parsed
-        }
-        return nil
-    }
-
-    private static func parseBool(_ value: Any?) -> Bool? {
-        if let bool = value as? Bool {
-            return bool
-        }
-        if let number = value as? NSNumber {
-            return number.boolValue
-        }
-        if let string = value as? String {
-            switch string.lowercased() {
-            case "true", "1", "yes":
-                return true
-            case "false", "0", "no":
-                return false
-            default:
-                return nil
-            }
-        }
-        return nil
-    }
 }

@@ -83,30 +83,14 @@ xcrun devicectl device copy to \
 mkdir -p "$LOG_DIR"
 BENCHMARK_START_ISO="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 echo "==> Launch strict JSON benchmark (12 prompts x 2 backends) started_at=$BENCHMARK_START_ISO"
-xcrun devicectl device process launch \
-  --device "$DEVICE_ID" \
-  --environment-variables '{"PREXUS_RUN_STRICT_JSON_BENCHMARK":"1"}' \
-  "$BUNDLE_ID"
 
-echo "==> Wait for benchmark (poll fresh summary on device, up to 35 min)"
-POLL_SECONDS=2100
-INTERVAL=30
-ELAPSED=0
-while (( ELAPSED < POLL_SECONDS )); do
-  if xcrun devicectl device copy from \
-    --device "$DEVICE_ID" \
-    --source Documents/prexus-strict-json-benchmark-summary.json \
-    --destination "$SUMMARY_OUT" \
-    --domain-type appDataContainer \
-    --domain-identifier "$BUNDLE_ID" 2>/dev/null; then
-    if BENCHMARK_START_ISO="$BENCHMARK_START_ISO" SUMMARY_OUT="$SUMMARY_OUT" python3 <<'PY'
+is_summary_fresh() {
+  BENCHMARK_START_ISO="$BENCHMARK_START_ISO" SUMMARY_OUT="$SUMMARY_OUT" python3 <<'PY'
 import json, os, sys
-from datetime import datetime, timezone
+from datetime import datetime
 
-start_raw = os.environ["BENCHMARK_START_ISO"].replace("Z", "+00:00")
-start = datetime.fromisoformat(start_raw)
-path = os.environ["SUMMARY_OUT"]
-with open(path, encoding="utf-8") as handle:
+start = datetime.fromisoformat(os.environ["BENCHMARK_START_ISO"].replace("Z", "+00:00"))
+with open(os.environ["SUMMARY_OUT"], encoding="utf-8") as handle:
     data = json.load(handle)
 generated = datetime.fromisoformat(data["generatedAt"].replace("Z", "+00:00"))
 litert = next((b for b in data.get("backends", []) if b.get("backend") == "litert_lm_gemma4"), None)
@@ -114,15 +98,53 @@ if generated > start and litert and litert.get("medianTotalMs", 0) > 100:
     sys.exit(0)
 sys.exit(1)
 PY
-    then
-      echo "Fresh benchmark summary detected after ${ELAPSED}s"
-      break
-    fi
+}
+
+LAUNCHED=0
+for attempt in 1 2 3 4 5 6 7 8 9 10; do
+  if xcrun devicectl device process launch \
+    --device "$DEVICE_ID" \
+    --environment-variables '{"PREXUS_RUN_STRICT_JSON_BENCHMARK":"1"}' \
+    "$BUNDLE_ID" 2>&1 | grep -q "Launched application"; then
+    LAUNCHED=1
+    echo "Launched on attempt ${attempt}"
+    break
+  fi
+  echo "Launch attempt ${attempt} failed (unlock device?)"
+  sleep 10
+done
+
+if [[ "$LAUNCHED" -ne 1 ]]; then
+  echo "error: could not launch PREXUS on device (locked or unavailable)" >&2
+  exit 1
+fi
+
+echo "==> Wait for benchmark (poll fresh summary on device, up to 35 min)"
+POLL_SECONDS=2100
+INTERVAL=30
+ELAPSED=0
+FRESH=0
+while (( ELAPSED < POLL_SECONDS )); do
+  if xcrun devicectl device copy from \
+    --device "$DEVICE_ID" \
+    --source Documents/prexus-strict-json-benchmark-summary.json \
+    --destination "$SUMMARY_OUT" \
+    --domain-type appDataContainer \
+    --domain-identifier "$BUNDLE_ID" 2>/dev/null \
+    && is_summary_fresh; then
+    FRESH=1
+    echo "Fresh benchmark summary detected after ${ELAPSED}s"
+    break
   fi
   echo "  ... still running (${ELAPSED}s / ${POLL_SECONDS}s)"
   sleep "$INTERVAL"
   ELAPSED=$((ELAPSED + INTERVAL))
 done
+
+if [[ "$FRESH" -ne 1 ]]; then
+  echo "error: timed out without a fresh benchmark summary (refusing stale logs)" >&2
+  exit 1
+fi
 
 echo "==> Fetch logs"
 xcrun devicectl device copy from \
@@ -132,12 +154,10 @@ xcrun devicectl device copy from \
   --domain-type appDataContainer \
   --domain-identifier "$BUNDLE_ID"
 
-xcrun devicectl device copy from \
-  --device "$DEVICE_ID" \
-  --source Documents/prexus-strict-json-benchmark-summary.json \
-  --destination "$SUMMARY_OUT" \
-  --domain-type appDataContainer \
-  --domain-identifier "$BUNDLE_ID"
+if ! is_summary_fresh; then
+  echo "error: summary on device is stale after fetch" >&2
+  exit 1
+fi
 
 echo "Done."
 echo "  Detail:  $DETAIL_OUT"

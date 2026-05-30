@@ -1199,6 +1199,23 @@ final class PREXUSTests: XCTestCase {
         XCTAssertTrue(score.strictPass)
     }
 
+    func testStrictJSONScorerRejectsNumericBooleanFields() {
+        let response = """
+        {"intent":"chat","confidence":0.9,"needs_cloud":1}
+        """
+        let score = StrictJSONEvalScorer.score(response: response, category: .routingClassification)
+        XCTAssertFalse(score.strictPass)
+        XCTAssertEqual(score.parseError, "json_decode_error")
+    }
+
+    func testStrictJSONScorerRejectsStringBooleanFields() {
+        let response = """
+        {"summary":"ok","todos":["a"],"local_sufficient":"yes"}
+        """
+        let score = StrictJSONEvalScorer.score(response: response, category: .summarizationMetadata)
+        XCTAssertFalse(score.strictPass)
+    }
+
     func testLocalModelGenerationCoordinatorCancelsSupersededTurn() async {
         let coordinator = LocalModelGenerationCoordinator()
         let firstStarted = expectation(description: "first started")
