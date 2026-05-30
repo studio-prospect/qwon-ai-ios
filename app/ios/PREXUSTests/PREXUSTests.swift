@@ -1024,6 +1024,50 @@ final class PREXUSTests: XCTestCase {
         XCTAssertNil(LocalModelExecutionTrace.current?.primaryFailure)
     }
 
+    func testNestedFallbackPreservesInnerRespondingBackend() async throws {
+        struct FailingLiteRT: LocalModelClient {
+            let descriptor = LocalModelDescriptor(
+                backend: .deviceRuntime,
+                name: "LiteRT-LM Prototype Runtime",
+                summary: "Fails"
+            )
+
+            func generate(prompt: String) async throws -> String {
+                throw LocalModelError.backendUnavailable("LiteRT engine missing")
+            }
+        }
+
+        struct FailingLlama: LocalModelClient {
+            let descriptor = LocalModelDescriptor(
+                backend: .deviceRuntime,
+                name: "llama.cpp On-Device Runtime",
+                summary: "Fails"
+            )
+
+            func generate(prompt: String) async throws -> String {
+                throw LocalModelError.modelAssetUnavailable
+            }
+        }
+
+        LocalModelExecutionTrace.reset()
+        let qwenChain = FallbackLocalModelClient(
+            primary: FailingLlama(),
+            fallback: EmbeddedHeuristicLocalModelClient()
+        )
+        let outer = FallbackLocalModelClient(
+            primary: FailingLiteRT(),
+            fallback: qwenChain
+        )
+        _ = try await outer.generate(prompt: "User:\nReview routing policy")
+
+        XCTAssertEqual(
+            LocalModelExecutionTrace.current?.respondingBackend,
+            "Embedded Heuristic Runtime"
+        )
+        XCTAssertTrue(LocalModelExecutionTrace.current?.primaryFailure?.contains("LiteRT") == true)
+        LocalModelExecutionTrace.reset()
+    }
+
     func testFallbackLocalModelClientPreservesPrimaryMetricsDetail() async throws {
         struct MetricsPrimary: LocalModelClient {
             let descriptor = LocalModelDescriptor(

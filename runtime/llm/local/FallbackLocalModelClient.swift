@@ -29,11 +29,11 @@ struct FallbackLocalModelClient: LocalModelClient {
         } catch {
             let failure = String(describing: error)
             let response = try await fallback.generate(prompt: prompt)
-            let fallbackMetrics = LocalModelExecutionTrace.current?.metricsDetail
+            let fallbackTrace = LocalModelExecutionTrace.current
             LocalModelExecutionTrace.record(
-                respondingBackend: fallback.descriptor.name,
+                respondingBackend: fallbackTrace?.respondingBackend ?? fallback.descriptor.name,
                 primaryFailure: failure,
-                metricsDetail: fallbackMetrics
+                metricsDetail: fallbackTrace?.metricsDetail
             )
             return response
         }
