@@ -150,6 +150,14 @@ Captured during the local run: isolated eval app → `Documents/prexus-litert-de
 
 **Wang conclusion:** LiteRT-LM + Gemma 4 E2B `.litertlm` **passes feasibility** on A17 Pro-class hardware where the GGUF llama.cpp path produced unusable output (`？`). Trade-offs: **~7 s cold load**, **~2.4 GiB** artifact, separate backend integration still required. **Do not adopt as default** without adoption review; continue Qwen MVP for production.
 
+### Implications
+
+- LiteRT-LM should move from "can it work?" to "should PREXUS adopt a second local backend?" evaluation.
+- A17/A19-class devices are viable targets for the next prototype lane.
+- A12-class devices should not be assumed supported for LiteRT-LM Gemma 4 E2B.
+- Any adoption work must keep the current Qwen MVP fallback available.
+- The next decision should compare LiteRT-LM against Qwen MVP on latency, memory, thermal behavior, package size, deterministic JSON reliability, and Japanese short-form quality.
+
 ## Cursor Task
 
 ### Title

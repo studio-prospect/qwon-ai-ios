@@ -112,7 +112,7 @@ Potential value:
 
 Research questions:
 
-- whether the Early Preview Swift API is stable enough for PREXUS
+- whether the Early Preview Swift API is stable enough for PREXUS beyond the Wang success case
 - whether model artifacts are available, license-compatible, and practical to distribute
 - cold load, memory, thermal, and package-size impact on iPhone
 - Japanese short-form quality and deterministic routing JSON reliability
