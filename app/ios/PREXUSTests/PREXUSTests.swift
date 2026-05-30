@@ -1170,6 +1170,14 @@ final class PREXUSTests: XCTestCase {
         let score = StrictJSONEvalScorer.score(response: response, category: .routingClassification)
         XCTAssertFalse(score.strictParsePass)
         XCTAssertFalse(score.strictPass)
+        XCTAssertEqual(score.parseError, "semicolon_separator")
+    }
+
+    func testStrictJSONScorerRejectsWangStyleInlineSemicolonJSON() {
+        let response = #"{   "intent": "chat";   "confidence": 0.9;   "needs_cloud": true }"#
+        let score = StrictJSONEvalScorer.score(response: response, category: .routingClassification)
+        XCTAssertFalse(score.strictPass)
+        XCTAssertEqual(score.parseError, "semicolon_separator")
     }
 
     func testStrictJSONScorerStripsMarkdownFenceAndValidates() {

@@ -133,27 +133,26 @@ enum LocalStrictJSONBenchmarkRunner {
             "backend,prompt_id,category,status,total_ms,cold_load_ms,first_token_ms,strict_pass,strict_parse_pass,required_keys_pass,enum_validity_pass,had_markdown_fence,used_fallback,answered_by,primary_failure,parse_error,response_prefix"
         ]
         for row in rows {
-            lines.append(
-                [
-                    row.backend,
-                    row.promptID,
-                    row.category,
-                    row.status,
-                    String(format: "%.1f", row.totalMs),
-                    row.coldLoadMs,
-                    row.firstTokenMs,
-                    row.strictPass ? "1" : "0",
-                    row.strictParsePass ? "1" : "0",
-                    row.requiredKeysPass ? "1" : "0",
-                    row.enumValidityPass ? "1" : "0",
-                    row.hadMarkdownFence ? "1" : "0",
-                    row.usedFallback ? "1" : "0",
-                    row.answeredBy,
-                    row.primaryFailure,
-                    row.parseError,
-                    row.responsePrefix
-                ].joined(separator: ",")
-            )
+            let fields: [String] = [
+                row.backend,
+                row.promptID,
+                row.category,
+                row.status,
+                String(format: "%.1f", row.totalMs),
+                row.coldLoadMs,
+                row.firstTokenMs,
+                row.strictPass ? "1" : "0",
+                row.strictParsePass ? "1" : "0",
+                row.requiredKeysPass ? "1" : "0",
+                row.enumValidityPass ? "1" : "0",
+                row.hadMarkdownFence ? "1" : "0",
+                row.usedFallback ? "1" : "0",
+                row.answeredBy,
+                row.primaryFailure,
+                row.parseError,
+                row.responsePrefix
+            ]
+            lines.append(fields.map(csvEscape).joined(separator: ","))
         }
         return lines.joined(separator: "\n")
     }
@@ -243,9 +242,13 @@ enum LocalStrictJSONBenchmarkRunner {
     }
 
     private static func sanitizeField(_ value: String) -> String {
-        value
-            .replacingOccurrences(of: ",", with: ";")
-            .replacingOccurrences(of: "\n", with: " ")
+        value.replacingOccurrences(of: "\n", with: " ")
+    }
+
+    private static func csvEscape(_ value: String) -> String {
+        let needsQuotes = value.contains(",") || value.contains("\"") || value.contains("\n")
+        guard needsQuotes else { return value }
+        return "\"\(value.replacingOccurrences(of: "\"", with: "\"\"\"))\""
     }
 
     private static func writeLogs(detailCSV: String, summaryJSON: String) {

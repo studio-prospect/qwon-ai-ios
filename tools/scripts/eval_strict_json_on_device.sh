@@ -85,18 +85,32 @@ BENCHMARK_START_ISO="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 echo "==> Launch strict JSON benchmark (12 prompts x 2 backends) started_at=$BENCHMARK_START_ISO"
 
 is_summary_fresh() {
-  BENCHMARK_START_ISO="$BENCHMARK_START_ISO" SUMMARY_OUT="$SUMMARY_OUT" python3 <<'PY'
-import json, os, sys
+  BENCHMARK_START_ISO="$BENCHMARK_START_ISO" SUMMARY_OUT="$SUMMARY_OUT" DETAIL_OUT="$DETAIL_OUT" python3 <<'PY'
+import csv, json, os, sys
 from datetime import datetime
 
 start = datetime.fromisoformat(os.environ["BENCHMARK_START_ISO"].replace("Z", "+00:00"))
-with open(os.environ["SUMMARY_OUT"], encoding="utf-8") as handle:
+summary_path = os.environ["SUMMARY_OUT"]
+with open(summary_path, encoding="utf-8") as handle:
     data = json.load(handle)
 generated = datetime.fromisoformat(data["generatedAt"].replace("Z", "+00:00"))
+if generated <= start:
+    sys.exit(1)
 litert = next((b for b in data.get("backends", []) if b.get("backend") == "litert_lm_gemma4"), None)
-if generated > start and litert and litert.get("medianTotalMs", 0) > 100:
-    sys.exit(0)
-sys.exit(1)
+qwen = next((b for b in data.get("backends", []) if b.get("backend") == "qwen_llama_cpp"), None)
+if not litert or not qwen:
+    sys.exit(1)
+if litert.get("runs", 0) != 12 or qwen.get("runs", 0) != 12:
+    sys.exit(1)
+if litert.get("medianTotalMs", 0) <= 100:
+    sys.exit(1)
+detail_path = os.environ.get("DETAIL_OUT", "")
+if detail_path and os.path.isfile(detail_path):
+    with open(detail_path, encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    if len(rows) != 24:
+        sys.exit(1)
+sys.exit(0)
 PY
 }
 
@@ -125,6 +139,12 @@ INTERVAL=30
 ELAPSED=0
 FRESH=0
 while (( ELAPSED < POLL_SECONDS )); do
+  xcrun devicectl device copy from \
+    --device "$DEVICE_ID" \
+    --source Documents/prexus-strict-json-benchmark-detail.csv \
+    --destination "$DETAIL_OUT" \
+    --domain-type appDataContainer \
+    --domain-identifier "$BUNDLE_ID" 2>/dev/null || true
   if xcrun devicectl device copy from \
     --device "$DEVICE_ID" \
     --source Documents/prexus-strict-json-benchmark-summary.json \
