@@ -21,6 +21,7 @@ SCHEME_PATH = PROJECT_PATH.join("xcshareddata", "xcschemes", "PREXUS.xcscheme")
 litert_prototype_only_source_names = %w[
   LiteRTLocalModelClient.swift
   LocalBackendComparisonRunner.swift
+  LocalStrictJSONBenchmarkRunner.swift
 ].freeze
 
 app_sources = Dir.glob(IOS_ROOT.join("PREXUS", "**", "*.swift").to_s).reject do |path|
@@ -270,7 +271,8 @@ end
 if ENV["PREXUS_LITERT_LM_PROTOTYPE"] == "1"
   litert_prototype_sources = [
     IOS_ROOT.join("PREXUS", "LocalInference", "LiteRTLocalModelClient.swift").to_s,
-    IOS_ROOT.join("PREXUS", "LocalInference", "LocalBackendComparisonRunner.swift").to_s
+    IOS_ROOT.join("PREXUS", "LocalInference", "LocalBackendComparisonRunner.swift").to_s,
+    IOS_ROOT.join("PREXUS", "LocalInference", "LocalStrictJSONBenchmarkRunner.swift").to_s
   ]
 
   litert_prototype_sources.each do |path|

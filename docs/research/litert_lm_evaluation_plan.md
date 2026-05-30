@@ -234,7 +234,7 @@ Device evidence for Matisse (blocked) and Wang (pass) is recorded above. The eva
 | Comparison prompts | Same as P1-4 eval (`ja_short`, `routing_json`) + `control_plane_medium` |
 | Production | Unchanged — `prexus-local-mvp.gguf` + llama.cpp automatic |
 | Next policy step | Review [LiteRT-LM Routing Policy Evaluation](./litert_lm_routing_policy_evaluation.md) before any L2 selector implementation |
-| P1-4c-a | Strict JSON benchmark for Qwen vs LiteRT; docs/logs only; no selector |
+| P1-4c-a | **Complete (Wang 2026-05-30)** — `./tools/scripts/eval_strict_json_on_device.sh`; see [routing policy §9](./litert_lm_routing_policy_evaluation.md) |
 | P1-4c-b | 5-10 minute thermal/memory eval; docs/logs only; no selector |
 
 ### Instructions (P1-4b and later)

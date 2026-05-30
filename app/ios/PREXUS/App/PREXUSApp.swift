@@ -10,6 +10,7 @@ struct PREXUSApp: App {
                 .background(Color(uiColor: .systemGroupedBackground))
                 .task {
                     #if PREXUS_LITERT_LM_PROTOTYPE
+                    await LocalStrictJSONBenchmarkRunner.runIfRequested()
                     await LocalBackendComparisonRunner.runIfRequested()
                     #endif
                 }
