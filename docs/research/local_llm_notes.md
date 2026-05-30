@@ -101,7 +101,7 @@ Research questions:
 
 ### LiteRT-LM / Google AI Edge direction
 
-Current status: backend feasibility evaluation candidate, not production path. See [LiteRT-LM Evaluation Plan](./litert_lm_evaluation_plan.md).
+Current status: backend feasibility **proven on A17 Pro+** (Wang); **not adopted** for production. See [LiteRT-LM Evaluation Plan](./litert_lm_evaluation_plan.md) and [LiteRT-LM Adoption Decision Memo](./litert_lm_adoption_decision.md).
 
 Potential value:
 

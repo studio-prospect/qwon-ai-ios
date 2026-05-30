@@ -6,6 +6,8 @@ This document defines the PREXUS evaluation lane for LiteRT-LM / Google AI Edge 
 
 LiteRT-LM is an evaluation candidate only. It is not the PREXUS production runtime, and it must not replace the current Qwen2.5-0.5B-Instruct Q4_K_M MVP default without a later adoption decision.
 
+**Adoption decision (post-feasibility):** see [LiteRT-LM Adoption Decision Memo](./litert_lm_adoption_decision.md).
+
 ## Current Decision
 
 | Area | Decision |
@@ -95,6 +97,89 @@ A blocked result is acceptable if the PR documents the blocker precisely. Valid 
 - memory, thermal, or startup cost too high for PREXUS MVP
 - output quality still unusable for Japanese or routing JSON
 
+## Isolated spike (implemented)
+
+Production **PREXUS** and **Qwen MVP** are unchanged. Evaluation uses a separate iOS app target and bundle id.
+
+| Item | Value |
+| --- | --- |
+| App target | `PREXUSLiteRTEval` (only when `PREXUS_LITERT_LM_EVAL=1` during project generation) |
+| Bundle id | `com.prexus.ios.literteval` |
+| Model on device | `Documents/Models/prexus-eval-gemma4-e2b.litertlm` |
+| Eval log | `Documents/prexus-litert-device-eval.log` |
+| Swift package | `https://github.com/google-ai-edge/LiteRT-LM` (product `LiteRTLM`, ≥ 0.12.0) |
+
+### SPM / Git LFS note
+
+Remote Swift Package Manager checkout of `LiteRT-LM` v0.12.0 can fail on Android LFS prebuilts (`remote missing object`). PREXUS vendors a shallow clone instead:
+
+```bash
+./tools/scripts/vendor_litert_lm.sh
+PREXUS_LITERT_LM_EVAL=1 ruby tools/scripts/generate_xcodeproj.rb
+```
+
+`install_litert_eval_on_device.sh` runs the vendor step automatically.
+
+### Device workflow (any paired iPhone; A17 Pro+ recommended)
+
+```bash
+./tools/scripts/fetch_litert_lm_eval_model.sh
+./tools/scripts/eval_litert_lm_on_device.sh "Matisse"
+# after smoke completes:
+./tools/scripts/fetch_litert_device_eval_log.sh "Matisse"
+```
+
+Pass a device name substring from `xcrun devicectl list devices` (e.g. `Matisse`, `Wang`).
+
+#### Device results (Matisse, iPhone XS Max, 2026-05-30)
+
+Captured via `PREXUSLiteRTEval` → `Documents/prexus-litert-device-eval.log` → `./tools/scripts/fetch_litert_device_eval_log.sh "Matisse"`.
+
+| Metric | Value |
+| --- | --- |
+| Device | iPhone XS Max (Matisse), `iPhone11,6`, A12 (below A17 Pro class) |
+| LiteRT-LM | v0.12.0 vendored (`vendor/LiteRT-LM`) |
+| Model on device | `Documents/Models/prexus-eval-gemma4-e2b.litertlm` (2.41 GiB) |
+| Backend requested | `.gpu` / Metal |
+| Cold load | **Failed** (~13 s after launch) |
+| Error | `Failed to create engine` |
+| Japanese / routing smoke | Not run (engine did not start) |
+| PREXUS production | Unchanged |
+
+**Matisse conclusion:** On **A12 / 4 GiB-class** hardware, Gemma 4 E2B `.litertlm` with Metal does **not** start. This is a valid **blocked** feasibility result for sub–A17 Pro devices; **does not disprove** LiteRT-LM on iPhone 17 / A17 Pro+.
+
+#### Device results (Wang, iPhone 17, 2026-05-30)
+
+Captured via `PREXUSLiteRTEval` → `Documents/prexus-litert-device-eval.log` → `./tools/scripts/fetch_litert_device_eval_log.sh "Wang"`.
+
+| Metric | Value |
+| --- | --- |
+| Device | iPhone 17 (Wang), `iPhone18,3`, A19-class |
+| LiteRT-LM | v0.12.0 vendored (`vendor/LiteRT-LM`) |
+| Model on device | `Documents/Models/prexus-eval-gemma4-e2b.litertlm` (2.41 GiB) |
+| Backend | `.gpu` / Metal |
+| Cold load | **6952 ms** |
+| JA first-token | **754 ms** |
+| JA total / decode | **1091 ms**, **~0.9 t/s** (short smoke; 1 sentence) |
+| Japanese smoke response | **Coherent** — 固定の予定や締め切りを確認… |
+| Routing JSON | **Valid compact JSON** (`intent`, `confidence`, `needs_cloud`) |
+| App stability | **Pass** (`eval-complete`) |
+| PREXUS production | Unchanged |
+
+**Wang conclusion:** LiteRT-LM + Gemma 4 E2B `.litertlm` **passes feasibility** on A17 Pro-class hardware where the GGUF llama.cpp path produced unusable output (`？`). Trade-offs: **~7 s cold load**, **~2.4 GiB** artifact, separate backend integration still required. **Do not adopt as default** without adoption review; continue Qwen MVP for production.
+
+Regenerate the Xcode project for LiteRT eval only:
+
+```bash
+PREXUS_LITERT_LM_EVAL=1 ruby tools/scripts/generate_xcodeproj.rb
+```
+
+Restore a clean reviewer project (no LiteRT target in committed `PREXUS.xcodeproj`):
+
+```bash
+ruby tools/scripts/generate_xcodeproj.rb
+```
+
 ## Cursor Task
 
 ### Title
@@ -104,11 +189,10 @@ A blocked result is acceptable if the PR documents the blocker precisely. Valid 
 ### Instructions
 
 1. Keep the current Qwen + llama.cpp MVP path untouched.
-2. Start with an isolated integration plan or spike, not a production runtime rewrite.
-3. Prefer a separate sample target, local script, or compile-gated path if code is needed.
-4. Do not commit model artifacts, `.litertlm` files, DerivedData, screenshots, or generated local logs.
-5. If iOS project files change, regenerate the Xcode project with `ruby tools/scripts/generate_xcodeproj.rb`.
-6. Record exact test-plan results in the PR body using the repository PR template.
+2. Use `PREXUSLiteRTEval` + scripts above; do not wire LiteRT-LM into production routing.
+3. Do not commit model artifacts, `.litertlm` files, DerivedData, screenshots, or generated local logs.
+4. Regenerate with `PREXUS_LITERT_LM_EVAL=1 ruby tools/scripts/generate_xcodeproj.rb` when changing eval sources; commit the default output without that flag for clean checkouts.
+5. Record exact test-plan results in the PR body using the repository PR template.
 
 ## Codex Review Gate
 
