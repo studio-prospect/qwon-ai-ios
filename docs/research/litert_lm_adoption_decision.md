@@ -10,6 +10,7 @@ Related evidence:
 - [Gemma-4-E2B-it Evaluation Plan](./gemma4_e2b_evaluation_plan.md) — GGUF path results on Wang
 - [Local LLM Notes](./local_llm_notes.md) — research directions
 - [Local Inference MVP](../requirements/local_inference_mvp.md) — production P1-1 contract
+- [LiteRT-LM Routing Policy Evaluation](./litert_lm_routing_policy_evaluation.md) — post-P1-4b L2 selection policy draft
 
 ---
 
@@ -23,7 +24,7 @@ Related evidence:
 | Default local model | **Unchanged** — `Qwen2.5-0.5B-Instruct` Q4_K_M as `prexus-local-mvp.gguf` |
 | Gemma 4 E2B via GGUF + llama.cpp | **Evaluated, not adoptable** — loads on Wang but output unusable (`？`) |
 | Gemma 4 E2B via LiteRT-LM `.litertlm` | **Feasible on Wang** — coherent Japanese + valid routing JSON in smoke eval |
-| PREXUS main app integration | **P1-4b prototype (debug-gated)** — `LiteRTLocalModelClient` behind `PREXUS_LITERT_LM_PROTOTYPE=1`; production automatic path unchanged |
+| PREXUS main app integration | **P1-4b complete** — `LiteRTLocalModelClient` behind `PREXUS_LITERT_LM_PROTOTYPE=1`; production automatic path unchanged |
 | Isolated eval app | `com.prexus.ios.literteval` — regenerate with `PREXUS_LITERT_LM_EVAL=1` when eval target changes |
 
 ### Wang feasibility snapshot (2026-05-30)
@@ -80,7 +81,7 @@ Side-by-side evidence on **the same device class (A17 Pro+)** and **the same pro
 
 ### Evidence gaps (must close in prototype)
 
-1. **No head-to-head bench yet** on Wang with identical prompts, warm vs cold start, and medium-length decode.
+1. **Head-to-head bench exists for the P1-4b prompt set**, but strict schema success rates, thermal/memory runs, and broader prompt coverage are still missing.
 2. **No peak memory or thermal** capture for LiteRT-LM in PREXUS-shaped sessions.
 3. **No App Store / download UX** for a second large artifact.
 4. **Integrated fallback (prototype only)** — P1-4b: LiteRT → Qwen llama.cpp → heuristics when debug toggle + gates pass; not production default.
@@ -115,6 +116,8 @@ Do **not** adopt LiteRT-LM as a production backend if any of the following persi
 ## 6. Proposed next prototype (P1-4b)
 
 **Title:** Debug-only second backend prototype — LiteRT-LM on A17 Pro+
+
+**Status:** Complete on `main`; see the Wang head-to-head results in the PR #17 test plan and the routing-policy follow-up in [LiteRT-LM Routing Policy Evaluation](./litert_lm_routing_policy_evaluation.md).
 
 ### In scope
 
@@ -183,7 +186,7 @@ ruby tools/scripts/generate_xcodeproj.rb
 | --- | --- |
 | 2026-05-30 | LiteRT-LM **feasibility proven** on Wang; **not adopted** for production |
 | 2026-05-30 | **Matisse blocked** — do not assume A12 support |
-| 2026-05-30 | **Next:** P1-4b debug prototype + head-to-head comparison; Codex reviews routing policy before any ship |
-| 2026-05-28 | **P1-4b shipped (PR, not merged):** compile-gated `LiteRTLocalModelClient`, debug toggle, comparison runner + script; production Qwen path unchanged |
+| 2026-05-30 | **P1-4b merged:** compile-gated `LiteRTLocalModelClient`, debug toggle, comparison runner + script; production Qwen path unchanged |
+| 2026-05-30 | **Next:** routing-policy evaluation before any L2 selector or adoption PR |
 
 **Owner split:** Cursor implements prototype and evidence; Codex owns adoption policy, routing semantics, and merge readiness.
