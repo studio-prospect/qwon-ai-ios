@@ -17,7 +17,7 @@ Related evidence:
 
 | Area | Status |
 | --- | --- |
-| LiteRT-LM feasibility (A17 Pro+) | **Proven on Wang** (iPhone 17 / `iPhone18,3`, A19-class) via isolated `PREXUSLiteRTEval` |
+| LiteRT-LM feasibility (A17 Pro+) | **Proven on Wang** (iPhone 17 / `iPhone18,3`, A19-class) via Cursor-local isolated eval app (`PREXUSLiteRTEval`, **uncommitted on `main`**) |
 | LiteRT-LM on sub–A17 Pro | **Not supported** in current eval — Matisse (iPhone XS Max / A12) failed with `Failed to create engine` |
 | Production local runtime | **Unchanged** — llama.cpp via `LlamaCppLocalModelClient` |
 | Default local model | **Unchanged** — `Qwen2.5-0.5B-Instruct` Q4_K_M as `prexus-local-mvp.gguf` |
