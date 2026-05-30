@@ -6,6 +6,9 @@ require "xcodeproj"
 # Regenerates PREXUS.xcodeproj. Links llama.xcframework only when
 # vendor/llama-cpp-artifacts/llama.xcframework exists. Commit the output from a
 # machine without that artifact so clean checkouts can run PREXUSTests.
+#
+# Optional LiteRT-LM evaluation target (isolated app, does not link into PREXUS):
+#   PREXUS_LITERT_LM_EVAL=1 ruby tools/scripts/generate_xcodeproj.rb
 
 ROOT = Pathname.new(__dir__).join("..", "..").expand_path
 IOS_ROOT = ROOT.join("app", "ios")
@@ -172,6 +175,86 @@ ui_test_target.build_configurations.each do |config|
   config.build_settings["TARGETED_DEVICE_FAMILY"] = "1"
   config.build_settings["TEST_TARGET_NAME"] = "PREXUS"
   config.build_settings["CLANG_ENABLE_OBJC_WEAK"] = "NO"
+end
+
+litert_eval_target = nil
+if ENV["PREXUS_LITERT_LM_EVAL"] == "1"
+  litert_sources = Dir.glob(IOS_ROOT.join("PREXUSLiteRTEval", "**", "*.swift").to_s)
+  litert_eval_target = project.new_target(:application, "PREXUSLiteRTEval", :ios, "17.0")
+  litert_eval_target.product_reference.name = "PREXUSLiteRTEval.app"
+  litert_group = main_group.new_group("PREXUSLiteRTEval", "PREXUSLiteRTEval")
+
+  litert_sources.each do |path|
+    add_file(litert_eval_target, litert_group, path, IOS_ROOT.join("PREXUSLiteRTEval"))
+  end
+
+  litert_vendor = ROOT.join("vendor", "LiteRT-LM")
+  if litert_vendor.join("Package.swift").exist?
+    package_ref = project.new(Xcodeproj::Project::Object::XCLocalSwiftPackageReference)
+    package_ref.relative_path = "../../vendor/LiteRT-LM"
+    puts "Using local LiteRT-LM package at vendor/LiteRT-LM"
+  else
+    package_ref = project.new(Xcodeproj::Project::Object::XCRemoteSwiftPackageReference)
+    package_ref.repositoryURL = "https://github.com/google-ai-edge/LiteRT-LM"
+    package_ref.requirement = {
+      "kind" => "upToNextMajorVersion",
+      "minimumVersion" => "0.12.0"
+    }
+    puts "Using remote LiteRT-LM package (run ./tools/scripts/vendor_litert_lm.sh if SPM LFS checkout fails)"
+  end
+  project.root_object.package_references << package_ref
+
+  package_product = project.new(Xcodeproj::Project::Object::XCSwiftPackageProductDependency)
+  package_product.product_name = "LiteRTLM"
+  package_product.package = package_ref
+  litert_eval_target.package_product_dependencies << package_product
+
+  litert_eval_target.build_configurations.each do |config|
+    config.build_settings["PRODUCT_BUNDLE_IDENTIFIER"] = "com.prexus.ios.literteval"
+    config.build_settings["INFOPLIST_FILE"] = "PREXUSLiteRTEval/Resources/Info.plist"
+    config.build_settings["SWIFT_VERSION"] = "5.0"
+    config.build_settings["IPHONEOS_DEPLOYMENT_TARGET"] = "17.0"
+    config.build_settings["TARGETED_DEVICE_FAMILY"] = "1"
+    config.build_settings["CODE_SIGN_STYLE"] = "Automatic"
+    config.build_settings["DEVELOPMENT_TEAM"] = ""
+    config.build_settings["GENERATE_INFOPLIST_FILE"] = "NO"
+    config.build_settings["SWIFT_EMIT_LOC_STRINGS"] = "NO"
+    config.build_settings["OTHER_LDFLAGS"] = ["$(inherited)"]
+  end
+
+  litert_scheme_path = PROJECT_PATH.join("xcshareddata", "xcschemes", "PREXUSLiteRTEval.xcscheme")
+  litert_scheme_path.parent.mkpath
+  litert_scheme_path.write(<<~XML)
+    <?xml version="1.0" encoding="UTF-8"?>
+    <Scheme LastUpgradeVersion="1600" version="1.7">
+       <BuildAction parallelizeBuildables="YES" buildImplicitDependencies="YES">
+          <BuildActionEntries>
+             <BuildActionEntry buildForTesting="YES" buildForRunning="YES" buildForProfiling="YES" buildForArchiving="YES" buildForAnalyzing="YES">
+                <BuildableReference
+                   BuildableIdentifier="primary"
+                   BlueprintIdentifier="#{litert_eval_target.uuid}"
+                   BuildableName="PREXUSLiteRTEval.app"
+                   BlueprintName="PREXUSLiteRTEval"
+                   ReferencedContainer="container:PREXUS.xcodeproj">
+                </BuildableReference>
+             </BuildActionEntry>
+          </BuildActionEntries>
+       </BuildAction>
+       <LaunchAction buildConfiguration="Debug" selectedDebuggerIdentifier="Xcode.DebuggerFoundation.Debugger.LLDB" selectedLauncherIdentifier="Xcode.DebuggerFoundation.Launcher.LLDB" launchStyle="0" useCustomWorkingDirectory="NO" ignoresPersistentStateOnLaunch="NO" debugDocumentVersioning="YES" debugServiceExtension="internal" allowLocationSimulation="YES">
+          <BuildableProductRunnable runnableDebuggingMode="0">
+             <BuildableReference
+                BuildableIdentifier="primary"
+                BlueprintIdentifier="#{litert_eval_target.uuid}"
+                BuildableName="PREXUSLiteRTEval.app"
+                BlueprintName="PREXUSLiteRTEval"
+                ReferencedContainer="container:PREXUS.xcodeproj">
+             </BuildableReference>
+          </BuildableProductRunnable>
+       </LaunchAction>
+    </Scheme>
+  XML
+
+  puts "Added PREXUSLiteRTEval target + LiteRT-LM Swift package (evaluation only)."
 end
 
 project.save
