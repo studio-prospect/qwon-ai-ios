@@ -234,6 +234,8 @@ Device evidence for Matisse (blocked) and Wang (pass) is recorded above. The eva
 | Comparison prompts | Same as P1-4 eval (`ja_short`, `routing_json`) + `control_plane_medium` |
 | Production | Unchanged — `prexus-local-mvp.gguf` + llama.cpp automatic |
 | Next policy step | Review [LiteRT-LM Routing Policy Evaluation](./litert_lm_routing_policy_evaluation.md) before any L2 selector implementation |
+| P1-4c-a | Strict JSON benchmark for Qwen vs LiteRT; docs/logs only; no selector |
+| P1-4c-b | 5-10 minute thermal/memory eval; docs/logs only; no selector |
 
 ### Instructions (P1-4b and later)
 
@@ -242,6 +244,7 @@ Device evidence for Matisse (blocked) and Wang (pass) is recorded above. The eva
 3. Do not commit model artifacts, `.litertlm` files, DerivedData, screenshots, or `.eval-logs`.
 4. Regenerate with `PREXUS_LITERT_LM_EVAL=1` only when changing eval sources; commit default `ruby tools/scripts/generate_xcodeproj.rb` output for review.
 5. Record exact test-plan results in the PR body using the repository PR template.
+6. For P1-4c, collect evidence only: strict JSON rates and thermal/memory observations. Do not add an L2 selector or change production `automatic`.
 
 ## Codex Review Gate
 

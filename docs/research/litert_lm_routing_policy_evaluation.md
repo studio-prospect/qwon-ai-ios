@@ -153,16 +153,48 @@ Current path: **C -> possibly B**. Do not promote LiteRT to the default automati
 
 Complete this checklist before adding an L2 selector:
 
-| Item | Status |
-| --- | --- |
-| Codex approves exact intents eligible for LiteRT | Open |
-| Product accepts latency trade-off for eligible intents | Open |
-| Strict JSON parse benchmark passes agreed threshold | Open |
-| 5-10 minute thermal/memory run is recorded | Open |
-| Artifact download/storage/deletion UX is defined | Open |
-| Legal/distribution sign-off is recorded | Open |
-| Fallback diagnostics preserve actual responding backend | Done in P1-4b |
-| Production automatic default remains Qwen + llama.cpp | Required invariant |
+### Approved / locked
+
+| Item | Status | Notes |
+| --- | --- | --- |
+| Production automatic default remains Qwen + llama.cpp | Approved invariant | No selector may change this without a later adoption PR |
+| Fallback diagnostics preserve actual responding backend | Approved | Covered in P1-4b tests, including nested fallback |
+| Device and artifact gates remain mandatory | Approved invariant | A17 Pro-class+, `.litertlm` present, compile/debug gate until adoption |
+| L1 routing policy remains unchanged | Approved invariant | LiteRT evaluation does not change local vs cloud decisions |
+| Non-goals remain enforced | Approved invariant | No broad backend registry, no model artifacts in git, no production default switch |
+
+### Needs evidence
+
+| Item | Status | Required evidence |
+| --- | --- | --- |
+| Exact intents eligible for LiteRT | Needs evidence | P1-4c-a strict JSON and control-plane prompt results |
+| Strict JSON parse benchmark passes agreed threshold | Needs evidence | Parse success rate, required-key rate, enum validity, markdown-fence handling |
+| 5-10 minute thermal/memory run is recorded | Needs evidence | Peak memory proxy, thermal state, failure/fallback behavior, battery observation |
+| Product accepts latency trade-off for eligible intents | Needs evidence | Cold/warm latency table plus task-quality delta for candidate intents |
+
+### Blocked until product/legal
+
+| Item | Status | Required decision |
+| --- | --- | --- |
+| Artifact download/storage/deletion UX is defined | Blocked | Product UX and storage policy for ~2.4 GiB artifacts |
+| Legal/distribution sign-off is recorded | Blocked | Model license, redistribution, attribution, and App Store review narrative |
+
+### 7.5 Cursor instructions
+
+Cursor may prepare evidence for the `Needs evidence` rows only. Cursor must not implement an L2 selector, change `automatic`, or wire LiteRT into production routing.
+
+Allowed P1-4c work:
+
+- P1-4c-a: strict JSON benchmark for Qwen vs LiteRT on Wang.
+- P1-4c-b: 5-10 minute thermal/memory eval for LiteRT prototype runs.
+- Gitignored logs under `.eval-logs/` and docs summaries with exact commands/results.
+
+Forbidden until policy freeze:
+
+- L2 selector implementation.
+- Production `automatic` behavior changes.
+- User-facing LiteRT adoption UX.
+- Model artifact commits.
 
 ---
 
@@ -177,3 +209,43 @@ Only after policy freeze:
 5. Add tests for every policy row.
 
 Do not introduce a broad backend registry or plugin framework until at least two production-eligible local backends are approved.
+
+---
+
+## 9. P1-4c evidence plan
+
+P1-4c exists to close the `Needs evidence` rows above. It must produce evidence, not product behavior.
+
+### P1-4c-a: strict JSON benchmark
+
+Goal: compare Qwen + llama.cpp and LiteRT + Gemma 4 E2B on structured control-plane prompts.
+
+Required prompt classes:
+
+- routing classification (`intent`, `confidence`, `needs_cloud`)
+- summarization metadata (`summary`, `todos`, `local_sufficient`)
+- memory extraction (`should_write_memory`, `memory_summary`, `sensitivity`)
+
+Required measurements:
+
+- strict JSON parse success rate
+- required-key presence
+- enum validity
+- markdown-fence rate
+- total latency per prompt
+- fallback/failure count
+
+Exit condition: docs record whether LiteRT has a clear structured-output advantage large enough to justify candidate intent rows. No selector implementation.
+
+### P1-4c-b: thermal and memory run
+
+Goal: determine whether LiteRT prototype sessions are operationally viable on Wang-class devices.
+
+Required run shape:
+
+- 5-10 minute bounded run on Wang or equivalent A17 Pro-class+ device.
+- repeated Tier-2 prompts with warm engine behavior.
+- capture best available memory proxy, thermal state, latency drift, and failures.
+- preserve logs under `.eval-logs/` only.
+
+Exit condition: docs record whether LiteRT can remain a candidate under PREXUS battery/thermal constraints. No adoption decision unless product/Codex later sign off.
