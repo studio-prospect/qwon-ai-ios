@@ -155,6 +155,10 @@ struct SettingsView: View {
                         Text("Automatic uses a simulator stub on Simulator and llama.cpp on A17 Pro-class iPhones when a GGUF model is present.")
                     }
 
+                    #if DEBUG && PREXUS_LITERT_LM_PROTOTYPE
+                    litertPrototypeSection
+                    #endif
+
                     Section {
                         SecureField("OpenAI API Key", text: $settings.openAIKey)
                             .textInputAutocapitalization(.never)
@@ -345,6 +349,45 @@ struct SettingsView: View {
         }
         .padding(.vertical, 4)
     }
+
+    #if DEBUG && PREXUS_LITERT_LM_PROTOTYPE
+    @ViewBuilder
+    private var litertPrototypeSection: some View {
+        Section {
+            Toggle(
+                "Use LiteRT eval backend (A17 Pro+ only)",
+                isOn: Binding(
+                    get: { settings.litertPrototypeEnabled },
+                    set: { settings.setLitertPrototypeEnabled($0) }
+                )
+            )
+
+            Text(litertPrototypeAvailabilityText)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        } header: {
+            PREXUSFormSectionHeader(
+                title: "LiteRT-LM Prototype (Debug)",
+                detail: "Off by default. Does not change production automatic routing."
+            )
+        } footer: {
+            Text("Requires prexus-eval-gemma4-e2b.litertlm in Documents/Models. On failure, PREXUS falls back to Qwen llama.cpp, then embedded heuristics.")
+        }
+    }
+
+    private var litertPrototypeAvailabilityText: String {
+        if LiteRTPrototypeSettings.isRuntimeAvailable {
+            return "Prototype path is active for local turns when enabled."
+        }
+        if !settings.litertPrototypeEnabled {
+            return "Enable the toggle on A17 Pro+ with the eval .litertlm artifact present."
+        }
+        if !LiteRTModelPlacement.isModelAvailable {
+            return "Push the eval artifact: ./tools/scripts/push_litert_lm_model_to_device.sh"
+        }
+        return "Requires A17 Pro-class hardware."
+    }
+    #endif
 
     private var availableLocalModelBackends: [LocalModelBackend] {
         #if targetEnvironment(simulator)

@@ -8,6 +8,11 @@ struct PREXUSApp: App {
         WindowGroup {
             RootView(environment: environment)
                 .background(Color(uiColor: .systemGroupedBackground))
+                .task {
+                    #if PREXUS_LITERT_LM_PROTOTYPE
+                    await LocalBackendComparisonRunner.runIfRequested()
+                    #endif
+                }
         }
     }
 }

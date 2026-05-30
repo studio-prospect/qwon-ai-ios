@@ -1000,6 +1000,150 @@ final class PREXUSTests: XCTestCase {
         XCTAssertTrue(response.localizedCaseInsensitiveContains("embedded local runtime"))
     }
 
+    func testFallbackLocalModelClientRecordsTraceOnPrimarySuccess() async throws {
+        struct SuccessPrimary: LocalModelClient {
+            let descriptor = LocalModelDescriptor(
+                backend: .deviceRuntime,
+                name: "Primary OK",
+                summary: "Succeeds"
+            )
+
+            func generate(prompt: String) async throws -> String {
+                "primary-response"
+            }
+        }
+
+        LocalModelExecutionTrace.reset()
+        let client = FallbackLocalModelClient(
+            primary: SuccessPrimary(),
+            fallback: EmbeddedHeuristicLocalModelClient()
+        )
+        _ = try await client.generate(prompt: "hello")
+
+        XCTAssertEqual(LocalModelExecutionTrace.current?.respondingBackend, "Primary OK")
+        XCTAssertNil(LocalModelExecutionTrace.current?.primaryFailure)
+    }
+
+    func testNestedFallbackPreservesInnerRespondingBackend() async throws {
+        struct FailingLiteRT: LocalModelClient {
+            let descriptor = LocalModelDescriptor(
+                backend: .deviceRuntime,
+                name: "LiteRT-LM Prototype Runtime",
+                summary: "Fails"
+            )
+
+            func generate(prompt: String) async throws -> String {
+                throw LocalModelError.backendUnavailable("LiteRT engine missing")
+            }
+        }
+
+        struct FailingLlama: LocalModelClient {
+            let descriptor = LocalModelDescriptor(
+                backend: .deviceRuntime,
+                name: "llama.cpp On-Device Runtime",
+                summary: "Fails"
+            )
+
+            func generate(prompt: String) async throws -> String {
+                throw LocalModelError.modelAssetUnavailable
+            }
+        }
+
+        LocalModelExecutionTrace.reset()
+        let qwenChain = FallbackLocalModelClient(
+            primary: FailingLlama(),
+            fallback: EmbeddedHeuristicLocalModelClient()
+        )
+        let outer = FallbackLocalModelClient(
+            primary: FailingLiteRT(),
+            fallback: qwenChain
+        )
+        _ = try await outer.generate(prompt: "User:\nReview routing policy")
+
+        XCTAssertEqual(
+            LocalModelExecutionTrace.current?.respondingBackend,
+            "Embedded Heuristic Runtime"
+        )
+        XCTAssertTrue(LocalModelExecutionTrace.current?.primaryFailure?.contains("LiteRT") == true)
+        LocalModelExecutionTrace.reset()
+    }
+
+    func testFallbackLocalModelClientPreservesPrimaryMetricsDetail() async throws {
+        struct MetricsPrimary: LocalModelClient {
+            let descriptor = LocalModelDescriptor(
+                backend: .deviceRuntime,
+                name: "LiteRT-LM Prototype Runtime",
+                summary: "Records metrics before fallback wrapper re-records"
+            )
+
+            func generate(prompt: String) async throws -> String {
+                LocalModelExecutionTrace.record(
+                    respondingBackend: descriptor.name,
+                    metricsDetail: "cold_load_ms=1768.8 first_token_ms=591.2 total_ms=2671.0"
+                )
+                return "litert-response"
+            }
+        }
+
+        LocalModelExecutionTrace.reset()
+        let client = FallbackLocalModelClient(
+            primary: MetricsPrimary(),
+            fallback: EmbeddedHeuristicLocalModelClient()
+        )
+        _ = try await client.generate(prompt: "hello")
+
+        XCTAssertEqual(LocalModelExecutionTrace.current?.respondingBackend, "LiteRT-LM Prototype Runtime")
+        XCTAssertEqual(
+            LocalModelExecutionTrace.current?.metricsDetail,
+            "cold_load_ms=1768.8 first_token_ms=591.2 total_ms=2671.0"
+        )
+        let detail = LocalModelExecutionTrace.formattedDetail(base: nil)
+        XCTAssertTrue(detail?.contains("cold_load_ms=1768.8") == true)
+        LocalModelExecutionTrace.reset()
+    }
+
+    func testFallbackLocalModelClientRecordsTraceOnFallback() async throws {
+        struct FailingPrimary: LocalModelClient {
+            let descriptor = LocalModelDescriptor(
+                backend: .deviceRuntime,
+                name: "Primary Fail",
+                summary: "Fails"
+            )
+
+            func generate(prompt: String) async throws -> String {
+                throw LocalModelError.modelAssetUnavailable
+            }
+        }
+
+        LocalModelExecutionTrace.reset()
+        let fallback = EmbeddedHeuristicLocalModelClient()
+        let client = FallbackLocalModelClient(primary: FailingPrimary(), fallback: fallback)
+        _ = try await client.generate(prompt: "User:\nReview routing policy")
+
+        XCTAssertEqual(LocalModelExecutionTrace.current?.respondingBackend, fallback.descriptor.name)
+        XCTAssertTrue(LocalModelExecutionTrace.current?.primaryFailure?.contains("modelAssetUnavailable") == true)
+    }
+
+    func testLocalModelExecutionTraceFormattedDetailMergesBase() {
+        LocalModelExecutionTrace.record(
+            respondingBackend: "LiteRT-LM Prototype Runtime",
+            metricsDetail: "cold_load_ms=100.0 first_token_ms=50.0 total_ms=200.0"
+        )
+
+        let detail = LocalModelExecutionTrace.formattedDetail(base: "summary line")
+        XCTAssertTrue(detail?.contains("answered_by=LiteRT-LM Prototype Runtime") == true)
+        XCTAssertTrue(detail?.contains("cold_load_ms=100.0") == true)
+        XCTAssertTrue(detail?.contains("summary line") == true)
+        LocalModelExecutionTrace.reset()
+    }
+
+    func testLiteRTModelPlacementUsesEvalArtifactFileName() {
+        XCTAssertEqual(
+            LiteRTModelPlacement.evaluationModelFileName,
+            "prexus-eval-gemma4-e2b.litertlm"
+        )
+    }
+
     func testLocalModelGenerationCoordinatorCancelsSupersededTurn() async {
         let coordinator = LocalModelGenerationCoordinator()
         let firstStarted = expectation(description: "first started")

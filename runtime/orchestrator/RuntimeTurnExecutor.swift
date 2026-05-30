@@ -164,13 +164,15 @@ extension RuntimeContainer {
     ) async throws -> TurnExecutionResult {
         switch route.target {
         case .local:
+            LocalModelExecutionTrace.reset()
+            let response = try await localModel.generate(prompt: prompt)
             return TurnExecutionResult(
-                response: try await localModel.generate(prompt: prompt),
+                response: response,
                 execution: RuntimeExecutionMetadata(
                     mode: .local,
                     provider: nil,
-                    model: localModel.descriptor.name,
-                    detail: localModel.descriptor.summary
+                    model: LocalModelExecutionTrace.current?.respondingBackend ?? localModel.descriptor.name,
+                    detail: LocalModelExecutionTrace.formattedDetail(base: localModel.descriptor.summary)
                 )
             )
         case .openAI, .anthropic, .gemini:
@@ -228,13 +230,15 @@ extension RuntimeContainer {
     }
 
     private func localExecution(prompt: String) async throws -> TurnExecutionResult {
-        TurnExecutionResult(
-            response: try await localModel.generate(prompt: prompt),
+        LocalModelExecutionTrace.reset()
+        let response = try await localModel.generate(prompt: prompt)
+        return TurnExecutionResult(
+            response: response,
             execution: RuntimeExecutionMetadata(
                 mode: .local,
                 provider: nil,
-                model: localModel.descriptor.name,
-                detail: localModel.descriptor.summary
+                model: LocalModelExecutionTrace.current?.respondingBackend ?? localModel.descriptor.name,
+                detail: LocalModelExecutionTrace.formattedDetail(base: localModel.descriptor.summary)
             )
         )
     }

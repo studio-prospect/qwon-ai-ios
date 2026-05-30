@@ -23,7 +23,8 @@ Related evidence:
 | Default local model | **Unchanged** — `Qwen2.5-0.5B-Instruct` Q4_K_M as `prexus-local-mvp.gguf` |
 | Gemma 4 E2B via GGUF + llama.cpp | **Evaluated, not adoptable** — loads on Wang but output unusable (`？`) |
 | Gemma 4 E2B via LiteRT-LM `.litertlm` | **Feasible on Wang** — coherent Japanese + valid routing JSON in smoke eval |
-| PREXUS main app integration | **None** — eval uses separate bundle `com.prexus.ios.literteval`; regenerate with `PREXUS_LITERT_LM_EVAL=1` |
+| PREXUS main app integration | **P1-4b prototype (debug-gated)** — `LiteRTLocalModelClient` behind `PREXUS_LITERT_LM_PROTOTYPE=1`; production automatic path unchanged |
+| Isolated eval app | `com.prexus.ios.literteval` — regenerate with `PREXUS_LITERT_LM_EVAL=1` when eval target changes |
 
 ### Wang feasibility snapshot (2026-05-30)
 
@@ -82,7 +83,7 @@ Side-by-side evidence on **the same device class (A17 Pro+)** and **the same pro
 1. **No head-to-head bench yet** on Wang with identical prompts, warm vs cold start, and medium-length decode.
 2. **No peak memory or thermal** capture for LiteRT-LM in PREXUS-shaped sessions.
 3. **No App Store / download UX** for a second large artifact.
-4. **No integrated fallback** behavior in the main app.
+4. **Integrated fallback (prototype only)** — P1-4b: LiteRT → Qwen llama.cpp → heuristics when debug toggle + gates pass; not production default.
 5. **Gemma vs Qwen role split** undefined — adoption needs a routing policy (when to select LiteRT), not only backend availability.
 
 ---
@@ -119,13 +120,13 @@ Do **not** adopt LiteRT-LM as a production backend if any of the following persi
 
 | Item | Requirement |
 | --- | --- |
-| Integration surface | Compile-gated (`PREXUS_LITERT_LM_PROTOTYPE`) or Debug-only path inside PREXUS — **not** default `AppLocalModelFactory` automatic mode |
-| Backend selection | Explicit developer toggle or internal eval flag — **no** user-facing default switch to Gemma |
-| Model placement | Separate artifact name (e.g. `prexus-eval-gemma4-e2b.litertlm`) under `Documents/Models/`; **do not** replace `prexus-local-mvp.gguf` |
-| Client shape | Thin `LiteRTLocalModelClient` implementing existing `LocalModelClient` — **avoid** new orchestration abstractions until two backends work |
-| Fallback | LiteRT failure → existing `LlamaCppLocalModelClient` (Qwen) → `EmbeddedHeuristicLocalModelClient` |
-| Measurement | Reuse eval prompts from P1-4; add warm-start pass; log to diagnostics / device eval log |
-| Xcode | Regenerate with `PREXUS_LITERT_LM_EVAL=1` only when eval target changes; committed project stays clean without flag |
+| Integration surface | Compile-gated (`PREXUS_LITERT_LM_PROTOTYPE=1`) + Debug Settings toggle — **not** default `AppLocalModelFactory` automatic mode |
+| Backend selection | Debug toggle for chat path; `PREXUS_RUN_BACKEND_COMPARISON=1` for head-to-head script — **no** production default switch |
+| Model placement | `prexus-eval-gemma4-e2b.litertlm` under `Documents/Models/` via `LiteRTModelPlacement`; **do not** replace `prexus-local-mvp.gguf` |
+| Client shape | `LiteRTLocalModelClient` on `LocalModelClient`; `LocalModelExecutionTrace` for `answered_by` + metrics in diagnostics |
+| Fallback | LiteRT failure → `makeQwenFallbackChain()` (llama.cpp Qwen → embedded heuristics) |
+| Measurement | `LocalBackendComparisonRunner` (ja_short, routing_json, control_plane_medium) → `Documents/prexus-backend-comparison.log` |
+| Xcode | Default `ruby tools/scripts/generate_xcodeproj.rb` (no LiteRT in PREXUS); prototype: `PREXUS_LITERT_LM_PROTOTYPE=1`; eval app: `PREXUS_LITERT_LM_EVAL=1` |
 
 ### Out of scope
 
@@ -136,12 +137,12 @@ Do **not** adopt LiteRT-LM as a production backend if any of the following persi
 - Broad `LocalBackendRegistry`-style refactors without measured need
 - Replacing `PREXUSLiteRTEval` standalone app with production UX in the same PR
 
-### Suggested deliverables
+### Deliverables (P1-4b implementation)
 
-1. `LiteRTLocalModelClient` + placement helper (eval artifact only)
-2. Debug Settings toggle: “Use LiteRT eval backend (A17 Pro+ only)”
-3. Script: `tools/scripts/compare_local_backends_on_device.sh` — runs matched prompts, outputs markdown table for PR
-4. Update this memo’s comparison table with measured P1-4b numbers
+1. `LiteRTLocalModelClient` + `LiteRTModelPlacement` (eval `.litertlm` only)
+2. Debug Settings toggle: “Use LiteRT eval backend (A17 Pro+ only)” — off by default
+3. `tools/scripts/compare_local_backends_on_device.sh` — install Debug PREXUS, push artifacts, launch with `PREXUS_RUN_BACKEND_COMPARISON=1`, fetch CSV log
+4. Update comparison table below after Wang run (metrics in PR body)
 
 ### Exit criteria for prototype
 
@@ -183,5 +184,6 @@ ruby tools/scripts/generate_xcodeproj.rb
 | 2026-05-30 | LiteRT-LM **feasibility proven** on Wang; **not adopted** for production |
 | 2026-05-30 | **Matisse blocked** — do not assume A12 support |
 | 2026-05-30 | **Next:** P1-4b debug prototype + head-to-head comparison; Codex reviews routing policy before any ship |
+| 2026-05-28 | **P1-4b shipped (PR, not merged):** compile-gated `LiteRTLocalModelClient`, debug toggle, comparison runner + script; production Qwen path unchanged |
 
 **Owner split:** Cursor implements prototype and evidence; Codex owns adoption policy, routing semantics, and merge readiness.

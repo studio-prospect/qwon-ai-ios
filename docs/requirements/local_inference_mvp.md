@@ -59,6 +59,15 @@ PREXUS_LITERT_LM_EVAL=1 ruby tools/scripts/generate_xcodeproj.rb
 
 See `docs/research/litert_lm_evaluation_plan.md`. This does not change the production `AppLocalModelFactory` path.
 
+**P1-4b debug prototype** (optional, off by default): link LiteRT-LM into PREXUS for A17 Pro+ comparison only:
+
+```bash
+./tools/scripts/vendor_litert_lm.sh
+PREXUS_LITERT_LM_PROTOTYPE=1 ruby tools/scripts/generate_xcodeproj.rb
+```
+
+Device comparison: `./tools/scripts/compare_local_backends_on_device.sh "Wang"`. Production automatic routing stays Qwen + llama.cpp unless the Debug Settings toggle is enabled.
+
 ## Related docs
 
 - `docs/design/device_install_and_screenshot_workflow.md`

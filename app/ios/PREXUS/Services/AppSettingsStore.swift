@@ -39,6 +39,14 @@ final class AppSettingsStore: ObservableObject {
     private let apiKeyStore: APIKeyStore
     private let configKey = "prexus.app-config"
 
+    var litertPrototypeEnabled: Bool {
+        defaults.bool(forKey: LiteRTPrototypeSettings.enabledDefaultsKey)
+    }
+
+    func setLitertPrototypeEnabled(_ enabled: Bool) {
+        defaults.set(enabled, forKey: LiteRTPrototypeSettings.enabledDefaultsKey)
+    }
+
     init(defaults: UserDefaults = .standard, apiKeyStore: APIKeyStore) {
         self.defaults = defaults
         self.apiKeyStore = apiKeyStore
