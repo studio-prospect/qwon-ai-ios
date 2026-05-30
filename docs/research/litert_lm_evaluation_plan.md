@@ -95,6 +95,33 @@ A blocked result is acceptable if the PR documents the blocker precisely. Valid 
 - memory, thermal, or startup cost too high for PREXUS MVP
 - output quality still unusable for Japanese or routing JSON
 
+## Device Evaluation Result
+
+**Status (2026-05-30):** Wang device evaluation completed successfully. LiteRT-LM is now proven feasible on the current high-end target class, but it is still not adopted as the PREXUS production backend.
+
+Reported evidence:
+
+| Item | Result |
+| --- | --- |
+| Device | iPhone 17 (Wang), A19-class |
+| Cold load | ~7.0 s |
+| Japanese response | Pass; coherent answers for fixed schedule / deadline confirmation prompts |
+| Routing JSON | Pass; valid `intent`, `confidence`, and `needs_cloud` fields |
+| Matisse (XS Max, A12) | Fail; `Failed to create engine` |
+| Production PREXUS default | Unchanged; Qwen MVP remains the default local model |
+| Production runtime | Unchanged; llama.cpp path remains the production local runtime |
+| Local log | `.eval-logs/wang-litert-device-eval.log` (local eval artifact; ignored by git) |
+
+Conclusion: the same Gemma 4 E2B family that produced unusable `？`-only output through the GGUF + llama.cpp path is usable on Wang through the LiteRT-LM path. This is enough to keep LiteRT-LM as the leading backend candidate for a deeper prototype, but not enough to switch production defaults.
+
+### Implications
+
+- LiteRT-LM should move from "can it work?" to "should PREXUS adopt a second local backend?" evaluation.
+- A17/A19-class devices are viable targets for the next prototype lane.
+- A12-class devices should not be assumed supported for LiteRT-LM Gemma 4 E2B.
+- Any adoption work must keep the current Qwen MVP fallback available.
+- The next decision should compare LiteRT-LM against Qwen MVP on latency, memory, thermal behavior, package size, deterministic JSON reliability, and Japanese short-form quality.
+
 ## Cursor Task
 
 ### Title
