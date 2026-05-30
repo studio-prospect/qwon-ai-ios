@@ -2,20 +2,23 @@ import Foundation
 import LiteRTLM
 
 enum LiteRTDeviceEvalRunner {
-    private static let completedKey = "prexus.litertDeviceEval.completed.v1"
+    private static let completedKey = "prexus.litertDeviceEval.completed.v2"
 
     static func runIfNeeded() {
         guard UserDefaults.standard.bool(forKey: completedKey) == false else { return }
         Task(priority: .userInitiated) {
-            await run()
-            UserDefaults.standard.set(true, forKey: completedKey)
+            let didComplete = await run()
+            if didComplete {
+                UserDefaults.standard.set(true, forKey: completedKey)
+            }
         }
     }
 
-    static func run() async {
+    @discardableResult
+    static func run() async -> Bool {
         guard let modelPath = LiteRTModelPlacement.resolvedModelPath else {
             LiteRTDeviceEvalLog.append("blocked model-missing path=Documents/Models/\(LiteRTModelPlacement.evaluationModelFileName)")
-            return
+            return false
         }
 
         LiteRTDeviceEvalLog.append("eval-start model=\(URL(fileURLWithPath: modelPath).lastPathComponent) backend=gpu")
@@ -37,8 +40,10 @@ enum LiteRTDeviceEvalRunner {
             try await runRoutingJSONSmoke(engine: engine)
 
             LiteRTDeviceEvalLog.append("eval-complete")
+            return true
         } catch {
             LiteRTDeviceEvalLog.append("eval-failed error=\(error.localizedDescription)")
+            return false
         }
     }
 

@@ -92,9 +92,8 @@ DEVICE_NAME="${DEVICE_RESOLUTION#*$'\t'}"
 echo "==> Installing PREXUSLiteRTEval to $DEVICE_NAME ($DEVICE_ID)"
 xcrun devicectl device install app --device "$DEVICE_ID" "$APP"
 
-echo "==> Launching $BUNDLE_ID"
-xcrun devicectl device process launch --device "$DEVICE_ID" "$BUNDLE_ID" || true
-
 echo ""
-echo "Done. Capture logs:"
-echo "  ./tools/scripts/fetch_litert_device_eval_log.sh \"$DEVICE_FILTER\""
+echo "Done (install only — do not launch before the model is on device)."
+echo "Next: push the .litertlm, then launch via:"
+echo "  ./tools/scripts/eval_litert_lm_on_device.sh \"$DEVICE_FILTER\""
+echo "  # or manually: push_litert_lm_model_to_device.sh, then devicectl launch"

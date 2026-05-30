@@ -23,16 +23,7 @@ if [[ ! -f "$EVAL_MODEL" ]]; then
   exit 1
 fi
 
-echo "==> Step 1/4: regenerate Xcode project + build/install PREXUSLiteRTEval"
-"$ROOT/tools/scripts/install_litert_eval_on_device.sh" "$DEVICE_FILTER"
-
-echo ""
-echo "==> Step 2/4: push .litertlm eval artifact (~2.6 GiB — may take several minutes)"
-"$ROOT/tools/scripts/push_litert_lm_model_to_device.sh" "$DEVICE_FILTER"
-
-echo ""
-echo "==> Step 3/4: relaunch eval app (runs one automated smoke per install)"
-xcrun devicectl device process launch --device "$(
+DEVICE_ID="$(
   DEVICE_JSON="$(mktemp)"
   xcrun devicectl list devices --json-output "$DEVICE_JSON" --quiet
   DEVICE_JSON="$DEVICE_JSON" DEVICE_FILTER="$DEVICE_FILTER" python3 <<'PY'
@@ -51,10 +42,28 @@ if not matches:
 matches.sort(key=lambda item: (not item[0], item[1].casefold()))
 print(matches[0][2])
 PY
-)" --console com.prexus.ios.literteval || true
+)"
+
+echo "==> Step 1/5: fresh install (uninstall prior eval app + UserDefaults)"
+xcrun devicectl device uninstall app --device "$DEVICE_ID" com.prexus.ios.literteval 2>/dev/null || true
+
+echo "==> Step 2/5: regenerate Xcode project + build/install PREXUSLiteRTEval (no launch)"
+"$ROOT/tools/scripts/install_litert_eval_on_device.sh" "$DEVICE_FILTER"
 
 echo ""
-echo "==> Step 4/4: fetch eval log"
+echo "==> Step 3/5: push .litertlm eval artifact (~2.6 GiB — may take several minutes)"
+"$ROOT/tools/scripts/push_litert_lm_model_to_device.sh" "$DEVICE_FILTER"
+
+echo ""
+echo "==> Step 4/5: launch eval app (smoke runs only after model is present)"
+xcrun devicectl device process launch --device "$DEVICE_ID" com.prexus.ios.literteval
+
+echo ""
+echo "==> Step 5/5: wait for smoke eval (cold load + prompts; ~1–3 min on A17 Pro+)"
+sleep 120
+
+echo ""
+echo "==> Fetch eval log"
 echo "Wait for cold load + two prompts to finish, then:"
 echo "  ./tools/scripts/fetch_litert_device_eval_log.sh \"$DEVICE_FILTER\""
 echo ""
