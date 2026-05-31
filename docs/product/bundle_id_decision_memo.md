@@ -1,27 +1,35 @@
 # PREXUS Bundle ID — Decision Memo
 
-**Status:** Draft for product / release engineering sign-off.
+**Status:** Approved. Repo migration tracked in `chore/alpha-bundle-id-migration` (Xcode + scripts).
 **Purpose:** Close [TestFlight prep section G](./qwen_text_only_alpha_testflight_prep.md#g-bundle-id-and-signing-blocking-upload--section-ae-and-smoke-alone-are-insufficient) (Bundle ID + signing gate) for the Qwen text-only alpha.
-**Scope:** Decision and impact analysis only — **no** ID committed to Xcode, **no** App Store Connect, signing, tag, archive, or upload in this memo phase.
+**Scope:** Distribution signing, archive validation, tag, and TestFlight upload remain separate manual steps.
 
 Related: [qwen_text_only_alpha_testflight_prep.md](./qwen_text_only_alpha_testflight_prep.md)
 
 ---
 
-## Current dev placeholder
+## Approved identifiers (repo)
 
 | Field | Value |
+| --- | --- |
+| Main app | `jp.studio-prospect.prexus.ios` |
+| Unit tests | `jp.studio-prospect.prexus.ios.tests` |
+| UI tests | `jp.studio-prospect.prexus.ios.uitests` |
+| LiteRT eval app (optional target) | `jp.studio-prospect.prexus.ios.literteval` |
+| Keychain service (API keys) | `com.prexus.api-keys` (unchanged; independent of Bundle ID) |
+
+Set in `tools/scripts/generate_xcodeproj.rb` and device scripts after bundle-id migration PR.
+
+### Migration note (previous dev placeholder)
+
+| Field | Previous value |
 | --- | --- |
 | Main app | `com.prexus.ios` |
 | Unit tests | `com.prexus.ios.tests` |
 | UI tests | `com.prexus.ios.uitests` |
-| LiteRT eval app (optional target) | `com.prexus.ios.literteval` |
-| Keychain service (API keys) | `com.prexus.api-keys` (independent of Bundle ID; revisit only if product wants namespace alignment) |
+| LiteRT eval | `com.prexus.ios.literteval` |
 
-Set in `tools/scripts/generate_xcodeproj.rb` and referenced by device scripts (`alpha_smoke_wang.sh`, `install_on_device.sh`, `push_local_model_to_device.sh`, etc.).
-
-**Use today:** local Debug builds, Wang smoke, ad hoc install.
-**Not sufficient for:** TestFlight upload, production identity, or “upload-ready” sign-off.
+Uninstall builds signed with the old ID before device smoke. Keychain data under the old app container does not migrate automatically.
 
 ---
 
@@ -31,7 +39,7 @@ Apple expects Bundle IDs to follow **reverse-DNS** under a domain the team contr
 
 | Question | Status | Gate |
 | --- | --- | --- |
-| Primary marketing / legal domain for PREXUS (e.g. `prexus.com`, `prexus.app`, studio domain) | **Undecided** | Must be recorded before final ID sign-off |
+| Primary marketing / legal domain for PREXUS (e.g. `prexus.com`, `prexus.app`, studio domain) | **studio-prospect** (via `jp.studio-prospect.prexus.ios`) | Recorded in approved Bundle ID |
 | Apple Developer Program legal entity matches domain registrant (or documented subsidiary relationship) | Confirm with owner | Required for long-lived ASC app |
 | Trademark / app name “PREXUS” vs bundle string | Align in ASC app name separately | Not blocking ID format choice |
 
@@ -93,14 +101,17 @@ Apply in a **follow-up implementation PR** after this memo is signed — not in 
 
 ---
 
-## Sign-off (fill when decided)
+## Sign-off
 
 | Field | Value |
 | --- | --- |
-| Approved Bundle ID | _TBD_ |
-| Owned domain | _TBD_ |
-| ASC app name (display) | _TBD_ |
-| Approved by / date | _TBD_ |
+| Approved Bundle ID | `jp.studio-prospect.prexus.ios` |
+| ASC app name (display) | `PREXUS` |
+| Apple ID | `6775110218` |
+| SKU | `jp.studio-prospect.prexus.ios` |
+| Owned domain / registrant | `studio-prospect` (Japan reverse-DNS prefix `jp`) |
+| Repo migration PR | `chore/alpha-bundle-id-migration` |
+| Approved by / date | Product ops (2026-05) |
 
 ---
 
@@ -117,24 +128,23 @@ Run only after the sign-off table is complete.
 
 ---
 
-## Explicitly not executed in this memo phase
+## Explicitly not executed in bundle-id migration PR
 
-Do **not** perform as part of documenting or merging this memo:
-
-- [ ] Final Bundle ID committed in Xcode / `project.pbxproj`
-- [ ] App Store Connect app creation or TestFlight upload
-- [ ] Provisioning profile or certificate changes
+- [x] Final Bundle ID in `generate_xcodeproj.rb`, device scripts, and regenerated `project.pbxproj`
+- [x] ASC app record documented (created outside repo)
+- [ ] Provisioning profile updates for all engineers (manual Developer portal)
+- [ ] Distribution signing validation / Release archive
 - [ ] Git release tag (`qwen-text-alpha-*`)
-- [ ] Release Archive or `xcodebuild -exportArchive`
-- [ ] Treating `com.prexus.ios` smoke success as section G complete
+- [ ] TestFlight upload
 
 ---
 
 ## Closing section G
 
-[TestFlight prep](./qwen_text_only_alpha_testflight_prep.md) section G is **closed** when:
+[TestFlight prep](./qwen_text_only_alpha_testflight_prep.md) section G is **fully closed** when:
 
-1. This memo’s sign-off table is filled, **and**
-2. ASC + Xcode + Distribution signing match the approved ID per prep doc exit criteria.
+1. Sign-off table is filled (**done**), **and**
+2. Repo + scripts use `jp.studio-prospect.prexus.ios` (**done** after migration PR), **and**
+3. Distribution signing + Release archive validate for that ID (**open**).
 
-Until then, alpha remains **not upload-ready** regardless of RC smoke results.
+Until (3), alpha remains **not upload-ready** for TestFlight upload regardless of simulator or Debug device smoke.

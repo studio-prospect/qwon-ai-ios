@@ -10,7 +10,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 MODEL="${PREXUS_LOCAL_MODEL_SOURCE:-$ROOT/models/prexus-local-mvp.gguf}"
 DEST="${PREXUS_LOCAL_MODEL_DEST:-prexus-local-mvp.gguf}"
-BUNDLE_ID="com.prexus.ios"
+BUNDLE_ID="jp.studio-prospect.prexus.ios"
 DEVICE_FILTER="${1:-}"
 DEVICE_JSON="$(mktemp)"
 trap 'rm -f "$DEVICE_JSON"' EXIT

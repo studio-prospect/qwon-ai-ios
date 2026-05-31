@@ -87,7 +87,7 @@ cmake --build build-mac -j --target llama-bench llama-cli
 | File name | `prexus-eval-gemma4-e2b.litertlm` |
 | Model | `litert-community/gemma-4-E2B-it-litert-lm` → `gemma-4-E2B-it.litertlm` |
 | Download | `./tools/scripts/fetch_litert_lm_eval_model.sh` |
-| Device eval app | `PREXUSLiteRTEval` (`com.prexus.ios.literteval`) |
+| Device eval app | `PREXUSLiteRTEval` (`jp.studio-prospect.prexus.ios.literteval`) |
 | Full workflow | `./tools/scripts/eval_litert_lm_on_device.sh "Wang"` |
 
 See [LiteRT-LM Evaluation Plan](../docs/research/litert_lm_evaluation_plan.md). **Default remains Qwen 0.5B + llama.cpp in PREXUS.**

@@ -14,6 +14,10 @@ require "xcodeproj"
 #   PREXUS_LITERT_LM_PROTOTYPE=1 ruby tools/scripts/generate_xcodeproj.rb
 
 ROOT = Pathname.new(__dir__).join("..", "..").expand_path
+MAIN_BUNDLE_ID = "jp.studio-prospect.prexus.ios"
+TEST_BUNDLE_ID = "#{MAIN_BUNDLE_ID}.tests"
+UI_TEST_BUNDLE_ID = "#{MAIN_BUNDLE_ID}.uitests"
+LITERT_EVAL_BUNDLE_ID = "#{MAIN_BUNDLE_ID}.literteval"
 IOS_ROOT = ROOT.join("app", "ios")
 PROJECT_PATH = IOS_ROOT.join("PREXUS.xcodeproj")
 SCHEME_PATH = PROJECT_PATH.join("xcshareddata", "xcschemes", "PREXUS.xcscheme")
@@ -135,7 +139,7 @@ if llama_available
 end
 
 app_target.build_configurations.each do |config|
-  config.build_settings["PRODUCT_BUNDLE_IDENTIFIER"] = "com.prexus.ios"
+  config.build_settings["PRODUCT_BUNDLE_IDENTIFIER"] = MAIN_BUNDLE_ID
   config.build_settings["INFOPLIST_FILE"] = "PREXUS/Resources/Info.plist"
   config.build_settings["SWIFT_VERSION"] = "5.0"
   config.build_settings["IPHONEOS_DEPLOYMENT_TARGET"] = "17.0"
@@ -167,7 +171,7 @@ app_target.build_configurations.each do |config|
 end
 
 test_target.build_configurations.each do |config|
-  config.build_settings["PRODUCT_BUNDLE_IDENTIFIER"] = "com.prexus.ios.tests"
+  config.build_settings["PRODUCT_BUNDLE_IDENTIFIER"] = TEST_BUNDLE_ID
   config.build_settings["INFOPLIST_FILE"] = ""
   config.build_settings["GENERATE_INFOPLIST_FILE"] = "YES"
   config.build_settings["SWIFT_VERSION"] = "5.0"
@@ -178,7 +182,7 @@ test_target.build_configurations.each do |config|
 end
 
 ui_test_target.build_configurations.each do |config|
-  config.build_settings["PRODUCT_BUNDLE_IDENTIFIER"] = "com.prexus.ios.uitests"
+  config.build_settings["PRODUCT_BUNDLE_IDENTIFIER"] = UI_TEST_BUNDLE_ID
   config.build_settings["INFOPLIST_FILE"] = ""
   config.build_settings["GENERATE_INFOPLIST_FILE"] = "YES"
   config.build_settings["SWIFT_VERSION"] = "5.0"
@@ -221,7 +225,7 @@ if ENV["PREXUS_LITERT_LM_EVAL"] == "1"
   litert_eval_target.package_product_dependencies << package_product
 
   litert_eval_target.build_configurations.each do |config|
-    config.build_settings["PRODUCT_BUNDLE_IDENTIFIER"] = "com.prexus.ios.literteval"
+    config.build_settings["PRODUCT_BUNDLE_IDENTIFIER"] = LITERT_EVAL_BUNDLE_ID
     config.build_settings["INFOPLIST_FILE"] = "PREXUSLiteRTEval/Resources/Info.plist"
     config.build_settings["SWIFT_VERSION"] = "5.0"
     config.build_settings["IPHONEOS_DEPLOYMENT_TARGET"] = "17.0"

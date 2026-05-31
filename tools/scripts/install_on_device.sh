@@ -4,7 +4,7 @@
 # Prerequisites:
 #   - iPhone connected by USB, unlocked, "Trust This Computer" accepted
 #   - Developer Mode enabled (Settings > Privacy & Security > Developer Mode)
-#   - Apple Development signing for com.prexus.ios on your team
+#   - Apple Development signing for jp.studio-prospect.prexus.ios on your team
 #
 # Usage:
 #   DEVELOPMENT_TEAM=YOUR_TEAM_ID ./tools/scripts/install_on_device.sh
@@ -16,7 +16,7 @@ ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 IOS="$ROOT/app/ios"
 DERIVED="$ROOT/.derivedData"
 TEAM="${DEVELOPMENT_TEAM:-BWSS94LH28}"
-BUNDLE_ID="com.prexus.ios"
+BUNDLE_ID="jp.studio-prospect.prexus.ios"
 APP="$DERIVED/Build/Products/Debug-iphoneos/PREXUS.app"
 DEVICE_FILTER="${1:-}"
 

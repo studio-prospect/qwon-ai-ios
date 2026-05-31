@@ -39,7 +39,7 @@ Use this note when:
 ruby tools/scripts/generate_xcodeproj.rb
 ```
 
-- Apple Development signing for bundle id `com.prexus.ios` on your team
+- Apple Development signing for bundle id `jp.studio-prospect.prexus.ios` on your team (migrated from dev placeholder `com.prexus.ios`)
 
 ### iPhone
 
@@ -79,7 +79,7 @@ The script:
 2. Resolves the device **UUID** via `devicectl --json-output` (not truncated name parsing)
 3. Prefers a tunnel-connected device when multiple names match
 4. Installs with `devicectl device install app`
-5. Launches `com.prexus.ios`
+5. Launches `jp.studio-prospect.prexus.ios`
 
 ### Xcode alternative
 
