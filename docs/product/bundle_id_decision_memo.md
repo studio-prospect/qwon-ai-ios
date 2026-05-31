@@ -1,7 +1,7 @@
 # PREXUS Bundle ID — Decision Memo
 
-**Status:** Draft for product / release engineering sign-off.  
-**Purpose:** Close [TestFlight prep section G](./qwen_text_only_alpha_testflight_prep.md#g-bundle-id-and-signing-blocking-upload--section-ae-and-smoke-alone-are-insufficient) (Bundle ID + signing gate) for the Qwen text-only alpha.  
+**Status:** Draft for product / release engineering sign-off.
+**Purpose:** Close [TestFlight prep section G](./qwen_text_only_alpha_testflight_prep.md#g-bundle-id-and-signing-blocking-upload--section-ae-and-smoke-alone-are-insufficient) (Bundle ID + signing gate) for the Qwen text-only alpha.
 **Scope:** Decision and impact analysis only — **no** ID committed to Xcode, **no** App Store Connect, signing, tag, archive, or upload in this memo phase.
 
 Related: [qwen_text_only_alpha_testflight_prep.md](./qwen_text_only_alpha_testflight_prep.md)
@@ -20,7 +20,7 @@ Related: [qwen_text_only_alpha_testflight_prep.md](./qwen_text_only_alpha_testfl
 
 Set in `tools/scripts/generate_xcodeproj.rb` and referenced by device scripts (`alpha_smoke_wang.sh`, `install_on_device.sh`, `push_local_model_to_device.sh`, etc.).
 
-**Use today:** local Debug builds, Wang smoke, ad hoc install.  
+**Use today:** local Debug builds, Wang smoke, ad hoc install.
 **Not sufficient for:** TestFlight upload, production identity, or “upload-ready” sign-off.
 
 ---
