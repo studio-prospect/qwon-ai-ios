@@ -2,7 +2,7 @@
 
 For internal / TestFlight testers validating the **text-only** local runtime slice.
 
-Related: [release notes](./qwen_text_only_alpha_release_notes.md) · [RC checklist](./qwen_text_only_alpha_release_readiness.md) · [TestFlight prep](./qwen_text_only_alpha_testflight_prep.md) · **[Lab evidence](./qwen_text_only_alpha_lab_evidence.md)**
+Related: [docs index](./qwen_text_only_alpha_docs_index.md) · [status summary](./qwen_text_only_alpha_status_summary.md) · [release notes](./qwen_text_only_alpha_release_notes.md) · [TestFlight prep](./qwen_text_only_alpha_testflight_prep.md) · **[Lab evidence](./qwen_text_only_alpha_lab_evidence.md)**
 
 Release status: internal TestFlight alpha `0.1.0 (1)` is for the **two-device lab** only (Wang + Matisse). **Build `2` is not approved.** See [Physical device lab](./qwen_text_only_alpha_testflight_prep.md#physical-device-lab-ops-policy), [evidence retention](./qwen_text_only_alpha_lab_evidence.md#retention-rules-do-not-commit-binaries), and the [feedback report template](#tester-feedback-report-template). Use [onboarding](./qwen_text_only_alpha_testflight_prep.md#tester-onboarding-message) and [What to Test](./qwen_text_only_alpha_testflight_prep.md#asc-what-to-test-copy).
 

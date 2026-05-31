@@ -3,16 +3,9 @@
 **Status:** RC merged to `main` (PR #22). **Build `1` stable operations** — see [status summary](./qwen_text_only_alpha_status_summary.md). TestFlight prep: [testflight_prep](./qwen_text_only_alpha_testflight_prep.md).
 **Production local path:** Qwen2.5-0.5B-Instruct Q4_K_M + llama.cpp only.
 
-| Doc | Purpose |
-| --- | --- |
-| [qwen_text_only_alpha_status_summary.md](./qwen_text_only_alpha_status_summary.md) | **Current state** — build `1` active, build `2` not approved |
-| [qwen_text_only_alpha_release.md](./qwen_text_only_alpha_release.md) | Scope and exclusions |
-| [qwen_text_only_alpha_release_notes.md](./qwen_text_only_alpha_release_notes.md) | Release notes + known limitations |
-| [qwen_text_only_alpha_tester_instructions.md](./qwen_text_only_alpha_tester_instructions.md) | Manual tester flow |
-| [qwen_text_only_alpha_testflight_prep.md](./qwen_text_only_alpha_testflight_prep.md) | Version/tag naming, pre-TestFlight gate, upload outline |
-| [qwen_text_only_alpha_lab_evidence.md](./qwen_text_only_alpha_lab_evidence.md) | Two-device evidence ledger and retention |
-| [local_inference_mvp.md](../requirements/local_inference_mvp.md) | P1-1 architecture |
-| [models/README.md](../../models/README.md) | GGUF placement |
+**Doc index:** [qwen_text_only_alpha_docs_index.md](./qwen_text_only_alpha_docs_index.md) — start with [status summary](./qwen_text_only_alpha_status_summary.md), then [handoff](./qwen_text_only_alpha_handoff.md).
+
+**Related:** [local_inference_mvp.md](../requirements/local_inference_mvp.md) (P1-1) · [models/README.md](../../models/README.md) (GGUF)
 
 ## Scope guard (RC)
 
