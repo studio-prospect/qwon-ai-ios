@@ -74,15 +74,16 @@ Optional (Wang only, before respin): `alpha_smoke_wang.sh` log → `.eval-logs/w
 
 ## Filename and path placeholders
 
-Use a **single ops root** outside the repo (team drive, password manager attachment area, or secure shared folder). Suggested layout:
+**Canonical ops root (outside git):** `~/PREXUS-alpha-evidence/qwen-text-0.1.0-build1/`  
+Team drive equivalents are fine; keep the same filenames. See `MANIFEST.txt` in that folder (ops-only, not committed).
 
 ```text
-PREXUS-alpha-evidence/
-  qwen-text-0.1.0-build1/
-    wang-0.1.0-1-diagnostics.png
-    matisse-0.1.0-1-diagnostics.png
-    wang-0.1.0-1-chat.png          # optional
-    matisse-0.1.0-1-chat.png       # optional
+~/PREXUS-alpha-evidence/qwen-text-0.1.0-build1/
+  MANIFEST.txt                     # ops index (optional, not in git)
+  wang-0.1.0-1-diagnostics.png     # Settings → Runtime Diagnostics
+  matisse-0.1.0-1-diagnostics.png
+  wang-0.1.0-1-chat.png            # optional corroboration
+  matisse-0.1.0-1-chat.png
 ```
 
 **Docs convention:** list filenames in the [ledger](#frozen-ledger-010-build-1) only. Do not copy images into `docs/product/` or `docs/design/screenshots/` for TestFlight lab evidence (`docs/design/screenshots/` is for XCTest surface spec, not alpha ops).
@@ -95,19 +96,22 @@ PREXUS-alpha-evidence/
 
 Baseline captured **2026-05-31** after TestFlight install + GGUF push on both lab devices. Aligns with [Wang](./qwen_text_only_alpha_testflight_prep.md#wang-testflight-verification-2026-05-31) and [Matisse](./qwen_text_only_alpha_testflight_prep.md#matisse-testflight-verification-2026-05-31) verification sections.
 
+**Ops filing status (2026-05-31):** Matisse diagnostics + chat PNGs filed under `~/PREXUS-alpha-evidence/qwen-text-0.1.0-build1/`. Wang chat strip filed; **Wang Runtime Diagnostics PNG still outstanding** (see Wang row).
+
 ### Wang
 
 | Field | Value |
 | --- | --- |
 | Lab name | Wang |
 | Device model | iPhone 17 (`iPhone18,3`) |
-| iOS version | (record in ops folder metadata if needed) |
-| TestFlight build | `0.1.0 (1)` |
-| GGUF pushed | yes — `push_local_model_to_device.sh "Wang"` |
-| Chat result | pass — local Qwen reply after GGUF (e.g. greeting) |
-| Diagnostics expectation | **Local runtime** + `answered_by=llama.cpp On-Device Runtime` |
-| Diagnostics screenshot | `on file (ops)` — e.g. `wang-0.1.0-1-diagnostics.png` |
-| Known deviation | none for alpha 0.1.0 (1) baseline |
+| iOS version | **26.5** (`osBuildUpdate` 23F77, devicectl 2026-05-31) |
+| TestFlight build | `0.1.0 (1)` — `jp.studio-prospect.prexus.ios` installed |
+| GGUF pushed | yes — `prexus-local-mvp.gguf` in Documents/Models (verified on device) |
+| Chat result | pass — TestFlight chat; **Local runtime** + **llama.cpp On-Device Runtime** strip |
+| Diagnostics expectation | **Local runtime** + `answered_by=llama.cpp On-Device Runtime` in **Runtime Diagnostics** |
+| Diagnostics screenshot | **unfiled** — target `wang-0.1.0-1-diagnostics.png` (capture Settings → Recent Runtime Decisions) |
+| Chat screenshot (optional) | `on file (ops)` — `wang-0.1.0-1-chat.png` (2026-05-27; llama.cpp strip; interim only) |
+| Known deviation | Diagnostics PNG not yet in ops; Qwen path corroborated via chat strip + TestFlight verification — **not** a Matisse-class heuristic fallback |
 
 ### Matisse
 
@@ -116,12 +120,13 @@ Baseline captured **2026-05-31** after TestFlight install + GGUF push on both la
 | Lab name | Matisse |
 | Device model | iPhone XS Max (`iPhone11,6`) |
 | iOS version | **18.7.9** |
-| TestFlight build | `0.1.0 (1)` |
+| TestFlight build | `0.1.0 (1)` — `jp.studio-prospect.prexus.ios` installed |
 | GGUF pushed | yes — `push_local_model_to_device.sh "Matisse"` |
-| Chat result | pass — `Hello PREXUS`; embedded heuristic reply |
-| Diagnostics expectation | **Local runtime** badge + embedded-heuristic detail (not llama.cpp) |
-| Diagnostics screenshot | `on file (ops)` — e.g. `matisse-0.1.0-1-diagnostics.png` |
-| Known deviation | GGUF present but **no llama.cpp** (A12 gate) — **accepted**, not failure |
+| Chat result | pass — `Hello PREXUS`; **Local runtime** primary chip + **Embedded Heuristic Runtime** backend |
+| Diagnostics expectation | **Local runtime** badge + *Local lightweight fallback path without a packaged LLM.* — **not** llama.cpp |
+| Diagnostics screenshot | `on file (ops)` — `matisse-0.1.0-1-diagnostics.png` |
+| Chat screenshot (optional) | `on file (ops)` — `matisse-0.1.0-1-chat.png` |
+| Known deviation | GGUF present but **no llama.cpp** (A12 gate) — **accepted pass**, not failure |
 
 ---
 
