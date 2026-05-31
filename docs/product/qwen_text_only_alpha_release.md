@@ -98,6 +98,7 @@ Release candidate docs:
 - [qwen_text_only_alpha_release_readiness.md](./qwen_text_only_alpha_release_readiness.md) — RC checklist
 - [qwen_text_only_alpha_release_notes.md](./qwen_text_only_alpha_release_notes.md) — release notes and known limitations
 - [qwen_text_only_alpha_tester_instructions.md](./qwen_text_only_alpha_tester_instructions.md) — internal / TestFlight tester steps
+- [qwen_text_only_alpha_testflight_prep.md](./qwen_text_only_alpha_testflight_prep.md) — version/tag naming, pre-TestFlight gate, upload outline (ops only; no tag/upload in repo)
 
 ## Cursor Task
 

@@ -1,6 +1,6 @@
 # Qwen Text-Only Alpha — Release Candidate Checklist
 
-**Status:** Release candidate (RC) for 2026-06 mid-month internal / TestFlight alpha.
+**Status:** RC merged to `main` (PR #22). Product ops / TestFlight prep: [testflight_prep](./qwen_text_only_alpha_testflight_prep.md).
 **Production local path:** Qwen2.5-0.5B-Instruct Q4_K_M + llama.cpp only.
 
 | Doc | Purpose |
@@ -8,6 +8,7 @@
 | [qwen_text_only_alpha_release.md](./qwen_text_only_alpha_release.md) | Scope and exclusions |
 | [qwen_text_only_alpha_release_notes.md](./qwen_text_only_alpha_release_notes.md) | Release notes + known limitations |
 | [qwen_text_only_alpha_tester_instructions.md](./qwen_text_only_alpha_tester_instructions.md) | Manual tester flow |
+| [qwen_text_only_alpha_testflight_prep.md](./qwen_text_only_alpha_testflight_prep.md) | Version/tag naming, pre-TestFlight gate, upload outline |
 | [local_inference_mvp.md](../requirements/local_inference_mvp.md) | P1-1 architecture |
 | [models/README.md](../../models/README.md) | GGUF placement |
 
@@ -70,8 +71,21 @@ Artifacts (gitignored): `.eval-logs/wang-alpha-smoke-*.json`
 - [x] Forced missing model → embedded fallback (`no_model`)
 - [x] Four sensitivity modes — one turn each (`sensitivity_matrix`)
 - [x] Diagnostics show route + execution detail (including fallback fields)
-- [ ] TestFlight / internal distribution build tagged (product ops)
+- [ ] TestFlight / internal distribution — see [product ops checklist](./qwen_text_only_alpha_testflight_prep.md#product-ops-status-from-rc-checklist)
 - [ ] Optional: escalation with real OpenAI key on device (not required for RC)
+
+## Product ops / TestFlight (post-RC)
+
+Concrete steps live in [qwen_text_only_alpha_testflight_prep.md](./qwen_text_only_alpha_testflight_prep.md). Summary:
+
+| Step | Gate |
+| --- | --- |
+| **Bundle ID + signing** | **Blocking** — formal ID undecided; dev placeholder `com.prexus.ios` is not upload-ready ([prep doc](./qwen_text_only_alpha_testflight_prep.md#bundle-id-and-signing-gate-blocking-testflight)) |
+| Version naming | Proposed `0.1.0` / build `1`, git tag `qwen-text-alpha-0.1.0-rc1` (manual) |
+| Pre-upload smoke | `alpha_smoke_wang.sh`: `with_model`, `no_model`, `sensitivity_matrix` |
+| Device archive | `build_llama_xcframework.sh` + `generate_xcodeproj.rb` before Release archive |
+| Tester comms | Link [tester instructions](./qwen_text_only_alpha_tester_instructions.md) + [release notes](./qwen_text_only_alpha_release_notes.md) |
+| Tag + TestFlight upload | Manual ASC / git — **only after Bundle ID gate closed** |
 
 ## RC sign-off criteria
 

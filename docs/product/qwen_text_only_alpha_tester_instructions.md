@@ -2,7 +2,9 @@
 
 For internal / TestFlight testers validating the **text-only** local runtime slice.
 
-Related: [release notes](./qwen_text_only_alpha_release_notes.md) · [RC checklist](./qwen_text_only_alpha_release_readiness.md)
+Related: [release notes](./qwen_text_only_alpha_release_notes.md) · [RC checklist](./qwen_text_only_alpha_release_readiness.md) · [TestFlight prep](./qwen_text_only_alpha_testflight_prep.md)
+
+Release engineers: complete the [pre-TestFlight gate](./qwen_text_only_alpha_testflight_prep.md#pre-testflight-gate-checklist) (including [`alpha_smoke_wang.sh`](../../tools/scripts/alpha_smoke_wang.sh)) before inviting testers.
 
 ## Before you start
 
