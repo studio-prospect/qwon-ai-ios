@@ -43,8 +43,9 @@
 | Artifact | Location |
 | --- | --- |
 | RC checklist | [qwen_text_only_alpha_release_readiness.md](./qwen_text_only_alpha_release_readiness.md) |
+| TestFlight prep | [qwen_text_only_alpha_testflight_prep.md](./qwen_text_only_alpha_testflight_prep.md) |
 | Tester steps | [qwen_text_only_alpha_tester_instructions.md](./qwen_text_only_alpha_tester_instructions.md) |
-| Automated Wang smoke | `./tools/scripts/alpha_smoke_wang.sh` → `.eval-logs/` (gitignored) |
+| Automated Wang smoke | [`tools/scripts/alpha_smoke_wang.sh`](../../tools/scripts/alpha_smoke_wang.sh) → `.eval-logs/` (gitignored) |
 
 ## Build requirements (developers)
 
