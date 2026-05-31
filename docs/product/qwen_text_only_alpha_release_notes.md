@@ -160,6 +160,8 @@ Out of [text-only alpha scope](./qwen_text_only_alpha_release.md); **not** build
 
 #### Tester feedback log (build 1)
 
+**Template policy:** New rows come from the [tester feedback report template](./qwen_text_only_alpha_tester_instructions.md#tester-feedback-report-template) only. Informal chat without Diagnostics summary + ops screenshot **filename** stays **needs evidence** until completed — it does **not** approve build `2`. Release engineering assigns the final class in the triage tables above.
+
 | Source | Summary | Classification |
 | --- | --- | --- |
 | Wang TestFlight verification (2026-05-31) | Install OK; llama path after GGUF; local reply | **Closed — pass** |
@@ -167,7 +169,7 @@ Out of [text-only alpha scope](./qwen_text_only_alpha_release.md); **not** build
 | Wang device smoke (2026-05-31) | `with_model`, `no_model`, `sensitivity_matrix` pass | **Closed — pass** |
 | Historical Wang UI (pre-upload dev) | Letterboxing / keyboard — addressed in PRs #6–#9 before `a021475` | **Closed in build `1` lineage** unless reopened on TF `0.1.0 (1)` |
 
-Record new feedback as a row above before reclassifying.
+Record new template-based feedback as a row above (date, device, one-line summary, final class). **Build `2` remains not approved** until a **Release blocker** row exists with repro on **`0.1.0 (1)`**.
 
 ### In scope (build 2 binary)
 

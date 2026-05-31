@@ -135,6 +135,7 @@ Use after [Known issues triage for build 1](./qwen_text_only_alpha_release_notes
 **Checklist before approving build `2`:**
 
 - [ ] At least one **Release blocker** row added to the triage table with repro on build `1`.
+- [ ] Judgment uses **[template-complete](./qwen_text_only_alpha_tester_instructions.md#tester-feedback-report-template)** feedback on **`0.1.0 (1)`** (Diagnostics fields + ops screenshot filename, or explicit pass row) — not informal messages alone.
 - [ ] Binary respin reason text approved in [release notes](./qwen_text_only_alpha_release_notes.md#binary-respin-reason-required-before-cut).
 - [ ] No triage item is **only** Docs/ops or Post-alpha.
 - [ ] Implementation PR scope is Qwen text-only (no LiteRT production / L2 / multimodal scope creep).

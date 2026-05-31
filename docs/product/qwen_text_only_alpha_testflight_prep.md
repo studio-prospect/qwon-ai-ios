@@ -488,6 +488,8 @@ For the **two-device lab** only:
 
 ### Feedback and build 2 classification
 
+**Tester form:** [Tester feedback report template](./qwen_text_only_alpha_tester_instructions.md#tester-feedback-report-template) — required format for new reports on build `1`.
+
 When testers report issues on **`0.1.0 (1)`**, classify using [Known issues triage for build 1](./qwen_text_only_alpha_release_notes.md#known-issues-triage-for-build-1) before requesting a new TestFlight build:
 
 | Class | Action |

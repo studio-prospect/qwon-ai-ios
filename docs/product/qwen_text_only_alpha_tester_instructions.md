@@ -4,7 +4,7 @@ For internal / TestFlight testers validating the **text-only** local runtime sli
 
 Related: [release notes](./qwen_text_only_alpha_release_notes.md) · [RC checklist](./qwen_text_only_alpha_release_readiness.md) · [TestFlight prep](./qwen_text_only_alpha_testflight_prep.md) · **[Lab evidence](./qwen_text_only_alpha_lab_evidence.md)**
 
-Release status: internal TestFlight alpha `0.1.0 (1)` is for the **two-device lab** only (Wang + Matisse). See [Physical device lab](./qwen_text_only_alpha_testflight_prep.md#physical-device-lab-ops-policy) and [evidence retention](./qwen_text_only_alpha_lab_evidence.md#retention-rules-do-not-commit-binaries). Use [onboarding](./qwen_text_only_alpha_testflight_prep.md#tester-onboarding-message) and [What to Test](./qwen_text_only_alpha_testflight_prep.md#asc-what-to-test-copy).
+Release status: internal TestFlight alpha `0.1.0 (1)` is for the **two-device lab** only (Wang + Matisse). **Build `2` is not approved.** See [Physical device lab](./qwen_text_only_alpha_testflight_prep.md#physical-device-lab-ops-policy), [evidence retention](./qwen_text_only_alpha_lab_evidence.md#retention-rules-do-not-commit-binaries), and the [feedback report template](#tester-feedback-report-template). Use [onboarding](./qwen_text_only_alpha_testflight_prep.md#tester-onboarding-message) and [What to Test](./qwen_text_only_alpha_testflight_prep.md#asc-what-to-test-copy).
 
 ## Lab devices (ops)
 
@@ -116,18 +116,69 @@ After four sends, open **Recent Runtime Decisions** (**Runtime Diagnostics**) �
 - Provider key section loads (keys optional for local-only testing).
 - Sensitivity descriptions match the selected mode.
 
-## Evidence report (return to release engineering)
+## Tester feedback report template
 
-Use the [copy-paste template](./qwen_text_only_alpha_lab_evidence.md#copy-paste-template-new-capture). **Do not** email PNG attachments into the repo — ops stores screenshots outside git; docs record `on file (ops)` and a [filename placeholder](./qwen_text_only_alpha_lab_evidence.md#filename-and-path-placeholders).
+Use this form for **every** issue or pass report on TestFlight **`0.1.0 (1)`**. Send to release engineering (Slack/issue channel — team choice). **Build `2` is not approved** — feedback does not by itself request a new TestFlight binary.
+
+**Do not** attach PNG/JPEG to git or email binaries into the repo. Save screenshots under `~/PREXUS-alpha-evidence/qwen-text-0.1.0-build1/` and list **filenames only** below.
+
+### Copy-paste template
+
+```text
+Device lab name: Wang | Matisse
+iPhone model:
+iOS version:
+TestFlight version/build: 0.1.0 (1)  (expected — say if different)
+GGUF pushed: yes | no | unknown
+
+Scenario: launch | first chat | GGUF push | Runtime Diagnostics | sensitivity | other
+Expected result:
+Actual result:
+
+Runtime Diagnostics (latest entry on Settings → Recent Runtime Decisions):
+  execution mode (badge):
+  backend/model label:
+  answered_by:
+  primary_failure:
+  fallback_reason:
+
+Ops screenshots (filenames only, not attached to git):
+  diagnostics: e.g. wang-0.1.0-1-diagnostics.png
+  chat (optional):
+  other:
+
+Reproducibility: once | intermittent | always
+
+Classification candidate (tester guess):
+  Release blocker | Build 2 candidate | Docs/ops only | Post-alpha | needs evidence
+
+Suggested next action:
+```
+
+### Classification guidance (testers)
+
+| Class | When to use | Notes |
+| --- | --- | --- |
+| **Release blocker** | Reproducible on build `1` and blocks launch, first text turn, Wang llama path after GGUF, no-model fallback safety, install/signing, Wang sensitivity smoke, or Diagnostics validation | **Matisse missing llama.cpp is not a failure** |
+| **Build 2 candidate** | Real bug or UX issue on build `1`, but internal testing can continue on build `1` for now | Does **not** auto-approve build `2` |
+| **Docs/ops only** | Confusing onboarding, What to Test, GGUF push steps, Diagnostics navigation, ops filename | **Must not** trigger build `2` |
+| **Post-alpha** | OCR, camera, audio, LiteRT production, model download, cloud quality, Qwen on A12 hardware | **Must not** trigger build `2` |
+| **needs evidence** | Missing Diagnostics fields, no screenshot filename, or unclear build number | Release engineering reclassifies — **do not** treat as build `2` approval |
+
+Release engineering maps your report to [Known issues triage](./qwen_text_only_alpha_release_notes.md#known-issues-triage-for-build-1) and the [tester feedback log](./qwen_text_only_alpha_release_notes.md#tester-feedback-log-build-1). Only **template-complete** reports with repro on **`0.1.0 (1)`** count toward a **Release blocker** decision.
+
+### Device expectations (quick reference)
 
 | Lab device | Diagnostics expectation | llama.cpp required? |
 | --- | --- | --- |
 | **Wang** | **Local runtime** + `answered_by=llama.cpp On-Device Runtime` | **Yes** (after GGUF push) |
 | **Matisse** | **Local runtime** badge + **Embedded Heuristic Runtime** backend/detail | **No** — missing llama.cpp is **not** a failure |
 
-File screenshots under `~/PREXUS-alpha-evidence/qwen-text-0.1.0-build1/` only; record filenames in the [frozen ledger](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1).
+### Baseline evidence (release engineering)
 
-Sensitivity matrix and missing-model fallback are **Wang-only** optional rows during the two-device lab phase (see [expected outcomes](./qwen_text_only_alpha_lab_evidence.md#expected-outcomes-wang-vs-matisse)).
+For scheduled lab sign-off (not per-issue), use the shorter [ledger copy-paste template](./qwen_text_only_alpha_lab_evidence.md#copy-paste-template-new-capture) and [frozen ledger](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1).
+
+Sensitivity matrix and missing-model fallback are **Wang-only** optional scenarios during the two-device lab phase (see [expected outcomes](./qwen_text_only_alpha_lab_evidence.md#expected-outcomes-wang-vs-matisse)).
 
 ## Out of scope for this alpha
 
