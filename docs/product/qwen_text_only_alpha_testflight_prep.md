@@ -1,6 +1,6 @@
 # Qwen Text-Only Alpha — TestFlight Preparation
 
-**Status:** TestFlight build **0.1.0 (1)** on internal group **`internal_tester`**. Awaiting first tester install + chat turn. **Not** an App Store public submission.
+**Status:** TestFlight build **0.1.0 (1)** assigned to **`internal_tester`** (1 build). Awaiting Wang TestFlight install + one chat turn. **Not** an App Store public submission.
 
 This doc turns the RC checklist into concrete **internal / TestFlight** steps.
 
@@ -27,7 +27,8 @@ RC **code** criteria are satisfied on `main` (PR #22). Remaining work is **distr
 | Required device smoke green | Release engineer | **Done** (2026-05-31 Wang) | [`alpha_smoke_wang.sh`](#automated-device-smoke-alpha_smoke_wangsh) — all three scenarios on `jp.studio-prospect.prexus.ios` |
 | GGUF available to testers | Ops + testers | Open | Document push path; testers need `Documents/Models/prexus-local-mvp.gguf` |
 | Git release tag | Release engineer | **Done** | `qwen-text-alpha-0.1.0-rc1` (2026-05-31) |
-| TestFlight upload + internal group | Release engineer | **Done** | Build `0.1.0 (1)` uploaded; ASC group **`internal_tester`** configured |
+| TestFlight upload + internal group | Release engineer | **Done** | Build `0.1.0 (1)` on **`internal_tester`** (1 build, 2 testers) |
+| First TestFlight install on device | Tester (Wang) | **In progress** | Uninstall dev builds done; install via TestFlight app |
 | Tester onboarding text | Product ops | Open | Paste release-notes excerpt + link to [tester instructions](./qwen_text_only_alpha_tester_instructions.md) |
 
 **Explicitly out of scope for this alpha:** App Store public release, LiteRT production, L2 selector, OCR/compression/audio/camera, in-app model download UX.
@@ -58,7 +59,7 @@ The **formal Bundle ID is decided** (`jp.studio-prospect.prexus.ios`). Distribut
 - [x] Xcode / scripts `PRODUCT_BUNDLE_IDENTIFIER` matches ASC (bundle-id migration PR).
 - [x] Provisioning profiles registered locally: `AppStorePREXUS_20260531`, `DevelopmentPREXUS_20260531`.
 - [x] Release archive validates with **Distribution** signing for that ID ([2026-05-31 validation](#distribution-archive-validation-2026-05-31)).
-- [x] Internal TestFlight group **`internal_tester`** mapped to ASC app `PREXUS` (build `0.1.0` / `1`).
+- [x] Internal TestFlight group **`internal_tester`** with build `0.1.0` / `1` assigned (was 0 builds — blocker resolved).
 
 ### Xcode / script gate (complete after migration PR)
 
@@ -116,11 +117,39 @@ Uploaded from archive at `main` commit tagged `qwen-text-alpha-0.1.0-rc1` (`a021
 | Internal TestFlight group | **`internal_tester`** |
 | Upload result | **Upload succeeded** (`xcodebuild -exportArchive`, `destination=upload`) |
 
-**Next in ASC:** confirm build processing complete → invite testers in **`internal_tester`** → paste [tester instructions](./qwen_text_only_alpha_tester_instructions.md) in What to Test (if not already).
+**ASC state (2026-05-31):** export compliance completed; **`internal_tester`** shows **1 build** (`0.1.0` / `1`).
 
 ---
 
-## Wang device smoke (2026-05-31)
+## Wang TestFlight install (next)
+
+Prerequisites on Wang:
+
+1. **Apple ID** matches an App Store Connect user in **`internal_tester`** (internal testing only).
+2. Old PREXUS builds **uninstalled** (`com.prexus.ios` and `jp.studio-prospect.prexus.ios`) — confirmed clean on device.
+3. **Unlock** the device before opening TestFlight.
+
+Steps:
+
+1. Open **TestFlight** → confirm **PREXUS** `0.1.0` appears → **Install**.
+2. If empty: pull to refresh; check invite email; verify ASC Apple ID on device.
+3. Launch PREXUS → send one chat turn (embedded heuristic OK without GGUF).
+4. For full Qwen path: `./tools/scripts/push_local_model_to_device.sh "Wang"` after install (GGUF not bundled in TestFlight).
+
+Report back: TestFlight install OK + one chat turn (and whether Diagnostics show `jp.studio-prospect.prexus.ios`).
+
+### TestFlight に PREXUS が出ないとき
+
+| Symptom | Typical fix |
+| --- | --- |
+| `internal_tester` shows **0 builds** | Manually add build `0.1.0 (1)` to the group after upload |
+| Processing email received but no invite | Processing mail is for developers; invite sends after build is on the group |
+| Build stuck 「提出準備中」 | Complete **export compliance** (exempt HTTPS → France **No** for extra declaration) |
+| TestFlight empty on device | Tester must be **ASC team user**; Apple ID on phone must match |
+
+---
+
+## Wang device smoke (2026-05-31, pre-TestFlight)
 
 `./tools/scripts/alpha_smoke_wang.sh "Wang"` on `jp.studio-prospect.prexus.ios` after bundle-id migration.
 
@@ -250,7 +279,8 @@ Environment overrides: `DEVELOPMENT_TEAM`, `PREXUS_SKIP_BUILD=1` — see script 
 **Distribution / upload (partial):**
 
 - [x] Distribution signing succeeds for `jp.studio-prospect.prexus.ios` ([2026-05-31](#distribution-archive-validation-2026-05-31)).
-- [x] Internal TestFlight group **`internal_tester`** under ASC app `PREXUS`.
+- [x] Internal TestFlight group **`internal_tester`** — **1 build** assigned.
+- [ ] First **TestFlight** install on Wang + one chat turn (dev builds uninstalled).
 - [x] Wang / device smoke on new ID (2026-05-31; `VALIDATION PASSED` for `with_model`, `no_model`, `sensitivity_matrix`).
 
 ### F. Optional (not blocking text-only alpha)
