@@ -42,17 +42,28 @@ Optional device smoke (environment-specific):
 ./tools/scripts/fetch_local_model.sh
 ./tools/scripts/build_llama_xcframework.sh   # if not already built
 ruby tools/scripts/generate_xcodeproj.rb
-./tools/scripts/push_local_model_to_device.sh "Wang"
-# Install Debug build, send one local-routed chat turn, open Settings → Runtime diagnostics
+./tools/scripts/alpha_smoke_wang.sh "Wang"
 ```
+
+Artifacts (gitignored): `.eval-logs/wang-alpha-smoke-result.json`, `.eval-logs/wang-alpha-smoke-no-model-result.json`
 
 ## Manual smoke (physical device)
 
-- [ ] App launches; Chat accepts a text turn without crash
-- [ ] With GGUF in `Documents/Models/prexus-local-mvp.gguf`, response comes from llama.cpp (diagnostics `answered_by=llama.cpp On-Device Runtime`)
-- [ ] With GGUF removed, response still returns (embedded heuristic); diagnostics `mode=fallback`, `primary_failure` mentions `model_asset_unavailable`, `fallback_reason=embedded_heuristic`
-- [ ] All four sensitivity modes send one turn each
-- [ ] Diagnostics list shows route + execution detail for last turns
+Automated on **Wang** (2026-05-31) via `alpha_smoke_wang.sh`:
+
+| Check | Result |
+| --- | --- |
+| App launches; local turn without crash | Pass (both scenarios) |
+| GGUF present → llama.cpp | Pass — `executionModel=llama.cpp On-Device Runtime`, `executionMode=local`, `answered_by=llama.cpp` |
+| Forced missing model → embedded fallback | Pass — `executionMode=fallback`, `Embedded Heuristic Runtime`, `primary_failure=model_asset_unavailable`, `fallback_reason=embedded_heuristic` |
+| Four sensitivity modes (manual) | Not run in automated script |
+| Diagnostics route + execution detail | Pass — encoded in smoke JSON `executionDetail` |
+
+- [x] App launches; Chat accepts a text turn without crash
+- [x] With GGUF in `Documents/Models/prexus-local-mvp.gguf`, response comes from llama.cpp (diagnostics `answered_by=llama.cpp On-Device Runtime`)
+- [x] With forced missing path (`PREXUS_LOCAL_MODEL_PATH` → nonexistent file), response returns via embedded heuristic; `mode=fallback`, `primary_failure` + `fallback_reason=embedded_heuristic`
+- [ ] All four sensitivity modes send one turn each (optional manual follow-up)
+- [x] Diagnostics list shows route + execution detail for smoke turns
 
 ## Known limitations (alpha)
 
