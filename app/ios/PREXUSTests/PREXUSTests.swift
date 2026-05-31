@@ -1065,6 +1065,9 @@ final class PREXUSTests: XCTestCase {
             "Embedded Heuristic Runtime"
         )
         XCTAssertTrue(LocalModelExecutionTrace.current?.primaryFailure?.contains("LiteRT") == true)
+        XCTAssertEqual(LocalModelExecutionTrace.current?.fallbackReason, "embedded_heuristic")
+        let detail = LocalModelExecutionTrace.formattedDetail(base: nil)
+        XCTAssertTrue(detail?.contains("fallback_reason=embedded_heuristic") == true)
         LocalModelExecutionTrace.reset()
     }
 
@@ -1150,12 +1153,62 @@ final class PREXUSTests: XCTestCase {
     func testLocalModelExecutionTraceIncludesFallbackReasonAfterPrimaryFailure() {
         LocalModelExecutionTrace.record(
             respondingBackend: "Embedded Heuristic Runtime",
-            primaryFailure: LocalModelError.modelAssetUnavailable.diagnosticDescription
+            primaryFailure: LocalModelError.modelAssetUnavailable.diagnosticDescription,
+            fallbackReason: "embedded_heuristic"
         )
 
         let detail = LocalModelExecutionTrace.formattedDetail(base: nil)
         XCTAssertTrue(detail?.contains("fallback_reason=embedded_heuristic") == true)
         XCTAssertTrue(detail?.contains("primary_failure=") == true)
+        LocalModelExecutionTrace.reset()
+    }
+
+    func testNestedFallbackDoesNotEmitEmbeddedHeuristicReasonWhenQwenAnswers() async throws {
+        struct FailingLiteRT: LocalModelClient {
+            let descriptor = LocalModelDescriptor(
+                backend: .deviceRuntime,
+                name: "LiteRT-LM Prototype Runtime",
+                summary: "Fails"
+            )
+
+            func generate(prompt: String) async throws -> String {
+                throw LocalModelError.backendUnavailable("LiteRT engine missing")
+            }
+        }
+
+        struct SuccessLlama: LocalModelClient {
+            let descriptor = LocalModelDescriptor(
+                backend: .deviceRuntime,
+                name: "llama.cpp On-Device Runtime",
+                summary: "Succeeds"
+            )
+
+            func generate(prompt: String) async throws -> String {
+                "qwen-local-response"
+            }
+        }
+
+        LocalModelExecutionTrace.reset()
+        let qwenChain = FallbackLocalModelClient(
+            primary: SuccessLlama(),
+            fallback: EmbeddedHeuristicLocalModelClient()
+        )
+        let outer = FallbackLocalModelClient(
+            primary: FailingLiteRT(),
+            fallback: qwenChain
+        )
+        _ = try await outer.generate(prompt: "User:\nReview routing policy")
+
+        XCTAssertEqual(
+            LocalModelExecutionTrace.current?.respondingBackend,
+            "llama.cpp On-Device Runtime"
+        )
+        XCTAssertTrue(LocalModelExecutionTrace.current?.primaryFailure?.contains("LiteRT") == true)
+        XCTAssertNil(LocalModelExecutionTrace.current?.fallbackReason)
+
+        let detail = LocalModelExecutionTrace.formattedDetail(base: nil)
+        XCTAssertTrue(detail?.contains("answered_by=llama.cpp On-Device Runtime") == true)
+        XCTAssertFalse(detail?.contains("fallback_reason=embedded_heuristic") == true)
         LocalModelExecutionTrace.reset()
     }
 

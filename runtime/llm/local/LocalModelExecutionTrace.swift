@@ -5,6 +5,7 @@ enum LocalModelExecutionTrace {
     struct Snapshot: Equatable {
         let respondingBackend: String
         let primaryFailure: String?
+        let fallbackReason: String?
         let metricsDetail: String?
     }
 
@@ -17,11 +18,13 @@ enum LocalModelExecutionTrace {
     static func record(
         respondingBackend: String,
         primaryFailure: String? = nil,
+        fallbackReason: String? = nil,
         metricsDetail: String? = nil
     ) {
         lastSnapshot = Snapshot(
             respondingBackend: respondingBackend,
             primaryFailure: primaryFailure,
+            fallbackReason: fallbackReason,
             metricsDetail: metricsDetail
         )
     }
@@ -42,7 +45,9 @@ enum LocalModelExecutionTrace {
         parts.append("answered_by=\(snapshot.respondingBackend)")
         if let primaryFailure = snapshot.primaryFailure {
             parts.append("primary_failure=\(primaryFailure)")
-            parts.append("fallback_reason=embedded_heuristic")
+        }
+        if let fallbackReason = snapshot.fallbackReason {
+            parts.append("fallback_reason=\(fallbackReason)")
         }
         if let metricsDetail = snapshot.metricsDetail {
             parts.append(metricsDetail)
