@@ -1,6 +1,6 @@
 # Qwen Text-Only Alpha — TestFlight Preparation
 
-**Status:** TestFlight build **0.1.0 (1)** assigned to **`internal_tester`** (1 build). Awaiting Wang TestFlight install + one chat turn. **Not** an App Store public submission.
+**Status:** TestFlight **0.1.0 (1)** verified on Wang (install + local Qwen turn). Internal alpha distribution **ready for `internal_tester`**. **Not** an App Store public submission.
 
 This doc turns the RC checklist into concrete **internal / TestFlight** steps.
 
@@ -28,7 +28,7 @@ RC **code** criteria are satisfied on `main` (PR #22). Remaining work is **distr
 | GGUF available to testers | Ops + testers | Open | Document push path; testers need `Documents/Models/prexus-local-mvp.gguf` |
 | Git release tag | Release engineer | **Done** | `qwen-text-alpha-0.1.0-rc1` (2026-05-31) |
 | TestFlight upload + internal group | Release engineer | **Done** | Build `0.1.0 (1)` on **`internal_tester`** (1 build, 2 testers) |
-| First TestFlight install on device | Tester (Wang) | **In progress** | Uninstall dev builds done; install via TestFlight app |
+| First TestFlight install on device | Tester (Wang) | **Done** | TestFlight install; GGUF via `push_local_model_to_device.sh`; banner **Local runtime** |
 | Tester onboarding text | Product ops | Open | Paste release-notes excerpt + link to [tester instructions](./qwen_text_only_alpha_tester_instructions.md) |
 
 **Explicitly out of scope for this alpha:** App Store public release, LiteRT production, L2 selector, OCR/compression/audio/camera, in-app model download UX.
@@ -121,22 +121,22 @@ Uploaded from archive at `main` commit tagged `qwen-text-alpha-0.1.0-rc1` (`a021
 
 ---
 
-## Wang TestFlight install (next)
+## Wang TestFlight verification (2026-05-31)
 
-Prerequisites on Wang:
+| Step | Result |
+| --- | --- |
+| TestFlight install `0.1.0 (1)` | Pass — TestFlight badge on device |
+| First turn (no GGUF) | Pass — **Fallback** / Embedded Heuristic (expected) |
+| `push_local_model_to_device.sh "Wang"` | Pass — `prexus-local-mvp.gguf` in Documents/Models |
+| Second turn (with GGUF) | Pass — reply e.g. `Hello! How can I assist you today?`; banner **Local runtime** (`executionMode=local`, not Fallback) |
 
-1. **Apple ID** matches an App Store Connect user in **`internal_tester`** (internal testing only).
-2. Old PREXUS builds **uninstalled** (`com.prexus.ios` and `jp.studio-prospect.prexus.ios`) — confirmed clean on device.
-3. **Unlock** the device before opening TestFlight.
+**UI note:** Chat banner **Local runtime** = `executionMode` local (see `ChatView`). Diagnostics detail may still show `answered_by=llama.cpp On-Device Runtime` for the full backend name.
 
-Steps:
+### New tester checklist
 
-1. Open **TestFlight** → confirm **PREXUS** `0.1.0` appears → **Install**.
-2. If empty: pull to refresh; check invite email; verify ASC Apple ID on device.
-3. Launch PREXUS → send one chat turn (embedded heuristic OK without GGUF).
-4. For full Qwen path: `./tools/scripts/push_local_model_to_device.sh "Wang"` after install (GGUF not bundled in TestFlight).
-
-Report back: TestFlight install OK + one chat turn (and whether Diagnostics show `jp.studio-prospect.prexus.ios`).
+1. Install from TestFlight (`internal_tester`).
+2. `./tools/scripts/push_local_model_to_device.sh "<DeviceName>"` (GGUF not in IPA).
+3. Relaunch app → confirm **Local runtime** (not Fallback) on a general chat prompt.
 
 ### TestFlight に PREXUS が出ないとき
 
@@ -280,7 +280,7 @@ Environment overrides: `DEVELOPMENT_TEAM`, `PREXUS_SKIP_BUILD=1` — see script 
 
 - [x] Distribution signing succeeds for `jp.studio-prospect.prexus.ios` ([2026-05-31](#distribution-archive-validation-2026-05-31)).
 - [x] Internal TestFlight group **`internal_tester`** — **1 build** assigned.
-- [ ] First **TestFlight** install on Wang + one chat turn (dev builds uninstalled).
+- [x] First **TestFlight** install on Wang + local Qwen turn (2026-05-31).
 - [x] Wang / device smoke on new ID (2026-05-31; `VALIDATION PASSED` for `with_model`, `no_model`, `sensitivity_matrix`).
 
 ### F. Optional (not blocking text-only alpha)
@@ -349,6 +349,6 @@ Send internal testers:
 
 After upload, additionally confirm:
 
-5. At least one internal tester device installed via TestFlight and completed one chat turn.
+5. At least one internal tester device installed via TestFlight and completed one chat turn — **done on Wang** (2026-05-31).
 
 Tagging and upload remain **manual**; this document only defines the procedure.
