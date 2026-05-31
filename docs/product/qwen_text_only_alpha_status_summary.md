@@ -76,7 +76,7 @@ No further alpha docs restructuring is planned unless release state changes (new
 | --- | --- |
 | Tester submits | [Feedback report template](./qwen_text_only_alpha_tester_instructions.md#tester-feedback-report-template) — **same form** for Wang and Matisse |
 | Release engineering processes | [Feedback intake processing (build 1)](./qwen_text_only_alpha_release_notes.md#feedback-intake-processing-build-1) |
-| **Record each report** | [Tester feedback log (build 1)](./qwen_text_only_alpha_release_notes.md#tester-feedback-log-build-1) — one row per template-complete intake |
+| **Record each report** | [Tester feedback log (build 1)](./qwen_text_only_alpha_release_notes.md#tester-feedback-log-build-1) — [row format](./qwen_text_only_alpha_release_notes.md#log-row-format-new-reports); update same row if **needs evidence** → complete |
 | Class reference | [Known issues triage](./qwen_text_only_alpha_release_notes.md#known-issues-triage-for-build-1) — update **Release blocker** table only when promoted |
 
 **Quick flow:** receive template → assign final class → append **feedback log** row → if **Release blocker**, add triage row + [Binary respin reason](./qwen_text_only_alpha_release_notes.md#binary-respin-reason-required-before-cut) (still no upload until approved). **needs evidence** / **Docs/ops only** / **Build 2 candidate** alone do **not** approve build `2`.

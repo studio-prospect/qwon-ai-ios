@@ -166,7 +166,7 @@ Release engineering workflow for **one incoming report** on TestFlight **`0.1.0 
 | 1 | Accept only the [tester feedback report template](./qwen_text_only_alpha_tester_instructions.md#tester-feedback-report-template). Informal chat → **needs evidence**; do not log as triage input. |
 | 2 | Store ops PNGs under `~/PREXUS-alpha-evidence/qwen-text-0.1.0-build1/` — cite **filenames only** in docs (never commit PNG/JPEG/log/GGUF/IPA/MANIFEST). |
 | 3 | Assign **final** class (tester guess is non-binding). |
-| 4 | Append **one row** to [tester feedback log (build 1)](#tester-feedback-log-build-1) below. |
+| 4 | Append or **update** one row in [tester feedback log (build 1)](#tester-feedback-log-build-1) per [log row format](#log-row-format-new-reports) (same row when **needs evidence** → complete). |
 | 5 | If **Release blocker:** add a row under [Release blocker](#release-blocker) and draft [Binary respin reason](#binary-respin-reason-required-before-cut) — still **no** archive/upload/tag until explicitly approved. |
 | 6 | If **Docs/ops only:** edit docs or ASC copy in place on build `1` — **no** `CFBundleVersion` bump. |
 
@@ -208,6 +208,12 @@ Promote **Build 2 candidate** → **Release blocker** only with template-complet
 
 **Template policy:** New rows come from the [tester feedback report template](./qwen_text_only_alpha_tester_instructions.md#tester-feedback-report-template) only. Informal chat without Diagnostics summary + ops screenshot **filename** stays **needs evidence** until completed — it does **not** approve build `2`. Release engineering assigns the final class in the triage tables above.
 
+**Scope:** Per-report **intake history** on build `1`. **Not** a substitute for the [build 1 frozen ledger](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1) (two-device lab sign-off). **Build `2` remains not approved** until a **Release blocker** exists on **`0.1.0 (1)`** with template-complete evidence per [intake processing](#feedback-intake-processing-build-1).
+
+##### Baseline log (closed — build 1 sign-off)
+
+Do **not** edit these rows. They record 2026-05-31 lab sign-off, not open tester issues.
+
 | Source | Summary | Classification |
 | --- | --- | --- |
 | Wang TestFlight verification (2026-05-31) | Install OK; llama path after GGUF; local reply | **Closed — pass** |
@@ -215,7 +221,42 @@ Promote **Build 2 candidate** → **Release blocker** only with template-complet
 | Wang device smoke (2026-05-31) | `with_model`, `no_model`, `sensitivity_matrix` pass | **Closed — pass** |
 | Historical Wang UI (pre-upload dev) | Letterboxing / keyboard — addressed in PRs #6–#9 before `a021475` | **Closed in build `1` lineage** unless reopened on TF `0.1.0 (1)` |
 
-Record new template-based feedback as a row above (date, device, one-line summary, final class). **Build `2` remains not approved** until a **Release blocker** row exists with repro on **`0.1.0 (1)`**.
+##### Log row format (new reports)
+
+Append **below** the baseline table when the first real template-based report arrives. Use this header (seven columns):
+
+| Date | Device | Scenario | Summary | Final class | Evidence filename | Next action |
+| --- | --- | --- | --- | --- | --- | --- |
+
+| Column | Required | Content |
+| --- | --- | --- |
+| **Date** | Yes | Report **received** date, ISO `YYYY-MM-DD` |
+| **Device** | Yes | `Wang` or `Matisse` only |
+| **Scenario** | Yes | From template (`launch`, `first chat`, `GGUF push`, `Runtime Diagnostics`, `sensitivity`, `other`, …) |
+| **Summary** | Yes | One line: actual vs expected (or pass note) |
+| **Final class** | Yes | `needs evidence` · `Docs/ops only` · `Build 2 candidate` · `Release blocker` · `Post-alpha` |
+| **Evidence filename** | Yes when class is not incomplete | Ops PNG name only (e.g. `wang-0.1.0-1-diagnostics.png`); use `—` while **needs evidence** and filename not yet provided |
+| **Next action** | Yes | e.g. `Re-request Diagnostics + filename`, `ASC copy PR`, `Monitor on build 1`, `Promote → Release blocker; triage row` |
+
+**Do not** add placeholder or sample rows before a real report exists.
+
+##### needs evidence — same row, then update
+
+| Situation | Log action | Build `2` input? |
+| --- | --- | --- |
+| First incomplete template | Append **one** row: Final class **needs evidence**; Evidence filename `—`; Next action lists missing fields | **No** |
+| Same report becomes template-complete | **Update that same row** (do not append a duplicate). Set Final class, Summary, Evidence filename, Next action | **No**, unless Final class becomes **Release blocker** |
+| Template-complete with repro on **`0.1.0 (1)`** | Row may use **Build 2 candidate**, **Docs/ops only**, **Post-alpha**, or **Release blocker** per [intake processing](#feedback-intake-processing-build-1) | **Release blocker** only (after promotion + triage + Binary respin reason) |
+
+##### Release blocker promotion — dual record
+
+When a report is promoted to **Release blocker** (from **Build 2 candidate** or after template-complete review):
+
+1. **Feedback log:** **Update** the original row — Final class → **Release blocker**; Next action → e.g. `Add triage row; draft Binary respin reason`.
+2. **Known issues triage:** **Append** one new row under [Release blocker](#release-blocker) (promoted issue). Keep the feedback log row; do not delete it.
+3. **Binary respin reason:** Fill [Binary respin reason](#binary-respin-reason-required-before-cut) in a separate edit — **build `2` still not approved** until reason is explicitly approved.
+
+Do **not** promote for Matisse “missing llama.cpp” alone (Embedded Heuristic is **expected** on A12).
 
 ### In scope (build 2 binary)
 
