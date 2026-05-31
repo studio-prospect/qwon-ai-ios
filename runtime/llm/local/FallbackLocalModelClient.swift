@@ -27,12 +27,16 @@ struct FallbackLocalModelClient: LocalModelClient {
         } catch LocalModelError.generationCancelled {
             throw LocalModelError.generationCancelled
         } catch {
-            let failure = String(describing: error)
+            let failure = (error as? LocalModelError)?.diagnosticDescription ?? String(describing: error)
             let response = try await fallback.generate(prompt: prompt)
             let fallbackTrace = LocalModelExecutionTrace.current
+            let respondingBackend = fallbackTrace?.respondingBackend ?? fallback.descriptor.name
+            let embeddedName = EmbeddedHeuristicLocalModelClient().descriptor.name
+            let fallbackReason = respondingBackend == embeddedName ? "embedded_heuristic" : nil
             LocalModelExecutionTrace.record(
-                respondingBackend: fallbackTrace?.respondingBackend ?? fallback.descriptor.name,
+                respondingBackend: respondingBackend,
                 primaryFailure: failure,
+                fallbackReason: fallbackReason,
                 metricsDetail: fallbackTrace?.metricsDetail
             )
             return response

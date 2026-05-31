@@ -51,6 +51,14 @@ Or run the full device eval workflow: `./tools/scripts/eval_gemma4_on_device.sh 
 
 If the GGUF is missing, llama.cpp fails to load, or the device is below A17 Pro class, PREXUS falls back to `EmbeddedHeuristicLocalModelClient` without crashing.
 
+Runtime diagnostics (Settings → Runtime diagnostics) record:
+
+- `answered_by` — backend that produced the reply (e.g. `llama.cpp On-Device Runtime` or `Embedded Heuristic Runtime`)
+- `primary_failure` — why the primary backend failed (e.g. `model_asset_unavailable: …`)
+- `fallback_reason=embedded_heuristic` — when the embedded path answered after a primary failure
+
+See [Qwen text-only alpha release readiness](../docs/product/qwen_text_only_alpha_release_readiness.md).
+
 ## Evaluation candidate (not default)
 
 | Property | Value |

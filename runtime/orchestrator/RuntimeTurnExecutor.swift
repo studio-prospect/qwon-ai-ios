@@ -168,12 +168,7 @@ extension RuntimeContainer {
             let response = try await localModel.generate(prompt: prompt)
             return TurnExecutionResult(
                 response: response,
-                execution: RuntimeExecutionMetadata(
-                    mode: .local,
-                    provider: nil,
-                    model: LocalModelExecutionTrace.current?.respondingBackend ?? localModel.descriptor.name,
-                    detail: LocalModelExecutionTrace.formattedDetail(base: localModel.descriptor.summary)
-                )
+                execution: localModelExecutionMetadata()
             )
         case .openAI, .anthropic, .gemini:
             guard let provider = route.target.cloudProvider else {
@@ -216,15 +211,20 @@ extension RuntimeContainer {
                 )
             )
         } catch {
+            LocalModelExecutionTrace.reset()
             let fallbackResponse = try await localModel.generate(prompt: prompt)
-            return TurnExecutionResult(
-                response: "\(provider.displayLabel) request failed. Local fallback used.\n\n\(fallbackResponse)",
-                execution: RuntimeExecutionMetadata(
+            var metadata = localModelExecutionMetadata(provider: provider)
+            if metadata.mode == .local {
+                metadata = RuntimeExecutionMetadata(
                     mode: .fallback,
                     provider: provider,
-                    model: localModel.descriptor.name,
-                    detail: "Cloud request failed. \(localModel.descriptor.summary)"
+                    model: metadata.model,
+                    detail: "Cloud request failed. \(metadata.detail ?? localModel.descriptor.summary)"
                 )
+            }
+            return TurnExecutionResult(
+                response: "\(provider.displayLabel) request failed. Local fallback used.\n\n\(fallbackResponse)",
+                execution: metadata
             )
         }
     }
@@ -234,12 +234,7 @@ extension RuntimeContainer {
         let response = try await localModel.generate(prompt: prompt)
         return TurnExecutionResult(
             response: response,
-            execution: RuntimeExecutionMetadata(
-                mode: .local,
-                provider: nil,
-                model: LocalModelExecutionTrace.current?.respondingBackend ?? localModel.descriptor.name,
-                detail: LocalModelExecutionTrace.formattedDetail(base: localModel.descriptor.summary)
-            )
+            execution: localModelExecutionMetadata()
         )
     }
 
@@ -248,15 +243,37 @@ extension RuntimeContainer {
         prompt: String,
         detail: String
     ) async throws -> TurnExecutionResult {
+        LocalModelExecutionTrace.reset()
         let response = try await localModel.generate(prompt: prompt)
-        return TurnExecutionResult(
-            response: "\(provider.displayLabel) API key is missing. Local fallback used.\n\n\(response)",
-            execution: RuntimeExecutionMetadata(
+        var metadata = localModelExecutionMetadata(provider: provider, baseDetail: detail)
+        if metadata.mode == .local {
+            metadata = RuntimeExecutionMetadata(
                 mode: .fallback,
                 provider: provider,
-                model: localModel.descriptor.name,
+                model: metadata.model,
                 detail: detail
             )
+        }
+        return TurnExecutionResult(
+            response: "\(provider.displayLabel) API key is missing. Local fallback used.\n\n\(response)",
+            execution: metadata
+        )
+    }
+
+    private func localModelExecutionMetadata(
+        provider: CloudProvider? = nil,
+        baseDetail: String? = nil
+    ) -> RuntimeExecutionMetadata {
+        let trace = LocalModelExecutionTrace.current
+        let usedEmbeddedFallback = trace?.primaryFailure != nil
+        let detail = LocalModelExecutionTrace.formattedDetail(
+            base: baseDetail ?? localModel.descriptor.summary
+        )
+        return RuntimeExecutionMetadata(
+            mode: usedEmbeddedFallback ? .fallback : .local,
+            provider: provider,
+            model: trace?.respondingBackend ?? localModel.descriptor.name,
+            detail: detail
         )
     }
 
