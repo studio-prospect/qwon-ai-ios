@@ -1,6 +1,6 @@
 # Qwen Text-Only Alpha — TestFlight Preparation
 
-**Status:** TestFlight build **0.1.0 (1)** uploaded 2026-05-31; ASC processing / internal group setup pending. **Not** an App Store public submission.
+**Status:** TestFlight build **0.1.0 (1)** on internal group **`internal_tester`**. Awaiting first tester install + chat turn. **Not** an App Store public submission.
 
 This doc turns the RC checklist into concrete **internal / TestFlight** steps.
 
@@ -27,7 +27,7 @@ RC **code** criteria are satisfied on `main` (PR #22). Remaining work is **distr
 | Required device smoke green | Release engineer | **Done** (2026-05-31 Wang) | [`alpha_smoke_wang.sh`](#automated-device-smoke-alpha_smoke_wangsh) — all three scenarios on `jp.studio-prospect.prexus.ios` |
 | GGUF available to testers | Ops + testers | Open | Document push path; testers need `Documents/Models/prexus-local-mvp.gguf` |
 | Git release tag | Release engineer | **Done** | `qwen-text-alpha-0.1.0-rc1` (2026-05-31) |
-| TestFlight upload + internal group | Release engineer | **Partial** | Build uploaded; [record](#testflight-upload-2026-05-31) — enable internal testers in ASC |
+| TestFlight upload + internal group | Release engineer | **Done** | Build `0.1.0 (1)` uploaded; ASC group **`internal_tester`** configured |
 | Tester onboarding text | Product ops | Open | Paste release-notes excerpt + link to [tester instructions](./qwen_text_only_alpha_tester_instructions.md) |
 
 **Explicitly out of scope for this alpha:** App Store public release, LiteRT production, L2 selector, OCR/compression/audio/camera, in-app model download UX.
@@ -38,7 +38,7 @@ RC **code** criteria are satisfied on `main` (PR #22). Remaining work is **distr
 
 ## Bundle ID and signing gate (blocking TestFlight)
 
-The **formal Bundle ID is decided** (`jp.studio-prospect.prexus.ios`). PREXUS remains **not upload-ready** until **Distribution signing** and Release archive validate for that ID, even if simulator tests pass.
+The **formal Bundle ID is decided** (`jp.studio-prospect.prexus.ios`). Distribution signing, upload, and internal group **`internal_tester`** are configured; confirm at least one TestFlight install before widening testers.
 
 **Decision record:** [bundle_id_decision_memo.md](./bundle_id_decision_memo.md) — ASC app `PREXUS`, Apple ID `6775110218`, profiles `AppStorePREXUS_20260531` / `DevelopmentPREXUS_20260531`, migration from dev placeholder `com.prexus.ios`.
 
@@ -58,7 +58,7 @@ The **formal Bundle ID is decided** (`jp.studio-prospect.prexus.ios`). PREXUS re
 - [x] Xcode / scripts `PRODUCT_BUNDLE_IDENTIFIER` matches ASC (bundle-id migration PR).
 - [x] Provisioning profiles registered locally: `AppStorePREXUS_20260531`, `DevelopmentPREXUS_20260531`.
 - [x] Release archive validates with **Distribution** signing for that ID ([2026-05-31 validation](#distribution-archive-validation-2026-05-31)).
-- [ ] Internal TestFlight group and crash symbolication mapped to ASC app `PREXUS`.
+- [x] Internal TestFlight group **`internal_tester`** mapped to ASC app `PREXUS` (build `0.1.0` / `1`).
 
 ### Xcode / script gate (complete after migration PR)
 
@@ -113,9 +113,10 @@ Uploaded from archive at `main` commit tagged `qwen-text-alpha-0.1.0-rc1` (`a021
 | Bundle ID | `jp.studio-prospect.prexus.ios` |
 | ASC app | PREXUS (Apple ID `6775110218`) |
 | Git tag | `qwen-text-alpha-0.1.0-rc1` |
+| Internal TestFlight group | **`internal_tester`** |
 | Upload result | **Upload succeeded** (`xcodebuild -exportArchive`, `destination=upload`) |
 
-**Next in ASC:** wait for build processing → assign to internal TestFlight group → paste [tester instructions](./qwen_text_only_alpha_tester_instructions.md) in What to Test.
+**Next in ASC:** confirm build processing complete → invite testers in **`internal_tester`** → paste [tester instructions](./qwen_text_only_alpha_tester_instructions.md) in What to Test (if not already).
 
 ---
 
@@ -249,7 +250,7 @@ Environment overrides: `DEVELOPMENT_TEAM`, `PREXUS_SKIP_BUILD=1` — see script 
 **Distribution / upload (partial):**
 
 - [x] Distribution signing succeeds for `jp.studio-prospect.prexus.ios` ([2026-05-31](#distribution-archive-validation-2026-05-31)).
-- [ ] Internal TestFlight group under ASC app `PREXUS` (manual ASC).
+- [x] Internal TestFlight group **`internal_tester`** under ASC app `PREXUS`.
 - [x] Wang / device smoke on new ID (2026-05-31; `VALIDATION PASSED` for `with_model`, `no_model`, `sensitivity_matrix`).
 
 ### F. Optional (not blocking text-only alpha)
@@ -297,7 +298,7 @@ For day-to-day debug without TestFlight, [`install_on_device.sh`](../../tools/sc
 
 Send internal testers:
 
-1. TestFlight invite link (ASC).
+1. TestFlight invite via ASC group **`internal_tester`**.
 2. Link or PDF export of [tester instructions](./qwen_text_only_alpha_tester_instructions.md).
 3. One-line model setup: GGUF via team push or documented `Documents/Models/` placement.
 4. Hardware expectation: A17 Pro-class+ for real Qwen; others get embedded heuristic only.

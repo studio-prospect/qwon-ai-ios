@@ -71,7 +71,7 @@ Artifacts (gitignored): `.eval-logs/wang-alpha-smoke-*.json`
 - [x] Forced missing model → embedded fallback (`no_model`)
 - [x] Four sensitivity modes — one turn each (`sensitivity_matrix`)
 - [x] Diagnostics show route + execution detail (including fallback fields)
-- [ ] TestFlight / internal distribution — see [product ops checklist](./qwen_text_only_alpha_testflight_prep.md#product-ops-status-from-rc-checklist)
+- [x] TestFlight / internal distribution — build uploaded; ASC group `internal_tester` ([prep doc](./qwen_text_only_alpha_testflight_prep.md#testflight-upload-2026-05-31))
 - [ ] Optional: escalation with real OpenAI key on device (not required for RC)
 
 ## Product ops / TestFlight (post-RC)
@@ -80,7 +80,7 @@ Concrete steps live in [qwen_text_only_alpha_testflight_prep.md](./qwen_text_onl
 
 | Step | Gate |
 | --- | --- |
-| **Bundle ID + signing** | **Partial** — Distribution archive validated 2026-05-31; Wang smoke + TestFlight upload open ([prep doc](./qwen_text_only_alpha_testflight_prep.md#distribution-archive-validation-2026-05-31)) |
+| **Bundle ID + signing** | **Done** — TestFlight `0.1.0 (1)` + group `internal_tester`; confirm first tester install ([prep doc](./qwen_text_only_alpha_testflight_prep.md#testflight-upload-2026-05-31)) |
 | Version naming | Proposed `0.1.0` / build `1`, git tag `qwen-text-alpha-0.1.0-rc1` (manual) |
 | Pre-upload smoke | `alpha_smoke_wang.sh`: `with_model`, `no_model`, `sensitivity_matrix` |
 | Device archive | `build_llama_xcframework.sh` + `generate_xcodeproj.rb` before Release archive |
