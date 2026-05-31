@@ -157,6 +157,53 @@ Out of [text-only alpha scope](./qwen_text_only_alpha_release.md); **not** build
 | Cloud provider matrix / escalation quality with live keys | Optional RC item; not alpha blocker |
 | PREXUSLiteRTEval (`com.prexus.ios.literteval`) | Separate eval app |
 
+#### Feedback intake processing (build 1)
+
+Release engineering workflow for **one incoming report** on TestFlight **`0.1.0 (1)`**. **Build `2` is not approved** by this process alone.
+
+| Step | Action |
+| --- | --- |
+| 1 | Accept only the [tester feedback report template](./qwen_text_only_alpha_tester_instructions.md#tester-feedback-report-template). Informal chat → **needs evidence**; do not log as triage input. |
+| 2 | Store ops PNGs under `~/PREXUS-alpha-evidence/qwen-text-0.1.0-build1/` — cite **filenames only** in docs (never commit PNG/JPEG/log/GGUF/IPA/MANIFEST). |
+| 3 | Assign **final** class (tester guess is non-binding). |
+| 4 | Append **one row** to [tester feedback log (build 1)](#tester-feedback-log-build-1) below. |
+| 5 | If **Release blocker:** add a row under [Release blocker](#release-blocker) and draft [Binary respin reason](#binary-respin-reason-required-before-cut) — still **no** archive/upload/tag until explicitly approved. |
+| 6 | If **Docs/ops only:** edit docs or ASC copy in place on build `1` — **no** `CFBundleVersion` bump. |
+
+**needs evidence — re-request**
+
+Ask the tester to complete only what is missing:
+
+- `TestFlight version/build: 0.1.0 (1)` (or explain mismatch)
+- `Device lab name: Wang | Matisse`
+- Full **Runtime Diagnostics** block (execution mode, backend/model, `answered_by`, `primary_failure`, `fallback_reason` as applicable)
+- Ops screenshot **filename** (e.g. `wang-0.1.0-1-diagnostics.png`), not a binary attachment in git
+
+Keep class **needs evidence** until template-complete. Does **not** approve build `2`.
+
+**Docs/ops only — handling**
+
+- Update [tester instructions](./qwen_text_only_alpha_tester_instructions.md), [TestFlight prep](./qwen_text_only_alpha_testflight_prep.md) onboarding/What to Test, or ASC text — **against build `1`**
+- **Do not** edit [build 1 frozen ledger](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1) rows
+- **Do not** cut build `2` for copy-only fixes
+
+**Build 2 candidate vs Release blocker**
+
+| Class | Meaning | Approves build `2`? |
+| --- | --- | --- |
+| **Build 2 candidate** | Real bug or UX issue on build `1`; Wang + Matisse can keep testing on build `1` | **No** — log only unless promoted |
+| **Release blocker** | Template-complete repro on **`0.1.0 (1)`** that blocks launch, first text turn, Wang llama path after GGUF, no-model fallback safety, signing, or Diagnostics validation baseline | **Not by default** — requires new [Release blocker](#release-blocker) row + approved [Binary respin reason](#binary-respin-reason-required-before-cut) + minimal fix PR |
+
+Promote **Build 2 candidate** → **Release blocker** only with template-complete repro on **`0.1.0 (1)`**. **Matisse without `answered_by=llama.cpp` is expected** — not a blocker, not build `2` justification.
+
+**Build `2` remains not approved when**
+
+- Class is **needs evidence**, **Docs/ops only**, **Post-alpha**, or **Build 2 candidate** alone
+- Issue is Matisse “missing Qwen/llama” on A12 (Embedded Heuristic path)
+- Only docs/ASC/onboarding changed; IPA unchanged
+- [Binary respin reason](#binary-respin-reason-required-before-cut) is empty
+- No open [Release blocker](#release-blocker) row for the issue on build `1`
+
 #### Tester feedback log (build 1)
 
 **Template policy:** New rows come from the [tester feedback report template](./qwen_text_only_alpha_tester_instructions.md#tester-feedback-report-template) only. Informal chat without Diagnostics summary + ops screenshot **filename** stays **needs evidence** until completed — it does **not** approve build `2`. Release engineering assigns the final class in the triage tables above.
