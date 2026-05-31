@@ -141,7 +141,7 @@ Run only after the sign-off table is complete.
 - [x] Final Bundle ID in `generate_xcodeproj.rb`, device scripts, and regenerated `project.pbxproj`
 - [x] ASC app record documented (created outside repo)
 - [x] Provisioning profiles registered locally: `AppStorePREXUS_20260531`, `DevelopmentPREXUS_20260531`
-- [ ] Distribution signing validation / Release archive
+- [x] Distribution signing validation / Release archive (2026-05-31; [record](./qwen_text_only_alpha_testflight_prep.md#distribution-archive-validation-2026-05-31))
 - [ ] Git release tag (`qwen-text-alpha-*`)
 - [ ] TestFlight upload
 
@@ -154,6 +154,6 @@ Run only after the sign-off table is complete.
 1. Sign-off table is filled (**done**), **and**
 2. Repo + scripts use `jp.studio-prospect.prexus.ios` (**done** after migration PR), **and**
 3. Provisioning profiles are registered for that ID (**done locally**), **and**
-4. Distribution signing + Release archive validate for that ID (**open**).
+4. Distribution signing + Release archive validate for that ID (**done** 2026-05-31).
 
-Until (4), alpha remains **not upload-ready** for TestFlight upload regardless of simulator or Debug device smoke.
+Upload-ready still requires Wang/device smoke and TestFlight internal group per [TestFlight prep](./qwen_text_only_alpha_testflight_prep.md#sign-off).
