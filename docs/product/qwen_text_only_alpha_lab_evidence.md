@@ -1,6 +1,7 @@
 # Qwen Text-Only Alpha — Two-Device Lab Evidence
 
-**Build line:** TestFlight `0.1.0` (build `1`) · tag `qwen-text-alpha-0.1.0-rc1`  
+**Build line:** TestFlight `0.1.0` (build `1`) · tag `qwen-text-alpha-0.1.0-rc1`
+
 **Lab policy:** [Physical device lab](./qwen_text_only_alpha_testflight_prep.md#physical-device-lab-ops-policy) — **Wang + Matisse only**; do not widen ASC `internal_tester` until a third physical device is added.
 
 This doc fixes **what to collect**, **expected outcomes per device**, and **where to store artifacts** (outside git). It does not change app behavior.
@@ -22,7 +23,7 @@ Related: [TestFlight prep](./qwen_text_only_alpha_testflight_prep.md) · [Tester
 
 **In git docs, record either:**
 
-- `on file (ops)` — artifact exists in team storage, or  
+- `on file (ops)` — artifact exists in team storage, or
 - **filename placeholder** below (not the image itself).
 
 Never add PNG/JPEG, IPA, `.gguf`, or raw device logs under `docs/` for alpha evidence.
