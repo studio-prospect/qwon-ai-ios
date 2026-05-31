@@ -108,10 +108,24 @@ PREXUS may be called a **release candidate** when all are true:
 
 **Out of scope for this gate:** App Store public release, LiteRT production, L2 selector, OCR/camera/audio, widening ASC `internal_tester` beyond Wang + Matisse.
 
+### Planned build 2 (not executed)
+
+Full plan: [release notes — Build 2](./qwen_text_only_alpha_release_notes.md#build-2-plan-not-executed). **Do not cut build `2`** for docs-only work.
+
+| Field | Planned value | Executed |
+| --- | --- | --- |
+| `CFBundleShortVersionString` | `0.1.0` | build `1` only |
+| `CFBundleVersion` | `2` | **no** |
+| Git tag | `qwen-text-alpha-0.1.0-build2` | **no** |
+| Binary respin approved | See release notes **Binary respin reason** | **no** (recommend stay on build `1`) |
+| Ops folder | `~/PREXUS-alpha-evidence/qwen-text-0.1.0-build2/` | **no** (create after evidence, not before upload planning PR) |
+| Ledger subsection | `### Frozen ledger: 0.1.0 build 2` | **no** (append after evidence; build `1` immutable) |
+
 ### 1. Record the change (git docs only)
 
-- [ ] Write **why** the respin or semver bump is needed in [release notes](./qwen_text_only_alpha_release_notes.md) (or a linked PR / issue).
-- [ ] Note planned `CFBundleShortVersionString` / `CFBundleVersion` and git tag name in this section or [TestFlight prep](./qwen_text_only_alpha_testflight_prep.md#version-and-tag-naming-proposals-only) (do not edit `Info.plist` in a docs-only PR).
+- [ ] Write **why** the respin is needed in [release notes — Binary respin reason](./qwen_text_only_alpha_release_notes.md#binary-respin-reason-required-before-cut) (skip if staying on build `1`).
+- [x] Planned `0.1.0` / build `2` / tag `qwen-text-alpha-0.1.0-build2` recorded (planning PR; **not** executed).
+- [ ] Do not edit `Info.plist` in a docs-only PR.
 
 ### 2. Code and archive (implementation PR — not docs-only)
 
