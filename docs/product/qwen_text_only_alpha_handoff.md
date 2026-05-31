@@ -4,7 +4,9 @@
 **Audience:** Internal operators, release engineering, Cursor/Codex agents — **not** a public or App Store release document.
 **Purpose:** Short **handoff memo** for stable build `1` TestFlight alpha: what to do next, what to avoid, and how to react if a **Release blocker** appears.
 
-**Current state snapshot:** [status summary](./qwen_text_only_alpha_status_summary.md)
+**Current state snapshot:** [status summary](./qwen_text_only_alpha_status_summary.md) (**read first**)
+
+**Doc index:** [qwen_text_only_alpha_docs_index.md](./qwen_text_only_alpha_docs_index.md) — all alpha docs and canonical sections (navigation only).
 
 **Not executed here:** `CFBundleVersion` bump, archive, TestFlight upload, git tag, app code, or edits to the [build 1 frozen ledger](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1).
 
@@ -87,16 +89,6 @@ Workflow reference: [agent collaboration](./agent_collaboration_workflow.md).
 
 ---
 
-## Link map
+## Related docs
 
-| Topic | Document |
-| --- | --- |
-| **Current state (one page)** | [qwen_text_only_alpha_status_summary.md](./qwen_text_only_alpha_status_summary.md) |
-| **This handoff** | `qwen_text_only_alpha_handoff.md` (this file) |
-| Release scope | [qwen_text_only_alpha_release.md](./qwen_text_only_alpha_release.md) |
-| Release notes + triage + build 2 plan | [qwen_text_only_alpha_release_notes.md](./qwen_text_only_alpha_release_notes.md) |
-| RC readiness + next build gate | [qwen_text_only_alpha_release_readiness.md](./qwen_text_only_alpha_release_readiness.md) |
-| Tester flow + feedback template | [qwen_text_only_alpha_tester_instructions.md](./qwen_text_only_alpha_tester_instructions.md) |
-| Lab evidence + frozen ledger | [qwen_text_only_alpha_lab_evidence.md](./qwen_text_only_alpha_lab_evidence.md) |
-| TestFlight prep + feedback classification | [qwen_text_only_alpha_testflight_prep.md](./qwen_text_only_alpha_testflight_prep.md) |
-| Bundle ID / ASC | [bundle_id_decision_memo.md](./bundle_id_decision_memo.md) |
+Full navigation: [documentation index](./qwen_text_only_alpha_docs_index.md). **Prerequisite:** [status summary](./qwen_text_only_alpha_status_summary.md) (current state).

@@ -5,6 +5,8 @@
 
 **Operations handoff:** [internal handoff memo](./qwen_text_only_alpha_handoff.md) — next steps, do-not rules, blocker response (not public-facing).
 
+**Doc index:** [qwen_text_only_alpha_docs_index.md](./qwen_text_only_alpha_docs_index.md) — reading order and per-doc responsibilities (navigation only).
+
 **Not executed here:** `CFBundleVersion` bump, archive, TestFlight upload, git tag, or changes to the [build 1 frozen ledger](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1).
 
 ---
@@ -73,20 +75,9 @@
 
 ---
 
-## Link map (alpha docs)
+## Related docs
 
-| Topic | Document |
-| --- | --- |
-| **This summary** | `qwen_text_only_alpha_status_summary.md` (this file) |
-| Internal handoff | [qwen_text_only_alpha_handoff.md](./qwen_text_only_alpha_handoff.md) |
-| Release scope | [qwen_text_only_alpha_release.md](./qwen_text_only_alpha_release.md) |
-| Release notes + build 2 plan + triage | [qwen_text_only_alpha_release_notes.md](./qwen_text_only_alpha_release_notes.md) |
-| RC readiness + next build gate + build 2 decision | [qwen_text_only_alpha_release_readiness.md](./qwen_text_only_alpha_release_readiness.md) |
-| Lab evidence + frozen ledger | [qwen_text_only_alpha_lab_evidence.md](./qwen_text_only_alpha_lab_evidence.md) |
-| Tester flow + feedback template | [qwen_text_only_alpha_tester_instructions.md](./qwen_text_only_alpha_tester_instructions.md) |
-| TestFlight prep + feedback classification | [qwen_text_only_alpha_testflight_prep.md](./qwen_text_only_alpha_testflight_prep.md) |
-| Bundle ID / ASC / signing | [bundle_id_decision_memo.md](./bundle_id_decision_memo.md) |
-| GGUF placement | [models/README.md](../../models/README.md) |
+Full navigation: [documentation index](./qwen_text_only_alpha_docs_index.md). **Next read after this file:** [internal handoff](./qwen_text_only_alpha_handoff.md).
 
 ---
 

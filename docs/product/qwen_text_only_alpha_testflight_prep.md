@@ -4,17 +4,7 @@
 
 This doc records the RC-to-internal-TestFlight steps and provides copy for **lab-only** tester onboarding (Wang + Matisse).
 
-| Doc | Role |
-| --- | --- |
-| [qwen_text_only_alpha_status_summary.md](./qwen_text_only_alpha_status_summary.md) | **One-page current state** (build `1` stable) |
-| [qwen_text_only_alpha_handoff.md](./qwen_text_only_alpha_handoff.md) | **Internal handoff** — operating loop, do-not rules, blocker response |
-| [qwen_text_only_alpha_release.md](./qwen_text_only_alpha_release.md) | Alpha scope and exclusions |
-| [qwen_text_only_alpha_release_readiness.md](./qwen_text_only_alpha_release_readiness.md) | RC readiness + [next build gate](./qwen_text_only_alpha_release_readiness.md#next-build-gate-before-build-2) + [build 2 triage decision](./qwen_text_only_alpha_release_readiness.md#build-2-binary-respin-decision-triage) |
-| [qwen_text_only_alpha_release_notes.md](./qwen_text_only_alpha_release_notes.md) | Tester-facing limitations |
-| [qwen_text_only_alpha_tester_instructions.md](./qwen_text_only_alpha_tester_instructions.md) | Manual tester flow |
-| [qwen_text_only_alpha_lab_evidence.md](./qwen_text_only_alpha_lab_evidence.md) | Two-device evidence fields, retention rules, frozen ledger |
-| [bundle_id_decision_memo.md](./bundle_id_decision_memo.md) | Approved Bundle ID, owned domain, post-decision gates |
-| [models/README.md](../../models/README.md) | GGUF placement |
+**Doc index:** [qwen_text_only_alpha_docs_index.md](./qwen_text_only_alpha_docs_index.md) — start with [status summary](./qwen_text_only_alpha_status_summary.md), then [handoff](./qwen_text_only_alpha_handoff.md). Gates: [next build gate](./qwen_text_only_alpha_release_readiness.md#next-build-gate-before-build-2) · [build 2 triage decision](./qwen_text_only_alpha_release_readiness.md#build-2-binary-respin-decision-triage).
 
 ---
 

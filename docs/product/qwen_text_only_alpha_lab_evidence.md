@@ -6,7 +6,7 @@
 
 This doc fixes **what to collect**, **expected outcomes per device**, and **where to store artifacts** (outside git). It does not change app behavior.
 
-Related: [TestFlight prep](./qwen_text_only_alpha_testflight_prep.md) · [Tester instructions](./qwen_text_only_alpha_tester_instructions.md) · [ASC What to Test](./qwen_text_only_alpha_testflight_prep.md#asc-what-to-test-copy) · [Onboarding message](./qwen_text_only_alpha_testflight_prep.md#tester-onboarding-message)
+Related: [docs index](./qwen_text_only_alpha_docs_index.md) · [TestFlight prep](./qwen_text_only_alpha_testflight_prep.md) · [Tester instructions](./qwen_text_only_alpha_tester_instructions.md) · [ASC What to Test](./qwen_text_only_alpha_testflight_prep.md#asc-what-to-test-copy) · [Onboarding message](./qwen_text_only_alpha_testflight_prep.md#tester-onboarding-message)
 
 ---
 

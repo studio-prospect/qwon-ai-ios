@@ -93,14 +93,7 @@ xcodebuild -project app/ios/PREXUS.xcodeproj -scheme PREXUS -destination 'platfo
 
 Device checks should be recorded manually because physical device availability and model placement are environment-specific.
 
-Release candidate docs:
-
-- **[qwen_text_only_alpha_status_summary.md](./qwen_text_only_alpha_status_summary.md)** — **current status** (build `1` stable; build `2` not approved)
-- **[qwen_text_only_alpha_handoff.md](./qwen_text_only_alpha_handoff.md)** — **internal operations handoff** (next / do-not / blocker flow; not public-facing)
-- [qwen_text_only_alpha_release_readiness.md](./qwen_text_only_alpha_release_readiness.md) — RC checklist
-- [qwen_text_only_alpha_release_notes.md](./qwen_text_only_alpha_release_notes.md) — release notes and known limitations
-- [qwen_text_only_alpha_tester_instructions.md](./qwen_text_only_alpha_tester_instructions.md) — internal / TestFlight tester steps
-- [qwen_text_only_alpha_testflight_prep.md](./qwen_text_only_alpha_testflight_prep.md) — version/tag naming, pre-TestFlight gate, upload outline (ops only; no tag/upload in repo)
+Alpha documentation: **[docs index](./qwen_text_only_alpha_docs_index.md)** — start with **[status summary](./qwen_text_only_alpha_status_summary.md)** (current state), then **[handoff](./qwen_text_only_alpha_handoff.md)** (internal ops). Scope for this file: [release scope](#alpha-scope) above.
 
 ## Cursor Task
 

@@ -2,7 +2,7 @@
 
 **Release candidate:** Qwen + llama.cpp text-only alpha
 **Target window:** 2026-06 mid-month (internal / TestFlight)
-**Main reference:** [qwen_text_only_alpha_release.md](./qwen_text_only_alpha_release.md) · **Current status:** [status summary](./qwen_text_only_alpha_status_summary.md)
+**Main reference:** [qwen_text_only_alpha_release.md](./qwen_text_only_alpha_release.md) · **Current status:** [status summary](./qwen_text_only_alpha_status_summary.md) · **Doc index:** [qwen_text_only_alpha_docs_index.md](./qwen_text_only_alpha_docs_index.md)
 
 ## What ships
 
@@ -40,12 +40,10 @@
 
 ## Verification artifacts
 
+Alpha doc navigation: [documentation index](./qwen_text_only_alpha_docs_index.md).
+
 | Artifact | Location |
 | --- | --- |
-| **Status summary** | [qwen_text_only_alpha_status_summary.md](./qwen_text_only_alpha_status_summary.md) |
-| RC checklist | [qwen_text_only_alpha_release_readiness.md](./qwen_text_only_alpha_release_readiness.md) |
-| TestFlight prep | [qwen_text_only_alpha_testflight_prep.md](./qwen_text_only_alpha_testflight_prep.md) |
-| Tester steps | [qwen_text_only_alpha_tester_instructions.md](./qwen_text_only_alpha_tester_instructions.md) |
 | Automated Wang smoke | [`tools/scripts/alpha_smoke_wang.sh`](../../tools/scripts/alpha_smoke_wang.sh) → `.eval-logs/` (gitignored) |
 
 ## Build requirements (developers)
