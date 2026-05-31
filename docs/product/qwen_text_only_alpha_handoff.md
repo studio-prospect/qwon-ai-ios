@@ -36,7 +36,7 @@
    - **Post-alpha** — OCR, camera, audio, LiteRT production, model download, etc.
 3. **Docs/ops path:** Update docs and/or ASC copy in place — **no** new TestFlight build.
 4. **Needs evidence path:** Ask tester to complete Diagnostics summary + ops screenshot filename (e.g. `wang-0.1.0-1-diagnostics.png`) — **do not** treat as build `2` approval.
-5. **Release blocker path:** Add row to [known issues triage](./qwen_text_only_alpha_release_notes.md#known-issues-triage-for-build-1), fill [Binary respin reason](./qwen_text_only_alpha_release_notes.md#binary-respin-reason-required-before-cut), then open implementation PR — **only after that** consider `CFBundleVersion = 2`, archive, upload, tag.
+5. **Release blocker path:** Add row to [known issues triage](./qwen_text_only_alpha_release_notes.md#known-issues-triage-for-build-1), fill [Binary respin reason](./qwen_text_only_alpha_release_notes.md#binary-respin-reason-required-before-cut), then open a **minimal implementation PR that fixes only the verified Release blocker** — **only after that** consider `CFBundleVersion = 2`, archive, upload, tag.
 
 Classification detail: [tester instructions](./qwen_text_only_alpha_tester_instructions.md#classification-guidance-testers) · [TestFlight prep feedback section](./qwen_text_only_alpha_testflight_prep.md).
 
@@ -60,7 +60,7 @@ Classification detail: [tester instructions](./qwen_text_only_alpha_tester_instr
 1. Confirm report is **template-complete** (Diagnostics fields + ops screenshot filename) and reproduces on TestFlight **`0.1.0 (1)`**.
 2. Add or update a row in [known issues triage](./qwen_text_only_alpha_release_notes.md#known-issues-triage-for-build-1).
 3. Fill **[Binary respin reason](./qwen_text_only_alpha_release_notes.md#binary-respin-reason-required-before-cut)** in release notes (required before any build `2` work).
-4. Prepare an **implementation PR** (not docs-only) for the fix.
+4. Prepare a **minimal implementation PR that fixes only the verified Release blocker** (not docs-only; no unrelated scope).
 5. **Only then** consider, in a separate ops PR: `CFBundleVersion = 2`, archive, TestFlight upload, tag `qwen-text-alpha-0.1.0-build2`, new ops evidence folder `~/PREXUS-alpha-evidence/qwen-text-0.1.0-build2/`, and a **new** ledger subsection (build `1` ledger stays frozen).
 
 Until steps 1–3 are satisfied, **build 2 remains not approved**.
