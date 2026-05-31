@@ -460,7 +460,7 @@ For the **two-device lab** only:
 3. Version naming is recorded in ASC and matches tag name.
 4. Required device smoke or equivalent Wang TestFlight verification passed on the uploaded build lineage.
 
-**Ready for internal lab testing:** yes — **Wang + Matisse** both completed one chat turn (2026-05-31). Ops evidence filed per [frozen ledger](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1) (Matisse diagnostics PNG complete; **Wang `wang-0.1.0-1-diagnostics.png` pending**).
+**Ready for internal lab testing:** yes — **Wang + Matisse** both completed one chat turn (2026-05-31). Ops evidence complete per [frozen ledger](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1) (diagnostics PNGs on file for both lab devices).
 
 **Do not widen `internal_tester`** beyond the lab until a new physical iPhone is added to the device table above.
 

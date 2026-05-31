@@ -96,7 +96,7 @@ Team drive equivalents are fine; keep the same filenames. See `MANIFEST.txt` in 
 
 Baseline captured **2026-05-31** after TestFlight install + GGUF push on both lab devices. Aligns with [Wang](./qwen_text_only_alpha_testflight_prep.md#wang-testflight-verification-2026-05-31) and [Matisse](./qwen_text_only_alpha_testflight_prep.md#matisse-testflight-verification-2026-05-31) verification sections.
 
-**Ops filing status (2026-05-31):** Matisse diagnostics + chat PNGs filed under `~/PREXUS-alpha-evidence/qwen-text-0.1.0-build1/`. Wang chat strip filed; **Wang Runtime Diagnostics PNG still outstanding** (see Wang row).
+**Ops filing status (2026-05-31):** Wang and Matisse diagnostics + chat PNGs filed under `~/PREXUS-alpha-evidence/qwen-text-0.1.0-build1/` (see rows below).
 
 ### Wang
 
@@ -109,9 +109,9 @@ Baseline captured **2026-05-31** after TestFlight install + GGUF push on both la
 | GGUF pushed | yes — `prexus-local-mvp.gguf` in Documents/Models (verified on device) |
 | Chat result | pass — TestFlight chat; **Local runtime** + **llama.cpp On-Device Runtime** strip |
 | Diagnostics expectation | **Local runtime** + `answered_by=llama.cpp On-Device Runtime` in **Runtime Diagnostics** |
-| Diagnostics screenshot | **unfiled** — target `wang-0.1.0-1-diagnostics.png` (capture Settings → Recent Runtime Decisions) |
-| Chat screenshot (optional) | `on file (ops)` — `wang-0.1.0-1-chat.png` (2026-05-27; llama.cpp strip; interim only) |
-| Known deviation | Diagnostics PNG not yet in ops; Qwen path corroborated via chat strip + TestFlight verification — **not** a Matisse-class heuristic fallback |
+| Diagnostics screenshot | `on file (ops)` — `wang-0.1.0-1-diagnostics.png` (2026-05-31) |
+| Chat screenshot (optional) | `on file (ops)` — `wang-0.1.0-1-chat.png` |
+| Known deviation | none for alpha 0.1.0 (1) baseline |
 
 ### Matisse
 
