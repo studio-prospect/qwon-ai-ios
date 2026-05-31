@@ -93,6 +93,8 @@ xcodebuild -project app/ios/PREXUS.xcodeproj -scheme PREXUS -destination 'platfo
 
 Device checks should be recorded manually because physical device availability and model placement are environment-specific.
 
+Release readiness checklist: [qwen_text_only_alpha_release_readiness.md](./qwen_text_only_alpha_release_readiness.md).
+
 ## Cursor Task
 
 Title: Harden Qwen text-only alpha release path

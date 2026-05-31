@@ -1121,7 +1121,17 @@ final class PREXUSTests: XCTestCase {
         _ = try await client.generate(prompt: "User:\nReview routing policy")
 
         XCTAssertEqual(LocalModelExecutionTrace.current?.respondingBackend, fallback.descriptor.name)
-        XCTAssertTrue(LocalModelExecutionTrace.current?.primaryFailure?.contains("modelAssetUnavailable") == true)
+        XCTAssertTrue(LocalModelExecutionTrace.current?.primaryFailure?.contains("model_asset_unavailable") == true)
+    }
+
+    func testLocalModelErrorDiagnosticDescriptionForMissingModel() {
+        XCTAssertEqual(
+            LocalModelError.modelAssetUnavailable.diagnosticCode,
+            "model_asset_unavailable"
+        )
+        XCTAssertTrue(
+            LocalModelError.modelAssetUnavailable.diagnosticDescription.contains("prexus-local-mvp.gguf")
+        )
     }
 
     func testLocalModelExecutionTraceFormattedDetailMergesBase() {
@@ -1135,6 +1145,56 @@ final class PREXUSTests: XCTestCase {
         XCTAssertTrue(detail?.contains("cold_load_ms=100.0") == true)
         XCTAssertTrue(detail?.contains("summary line") == true)
         LocalModelExecutionTrace.reset()
+    }
+
+    func testLocalModelExecutionTraceIncludesFallbackReasonAfterPrimaryFailure() {
+        LocalModelExecutionTrace.record(
+            respondingBackend: "Embedded Heuristic Runtime",
+            primaryFailure: LocalModelError.modelAssetUnavailable.diagnosticDescription
+        )
+
+        let detail = LocalModelExecutionTrace.formattedDetail(base: nil)
+        XCTAssertTrue(detail?.contains("fallback_reason=embedded_heuristic") == true)
+        XCTAssertTrue(detail?.contains("primary_failure=") == true)
+        LocalModelExecutionTrace.reset()
+    }
+
+    func testRunTurnMarksFallbackWhenLlamaPrimaryFails() async throws {
+        struct FailingLlama: LocalModelClient {
+            let descriptor = LocalModelDescriptor(
+                backend: .deviceRuntime,
+                name: "llama.cpp On-Device Runtime",
+                summary: "Unavailable for test"
+            )
+
+            func generate(prompt: String) async throws -> String {
+                throw LocalModelError.modelAssetUnavailable
+            }
+        }
+
+        let localModel = FallbackLocalModelClient(
+            primary: FailingLlama(),
+            fallback: EmbeddedHeuristicLocalModelClient()
+        )
+        let runtime = RuntimeContainer.live(
+            config: .default,
+            apiKeyStore: InMemoryAPIKeyStore(),
+            memoryStore: InMemoryEpisodicMemoryStore(),
+            localModel: localModel,
+            cloudModel: MockCloudModelClient()
+        )
+
+        let output = try await runtime.runTurn(
+            userText: "Hello from alpha smoke",
+            transcript: [ChatMessage(role: .user, content: "Hello from alpha smoke")]
+        )
+
+        XCTAssertEqual(output.route.target, .local)
+        XCTAssertEqual(output.execution.mode, .fallback)
+        XCTAssertEqual(output.execution.model, "Embedded Heuristic Runtime")
+        XCTAssertTrue(output.execution.detail?.contains("primary_failure=") == true)
+        XCTAssertTrue(output.execution.detail?.contains("fallback_reason=embedded_heuristic") == true)
+        XCTAssertTrue(output.response.localizedCaseInsensitiveContains("embedded local runtime"))
     }
 
     func testLiteRTModelPlacementUsesEvalArtifactFileName() {

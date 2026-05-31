@@ -27,7 +27,7 @@ struct FallbackLocalModelClient: LocalModelClient {
         } catch LocalModelError.generationCancelled {
             throw LocalModelError.generationCancelled
         } catch {
-            let failure = String(describing: error)
+            let failure = (error as? LocalModelError)?.diagnosticDescription ?? String(describing: error)
             let response = try await fallback.generate(prompt: prompt)
             let fallbackTrace = LocalModelExecutionTrace.current
             LocalModelExecutionTrace.record(

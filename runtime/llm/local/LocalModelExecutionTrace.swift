@@ -42,6 +42,7 @@ enum LocalModelExecutionTrace {
         parts.append("answered_by=\(snapshot.respondingBackend)")
         if let primaryFailure = snapshot.primaryFailure {
             parts.append("primary_failure=\(primaryFailure)")
+            parts.append("fallback_reason=embedded_heuristic")
         }
         if let metricsDetail = snapshot.metricsDetail {
             parts.append(metricsDetail)
