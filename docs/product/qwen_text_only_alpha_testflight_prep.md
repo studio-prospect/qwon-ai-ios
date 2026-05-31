@@ -38,7 +38,7 @@ RC **code** criteria are satisfied on `main` (PR #22). Remaining work is **distr
 
 ## Bundle ID and signing gate (blocking TestFlight)
 
-The **production / TestFlight Bundle ID is finalized as `jp.studio-prospect.prexus.ios`**, but ASC app creation, Xcode/script migration, and Distribution signing are still open. Until those are complete, PREXUS must be treated as **not upload-ready**, even if simulator tests and `alpha_smoke_wang.sh` are green.
+The **production / TestFlight Bundle ID is finalized as `jp.studio-prospect.prexus.ios`** and the App Store Connect app record is created. Xcode/script migration and Distribution signing are still open. Until those are complete, PREXUS must be treated as **not upload-ready**, even if simulator tests and `alpha_smoke_wang.sh` are green.
 
 **Decision support:** [bundle_id_decision_memo.md](./bundle_id_decision_memo.md) — approved ID `jp.studio-prospect.prexus.ios`, owned-domain record, impact map, and post-decision steps. ASC/Xcode alignment below still gates upload.
 
@@ -46,14 +46,14 @@ The **production / TestFlight Bundle ID is finalized as `jp.studio-prospect.prex
 | --- | --- | --- |
 | Formal Bundle ID | `jp.studio-prospect.prexus.ios` approved | Same ID recorded in ASC and Xcode before first archive |
 | Repo / dev placeholder | `com.prexus.ios` in `generate_xcodeproj.rb`, `alpha_smoke_wang.sh`, `install_on_device.sh` | Dev smoke and ad hoc only — **not** proof of TestFlight identity |
-| ASC app record | Pending | Create or select app for `jp.studio-prospect.prexus.ios` |
+| ASC app record | Created: `PREXUS`, Apple ID `6775110218` | Must remain aligned with `jp.studio-prospect.prexus.ios` |
 | Signing | `DEVELOPMENT_TEAM` / Automatic Signing per engineer machine | Profiles and entitlements must cover the **final** Bundle ID |
 | Test targets | `com.prexus.ios.tests`, `com.prexus.ios.uitests` | May change with main app ID in a follow-up ops PR |
 
 ### Exit criteria (gate closed)
 
 - [x] Product owner records the **official Bundle ID** in [bundle_id_decision_memo.md](./bundle_id_decision_memo.md#sign-off-fill-when-decided) sign-off: `jp.studio-prospect.prexus.ios`.
-- [ ] App Store Connect has an app whose Bundle ID **exactly matches** `jp.studio-prospect.prexus.ios` (new app or pre-existing — document which).
+- [x] App Store Connect has an app whose Bundle ID **exactly matches** `jp.studio-prospect.prexus.ios`: `PREXUS`, Apple ID `6775110218`.
 - [ ] Xcode `PRODUCT_BUNDLE_IDENTIFIER` for **PREXUS** matches ASC (committed change or documented one-time archive override — must be traceable to the archived binary).
 - [ ] Release archive validates with **Distribution** signing for that ID (Organizer / `xcodebuild -exportArchive` dry run acceptable).
 - [ ] Internal TestFlight group and crash symbolication are mapped to the same ASC app + ID.

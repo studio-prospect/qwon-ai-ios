@@ -102,7 +102,12 @@ Apply in a **follow-up implementation PR** after this memo is signed — not in 
 | --- | --- |
 | Approved Bundle ID | `jp.studio-prospect.prexus.ios` |
 | Owned domain | `prexus.studio-prospect.jp` |
-| ASC app name (display) | _TBD_ |
+| ASC app name (display) | `PREXUS` |
+| ASC Apple ID | `6775110218` |
+| ASC SKU | `jp.studio-prospect.prexus.ios` |
+| ASC primary language | English (U.S.) |
+| ASC subtitle | `Local-first AI Runtime` |
+| ASC categories | Primary: Utilities; Secondary: Productivity |
 | Approved by / date | Product owner decision, 2026-05-31 |
 
 ---
