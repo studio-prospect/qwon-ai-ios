@@ -1,0 +1,163 @@
+# Qwen Text-Only Alpha — Two-Device Lab Evidence
+
+**Build line:** TestFlight `0.1.0` (build `1`) · tag `qwen-text-alpha-0.1.0-rc1`  
+**Lab policy:** [Physical device lab](./qwen_text_only_alpha_testflight_prep.md#physical-device-lab-ops-policy) — **Wang + Matisse only**; do not widen ASC `internal_tester` until a third physical device is added.
+
+This doc fixes **what to collect**, **expected outcomes per device**, and **where to store artifacts** (outside git). It does not change app behavior.
+
+Related: [TestFlight prep](./qwen_text_only_alpha_testflight_prep.md) · [Tester instructions](./qwen_text_only_alpha_tester_instructions.md) · [ASC What to Test](./qwen_text_only_alpha_testflight_prep.md#asc-what-to-test-copy) · [Onboarding message](./qwen_text_only_alpha_testflight_prep.md#tester-onboarding-message)
+
+---
+
+## Retention rules (do not commit binaries)
+
+| Artifact type | Store in git? | Where ops keeps files |
+| --- | --- | --- |
+| Runtime Diagnostics screenshots | **No** | Team ops storage only (see [naming](#filename-and-path-placeholders)) |
+| Chat screenshots (optional) | **No** | Same ops folder |
+| `alpha_smoke_wang.sh` JSON | **No** | `.eval-logs/` (repo-local, [gitignored](../../.gitignore)) |
+| Device syslog / crash reports | **No** | Ops folder or Apple crash portal; reference filename in ledger only |
+| GGUF (`prexus-local-mvp.gguf`) | **No** | `models/` (gitignored) |
+| This evidence ledger (text) | **Yes** | This file — **metadata and pass/fail only** |
+
+**In git docs, record either:**
+
+- `on file (ops)` — artifact exists in team storage, or  
+- **filename placeholder** below (not the image itself).
+
+Never add PNG/JPEG, IPA, `.gguf`, or raw device logs under `docs/` for alpha evidence.
+
+---
+
+## Evidence fields (every lab device, every capture)
+
+Collect one row per device per **build number** (re-run when `CFBundleVersion` changes).
+
+| Field | Description | Example |
+| --- | --- | --- |
+| **Lab name** | Devicectl / USB name substring | `Wang`, `Matisse` |
+| **Device model** | Marketing or machine id | `iPhone 17`, `iPhone XS Max (iPhone11,6)` |
+| **iOS version** | Settings → General | `18.x` |
+| **TestFlight build** | Marketing + build | `0.1.0 (1)` |
+| **GGUF pushed** | `push_local_model_to_device.sh` run for this build | `yes` / `no` |
+| **Chat result** | One short prompt + assistant reply | `pass` / `fail` + one-line note |
+| **Diagnostics expectation** | What a reviewer should see (device-specific — below) | see Wang / Matisse tables |
+| **Diagnostics screenshot** | Ops filename only or `on file (ops)` | `wang-0.1.0-1-diagnostics.png` |
+| **Known deviation** | Intentional or accepted difference | `none` or free text |
+
+Optional (Wang only, before respin): `alpha_smoke_wang.sh` log → `.eval-logs/wang-alpha-smoke-<timestamp>.json` (gitignored).
+
+---
+
+## Expected outcomes (Wang vs Matisse)
+
+### Wang — primary Qwen path (A17 Pro+)
+
+| Surface | Pass criteria |
+| --- | --- |
+| **Chat** | Primary chip **Local runtime**; backend/model includes **llama.cpp On-Device Runtime** (after GGUF push) |
+| **Runtime Diagnostics** | Latest entry: **Local runtime** badge; detail includes **`answered_by=llama.cpp On-Device Runtime`** |
+| **Failure** | Missing llama.cpp after confirmed GGUF push on this device |
+
+### Matisse — secondary heuristic path (A12)
+
+| Surface | Pass criteria |
+| --- | --- |
+| **Chat** | Primary chip **Local runtime** (not **Fallback** for routine post-GGUF chat); secondary chip **Embedded Heuristic Runtime**; caption may be *Local lightweight fallback path without a packaged LLM.* |
+| **Runtime Diagnostics** | **Local runtime** badge; same embedded-heuristic backend/detail as Chat |
+| **Not a failure** | **No** `answered_by=llama.cpp` — hardware gate; GGUF on device does not enable llama on A12 |
+
+**UI reference:** primary chip = `executionMode` (`ChatView`); backend/model = `execution.model` (`runtimeBadgeRow`). See [Matisse UI note](./qwen_text_only_alpha_testflight_prep.md#matisse-testflight-verification-2026-05-31) in prep doc.
+
+---
+
+## Filename and path placeholders
+
+Use a **single ops root** outside the repo (team drive, password manager attachment area, or secure shared folder). Suggested layout:
+
+```text
+PREXUS-alpha-evidence/
+  qwen-text-0.1.0-build1/
+    wang-0.1.0-1-diagnostics.png
+    matisse-0.1.0-1-diagnostics.png
+    wang-0.1.0-1-chat.png          # optional
+    matisse-0.1.0-1-chat.png       # optional
+```
+
+**Docs convention:** list filenames in the [ledger](#frozen-ledger-010-build-1) only. Do not copy images into `docs/product/` or `docs/design/screenshots/` for TestFlight lab evidence (`docs/design/screenshots/` is for XCTest surface spec, not alpha ops).
+
+**Smoke logs (Wang):** `.eval-logs/wang-alpha-smoke-*.json` — local machine, gitignored; optional cross-reference in `Known deviation` if a manual run disagrees with TestFlight UI.
+
+---
+
+## Frozen ledger: 0.1.0 build 1
+
+Baseline captured **2026-05-31** after TestFlight install + GGUF push on both lab devices. Aligns with [Wang](./qwen_text_only_alpha_testflight_prep.md#wang-testflight-verification-2026-05-31) and [Matisse](./qwen_text_only_alpha_testflight_prep.md#matisse-testflight-verification-2026-05-31) verification sections.
+
+### Wang
+
+| Field | Value |
+| --- | --- |
+| Lab name | Wang |
+| Device model | iPhone 17 (`iPhone18,3`) |
+| iOS version | (record in ops folder metadata if needed) |
+| TestFlight build | `0.1.0 (1)` |
+| GGUF pushed | yes — `push_local_model_to_device.sh "Wang"` |
+| Chat result | pass — local Qwen reply after GGUF (e.g. greeting) |
+| Diagnostics expectation | **Local runtime** + `answered_by=llama.cpp On-Device Runtime` |
+| Diagnostics screenshot | `on file (ops)` — e.g. `wang-0.1.0-1-diagnostics.png` |
+| Known deviation | none for alpha 0.1.0 (1) baseline |
+
+### Matisse
+
+| Field | Value |
+| --- | --- |
+| Lab name | Matisse |
+| Device model | iPhone XS Max (`iPhone11,6`) |
+| iOS version | **18.7.9** |
+| TestFlight build | `0.1.0 (1)` |
+| GGUF pushed | yes — `push_local_model_to_device.sh "Matisse"` |
+| Chat result | pass — `Hello PREXUS`; embedded heuristic reply |
+| Diagnostics expectation | **Local runtime** badge + embedded-heuristic detail (not llama.cpp) |
+| Diagnostics screenshot | `on file (ops)` — e.g. `matisse-0.1.0-1-diagnostics.png` |
+| Known deviation | GGUF present but **no llama.cpp** (A12 gate) — **accepted**, not failure |
+
+---
+
+## Consistency with ASC copy
+
+| ASC / onboarding statement | Evidence doc alignment |
+| --- | --- |
+| Two-device lab only; do not install without dev Mac | Ledger covers **Wang + Matisse** only; no third row until hardware added |
+| A17 Pro+: `answered_by=llama.cpp` after GGUF | **Wang** row |
+| Older iPhones: Local runtime chip + Embedded Heuristic backend/detail | **Matisse** row; missing llama.cpp = pass |
+| Runtime Diagnostics via Settings → Recent Runtime Decisions | Screenshot field targets that screen |
+| Do not widen `internal_tester` | Same as [prep sign-off](./qwen_text_only_alpha_testflight_prep.md#sign-off) |
+
+If ASC What to Test text is edited, update this table and the [prep copy blocks](./qwen_text_only_alpha_testflight_prep.md#asc-what-to-test-copy) together.
+
+---
+
+## When to refresh evidence
+
+1. Every new TestFlight **build number** (`CFBundleVersion` bump).
+2. After runtime/routing changes that affect local execution labels.
+3. Optional: re-run `alpha_smoke_wang.sh "Wang"` before upload; attach gitignored JSON reference in Wang `Known deviation` if used.
+
+Add a new subsection under [Frozen ledger](#frozen-ledger-010-build-1) per build (e.g. `0.1.0 build 2`) — do not overwrite prior build rows.
+
+---
+
+## Copy-paste template (new capture)
+
+```text
+Lab name:
+Device model:
+iOS version:
+TestFlight build: 0.1.0 (1)
+GGUF pushed: yes / no
+Chat result: pass / fail —
+Diagnostics expectation: (Wang: llama.cpp | Matisse: Local runtime + Embedded Heuristic)
+Diagnostics screenshot: on file (ops) — <filename>.png
+Known deviation: none |
+```

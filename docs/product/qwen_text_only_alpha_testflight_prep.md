@@ -10,6 +10,7 @@ This doc records the RC-to-internal-TestFlight steps and provides copy for **lab
 | [qwen_text_only_alpha_release_readiness.md](./qwen_text_only_alpha_release_readiness.md) | RC code readiness (merged) |
 | [qwen_text_only_alpha_release_notes.md](./qwen_text_only_alpha_release_notes.md) | Tester-facing limitations |
 | [qwen_text_only_alpha_tester_instructions.md](./qwen_text_only_alpha_tester_instructions.md) | Manual tester flow |
+| [qwen_text_only_alpha_lab_evidence.md](./qwen_text_only_alpha_lab_evidence.md) | Two-device evidence fields, retention rules, frozen ledger |
 | [bundle_id_decision_memo.md](./bundle_id_decision_memo.md) | Approved Bundle ID, owned domain, post-decision gates |
 | [models/README.md](../../models/README.md) | GGUF placement |
 
@@ -96,6 +97,8 @@ Repo and device scripts reference the formal ID. **Previous placeholder:** `com.
 3. **Matisse:** one Chat turn → confirm **Local runtime** primary chip + **Embedded Heuristic Runtime** backend/model (Chat or Diagnostics); no crash; capture Diagnostics screenshot.
 4. Optional on **Wang only:** re-run `./tools/scripts/alpha_smoke_wang.sh "Wang"` before each TestFlight respin.
 
+**Evidence:** use [lab evidence](./qwen_text_only_alpha_lab_evidence.md) for field list, Wang/Matisse expectations, screenshot naming, and the **frozen ledger** for `0.1.0 (1)`. Store PNG/logs **outside git** (`on file (ops)` in docs only).
+
 ---
 
 ## Distribution archive validation (2026-05-31)
@@ -167,7 +170,7 @@ Uploaded from archive at `main` commit tagged `qwen-text-alpha-0.1.0-rc1` (`a021
 | Chat (`Hello PREXUS`) | Pass — primary chip **Local runtime**; secondary chip **Embedded Heuristic Runtime**; reply via on-device heuristics |
 | Runtime Diagnostics | Pass — **Local runtime** badge; detail *Local lightweight fallback path without a packaged LLM.* (expected on A12; not llama.cpp) |
 
-**Device:** iPhone XS Max (`iPhone11,6`), iOS **18.7.9**. Screenshots on file (ops). Do **not** fail Matisse for missing llama.cpp — use Wang for Qwen path evidence.
+**Device:** iPhone XS Max (`iPhone11,6`), iOS **18.7.9**. Screenshots **on file (ops)** — see [frozen ledger](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1). Do **not** fail Matisse for missing llama.cpp — use Wang for Qwen path evidence.
 
 **UI note (Matisse / A12):** Chat primary chip follows `executionMode` (**Local runtime** when local). **Embedded Heuristic Runtime** is the backend/model chip and Diagnostics detail — not the primary banner label (see `ChatView.runtimeBadgeRow`).
 
@@ -457,7 +460,7 @@ For the **two-device lab** only:
 3. Version naming is recorded in ASC and matches tag name.
 4. Required device smoke or equivalent Wang TestFlight verification passed on the uploaded build lineage.
 
-**Ready for internal lab testing:** yes — **Wang + Matisse** both completed one chat turn and Diagnostics evidence (2026-05-31).
+**Ready for internal lab testing:** yes — **Wang + Matisse** both completed one chat turn and Diagnostics evidence (2026-05-31); baseline recorded in [frozen ledger](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1).
 
 **Do not widen `internal_tester`** beyond the lab until a new physical iPhone is added to the device table above.
 

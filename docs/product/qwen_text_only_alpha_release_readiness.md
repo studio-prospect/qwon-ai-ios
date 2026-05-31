@@ -9,6 +9,7 @@
 | [qwen_text_only_alpha_release_notes.md](./qwen_text_only_alpha_release_notes.md) | Release notes + known limitations |
 | [qwen_text_only_alpha_tester_instructions.md](./qwen_text_only_alpha_tester_instructions.md) | Manual tester flow |
 | [qwen_text_only_alpha_testflight_prep.md](./qwen_text_only_alpha_testflight_prep.md) | Version/tag naming, pre-TestFlight gate, upload outline |
+| [qwen_text_only_alpha_lab_evidence.md](./qwen_text_only_alpha_lab_evidence.md) | Two-device evidence ledger and retention |
 | [local_inference_mvp.md](../requirements/local_inference_mvp.md) | P1-1 architecture |
 | [models/README.md](../../models/README.md) | GGUF placement |
 
