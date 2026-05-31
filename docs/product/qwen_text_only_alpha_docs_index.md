@@ -25,7 +25,7 @@ Then open the doc for your task using the table below.
 | Document | Responsibility |
 | --- | --- |
 | [qwen_text_only_alpha_status_summary.md](./qwen_text_only_alpha_status_summary.md) | **Current state / first read** — stable build `1` snapshot and when to revisit |
-| [qwen_text_only_alpha_handoff.md](./qwen_text_only_alpha_handoff.md) | **Internal ops handoff** — next steps, do-not rules, minimal blocker PR scope |
+| [qwen_text_only_alpha_handoff.md](./qwen_text_only_alpha_handoff.md) | **Internal ops handoff** — next steps, do-not rules, [Cursor PR steps](./qwen_text_only_alpha_handoff.md#cursor-pr-steps-real-feedback-received) |
 | [qwen_text_only_alpha_release.md](./qwen_text_only_alpha_release.md) | **Scope / non-goals** — what the alpha includes and excludes |
 | [qwen_text_only_alpha_release_notes.md](./qwen_text_only_alpha_release_notes.md) | **Known limitations / build 2 plan / triage / feedback log** — canonical policy tables |
 | [qwen_text_only_alpha_release_readiness.md](./qwen_text_only_alpha_release_readiness.md) | **Gates / checklists** — RC criteria, next build gate, build `2` triage decision |
@@ -48,6 +48,7 @@ Then open the doc for your task using the table below.
 | File or check lab screenshots | [lab evidence](./qwen_text_only_alpha_lab_evidence.md) — **do not** duplicate [frozen ledger](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1) rows elsewhere |
 | Submit tester feedback | [feedback template](./qwen_text_only_alpha_tester_instructions.md#tester-feedback-report-template) only |
 | Intake / triage one report (build `1`) | [status summary § feedback intake](./qwen_text_only_alpha_status_summary.md#feedback-intake-readiness) → [processing rules](./qwen_text_only_alpha_release_notes.md#feedback-intake-processing-build-1) → [feedback log](./qwen_text_only_alpha_release_notes.md#tester-feedback-log-build-1) |
+| Real feedback — Cursor PR order | [handoff § Cursor PR steps](./qwen_text_only_alpha_handoff.md#cursor-pr-steps-real-feedback-received) |
 | Triage an issue | [release notes: known issues](./qwen_text_only_alpha_release_notes.md#known-issues-triage-for-build-1) · [feedback log](./qwen_text_only_alpha_release_notes.md#tester-feedback-log-build-1) |
 | Prepare ASC / TestFlight / GGUF push | [TestFlight prep](./qwen_text_only_alpha_testflight_prep.md) |
 | Confirm alpha scope | [release scope](./qwen_text_only_alpha_release.md) |
