@@ -112,6 +112,8 @@ Use the [copy-paste template](./qwen_text_only_alpha_lab_evidence.md#copy-paste-
 | **Wang** | **Local runtime** + `answered_by=llama.cpp On-Device Runtime` | **Yes** (after GGUF push) |
 | **Matisse** | **Local runtime** badge + **Embedded Heuristic Runtime** backend/detail | **No** — missing llama.cpp is **not** a failure |
 
+File screenshots under `~/PREXUS-alpha-evidence/qwen-text-0.1.0-build1/` only; record filenames in the [frozen ledger](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1).
+
 Sensitivity matrix and missing-model fallback are **Wang-only** optional rows during the two-device lab phase (see [expected outcomes](./qwen_text_only_alpha_lab_evidence.md#expected-outcomes-wang-vs-matisse)).
 
 ## Out of scope for this alpha
