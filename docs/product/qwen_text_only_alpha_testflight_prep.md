@@ -377,7 +377,7 @@ Environment overrides: `DEVELOPMENT_TEAM`, `PREXUS_SKIP_BUILD=1` — see script 
 
 ## TestFlight upload outline (not executed here)
 
-Manual steps for the release engineer. **Do not start** until [section G](#g-bundle-id-and-signing-blocking-upload--section-ae-and-smoke-alone-are-insufficient) is checked.
+Manual steps for the release engineer. **Do not start** until [section G](#g-bundle-id-and-signing-blocking-upload-section-ae-and-smoke-alone-are-insufficient) is checked.
 
 0. **Bundle ID gate:** Confirm [upload-ready exit criteria](#exit-criteria-upload-ready) are met — especially **Distribution** archive for `jp.studio-prospect.prexus.ios` (Xcode/script alignment alone is insufficient).
 1. Bump `CFBundleShortVersionString` / `CFBundleVersion` per [naming table](#version-and-tag-naming-proposals-only).

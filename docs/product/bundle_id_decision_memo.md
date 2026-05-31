@@ -1,7 +1,7 @@
 # PREXUS Bundle ID — Decision Memo
 
 **Status:** Approved. Repo migration tracked in `chore/alpha-bundle-id-migration` (Xcode + scripts).
-**Purpose:** Close [TestFlight prep section G](./qwen_text_only_alpha_testflight_prep.md#g-bundle-id-and-signing-blocking-upload--section-ae-and-smoke-alone-are-insufficient) (Bundle ID + signing gate) for the Qwen text-only alpha.
+**Purpose:** Close [TestFlight prep section G](./qwen_text_only_alpha_testflight_prep.md#g-bundle-id-and-signing-blocking-upload-section-ae-and-smoke-alone-are-insufficient) (Bundle ID + signing gate) for the Qwen text-only alpha.
 **Scope:** Distribution signing, archive validation, tag, and TestFlight upload remain separate manual steps.
 
 Related: [qwen_text_only_alpha_testflight_prep.md](./qwen_text_only_alpha_testflight_prep.md)
