@@ -1,11 +1,12 @@
 # Qwen Text-Only Alpha — TestFlight Preparation
 
-**Status:** TestFlight **0.1.0 (1)** verified on **Wang** (llama.cpp) and **Matisse** (Embedded Heuristic). Physical lab is **two devices only**; keep ASC group **`internal_tester`** aligned with that lab. **Not** an App Store public submission.
+**Status:** TestFlight **0.1.0 (1)** in **stable lab operations** — see [status summary](./qwen_text_only_alpha_status_summary.md). Verified on **Wang** (llama.cpp) and **Matisse** (Embedded Heuristic). Two devices only; **`internal_tester`** aligned. **Build `2` not approved.** Not App Store public submission.
 
 This doc records the RC-to-internal-TestFlight steps and provides copy for **lab-only** tester onboarding (Wang + Matisse).
 
 | Doc | Role |
 | --- | --- |
+| [qwen_text_only_alpha_status_summary.md](./qwen_text_only_alpha_status_summary.md) | **One-page current state** (build `1` stable) |
 | [qwen_text_only_alpha_release.md](./qwen_text_only_alpha_release.md) | Alpha scope and exclusions |
 | [qwen_text_only_alpha_release_readiness.md](./qwen_text_only_alpha_release_readiness.md) | RC readiness + [next build gate](./qwen_text_only_alpha_release_readiness.md#next-build-gate-before-build-2) + [build 2 triage decision](./qwen_text_only_alpha_release_readiness.md#build-2-binary-respin-decision-triage) |
 | [qwen_text_only_alpha_release_notes.md](./qwen_text_only_alpha_release_notes.md) | Tester-facing limitations |
