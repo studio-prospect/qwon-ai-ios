@@ -2,7 +2,7 @@
 
 **Status:** TestFlight **0.1.0 (1)** verified on Wang (install + local Qwen turn). Internal alpha distribution **ready for `internal_tester`**. **Not** an App Store public submission.
 
-This doc turns the RC checklist into concrete **internal / TestFlight** steps.
+This doc records the RC-to-internal-TestFlight steps and provides copy for additional tester onboarding.
 
 | Doc | Role |
 | --- | --- |
@@ -17,7 +17,7 @@ This doc turns the RC checklist into concrete **internal / TestFlight** steps.
 
 ## Product ops status (from RC checklist)
 
-RC **code** criteria are satisfied on `main` (PR #22). Remaining work is **distribution ops** only:
+RC **code** criteria are satisfied on `main` (PR #22). Internal TestFlight distribution is complete for alpha 0.1.0:
 
 | Item | Owner | Status | Action |
 | --- | --- | --- | --- |
@@ -25,15 +25,15 @@ RC **code** criteria are satisfied on `main` (PR #22). Remaining work is **distr
 | Version / build numbers aligned with alpha naming | Release engineer | **Done** | `0.1.0` / build `1` uploaded; tag `qwen-text-alpha-0.1.0-rc1` on `a021475` |
 | Device archive with llama.cpp linked | Release engineer | **Validated locally** | See [Distribution archive validation](#distribution-archive-validation-2026-05-31); repeat after each release-changing commit |
 | Required device smoke green | Release engineer | **Done** (2026-05-31 Wang) | [`alpha_smoke_wang.sh`](#automated-device-smoke-alpha_smoke_wangsh) — all three scenarios on `jp.studio-prospect.prexus.ios` |
-| GGUF available to testers | Ops + testers | Open | Document push path; testers need `Documents/Models/prexus-local-mvp.gguf` |
+| GGUF available to testers | Ops + testers | Ready | Developers push `prexus-local-mvp.gguf` with `push_local_model_to_device.sh` per tester |
 | Git release tag | Release engineer | **Done** | `qwen-text-alpha-0.1.0-rc1` (2026-05-31) |
 | TestFlight upload + internal group | Release engineer | **Done** | Build `0.1.0 (1)` on **`internal_tester`** (1 build, 2 testers) |
 | First TestFlight install on device | Tester (Wang) | **Done** | TestFlight install; GGUF via `push_local_model_to_device.sh`; banner **Local runtime** |
-| Tester onboarding text | Product ops | Open | Paste release-notes excerpt + link to [tester instructions](./qwen_text_only_alpha_tester_instructions.md) |
+| Tester onboarding text | Product ops | Ready | Use [ASC What to Test](#asc-what-to-test-copy) and [tester onboarding message](#tester-onboarding-message) below |
 
 **Explicitly out of scope for this alpha:** App Store public release, LiteRT production, L2 selector, OCR/compression/audio/camera, in-app model download UX.
 
-**Not upload-ready when:** sections A–E and device smoke pass but ASC, Xcode, and Distribution signing are not aligned to the approved Bundle ID. Smoke validates runtime behavior only; it does not substitute for a valid App Store Connect identity.
+**Current release state:** internal TestFlight alpha is distribution-ready. Remaining work is tester onboarding and evidence collection from additional devices.
 
 ---
 
@@ -68,7 +68,9 @@ Repo and device scripts reference the formal ID. **Previous placeholder:** `com.
 ### After Distribution archive validates
 
 - Proceed with Wang / device smoke on the **new** Bundle ID (uninstall old `com.prexus.ios` builds first).
-- Do **not** upload to TestFlight or create a distribution git tag until device smoke and ASC internal group are ready.
+- Distribute alpha 0.1.0 only to internal testers.
+- Keep public App Store submission out of scope.
+- Collect diagnostics screenshots or logs from additional devices before widening the tester group.
 
 ---
 
@@ -276,12 +278,13 @@ Environment overrides: `DEVELOPMENT_TEAM`, `PREXUS_SKIP_BUILD=1` — see script 
 - [x] Regenerated `project.pbxproj` committed with formal test target IDs.
 - [x] Provisioning profiles registered locally: `AppStorePREXUS_20260531`, `DevelopmentPREXUS_20260531`.
 
-**Distribution / upload (partial):**
+**Distribution / upload:**
 
 - [x] Distribution signing succeeds for `jp.studio-prospect.prexus.ios` ([2026-05-31](#distribution-archive-validation-2026-05-31)).
 - [x] Internal TestFlight group **`internal_tester`** — **1 build** assigned.
 - [x] First **TestFlight** install on Wang + local Qwen turn (2026-05-31).
 - [x] Wang / device smoke on new ID (2026-05-31; `VALIDATION PASSED` for `with_model`, `no_model`, `sensitivity_matrix`).
+- [ ] Uninstall any `com.prexus.ios` builds on additional test devices before re-smoking with new ID.
 
 ### F. Optional (not blocking text-only alpha)
 
@@ -324,6 +327,52 @@ For day-to-day debug without TestFlight, [`install_on_device.sh`](../../tools/sc
 
 ---
 
+## ASC What to Test copy
+
+Paste this into App Store Connect for the internal TestFlight build:
+
+```text
+PREXUS 0.1.0 is the Qwen text-only alpha.
+
+Please verify:
+1. Install the TestFlight build and launch PREXUS.
+2. Ask one short text question in Chat.
+3. Confirm Settings -> Runtime diagnostics shows local execution with answered_by=llama.cpp On-Device Runtime after the local model is installed.
+4. Try the four sensitivity modes once each and confirm the app does not crash.
+
+Known limitations:
+- The local Qwen model is not bundled in the app. A developer must push prexus-local-mvp.gguf to Documents/Models/ on the device.
+- This alpha is text-only. OCR, camera, audio, compression, model download UX, and LiteRT production routing are out of scope.
+- First local response can be slower while the model loads.
+
+Report your device model, iOS version, build number, whether GGUF was installed, and a screenshot of Runtime diagnostics if available.
+```
+
+## Tester onboarding message
+
+Send this to internal testers:
+
+```text
+PREXUS 0.1.0 alpha is available in TestFlight.
+
+Setup:
+1. Install PREXUS from TestFlight.
+2. Connect your iPhone to the Mac used for development.
+3. Ask a developer to run:
+   ./tools/scripts/push_local_model_to_device.sh "<your device name>"
+4. Restart PREXUS.
+5. Send one short Chat message.
+6. Open Settings -> Runtime diagnostics and confirm the latest entry shows local runtime / answered_by=llama.cpp On-Device Runtime.
+
+Please send back:
+- Device model and iOS version
+- Whether the reply worked
+- Screenshot of Runtime diagnostics if possible
+- Any crash, hang, or confusing UI text
+
+Scope reminder: this build is a text-only local Qwen alpha. Model download, OCR, camera, audio, and broader cloud/provider behavior are not part of this test.
+```
+
 ## Post-upload tester onboarding (minimal)
 
 Send internal testers:
@@ -338,17 +387,17 @@ Send internal testers:
 
 ## Sign-off
 
-**Upload-ready** (TestFlight binary may be uploaded) only when **all** are true:
+**Upload-ready** (TestFlight binary may be uploaded) is complete for alpha 0.1.0:
 
 1. Pre-TestFlight gate checklist sections **A–E** are checked.
 2. **Section G (Bundle ID and signing)** is checked — formal ID decided, ASC app aligned, Distribution signing validated.
-3. Version naming is recorded in ASC and matches proposed tag name.
-4. Required device smoke (`alpha_smoke_wang.sh` or equivalent) passed on the build lineage intended for archive.
+3. Version naming is recorded in ASC and matches tag name.
+4. Required device smoke or equivalent Wang TestFlight verification passed on the uploaded build lineage.
 
-**Ready to execute prep work** (smoke, docs, simulator tests) when A–E pass. Section G **Xcode/ASC** items may be complete while **Distribution** items remain open.
+**Ready to onboard additional testers:** yes, as internal TestFlight alpha.
 
 After upload, additionally confirm:
 
 5. At least one internal tester device installed via TestFlight and completed one chat turn — **done on Wang** (2026-05-31).
 
-Tagging and upload remain **manual**; this document only defines the procedure.
+Tagging and upload were performed manually; this document records the completed state and the repeatable tester-onboarding procedure.

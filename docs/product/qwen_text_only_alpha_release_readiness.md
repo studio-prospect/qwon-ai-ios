@@ -80,12 +80,12 @@ Concrete steps live in [qwen_text_only_alpha_testflight_prep.md](./qwen_text_onl
 
 | Step | Gate |
 | --- | --- |
-| **Bundle ID + signing** | **Done** — TestFlight `0.1.0 (1)` + group `internal_tester`; confirm first tester install ([prep doc](./qwen_text_only_alpha_testflight_prep.md#testflight-upload-2026-05-31)) |
-| Version naming | Proposed `0.1.0` / build `1`, git tag `qwen-text-alpha-0.1.0-rc1` (manual) |
-| Pre-upload smoke | `alpha_smoke_wang.sh`: `with_model`, `no_model`, `sensitivity_matrix` |
-| Device archive | `build_llama_xcframework.sh` + `generate_xcodeproj.rb` before Release archive |
-| Tester comms | Link [tester instructions](./qwen_text_only_alpha_tester_instructions.md) + [release notes](./qwen_text_only_alpha_release_notes.md) |
-| Tag + TestFlight upload | Manual ASC / git — **only after Bundle ID gate closed** |
+| **Bundle ID + signing** | **Complete** — formal ID `jp.studio-prospect.prexus.ios`, ASC app, repo migration, local provisioning profiles, Distribution archive, upload, and tag are complete ([prep doc](./qwen_text_only_alpha_testflight_prep.md#testflight-upload-2026-05-31)) |
+| Version naming | Complete — TestFlight alpha `0.1.0`, build `1` |
+| Pre-upload smoke | Complete — Wang TestFlight install + local Qwen one-turn verification |
+| Device archive | Complete — uploaded TestFlight build includes llama.cpp path |
+| Tester comms | Ready — use [tester instructions](./qwen_text_only_alpha_tester_instructions.md), [What to Test copy](./qwen_text_only_alpha_testflight_prep.md#asc-what-to-test-copy), and [onboarding message](./qwen_text_only_alpha_testflight_prep.md#tester-onboarding-message) |
+| Tag + TestFlight upload | Complete |
 
 ## RC sign-off criteria
 

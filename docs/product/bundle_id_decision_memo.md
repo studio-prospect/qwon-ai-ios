@@ -137,14 +137,15 @@ Run only after the sign-off table is complete.
 
 ---
 
-## Explicitly not executed in bundle-id migration PR
+## Alpha ops completion
 
 - [x] Final Bundle ID in `generate_xcodeproj.rb`, device scripts, and regenerated `project.pbxproj`
 - [x] ASC app record documented (created outside repo)
 - [x] Provisioning profiles registered locally: `AppStorePREXUS_20260531`, `DevelopmentPREXUS_20260531`
 - [x] Distribution signing validation / Release archive (2026-05-31; [record](./qwen_text_only_alpha_testflight_prep.md#distribution-archive-validation-2026-05-31))
-- [ ] Git release tag (`qwen-text-alpha-*`)
+- [x] Git release tag `qwen-text-alpha-0.1.0-rc1`
 - [x] TestFlight upload (2026-05-31, build `0.1.0` / `1`; tag `qwen-text-alpha-0.1.0-rc1`)
+- [x] Wang TestFlight install + one local Qwen chat turn
 
 ---
 
@@ -155,6 +156,7 @@ Run only after the sign-off table is complete.
 1. Sign-off table is filled (**done**), **and**
 2. Repo + scripts use `jp.studio-prospect.prexus.ios` (**done** after migration PR), **and**
 3. Provisioning profiles are registered for that ID (**done locally**), **and**
-4. Distribution signing + Release archive validate for that ID (**done** 2026-05-31).
+4. Distribution signing + Release archive validate for that ID (**done**), **and**
+5. TestFlight build installs on at least one internal tester device and completes one local Qwen turn (**done on Wang**).
 
-Upload-ready still requires Wang/device smoke and TestFlight internal group per [TestFlight prep](./qwen_text_only_alpha_testflight_prep.md#sign-off).
+The alpha is upload-ready and internally distributed. Public App Store submission remains out of scope.

@@ -4,14 +4,14 @@ For internal / TestFlight testers validating the **text-only** local runtime sli
 
 Related: [release notes](./qwen_text_only_alpha_release_notes.md) · [RC checklist](./qwen_text_only_alpha_release_readiness.md) · [TestFlight prep](./qwen_text_only_alpha_testflight_prep.md)
 
-Release engineers: complete the [pre-TestFlight gate](./qwen_text_only_alpha_testflight_prep.md#pre-testflight-gate-checklist) (including [`alpha_smoke_wang.sh`](../../tools/scripts/alpha_smoke_wang.sh)) before inviting testers.
+Release status: internal TestFlight alpha `0.1.0 (1)` is available for `internal_tester`. Release engineers can use the [onboarding copy](./qwen_text_only_alpha_testflight_prep.md#tester-onboarding-message) and [What to Test copy](./qwen_text_only_alpha_testflight_prep.md#asc-what-to-test-copy).
 
 ## Before you start
 
 1. **Device:** iPhone 15 Pro / 16 / 17 class (A17 Pro+) recommended for real Qwen output.
 2. **Model:** Ensure `prexus-local-mvp.gguf` is on the device under `Documents/Models/` (developers use `./tools/scripts/push_local_model_to_device.sh "YourDeviceName"`).
-3. **Build:** Debug or TestFlight build with llama.cpp linked (not simulator-only checkout).
-4. **Unlock** the device and accept the developer-trust prompt if sideloading.
+3. **Build:** TestFlight `0.1.0 (1)` or a Debug build with llama.cpp linked.
+4. **Unlock** the device and keep it connected while developers push the model.
 
 ## Quick automated smoke (developers)
 
@@ -28,6 +28,19 @@ This runs:
 Results land in `.eval-logs/` (not committed).
 
 ## Manual tester flow
+
+### 0. TestFlight install
+
+1. Open the TestFlight invitation.
+2. Install **PREXUS 0.1.0**.
+3. Launch once, then close the app.
+4. Ask a developer to run:
+
+```bash
+./tools/scripts/push_local_model_to_device.sh "<YourDeviceName>"
+```
+
+5. Reopen PREXUS before starting the checks below.
 
 ### 1. Launch and Chat
 
@@ -78,13 +91,14 @@ After four sends, open **Runtime diagnostics** — four entries with route + exe
 
 ```
 Device: <model, iOS version>
-Build: <build number / git sha>
+Build: 0.1.0 (1) / <git sha if known>
 GGUF present: yes / no
 
 Chat launch: pass / fail
 Qwen path (answered_by llama.cpp): pass / fail / not tested
 Missing-model fallback: pass / fail / not tested
 Sensitivity matrix: pass / fail / not tested
+Diagnostics screenshot captured: yes / no
 Notes:
 ```
 
