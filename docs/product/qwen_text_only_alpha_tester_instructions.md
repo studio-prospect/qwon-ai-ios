@@ -120,6 +120,8 @@ After four sends, open **Recent Runtime Decisions** (**Runtime Diagnostics**) �
 
 Use this form for **every** issue or pass report on TestFlight **`0.1.0 (1)`**. Send to release engineering (Slack/issue channel — team choice). **Build `2` is not approved** — feedback does not by itself request a new TestFlight binary.
 
+**Wang and Matisse:** Use the **same** template below. Set `Device lab name` to **Wang** or **Matisse** and check Diagnostics against [device expectations](#device-expectations-quick-reference). On Matisse, **Embedded Heuristic** without llama.cpp is **expected**, not a failure.
+
 **Do not** attach PNG/JPEG to git or email binaries into the repo. Save screenshots under `~/PREXUS-alpha-evidence/qwen-text-0.1.0-build1/` and list **filenames only** below.
 
 ### Copy-paste template
