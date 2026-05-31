@@ -40,6 +40,8 @@ Delivery workflow (Codex / Cursor role split): [agent_collaboration_workflow.md]
 
 - ローカルファースト AI 体験を成立させる
 
+最初の正式リリースは Phase 1 全体ではなく、[Qwen text-only alpha](./qwen_text_only_alpha_release.md) として切り出す。OCR、compression v1、LiteRT-LM adoption、音声、live vision は alpha 後のバージョンアップ要件として扱う。
+
 対象機能:
 
 - チャット UI

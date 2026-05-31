@@ -9,6 +9,7 @@
 | Device class | **A17 Pro generation and newer** (iPhone 15 Pro / 16 / 17 families) |
 | Merge order | **P1-1 before compression/OCR** |
 | OCR | Stays in Phase 1 but **after** P1-1/P1-2/P1-3 |
+| First release | **Qwen text-only alpha**; see `docs/product/qwen_text_only_alpha_release.md` |
 
 ## Architecture
 
