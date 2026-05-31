@@ -147,11 +147,42 @@ If ASC What to Test text is edited, update this table and the [prep copy blocks]
 
 ## When to refresh evidence
 
-1. Every new TestFlight **build number** (`CFBundleVersion` bump).
-2. After runtime/routing changes that affect local execution labels.
-3. Optional: re-run `alpha_smoke_wang.sh "Wang"` before upload; attach gitignored JSON reference in Wang `Known deviation` if used.
+Refresh on every TestFlight **`CFBundleVersion`** increase (respins under `0.1.0` or a new marketing version such as `0.1.1`). Also refresh after runtime/routing changes that alter Chat or Diagnostics labels, even if the build number is unchanged (note the reason in `Known deviation`).
 
-Add a new subsection under [Frozen ledger](#frozen-ledger-010-build-1) per build (e.g. `0.1.0 build 2`) — do not overwrite prior build rows.
+---
+
+## Adding a new ledger subsection
+
+Use this when moving from build `1` to build `2` (or `0.1.1` build `1`). **Do not** modify or delete [Frozen ledger: 0.1.0 build 1](#frozen-ledger-010-build-1) rows.
+
+### Steps (short)
+
+1. **Record the change** in [release notes](./qwen_text_only_alpha_release_notes.md) and [next build gate](./qwen_text_only_alpha_release_readiness.md#next-build-gate-before-build-2).
+2. **Ops folder** — create a build-specific directory (do not reuse build `1` files):
+
+   ```text
+   ~/PREXUS-alpha-evidence/qwen-text-0.1.0-build2/
+   ```
+
+   Pattern: `qwen-text-<CFBundleShortVersionString>-build<CFBundleVersion>/`. Keep `MANIFEST.txt` in ops only (not in git).
+
+3. **Screenshots** — per device, after TestFlight install + GGUF push:
+
+   | File | Screen |
+   | --- | --- |
+   | `wang-0.1.0-2-diagnostics.png` | Settings → Recent Runtime Decisions |
+   | `matisse-0.1.0-2-diagnostics.png` | same |
+   | `wang-0.1.0-2-chat.png` | optional |
+   | `matisse-0.1.0-2-chat.png` | optional |
+
+   Adjust semver/build in filenames when marketing version changes (e.g. `wang-0.1.1-1-diagnostics.png`).
+
+4. **Ledger** — append a new heading, e.g. `### Frozen ledger: 0.1.0 build 2`, with full Wang and Matisse tables (copy [template](#copy-paste-template-new-capture)).
+5. **Wang pass:** `answered_by=llama.cpp On-Device Runtime` after GGUF push.
+6. **Matisse pass:** **Local runtime** + **Embedded Heuristic Runtime** — not llama.cpp.
+7. **Docs PR:** metadata only; `git diff --check` before merge.
+
+Optional: Wang pre-upload `alpha_smoke_wang.sh` → reference `.eval-logs/wang-alpha-smoke-*.json` in `Known deviation` (gitignored).
 
 ---
 

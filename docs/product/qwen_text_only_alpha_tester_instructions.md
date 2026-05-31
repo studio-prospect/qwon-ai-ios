@@ -22,6 +22,19 @@ Do not join `internal_tester` without coordinating with release engineering (GGU
 3. **Build:** TestFlight `0.1.0 (1)`.
 4. **Unlock** the device and keep USB connected during GGUF push.
 
+## When the TestFlight build number changes
+
+Applies when ASC shows a new **build** (e.g. `0.1.0 (2)` or `0.1.1 (1)`). See [next build gate](./qwen_text_only_alpha_release_readiness.md#next-build-gate-before-build-2).
+
+1. Install the **new** TestFlight build on your lab device (Wang or Matisse only).
+2. Ask release engineering to run `push_local_model_to_device.sh "<DeviceName>"` again for that build.
+3. Force-quit PREXUS, send one short Chat message, open **Settings → Recent Runtime Decisions**.
+4. **Wang:** confirm `answered_by=llama.cpp On-Device Runtime`.
+5. **Matisse:** confirm **Local runtime** + **Embedded Heuristic Runtime** — **not** a failure if llama.cpp is absent.
+6. Return screenshot filenames; ops stores PNGs outside git ([ledger subsection](./qwen_text_only_alpha_lab_evidence.md#adding-a-new-ledger-subsection)).
+
+Update the **Build:** line in your report to the new marketing version and build number.
+
 ## Quick automated smoke (developers)
 
 ```bash

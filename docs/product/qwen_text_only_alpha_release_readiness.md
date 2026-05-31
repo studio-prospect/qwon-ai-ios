@@ -99,3 +99,45 @@ PREXUS may be called a **release candidate** when all are true:
 4. No production routing or automatic backend change beyond Qwen + llama.cpp.
 
 **Not required for RC:** LiteRT adoption, OCR, compression v1, model download UX, four-provider cloud matrix on device.
+
+---
+
+## Next build gate (before build 2+)
+
+**Baseline:** TestFlight `0.1.0` (build `1`) two-device lab evidence is **closed** ([frozen ledger](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1), PR #33 on `main`). Run this gate **before** bumping `CFBundleVersion`, archiving, uploading, or asking testers to reinstall.
+
+**Out of scope for this gate:** App Store public release, LiteRT production, L2 selector, OCR/camera/audio, widening ASC `internal_tester` beyond Wang + Matisse.
+
+### 1. Record the change (git docs only)
+
+- [ ] Write **why** the respin or semver bump is needed in [release notes](./qwen_text_only_alpha_release_notes.md) (or a linked PR / issue).
+- [ ] Note planned `CFBundleShortVersionString` / `CFBundleVersion` and git tag name in this section or [TestFlight prep](./qwen_text_only_alpha_testflight_prep.md#version-and-tag-naming-proposals-only) (do not edit `Info.plist` in a docs-only PR).
+
+### 2. Code and archive (implementation PR — not docs-only)
+
+- [ ] Simulator `PREXUSTests` green on the commit to archive.
+- [ ] Optional: `./tools/scripts/alpha_smoke_wang.sh "Wang"` before upload (gitignored `.eval-logs/`).
+- [ ] Distribution archive + export for `jp.studio-prospect.prexus.ios` with llama linked ([prep validation record](./qwen_text_only_alpha_testflight_prep.md#distribution-archive-validation-2026-05-31)).
+
+### 3. Version, tag, and TestFlight (release engineer)
+
+Follow [TestFlight upload outline](./qwen_text_only_alpha_testflight_prep.md#testflight-upload-outline-not-executed-here) and [next build evidence](./qwen_text_only_alpha_testflight_prep.md#next-build-gate-evidence-and-ops).
+
+- [ ] Increment **`CFBundleVersion`** by 1 (or bump marketing version per naming table if intentional).
+- [ ] Upload binary; assign new build to ASC group **`internal_tester`** (still **Wang + Matisse only** — do not add testers).
+- [ ] Update ASC **What to Test** / onboarding if behavior or build label changed ([copy blocks](./qwen_text_only_alpha_testflight_prep.md#asc-what-to-test-copy)).
+- [ ] Annotated git tag on the archived commit ([tag procedure](./qwen_text_only_alpha_testflight_prep.md#git-tag-procedure-do-not-run-in-automation)).
+
+### 4. Two-device lab evidence (ops + ledger metadata)
+
+- [ ] Create a **new** ops folder per build (e.g. `~/PREXUS-alpha-evidence/qwen-text-0.1.0-build2/`) — do not overwrite [build 1](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1) PNGs.
+- [ ] Add a **new** ledger subsection in [lab evidence](./qwen_text_only_alpha_lab_evidence.md#adding-a-new-ledger-subsection); **do not** edit or delete build `1` rows.
+- [ ] **Wang:** `push_local_model_to_device.sh "Wang"` → Chat + **Runtime Diagnostics** with `answered_by=llama.cpp On-Device Runtime`.
+- [ ] **Matisse:** Chat + Diagnostics — **Local runtime** + **Embedded Heuristic Runtime**; missing llama.cpp is **pass**, not failure.
+- [ ] File screenshots as `wang-<semver>-<build>-diagnostics.png` / `matisse-…` per [naming](./qwen_text_only_alpha_lab_evidence.md#filename-and-path-placeholders).
+- [ ] **Never** commit PNG/JPEG, device logs, IPA, GGUF, or ops `MANIFEST.txt` to git.
+
+### 5. Sign-off
+
+- [ ] [Regression focus](./qwen_text_only_alpha_testflight_prep.md#regression-focus-until-a-third-device-exists) completed on **both** lab devices for the new build number.
+- [ ] Ledger + ops filenames recorded; PR body lists `on file (ops)` paths only.
