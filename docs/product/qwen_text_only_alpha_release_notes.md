@@ -90,10 +90,84 @@ Record the **why** here (or link PR/issue) before bumping `CFBundleVersion`:
 
 ```text
 Status: not approved — no binary respin queued on main as of 2026-05-31.
+Triage: no open Release blocker on build 1 (see Known issues triage for build 1).
 Planned trigger: <fill when implementation PR is ready — e.g. runtime fix, UI fix, signing/asset change>
 ```
 
 Until this block is filled with an approved binary change, **recommendation: maintain TestFlight build `1`.**
+
+### Known issues triage for build 1
+
+Inventory for **TestFlight `0.1.0 (1)`** (tag `qwen-text-alpha-0.1.0-rc1`, commit `a021475`). Used to decide whether [Binary respin reason](#binary-respin-reason-required-before-cut) should be approved. Evidence baseline: [frozen ledger](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1) (Wang + Matisse **pass**, 2026-05-31).
+
+**Triage outcome (2026-05-31):** **No `Release blocker` open.** **Do not approve build `2` yet** — continue internal alpha on build `1`; use **Docs/ops only** for remaining friction.
+
+#### Release blocker
+
+*None open.* Build `1` meets [alpha release blockers](./qwen_text_only_alpha_release.md#release-blockers) for the two-device lab:
+
+| Check | Build `1` status |
+| --- | --- |
+| Launch + first text turn without crash | Pass — Wang / Matisse TestFlight + smoke lineage |
+| Qwen path on Wang (A17 Pro+) after GGUF push | Pass — `answered_by=llama.cpp On-Device Runtime` (ops + verification) |
+| Missing GGUF / llama failure | Pass — embedded heuristic fallback, no crash (`no_model` smoke) |
+| Bundle ID / Distribution signing | Pass — `jp.studio-prospect.prexus.ios`, upload 2026-05-31 |
+| Sensitivity regression (Wang) | Pass — `sensitivity_matrix` smoke on lab device |
+| Diagnostics unusable for validation | Pass — Runtime Diagnostics captured; Matisse heuristic path documented |
+
+Add a row here only if a **new** issue reproduces on **TestFlight build `1`** and blocks the checks above.
+
+#### Build 2 candidate
+
+Binary change **may help** but **build `1` internal distribution can continue**:
+
+| Issue | Notes | Suggested action |
+| --- | --- | --- |
+| Local Qwen **hallucination / weak reasoning** | Documented [known limitation](#known-limitations); 0.5B demo model | **Post-alpha** model/prompt work — not a respin unless product changes bundled model |
+| **Slow first response** after cold GGUF load | Thermal/load expectation for on-device Qwen | Note in tester comms; monitor — **not** blocking build `1` |
+| **First turn before GGUF push** shows Fallback / heuristic | Expected; onboarding requires dev Mac push | **Docs/ops** — already in What to Test / onboarding |
+| Chat **keyboard / composer** friction (historical) | iPhone 17 feedback during dev; layout/keyboard fixes landed **before** `a021475` (PRs #6–#9) | If **not** repro on TestFlight `0.1.0 (1)`, treat as **closed**; if repro, move to **Release blocker** and approve build `2` |
+| **Strict JSON / markdown fences** in eval | Evidence-only eval concern, not Chat UX | **Post-alpha** / eval harness — not build `2` for text-only alpha |
+
+#### Docs / ops only
+
+**Do not** cut build `2` for these alone:
+
+| Item | Resolution path |
+| --- | --- |
+| GGUF not in IPA; requires `push_local_model_to_device.sh` | Onboarding + [tester instructions](./qwen_text_only_alpha_tester_instructions.md) |
+| Runtime Diagnostics entry path (**Recent Runtime Decisions**) | Docs + onboarding copy ([prep](./qwen_text_only_alpha_testflight_prep.md#tester-onboarding-message)) |
+| Matisse: **Embedded Heuristic** despite GGUF (A12 gate) | Lab evidence + ASC copy — **not** failure |
+| `internal_tester` **0 builds** / export compliance / invite confusion | Resolved in ASC ops 2026-05-31 ([prep](./qwen_text_only_alpha_testflight_prep.md#testflight-に-prexus-が出ないとき)) |
+| Ops screenshot naming / frozen ledger / two-device lab policy | [Lab evidence](./qwen_text_only_alpha_lab_evidence.md); PRs #31–#33 |
+| ASC **What to Test** / onboarding wording updates | Edit ASC in place against build `1` |
+| Feedback channel undefined (Slack vs issue template) | **Docs/ops** — pick channel; not IPA |
+| Optional: full **sensitivity matrix** on Matisse | **Wang-only** during lab phase ([tester instructions](./qwen_text_only_alpha_tester_instructions.md)) |
+
+#### Post-alpha
+
+Out of [text-only alpha scope](./qwen_text_only_alpha_release.md); **not** build `2` drivers:
+
+| Item | Track |
+| --- | --- |
+| LiteRT production default / L2 backend selector | Policy + eval sign-off |
+| OCR, compression v1, audio, live camera | Phase 1+ roadmap |
+| In-app **model download** UX | Post-alpha |
+| Public **App Store** listing | Explicitly out of scope |
+| Real Qwen on **pre–A17 Pro** hardware (e.g. Matisse) | Hardware gate — not fixable by respin alone |
+| Cloud provider matrix / escalation quality with live keys | Optional RC item; not alpha blocker |
+| PREXUSLiteRTEval (`com.prexus.ios.literteval`) | Separate eval app |
+
+#### Tester feedback log (build 1)
+
+| Source | Summary | Classification |
+| --- | --- | --- |
+| Wang TestFlight verification (2026-05-31) | Install OK; llama path after GGUF; local reply | **Closed — pass** |
+| Matisse TestFlight (2026-05-31, iOS 18.7.9) | Embedded Heuristic + Diagnostics pass; no crash | **Closed — pass** (not llama.cpp) |
+| Wang device smoke (2026-05-31) | `with_model`, `no_model`, `sensitivity_matrix` pass | **Closed — pass** |
+| Historical Wang UI (pre-upload dev) | Letterboxing / keyboard — addressed in PRs #6–#9 before `a021475` | **Closed in build `1` lineage** unless reopened on TF `0.1.0 (1)` |
+
+Record new feedback as a row above before reclassifying.
 
 ### In scope (build 2 binary)
 
