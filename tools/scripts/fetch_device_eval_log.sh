@@ -39,7 +39,7 @@ xcrun devicectl device copy from \
   --source Documents/prexus-device-eval.log \
   --destination "$OUT" \
   --domain-type appDataContainer \
-  --domain-identifier com.prexus.ios
+  --domain-identifier jp.studio-prospect.prexus.ios
 
 echo "==> Device eval log saved to $OUT"
 cat "$OUT"

@@ -60,7 +60,7 @@ if not matches:
 matches.sort(key=lambda item: (not item[0], item[1].casefold()))
 print(matches[0][2])
 PY
-)" --console com.prexus.ios || true
+)" --console jp.studio-prospect.prexus.ios || true
 
 echo ""
 echo "==> Step 4/4: optional manual prompts + log capture"

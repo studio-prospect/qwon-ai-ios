@@ -25,7 +25,7 @@ Related evidence:
 | Gemma 4 E2B via GGUF + llama.cpp | **Evaluated, not adoptable** — loads on Wang but output unusable (`？`) |
 | Gemma 4 E2B via LiteRT-LM `.litertlm` | **Feasible on Wang** — coherent Japanese + valid routing JSON in smoke eval |
 | PREXUS main app integration | **P1-4b complete** — `LiteRTLocalModelClient` behind `PREXUS_LITERT_LM_PROTOTYPE=1`; production automatic path unchanged |
-| Isolated eval app | `com.prexus.ios.literteval` — regenerate with `PREXUS_LITERT_LM_EVAL=1` when eval target changes |
+| Isolated eval app | `jp.studio-prospect.prexus.ios.literteval` — regenerate with `PREXUS_LITERT_LM_EVAL=1` when eval target changes |
 
 ### Wang feasibility snapshot (2026-05-30)
 
