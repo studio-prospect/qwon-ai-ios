@@ -9,6 +9,20 @@
 
 **Not executed here:** `CFBundleVersion` bump, archive, TestFlight upload, git tag, or changes to the [build 1 frozen ledger](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1).
 
+## Documentation state
+
+Alpha documentation setup is **complete** for build `1` stable operations (docs-only; release state unchanged).
+
+| Item | Status |
+| --- | --- |
+| [Documentation index](./qwen_text_only_alpha_docs_index.md) | Available — reading order and per-doc responsibilities |
+| [Internal handoff](./qwen_text_only_alpha_handoff.md) | Available — operating loop and do-not rules |
+| Link / anchor validation | **Complete** (2026-05-31, PR #41) — relative links across alpha docs verified |
+| [Build 1 frozen ledger](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1) | **Canonical** — do not duplicate or edit rows in other docs |
+| **Next work entry point** | Start from **this status summary**, then the **docs index**; use handoff for day-to-day ops |
+
+No further alpha docs restructuring is planned unless release state changes (new build, blocker, or lab policy).
+
 ---
 
 ## Current state

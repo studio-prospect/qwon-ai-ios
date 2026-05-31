@@ -5,6 +5,8 @@
 
 **Release state (unchanged):** TestFlight `0.1.0 (1)` · tag `qwen-text-alpha-0.1.0-rc1` · build `2` **not approved** · lab **Wang + Matisse** only.
 
+**Last validation:** 2026-05-31 — relative link / anchor validation passed after PR #41. **Docs setup:** complete; start from [status summary](./qwen_text_only_alpha_status_summary.md) then this index.
+
 ---
 
 ## Start here (reading order)
