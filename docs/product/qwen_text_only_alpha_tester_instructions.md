@@ -69,10 +69,10 @@ Results land in `.eval-logs/` (not committed).
 
 ### 2b. With model — heuristic path (A12 lab devices, e.g. Matisse)
 
-1. Developer may still push GGUF (optional for ops); hardware gate uses **Embedded Heuristic Runtime** only.
+1. Developer may still push GGUF (optional for ops); hardware gate uses **Embedded Heuristic Runtime** as the answering backend only.
 2. Send a short message (e.g. `Hello PREXUS`).
-3. Same **Runtime Diagnostics** screen as above.
-4. Expect Chat banner **Embedded Heuristic Runtime** and detail *Local lightweight fallback path without a packaged LLM.* — **pass** if no crash (not a llama.cpp failure).
+3. In **Chat**, confirm the primary chip is **Local runtime** (not Fallback) and a secondary chip shows **Embedded Heuristic Runtime**; caption may read *Local lightweight fallback path without a packaged LLM.*
+4. In **Runtime Diagnostics**, confirm **Local runtime** on the entry and the same embedded-heuristic backend/detail — **pass** if stable (missing llama.cpp is expected on A12).
 
 ### 3. Without model (fallback path)
 

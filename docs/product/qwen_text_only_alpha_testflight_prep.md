@@ -81,7 +81,7 @@ Repo and device scripts reference the formal ID. **Previous placeholder:** `com.
 | Device | Model | Chip | iOS (verified) | Role in alpha |
 | --- | --- | --- | --- | --- |
 | **Wang** | iPhone 17 | A17 Pro+ | (TestFlight verified) | **Primary** — real Qwen via `llama.cpp` after `push_local_model_to_device.sh "Wang"`; `alpha_smoke_wang.sh` three scenarios |
-| **Matisse** | iPhone XS Max | A12 | **18.7.9** | **Secondary** — non–A17 Pro path; **Embedded Heuristic Runtime** even with GGUF; crash-free Chat + Runtime Diagnostics |
+| **Matisse** | iPhone XS Max | A12 | **18.7.9** | **Secondary** — non–A17 Pro path; Chat chip **Local runtime** + backend **Embedded Heuristic Runtime** even with GGUF; crash-free Diagnostics |
 
 ### ASC `internal_tester` group
 
@@ -93,7 +93,7 @@ Repo and device scripts reference the formal ID. **Previous placeholder:** `com.
 
 1. Re-install or upgrade TestFlight build on **both** devices when build number changes.
 2. **Wang:** one Chat turn with GGUF → confirm **Local runtime** / `answered_by=llama.cpp On-Device Runtime` in **Settings → Recent Runtime Decisions** (screen title: **Runtime Diagnostics**).
-3. **Matisse:** one Chat turn → confirm **Embedded Heuristic Runtime** and no crash; capture Diagnostics screenshot.
+3. **Matisse:** one Chat turn → confirm **Local runtime** primary chip + **Embedded Heuristic Runtime** backend/model (Chat or Diagnostics); no crash; capture Diagnostics screenshot.
 4. Optional on **Wang only:** re-run `./tools/scripts/alpha_smoke_wang.sh "Wang"` before each TestFlight respin.
 
 ---
@@ -164,10 +164,12 @@ Uploaded from archive at `main` commit tagged `qwen-text-alpha-0.1.0-rc1` (`a021
 | --- | --- |
 | TestFlight install `0.1.0 (1)` | Pass — `jp.studio-prospect.prexus.ios` |
 | `push_local_model_to_device.sh "Matisse"` | Pass — GGUF in Documents/Models (379 MB) |
-| Chat (`Hello PREXUS`) | Pass — **Embedded Heuristic Runtime**; reply via on-device heuristics |
+| Chat (`Hello PREXUS`) | Pass — primary chip **Local runtime**; secondary chip **Embedded Heuristic Runtime**; reply via on-device heuristics |
 | Runtime Diagnostics | Pass — **Local runtime** badge; detail *Local lightweight fallback path without a packaged LLM.* (expected on A12; not llama.cpp) |
 
 **Device:** iPhone XS Max (`iPhone11,6`), iOS **18.7.9**. Screenshots on file (ops). Do **not** fail Matisse for missing llama.cpp — use Wang for Qwen path evidence.
+
+**UI note (Matisse / A12):** Chat primary chip follows `executionMode` (**Local runtime** when local). **Embedded Heuristic Runtime** is the backend/model chip and Diagnostics detail — not the primary banner label (see `ChatView.runtimeBadgeRow`).
 
 ### New tester checklist (lab devices only)
 
@@ -186,7 +188,8 @@ Uploaded from archive at `main` commit tagged `qwen-text-alpha-0.1.0-rc1` (`a021
 
 **Matisse (A12 / pre–A17 Pro) — heuristic path**
 
-- Expect **Embedded Heuristic Runtime** in Chat and Diagnostics detail *Local lightweight fallback path without a packaged LLM.* — **Pass** if stable; llama.cpp is out of scope on this hardware.
+- Expect Chat primary chip **Local runtime** plus secondary chip **Embedded Heuristic Runtime** (and caption *Local lightweight fallback path without a packaged LLM.*).
+- Expect Runtime Diagnostics **Local runtime** badge with the same embedded-heuristic backend/detail — **Pass** if stable; llama.cpp is out of scope on this hardware.
 
 ### TestFlight に PREXUS が出ないとき
 
@@ -388,7 +391,7 @@ Please verify:
 3. Restart PREXUS and ask one short text question in Chat.
 4. Open Settings (gear) -> Recent Runtime Decisions (screen title: Runtime Diagnostics) and screenshot the latest entry.
 5. On A17 Pro-class iPhones (e.g. iPhone 15 Pro+): confirm answered_by=llama.cpp On-Device Runtime after GGUF push.
-6. On older iPhones (e.g. XS Max / A12): confirm Embedded Heuristic Runtime and no crash — llama.cpp is not expected.
+6. On older iPhones (e.g. XS Max / A12): confirm Local runtime chip plus Embedded Heuristic Runtime backend/detail (not llama.cpp) and no crash.
 7. Optional on A17 Pro+ only: try four sensitivity modes once each; confirm no crash.
 
 Known limitations:
@@ -419,7 +422,7 @@ Setup (lab devices):
 
 What to confirm:
 - iPhone 15 Pro / 16 / 17 class (A17 Pro+): latest entry should show answered_by=llama.cpp On-Device Runtime after GGUF push.
-- Older iPhones (e.g. XS Max): expect Embedded Heuristic Runtime — still a pass if there is no crash.
+- Older iPhones (e.g. XS Max): expect Local runtime chip plus Embedded Heuristic Runtime backend/detail — still a pass if there is no crash.
 
 Please send back:
 - Device model and iOS version
