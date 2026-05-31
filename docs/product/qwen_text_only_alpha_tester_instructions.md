@@ -2,9 +2,9 @@
 
 For internal / TestFlight testers validating the **text-only** local runtime slice.
 
-Related: [release notes](./qwen_text_only_alpha_release_notes.md) · [RC checklist](./qwen_text_only_alpha_release_readiness.md) · [TestFlight prep](./qwen_text_only_alpha_testflight_prep.md)
+Related: [release notes](./qwen_text_only_alpha_release_notes.md) · [RC checklist](./qwen_text_only_alpha_release_readiness.md) · [TestFlight prep](./qwen_text_only_alpha_testflight_prep.md) · **[Lab evidence](./qwen_text_only_alpha_lab_evidence.md)**
 
-Release status: internal TestFlight alpha `0.1.0 (1)` is for the **two-device lab** only (Wang + Matisse). See [Physical device lab](./qwen_text_only_alpha_testflight_prep.md#physical-device-lab-ops-policy). Use [onboarding](./qwen_text_only_alpha_testflight_prep.md#tester-onboarding-message) and [What to Test](./qwen_text_only_alpha_testflight_prep.md#asc-what-to-test-copy).
+Release status: internal TestFlight alpha `0.1.0 (1)` is for the **two-device lab** only (Wang + Matisse). See [Physical device lab](./qwen_text_only_alpha_testflight_prep.md#physical-device-lab-ops-policy) and [evidence retention](./qwen_text_only_alpha_lab_evidence.md#retention-rules-do-not-commit-binaries). Use [onboarding](./qwen_text_only_alpha_testflight_prep.md#tester-onboarding-message) and [What to Test](./qwen_text_only_alpha_testflight_prep.md#asc-what-to-test-copy).
 
 ## Lab devices (ops)
 
@@ -103,20 +103,16 @@ After four sends, open **Recent Runtime Decisions** (**Runtime Diagnostics**) �
 - Provider key section loads (keys optional for local-only testing).
 - Sensitivity descriptions match the selected mode.
 
-## Report template
+## Evidence report (return to release engineering)
 
-```
-Device: <model, iOS version>
-Build: 0.1.0 (1) / <git sha if known>
-GGUF present: yes / no
+Use the [copy-paste template](./qwen_text_only_alpha_lab_evidence.md#copy-paste-template-new-capture). **Do not** email PNG attachments into the repo — ops stores screenshots outside git; docs record `on file (ops)` and a [filename placeholder](./qwen_text_only_alpha_lab_evidence.md#filename-and-path-placeholders).
 
-Chat launch: pass / fail
-Qwen path (answered_by llama.cpp): pass / fail / not tested
-Missing-model fallback: pass / fail / not tested
-Sensitivity matrix: pass / fail / not tested
-Diagnostics screenshot captured: yes / no
-Notes:
-```
+| Lab device | Diagnostics expectation | llama.cpp required? |
+| --- | --- | --- |
+| **Wang** | **Local runtime** + `answered_by=llama.cpp On-Device Runtime` | **Yes** (after GGUF push) |
+| **Matisse** | **Local runtime** badge + **Embedded Heuristic Runtime** backend/detail | **No** — missing llama.cpp is **not** a failure |
+
+Sensitivity matrix and missing-model fallback are **Wang-only** optional rows during the two-device lab phase (see [expected outcomes](./qwen_text_only_alpha_lab_evidence.md#expected-outcomes-wang-vs-matisse)).
 
 ## Out of scope for this alpha
 
