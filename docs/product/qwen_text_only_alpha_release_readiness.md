@@ -72,6 +72,7 @@ Artifacts (gitignored): `.eval-logs/wang-alpha-smoke-*.json`
 - [x] Four sensitivity modes — one turn each (`sensitivity_matrix`)
 - [x] Diagnostics show route + execution detail (including fallback fields)
 - [x] TestFlight / internal distribution — Wang verified on `0.1.0 (1)` ([prep doc](./qwen_text_only_alpha_testflight_prep.md#wang-testflight-verification-2026-05-31))
+- [x] TestFlight / Matisse (A12 heuristic path) on `0.1.0 (1)` ([prep doc](./qwen_text_only_alpha_testflight_prep.md#matisse-testflight-verification-2026-05-31))
 - [ ] Optional: escalation with real OpenAI key on device (not required for RC)
 
 ## Product ops / TestFlight (post-RC)
@@ -84,7 +85,7 @@ Concrete steps live in [qwen_text_only_alpha_testflight_prep.md](./qwen_text_onl
 | Version naming | Complete — TestFlight alpha `0.1.0`, build `1` |
 | Pre-upload smoke | Complete — Wang TestFlight install + local Qwen one-turn verification |
 | Device archive | Complete — uploaded TestFlight build includes llama.cpp path |
-| Tester comms | Ready — use [tester instructions](./qwen_text_only_alpha_tester_instructions.md), [What to Test copy](./qwen_text_only_alpha_testflight_prep.md#asc-what-to-test-copy), and [onboarding message](./qwen_text_only_alpha_testflight_prep.md#tester-onboarding-message) |
+| Tester comms | Ready — two-device lab only; [device lab policy](./qwen_text_only_alpha_testflight_prep.md#physical-device-lab-ops-policy), [tester instructions](./qwen_text_only_alpha_tester_instructions.md), [What to Test](./qwen_text_only_alpha_testflight_prep.md#asc-what-to-test-copy), [onboarding](./qwen_text_only_alpha_testflight_prep.md#tester-onboarding-message) |
 | Tag + TestFlight upload | Complete |
 
 ## RC sign-off criteria

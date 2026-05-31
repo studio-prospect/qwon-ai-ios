@@ -1,8 +1,8 @@
 # Qwen Text-Only Alpha — TestFlight Preparation
 
-**Status:** TestFlight **0.1.0 (1)** verified on Wang (install + local Qwen turn). Internal alpha distribution **ready for `internal_tester`**. **Not** an App Store public submission.
+**Status:** TestFlight **0.1.0 (1)** verified on **Wang** (llama.cpp) and **Matisse** (Embedded Heuristic). Physical lab is **two devices only**; keep ASC group **`internal_tester`** aligned with that lab. **Not** an App Store public submission.
 
-This doc records the RC-to-internal-TestFlight steps and provides copy for additional tester onboarding.
+This doc records the RC-to-internal-TestFlight steps and provides copy for **lab-only** tester onboarding (Wang + Matisse).
 
 | Doc | Role |
 | --- | --- |
@@ -28,12 +28,12 @@ RC **code** criteria are satisfied on `main` (PR #22). Internal TestFlight distr
 | GGUF available to testers | Ops + testers | Ready | Developers push `prexus-local-mvp.gguf` with `push_local_model_to_device.sh` per tester |
 | Git release tag | Release engineer | **Done** | `qwen-text-alpha-0.1.0-rc1` (2026-05-31) |
 | TestFlight upload + internal group | Release engineer | **Done** | Build `0.1.0 (1)` on **`internal_tester`** (1 build, 2 testers) |
-| First TestFlight install on device | Tester (Wang) | **Done** | TestFlight install; GGUF via `push_local_model_to_device.sh`; banner **Local runtime** |
-| Tester onboarding text | Product ops | Ready | Use [ASC What to Test](#asc-what-to-test-copy) and [tester onboarding message](#tester-onboarding-message) below |
+| First TestFlight install on device | Wang + Matisse | **Done** | Wang: llama.cpp after GGUF push; Matisse: Embedded Heuristic (A12) — see [device lab](#physical-device-lab-ops-policy) |
+| Tester onboarding text | Product ops | **Ready** | Use updated [ASC What to Test](#asc-what-to-test-copy) and [onboarding message](#tester-onboarding-message); **do not widen** `internal_tester` beyond the two lab devices without a new A17+ phone |
 
 **Explicitly out of scope for this alpha:** App Store public release, LiteRT production, L2 selector, OCR/compression/audio/camera, in-app model download UX.
 
-**Current release state:** internal TestFlight alpha is distribution-ready. Remaining work is tester onboarding and evidence collection from additional devices.
+**Current release state:** internal TestFlight alpha is distribution-ready. **Ops policy:** regression and evidence collection stay on the [two-device lab](#physical-device-lab-ops-policy) until a new physical iPhone is available; do not invite extra ASC testers who cannot receive a developer GGUF push.
 
 ---
 
@@ -70,7 +70,31 @@ Repo and device scripts reference the formal ID. **Previous placeholder:** `com.
 - Proceed with Wang / device smoke on the **new** Bundle ID (uninstall old `com.prexus.ios` builds first).
 - Distribute alpha 0.1.0 only to internal testers.
 - Keep public App Store submission out of scope.
-- Collect diagnostics screenshots or logs from additional devices before widening the tester group.
+- Collect diagnostics screenshots from **Wang** and **Matisse** only (see [device lab](#physical-device-lab-ops-policy)).
+
+---
+
+## Physical device lab (ops policy)
+
+**As of 2026-05-31:** the team has **two** USB-capable lab iPhones. All alpha validation, GGUF push, and `internal_tester` membership should treat this set as authoritative.
+
+| Device | Model | Chip | iOS (verified) | Role in alpha |
+| --- | --- | --- | --- | --- |
+| **Wang** | iPhone 17 | A17 Pro+ | (TestFlight verified) | **Primary** — real Qwen via `llama.cpp` after `push_local_model_to_device.sh "Wang"`; `alpha_smoke_wang.sh` three scenarios |
+| **Matisse** | iPhone XS Max | A12 | **18.7.9** | **Secondary** — non–A17 Pro path; Chat chip **Local runtime** + backend **Embedded Heuristic Runtime** even with GGUF; crash-free Diagnostics |
+
+### ASC `internal_tester` group
+
+- **Keep membership to the two lab device owners** (Wang + Matisse) unless product explicitly adds a **new physical device** to the lab.
+- If you must add an ASC email without a lab phone, state in onboarding that **llama.cpp Qwen requires a developer USB push on an A17 Pro+ device**; otherwise expect **Embedded Heuristic** only (Matisse-class behavior).
+- **Do not** interpret “ready to onboard additional testers” (below) as inviting arbitrary ASC users without hardware + GGUF push capacity.
+
+### Regression focus (until a third device exists)
+
+1. Re-install or upgrade TestFlight build on **both** devices when build number changes.
+2. **Wang:** one Chat turn with GGUF → confirm **Local runtime** / `answered_by=llama.cpp On-Device Runtime` in **Settings → Recent Runtime Decisions** (screen title: **Runtime Diagnostics**).
+3. **Matisse:** one Chat turn → confirm **Local runtime** primary chip + **Embedded Heuristic Runtime** backend/model (Chat or Diagnostics); no crash; capture Diagnostics screenshot.
+4. Optional on **Wang only:** re-run `./tools/scripts/alpha_smoke_wang.sh "Wang"` before each TestFlight respin.
 
 ---
 
@@ -134,11 +158,38 @@ Uploaded from archive at `main` commit tagged `qwen-text-alpha-0.1.0-rc1` (`a021
 
 **UI note:** Chat banner **Local runtime** = `executionMode` local (see `ChatView`). Diagnostics detail may still show `answered_by=llama.cpp On-Device Runtime` for the full backend name.
 
-### New tester checklist
+## Matisse TestFlight verification (2026-05-31)
 
-1. Install from TestFlight (`internal_tester`).
-2. `./tools/scripts/push_local_model_to_device.sh "<DeviceName>"` (GGUF not in IPA).
-3. Relaunch app → confirm **Local runtime** (not Fallback) on a general chat prompt.
+| Step | Result |
+| --- | --- |
+| TestFlight install `0.1.0 (1)` | Pass — `jp.studio-prospect.prexus.ios` |
+| `push_local_model_to_device.sh "Matisse"` | Pass — GGUF in Documents/Models (379 MB) |
+| Chat (`Hello PREXUS`) | Pass — primary chip **Local runtime**; secondary chip **Embedded Heuristic Runtime**; reply via on-device heuristics |
+| Runtime Diagnostics | Pass — **Local runtime** badge; detail *Local lightweight fallback path without a packaged LLM.* (expected on A12; not llama.cpp) |
+
+**Device:** iPhone XS Max (`iPhone11,6`), iOS **18.7.9**. Screenshots on file (ops). Do **not** fail Matisse for missing llama.cpp — use Wang for Qwen path evidence.
+
+**UI note (Matisse / A12):** Chat primary chip follows `executionMode` (**Local runtime** when local). **Embedded Heuristic Runtime** is the backend/model chip and Diagnostics detail — not the primary banner label (see `ChatView.runtimeBadgeRow`).
+
+### New tester checklist (lab devices only)
+
+**All lab testers**
+
+1. Install from TestFlight (`internal_tester` — **lab members only**).
+2. Connect iPhone to the development Mac (USB, unlocked, trusted).
+3. Developer runs `./tools/scripts/push_local_model_to_device.sh "<DeviceName>"` (GGUF not in IPA).
+4. Force-quit and relaunch PREXUS; send one short Chat message.
+5. Open **Settings** (gear on Chat) → **Recent Runtime Decisions** → confirm **Runtime Diagnostics** matches your hardware row below.
+6. Send back device model, iOS version, Diagnostics screenshot, and any crash/hang.
+
+**Wang (A17 Pro+) — Qwen path**
+
+- Expect Chat banner **Local runtime** and Diagnostics detail with **`answered_by=llama.cpp On-Device Runtime`** (after GGUF push).
+
+**Matisse (A12 / pre–A17 Pro) — heuristic path**
+
+- Expect Chat primary chip **Local runtime** plus secondary chip **Embedded Heuristic Runtime** (and caption *Local lightweight fallback path without a packaged LLM.*).
+- Expect Runtime Diagnostics **Local runtime** badge with the same embedded-heuristic backend/detail — **Pass** if stable; llama.cpp is out of scope on this hardware.
 
 ### TestFlight に PREXUS が出ないとき
 
@@ -332,20 +383,23 @@ For day-to-day debug without TestFlight, [`install_on_device.sh`](../../tools/sc
 Paste this into App Store Connect for the internal TestFlight build:
 
 ```text
-PREXUS 0.1.0 is the Qwen text-only alpha.
+PREXUS 0.1.0 is the Qwen text-only alpha (internal lab: two devices only).
 
 Please verify:
 1. Install the TestFlight build and launch PREXUS.
-2. Ask one short text question in Chat.
-3. Confirm Settings -> Runtime diagnostics shows local execution with answered_by=llama.cpp On-Device Runtime after the local model is installed.
-4. Try the four sensitivity modes once each and confirm the app does not crash.
+2. Connect your iPhone to the dev Mac; ask a developer to push prexus-local-mvp.gguf (not bundled in the IPA).
+3. Restart PREXUS and ask one short text question in Chat.
+4. Open Settings (gear) -> Recent Runtime Decisions (screen title: Runtime Diagnostics) and screenshot the latest entry.
+5. On A17 Pro-class iPhones (e.g. iPhone 15 Pro+): confirm answered_by=llama.cpp On-Device Runtime after GGUF push.
+6. On older iPhones (e.g. XS Max / A12): confirm Local runtime chip plus Embedded Heuristic Runtime backend/detail (not llama.cpp) and no crash.
+7. Optional on A17 Pro+ only: try four sensitivity modes once each; confirm no crash.
 
 Known limitations:
-- The local Qwen model is not bundled in the app. A developer must push prexus-local-mvp.gguf to Documents/Models/ on the device.
-- This alpha is text-only. OCR, camera, audio, compression, model download UX, and LiteRT production routing are out of scope.
-- First local response can be slower while the model loads.
+- Only lab devices receive developer GGUF push; do not join TestFlight without coordinating with the release engineer.
+- A17 Pro-class hardware is recommended for real Qwen; other devices use embedded heuristic only.
+- Text-only alpha: no OCR, camera, audio, compression, model download UX, or LiteRT production routing.
 
-Report your device model, iOS version, build number, whether GGUF was installed, and a screenshot of Runtime diagnostics if available.
+Report device model, iOS version, build 0.1.0 (1), GGUF pushed (yes/no), and a Runtime Diagnostics screenshot.
 ```
 
 ## Tester onboarding message
@@ -353,35 +407,44 @@ Report your device model, iOS version, build number, whether GGUF was installed,
 Send this to internal testers:
 
 ```text
-PREXUS 0.1.0 alpha is available in TestFlight.
+PREXUS 0.1.0 alpha is on TestFlight for the internal lab (Wang + Matisse devices only).
 
-Setup:
-1. Install PREXUS from TestFlight.
-2. Connect your iPhone to the Mac used for development.
+If you are not one of those two lab phones, do not install yet — we cannot push the GGUF model or verify llama.cpp without a dev Mac session.
+
+Setup (lab devices):
+1. Install PREXUS from TestFlight (internal_tester).
+2. Connect your iPhone to the dev Mac (USB, unlocked).
 3. Ask a developer to run:
    ./tools/scripts/push_local_model_to_device.sh "<your device name>"
-4. Restart PREXUS.
-5. Send one short Chat message.
-6. Open Settings -> Runtime diagnostics and confirm the latest entry shows local runtime / answered_by=llama.cpp On-Device Runtime.
+4. Force-quit and reopen PREXUS.
+5. Send one short Chat message (e.g. "Hello PREXUS").
+6. Open Settings -> Recent Runtime Decisions (Runtime Diagnostics screen).
+
+What to confirm:
+- iPhone 15 Pro / 16 / 17 class (A17 Pro+): latest entry should show answered_by=llama.cpp On-Device Runtime after GGUF push.
+- Older iPhones (e.g. XS Max): expect Local runtime chip plus Embedded Heuristic Runtime backend/detail — still a pass if there is no crash.
 
 Please send back:
 - Device model and iOS version
 - Whether the reply worked
-- Screenshot of Runtime diagnostics if possible
+- Screenshot of Runtime Diagnostics
 - Any crash, hang, or confusing UI text
 
-Scope reminder: this build is a text-only local Qwen alpha. Model download, OCR, camera, audio, and broader cloud/provider behavior are not part of this test.
+Scope: text-only local alpha. No in-app model download; OCR, camera, audio, and cloud matrix are out of scope.
 ```
 
 ## Post-upload tester onboarding (minimal)
 
-Send internal testers:
+For the **two-device lab** only:
 
-1. TestFlight invite via ASC group **`internal_tester`**.
-2. Link or PDF export of [tester instructions](./qwen_text_only_alpha_tester_instructions.md).
-3. One-line model setup: GGUF via team push or documented `Documents/Models/` placement.
-4. Hardware expectation: A17 Pro-class+ for real Qwen; others get embedded heuristic only.
-5. Feedback channel (issue template / Slack — team choice; not defined in repo).
+1. Ensure ASC group **`internal_tester`** lists **only** Wang and Matisse owners (remove stray invites).
+2. Send the [onboarding message](#tester-onboarding-message) above (includes lab-only warning).
+3. Link [tester instructions](./qwen_text_only_alpha_tester_instructions.md).
+4. Schedule USB session for `push_local_model_to_device.sh` per device name.
+5. Collect Diagnostics screenshots from **both** devices; store with device model + iOS version.
+6. Feedback channel (issue template / Slack — team choice; not defined in repo).
+
+**Do not** add ASC testers who lack a lab device and dev Mac GGUF push.
 
 ---
 
@@ -394,10 +457,8 @@ Send internal testers:
 3. Version naming is recorded in ASC and matches tag name.
 4. Required device smoke or equivalent Wang TestFlight verification passed on the uploaded build lineage.
 
-**Ready to onboard additional testers:** yes, as internal TestFlight alpha.
+**Ready for internal lab testing:** yes — **Wang + Matisse** both completed one chat turn and Diagnostics evidence (2026-05-31).
 
-After upload, additionally confirm:
-
-5. At least one internal tester device installed via TestFlight and completed one chat turn — **done on Wang** (2026-05-31).
+**Do not widen `internal_tester`** beyond the lab until a new physical iPhone is added to the device table above.
 
 Tagging and upload were performed manually; this document records the completed state and the repeatable tester-onboarding procedure.

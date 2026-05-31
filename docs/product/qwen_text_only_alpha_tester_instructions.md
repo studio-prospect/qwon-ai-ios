@@ -4,14 +4,23 @@ For internal / TestFlight testers validating the **text-only** local runtime sli
 
 Related: [release notes](./qwen_text_only_alpha_release_notes.md) · [RC checklist](./qwen_text_only_alpha_release_readiness.md) · [TestFlight prep](./qwen_text_only_alpha_testflight_prep.md)
 
-Release status: internal TestFlight alpha `0.1.0 (1)` is available for `internal_tester`. Release engineers can use the [onboarding copy](./qwen_text_only_alpha_testflight_prep.md#tester-onboarding-message) and [What to Test copy](./qwen_text_only_alpha_testflight_prep.md#asc-what-to-test-copy).
+Release status: internal TestFlight alpha `0.1.0 (1)` is for the **two-device lab** only (Wang + Matisse). See [Physical device lab](./qwen_text_only_alpha_testflight_prep.md#physical-device-lab-ops-policy). Use [onboarding](./qwen_text_only_alpha_testflight_prep.md#tester-onboarding-message) and [What to Test](./qwen_text_only_alpha_testflight_prep.md#asc-what-to-test-copy).
+
+## Lab devices (ops)
+
+| Device | Use for |
+| --- | --- |
+| **Wang** (iPhone 17, A17 Pro+) | Real Qwen — `llama.cpp` after GGUF push; full smoke optional |
+| **Matisse** (iPhone XS Max, A12) | Embedded Heuristic path — stable Chat + Diagnostics; **not** llama.cpp |
+
+Do not join `internal_tester` without coordinating with release engineering (GGUF requires USB + dev Mac).
 
 ## Before you start
 
-1. **Device:** iPhone 15 Pro / 16 / 17 class (A17 Pro+) recommended for real Qwen output.
-2. **Model:** Ensure `prexus-local-mvp.gguf` is on the device under `Documents/Models/` (developers use `./tools/scripts/push_local_model_to_device.sh "YourDeviceName"`).
-3. **Build:** TestFlight `0.1.0 (1)` or a Debug build with llama.cpp linked.
-4. **Unlock** the device and keep it connected while developers push the model.
+1. **Device:** A17 Pro-class (iPhone 15 Pro / 16 / 17) **recommended** for real Qwen; older iPhones (e.g. XS Max) stay on **Embedded Heuristic** even with GGUF.
+2. **Model:** Developer runs `./tools/scripts/push_local_model_to_device.sh "<DeviceName>"` — not bundled in TestFlight IPA.
+3. **Build:** TestFlight `0.1.0 (1)`.
+4. **Unlock** the device and keep USB connected during GGUF push.
 
 ## Quick automated smoke (developers)
 
@@ -49,14 +58,21 @@ Results land in `.eval-logs/` (not committed).
 3. Send: `Hello PREXUS — one sentence reply please.`
 4. Expect an assistant reply within ~30s (first load may be slower).
 
-### 2. With model (Qwen path)
+### 2. With model — Qwen path (A17 Pro+ lab devices, e.g. Wang)
 
-1. Confirm GGUF is installed (developer-provided).
+1. Confirm developer pushed GGUF.
 2. Send a short message.
-3. Open **Settings → Runtime diagnostics**.
+3. Open **Settings** (gear on Chat) → **Recent Runtime Decisions** (navigation title: **Runtime Diagnostics**).
 4. Latest entry should show:
    - Execution: **Local runtime**
    - Detail includes `answered_by=llama.cpp On-Device Runtime`
+
+### 2b. With model — heuristic path (A12 lab devices, e.g. Matisse)
+
+1. Developer may still push GGUF (optional for ops); hardware gate uses **Embedded Heuristic Runtime** as the answering backend only.
+2. Send a short message (e.g. `Hello PREXUS`).
+3. In **Chat**, confirm the primary chip is **Local runtime** (not Fallback) and a secondary chip shows **Embedded Heuristic Runtime**; caption may read *Local lightweight fallback path without a packaged LLM.*
+4. In **Runtime Diagnostics**, confirm **Local runtime** on the entry and the same embedded-heuristic backend/detail — **pass** if stable (missing llama.cpp is expected on A12).
 
 ### 3. Without model (fallback path)
 
@@ -80,7 +96,7 @@ For each mode in the Chat sensitivity control, send **one** short message and no
 | Escalation Allowed | `Review this Swift code for a bug.` | Without API keys: reroutes local; with keys: may use cloud |
 | Provider Restricted | `Extract text from this receipt with OCR.` | Stays local when providers not approved |
 
-After four sends, open **Runtime diagnostics** — four entries with route + execution detail.
+After four sends, open **Recent Runtime Decisions** (**Runtime Diagnostics**) — four entries with route + execution detail. **Wang only** for this matrix during the two-device lab phase.
 
 ### 5. Settings sanity
 

@@ -146,6 +146,9 @@ Run only after the sign-off table is complete.
 - [x] Git release tag `qwen-text-alpha-0.1.0-rc1`
 - [x] TestFlight upload (2026-05-31, build `0.1.0` / `1`; tag `qwen-text-alpha-0.1.0-rc1`)
 - [x] Wang TestFlight install + one local Qwen chat turn
+- [x] Matisse TestFlight install + Embedded Heuristic chat turn (two-device lab — see [prep doc](./qwen_text_only_alpha_testflight_prep.md#physical-device-lab-ops-policy))
+
+**Ops:** keep ASC `internal_tester` membership to the **Wang + Matisse** lab only until a third device is added.
 
 ---
 
@@ -157,6 +160,6 @@ Run only after the sign-off table is complete.
 2. Repo + scripts use `jp.studio-prospect.prexus.ios` (**done** after migration PR), **and**
 3. Provisioning profiles are registered for that ID (**done locally**), **and**
 4. Distribution signing + Release archive validate for that ID (**done**), **and**
-5. TestFlight build installs on at least one internal tester device and completes one local Qwen turn (**done on Wang**).
+5. TestFlight build installs on lab devices and completes required chat turns — **Wang** (llama.cpp) and **Matisse** (Embedded Heuristic) on 2026-05-31.
 
 The alpha is upload-ready and internally distributed. Public App Store submission remains out of scope.
