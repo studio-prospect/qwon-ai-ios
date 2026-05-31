@@ -74,7 +74,8 @@ Optional (Wang only, before respin): `alpha_smoke_wang.sh` log → `.eval-logs/w
 
 ## Filename and path placeholders
 
-**Canonical ops root (outside git):** `~/PREXUS-alpha-evidence/qwen-text-0.1.0-build1/`  
+**Canonical ops root (outside git):** `~/PREXUS-alpha-evidence/qwen-text-0.1.0-build1/`
+
 Team drive equivalents are fine; keep the same filenames. See `MANIFEST.txt` in that folder (ops-only, not committed).
 
 ```text
