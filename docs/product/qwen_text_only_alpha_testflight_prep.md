@@ -1,8 +1,8 @@
 # Qwen Text-Only Alpha — TestFlight Preparation
 
-**Status:** Product ops prep (post-RC merge). **Not** an App Store submission.
+**Status:** TestFlight build **0.1.0 (1)** uploaded 2026-05-31; ASC processing / internal group setup pending. **Not** an App Store public submission.
 
-This doc turns the RC checklist into concrete **internal / TestFlight** steps. It does **not** create git tags, upload binaries, or change App Store Connect.
+This doc turns the RC checklist into concrete **internal / TestFlight** steps.
 
 | Doc | Role |
 | --- | --- |
@@ -21,13 +21,13 @@ RC **code** criteria are satisfied on `main` (PR #22). Remaining work is **distr
 
 | Item | Owner | Status | Action |
 | --- | --- | --- | --- |
-| **Formal Bundle ID + ASC app + signing** | Product / release engineering | **Partial** | Distribution + Wang smoke validated 2026-05-31. **Upload blocked** until TestFlight internal group + upload |
-| Version / build numbers aligned with alpha naming | Release engineer | In progress | `Info.plist` → `0.1.0` / build `1` (alpha PR); ASC must match on upload |
+| **Formal Bundle ID + ASC app + signing** | Product / release engineering | **Done** | Distribution + Wang smoke + upload 2026-05-31 |
+| Version / build numbers aligned with alpha naming | Release engineer | **Done** | `0.1.0` / build `1` uploaded; tag `qwen-text-alpha-0.1.0-rc1` on `a021475` |
 | Device archive with llama.cpp linked | Release engineer | **Validated locally** | See [Distribution archive validation](#distribution-archive-validation-2026-05-31); repeat after each release-changing commit |
 | Required device smoke green | Release engineer | **Done** (2026-05-31 Wang) | [`alpha_smoke_wang.sh`](#automated-device-smoke-alpha_smoke_wangsh) — all three scenarios on `jp.studio-prospect.prexus.ios` |
 | GGUF available to testers | Ops + testers | Open | Document push path; testers need `Documents/Models/prexus-local-mvp.gguf` |
-| Git release tag | Release engineer | Open | Create **only after** smoke + archive success — [tag procedure](#git-tag-procedure-do-not-run-in-automation) |
-| TestFlight upload + internal group | Release engineer | Open | Manual ASC steps — [upload outline](#testflight-upload-outline-not-executed-here) |
+| Git release tag | Release engineer | **Done** | `qwen-text-alpha-0.1.0-rc1` (2026-05-31) |
+| TestFlight upload + internal group | Release engineer | **Partial** | Build uploaded; [record](#testflight-upload-2026-05-31) — enable internal testers in ASC |
 | Tester onboarding text | Product ops | Open | Paste release-notes excerpt + link to [tester instructions](./qwen_text_only_alpha_tester_instructions.md) |
 
 **Explicitly out of scope for this alpha:** App Store public release, LiteRT production, L2 selector, OCR/compression/audio/camera, in-app model download UX.
@@ -100,6 +100,22 @@ xcodebuild -exportArchive \
 | IPA signature | `Apple Distribution: studio PROSPECT, Inc (BWSS94LH28)` |
 
 Re-run after version bumps or runtime changes intended for TestFlight.
+
+---
+
+## TestFlight upload (2026-05-31)
+
+Uploaded from archive at `main` commit tagged `qwen-text-alpha-0.1.0-rc1` (`a021475`).
+
+| Field | Value |
+| --- | --- |
+| Version | `0.1.0` (build `1`) |
+| Bundle ID | `jp.studio-prospect.prexus.ios` |
+| ASC app | PREXUS (Apple ID `6775110218`) |
+| Git tag | `qwen-text-alpha-0.1.0-rc1` |
+| Upload result | **Upload succeeded** (`xcodebuild -exportArchive`, `destination=upload`) |
+
+**Next in ASC:** wait for build processing → assign to internal TestFlight group → paste [tester instructions](./qwen_text_only_alpha_tester_instructions.md) in What to Test.
 
 ---
 
