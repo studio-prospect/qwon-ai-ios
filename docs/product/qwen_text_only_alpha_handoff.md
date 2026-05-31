@@ -45,6 +45,67 @@ Classification detail: [tester instructions](./qwen_text_only_alpha_tester_instr
 
 ---
 
+## Cursor PR steps (real feedback received)
+
+Use when **one real** template-based report exists. Follow [feedback intake processing](./qwen_text_only_alpha_release_notes.md#feedback-intake-processing-build-1) and [log row format](./qwen_text_only_alpha_release_notes.md#log-row-format-new-reports). **Do not** add placeholder or sample log rows before a report arrives.
+
+### PR types
+
+| PR type | Use when | May change |
+| --- | --- | --- |
+| **docs-only feedback PR** | Log append/update for any class; triage + Binary respin draft for **Release blocker** | `release_notes` feedback log; optional triage / Binary respin sections only |
+| **docs/ops copy PR** | **Docs/ops only** | Tester/onboarding/What to Test/ASC copy in docs — **not** frozen ledger, **not** `CFBundleVersion` |
+| **minimal implementation PR** | **Release blocker** only — after template-complete repro and Binary respin reason drafted | App/runtime fix for the verified blocker only — **no** unrelated scope |
+
+**Never** open an implementation PR for **needs evidence**, **Docs/ops only**, **Build 2 candidate**, or **Post-alpha** alone. **Build `2` is not approved** by any docs-only feedback PR.
+
+### By final class (Cursor order)
+
+#### needs evidence
+
+1. Branch from `main`; **docs-only feedback PR** only.
+2. **Append** one [feedback log](./qwen_text_only_alpha_release_notes.md#log-row-format-new-reports) row: Final class **needs evidence**; Evidence filename `—`; **Next action** lists missing fields (Diagnostics block, `0.1.0 (1)` build, device name, ops filename).
+3. **Do not** edit baseline log rows or [frozen ledger](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1). **No** implementation PR. **No** build `2`.
+4. When the tester completes the same report: **update that same row** (no duplicate) in a follow-up **docs-only feedback PR**.
+
+#### Docs/ops only
+
+1. **docs-only feedback PR:** append or update log row with Final class **Docs/ops only**; Evidence filename if available; Next action → e.g. `docs/ops copy PR`.
+2. **docs/ops copy PR:** edit [tester instructions](./qwen_text_only_alpha_tester_instructions.md), [TestFlight prep](./qwen_text_only_alpha_testflight_prep.md) copy blocks, or ASC text — **build `1` maintained**, **no** archive/upload/tag.
+3. **No** implementation PR. **No** build `2`.
+
+#### Build 2 candidate
+
+1. **docs-only feedback PR** only: append or update log row with Final class **Build 2 candidate**; Evidence filename from ops folder; **Next action** → e.g. `Monitor on build 1` or `Promote → Release blocker if repro blocks baseline on 0.1.0 (1)`.
+2. **Do not** cut build `2`. **Do not** open implementation PR unless promoted to **Release blocker** (see below).
+3. If promoting: follow [Release blocker promotion](./qwen_text_only_alpha_release_notes.md#release-blocker-promotion-dual-record) in the **same or next docs-only feedback PR** before any implementation work.
+
+#### Release blocker
+
+Run in order; **build `2` still not approved** until Binary respin reason is explicitly approved and ops steps are separate.
+
+1. **docs-only feedback PR (first):**
+   - **Update** feedback log row → Final class **Release blocker**.
+   - **Append** one row under [Release blocker](./qwen_text_only_alpha_release_notes.md#release-blocker) triage (dual record — keep log row).
+   - **Draft** [Binary respin reason](./qwen_text_only_alpha_release_notes.md#binary-respin-reason-required-before-cut) (text only; not execution).
+2. **Codex review** on policy-sensitive docs changes.
+3. **minimal implementation PR (second):** fix **only** the verified Release blocker — no scope creep.
+4. **Only after** reason approval: operator-owned ops (not this doc) — `CFBundleVersion = 2`, archive, upload, tag, new ops evidence — per [readiness](./qwen_text_only_alpha_release_readiness.md#next-build-gate-before-build-2).
+
+**Not a blocker:** Matisse Embedded Heuristic without llama.cpp on A12.
+
+### PR body checklist (all alpha feedback PRs)
+
+Include in every PR description:
+
+- [ ] **Release state unchanged** (unless ops explicitly approves build `2` after Release blocker + Binary respin reason)
+- [ ] **Build `2` not approved** — unless Release blocker path with **approved** Binary respin reason and separate ops execution
+- [ ] **Build 1 frozen ledger unchanged**
+- [ ] **No artifacts committed** (PNG/JPEG/log/GGUF/IPA/MANIFEST stay in ops storage; filenames only in docs)
+- [ ] **No tester scope widening** (Wang + Matisse only)
+
+---
+
 ## Do not do (stable build `1` phase)
 
 | Rule | Rationale |
