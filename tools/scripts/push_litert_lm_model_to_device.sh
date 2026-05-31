@@ -10,7 +10,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 MODEL="${PREXUS_LITERT_MODEL_SOURCE:-$ROOT/models/prexus-eval-gemma4-e2b.litertlm}"
 DEST="${PREXUS_LITERT_MODEL_DEST:-prexus-eval-gemma4-e2b.litertlm}"
-BUNDLE_ID="com.prexus.ios.literteval"
+BUNDLE_ID="jp.studio-prospect.prexus.ios.literteval"
 DEVICE_FILTER="${1:-}"
 DEVICE_JSON="$(mktemp)"
 trap 'rm -f "$DEVICE_JSON"' EXIT

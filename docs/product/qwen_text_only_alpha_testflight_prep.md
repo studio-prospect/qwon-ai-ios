@@ -21,7 +21,7 @@ RC **code** criteria are satisfied on `main` (PR #22). Remaining work is **distr
 
 | Item | Owner | Status | Action |
 | --- | --- | --- | --- |
-| **Formal Bundle ID + ASC app + signing** | Product / release engineering | **Blocked** | [Bundle ID gate](#bundle-id-and-signing-gate-blocking-testflight) + [decision memo](./bundle_id_decision_memo.md); placeholder `com.prexus.ios` is not upload approval |
+| **Formal Bundle ID + ASC app + signing** | Product / release engineering | **Partial** | ID, ASC app, local profiles, and repo migration documented for `jp.studio-prospect.prexus.ios` ([memo](./bundle_id_decision_memo.md)). **Upload blocked** until Distribution signing + archive validate |
 | Version / build numbers aligned with alpha naming | Release engineer | Open | Apply [Version and tag naming](#version-and-tag-naming-proposals-only) in Xcode before first archive |
 | Device archive with llama.cpp linked | Release engineer | Open | `build_llama_xcframework.sh` → `generate_xcodeproj.rb` → Release archive (see below) |
 | Required device smoke green | Release engineer | Open | Run [`alpha_smoke_wang.sh`](#automated-device-smoke-alpha_smoke_wangsh) (or equivalent A17 Pro+ device) |
@@ -38,30 +38,36 @@ RC **code** criteria are satisfied on `main` (PR #22). Remaining work is **distr
 
 ## Bundle ID and signing gate (blocking TestFlight)
 
-The **production / TestFlight Bundle ID is finalized as `jp.studio-prospect.prexus.ios`** and the App Store Connect app record is created. Xcode/script migration and Distribution signing are still open. Until those are complete, PREXUS must be treated as **not upload-ready**, even if simulator tests and `alpha_smoke_wang.sh` are green.
+The **formal Bundle ID is decided** (`jp.studio-prospect.prexus.ios`). PREXUS remains **not upload-ready** until **Distribution signing** and Release archive validate for that ID, even if simulator tests pass.
 
-**Decision support:** [bundle_id_decision_memo.md](./bundle_id_decision_memo.md) — approved ID `jp.studio-prospect.prexus.ios`, owned-domain record, impact map, and post-decision steps. ASC/Xcode alignment below still gates upload.
+**Decision record:** [bundle_id_decision_memo.md](./bundle_id_decision_memo.md) — ASC app `PREXUS`, Apple ID `6775110218`, profiles `AppStorePREXUS_20260531` / `DevelopmentPREXUS_20260531`, migration from dev placeholder `com.prexus.ios`.
 
 | Topic | Current state | Upload requirement |
 | --- | --- | --- |
-| Formal Bundle ID | `jp.studio-prospect.prexus.ios` approved | Same ID recorded in ASC and Xcode before first archive |
-| Repo / dev placeholder | `com.prexus.ios` in `generate_xcodeproj.rb`, `alpha_smoke_wang.sh`, `install_on_device.sh` | Dev smoke and ad hoc only — **not** proof of TestFlight identity |
-| ASC app record | Created: `PREXUS`, Apple ID `6775110218` | Must remain aligned with `jp.studio-prospect.prexus.ios` |
-| Signing | `DEVELOPMENT_TEAM` / Automatic Signing per engineer machine | Profiles and entitlements must cover the **final** Bundle ID |
-| Test targets | `com.prexus.ios.tests`, `com.prexus.ios.uitests` | May change with main app ID in a follow-up ops PR |
+| Formal Bundle ID | `jp.studio-prospect.prexus.ios` | Matches ASC app SKU / bundle |
+| Repo + scripts | Migrated in bundle-id PR (`generate_xcodeproj.rb`, device scripts) | Regenerate `project.pbxproj` after pull |
+| ASC app record | **PREXUS** (Apple ID `6775110218`) | Documented; no further ASC edits in repo PRs |
+| Provisioning profiles | `AppStorePREXUS_20260531`, `DevelopmentPREXUS_20260531` installed locally | Validate Release archive against Distribution profile |
+| Signing (Distribution) | **Open** | Validate Release archive for final ID |
+| Test targets | `jp.studio-prospect.prexus.ios.tests`, `.uitests` | Aligned with main app in generator |
 
-### Exit criteria (gate closed)
+### Exit criteria (upload-ready)
 
-- [x] Product owner records the **official Bundle ID** in [bundle_id_decision_memo.md](./bundle_id_decision_memo.md#sign-off-fill-when-decided) sign-off: `jp.studio-prospect.prexus.ios`.
-- [x] App Store Connect has an app whose Bundle ID **exactly matches** `jp.studio-prospect.prexus.ios`: `PREXUS`, Apple ID `6775110218`.
-- [ ] Xcode `PRODUCT_BUNDLE_IDENTIFIER` for **PREXUS** matches ASC (committed change or documented one-time archive override — must be traceable to the archived binary).
+- [x] Official Bundle ID in [bundle_id_decision_memo.md](./bundle_id_decision_memo.md#sign-off) sign-off.
+- [x] ASC app exists with Bundle ID `jp.studio-prospect.prexus.ios`.
+- [x] Xcode / scripts `PRODUCT_BUNDLE_IDENTIFIER` matches ASC (bundle-id migration PR).
+- [x] Provisioning profiles registered locally: `AppStorePREXUS_20260531`, `DevelopmentPREXUS_20260531`.
 - [ ] Release archive validates with **Distribution** signing for that ID (Organizer / `xcodebuild -exportArchive` dry run acceptable).
-- [ ] Internal TestFlight group and crash symbolication are mapped to the same ASC app + ID.
+- [ ] Internal TestFlight group and crash symbolication mapped to ASC app `PREXUS`.
 
-### While the gate is open
+### Xcode / script gate (complete after migration PR)
 
-- Proceed with RC smoke, simulator tests, and internal **Debug** sideload using `com.prexus.ios` if useful.
-- Do **not** mark TestFlight prep complete, create a release git tag for distribution, or upload to ASC until Xcode/scripts and Distribution signing use `jp.studio-prospect.prexus.ios`.
+Repo and device scripts reference the formal ID. **Previous placeholder:** `com.prexus.ios` — uninstall old builds on test devices before Debug smoke.
+
+### While Distribution signing is open
+
+- Proceed with simulator `PREXUSTests` and Debug device smoke with the **new** Bundle ID once provisioning exists.
+- Do **not** upload to TestFlight, create a distribution git tag, or mark upload-ready until Distribution archive validates.
 
 ---
 
@@ -171,12 +177,18 @@ Environment overrides: `DEVELOPMENT_TEAM`, `PREXUS_SKIP_BUILD=1` — see script 
 
 ### G. Bundle ID and signing (**blocking upload** — section A–E and smoke alone are insufficient)
 
-- [x] [bundle_id_decision_memo.md](./bundle_id_decision_memo.md) reviewed; owned-domain gate and approved ID agreed.
-- [x] Formal ID recorded in memo sign-off table: `jp.studio-prospect.prexus.ios`.
-- [ ] ASC app exists with `jp.studio-prospect.prexus.ios`; internal TestFlight group is under that app.
-- [ ] Xcode **PREXUS** target `PRODUCT_BUNDLE_IDENTIFIER` matches ASC for the archive you will upload.
-- [ ] Distribution signing succeeds for `jp.studio-prospect.prexus.ios` (not only Debug / ad hoc with `com.prexus.ios`).
-- [ ] Confirm: passing `alpha_smoke_wang.sh` with the dev placeholder ID does **not** satisfy this section.
+**Xcode / scripts / ASC record (complete after bundle-id migration PR):**
+
+- [x] [bundle_id_decision_memo.md](./bundle_id_decision_memo.md) sign-off: `jp.studio-prospect.prexus.ios`, ASC `PREXUS`.
+- [x] `generate_xcodeproj.rb` + device scripts use formal ID (migration PR).
+- [x] Regenerated `project.pbxproj` committed with formal test target IDs.
+- [x] Provisioning profiles registered locally: `AppStorePREXUS_20260531`, `DevelopmentPREXUS_20260531`.
+
+**Distribution / upload (still open):**
+
+- [ ] Distribution signing succeeds for `jp.studio-prospect.prexus.ios` (Release archive, not Debug-only).
+- [ ] Internal TestFlight group under ASC app `PREXUS` (manual ASC).
+- [ ] Uninstall any `com.prexus.ios` builds on test devices before re-smoking with new ID.
 
 ### F. Optional (not blocking text-only alpha)
 
@@ -189,7 +201,7 @@ Environment overrides: `DEVELOPMENT_TEAM`, `PREXUS_SKIP_BUILD=1` — see script 
 
 Manual steps for the release engineer. **Do not start** until [section G](#g-bundle-id-and-signing-blocking-upload--section-ae-and-smoke-alone-are-insufficient) is checked.
 
-0. **Bundle ID gate:** Confirm [exit criteria](#exit-criteria-gate-closed) are met; ASC app Bundle ID equals archived `PRODUCT_BUNDLE_IDENTIFIER` (`jp.studio-prospect.prexus.ios`, not the dev placeholder `com.prexus.ios`).
+0. **Bundle ID gate:** Confirm [upload-ready exit criteria](#exit-criteria-upload-ready) are met — especially **Distribution** archive for `jp.studio-prospect.prexus.ios` (Xcode/script alignment alone is insufficient).
 1. Bump `CFBundleShortVersionString` / `CFBundleVersion` per [naming table](#version-and-tag-naming-proposals-only).
 2. Regenerate Xcode project **with** llama artifact present (device linkage).
 3. Xcode → **Product → Archive** (Release, generic iOS device).
@@ -240,7 +252,7 @@ Send internal testers:
 3. Version naming is recorded in ASC and matches proposed tag name.
 4. Required device smoke (`alpha_smoke_wang.sh` or equivalent) passed on the build lineage intended for archive.
 
-**Ready to execute prep work** (smoke, docs, simulator tests) when A–E pass — section G may still be open.
+**Ready to execute prep work** (smoke, docs, simulator tests) when A–E pass. Section G **Xcode/ASC** items may be complete while **Distribution** items remain open.
 
 After upload, additionally confirm:
 

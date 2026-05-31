@@ -107,7 +107,7 @@ Production **PREXUS** and **Qwen MVP** are unchanged. Evaluation uses a separate
 | App sources | `app/ios/PREXUSLiteRTEval/` |
 | Xcode target | `PREXUSLiteRTEval` — added only when regenerating with `PREXUS_LITERT_LM_EVAL=1` |
 | Scheme | `PREXUSLiteRTEval.xcscheme` — generated alongside the eval target (gitignored; recreated by scripts) |
-| Bundle id | `com.prexus.ios.literteval` |
+| Bundle id | `jp.studio-prospect.prexus.ios.literteval` |
 | Model on device | `Documents/Models/prexus-eval-gemma4-e2b.litertlm` |
 | Eval log | `Documents/prexus-litert-device-eval.log` |
 | LiteRT-LM package | Shallow vendor at `vendor/LiteRT-LM` (see `vendor_litert_lm.sh`) |
