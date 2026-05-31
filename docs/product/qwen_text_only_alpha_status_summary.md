@@ -1,6 +1,6 @@
 # Qwen Text-Only Alpha — Status Summary (Build 1 Stable)
 
-**Last updated:** 2026-05-31 (post PR #37 on `main`)  
+**Last updated:** 2026-05-31 (post PR #37 on `main`)
 **Purpose:** One-page **current state** for Qwen text-only alpha operations. **Build 1 is in stable internal TestFlight operations** until a template-complete **Release blocker** opens build `2` approval.
 
 **Not executed here:** `CFBundleVersion` bump, archive, TestFlight upload, git tag, or changes to the [build 1 frozen ledger](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1).
