@@ -1,7 +1,7 @@
 # Qwen Text-Only Alpha — Release Notes
 
-**Release candidate:** Qwen + llama.cpp text-only alpha  
-**Target window:** 2026-06 mid-month (internal / TestFlight)  
+**Release candidate:** Qwen + llama.cpp text-only alpha
+**Target window:** 2026-06 mid-month (internal / TestFlight)
 **Main reference:** [qwen_text_only_alpha_release.md](./qwen_text_only_alpha_release.md)
 
 ## What ships
