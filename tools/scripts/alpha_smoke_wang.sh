@@ -107,7 +107,8 @@ if data.get("scenario") != os.environ["SCENARIO"]:
     sys.exit(1)
 generated = datetime.fromisoformat(data["generatedAt"].replace("Z", "+00:00"))
 start = datetime.fromisoformat(os.environ["START_ISO"].replace("Z", "+00:00"))
-if generated <= start:
+# Allow same-second writes; reject only results clearly from a prior launch.
+if (start - generated).total_seconds() > 2:
     sys.exit(1)
 if os.environ["SCENARIO"] == "sensitivity_matrix":
     results = data.get("results", [])

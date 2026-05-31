@@ -21,10 +21,10 @@ RC **code** criteria are satisfied on `main` (PR #22). Remaining work is **distr
 
 | Item | Owner | Status | Action |
 | --- | --- | --- | --- |
-| **Formal Bundle ID + ASC app + signing** | Product / release engineering | **Partial** | Distribution archive + export validated 2026-05-31 ([record](#distribution-archive-validation-2026-05-31)). **Upload blocked** until Wang smoke + TestFlight group |
+| **Formal Bundle ID + ASC app + signing** | Product / release engineering | **Partial** | Distribution + Wang smoke validated 2026-05-31. **Upload blocked** until TestFlight internal group + upload |
 | Version / build numbers aligned with alpha naming | Release engineer | In progress | `Info.plist` → `0.1.0` / build `1` (alpha PR); ASC must match on upload |
 | Device archive with llama.cpp linked | Release engineer | **Validated locally** | See [Distribution archive validation](#distribution-archive-validation-2026-05-31); repeat after each release-changing commit |
-| Required device smoke green | Release engineer | Open | Run [`alpha_smoke_wang.sh`](#automated-device-smoke-alpha_smoke_wangsh) (or equivalent A17 Pro+ device) |
+| Required device smoke green | Release engineer | **Done** (2026-05-31 Wang) | [`alpha_smoke_wang.sh`](#automated-device-smoke-alpha_smoke_wangsh) — all three scenarios on `jp.studio-prospect.prexus.ios` |
 | GGUF available to testers | Ops + testers | Open | Document push path; testers need `Documents/Models/prexus-local-mvp.gguf` |
 | Git release tag | Release engineer | Open | Create **only after** smoke + archive success — [tag procedure](#git-tag-procedure-do-not-run-in-automation) |
 | TestFlight upload + internal group | Release engineer | Open | Manual ASC steps — [upload outline](#testflight-upload-outline-not-executed-here) |
@@ -100,6 +100,20 @@ xcodebuild -exportArchive \
 | IPA signature | `Apple Distribution: studio PROSPECT, Inc (BWSS94LH28)` |
 
 Re-run after version bumps or runtime changes intended for TestFlight.
+
+---
+
+## Wang device smoke (2026-05-31)
+
+`./tools/scripts/alpha_smoke_wang.sh "Wang"` on `jp.studio-prospect.prexus.ios` after bundle-id migration.
+
+| Scenario | Result |
+| --- | --- |
+| `with_model` | Pass — `llama.cpp On-Device Runtime`, `local` |
+| `no_model` | Pass — embedded heuristic, `fallback_reason=embedded_heuristic` |
+| `sensitivity_matrix` | Pass — four sensitivity modes |
+
+**Device note:** first launch may fail if Wang is locked; unlock before smoke. Script freshness check tolerates same-second result writes (see `alpha_smoke_wang.sh`).
 
 ---
 
@@ -220,7 +234,7 @@ Environment overrides: `DEVELOPMENT_TEAM`, `PREXUS_SKIP_BUILD=1` — see script 
 
 - [x] Distribution signing succeeds for `jp.studio-prospect.prexus.ios` ([2026-05-31](#distribution-archive-validation-2026-05-31)).
 - [ ] Internal TestFlight group under ASC app `PREXUS` (manual ASC).
-- [ ] Wang / device smoke on new ID (`alpha_smoke_wang.sh`) — uninstall `com.prexus.ios` first.
+- [x] Wang / device smoke on new ID (2026-05-31; `VALIDATION PASSED` for `with_model`, `no_model`, `sensitivity_matrix`).
 
 ### F. Optional (not blocking text-only alpha)
 
