@@ -252,7 +252,16 @@ Use a dedicated **0.1.x** marketing line so TestFlight builds are clearly not a 
 | **TestFlight build subtitle** | `Qwen text-only alpha rc1` | Short human label in ASC |
 | **Branch naming (ops docs/PRs)** | `chore/qwen-alpha-release-ops-*` | Keeps ops churn out of runtime feature branches |
 
-**Respins:** Same marketing version `0.1.0`, new `CFBundleVersion`, new git tag e.g. `qwen-text-alpha-0.1.0-rc2` if binaries change materially.
+**Respins:** Same marketing version `0.1.0`, new `CFBundleVersion`, new git tag when the **IPA changes** — see [build 2 plan](./qwen_text_only_alpha_release_notes.md#build-2-plan-not-executed).
+
+| Artifact | Build `1` (shipped) | Build `2` (planned, not executed) |
+| --- | --- | --- |
+| **Git tag** | `qwen-text-alpha-0.1.0-rc1` | `qwen-text-alpha-0.1.0-build2` |
+| **CFBundleVersion** | `1` | `2` |
+| **Archive display name** | `PREXUS Qwen Text Alpha 0.1.0 (1)` | `PREXUS Qwen Text Alpha 0.1.0 (2)` (proposed) |
+| **Trigger** | First text-only alpha upload | Next **binary** respin only — not docs/evidence-only |
+
+**Docs-only updates:** do **not** bump build number; refresh ASC What to Test / repo docs against build `1`.
 
 **Next semver slice (post-alpha, not this task):** `0.2.0` for a broader Phase 1 drop; do not conflate with this text-only alpha.
 
@@ -261,6 +270,13 @@ Committed alpha versioning (TestFlight-first archive):
 ```text
 CFBundleShortVersionString = 0.1.0
 CFBundleVersion = 1
+```
+
+Planned next binary (not committed to Info.plist yet):
+
+```text
+CFBundleShortVersionString = 0.1.0
+CFBundleVersion = 2
 ```
 
 ---
