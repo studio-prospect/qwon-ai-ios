@@ -1,32 +1,38 @@
-# Qwen Text-Only Alpha — Release Readiness Checklist
+# Qwen Text-Only Alpha — Release Candidate Checklist
 
-Companion to [qwen_text_only_alpha_release.md](./qwen_text_only_alpha_release.md) and [local_inference_mvp.md](../requirements/local_inference_mvp.md).
+**Status:** Release candidate (RC) for 2026-06 mid-month internal / TestFlight alpha.
+**Production local path:** Qwen2.5-0.5B-Instruct Q4_K_M + llama.cpp only.
 
-Target: **2026-06 mid-month** internal / TestFlight alpha. Production local path: **Qwen2.5-0.5B-Instruct Q4_K_M + llama.cpp** only.
+| Doc | Purpose |
+| --- | --- |
+| [qwen_text_only_alpha_release.md](./qwen_text_only_alpha_release.md) | Scope and exclusions |
+| [qwen_text_only_alpha_release_notes.md](./qwen_text_only_alpha_release_notes.md) | Release notes + known limitations |
+| [qwen_text_only_alpha_tester_instructions.md](./qwen_text_only_alpha_tester_instructions.md) | Manual tester flow |
+| [local_inference_mvp.md](../requirements/local_inference_mvp.md) | P1-1 architecture |
+| [models/README.md](../../models/README.md) | GGUF placement |
 
-## Scope guard
+## Scope guard (RC)
 
-| Check | Status |
+| Check | RC status |
 | --- | --- |
 | No L2 backend selector | Required |
-| `automatic` / device runtime stays Qwen + llama.cpp (no LiteRT in production) | Required |
-| No OCR / compression v1 / audio / camera in alpha exit criteria | Required |
-| No `.gguf` / `.litertlm` / `.eval-logs` / DerivedData in git | Required |
+| `automatic` / device runtime = Qwen + llama.cpp | Required |
+| LiteRT-LM not in production behavior | Required |
+| No OCR / compression v1 / audio / camera in RC | Required |
+| No model artifacts / eval logs in git | Required |
 
 ## Code readiness
 
 | Item | Verification |
 | --- | --- |
-| Qwen missing model → embedded heuristic, no crash | `FallbackLocalModelClient` + `PREXUSTests.testRunTurnMarksFallbackWhenLlamaPrimaryFails` |
-| llama.cpp load/generation failure → embedded heuristic | Same chain; `LocalModelError.diagnosticDescription` in trace |
-| Diagnostics show `answered_by`, `primary_failure`, `fallback_reason` | `LocalModelExecutionTrace.formattedDetail`; runtime turn uses `.fallback` when trace has `primary_failure` |
-| Simulator uses mock/safe backend | `AppLocalModelFactory` + `PREXUSTests` factory tests |
-| Sensitivity routing unchanged | Existing `PREXUSTests` sensitivity / routing tests |
-| Cloud key missing → local path, no invalid cloud call | `testRunTurnUsesLocalPrimaryWhenCloudKeyIsMissing` |
+| Qwen missing → embedded heuristic, no crash | `FallbackLocalModelClient`, `PREXUSTests`, Wang `no_model` smoke |
+| llama.cpp failure diagnostics | `LocalModelError.diagnosticDescription`, trace fields |
+| Nested fallback preserves real responder | `testNestedFallbackDoesNotEmitEmbeddedHeuristicReasonWhenQwenAnswers` |
+| Simulator safe backend | `AppLocalModelFactory` + `PREXUSTests` |
+| Sensitivity routing | `PREXUSTests` + Wang `sensitivity_matrix` smoke |
+| Cloud key missing → no invalid cloud call | `testRunTurnUsesLocalPrimaryWhenCloudKeyIsMissing` |
 
 ## Build & test commands
-
-Default project (no LiteRT prototype):
 
 ```bash
 ruby tools/scripts/generate_xcodeproj.rb
@@ -36,50 +42,44 @@ xcodebuild -project PREXUS.xcodeproj -scheme PREXUS \
   -derivedDataPath ../../.derivedData-release test
 ```
 
-Optional device smoke (environment-specific):
+Device RC smoke (Wang or equivalent A17 Pro+):
 
 ```bash
 ./tools/scripts/fetch_local_model.sh
-./tools/scripts/build_llama_xcframework.sh   # if not already built
+./tools/scripts/build_llama_xcframework.sh   # once per machine
 ruby tools/scripts/generate_xcodeproj.rb
 ./tools/scripts/alpha_smoke_wang.sh "Wang"
 ```
 
-Artifacts (gitignored): `.eval-logs/wang-alpha-smoke-result.json`, `.eval-logs/wang-alpha-smoke-no-model-result.json`
+Optional faster re-run after build: `PREXUS_SKIP_BUILD=1 ./tools/scripts/alpha_smoke_wang.sh "Wang"`
 
-## Manual smoke (physical device)
+Artifacts (gitignored): `.eval-logs/wang-alpha-smoke-*.json`
 
-Automated on **Wang** (2026-05-31) via `alpha_smoke_wang.sh`:
+## Wang automated smoke (2026-05-31, RC refresh)
 
-| Check | Result |
+| Scenario | Result |
 | --- | --- |
-| App launches; local turn without crash | Pass (both scenarios) |
-| GGUF present → llama.cpp | Pass — `executionModel=llama.cpp On-Device Runtime`, `executionMode=local`, `answered_by=llama.cpp` |
-| Forced missing model → embedded fallback | Pass — `executionMode=fallback`, `Embedded Heuristic Runtime`, `primary_failure=model_asset_unavailable`, `fallback_reason=embedded_heuristic` |
-| Four sensitivity modes (manual) | Not run in automated script |
-| Diagnostics route + execution detail | Pass — encoded in smoke JSON `executionDetail` |
+| `with_model` | Pass — `llama.cpp On-Device Runtime`, `local`, `answered_by=llama.cpp` |
+| `no_model` | Pass — `fallback`, embedded heuristic, `model_asset_unavailable`, `fallback_reason=embedded_heuristic` |
+| `sensitivity_matrix` | Pass — four modes complete without error; `localOnly` + `providerRestricted` stay local; `escalationAllowed` may route OpenAI when keys exist (Wang: cloud fail → local llama fallback, no crash) |
 
-- [x] App launches; Chat accepts a text turn without crash
-- [x] With GGUF in `Documents/Models/prexus-local-mvp.gguf`, response comes from llama.cpp (diagnostics `answered_by=llama.cpp On-Device Runtime`)
-- [x] With forced missing path (`PREXUS_LOCAL_MODEL_PATH` → nonexistent file), response returns via embedded heuristic; `mode=fallback`, `primary_failure` + `fallback_reason=embedded_heuristic`
-- [ ] All four sensitivity modes send one turn each (optional manual follow-up)
-- [x] Diagnostics list shows route + execution detail for smoke turns
+## RC manual checklist
 
-## Known limitations (alpha)
+- [x] App launches; local turn without crash (automated + manual path documented)
+- [x] GGUF present → llama.cpp (`with_model`)
+- [x] Forced missing model → embedded fallback (`no_model`)
+- [x] Four sensitivity modes — one turn each (`sensitivity_matrix`)
+- [x] Diagnostics show route + execution detail (including fallback fields)
+- [ ] TestFlight / internal distribution build tagged (product ops)
+- [ ] Optional: escalation with real OpenAI key on device (not required for RC)
 
-| Topic | Expectation |
-| --- | --- |
-| Model quality | 0.5B demo-grade; may hallucinate on facts |
-| Model install | Manual copy / `push_local_model_to_device.sh`; no in-app download UX |
-| Hardware | A17 Pro-class+ for real Qwen; older devices use embedded heuristic |
-| LiteRT-LM | Prototype/eval only; not alpha behavior |
-| Multimodal | Text-only alpha; OCR/camera/audio deferred |
+## RC sign-off criteria
 
-## Release candidate sign-off
+PREXUS may be called a **release candidate** when all are true:
 
-Alpha is **release-candidate evaluable** when:
-
-1. Simulator `PREXUSTests` green on default generated project.
-2. Device smoke (if available) confirms Qwen path and missing-model fallback with diagnostics.
-3. PR body lists concrete test results and links this checklist.
+1. Simulator `PREXUSTests` green on default generated project (no LiteRT prototype).
+2. Wang smoke (or equivalent device) passes `with_model`, `no_model`, and `sensitivity_matrix`.
+3. Release notes, tester instructions, and this checklist are linked from the alpha scope doc.
 4. No production routing or automatic backend change beyond Qwen + llama.cpp.
+
+**Not required for RC:** LiteRT adoption, OCR, compression v1, model download UX, four-provider cloud matrix on device.

@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-# Qwen text-only alpha smoke on Wang (GGUF present vs forced-missing path).
+# Qwen text-only alpha RC smoke on Wang (backend + sensitivity matrix).
 #
 # Usage:
 #   ./tools/scripts/alpha_smoke_wang.sh "Wang"
+#   PREXUS_SKIP_BUILD=1 ./tools/scripts/alpha_smoke_wang.sh "Wang"
 
 set -euo pipefail
 
@@ -14,8 +15,9 @@ TEAM="${DEVELOPMENT_TEAM:-BWSS94LH28}"
 APP="$DERIVED/Build/Products/Debug-iphoneos/PREXUS.app"
 BUNDLE_ID="com.prexus.ios"
 LOG_DIR="$ROOT/.eval-logs"
-RESULT_OUT="$LOG_DIR/wang-alpha-smoke-result.json"
-MISSING_RESULT_OUT="$LOG_DIR/wang-alpha-smoke-no-model-result.json"
+RESULT_OUT="$LOG_DIR/wang-alpha-smoke-with_model.json"
+MISSING_RESULT_OUT="$LOG_DIR/wang-alpha-smoke-no_model.json"
+SENSITIVITY_OUT="$LOG_DIR/wang-alpha-smoke-sensitivity_matrix.json"
 
 if [[ ! -f "$ROOT/models/prexus-local-mvp.gguf" ]]; then
   echo "error: missing models/prexus-local-mvp.gguf — run ./tools/scripts/fetch_local_model.sh" >&2
@@ -29,16 +31,24 @@ fi
 
 ruby "$ROOT/tools/scripts/generate_xcodeproj.rb"
 
-echo "==> Build Debug PREXUS for device"
-cd "$IOS"
-xcodebuild \
-  -project PREXUS.xcodeproj \
-  -scheme PREXUS \
-  -destination 'generic/platform=iOS' \
-  -derivedDataPath "$DERIVED" \
-  DEVELOPMENT_TEAM="$TEAM" \
-  -allowProvisioningUpdates \
-  build
+if [[ "${PREXUS_SKIP_BUILD:-0}" != "1" ]]; then
+  echo "==> Build Debug PREXUS for device"
+  cd "$IOS"
+  xcodebuild \
+    -project PREXUS.xcodeproj \
+    -scheme PREXUS \
+    -destination 'generic/platform=iOS' \
+    -derivedDataPath "$DERIVED" \
+    DEVELOPMENT_TEAM="$TEAM" \
+    -allowProvisioningUpdates \
+    build
+else
+  echo "==> Skipping build (PREXUS_SKIP_BUILD=1)"
+  if [[ ! -d "$APP" ]]; then
+    echo "error: missing $APP — run without PREXUS_SKIP_BUILD first" >&2
+    exit 1
+  fi
+fi
 
 DEVICE_ID="$(
   DEVICE_JSON="$(mktemp)"
@@ -83,7 +93,7 @@ wait_for_smoke_result() {
   local dest="$1"
   local scenario="$2"
   local start_iso="$3"
-  local poll=120
+  local poll="${4:-120}"
   local interval=5
   local elapsed=0
   while (( elapsed < poll )); do
@@ -97,9 +107,16 @@ if data.get("scenario") != os.environ["SCENARIO"]:
     sys.exit(1)
 generated = datetime.fromisoformat(data["generatedAt"].replace("Z", "+00:00"))
 start = datetime.fromisoformat(os.environ["START_ISO"].replace("Z", "+00:00"))
-if generated > start and not data.get("error"):
+if generated <= start:
+    sys.exit(1)
+if os.environ["SCENARIO"] == "sensitivity_matrix":
+    results = data.get("results", [])
+    if len(results) != 4 or any(item.get("error") for item in results):
+        sys.exit(1)
     sys.exit(0)
-sys.exit(1)
+if data.get("error"):
+    sys.exit(1)
+sys.exit(0)
 PY
     then
       echo "Fresh smoke result ($scenario) after ${elapsed}s"
@@ -161,8 +178,12 @@ echo "==> Scenario B: no_model (PREXUS_LOCAL_MODEL_PATH missing)"
 START_B="$(launch_smoke no_model "PREXUS_LOCAL_MODEL_PATH=/var/empty/prexus-missing.gguf")"
 wait_for_smoke_result "$MISSING_RESULT_OUT" "no_model" "$START_B"
 
+echo "==> Scenario C: sensitivity_matrix (four modes, GGUF present)"
+START_C="$(launch_smoke sensitivity_matrix)"
+wait_for_smoke_result "$SENSITIVITY_OUT" "sensitivity_matrix" "$START_C" 420
+
 echo "==> Validate results"
-WITH_PATH="$RESULT_OUT" NO_PATH="$MISSING_RESULT_OUT" python3 <<'PY'
+WITH_PATH="$RESULT_OUT" NO_PATH="$MISSING_RESULT_OUT" SENS_PATH="$SENSITIVITY_OUT" python3 <<'PY'
 import json, os, sys
 
 def load(path):
@@ -191,6 +212,33 @@ if "model_asset_unavailable" not in detail:
 if "fallback_reason=embedded_heuristic" not in detail:
     errors.append("no_model: executionDetail missing fallback_reason=embedded_heuristic")
 
+sens = load(os.environ["SENS_PATH"])
+rows = sens.get("results", [])
+if len(rows) != 4:
+    errors.append(f"sensitivity_matrix: expected 4 results, got {len(rows)}")
+for row in rows:
+    label = row.get("sensitivity", "?")
+    if row.get("error"):
+        errors.append(f"sensitivity_matrix/{label}: error {row['error']}")
+        continue
+    codes = row.get("routeReasonCodes", [])
+    target = row.get("routeTarget")
+    mode = row.get("executionMode")
+    if label == "localOnly":
+        if target != "Local" or "local_only" not in codes:
+            errors.append(f"sensitivity_matrix/localOnly: expected local route with local_only, got {target} {codes}")
+    elif label == "localPreferred":
+        if target != "Local":
+            errors.append(f"sensitivity_matrix/localPreferred: expected route Local, got {target!r}")
+    elif label == "escalationAllowed":
+        if "codeAnalysis" not in codes:
+            errors.append(f"sensitivity_matrix/escalationAllowed: expected codeAnalysis in {codes}")
+        if mode not in ("local", "cloud", "fallback"):
+            errors.append(f"sensitivity_matrix/escalationAllowed: unexpected mode {mode!r}")
+    elif label == "providerRestricted":
+        if target != "Local" or "provider_restricted" not in codes:
+            errors.append(f"sensitivity_matrix/providerRestricted: expected local + provider_restricted, got {target} {codes}")
+
 if errors:
     print("VALIDATION FAILED:", file=sys.stderr)
     for err in errors:
@@ -200,8 +248,10 @@ if errors:
 print("VALIDATION PASSED")
 print("with_model:", json.dumps(with_data, ensure_ascii=False))
 print("no_model:", json.dumps(no_data, ensure_ascii=False))
+print("sensitivity_matrix:", json.dumps(sens, ensure_ascii=False))
 PY
 
 echo "Done."
-echo "  with_model: $RESULT_OUT"
-echo "  no_model:   $MISSING_RESULT_OUT"
+echo "  with_model:           $RESULT_OUT"
+echo "  no_model:             $MISSING_RESULT_OUT"
+echo "  sensitivity_matrix:   $SENSITIVITY_OUT"

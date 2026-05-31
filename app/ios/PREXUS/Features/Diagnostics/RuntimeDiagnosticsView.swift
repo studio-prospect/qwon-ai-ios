@@ -67,7 +67,7 @@ struct RuntimeDiagnosticsView: View {
                     PREXUSStatusChip("Local-only history", tint: .secondary)
                 }
 
-                Text("Entries show the route target, execution path, and primary reason first so you can scan policy behavior without opening raw logs.")
+                Text("Entries show route target, execution path, and detail (including answered_by, primary_failure, and fallback_reason when the embedded heuristic answered after a local backend failure).")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
