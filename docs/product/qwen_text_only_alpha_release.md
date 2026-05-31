@@ -95,6 +95,7 @@ Device checks should be recorded manually because physical device availability a
 
 Release candidate docs:
 
+- **[qwen_text_only_alpha_status_summary.md](./qwen_text_only_alpha_status_summary.md)** — **current status** (build `1` stable; build `2` not approved)
 - [qwen_text_only_alpha_release_readiness.md](./qwen_text_only_alpha_release_readiness.md) — RC checklist
 - [qwen_text_only_alpha_release_notes.md](./qwen_text_only_alpha_release_notes.md) — release notes and known limitations
 - [qwen_text_only_alpha_tester_instructions.md](./qwen_text_only_alpha_tester_instructions.md) — internal / TestFlight tester steps
