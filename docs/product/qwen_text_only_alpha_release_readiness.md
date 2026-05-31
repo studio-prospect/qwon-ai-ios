@@ -80,11 +80,12 @@ Concrete steps live in [qwen_text_only_alpha_testflight_prep.md](./qwen_text_onl
 
 | Step | Gate |
 | --- | --- |
+| **Bundle ID + signing** | **Blocking** — formal ID undecided; dev placeholder `com.prexus.ios` is not upload-ready ([prep doc](./qwen_text_only_alpha_testflight_prep.md#bundle-id-and-signing-gate-blocking-testflight)) |
 | Version naming | Proposed `0.1.0` / build `1`, git tag `qwen-text-alpha-0.1.0-rc1` (manual) |
 | Pre-upload smoke | `alpha_smoke_wang.sh`: `with_model`, `no_model`, `sensitivity_matrix` |
 | Device archive | `build_llama_xcframework.sh` + `generate_xcodeproj.rb` before Release archive |
 | Tester comms | Link [tester instructions](./qwen_text_only_alpha_tester_instructions.md) + [release notes](./qwen_text_only_alpha_release_notes.md) |
-| Tag + TestFlight upload | Manual ASC / git — **not automated in repo** |
+| Tag + TestFlight upload | Manual ASC / git — **only after Bundle ID gate closed** |
 
 ## RC sign-off criteria
 

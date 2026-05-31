@@ -20,6 +20,7 @@ RC **code** criteria are satisfied on `main` (PR #22). Remaining work is **distr
 
 | Item | Owner | Status | Action |
 | --- | --- | --- | --- |
+| **Formal Bundle ID + ASC app + signing** | Product / release engineering | **Blocked** | [Bundle ID gate](#bundle-id-and-signing-gate-blocking-testflight) must be **closed** before upload; repo placeholder `com.prexus.ios` is not upload approval |
 | Version / build numbers aligned with alpha naming | Release engineer | Open | Apply [Version and tag naming](#version-and-tag-naming-proposals-only) in Xcode before first archive |
 | Device archive with llama.cpp linked | Release engineer | Open | `build_llama_xcframework.sh` → `generate_xcodeproj.rb` → Release archive (see below) |
 | Required device smoke green | Release engineer | Open | Run [`alpha_smoke_wang.sh`](#automated-device-smoke-alpha_smoke_wangsh) (or equivalent A17 Pro+ device) |
@@ -29,6 +30,35 @@ RC **code** criteria are satisfied on `main` (PR #22). Remaining work is **distr
 | Tester onboarding text | Product ops | Open | Paste release-notes excerpt + link to [tester instructions](./qwen_text_only_alpha_tester_instructions.md) |
 
 **Explicitly out of scope for this alpha:** App Store public release, LiteRT production, L2 selector, OCR/compression/audio/camera, in-app model download UX.
+
+**Not upload-ready when:** sections A–E and device smoke pass but the [Bundle ID gate](#bundle-id-and-signing-gate-blocking-testflight) remains open. Smoke validates runtime behavior only; it does not substitute for a decided App Store Connect identity.
+
+---
+
+## Bundle ID and signing gate (blocking TestFlight)
+
+The **production / TestFlight Bundle ID is not finalized**. Until product ops closes this gate, PREXUS must be treated as **not upload-ready**, even if simulator tests and `alpha_smoke_wang.sh` are green.
+
+| Topic | Current state | Upload requirement |
+| --- | --- | --- |
+| Formal Bundle ID | **Undecided** | Single agreed ID recorded in ASC and Xcode before first archive |
+| Repo / dev placeholder | `com.prexus.ios` in `generate_xcodeproj.rb`, `alpha_smoke_wang.sh`, `install_on_device.sh` | Dev smoke and ad hoc only — **not** proof of TestFlight identity |
+| ASC app record | Must match finalized ID | Create or select app only after ID decision |
+| Signing | `DEVELOPMENT_TEAM` / Automatic Signing per engineer machine | Profiles and entitlements must cover the **final** Bundle ID |
+| Test targets | `com.prexus.ios.tests`, `com.prexus.ios.uitests` | May change with main app ID in a follow-up ops PR |
+
+### Exit criteria (gate closed)
+
+- [ ] Product owner records the **official Bundle ID** (and any ASC app name / SKU notes) in team ops (wiki, issue, or signed release memo — outside this doc if preferred).
+- [ ] App Store Connect has an app whose Bundle ID **exactly matches** the decision (new app or pre-existing — document which).
+- [ ] Xcode `PRODUCT_BUNDLE_IDENTIFIER` for **PREXUS** matches ASC (committed change or documented one-time archive override — must be traceable to the archived binary).
+- [ ] Release archive validates with **Distribution** signing for that ID (Organizer / `xcodebuild -exportArchive` dry run acceptable).
+- [ ] Internal TestFlight group and crash symbolication are mapped to the same ASC app + ID.
+
+### While the gate is open
+
+- Proceed with RC smoke, simulator tests, and internal **Debug** sideload using `com.prexus.ios` if useful.
+- Do **not** mark TestFlight prep complete, create a release git tag for distribution, or upload to ASC.
 
 ---
 
@@ -60,7 +90,7 @@ CFBundleVersion = 1
 
 ## Git tag procedure (do not run in automation)
 
-Run only after [Pre-TestFlight gate](#pre-testflight-gate-checklist) passes on the **same commit** you archive.
+Run only after [Pre-TestFlight gate](#pre-testflight-gate-checklist) passes **including the Bundle ID gate (section G)** on the **same commit** you archive.
 
 ```bash
 # Example — execute manually when ready; not part of CI/docs PRs
@@ -136,6 +166,14 @@ Environment overrides: `DEVELOPMENT_TEAM`, `PREXUS_SKIP_BUILD=1` — see script 
 - [ ] [Tester instructions](./qwen_text_only_alpha_tester_instructions.md) linked from ASC “What to Test”.
 - [ ] [Release notes](./qwen_text_only_alpha_release_notes.md) limitations copied into tester comms.
 
+### G. Bundle ID and signing (**blocking upload** — section A–E and smoke alone are insufficient)
+
+- [ ] [Bundle ID gate](#bundle-id-and-signing-gate-blocking-testflight) **closed**: formal ID decided and recorded by product ops.
+- [ ] ASC app exists with that Bundle ID; internal TestFlight group is under that app.
+- [ ] Xcode **PREXUS** target `PRODUCT_BUNDLE_IDENTIFIER` matches ASC for the archive you will upload.
+- [ ] Distribution signing succeeds for the final ID (not only Debug / ad hoc with `com.prexus.ios`).
+- [ ] Confirm: passing `alpha_smoke_wang.sh` with the dev placeholder ID does **not** satisfy this section.
+
 ### F. Optional (not blocking text-only alpha)
 
 - [ ] Escalation smoke with a real OpenAI key on device (`escalationAllowed` cloud path).
@@ -145,13 +183,14 @@ Environment overrides: `DEVELOPMENT_TEAM`, `PREXUS_SKIP_BUILD=1` — see script 
 
 ## TestFlight upload outline (not executed here)
 
-Manual steps for the release engineer; adjust for your ASC app record.
+Manual steps for the release engineer. **Do not start** until [section G](#g-bundle-id-and-signing-blocking-upload--section-ae-and-smoke-alone-are-insufficient) is checked.
 
+0. **Bundle ID gate:** Confirm [exit criteria](#exit-criteria-gate-closed) are met; ASC app Bundle ID equals archived `PRODUCT_BUNDLE_IDENTIFIER` (not merely the dev placeholder `com.prexus.ios` unless that ID is explicitly the finalized decision).
 1. Bump `CFBundleShortVersionString` / `CFBundleVersion` per [naming table](#version-and-tag-naming-proposals-only).
 2. Regenerate Xcode project **with** llama artifact present (device linkage).
 3. Xcode → **Product → Archive** (Release, generic iOS device).
-4. Validate archive: signing, embedded `llama.framework`, no debug-only traps.
-5. **Distribute App** → App Store Connect → upload.
+4. Validate archive: **Distribution** signing for the **final** Bundle ID, embedded `llama.framework`, no debug-only traps.
+5. **Distribute App** → App Store Connect → upload to the app record that matches section G.
 6. In ASC: select build, add **internal** testers group, paste What to Test (scope + model install + [tester instructions](./qwen_text_only_alpha_tester_instructions.md) URL/path).
 7. After processing: confirm install on one A17 Pro+ device before widening the group.
 8. Create git tag per [tag procedure](#git-tag-procedure-do-not-run-in-automation) on the archived commit.
@@ -190,10 +229,17 @@ Send internal testers:
 
 ## Sign-off
 
-TestFlight prep is **ready to execute** when:
+**Upload-ready** (TestFlight binary may be uploaded) only when **all** are true:
 
-1. Pre-TestFlight gate checklist (sections A–E) is checked.
-2. Version naming is recorded in ASC and matches proposed tag name.
-3. At least one internal tester device confirmed install + one chat turn.
+1. Pre-TestFlight gate checklist sections **A–E** are checked.
+2. **Section G (Bundle ID and signing)** is checked — formal ID decided, ASC app aligned, Distribution signing validated.
+3. Version naming is recorded in ASC and matches proposed tag name.
+4. Required device smoke (`alpha_smoke_wang.sh` or equivalent) passed on the build lineage intended for archive.
+
+**Ready to execute prep work** (smoke, docs, simulator tests) when A–E pass — section G may still be open.
+
+After upload, additionally confirm:
+
+5. At least one internal tester device installed via TestFlight and completed one chat turn.
 
 Tagging and upload remain **manual**; this document only defines the procedure.
