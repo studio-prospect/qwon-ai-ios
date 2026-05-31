@@ -7,7 +7,7 @@ This doc records the RC-to-internal-TestFlight steps and provides copy for **lab
 | Doc | Role |
 | --- | --- |
 | [qwen_text_only_alpha_release.md](./qwen_text_only_alpha_release.md) | Alpha scope and exclusions |
-| [qwen_text_only_alpha_release_readiness.md](./qwen_text_only_alpha_release_readiness.md) | RC readiness + [next build gate](./qwen_text_only_alpha_release_readiness.md#next-build-gate-before-build-2) |
+| [qwen_text_only_alpha_release_readiness.md](./qwen_text_only_alpha_release_readiness.md) | RC readiness + [next build gate](./qwen_text_only_alpha_release_readiness.md#next-build-gate-before-build-2) + [build 2 triage decision](./qwen_text_only_alpha_release_readiness.md#build-2-binary-respin-decision-triage) |
 | [qwen_text_only_alpha_release_notes.md](./qwen_text_only_alpha_release_notes.md) | Tester-facing limitations |
 | [qwen_text_only_alpha_tester_instructions.md](./qwen_text_only_alpha_tester_instructions.md) | Manual tester flow |
 | [qwen_text_only_alpha_lab_evidence.md](./qwen_text_only_alpha_lab_evidence.md) | Two-device evidence fields, retention rules, frozen ledger |
@@ -485,6 +485,19 @@ For the **two-device lab** only:
 6. Feedback channel (issue template / Slack — team choice; not defined in repo).
 
 **Do not** add ASC testers who lack a lab device and dev Mac GGUF push.
+
+### Feedback and build 2 classification
+
+When testers report issues on **`0.1.0 (1)`**, classify using [Known issues triage for build 1](./qwen_text_only_alpha_release_notes.md#known-issues-triage-for-build-1) before requesting a new TestFlight build:
+
+| Class | Action |
+| --- | --- |
+| **Release blocker** | Escalate; approve [build 2 plan](./qwen_text_only_alpha_release_notes.md#build-2-plan-not-executed) only after binary reason is recorded. |
+| **Build 2 candidate** | Prefer build `1` + docs unless IPA change is essential. |
+| **Docs/ops only** | Update ASC / onboarding / lab evidence metadata — **no** new build. |
+| **Post-alpha** | Track outside alpha; do not block build `1`. |
+
+**Current recommendation:** **maintain build `1`** — no open release blocker on the 2026-05-31 triage.
 
 ---
 

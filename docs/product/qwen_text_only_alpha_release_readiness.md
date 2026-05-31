@@ -121,6 +121,24 @@ Full plan: [release notes — Build 2](./qwen_text_only_alpha_release_notes.md#b
 | Ops folder | `~/PREXUS-alpha-evidence/qwen-text-0.1.0-build2/` | **no** (create after evidence, not before upload planning PR) |
 | Ledger subsection | `### Frozen ledger: 0.1.0 build 2` | **no** (append after evidence; build `1` immutable) |
 
+### Build 2 binary respin decision (triage)
+
+Use after [Known issues triage for build 1](./qwen_text_only_alpha_release_notes.md#known-issues-triage-for-build-1). **Default: do not approve build `2`.**
+
+| Question | If **yes** | If **no** (2026-05-31 default) |
+| --- | --- | --- |
+| Any open **[Release blocker](./qwen_text_only_alpha_release_notes.md#release-blocker)** on TestFlight `0.1.0 (1)`? | Fill [Binary respin reason](./qwen_text_only_alpha_release_notes.md#binary-respin-reason-required-before-cut); proceed with planned build `2` | **Stay on build `1`** |
+| Only **Docs/ops** or **Post-alpha** items? | Update docs / ASC; no `CFBundleVersion` bump | **Stay on build `1`** |
+| **Build 2 candidate** only (UX polish, model quality, non-blocking diagnostics clarity)? | Prefer build `1` + docs unless product explicitly needs IPA | **Stay on build `1`** |
+| Wang + Matisse evidence still **pass** on build `1`? | Necessary but not sufficient for build `2` | Confirmed — [frozen ledger](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1) |
+
+**Checklist before approving build `2`:**
+
+- [ ] At least one **Release blocker** row added to the triage table with repro on build `1`.
+- [ ] Binary respin reason text approved in [release notes](./qwen_text_only_alpha_release_notes.md#binary-respin-reason-required-before-cut).
+- [ ] No triage item is **only** Docs/ops or Post-alpha.
+- [ ] Implementation PR scope is Qwen text-only (no LiteRT production / L2 / multimodal scope creep).
+
 ### 1. Record the change (git docs only)
 
 - [ ] Write **why** the respin is needed in [release notes — Binary respin reason](./qwen_text_only_alpha_release_notes.md#binary-respin-reason-required-before-cut) (skip if staying on build `1`).
