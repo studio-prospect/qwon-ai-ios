@@ -21,9 +21,9 @@ RC **code** criteria are satisfied on `main` (PR #22). Remaining work is **distr
 
 | Item | Owner | Status | Action |
 | --- | --- | --- | --- |
-| **Formal Bundle ID + ASC app + signing** | Product / release engineering | **Partial** | ID, ASC app, local profiles, and repo migration documented for `jp.studio-prospect.prexus.ios` ([memo](./bundle_id_decision_memo.md)). **Upload blocked** until Distribution signing + archive validate |
-| Version / build numbers aligned with alpha naming | Release engineer | Open | Apply [Version and tag naming](#version-and-tag-naming-proposals-only) in Xcode before first archive |
-| Device archive with llama.cpp linked | Release engineer | Open | `build_llama_xcframework.sh` → `generate_xcodeproj.rb` → Release archive (see below) |
+| **Formal Bundle ID + ASC app + signing** | Product / release engineering | **Partial** | Distribution archive + export validated 2026-05-31 ([record](#distribution-archive-validation-2026-05-31)). **Upload blocked** until Wang smoke + TestFlight group |
+| Version / build numbers aligned with alpha naming | Release engineer | In progress | `Info.plist` → `0.1.0` / build `1` (alpha PR); ASC must match on upload |
+| Device archive with llama.cpp linked | Release engineer | **Validated locally** | See [Distribution archive validation](#distribution-archive-validation-2026-05-31); repeat after each release-changing commit |
 | Required device smoke green | Release engineer | Open | Run [`alpha_smoke_wang.sh`](#automated-device-smoke-alpha_smoke_wangsh) (or equivalent A17 Pro+ device) |
 | GGUF available to testers | Ops + testers | Open | Document push path; testers need `Documents/Models/prexus-local-mvp.gguf` |
 | Git release tag | Release engineer | Open | Create **only after** smoke + archive success — [tag procedure](#git-tag-procedure-do-not-run-in-automation) |
@@ -48,7 +48,7 @@ The **formal Bundle ID is decided** (`jp.studio-prospect.prexus.ios`). PREXUS re
 | Repo + scripts | Migrated in bundle-id PR (`generate_xcodeproj.rb`, device scripts) | Regenerate `project.pbxproj` after pull |
 | ASC app record | **PREXUS** (Apple ID `6775110218`) | Documented; no further ASC edits in repo PRs |
 | Provisioning profiles | `AppStorePREXUS_20260531`, `DevelopmentPREXUS_20260531` installed locally | Validate Release archive against Distribution profile |
-| Signing (Distribution) | **Open** | Validate Release archive for final ID |
+| Signing (Distribution) | **Validated** (2026-05-31) | Release archive + `app-store-connect` export; see [validation record](#distribution-archive-validation-2026-05-31) |
 | Test targets | `jp.studio-prospect.prexus.ios.tests`, `.uitests` | Aligned with main app in generator |
 
 ### Exit criteria (upload-ready)
@@ -57,17 +57,49 @@ The **formal Bundle ID is decided** (`jp.studio-prospect.prexus.ios`). PREXUS re
 - [x] ASC app exists with Bundle ID `jp.studio-prospect.prexus.ios`.
 - [x] Xcode / scripts `PRODUCT_BUNDLE_IDENTIFIER` matches ASC (bundle-id migration PR).
 - [x] Provisioning profiles registered locally: `AppStorePREXUS_20260531`, `DevelopmentPREXUS_20260531`.
-- [ ] Release archive validates with **Distribution** signing for that ID (Organizer / `xcodebuild -exportArchive` dry run acceptable).
+- [x] Release archive validates with **Distribution** signing for that ID ([2026-05-31 validation](#distribution-archive-validation-2026-05-31)).
 - [ ] Internal TestFlight group and crash symbolication mapped to ASC app `PREXUS`.
 
 ### Xcode / script gate (complete after migration PR)
 
 Repo and device scripts reference the formal ID. **Previous placeholder:** `com.prexus.ios` — uninstall old builds on test devices before Debug smoke.
 
-### While Distribution signing is open
+### After Distribution archive validates
 
-- Proceed with simulator `PREXUSTests` and Debug device smoke with the **new** Bundle ID once provisioning exists.
-- Do **not** upload to TestFlight, create a distribution git tag, or mark upload-ready until Distribution archive validates.
+- Proceed with Wang / device smoke on the **new** Bundle ID (uninstall old `com.prexus.ios` builds first).
+- Do **not** upload to TestFlight or create a distribution git tag until device smoke and ASC internal group are ready.
+
+---
+
+## Distribution archive validation (2026-05-31)
+
+Local validation on `main` after bundle-id migration (no TestFlight upload). Prerequisites: `fetch_local_model.sh`, `build_llama_xcframework.sh`, then `ruby tools/scripts/generate_xcodeproj.rb` **with** `llama.xcframework` present (local only — do not commit llama-linked `project.pbxproj`).
+
+```bash
+cd app/ios
+xcodebuild -project PREXUS.xcodeproj -scheme PREXUS \
+  -destination 'generic/platform=iOS' -configuration Release \
+  -archivePath ../../.archive/PREXUS-Release.xcarchive \
+  DEVELOPMENT_TEAM=BWSS94LH28 CODE_SIGN_STYLE=Automatic \
+  -allowProvisioningUpdates archive
+
+xcodebuild -exportArchive \
+  -archivePath ../../.archive/PREXUS-Release.xcarchive \
+  -exportPath ../../.archive/PREXUS-Export \
+  -exportOptionsPlist ../../.archive/ExportOptions-appstore.plist \
+  -allowProvisioningUpdates
+```
+
+`ExportOptions-appstore.plist` (local, not in git): `method` = `app-store-connect`, `teamID` = `BWSS94LH28`, `signingStyle` = `automatic`.
+
+| Check | Result |
+| --- | --- |
+| Archive | **ARCHIVE SUCCEEDED** |
+| Export | **EXPORT SUCCEEDED** |
+| Bundle ID in archive | `jp.studio-prospect.prexus.ios` |
+| IPA signature | `Apple Distribution: studio PROSPECT, Inc (BWSS94LH28)` |
+
+Re-run after version bumps or runtime changes intended for TestFlight.
 
 ---
 
@@ -88,10 +120,10 @@ Use a dedicated **0.1.x** marketing line so TestFlight builds are clearly not a 
 
 **Next semver slice (post-alpha, not this task):** `0.2.0` for a broader Phase 1 drop; do not conflate with this text-only alpha.
 
-Current committed defaults (change before first TestFlight archive):
+Committed alpha versioning (TestFlight-first archive):
 
 ```text
-CFBundleShortVersionString = 1.0
+CFBundleShortVersionString = 0.1.0
 CFBundleVersion = 1
 ```
 
@@ -184,11 +216,11 @@ Environment overrides: `DEVELOPMENT_TEAM`, `PREXUS_SKIP_BUILD=1` — see script 
 - [x] Regenerated `project.pbxproj` committed with formal test target IDs.
 - [x] Provisioning profiles registered locally: `AppStorePREXUS_20260531`, `DevelopmentPREXUS_20260531`.
 
-**Distribution / upload (still open):**
+**Distribution / upload (partial):**
 
-- [ ] Distribution signing succeeds for `jp.studio-prospect.prexus.ios` (Release archive, not Debug-only).
+- [x] Distribution signing succeeds for `jp.studio-prospect.prexus.ios` ([2026-05-31](#distribution-archive-validation-2026-05-31)).
 - [ ] Internal TestFlight group under ASC app `PREXUS` (manual ASC).
-- [ ] Uninstall any `com.prexus.ios` builds on test devices before re-smoking with new ID.
+- [ ] Wang / device smoke on new ID (`alpha_smoke_wang.sh`) — uninstall `com.prexus.ios` first.
 
 ### F. Optional (not blocking text-only alpha)
 
