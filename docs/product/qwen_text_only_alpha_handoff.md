@@ -29,6 +29,7 @@
 
 ## Normal operating loop
 
+0. **Start from** [status summary](./qwen_text_only_alpha_status_summary.md) (current state) and [docs index](./qwen_text_only_alpha_docs_index.md) (navigation); use this handoff for day-to-day ops.
 1. **Collect feedback** using the [tester feedback report template](./qwen_text_only_alpha_tester_instructions.md#tester-feedback-report-template) only (no informal-only intake for triage decisions).
 2. **Classify** each report (release engineering assigns final class):
    - **needs evidence** — missing Diagnostics fields and/or ops screenshot **filename**
