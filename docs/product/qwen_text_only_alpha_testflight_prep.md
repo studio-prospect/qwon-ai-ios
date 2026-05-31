@@ -7,6 +7,7 @@ This doc records the RC-to-internal-TestFlight steps and provides copy for **lab
 | Doc | Role |
 | --- | --- |
 | [qwen_text_only_alpha_status_summary.md](./qwen_text_only_alpha_status_summary.md) | **One-page current state** (build `1` stable) |
+| [qwen_text_only_alpha_handoff.md](./qwen_text_only_alpha_handoff.md) | **Internal handoff** — operating loop, do-not rules, blocker response |
 | [qwen_text_only_alpha_release.md](./qwen_text_only_alpha_release.md) | Alpha scope and exclusions |
 | [qwen_text_only_alpha_release_readiness.md](./qwen_text_only_alpha_release_readiness.md) | RC readiness + [next build gate](./qwen_text_only_alpha_release_readiness.md#next-build-gate-before-build-2) + [build 2 triage decision](./qwen_text_only_alpha_release_readiness.md#build-2-binary-respin-decision-triage) |
 | [qwen_text_only_alpha_release_notes.md](./qwen_text_only_alpha_release_notes.md) | Tester-facing limitations |
