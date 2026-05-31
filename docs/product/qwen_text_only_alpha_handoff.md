@@ -30,7 +30,7 @@
 ## Normal operating loop
 
 0. **Start from** [status summary](./qwen_text_only_alpha_status_summary.md) (current state) and [docs index](./qwen_text_only_alpha_docs_index.md) (navigation); use this handoff for day-to-day ops.
-1. **Collect feedback** using the [tester feedback report template](./qwen_text_only_alpha_tester_instructions.md#tester-feedback-report-template) only (no informal-only intake for triage decisions). Process per [feedback intake processing](./qwen_text_only_alpha_release_notes.md#feedback-intake-processing-build-1); record in [feedback log](./qwen_text_only_alpha_release_notes.md#tester-feedback-log-build-1).
+1. **Collect feedback** using the [tester feedback report template](./qwen_text_only_alpha_tester_instructions.md#tester-feedback-report-template) only (no informal-only intake for triage decisions). Process per [feedback intake processing](./qwen_text_only_alpha_release_notes.md#feedback-intake-processing-build-1); append or update one row per [feedback log format](./qwen_text_only_alpha_release_notes.md#log-row-format-new-reports) (same row when **needs evidence** completes).
 2. **Classify** each report (release engineering assigns final class):
    - **needs evidence** — missing Diagnostics fields and/or ops screenshot **filename**
    - **Docs/ops only** — onboarding, What to Test, GGUF push steps, ASC copy, ops naming

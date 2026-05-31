@@ -65,6 +65,7 @@ Keep a **single source** for these sections. Other docs should link, not restate
 | Known issues triage | [release notes § triage](./qwen_text_only_alpha_release_notes.md#known-issues-triage-for-build-1) |
 | Tester feedback template | [tester instructions § template](./qwen_text_only_alpha_tester_instructions.md#tester-feedback-report-template) |
 | Feedback intake processing (build `1`) | [release notes § intake processing](./qwen_text_only_alpha_release_notes.md#feedback-intake-processing-build-1) |
+| Feedback log row format (build `1`) | [release notes § log row format](./qwen_text_only_alpha_release_notes.md#log-row-format-new-reports) — not frozen ledger |
 | Release blocker / build `2` decision rules | [status summary § decision rules](./qwen_text_only_alpha_status_summary.md#decision-rules) · [readiness § build 2 decision](./qwen_text_only_alpha_release_readiness.md#build-2-binary-respin-decision-triage) |
 | TestFlight upload history (2026-05-31) | [TestFlight prep § upload](./qwen_text_only_alpha_testflight_prep.md#testflight-upload-2026-05-31) |
 | Binary respin reason (before build `2`) | [release notes § binary respin](./qwen_text_only_alpha_release_notes.md#binary-respin-reason-required-before-cut) |
