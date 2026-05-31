@@ -10,6 +10,7 @@ This doc turns the RC checklist into concrete **internal / TestFlight** steps. I
 | [qwen_text_only_alpha_release_readiness.md](./qwen_text_only_alpha_release_readiness.md) | RC code readiness (merged) |
 | [qwen_text_only_alpha_release_notes.md](./qwen_text_only_alpha_release_notes.md) | Tester-facing limitations |
 | [qwen_text_only_alpha_tester_instructions.md](./qwen_text_only_alpha_tester_instructions.md) | Manual tester flow |
+| [bundle_id_decision_memo.md](./bundle_id_decision_memo.md) | Formal Bundle ID candidates, recommendation, domain gate |
 | [models/README.md](../../models/README.md) | GGUF placement |
 
 ---
@@ -20,7 +21,7 @@ RC **code** criteria are satisfied on `main` (PR #22). Remaining work is **distr
 
 | Item | Owner | Status | Action |
 | --- | --- | --- | --- |
-| **Formal Bundle ID + ASC app + signing** | Product / release engineering | **Blocked** | [Bundle ID gate](#bundle-id-and-signing-gate-blocking-testflight) must be **closed** before upload; repo placeholder `com.prexus.ios` is not upload approval |
+| **Formal Bundle ID + ASC app + signing** | Product / release engineering | **Blocked** | [Bundle ID gate](#bundle-id-and-signing-gate-blocking-testflight) + [decision memo](./bundle_id_decision_memo.md); placeholder `com.prexus.ios` is not upload approval |
 | Version / build numbers aligned with alpha naming | Release engineer | Open | Apply [Version and tag naming](#version-and-tag-naming-proposals-only) in Xcode before first archive |
 | Device archive with llama.cpp linked | Release engineer | Open | `build_llama_xcframework.sh` → `generate_xcodeproj.rb` → Release archive (see below) |
 | Required device smoke green | Release engineer | Open | Run [`alpha_smoke_wang.sh`](#automated-device-smoke-alpha_smoke_wangsh) (or equivalent A17 Pro+ device) |
@@ -39,6 +40,8 @@ RC **code** criteria are satisfied on `main` (PR #22). Remaining work is **distr
 
 The **production / TestFlight Bundle ID is not finalized**. Until product ops closes this gate, PREXUS must be treated as **not upload-ready**, even if simulator tests and `alpha_smoke_wang.sh` are green.
 
+**Decision support:** [bundle_id_decision_memo.md](./bundle_id_decision_memo.md) — candidates, recommended `com.prexus.app`, owned-domain prerequisite, impact map, and post-decision steps. Sign-off in that memo closes this gate together with ASC/Xcode alignment below.
+
 | Topic | Current state | Upload requirement |
 | --- | --- | --- |
 | Formal Bundle ID | **Undecided** | Single agreed ID recorded in ASC and Xcode before first archive |
@@ -49,7 +52,7 @@ The **production / TestFlight Bundle ID is not finalized**. Until product ops cl
 
 ### Exit criteria (gate closed)
 
-- [ ] Product owner records the **official Bundle ID** (and any ASC app name / SKU notes) in team ops (wiki, issue, or signed release memo — outside this doc if preferred).
+- [ ] Product owner records the **official Bundle ID** in [bundle_id_decision_memo.md](./bundle_id_decision_memo.md#sign-off-fill-when-decided) sign-off (and ASC app name / SKU notes as needed).
 - [ ] App Store Connect has an app whose Bundle ID **exactly matches** the decision (new app or pre-existing — document which).
 - [ ] Xcode `PRODUCT_BUNDLE_IDENTIFIER` for **PREXUS** matches ASC (committed change or documented one-time archive override — must be traceable to the archived binary).
 - [ ] Release archive validates with **Distribution** signing for that ID (Organizer / `xcodebuild -exportArchive` dry run acceptable).
@@ -168,7 +171,8 @@ Environment overrides: `DEVELOPMENT_TEAM`, `PREXUS_SKIP_BUILD=1` — see script 
 
 ### G. Bundle ID and signing (**blocking upload** — section A–E and smoke alone are insufficient)
 
-- [ ] [Bundle ID gate](#bundle-id-and-signing-gate-blocking-testflight) **closed**: formal ID decided and recorded by product ops.
+- [ ] [bundle_id_decision_memo.md](./bundle_id_decision_memo.md) reviewed; owned-domain gate and recommended ID (or documented alternative) agreed.
+- [ ] [Bundle ID gate](#bundle-id-and-signing-gate-blocking-testflight) **closed**: formal ID recorded in memo sign-off table.
 - [ ] ASC app exists with that Bundle ID; internal TestFlight group is under that app.
 - [ ] Xcode **PREXUS** target `PRODUCT_BUNDLE_IDENTIFIER` matches ASC for the archive you will upload.
 - [ ] Distribution signing succeeds for the final ID (not only Debug / ad hoc with `com.prexus.ios`).
