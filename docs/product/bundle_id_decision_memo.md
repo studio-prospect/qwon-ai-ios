@@ -143,7 +143,7 @@ Run only after the sign-off table is complete.
 - [x] Provisioning profiles registered locally: `AppStorePREXUS_20260531`, `DevelopmentPREXUS_20260531`
 - [x] Distribution signing validation / Release archive (2026-05-31; [record](./qwen_text_only_alpha_testflight_prep.md#distribution-archive-validation-2026-05-31))
 - [ ] Git release tag (`qwen-text-alpha-*`)
-- [ ] TestFlight upload
+- [x] TestFlight upload (2026-05-31, build `0.1.0` / `1`; tag `qwen-text-alpha-0.1.0-rc1`)
 
 ---
 
