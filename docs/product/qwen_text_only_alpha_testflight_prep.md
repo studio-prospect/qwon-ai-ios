@@ -7,7 +7,7 @@ This doc records the RC-to-internal-TestFlight steps and provides copy for **lab
 | Doc | Role |
 | --- | --- |
 | [qwen_text_only_alpha_release.md](./qwen_text_only_alpha_release.md) | Alpha scope and exclusions |
-| [qwen_text_only_alpha_release_readiness.md](./qwen_text_only_alpha_release_readiness.md) | RC code readiness (merged) |
+| [qwen_text_only_alpha_release_readiness.md](./qwen_text_only_alpha_release_readiness.md) | RC readiness + [next build gate](./qwen_text_only_alpha_release_readiness.md#next-build-gate-before-build-2) |
 | [qwen_text_only_alpha_release_notes.md](./qwen_text_only_alpha_release_notes.md) | Tester-facing limitations |
 | [qwen_text_only_alpha_tester_instructions.md](./qwen_text_only_alpha_tester_instructions.md) | Manual tester flow |
 | [qwen_text_only_alpha_lab_evidence.md](./qwen_text_only_alpha_lab_evidence.md) | Two-device evidence fields, retention rules, frozen ledger |
@@ -98,6 +98,26 @@ Repo and device scripts reference the formal ID. **Previous placeholder:** `com.
 4. Optional on **Wang only:** re-run `./tools/scripts/alpha_smoke_wang.sh "Wang"` before each TestFlight respin.
 
 **Evidence:** use [lab evidence](./qwen_text_only_alpha_lab_evidence.md) for field list, Wang/Matisse expectations, screenshot naming, and the **frozen ledger** for `0.1.0 (1)`. Store PNG/logs **outside git** (`on file (ops)` in docs only).
+
+For **build 2+**, follow [Next build gate (evidence and ops)](#next-build-gate-evidence-and-ops) and [readiness next build gate](./qwen_text_only_alpha_release_readiness.md#next-build-gate-before-build-2) before upload.
+
+---
+
+## Next build gate (evidence and ops)
+
+Run **after** code/archive work passes [Pre-TestFlight gate](#pre-testflight-gate-checklist) and **before** widening tester communication. Canonical checklist: [release readiness — Next build gate](./qwen_text_only_alpha_release_readiness.md#next-build-gate-before-build-2).
+
+| Step | Action |
+| --- | --- |
+| Version | Bump `CFBundleVersion` (and marketing version if planned) per [naming table](#version-and-tag-naming-proposals-only); document reason in [release notes](./qwen_text_only_alpha_release_notes.md). |
+| Ops folder | New directory e.g. `~/PREXUS-alpha-evidence/qwen-text-0.1.0-build2/` — **do not** overwrite build `1` artifacts. |
+| Ledger | New subsection via [adding a ledger subsection](./qwen_text_only_alpha_lab_evidence.md#adding-a-new-ledger-subsection); keep [build 1 rows](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1) immutable. |
+| ASC | Keep **`internal_tester`** to Wang + Matisse only; assign the **new** build to the group. |
+| Wang | GGUF push → Diagnostics shows `answered_by=llama.cpp On-Device Runtime`. |
+| Matisse | **Local runtime** + **Embedded Heuristic Runtime** — acceptable without llama.cpp. |
+| Git | **No** PNG, logs, IPA, GGUF, or ops `MANIFEST.txt` in the repo. |
+
+Aligns with [TestFlight upload outline](#testflight-upload-outline-not-executed-here) steps 1–8; add evidence steps **after** step 7 (device install smoke) and **before** closing the release.
 
 ---
 
@@ -358,10 +378,11 @@ Manual steps for the release engineer. **Do not start** until [section G](#g-bun
 4. Validate archive: **Distribution** signing for the **final** Bundle ID, embedded `llama.framework`, no debug-only traps.
 5. **Distribute App** → App Store Connect → upload to the app record that matches section G.
 6. In ASC: select build, add **internal** testers group, paste What to Test (scope + model install + [tester instructions](./qwen_text_only_alpha_tester_instructions.md) URL/path).
-7. After processing: confirm install on one A17 Pro+ device before widening the group.
+7. After processing: reinstall on **Wang** and **Matisse**; complete [next build evidence](#next-build-gate-evidence-and-ops) (do not skip Matisse).
 8. Create git tag per [tag procedure](#git-tag-procedure-do-not-run-in-automation) on the archived commit.
+9. Docs-only PR: append ledger metadata + link ops filenames (`on file (ops)`); no binaries in git.
 
-**Not in scope:** App Store public listing, pricing, or review submission for production.
+**Not in scope:** App Store public listing, pricing, or review submission for production. **Do not** add ASC testers beyond the two-device lab.
 
 ---
 
