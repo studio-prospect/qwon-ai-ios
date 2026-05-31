@@ -119,6 +119,7 @@ Apply in a **follow-up implementation PR** after this memo is signed — not in 
 | Repo migration PR | `chore/alpha-bundle-id-migration` |
 | App Store provisioning profile | `AppStorePREXUS_20260531` (expires 2026-10-07) |
 | Development provisioning profile | `DevelopmentPREXUS_20260531` (expires 2027-05-31) |
+| TestFlight internal group | `internal_tester` |
 | Approved by / date | Product owner decision, 2026-05-31 |
 
 ---
