@@ -7,6 +7,8 @@
 
 **Doc index:** [qwen_text_only_alpha_docs_index.md](./qwen_text_only_alpha_docs_index.md) — reading order and per-doc responsibilities (navigation only).
 
+**Product rename (QWON):** This summary describes **historical PREXUS** alpha on `jp.studio-prospect.prexus.ios`. Do not rewrite frozen ledger or upload history for naming. New work: [QWON rename migration plan](./qwon_rename_migration_plan.md) (`jp.studio-prospect.qwon.ios`, repo `qwon-ai-ios`).
+
 **Not executed here:** `CFBundleVersion` bump, archive, TestFlight upload, git tag, or changes to the [build 1 frozen ledger](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1).
 
 ## Documentation state

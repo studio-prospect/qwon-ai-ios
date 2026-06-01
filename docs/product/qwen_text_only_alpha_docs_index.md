@@ -5,6 +5,8 @@
 
 **Release state (unchanged):** TestFlight `0.1.0 (1)` · tag `qwen-text-alpha-0.1.0-rc1` · build `2` **not approved** · lab **Wang + Matisse** only.
 
+**Product rename:** This index and linked alpha docs are **PREXUS-era historical** (`jp.studio-prospect.prexus.ios`). Future product work under display name **QWON** follows [qwon_rename_migration_plan.md](./qwon_rename_migration_plan.md).
+
 **Last validation:** 2026-05-31 — relative link / anchor validation passed after PR #41. **Docs setup:** complete; start from [status summary](./qwen_text_only_alpha_status_summary.md) then this index.
 
 ---
@@ -34,6 +36,7 @@ Then open the doc for your task using the table below.
 | [qwen_text_only_alpha_testflight_prep.md](./qwen_text_only_alpha_testflight_prep.md) | **ASC / TestFlight ops** — upload history, onboarding copy, lab policy |
 | [bundle_id_decision_memo.md](./bundle_id_decision_memo.md) | **Bundle ID decision** — `jp.studio-prospect.prexus.ios`, ASC app, signing gates |
 | [agent_collaboration_workflow.md](./agent_collaboration_workflow.md) | **Codex / Cursor roles** — planning vs implementation vs merge readiness |
+| [qwon_rename_migration_plan.md](./qwon_rename_migration_plan.md) | **QWON rename (future)** — PREXUS docs here are historical; new Bundle ID `jp.studio-prospect.qwon.ios` |
 
 **Related (outside this index):** [models/README.md](../../models/README.md) (GGUF placement) · [local_inference_mvp.md](../requirements/local_inference_mvp.md) (P1-1 architecture)
 
