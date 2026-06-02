@@ -9,7 +9,7 @@
 #   ./tools/scripts/eval_litert_lm_on_device.sh
 #   ./tools/scripts/eval_litert_lm_on_device.sh "Wang"
 #
-# Does NOT modify PREXUS production app or Qwen MVP files.
+# Does NOT modify QWON production app/runtime or Qwen MVP files.
 
 set -euo pipefail
 
@@ -72,4 +72,4 @@ echo "Look for: cold_load_ms, ja-first_token_ms, ja-response, routing-response, 
 echo "Log saved to: $LOG_OUT"
 echo "Record results in docs/research/litert_lm_evaluation_plan.md"
 echo ""
-echo "PREXUS production (Qwen MVP) is unchanged. Remove PREXUSLiteRTEval from device when done."
+echo "QWON production app/runtime (Qwen MVP) is unchanged. Remove PREXUSLiteRTEval from device when done."
