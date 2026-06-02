@@ -18,6 +18,7 @@ TEST_BUNDLE_ID = "#{MAIN_BUNDLE_ID}.tests"
 UI_TEST_BUNDLE_ID = "#{MAIN_BUNDLE_ID}.uitests"
 LITERT_EVAL_BUNDLE_ID = "#{MAIN_BUNDLE_ID}.literteval"
 IOS_ROOT = ROOT.join("app", "ios")
+APP_SOURCE_DIR = "QWON"
 PROJECT_PATH = IOS_ROOT.join("PREXUS.xcodeproj")
 APP_TARGET_NAME = "QWON"
 LEGACY_APP_SCHEME = "PREXUS"
@@ -30,13 +31,13 @@ litert_prototype_only_source_names = %w[
   LocalStrictJSONBenchmarkRunner.swift
 ].freeze
 
-app_sources = Dir.glob(IOS_ROOT.join("PREXUS", "**", "*.swift").to_s).reject do |path|
+app_sources = Dir.glob(IOS_ROOT.join(APP_SOURCE_DIR, "**", "*.swift").to_s).reject do |path|
   litert_prototype_only_source_names.include?(File.basename(path))
 end
 runtime_sources = Dir.glob(ROOT.join("runtime", "**", "*.swift").to_s)
 test_sources = Dir.glob(IOS_ROOT.join("PREXUSTests", "**", "*.swift").to_s)
 ui_test_sources = Dir.glob(IOS_ROOT.join("PREXUSUITests", "**", "*.swift").to_s)
-resource_root = IOS_ROOT.join("PREXUS", "Resources")
+resource_root = IOS_ROOT.join(APP_SOURCE_DIR, "Resources")
 asset_catalogs = Dir.glob(resource_root.join("**", "*.xcassets").to_s)
 resources = Dir.glob(resource_root.join("**", "*").to_s).reject do |path|
   File.basename(path) == "Info.plist" ||
@@ -44,10 +45,10 @@ resources = Dir.glob(resource_root.join("**", "*").to_s).reject do |path|
     asset_catalogs.any? { |catalog| path.start_with?("#{catalog}/") }
 end
 shared_resources = Dir.glob(IOS_ROOT.join("shared", "**", "*").to_s).reject { |path| File.directory?(path) }
-bridge_sources = Dir.glob(IOS_ROOT.join("PREXUS", "LlamaCppBridge", "*.{mm,h}").to_s)
+bridge_sources = Dir.glob(IOS_ROOT.join(APP_SOURCE_DIR, "LlamaCppBridge", "*.{mm,h}").to_s)
 llama_xcframework = ROOT.join("vendor", "llama-cpp-artifacts", "llama.xcframework")
 llama_available = llama_xcframework.exist?
-bridging_header = IOS_ROOT.join("PREXUS", "LlamaCppBridge", "PREXUS-Bridging-Header.h")
+bridging_header = IOS_ROOT.join(APP_SOURCE_DIR, "LlamaCppBridge", "PREXUS-Bridging-Header.h")
 
 project = Xcodeproj::Project.new(PROJECT_PATH.to_s)
 project.root_object.attributes["LastSwiftUpdateCheck"] = "1600"
@@ -64,7 +65,7 @@ test_target.product_reference.name = "PREXUSTests.xctest"
 ui_test_target.product_reference.name = "PREXUSUITests.xctest"
 
 main_group = project.main_group
-app_group = main_group.new_group("PREXUS", "PREXUS")
+app_group = main_group.new_group(APP_SOURCE_DIR, APP_SOURCE_DIR)
 runtime_group = main_group.new_group("runtime", "../../runtime")
 shared_group = main_group.new_group("shared", "../shared")
 tests_group = main_group.new_group("PREXUSTests", "PREXUSTests")
@@ -87,7 +88,7 @@ def add_file(target, parent_group, absolute_path, root_path)
 end
 
 app_sources.each do |path|
-  add_file(app_target, app_group, path, IOS_ROOT.join("PREXUS"))
+  add_file(app_target, app_group, path, IOS_ROOT.join(APP_SOURCE_DIR))
 end
 
 runtime_sources.each do |path|
@@ -95,7 +96,7 @@ runtime_sources.each do |path|
 end
 
 bridge_sources.each do |path|
-  add_file(app_target, app_group, path, IOS_ROOT.join("PREXUS"))
+  add_file(app_target, app_group, path, IOS_ROOT.join(APP_SOURCE_DIR))
 end
 
 test_sources.each do |path|
@@ -143,7 +144,7 @@ end
 app_target.build_configurations.each do |config|
   config.build_settings["PRODUCT_BUNDLE_IDENTIFIER"] = MAIN_BUNDLE_ID
   config.build_settings["PRODUCT_MODULE_NAME"] = "PREXUS"
-  config.build_settings["INFOPLIST_FILE"] = "PREXUS/Resources/Info.plist"
+  config.build_settings["INFOPLIST_FILE"] = "#{APP_SOURCE_DIR}/Resources/Info.plist"
   config.build_settings["SWIFT_VERSION"] = "5.0"
   config.build_settings["IPHONEOS_DEPLOYMENT_TARGET"] = "17.0"
   config.build_settings["TARGETED_DEVICE_FAMILY"] = "1"
@@ -153,7 +154,7 @@ app_target.build_configurations.each do |config|
   config.build_settings["SWIFT_EMIT_LOC_STRINGS"] = "NO"
   config.build_settings["ASSETCATALOG_COMPILER_APPICON_NAME"] = "AppIcon"
   config.build_settings["CLANG_CXX_LANGUAGE_STANDARD"] = "gnu++17"
-  config.build_settings["SWIFT_OBJC_BRIDGING_HEADER"] = "PREXUS/LlamaCppBridge/PREXUS-Bridging-Header.h"
+  config.build_settings["SWIFT_OBJC_BRIDGING_HEADER"] = "#{APP_SOURCE_DIR}/LlamaCppBridge/PREXUS-Bridging-Header.h"
   config.build_settings["OTHER_LDFLAGS"] = ["$(inherited)", "-lc++"]
 
   next unless llama_available
@@ -277,14 +278,14 @@ end
 
 if ENV["PREXUS_LITERT_LM_PROTOTYPE"] == "1"
   litert_prototype_sources = [
-    IOS_ROOT.join("PREXUS", "LocalInference", "LiteRTLocalModelClient.swift").to_s,
-    IOS_ROOT.join("PREXUS", "LocalInference", "LocalBackendComparisonRunner.swift").to_s,
-    IOS_ROOT.join("PREXUS", "LocalInference", "LocalStrictJSONBenchmarkRunner.swift").to_s
+    IOS_ROOT.join(APP_SOURCE_DIR, "LocalInference", "LiteRTLocalModelClient.swift").to_s,
+    IOS_ROOT.join(APP_SOURCE_DIR, "LocalInference", "LocalBackendComparisonRunner.swift").to_s,
+    IOS_ROOT.join(APP_SOURCE_DIR, "LocalInference", "LocalStrictJSONBenchmarkRunner.swift").to_s
   ]
 
   litert_prototype_sources.each do |path|
     next unless File.file?(path)
-    add_file(app_target, app_group, path, IOS_ROOT.join("PREXUS"))
+    add_file(app_target, app_group, path, IOS_ROOT.join(APP_SOURCE_DIR))
   end
 
   litert_vendor = ROOT.join("vendor", "LiteRT-LM")

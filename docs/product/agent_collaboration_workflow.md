@@ -161,7 +161,7 @@ PREXUS uses `tools/scripts/generate_xcodeproj.rb` to recreate `app/ios/PREXUS.xc
 
 Cursor should run regeneration when a change touches any of:
 
-- files under `app/ios/PREXUS/`
+- files under `app/ios/QWON/`
 - files under `app/ios/PREXUSTests/` or `app/ios/PREXUSUITests/`
 - files under `runtime/` that are compiled into the iOS app target
 - test targets, bundle identifiers, or shared scheme test bundles
