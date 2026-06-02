@@ -1,7 +1,7 @@
 # QWON Text Alpha — TestFlight Preparation (Phase 3)
 
 **Last updated:** 2026-06-02
-**Status:** **Distribution archive validated** and **Wang device smoke passed** (2026-06-02). **TestFlight upload** and **git tag** **not executed**. Repo defaults to `jp.studio-prospect.qwon.ios` after Phase 2 merge (#48).
+**Status:** **TestFlight upload succeeded** (2026-06-02) to QWON ASC `6775685841`. **Internal group**, device TestFlight installs, and **git tag** **pending**. Repo defaults to `jp.studio-prospect.qwon.ios` after Phase 2 merge (#48).
 
 **Historical line:** PREXUS alpha `0.1.0 (1)` on `jp.studio-prospect.prexus.ios` remains frozen — see [Qwen text-only alpha TestFlight prep](./qwen_text_only_alpha_testflight_prep.md). **Do not** upload QWON builds to ASC app **PREXUS** (Apple ID `6775110218`).
 
@@ -18,8 +18,8 @@
 | Apple gate (App ID, profiles, ASC app) | Release engineering | **Done** (2026-06-02) | [Apple gate checklist](#apple-gate-checklist-operator) · ASC `6775685841` |
 | Distribution archive (QWON bundle + llama) | Release engineering | **Done** (2026-06-02) | [Distribution archive validation](#distribution-archive-validation-2026-06-02) |
 | Device smoke on QWON bundle | Release engineering | **Done** (2026-06-02, Wang) | [`alpha_smoke_wang.sh`](../../tools/scripts/alpha_smoke_wang.sh) — `VALIDATION PASSED` |
-| TestFlight upload | Release engineering | **Not started** | [Upload outline](#testflight-upload-outline-operator) |
-| Git tag | Release engineering | **Not created** | Proposed: `qwon-text-alpha-0.1.0-rc1` on archived commit |
+| TestFlight upload | Release engineering | **Done** (2026-06-02) | [TestFlight upload record](#testflight-upload-2026-06-02) · ASC `6775685841` |
+| Git tag | Release engineering | **Not created** | Proposed: `qwon-text-alpha-0.1.0-rc1` on archive commit `d4f2a0b` |
 | Ops evidence folder | Release engineering | **Path decided** | `~/QWON-alpha-evidence/qwon-text-0.1.0-build1/` (no overwrite of PREXUS build `1` paths) |
 
 **Version proposal (first QWON TestFlight):** marketing `0.1.0`, build `1` (matches current `Info.plist`; bump build only on respin).
@@ -43,7 +43,7 @@ Complete [distribution validation](#distribution-archive-validation-2026-06-02) 
 | ASC Apple ID for QWON app | [x] | `6775685841` |
 | ASC categories | [x] | Primary **ユーティリティ** / Secondary **仕事効率化** |
 | Distribution archive validates for QWON bundle | [x] | **Done** 2026-06-02 — [validation record](#distribution-archive-validation-2026-06-02) |
-| Internal TestFlight group on **QWON** app | [ ] | Suggest **Wang + Matisse only** (`internal_tester` or equivalent) — configure at upload |
+| Internal TestFlight group on **QWON** app | [ ] | Assign build `0.1.0 (1)` to **Wang + Matisse** group in ASC — **not done in repo** |
 
 ---
 
@@ -131,26 +131,54 @@ xcodebuild -exportArchive \
 | IPA signature | `Apple Distribution: studio PROSPECT, Inc (BWSS94LH28)` — cert expires **2026-10-07** |
 | Export profile (automatic) | `iOS Team Store Provisioning Profile: jp.studio-prospect.qwon.ios` |
 | Named profiles (gate) | `AppStoreQWON_20260602` / `DevelopmentQWON_20260602` registered locally |
-| IPA path (ops, not in git) | `.archive/QWON-Export/PREXUS.ipa` — **not uploaded** to ASC |
+| IPA path (ops, not in git) | `.archive/QWON-Export/PREXUS.ipa` — uploaded 2026-06-02 via [TestFlight upload](#testflight-upload-2026-06-02) |
 
 Re-run after version bumps or runtime changes intended for TestFlight. Upload must target **QWON** ASC (`6775685841`) only — **not** PREXUS (`6775110218`).
 
 ---
 
+## TestFlight upload (2026-06-02)
+
+Uploaded from archive built on `main` at `d4f2a0b` (Distribution validation commit; docs-only commits after archive do not require re-archive unless runtime changes).
+
+```bash
+xcodebuild -exportArchive \
+  -archivePath .archive/QWON-0.1.0.xcarchive \
+  -exportPath .archive/QWON-Upload \
+  -exportOptionsPlist .archive/ExportOptions-upload.plist \
+  -allowProvisioningUpdates
+```
+
+`ExportOptions-upload.plist` (local, not in git): `destination` = `upload`, `method` = `app-store-connect`, `teamID` = `BWSS94LH28`.
+
+| Field | Value |
+| --- | --- |
+| Version | `0.1.0` (build `1`) |
+| Bundle ID | `jp.studio-prospect.qwon.ios` |
+| ASC app | **QWON** (Apple ID `6775685841`) |
+| Archive commit | `d4f2a0b` |
+| Git tag | _pending_ — proposed `qwon-text-alpha-0.1.0-rc1` |
+| Internal TestFlight group | _pending_ — assign in ASC (**Wang + Matisse** policy) |
+| Upload result | **Upload succeeded** (`xcodebuild -exportArchive`, `destination=upload`) |
+
+**Still pending after upload:** ASC export compliance confirmation; internal group build assignment; Wang/Matisse TestFlight install verification; git tag; ops evidence under `~/QWON-alpha-evidence/qwon-text-0.1.0-build1/`.
+
+**Not uploaded to:** PREXUS ASC (`6775110218`).
+
+---
+
 ## TestFlight upload outline (operator)
 
-**Do not start** until [distribution validation](#distribution-archive-validation-2026-06-02) is recorded (done 2026-06-02).
+Archive validation and initial upload are **done** (2026-06-02). Remaining operator steps:
+1. [x] Upload to **QWON** ASC (`6775685841`) — [record](#testflight-upload-2026-06-02).
+2. [ ] Complete export compliance in ASC if prompted.
+3. [ ] Assign build `0.1.0 (1)` to internal group (**Wang + Matisse** policy).
+4. [ ] Paste [ASC What to Test](#asc-what-to-test-copy) + link [PREXUS-era tester instructions](./qwen_text_only_alpha_tester_instructions.md) until QWON-specific copy exists.
+5. [ ] Reinstall on Wang + Matisse; capture evidence under `~/QWON-alpha-evidence/qwon-text-0.1.0-build1/`.
+6. [ ] Tag archive commit `d4f2a0b`: `qwon-text-alpha-0.1.0-rc1` (manual; not in automation).
+7. [ ] Docs-only follow-up: ledger subsection for QWON build `1` (new doc or appendix — **do not** edit PREXUS frozen ledger).
 
-1. Confirm `CFBundleShortVersionString` / `CFBundleVersion` (`0.1.0` / `1` unless product bumps).
-2. Regenerate Xcode project **with** llama for device linkage (local).
-3. **Product → Archive** (Release, generic iOS device).
-4. Validate Distribution signing for `jp.studio-prospect.qwon.ios`.
-5. Upload to **QWON** ASC app record (new Apple ID — fill in bundle memo).
-6. Assign build to internal group (**Wang + Matisse** policy).
-7. Paste [ASC What to Test](#asc-what-to-test-copy) + link [PREXUS-era tester instructions](./qwen_text_only_alpha_tester_instructions.md) until QWON-specific copy exists.
-8. Reinstall on Wang + Matisse; capture evidence under `~/QWON-alpha-evidence/qwon-text-0.1.0-build1/`.
-9. Tag archived commit: `qwon-text-alpha-0.1.0-rc1` (manual; not in automation).
-10. Docs-only follow-up: ledger subsection for QWON build `1` (new doc or appendix — **do not** edit PREXUS frozen ledger).
+**Re-upload / respin:** Confirm version/build bump, re-archive with llama locally, validate, then upload to **QWON** ASC only.
 
 **Not in scope:** Public App Store listing; uploading to PREXUS bundle; PREXUS alpha build `2`.
 
