@@ -39,6 +39,7 @@ Then open the doc for your task using the table below.
 | [qwon_rename_migration_plan.md](./qwon_rename_migration_plan.md) | **QWON rename** — PREXUS alpha docs here are historical |
 | [qwon_bundle_id_decision_memo.md](./qwon_bundle_id_decision_memo.md) | **QWON Bundle ID** — `jp.studio-prospect.qwon.ios` (repo default after Phase 2) |
 | [qwon_text_alpha_testflight_prep.md](./qwon_text_alpha_testflight_prep.md) | **QWON TestFlight prep** — Phase 3 ops; PREXUS alpha docs above stay historical |
+| [qwon_text_alpha_lab_evidence.md](./qwon_text_alpha_lab_evidence.md) | **QWON evidence / frozen ledger** — build `1` on `jp.studio-prospect.qwon.ios`; PREXUS ledger unchanged |
 
 **Related (outside this index):** [models/README.md](../../models/README.md) (GGUF placement) · [local_inference_mvp.md](../requirements/local_inference_mvp.md) (P1-1 architecture)
 
@@ -57,6 +58,7 @@ Then open the doc for your task using the table below.
 | Triage an issue | [release notes: known issues](./qwen_text_only_alpha_release_notes.md#known-issues-triage-for-build-1) · [feedback log](./qwen_text_only_alpha_release_notes.md#tester-feedback-log-build-1) |
 | Prepare ASC / TestFlight / GGUF push (PREXUS historical) | [TestFlight prep](./qwen_text_only_alpha_testflight_prep.md) |
 | Prepare QWON bundle TestFlight (new app line) | [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) |
+| File or check QWON lab screenshots | [QWON lab evidence](./qwon_text_alpha_lab_evidence.md) — **do not** edit [PREXUS frozen ledger](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1) |
 | Confirm alpha scope | [release scope](./qwen_text_only_alpha_release.md) |
 | Ship a fix after Release blocker | [handoff: if blocker](./qwen_text_only_alpha_handoff.md#if-a-release-blocker-appears) → minimal implementation PR → then ops steps in [readiness](./qwen_text_only_alpha_release_readiness.md) |
 
@@ -68,7 +70,8 @@ Keep a **single source** for these sections. Other docs should link, not restate
 
 | Content | Canonical location |
 | --- | --- |
-| Build `1` frozen ledger rows | [lab evidence § frozen ledger](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1) |
+| PREXUS build `1` frozen ledger rows | [PREXUS lab evidence § frozen ledger](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1) |
+| QWON build `1` frozen ledger rows | [QWON lab evidence § frozen ledger](./qwon_text_alpha_lab_evidence.md#frozen-ledger-qwon-010-build-1) |
 | Known issues triage | [release notes § triage](./qwen_text_only_alpha_release_notes.md#known-issues-triage-for-build-1) |
 | Tester feedback template | [tester instructions § template](./qwen_text_only_alpha_tester_instructions.md#tester-feedback-report-template) |
 | Feedback intake processing (build `1`) | [release notes § intake processing](./qwen_text_only_alpha_release_notes.md#feedback-intake-processing-build-1) |

@@ -5,7 +5,7 @@
 
 **Historical line:** PREXUS alpha `0.1.0 (1)` on `jp.studio-prospect.prexus.ios` remains frozen — see [Qwen text-only alpha TestFlight prep](./qwen_text_only_alpha_testflight_prep.md). **Do not** upload QWON builds to ASC app **PREXUS** (Apple ID `6775110218`).
 
-**Related:** [QWON rename migration plan](./qwon_rename_migration_plan.md) · [QWON bundle memo](./qwon_bundle_id_decision_memo.md) · [PREXUS bundle memo](./bundle_id_decision_memo.md) (historical)
+**Related:** [QWON rename migration plan](./qwon_rename_migration_plan.md) · [QWON bundle memo](./qwon_bundle_id_decision_memo.md) · [QWON lab evidence](./qwon_text_alpha_lab_evidence.md) · [PREXUS bundle memo](./bundle_id_decision_memo.md) (historical)
 
 ---
 
@@ -24,7 +24,9 @@
 | Lab build `2` verification | Release engineering | **Done** (2026-06-02) | Return **sends** on Wang + Matisse — [build 2 record](#testflight-build-2-2026-06-02) · [tier policy](#physical-device-lab-tier-policy) |
 | Export compliance (ASC) | Release engineering | **Done** (build `2`, 2026-06-02) | [Export compliance gate](#export-compliance-operator-gate) — required before build `2` TestFlight install |
 | Git tag | Release engineering | **Done** (2026-06-02) | `qwon-text-alpha-0.1.0-rc1` on `d4f2a0b` — [tag record](#git-tag-2026-06-02) |
-| Ops evidence folder | Release engineering | **In use** | `~/QWON-alpha-evidence/qwon-text-0.1.0-build1/` — Wang + Matisse Chat PNGs on file |
+| Ops evidence folder | Release engineering | **In use** | [QWON build `1` ledger](./qwon_text_alpha_lab_evidence.md#frozen-ledger-qwon-010-build-1) — Chat PNGs on file |
+| ASC What to Test | Release engineering | **Done** (2026-06-02) | [Copy block](#asc-what-to-test-copy) pasted to internal builds `1` and `2` |
+| QWON build `1` frozen ledger | Release engineering | **Done** (2026-06-02) | [lab evidence](./qwon_text_alpha_lab_evidence.md#frozen-ledger-qwon-010-build-1) — PREXUS ledger untouched |
 
 **Active build:** marketing `0.1.0`, **`CFBundleVersion` `2`** on `main` (keyboard fix). Bump build number for each TestFlight binary upload.
 
@@ -268,10 +270,10 @@ Archive validation and build `1` upload are **done** (2026-06-02). **Build `2`**
 1. [x] Upload to **QWON** ASC (`6775685841`) — [build 1](#testflight-upload-2026-06-02) · [build 2](#testflight-build-2-2026-06-02).
 2. [x] Complete **export compliance** in ASC when prompted — [gate notes](#export-compliance-operator-gate) (build `2` required re-submission).
 3. [x] Internal TestFlight access for **Wang + Matisse** — build `1` full lab; build `2` install on both ([tier policy](#physical-device-lab-tier-policy)).
-4. [ ] Paste [ASC What to Test](#asc-what-to-test-copy) + link [PREXUS-era tester instructions](./qwen_text_only_alpha_tester_instructions.md) until QWON-specific copy exists.
+4. [x] Paste [ASC What to Test](#asc-what-to-test-copy) + link [PREXUS-era tester instructions](./qwen_text_only_alpha_tester_instructions.md) until QWON-specific copy exists — **done** 2026-06-02.
 5. [x] Build `1`: Wang + Matisse Chat verified (2026-06-02). Build `2`: Return-key **sends** on Wang + Matisse (2026-06-02).
 6. [x] Tag archive commit `d4f2a0b`: `qwon-text-alpha-0.1.0-rc1` — [record](#git-tag-2026-06-02) (build `1` only).
-7. [ ] Docs-only follow-up: ledger subsection for QWON build `1` (new doc or appendix — **do not** edit PREXUS frozen ledger).
+7. [x] [QWON build `1` frozen ledger](./qwon_text_alpha_lab_evidence.md#frozen-ledger-qwon-010-build-1) — **do not** edit [PREXUS frozen ledger](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1).
 
 **Re-upload / respin:** Confirm version/build bump, re-archive with llama locally, validate, then upload to **QWON** ASC only.
 
@@ -279,17 +281,20 @@ Archive validation and build `1` upload are **done** (2026-06-02). **Build `2`**
 
 ---
 
-## ASC What to Test copy (draft)
+## ASC What to Test copy
 
-Paste into the **QWON** ASC app internal TestFlight build:
+**Applied 2026-06-02** to **QWON** ASC (`6775685841`) internal TestFlight builds **`0.1.0 (1)`** and **`0.1.0 (2)`**. Re-paste when marketing version or lab policy changes.
+
+Link testers to [PREXUS-era tester instructions](./qwen_text_only_alpha_tester_instructions.md) (feedback template and Diagnostics steps) until QWON-specific onboarding exists.
 
 ```text
-QWON 0.1.0 is the text-only alpha on a new bundle (internal lab: Wang primary + Matisse secondary).
+QWON 0.1.0 — text-only alpha on jp.studio-prospect.qwon.ios (internal lab: Wang primary + Matisse secondary).
 
-- Display name: QWON. Not the historical PREXUS TestFlight app.
-- Local Qwen path requires developer USB push of prexus-local-mvp.gguf (see repo models/README).
-- Matisse (A12) may show Embedded Heuristic even with GGUF; that is expected on secondary tier.
-- Report issues with device model, iOS version, and Settings → Runtime Diagnostics screenshot.
+- Display name: QWON. Not the historical PREXUS TestFlight app (jp.studio-prospect.prexus.ios).
+- Active build: 0.1.0 (2) — keyboard Return sends the message (does not insert a newline). Build 1 baseline is tagged qwon-text-alpha-0.1.0-rc1.
+- Local Qwen path (Wang / A17 Pro+): developer USB push of prexus-local-mvp.gguf required (see repo models/README). Not bundled in the IPA.
+- Matisse (A12): may show Embedded Heuristic even with GGUF — expected on secondary tier; not a failure.
+- Report issues with device model, iOS version, TestFlight build number, and Settings → Runtime Diagnostics screenshot.
 ```
 
 ---
@@ -327,10 +332,12 @@ git push origin qwon-text-alpha-0.1.0-rc1
 
 ## Evidence retention
 
-| Build | Ops path (outside git) |
-| --- | --- |
-| QWON `0.1.0 (1)` | `~/QWON-alpha-evidence/qwon-text-0.1.0-build1/` |
-| QWON `0.1.0 (2)` | Same folder or `~/QWON-alpha-evidence/qwon-text-0.1.0-build2/` when populated — keyboard fix verification on file (ops) |
-| PREXUS `0.1.0 (1)` (historical) | `~/PREXUS-alpha-evidence/qwen-text-0.1.0-build1/` — **immutable** |
+Canonical ledger: [QWON lab evidence](./qwon_text_alpha_lab_evidence.md). PREXUS ledger: [historical](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1) — **immutable**.
+
+| Build | Ops path (outside git) | Ledger |
+| --- | --- | --- |
+| QWON `0.1.0 (1)` | `~/QWON-alpha-evidence/qwon-text-0.1.0-build1/` | [Frozen — build 1](./qwon_text_alpha_lab_evidence.md#frozen-ledger-qwon-010-build-1) |
+| QWON `0.1.0 (2)` | Spot-check on device (Return key) | [Spot check — not frozen](./qwon_text_alpha_lab_evidence.md#build-2-spot-check-2026-06-02--not-frozen-ledger) |
+| PREXUS `0.1.0 (1)` (historical) | `~/PREXUS-alpha-evidence/qwen-text-0.1.0-build1/` | [PREXUS frozen](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1) |
 
 No PNG, IPA, GGUF, or logs in git. Docs reference filenames as `on file (ops)` only.
