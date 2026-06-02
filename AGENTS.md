@@ -242,6 +242,7 @@ Before completing tasks:
 - run relevant tests
 - avoid introducing warnings
 - verify no obvious memory regressions
+- run `git diff --check` before commit when editing text files (CI enforces on PRs; optional local hook: `./tools/scripts/install-git-hooks.sh`)
 
 When opening a PR, include concrete test-plan results in the PR body (see `.github/pull_request_template.md`).
 
