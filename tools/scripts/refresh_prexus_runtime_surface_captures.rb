@@ -20,7 +20,7 @@ options = {
   devices: [],
   output_root: Pathname('docs/design/runtime-surface-captures'),
   project: Pathname('app/ios/PREXUS.xcodeproj'),
-  scheme: 'PREXUS'
+  scheme: 'QWON'
 }
 
 OptionParser.new do |parser|

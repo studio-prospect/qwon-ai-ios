@@ -16,7 +16,7 @@ DEVICE_FILTER="${1:-Wang}"
 IOS="$ROOT/app/ios"
 DERIVED="$ROOT/.derivedData-litert-prototype"
 TEAM="${DEVELOPMENT_TEAM:-BWSS94LH28}"
-APP="$DERIVED/Build/Products/Debug-iphoneos/PREXUS.app"
+APP="$DERIVED/Build/Products/Debug-iphoneos/QWON.app"
 BUNDLE_ID="jp.studio-prospect.qwon.ios"
 LOG_OUT="$ROOT/.eval-logs/litert-backend-comparison-${DEVICE_FILTER}.log"
 
@@ -38,7 +38,7 @@ echo "==> Build Debug PREXUS for device"
 cd "$IOS"
 xcodebuild \
   -project PREXUS.xcodeproj \
-  -scheme PREXUS \
+  -scheme QWON \
   -destination 'generic/platform=iOS' \
   -derivedDataPath "$DERIVED" \
   DEVELOPMENT_TEAM="$TEAM" \

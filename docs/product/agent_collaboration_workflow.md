@@ -172,7 +172,7 @@ Suggested verification after regeneration:
 
 ```bash
 ruby tools/scripts/generate_xcodeproj.rb
-xcodebuild -project app/ios/PREXUS.xcodeproj -scheme PREXUS \
+xcodebuild -project app/ios/PREXUS.xcodeproj -scheme QWON \
   -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' test
 ```
 

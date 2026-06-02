@@ -16,7 +16,7 @@
 | LiteRT eval app (optional target) | `jp.studio-prospect.qwon.ios.literteval` |
 | Keychain service (API keys) | `com.prexus.api-keys` (**unchanged** — independent of Bundle ID) |
 
-Set in `tools/scripts/generate_xcodeproj.rb` and device scripts after Phase 2 merge. Regenerate `app/ios/PREXUS.xcodeproj` with `ruby tools/scripts/generate_xcodeproj.rb` (no-llama checkout policy unchanged).
+Set in `tools/scripts/generate_xcodeproj.rb` and device scripts after Phase 2 merge. Regenerate `app/ios/PREXUS.xcodeproj` with `ruby tools/scripts/generate_xcodeproj.rb` (no-llama checkout policy unchanged). **Phase 4B:** main target/scheme **QWON**; Swift module remains `PREXUS` until a later Phase 4 PR.
 
 ---
 

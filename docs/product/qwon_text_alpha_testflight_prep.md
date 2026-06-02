@@ -84,7 +84,7 @@ Run on `main` after Apple gate profiles exist locally.
 ```bash
 ruby tools/scripts/generate_xcodeproj.rb
 cd app/ios
-xcodebuild -project PREXUS.xcodeproj -scheme PREXUS \
+xcodebuild -project PREXUS.xcodeproj -scheme QWON \
   -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' \
   -derivedDataPath ../../.derivedData-release test
 ```
@@ -120,7 +120,7 @@ Local Release archive + **App Store Connect export** on `main` at `d4f2a0b` (no 
 
 ```bash
 cd app/ios
-xcodebuild -project PREXUS.xcodeproj -scheme PREXUS \
+xcodebuild -project PREXUS.xcodeproj -scheme QWON \
   -destination 'generic/platform=iOS' -configuration Release \
   -archivePath ../../.archive/QWON-0.1.0.xcarchive \
   DEVELOPMENT_TEAM=BWSS94LH28 CODE_SIGN_STYLE=Automatic \

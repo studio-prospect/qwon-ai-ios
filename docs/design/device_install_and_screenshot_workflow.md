@@ -124,12 +124,12 @@ Record results in the PR test plan when device QA is required.
 ```bash
 cd app/ios
 
-xcodebuild -project PREXUS.xcodeproj -scheme PREXUS \
+xcodebuild -project PREXUS.xcodeproj -scheme QWON \
   -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' \
   -derivedDataPath ../../.derivedData \
   -only-testing:PREXUSTests build-for-testing
 
-xcodebuild -project PREXUS.xcodeproj -scheme PREXUS \
+xcodebuild -project PREXUS.xcodeproj -scheme QWON \
   -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' \
   -derivedDataPath ../../.derivedData \
   test-without-building \
