@@ -1,7 +1,7 @@
 # QWON Text Alpha — TestFlight Preparation (Phase 3)
 
 **Last updated:** 2026-06-02
-**Status:** **QWON text alpha `0.1.0 (1)` stable on TestFlight** — upload, Wang/Matisse lab, tag `qwon-text-alpha-0.1.0-rc1` (2026-06-02). ASC `6775685841`.
+**Status:** **Active lab build `0.1.0 (2)`** on TestFlight (keyboard Return → Send fix). Build `1` baseline + tag `qwon-text-alpha-0.1.0-rc1` remain historical. ASC `6775685841`.
 
 **Historical line:** PREXUS alpha `0.1.0 (1)` on `jp.studio-prospect.prexus.ios` remains frozen — see [Qwen text-only alpha TestFlight prep](./qwen_text_only_alpha_testflight_prep.md). **Do not** upload QWON builds to ASC app **PREXUS** (Apple ID `6775110218`).
 
@@ -18,14 +18,17 @@
 | Apple gate (App ID, profiles, ASC app) | Release engineering | **Done** (2026-06-02) | [Apple gate checklist](#apple-gate-checklist-operator) · ASC `6775685841` |
 | Distribution archive (QWON bundle + llama) | Release engineering | **Done** (2026-06-02) | [Distribution archive validation](#distribution-archive-validation-2026-06-02) |
 | Device smoke on QWON bundle | Release engineering | **Done** (2026-06-02, Wang) | [`alpha_smoke_wang.sh`](../../tools/scripts/alpha_smoke_wang.sh) — `VALIDATION PASSED` |
-| TestFlight upload | Release engineering | **Done** (2026-06-02) | [TestFlight upload record](#testflight-upload-2026-06-02) · ASC `6775685841` |
-| Lab TestFlight install (Wang + Matisse) | Release engineering | **Done** (2026-06-02) | [Wang](#wang-testflight-verification-2026-06-02) llama.cpp · [Matisse](#matisse-testflight-verification-2026-06-02) Embedded Heuristic |
+| TestFlight upload (build `1`) | Release engineering | **Done** (2026-06-02) | [TestFlight upload — build 1](#testflight-upload-2026-06-02) |
+| TestFlight upload (build `2`) | Release engineering | **Done** (2026-06-02) | [Build 2 — keyboard fix](#testflight-build-2-2026-06-02) · `main` `1bac472` |
+| Lab TestFlight install (Wang + Matisse) | Release engineering | **Done** (build `1`, 2026-06-02) | [Wang](#wang-testflight-verification-2026-06-02) · [Matisse](#matisse-testflight-verification-2026-06-02) |
+| Lab build `2` verification | Release engineering | **Done** (2026-06-02) | Return **sends** on Wang + Matisse — [build 2 record](#testflight-build-2-2026-06-02) · [tier policy](#physical-device-lab-tier-policy) |
+| Export compliance (ASC) | Release engineering | **Done** (build `2`, 2026-06-02) | [Export compliance gate](#export-compliance-operator-gate) — required before build `2` TestFlight install |
 | Git tag | Release engineering | **Done** (2026-06-02) | `qwon-text-alpha-0.1.0-rc1` on `d4f2a0b` — [tag record](#git-tag-2026-06-02) |
 | Ops evidence folder | Release engineering | **In use** | `~/QWON-alpha-evidence/qwon-text-0.1.0-build1/` — Wang + Matisse Chat PNGs on file |
 
-**Version proposal (first QWON TestFlight):** marketing `0.1.0`, build `1` (matches current `Info.plist`; bump build only on respin).
+**Active build:** marketing `0.1.0`, **`CFBundleVersion` `2`** on `main` (keyboard fix). Bump build number for each TestFlight binary upload.
 
-**Explicitly out of scope:** App Store public release; PREXUS alpha **build `2`**; rewriting PREXUS frozen ledger or upload history.
+**Explicitly out of scope:** App Store public release; **PREXUS** alpha **build `2`** (separate product line — not this QWON build `2`); rewriting PREXUS frozen ledger or upload history.
 
 ---
 
@@ -44,18 +47,27 @@ Complete [distribution validation](#distribution-archive-validation-2026-06-02) 
 | ASC Apple ID for QWON app | [x] | `6775685841` |
 | ASC categories | [x] | Primary **ユーティリティ** / Secondary **仕事効率化** |
 | Distribution archive validates for QWON bundle | [x] | **Done** 2026-06-02 — [validation record](#distribution-archive-validation-2026-06-02) |
-| Internal TestFlight group on **QWON** app | [ ] | Assign build `0.1.0 (1)` to **Wang + Matisse** group in ASC — **not done in repo** |
+| Internal TestFlight group on **QWON** app | [x] | Wang + Matisse in ASC; build `1` full lab on both; build `2` install + Return-key on both — [tier policy](#physical-device-lab-tier-policy) |
 
 ---
 
-## Physical device lab (unchanged policy)
+## Physical device lab (tier policy)
 
-Same two-device lab as PREXUS alpha — see [PREXUS prep — device lab](./qwen_text_only_alpha_testflight_prep.md#physical-device-lab-ops-policy).
+Two-device lab inherited from PREXUS alpha — see [PREXUS prep — device lab](./qwen_text_only_alpha_testflight_prep.md#physical-device-lab-ops-policy). **QWON alpha (2026-06-02):** per-build requirements are **tiered** — Wang primary, Matisse secondary.
 
-| Device | Role under QWON bundle |
-| --- | --- |
-| **Wang** | Primary — llama.cpp after `push_local_model_to_device.sh`; `alpha_smoke_wang.sh` three scenarios |
-| **Matisse** | Secondary — Embedded Heuristic acceptable; crash-free Diagnostics |
+| Device | Tier | Role |
+| --- | --- | --- |
+| **Wang** | **Primary** | llama.cpp after `push_local_model_to_device.sh`; `alpha_smoke_wang.sh` before upload when runtime changes; full Chat + Diagnostics on baseline / major builds |
+| **Matisse** | **Secondary** | A12 / Embedded Heuristic path; **install + launch + crash-free** on every TestFlight build; full Diagnostics ledger on **baseline** builds only unless runtime changes |
+
+### Per-build verification tiers
+
+| Build class | Wang | Matisse |
+| --- | --- | --- |
+| **Baseline / runtime change** (e.g. build `1`, routing, model path) | Full — smoke script + TestFlight Chat + Diagnostics (`answered_by=llama.cpp`) | Full — TestFlight Chat + Diagnostics (**Local runtime** + **Embedded Heuristic**) |
+| **Minor UX-only** (e.g. build `2` keyboard Return → Send) | Feature check on TestFlight + prior smoke lineage | TestFlight **install + Return sends** (not newline); no new Diagnostics ledger required |
+
+**ASC `internal_tester`:** keep **Wang + Matisse** membership. Matisse remains in the group for install/regression on secondary tier; do not widen beyond the two lab devices without product decision.
 
 **Before first QWON Debug/TestFlight install:** uninstall `jp.studio-prospect.prexus.ios` and legacy `com.prexus.ios` builds on lab phones to avoid confusion.
 
@@ -168,6 +180,46 @@ xcodebuild -exportArchive \
 
 ---
 
+## Export compliance (operator gate)
+
+After each upload, ASC may hold the build until **暗号化に関する輸出コンプライアンス** (export compliance / encryption) is answered. Upload success alone does not make the build installable on TestFlight.
+
+| Build | Upload | Compliance | TestFlight install |
+| --- | --- | --- | --- |
+| `0.1.0 (1)` | 2026-06-02 | Completed at first upload | Wang + Matisse verified |
+| `0.1.0 (2)` | 2026-06-02 | **Re-submission required** — was pending; **submitted 2026-06-02** | Wang + Matisse — Return sends (secondary tier) |
+
+**Operator checklist (every new build):**
+
+1. Upload succeeds (`Upload succeeded` in Xcode / `xcodebuild -exportArchive`).
+2. ASC → **QWON** → TestFlight → select build → complete **輸出コンプライアンス** if status shows missing.
+3. Wait for processing → assign build to internal group if not auto-assigned.
+4. TestFlight app on device → **更新** → confirm version shows `(2)` etc.
+
+Build `2` was uploaded while compliance was outstanding; devices stayed on build `1` until compliance was submitted — not an upload failure.
+
+---
+
+## TestFlight build 2 (2026-06-02)
+
+**Purpose:** UX fix — soft keyboard Return **sends** instead of inserting a newline (PR #56, `f28d925` on `main`).
+
+| Field | Value |
+| --- | --- |
+| Version | `0.1.0` (build **`2`**) |
+| Repo commit (archive) | `1bac472` (`CFBundleVersion` bump + keyboard fix) |
+| Change | Remove `TextField` `axis: .vertical`; `submitLabel(.send)` + `onSubmit` send on Return |
+| ASC app | **QWON** (`6775685841`) |
+| Archive (ops) | `.archive/QWON-0.1.0-build2.xcarchive` |
+| Upload | **Upload succeeded** — compliance gating delayed install until submitted |
+| Wang verification | **Pass** — Return sends message (not newline) on TestFlight build `2` |
+| Matisse verification | **Pass** — Return sends (not newline); install + launch crash-free — [secondary tier](#physical-device-lab-tier-policy) |
+| PREXUS alpha build `2` | **Unrelated** — do not conflate with QWON line |
+
+No new git tag for build `2` (tag `qwon-text-alpha-0.1.0-rc1` remains on build `1` archive commit `d4f2a0b` unless product adds a build-2 tag later).
+
+---
+
 ## Wang TestFlight verification (2026-06-02)
 
 | Step | Result |
@@ -198,17 +250,27 @@ xcodebuild -exportArchive \
 
 **Expected on A12:** Matisse does **not** use llama.cpp even with GGUF; **Embedded Heuristic Runtime** is acceptable — same policy as [PREXUS Matisse verification](./qwen_text_only_alpha_testflight_prep.md#matisse-testflight-verification-2026-05-31).
 
+### Matisse build `2` verification (2026-06-02)
+
+Secondary-tier check after export compliance cleared — UX-only build; no new Diagnostics ledger.
+
+| Step | Result |
+| --- | --- |
+| TestFlight install `0.1.0 (2)` on **QWON** bundle | **Pass** |
+| App launch (display name **QWON**) | **Pass** |
+| Return key in Chat | **Pass** — **sends** message (not newline), same as Wang |
+
 ---
 
 ## TestFlight upload outline (operator)
 
-Archive validation and initial upload are **done** (2026-06-02). Remaining operator steps:
-1. [x] Upload to **QWON** ASC (`6775685841`) — [record](#testflight-upload-2026-06-02).
-2. [ ] Complete export compliance in ASC if prompted.
-3. [x] Internal TestFlight access for **Wang + Matisse** — install confirmed (2026-06-02).
+Archive validation and build `1` upload are **done** (2026-06-02). **Build `2`** uploaded same day (keyboard fix). Operator steps for **future builds**:
+1. [x] Upload to **QWON** ASC (`6775685841`) — [build 1](#testflight-upload-2026-06-02) · [build 2](#testflight-build-2-2026-06-02).
+2. [x] Complete **export compliance** in ASC when prompted — [gate notes](#export-compliance-operator-gate) (build `2` required re-submission).
+3. [x] Internal TestFlight access for **Wang + Matisse** — build `1` full lab; build `2` install on both ([tier policy](#physical-device-lab-tier-policy)).
 4. [ ] Paste [ASC What to Test](#asc-what-to-test-copy) + link [PREXUS-era tester instructions](./qwen_text_only_alpha_tester_instructions.md) until QWON-specific copy exists.
-5. [x] Wang + Matisse TestFlight Chat verified (2026-06-02); screenshots on file under `~/QWON-alpha-evidence/qwon-text-0.1.0-build1/`.
-6. [x] Tag archive commit `d4f2a0b`: `qwon-text-alpha-0.1.0-rc1` — [record](#git-tag-2026-06-02).
+5. [x] Build `1`: Wang + Matisse Chat verified (2026-06-02). Build `2`: Return-key **sends** on Wang + Matisse (2026-06-02).
+6. [x] Tag archive commit `d4f2a0b`: `qwon-text-alpha-0.1.0-rc1` — [record](#git-tag-2026-06-02) (build `1` only).
 7. [ ] Docs-only follow-up: ledger subsection for QWON build `1` (new doc or appendix — **do not** edit PREXUS frozen ledger).
 
 **Re-upload / respin:** Confirm version/build bump, re-archive with llama locally, validate, then upload to **QWON** ASC only.
@@ -222,11 +284,11 @@ Archive validation and initial upload are **done** (2026-06-02). Remaining opera
 Paste into the **QWON** ASC app internal TestFlight build:
 
 ```text
-QWON 0.1.0 is the text-only alpha on a new bundle (internal lab: Wang + Matisse only).
+QWON 0.1.0 is the text-only alpha on a new bundle (internal lab: Wang primary + Matisse secondary).
 
 - Display name: QWON. Not the historical PREXUS TestFlight app.
 - Local Qwen path requires developer USB push of prexus-local-mvp.gguf (see repo models/README).
-- Matisse (A12) may show Embedded Heuristic even with GGUF; that is expected.
+- Matisse (A12) may show Embedded Heuristic even with GGUF; that is expected on secondary tier.
 - Report issues with device model, iOS version, and Settings → Runtime Diagnostics screenshot.
 ```
 
@@ -268,6 +330,7 @@ git push origin qwon-text-alpha-0.1.0-rc1
 | Build | Ops path (outside git) |
 | --- | --- |
 | QWON `0.1.0 (1)` | `~/QWON-alpha-evidence/qwon-text-0.1.0-build1/` |
+| QWON `0.1.0 (2)` | Same folder or `~/QWON-alpha-evidence/qwon-text-0.1.0-build2/` when populated — keyboard fix verification on file (ops) |
 | PREXUS `0.1.0 (1)` (historical) | `~/PREXUS-alpha-evidence/qwen-text-0.1.0-build1/` — **immutable** |
 
 No PNG, IPA, GGUF, or logs in git. Docs reference filenames as `on file (ops)` only.
