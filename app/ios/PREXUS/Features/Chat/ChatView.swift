@@ -125,7 +125,7 @@ struct ChatView: View {
             }
 
             HStack(alignment: .bottom, spacing: 12) {
-                TextField("Ask PREXUS", text: $viewModel.draftText, axis: .vertical)
+                TextField("Ask QWON", text: $viewModel.draftText, axis: .vertical)
                     .font(.body)
                     .lineLimit(1...6)
                     .focused($isComposerFocused)
@@ -169,7 +169,7 @@ struct ChatView: View {
     private var header: some View {
         HStack(alignment: .center, spacing: 12) {
             VStack(alignment: .leading, spacing: 2) {
-                Text("PREXUS")
+                Text("QWON")
                     .font(.title2.weight(.semibold))
                     .tracking(-0.4)
 

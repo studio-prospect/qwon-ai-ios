@@ -207,7 +207,7 @@ final class PREXUSTests: XCTestCase {
             cloudModel: MockCloudModelClient()
         )
         let transcript = [
-            ChatMessage(role: .system, content: "PREXUS runtime initialized."),
+            ChatMessage(role: .system, content: "QWON runtime initialized."),
             ChatMessage(role: .user, content: "Hello")
         ]
 
@@ -443,13 +443,13 @@ final class PREXUSTests: XCTestCase {
     func testRuntimeTranscriptExcludesCanceledInFlightUserTurn() {
         let transcript = ChatRuntimeTranscript.messages(
             from: [
-                ChatMessage(role: .system, content: "PREXUS runtime initialized."),
+                ChatMessage(role: .system, content: "QWON runtime initialized."),
                 ChatMessage(role: .user, content: "First turn")
             ],
             replacingInFlightTurn: true
         )
 
-        XCTAssertEqual(transcript.map(\.content), ["PREXUS runtime initialized."])
+        XCTAssertEqual(transcript.map(\.content), ["QWON runtime initialized."])
     }
 
     @MainActor
@@ -1362,8 +1362,8 @@ final class PREXUSTests: XCTestCase {
     func testStructuredContextCompressorLabelsRolesAndDeduplicatesSystemLines() {
         let compressor = StructuredContextCompressor(recencyWindow: 8)
         let messages = [
-            RuntimeMessage(role: .system, content: "PREXUS runtime initialized."),
-            RuntimeMessage(role: .system, content: "PREXUS runtime initialized."),
+            RuntimeMessage(role: .system, content: "QWON runtime initialized."),
+            RuntimeMessage(role: .system, content: "QWON runtime initialized."),
             RuntimeMessage(role: .user, content: "First question"),
             RuntimeMessage(role: .assistant, content: "First answer"),
             RuntimeMessage(role: .user, content: "Second question")
@@ -1371,7 +1371,7 @@ final class PREXUSTests: XCTestCase {
 
         let result = compressor.compress(messages: messages, maxEstimatedTokens: 256)
 
-        XCTAssertTrue(result.text.contains("System: PREXUS runtime initialized."))
+        XCTAssertTrue(result.text.contains("System: QWON runtime initialized."))
         XCTAssertTrue(result.text.contains("User: First question"))
         XCTAssertTrue(result.text.contains("Assistant: First answer"))
         XCTAssertEqual(result.metrics.deduplicatedMessageCount, 1)

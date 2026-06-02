@@ -1,4 +1,4 @@
-# PREXUS Local Model Assets
+# QWON Local Model Assets
 
 GGUF weights are **not** committed to git.
 
@@ -49,7 +49,7 @@ Or run the full device eval workflow: `./tools/scripts/eval_gemma4_on_device.sh 
 
 ## Fallback behavior
 
-If the GGUF is missing, llama.cpp fails to load, or the device is below A17 Pro class, PREXUS falls back to `EmbeddedHeuristicLocalModelClient` without crashing.
+If the GGUF is missing, llama.cpp fails to load, or the device is below A17 Pro class, QWON falls back to `EmbeddedHeuristicLocalModelClient` without crashing.
 
 Runtime diagnostics (Settings → Runtime diagnostics) record:
 
@@ -90,5 +90,5 @@ cmake --build build-mac -j --target llama-bench llama-cli
 | Device eval app | `PREXUSLiteRTEval` (`jp.studio-prospect.prexus.ios.literteval`) |
 | Full workflow | `./tools/scripts/eval_litert_lm_on_device.sh "Wang"` |
 
-See [LiteRT-LM Evaluation Plan](../docs/research/litert_lm_evaluation_plan.md). **Default remains Qwen 0.5B + llama.cpp in PREXUS.**
+See [LiteRT-LM Evaluation Plan](../docs/research/litert_lm_evaluation_plan.md). **Default remains Qwen 0.5B + llama.cpp in QWON.**
 

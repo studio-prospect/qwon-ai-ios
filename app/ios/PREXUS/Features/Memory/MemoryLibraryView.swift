@@ -16,7 +16,7 @@ struct MemoryLibraryView: View {
                     PREXUSEmptyState(
                         title: "No Local Memory Yet",
                         systemImage: "memorychip",
-                        message: "PREXUS will keep compact local episodes here after eligible runtime turns.",
+                        message: "QWON will keep compact local episodes here after eligible runtime turns.",
                         tint: .purple
                     )
                     .accessibilityIdentifier(PREXUSAccessibilityID.Memory.empty)
@@ -65,7 +65,7 @@ struct MemoryLibraryView: View {
         PREXUSScreenIntro(
             eyebrow: "Local context",
             title: "Memory",
-            message: "Browse the compact on-device episodes PREXUS retained for future context."
+            message: "Browse the compact on-device episodes QWON retained for future context."
         )
     }
 
@@ -81,7 +81,7 @@ struct MemoryLibraryView: View {
                     PREXUSStatusChip("On-device only", tint: .secondary)
                 }
 
-                Text("Episodes are compact summaries PREXUS keeps locally for future context. Retention follows the sensitivity policy, so local-only and provider-restricted turns are excluded from automatic storage.")
+                Text("Episodes are compact summaries QWON keeps locally for future context. Retention follows the sensitivity policy, so local-only and provider-restricted turns are excluded from automatic storage.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }

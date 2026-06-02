@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document defines how PREXUS work is split between the planning/review agent and the implementation agent.
+This document defines how QWON work is split between the planning/review agent and the implementation agent.
 
 The goal is to keep:
 
@@ -125,7 +125,7 @@ Examples:
 When Codex reviews a PR, the review should explicitly answer:
 
 1. Is the implementation correct?
-2. Does it match PREXUS architecture and local-first policy?
+2. Does it match QWON architecture and local-first policy?
 3. Are the tests and verification results sufficient?
 4. Is the PR safe to merge now?
 5. What, if anything, should be deferred into a follow-up?
@@ -150,7 +150,7 @@ Use short, intent-first branch names:
 - `chore/` for tooling, project generation, or CI-adjacent work
 - `docs/` for documentation-only updates
 
-Examples from recent PREXUS work:
+Examples from recent QWON work:
 
 - `refactor/runtime-boundary-and-turn-hardening`
 - `chore/include-generated-ui-tests`

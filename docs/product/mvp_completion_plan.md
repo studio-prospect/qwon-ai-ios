@@ -4,7 +4,7 @@
 
 This document summarizes:
 
-- what has already been implemented in the current PREXUS iOS scaffold
+- what has already been implemented in the current QWON iOS scaffold
 - what remains to reach the next "MVP completion" checkpoint
 
 For this plan, "MVP completion" means the current mobile runtime scaffold is coherent end-to-end across:
@@ -16,7 +16,7 @@ For this plan, "MVP completion" means the current mobile runtime scaffold is coh
 - test coverage for current behavior
 - minimum required documentation
 
-It does **not** mean PREXUS is feature-complete as a cognitive runtime. It marks a stable milestone for the current scaffold.
+It does **not** mean QWON is feature-complete as a cognitive runtime. It marks a stable milestone for the current scaffold.
 
 ## Completed Work
 
@@ -152,7 +152,7 @@ The items below are now primarily future-regression risks rather than current ch
 | Sensitivity policy stays UI-led instead of policy-led | Runtime and Settings behavior become harder to reason about |
 | Diagnostics stay flat | Debugging route selection becomes slower as reason vocabulary grows |
 | Memory policy remains undefined | Sensitive content handling may become inconsistent later |
-| Multimodal paths diverge from text routing | PREXUS loses policy coherence as capabilities expand |
+| Multimodal paths diverge from text routing | QWON loses policy coherence as capabilities expand |
 
 ## Notes
 

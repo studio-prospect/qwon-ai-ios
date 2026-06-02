@@ -1,8 +1,8 @@
 # AGENTS.md
 
-# PREXUS Development Guide
+# QWON Development Guide
 
-PREXUS is a local-first mobile AI runtime for iPhone.
+QWON is a local-first mobile AI runtime for iPhone. **Website:** https://qwon.ai — see [rename migration plan](docs/product/qwon_rename_migration_plan.md) for phased PREXUS → QWON rollout (Bundle ID unchanged until Phase 2).
 
 The project focuses on:
 - on-device intelligence

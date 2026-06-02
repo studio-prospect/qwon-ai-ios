@@ -12,7 +12,7 @@ struct RuntimeDiagnosticsView: View {
                     PREXUSEmptyState(
                         title: "No Runtime Diagnostics Yet",
                         systemImage: "waveform.path.ecg",
-                        message: "PREXUS will capture recent route and execution decisions here after the first runtime turn.",
+                        message: "QWON will capture recent route and execution decisions here after the first runtime turn.",
                         tint: .blue
                     )
                     .accessibilityIdentifier(PREXUSAccessibilityID.Diagnostics.empty)
@@ -51,7 +51,7 @@ struct RuntimeDiagnosticsView: View {
         PREXUSScreenIntro(
             eyebrow: "Runtime visibility",
             title: "Diagnostics",
-            message: "Review how PREXUS routed and executed recent turns without dropping into raw logs."
+            message: "Review how QWON routed and executed recent turns without dropping into raw logs."
         )
     }
 

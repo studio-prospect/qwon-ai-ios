@@ -16,7 +16,7 @@ enum LocalBackendComparisonRunner {
             label: "ja_short",
             text: """
             User:
-            あなたはPREXUSのローカル補助モデルです。短く自然な日本語で答えてください。
+            あなたはQWONのローカル補助モデルです。短く自然な日本語で答えてください。
             質問: 明日の予定を整理する時、最初に何を確認すべきですか？
             """
         ),

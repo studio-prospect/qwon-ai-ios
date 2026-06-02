@@ -43,16 +43,16 @@ struct SettingsView: View {
                     } header: {
                         PREXUSFormSectionHeader(
                             title: "Workspace",
-                            detail: "Inspect the local runtime history PREXUS keeps on device."
+                            detail: "Inspect the local runtime history QWON keeps on device."
                         )
                     } footer: {
-                        Text("PREXUS keeps local-only summaries for memory and runtime inspection, and trims older diagnostics automatically.")
+                        Text("QWON keeps local-only summaries for memory and runtime inspection, and trims older diagnostics automatically.")
                     }
 
                     Section {
                         settingSummaryRow(
                             "Escalation",
-                            subtitle: "Controls whether PREXUS may leave the on-device runtime.",
+                            subtitle: "Controls whether QWON may leave the on-device runtime.",
                             accessory: AnyView(
                                 PREXUSStatusChip(
                                     settings.config.allowsCloudEscalation ? "Enabled" : "Local Only",
@@ -82,10 +82,10 @@ struct SettingsView: View {
                     } header: {
                         PREXUSFormSectionHeader(
                             title: "Routing Policy",
-                            detail: "Define when PREXUS may escalate beyond the on-device runtime."
+                            detail: "Define when QWON may escalate beyond the on-device runtime."
                         )
                     } footer: {
-                        Text("Cloud escalation must be enabled before PREXUS can leave the local runtime. Provider Restricted turns may use only the approved providers below, and providers without valid keys still fall back to local execution.")
+                        Text("Cloud escalation must be enabled before QWON can leave the local runtime. Provider Restricted turns may use only the approved providers below, and providers without valid keys still fall back to local execution.")
                     }
 
                     Section {
@@ -124,7 +124,7 @@ struct SettingsView: View {
                             detail: "Limit restricted turns to an explicit provider allowlist."
                         )
                     } footer: {
-                        Text("These providers are the only cloud targets allowed when a turn uses Provider Restricted sensitivity. If none are approved, PREXUS keeps the turn local.")
+                        Text("These providers are the only cloud targets allowed when a turn uses Provider Restricted sensitivity. If none are approved, QWON keeps the turn local.")
                     }
 
                     Section {
@@ -137,7 +137,7 @@ struct SettingsView: View {
                             detail: "See which providers are actually ready for cloud execution."
                         )
                     } footer: {
-                        Text("When a provider is not ready, PREXUS keeps the request on the local runtime instead of attempting cloud escalation.")
+                        Text("When a provider is not ready, QWON keeps the request on the local runtime instead of attempting cloud escalation.")
                     }
 
                     Section {
@@ -149,7 +149,7 @@ struct SettingsView: View {
                     } header: {
                         PREXUSFormSectionHeader(
                             title: "Local Runtime",
-                            detail: "Select the on-device backend PREXUS should favor locally."
+                            detail: "Select the on-device backend QWON should favor locally."
                         )
                     } footer: {
                         Text("Automatic uses a simulator stub on Simulator and llama.cpp on A17 Pro-class iPhones when a GGUF model is present.")
@@ -174,7 +174,7 @@ struct SettingsView: View {
                     } header: {
                         PREXUSFormSectionHeader(
                             title: "API Keys",
-                            detail: "Store provider credentials locally so PREXUS can verify cloud readiness."
+                            detail: "Store provider credentials locally so QWON can verify cloud readiness."
                         )
                     }
                 }
@@ -274,7 +274,7 @@ struct SettingsView: View {
                 PREXUSScreenIntro(
                     eyebrow: "Runtime control",
                     title: "Settings",
-                    message: "Tune how PREXUS routes work between the on-device runtime, approved cloud providers, diagnostics, and local memory."
+                    message: "Tune how QWON routes work between the on-device runtime, approved cloud providers, diagnostics, and local memory."
                 )
 
                 ViewThatFits(in: .horizontal) {
@@ -371,7 +371,7 @@ struct SettingsView: View {
                 detail: "Off by default. Does not change production automatic routing."
             )
         } footer: {
-            Text("Requires prexus-eval-gemma4-e2b.litertlm in Documents/Models. On failure, PREXUS falls back to Qwen llama.cpp, then embedded heuristics.")
+            Text("Requires prexus-eval-gemma4-e2b.litertlm in Documents/Models. On failure, QWON falls back to Qwen llama.cpp, then embedded heuristics.")
         }
     }
 
@@ -420,7 +420,7 @@ struct SettingsView: View {
         case .cloudReady:
             return "Ready for cloud execution when policy allows it."
         case .localPrimary:
-            return "No valid API key is available, so PREXUS stays local."
+            return "No valid API key is available, so QWON stays local."
         case .disabled:
             return "Cloud escalation is disabled at the policy level."
         }
@@ -592,7 +592,7 @@ struct PREXUSEmptyState: View {
                             .font(.headline)
                             .foregroundStyle(.primary)
 
-                        Text("PREXUS surface")
+                        Text("QWON surface")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
