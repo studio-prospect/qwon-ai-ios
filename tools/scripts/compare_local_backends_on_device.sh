@@ -17,7 +17,7 @@ IOS="$ROOT/app/ios"
 DERIVED="$ROOT/.derivedData-litert-prototype"
 TEAM="${DEVELOPMENT_TEAM:-BWSS94LH28}"
 APP="$DERIVED/Build/Products/Debug-iphoneos/PREXUS.app"
-BUNDLE_ID="jp.studio-prospect.prexus.ios"
+BUNDLE_ID="jp.studio-prospect.qwon.ios"
 LOG_OUT="$ROOT/.eval-logs/litert-backend-comparison-${DEVICE_FILTER}.log"
 
 if [[ ! -f "$ROOT/models/prexus-eval-gemma4-e2b.litertlm" ]]; then

@@ -14,7 +14,7 @@ require "xcodeproj"
 #   PREXUS_LITERT_LM_PROTOTYPE=1 ruby tools/scripts/generate_xcodeproj.rb
 
 ROOT = Pathname.new(__dir__).join("..", "..").expand_path
-MAIN_BUNDLE_ID = "jp.studio-prospect.prexus.ios"
+MAIN_BUNDLE_ID = "jp.studio-prospect.qwon.ios"
 TEST_BUNDLE_ID = "#{MAIN_BUNDLE_ID}.tests"
 UI_TEST_BUNDLE_ID = "#{MAIN_BUNDLE_ID}.uitests"
 LITERT_EVAL_BUNDLE_ID = "#{MAIN_BUNDLE_ID}.literteval"

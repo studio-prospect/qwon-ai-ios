@@ -45,7 +45,7 @@ PY
 )"
 
 echo "==> Step 1/6: fresh install (uninstall prior eval app + UserDefaults)"
-xcrun devicectl device uninstall app --device "$DEVICE_ID" jp.studio-prospect.prexus.ios.literteval 2>/dev/null || true
+xcrun devicectl device uninstall app --device "$DEVICE_ID" jp.studio-prospect.qwon.ios.literteval 2>/dev/null || true
 
 echo "==> Step 2/6: regenerate Xcode project + build/install PREXUSLiteRTEval (no launch)"
 "$ROOT/tools/scripts/install_litert_eval_on_device.sh" "$DEVICE_FILTER"
@@ -56,7 +56,7 @@ echo "==> Step 3/6: push .litertlm eval artifact (~2.6 GiB — may take several 
 
 echo ""
 echo "==> Step 4/6: launch eval app (smoke runs only after model is present)"
-xcrun devicectl device process launch --device "$DEVICE_ID" jp.studio-prospect.prexus.ios.literteval
+xcrun devicectl device process launch --device "$DEVICE_ID" jp.studio-prospect.qwon.ios.literteval
 
 echo ""
 echo "==> Step 5/6: wait for smoke eval (cold load + prompts; ~1–3 min on A17 Pro+)"
