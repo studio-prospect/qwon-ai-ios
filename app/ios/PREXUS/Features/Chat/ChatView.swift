@@ -125,9 +125,9 @@ struct ChatView: View {
             }
 
             HStack(alignment: .bottom, spacing: 12) {
-                TextField("Ask QWON", text: $viewModel.draftText, axis: .vertical)
+                TextField("Ask QWON", text: $viewModel.draftText)
                     .font(.body)
-                    .lineLimit(1...6)
+                    .lineLimit(1)
                     .focused($isComposerFocused)
                     .submitLabel(.send)
                     .onSubmit(submitDraftIfPossible)
