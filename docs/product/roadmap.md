@@ -2,7 +2,7 @@
 
 ## Product Roadmap
 
-PREXUS は段階的に「ローカル AI チャット」から「モバイル AI ランタイム」へ進める。優先順位は常に、機能数よりも runtime の質を取る。
+QWON は段階的に「ローカル AI チャット」から「モバイル AI ランタイム」へ進める。優先順位は常に、機能数よりも runtime の質を取る。
 
 Delivery workflow (Codex / Cursor role split): [agent_collaboration_workflow.md](./agent_collaboration_workflow.md).
 
@@ -98,7 +98,7 @@ Delivery workflow (Codex / Cursor role split): [agent_collaboration_workflow.md]
 
 目的:
 
-- PREXUS を汎用チャットから知能実行基盤へ進化させる
+- QWON を汎用チャットから知能実行基盤へ進化させる
 
 対象機能:
 

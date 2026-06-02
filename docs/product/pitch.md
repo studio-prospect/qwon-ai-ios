@@ -2,11 +2,11 @@
 
 ## One-Line Pitch
 
-PREXUS is a local-first AI runtime for iPhone that thinks nearby, routes intelligently, and calls the cloud only when necessary.
+QWON is a local-first AI runtime for iPhone that thinks nearby, routes intelligently, and calls the cloud only when necessary.
 
 ## Short Pitch
 
-ほとんどの AI アプリは、すべてをクラウドへ送り、毎回大きなコンテキストを投げて処理している。PREXUS は逆をやる。iPhone 上のローカル LLM を中核に、会話、OCR、音声、画像理解、文脈圧縮、メモリ処理をできる限り端末側で行い、本当に必要なときだけ高性能クラウドモデルへエスカレーションする。
+ほとんどの AI アプリは、すべてをクラウドへ送り、毎回大きなコンテキストを投げて処理している。QWON は逆をやる。iPhone 上のローカル LLM を中核に、会話、OCR、音声、画像理解、文脈圧縮、メモリ処理をできる限り端末側で行い、本当に必要なときだけ高性能クラウドモデルへエスカレーションする。
 
 その結果、低遅延、低コスト、高プライバシー、オフライン性を両立した「携帯型 AI 実行基盤」を実現する。
 
@@ -24,9 +24,9 @@ PREXUS is a local-first AI runtime for iPhone that thinks nearby, routes intelli
 
 ## Solution
 
-PREXUS は、ローカル LLM を単なる小型チャットモデルではなく、オーケストレータとして使う。
+QWON は、ローカル LLM を単なる小型チャットモデルではなく、オーケストレータとして使う。
 
-PREXUS が担うこと:
+QWON が担うこと:
 
 - 入力の intent 解析
 - タスク複雑度の判断
@@ -48,7 +48,7 @@ PREXUS が担うこと:
 
 ## Differentiation
 
-PREXUS は以下で差別化する。
+QWON は以下で差別化する。
 
 - ローカル LLM 中心の設計
 - セマンティックルーティング
@@ -70,6 +70,6 @@ PREXUS は以下で差別化する。
 
 ## Long-Term Vision
 
-PREXUS はチャットアプリを作るのではない。将来的には、個人の近くで継続的に動作するモバイル AI OS の知能レイヤを作る。
+QWON はチャットアプリを作るのではない。将来的には、個人の近くで継続的に動作するモバイル AI OS の知能レイヤを作る。
 
 目的は、AI を「呼び出すもの」から「そばで動き続けるもの」に変えることにある。

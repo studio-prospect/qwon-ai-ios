@@ -70,9 +70,12 @@ Execute in order. Each phase is a **separate PR** unless explicitly combined in 
 
 ### Phase 1: User-facing product name and website URL
 
-- Display strings, marketing copy, `https://qwon.ai` references in allowed surfaces.
+**Status:** Executed in repo via Phase 1 PR (user-facing rename only).
+
+- Display strings, marketing copy, `https://qwon.ai` as canonical website.
 - **Scope PR explicitly** — no Bundle ID change in the same PR unless Phase 2 is approved and gates are done.
-- Historical PREXUS strings in alpha-only docs may remain until a scoped docs pass.
+- Historical PREXUS strings in [Qwen text-only alpha](./qwen_text_only_alpha_docs_index.md) docs, frozen ledger, and TestFlight upload history **unchanged** (audit trail).
+- `CFBundleDisplayName` = **QWON** allowed; `PRODUCT_BUNDLE_IDENTIFIER` remains `jp.studio-prospect.prexus.ios` until Phase 2.
 
 ### Phase 2: Bundle ID / signing / scripts / Xcode project generation
 

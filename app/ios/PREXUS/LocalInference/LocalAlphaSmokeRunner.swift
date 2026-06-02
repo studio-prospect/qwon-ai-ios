@@ -159,7 +159,7 @@ enum LocalAlphaSmokeRunner {
 
     private static func baseTranscript(userText: String) -> [ChatMessage] {
         [
-            ChatMessage(role: .system, content: "PREXUS runtime initialized."),
+            ChatMessage(role: .system, content: "QWON runtime initialized."),
             ChatMessage(role: .user, content: userText)
         ]
     }

@@ -75,7 +75,7 @@ private actor LiteRTEngineHolder {
 
         let conversation = try await engine.createConversation(
             with: ConversationConfig(
-                systemMessage: Message("You are PREXUS local assistant. Reply briefly in natural Japanese when asked in Japanese.")
+                systemMessage: Message("You are QWON local assistant. Reply briefly in natural Japanese when asked in Japanese.")
             )
         )
 
