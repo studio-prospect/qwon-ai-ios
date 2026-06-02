@@ -16,7 +16,7 @@
 | LiteRT eval app (optional target) | `jp.studio-prospect.qwon.ios.literteval` |
 | Keychain service (API keys) | `com.prexus.api-keys` (**unchanged** — independent of Bundle ID) |
 
-Set in `tools/scripts/generate_xcodeproj.rb` and device scripts after Phase 2 merge. App sources: `app/ios/QWON/`. Regenerate `app/ios/PREXUS.xcodeproj` with `ruby tools/scripts/generate_xcodeproj.rb` (no-llama checkout policy unchanged). **Phase 4B:** main target/scheme **QWON**; **Phase 4C-a:** app source path **QWON**; Swift module remains `PREXUS` until 4C-c.
+Set in `tools/scripts/generate_xcodeproj.rb` and device scripts after Phase 2 merge. App sources: `app/ios/QWON/`. Regenerate **`app/ios/PREXUS.xcodeproj`** (container name deferred) with `ruby tools/scripts/generate_xcodeproj.rb` (no-llama checkout policy unchanged). **Phase 4:** active target/scheme/module **`QWON`**; test targets **`QWONTests`** / **`QWONUITests`**; `@testable import QWON`.
 
 ---
 
@@ -53,7 +53,7 @@ Set in `tools/scripts/generate_xcodeproj.rb` and device scripts after Phase 2 me
 | In scope | Out of scope |
 | --- | --- |
 | `generate_xcodeproj.rb` + shell `BUNDLE_ID` defaults | TestFlight upload / git tag — [Phase 3 prep](./qwon_text_alpha_testflight_prep.md) |
-| Regenerated `project.pbxproj` bundle identifiers | Target rename `PREXUS` → `QWON` (Phase 4) |
+| Regenerated `project.pbxproj` bundle identifiers | Target rename `PREXUS` → `QWON` — **done** (Phase 4, #59–#63) |
 | Non-historical dev docs (this memo, migration plan, models README eval bundle) | [Qwen alpha docs](./qwen_text_only_alpha_docs_index.md) — PREXUS-era |
 | | [bundle_id_decision_memo.md](./bundle_id_decision_memo.md) rows |
 

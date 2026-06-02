@@ -106,5 +106,5 @@ Dir.mktmpdir('prexus-xcresult-export') do |temp_dir|
 
   File.write(output_dir.join('manifest.json'), JSON.pretty_generate(metadata) + "\n")
   puts stdout unless stdout.empty?
-  puts "Exported #{exported.count} PREXUS screenshot attachment(s) to #{output_dir}"
+  puts "Exported #{exported.count} QWON screenshot attachment(s) to #{output_dir}"
 end

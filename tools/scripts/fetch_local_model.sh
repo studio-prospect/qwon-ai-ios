@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Download the default PREXUS local MVP GGUF model into models/ (gitignored).
+# Download the default QWON local MVP GGUF model into models/ (gitignored).
 #
 # Default asset:
 #   Qwen2.5-0.5B-Instruct Q4_K_M (~400MB, better multilingual QA than SmolLM2-360M)
@@ -36,6 +36,6 @@ curl -L --fail --progress-bar "$URL" -o "$OUTPUT"
 echo ""
 echo "Done."
 echo "Place on device via one of:"
-echo "  - Xcode → Devices → PREXUS → Download container → Documents/Models/prexus-local-mvp.gguf"
+echo "  - Xcode → Devices → QWON → Download container → Documents/Models/prexus-local-mvp.gguf"
 echo "  - PREXUS_LOCAL_MODEL_PATH when running from Xcode"
 echo "  - Optional app bundle copy for local device debug builds (see models/README.md)"

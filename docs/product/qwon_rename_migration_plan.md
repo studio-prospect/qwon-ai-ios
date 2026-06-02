@@ -1,7 +1,7 @@
 # QWON Rename Migration Plan
 
 **Last updated:** 2026-06-02
-**Status:** **Phase 3 build `1` complete**; **active TestFlight `0.1.0 (2)`** (keyboard fix, 2026-06-02) — [prep doc](./qwon_text_alpha_testflight_prep.md). Phase 4 **planned / deferred** — [Phase 4 plan](./qwon_phase4_target_rename_plan.md).
+**Status:** **Phase 3 build `1` complete**; **active TestFlight `0.1.0 (2)`** (keyboard fix, 2026-06-02) — [prep doc](./qwon_text_alpha_testflight_prep.md). Phase 4 **4C complete** (#59–#63); **4D** active docs/scripts cleanup — [Phase 4 plan](./qwon_phase4_target_rename_plan.md).
 **Audience:** Product, release engineering, Cursor/Codex agents.
 
 **Purpose:** Migrate the product from **PREXUS** to **QWON** without a blind mass-replace. Fix impact scope, execution order, and Apple-side gates before implementation PRs.
@@ -96,12 +96,12 @@ Execute in order. Each phase is a **separate PR** unless explicitly combined in 
 
 ### Phase 4: Optional internal target / module / path rename
 
-**Optional and explicitly scoped.** Default: **defer** until [Phase 4 entry gates](./qwon_phase4_target_rename_plan.md#entry-gates) are satisfied.
+**Status:** **4C complete** (#59–#63). **4D** (active docs/scripts) in progress; **4E** (optional TestFlight smoke) deferred.
 
-- Swift module name, Xcode target `PREXUS` → `QWON`, directory renames.
-- High churn; split by [Phase 4 PR plan](./qwon_phase4_target_rename_plan.md#pr-split). Inventory: [rename surface audit](./qwon_phase4_rename_surface_audit.md).
+- Xcode target/scheme, app path, test targets, and Swift module are **QWON**.
+- Project container remains **`PREXUS.xcodeproj`** until explicitly scoped.
+- Split by [Phase 4 PR plan](./qwon_phase4_target_rename_plan.md#pr-split). Inventory: [rename surface audit](./qwon_phase4_rename_surface_audit.md).
 - Not required for App Store identity if display name and Bundle ID are correct.
-- Do not start from global find-replace; use the [review checklist](./qwon_phase4_target_rename_plan.md#review-checklist).
 
 ---
 

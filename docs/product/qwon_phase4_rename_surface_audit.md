@@ -1,7 +1,7 @@
 # QWON Phase 4 — Rename Surface Audit
 
-**Status:** Pre-implementation inventory for PR 4C-a / 4C-b / 4C-c / 4D / 4E. **No code changes in this doc.**
-**Baseline:** `main` after Phase 4 PR 4B (#59) — active target/scheme **QWON**; Swift module **`PREXUS`** via `PRODUCT_MODULE_NAME`; source paths unchanged.
+**Status:** Phase 4 **4C complete** (#59–#63); **4D** active docs/scripts narrative cleanup (this PR).
+**Baseline:** `main` after Phase 4 PR **4C-c** (#63) — active target/scheme **`QWON`**; Swift module **`QWON`**; app sources **`app/ios/QWON/`**; test targets **`QWONTests`** / **`QWONUITests`**; project container **`PREXUS.xcodeproj`** (deferred).
 
 Related: [Phase 4 target rename plan](./qwon_phase4_target_rename_plan.md) · [QWON migration plan](./qwon_rename_migration_plan.md)
 
@@ -12,6 +12,23 @@ Related: [Phase 4 target rename plan](./qwon_phase4_target_rename_plan.md) · [Q
 Before PR 4C-a, record **what still says PREXUS**, assign each surface to **4C-a / 4C-b / 4C-c / 4D / 4E**, and mark **preserve** items that must not be mass-renamed.
 
 This audit avoids a blind global replace and keeps historical PREXUS alpha docs immutable.
+
+---
+
+## Completed through PR 4C-c (#63)
+
+| Surface | Before (4B) | After (4C) |
+| --- | --- | --- |
+| App source directory | `app/ios/PREXUS/` | **`app/ios/QWON/`** (4C-a, #61) |
+| Test directories / targets | `PREXUSTests`, `PREXUSUITests` | **`QWONTests`**, **`QWONUITests`** (4C-b, #62) |
+| Swift module | `PREXUS` (`PRODUCT_MODULE_NAME` override) | **`QWON`** (override removed, 4C-c, #63) |
+| `@testable import` | `PREXUS` | **`QWON`** |
+| App entry / UI / bridge types | `PREXUSApp`, `PREXUSAccessibilityID`, … | **`QWONApp`**, **`QWONAccessibilityID`**, … |
+| Bridging header filename | `PREXUS-Bridging-Header.h` | **`QWON-Bridging-Header.h`** |
+| Llama bridge | `PREXUSLlamaBridge.*` | **`QWONLlamaBridge.*`** |
+| Project container | `PREXUS.xcodeproj` | **unchanged** (deferred) |
+
+Accessibility identifier **string values** unchanged (`chat.screen`, etc.). `PREXUS_*` env/compile flags, `prexus-local-mvp.gguf`, and log prefixes remain preserved contracts.
 
 ---
 
@@ -216,8 +233,9 @@ Not required to close Phase 4 naming internally.
 | --- | --- | --- |
 | `-scheme` | `PREXUS` in `qwen_text_only_alpha_testflight_prep.md` | **`QWON`** (4B done) |
 | `-project` | PREXUS-era snippets | `PREXUS.xcodeproj` until container rename scoped |
-| Source path in docs | PREXUS alpha prep (`app/ios/PREXUS/Resources/Info.plist`) | QWON ops docs → `app/ios/QWON/…` after **4C-a** |
-| Test bundle `-only-testing:` | — | `PREXUSUITests` → `QWONUITests` in **4C-b** |
+| Source path in docs | PREXUS alpha prep (`app/ios/PREXUS/Resources/Info.plist`) | QWON ops docs → **`app/ios/QWON/…`** (4C-a done) |
+| Test bundle `-only-testing:` | — | **`QWONUITests`** (4C-b done) |
+| Swift module / `@testable import` | — | **`QWON`** (4C-c done) |
 
 ---
 
@@ -236,4 +254,6 @@ Not required to close Phase 4 naming internally.
 
 ## Next step
 
-When [entry gates](./qwon_phase4_target_rename_plan.md#entry-gates) are satisfied, open **PR 4C-a** using this audit as the file checklist. Merge and soak-test before **4C-b**; repeat before **4C-c**. Do not start until product confirms no active TestFlight release blocker.
+Phase 4 **4D** (this PR): update **active** docs/scripts so operational commands describe the current QWON target, scheme, module, test bundles, and source paths. **Do not** global-replace historical `qwen_text_only_alpha_*` docs or preserved runtime contracts.
+
+Optional **4E**: TestFlight archive smoke after 4D if product wants a renamed-target binary on device.

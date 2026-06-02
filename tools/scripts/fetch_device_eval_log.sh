@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Pull the on-device PREXUS evaluation log written by Debug builds.
+# Pull the on-device QWON evaluation log written by Debug builds.
 #
 # Usage:
 #   ./tools/scripts/fetch_device_eval_log.sh "Wang"

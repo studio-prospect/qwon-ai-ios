@@ -1,6 +1,6 @@
 # QWON Phase 4 — Target Rename Plan
 
-**Status:** Planned / deferred. Do **not** start implementation until the entry gates below are checked.
+**Status:** Phase 4 **4C complete** (#59–#63); **4D** active docs/scripts cleanup in progress.
 **Scope:** Internal repo/Xcode naming only: target, scheme, Swift module, tests, paths, and scripts that still use `PREXUS` as the active app name.
 **Non-goal:** Product identity, Bundle ID, ASC app, TestFlight history, and historical PREXUS alpha docs are already handled elsewhere and must not be rewritten here.
 
@@ -65,6 +65,8 @@ Use small, reversible PRs. Do not combine all rename surfaces into one mass-repl
 
 ### PR 4B — Xcode target and scheme rename
 
+**Status:** **Done** (#59).
+
 **Type:** tooling / project generation.
 
 - Update `tools/scripts/generate_xcodeproj.rb` so generated active app target/scheme names are QWON.
@@ -84,6 +86,8 @@ If the project path is renamed in this PR, replace the project path in the comma
 
 ### PR 4C-a — App source path move
 
+**Status:** **Done** (#61).
+
 **Type:** file moves (app tree only) + generator app paths.
 
 - Rename `app/ios/PREXUS/` → `app/ios/QWON/` after PR 4B is green.
@@ -95,6 +99,8 @@ If the project path is renamed in this PR, replace the project path in the comma
 
 ### PR 4C-b — Test path and target rename
 
+**Status:** **Done** (#62).
+
 **Type:** test directory moves + Xcode test target rename.
 
 - Rename `PREXUSTests` / `PREXUSUITests` directories and targets → `QWONTests` / `QWONUITests`.
@@ -105,6 +111,8 @@ If the project path is renamed in this PR, replace the project path in the comma
 **Validation:** same simulator test + `git diff --check`.
 
 ### PR 4C-c — Swift module and symbol rename
+
+**Status:** **Done** (#63).
 
 **Type:** module/import/type renames only — no behavior changes.
 
@@ -120,7 +128,9 @@ Detail: [rename surface audit](./qwon_phase4_rename_surface_audit.md).
 
 ### PR 4D — Script and docs active-command cleanup
 
-**Type:** tooling/docs cleanup.
+**Status:** **In progress** (this PR).
+
+**Type:** tooling/docs cleanup — active QWON operational narrative only.
 
 - Update active QWON commands and references in release ops docs.
 - Preserve PREXUS historical docs and command snippets where they describe historical alpha state.

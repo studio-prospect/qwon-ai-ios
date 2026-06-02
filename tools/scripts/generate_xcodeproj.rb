@@ -1,15 +1,15 @@
 require "pathname"
 require "xcodeproj"
 
-# Regenerates PREXUS.xcodeproj (container name unchanged in Phase 4B). Main app
-# target/scheme: QWON. Links llama.xcframework only when
-# vendor/llama-cpp-artifacts/llama.xcframework exists. Commit the output from a
-# machine without that artifact so clean checkouts can run QWONTests.
+# Regenerates app/ios/PREXUS.xcodeproj (container name deferred in Phase 4).
+# Active app target/scheme/module: QWON. Test targets: QWONTests / QWONUITests.
+# Links llama.xcframework only when vendor/llama-cpp-artifacts/llama.xcframework exists.
+# Commit the output from a machine without that artifact so clean checkouts can run QWONTests.
 #
-# Optional LiteRT-LM evaluation target (isolated app, does not link into PREXUS):
+# Optional LiteRT-LM evaluation target (isolated app, does not link into QWON):
 #   PREXUS_LITERT_LM_EVAL=1 ruby tools/scripts/generate_xcodeproj.rb
 #
-# Optional LiteRT-LM debug prototype inside PREXUS (compile-gated, off by default):
+# Optional LiteRT-LM debug prototype inside QWON (compile-gated, off by default):
 #   PREXUS_LITERT_LM_PROTOTYPE=1 ruby tools/scripts/generate_xcodeproj.rb
 
 ROOT = Pathname.new(__dir__).join("..", "..").expand_path
@@ -293,7 +293,7 @@ if ENV["PREXUS_LITERT_LM_PROTOTYPE"] == "1"
   package_ref = if litert_vendor.join("Package.swift").exist?
     ref = project.new(Xcodeproj::Project::Object::XCLocalSwiftPackageReference)
     ref.relative_path = "../../vendor/LiteRT-LM"
-    puts "Using local LiteRT-LM package for PREXUS prototype at vendor/LiteRT-LM"
+    puts "Using local LiteRT-LM package for QWON prototype at vendor/LiteRT-LM"
     ref
   else
     ref = project.new(Xcodeproj::Project::Object::XCRemoteSwiftPackageReference)
@@ -302,7 +302,7 @@ if ENV["PREXUS_LITERT_LM_PROTOTYPE"] == "1"
       "kind" => "upToNextMajorVersion",
       "minimumVersion" => "0.12.0"
     }
-    puts "Using remote LiteRT-LM package for PREXUS prototype (run ./tools/scripts/vendor_litert_lm.sh if needed)"
+    puts "Using remote LiteRT-LM package for QWON prototype (run ./tools/scripts/vendor_litert_lm.sh if needed)"
     ref
   end
   project.root_object.package_references << package_ref unless project.root_object.package_references.any? { |existing|
@@ -321,7 +321,7 @@ if ENV["PREXUS_LITERT_LM_PROTOTYPE"] == "1"
     config.build_settings["SWIFT_ACTIVE_COMPILATION_CONDITIONS"] = conditions
   end
 
-  puts "Linked LiteRT-LM Swift package into PREXUS (PREXUS_LITERT_LM_PROTOTYPE)."
+  puts "Linked LiteRT-LM Swift package into QWON (PREXUS_LITERT_LM_PROTOTYPE)."
 end
 
 project.save

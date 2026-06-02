@@ -95,7 +95,7 @@ if [[ "$RESOLVE_STATUS" -eq 2 ]]; then
   echo "  4. Re-run: ./tools/scripts/install_on_device.sh"
   echo ""
   echo "Or open Xcode and Run (⌘R) on your device:"
-  echo "  open $IOS/PREXUS.xcodeproj"
+  echo "  open $IOS/PREXUS.xcodeproj   # project container; active scheme QWON"
   exit 1
 fi
 

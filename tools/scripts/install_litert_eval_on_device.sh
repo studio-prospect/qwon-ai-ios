@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Build and install the isolated PREXUSLiteRTEval app (does not touch PREXUS production).
+# Build and install the isolated PREXUSLiteRTEval app (does not touch QWON production app/runtime).
 #
 # Prerequisites:
 #   PREXUS_LITERT_LM_EVAL=1 ruby tools/scripts/generate_xcodeproj.rb

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# P1-4b: Run Qwen vs LiteRT comparison prompts inside Debug PREXUS on device.
+# P1-4b: Run Qwen vs LiteRT comparison prompts inside Debug QWON on device.
 #
 # Prerequisites:
 #   - models/prexus-eval-gemma4-e2b.litertlm and prexus-local-mvp.gguf fetched
@@ -30,11 +30,11 @@ if [[ ! -f "$ROOT/models/prexus-local-mvp.gguf" ]]; then
   exit 1
 fi
 
-echo "==> Vendor + regenerate PREXUS with LiteRT prototype"
+echo "==> Vendor + regenerate QWON with LiteRT prototype"
 "$ROOT/tools/scripts/vendor_litert_lm.sh"
 PREXUS_LITERT_LM_PROTOTYPE=1 ruby "$ROOT/tools/scripts/generate_xcodeproj.rb"
 
-echo "==> Build Debug PREXUS for device"
+echo "==> Build Debug QWON for device"
 cd "$IOS"
 xcodebuild \
   -project PREXUS.xcodeproj \
@@ -66,7 +66,7 @@ print(matches[0][2])
 PY
 )"
 
-echo "==> Install PREXUS Debug"
+echo "==> Install QWON Debug"
 xcrun devicectl device install app --device "$DEVICE_ID" "$APP"
 
 echo "==> Push Qwen MVP + LiteRT eval artifacts"
@@ -78,7 +78,7 @@ xcrun devicectl device copy to \
   --domain-type appDataContainer \
   --domain-identifier "$BUNDLE_ID"
 
-echo "==> Launch PREXUS with comparison env"
+echo "==> Launch QWON with comparison env"
 xcrun devicectl device process launch \
   --device "$DEVICE_ID" \
   --environment-variables '{"PREXUS_RUN_BACKEND_COMPARISON":"1"}' \

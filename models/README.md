@@ -37,6 +37,19 @@ ruby tools/scripts/generate_xcodeproj.rb
 
 Copy `models/prexus-local-mvp.gguf` into the app sandbox `Documents/Models/` on first device run, or set `PREXUS_LOCAL_MODEL_PATH` in the Xcode scheme.
 
+## Naming notes (Phase 4)
+
+| Surface | Current active value | Notes |
+| --- | --- | --- |
+| Xcode project path | `app/ios/PREXUS.xcodeproj` | **Container name deferred** — use `-scheme QWON` |
+| App target / product | `QWON` / `QWON.app` | |
+| Swift module | `QWON` | |
+| Unit / UI tests | `QWONTests` / `QWONUITests` | |
+| Model file | `prexus-local-mvp.gguf` | **Preserved** filename — separate migration if product approves |
+| Env vars | `PREXUS_LOCAL_MODEL_PATH`, `PREXUS_RUN_*`, … | **Preserved** runtime contracts until a dedicated migration |
+
+Historical PREXUS alpha docs (`qwen_text_only_alpha_*`) keep frozen command snippets for audit trail.
+
 Evaluation-only Gemma push (does not replace default filename):
 
 ```bash

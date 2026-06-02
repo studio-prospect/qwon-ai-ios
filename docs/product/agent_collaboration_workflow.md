@@ -157,7 +157,7 @@ Examples from recent QWON work:
 
 ## iOS Project Regeneration
 
-PREXUS uses `tools/scripts/generate_xcodeproj.rb` to recreate `app/ios/PREXUS.xcodeproj`.
+QWON uses `tools/scripts/generate_xcodeproj.rb` to recreate **`app/ios/PREXUS.xcodeproj`** (Xcode project **container name** remains `PREXUS.xcodeproj` until explicitly scoped; active target/scheme/module is **QWON**).
 
 Cursor should run regeneration when a change touches any of:
 

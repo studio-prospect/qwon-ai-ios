@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Copy the default local GGUF model into PREXUS app Documents/Models on a device.
+# Copy the default local GGUF model into QWON app Documents/Models on a device.
 #
 # Usage:
 #   ./tools/scripts/push_local_model_to_device.sh
@@ -71,4 +71,4 @@ xcrun devicectl device copy to \
   --domain-type appDataContainer \
   --domain-identifier "$BUNDLE_ID"
 
-echo "Done. Launch PREXUS and send a local-routed prompt to verify llama.cpp output."
+echo "Done. Launch QWON and send a local-routed prompt to verify llama.cpp output."
