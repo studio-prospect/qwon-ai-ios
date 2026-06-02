@@ -36,7 +36,8 @@ Then open the doc for your task using the table below.
 | [qwen_text_only_alpha_testflight_prep.md](./qwen_text_only_alpha_testflight_prep.md) | **ASC / TestFlight ops** — upload history, onboarding copy, lab policy |
 | [bundle_id_decision_memo.md](./bundle_id_decision_memo.md) | **Bundle ID decision** — `jp.studio-prospect.prexus.ios`, ASC app, signing gates |
 | [agent_collaboration_workflow.md](./agent_collaboration_workflow.md) | **Codex / Cursor roles** — planning vs implementation vs merge readiness |
-| [qwon_rename_migration_plan.md](./qwon_rename_migration_plan.md) | **QWON rename (future)** — PREXUS docs here are historical; new Bundle ID `jp.studio-prospect.qwon.ios` |
+| [qwon_rename_migration_plan.md](./qwon_rename_migration_plan.md) | **QWON rename** — PREXUS alpha docs here are historical |
+| [qwon_bundle_id_decision_memo.md](./qwon_bundle_id_decision_memo.md) | **QWON Bundle ID** — `jp.studio-prospect.qwon.ios` (repo default after Phase 2) |
 
 **Related (outside this index):** [models/README.md](../../models/README.md) (GGUF placement) · [local_inference_mvp.md](../requirements/local_inference_mvp.md) (P1-1 architecture)
 

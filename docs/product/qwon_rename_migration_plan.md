@@ -79,12 +79,12 @@ Execute in order. Each phase is a **separate PR** unless explicitly combined in 
 
 ### Phase 2: Bundle ID / signing / scripts / Xcode project generation
 
-**Prerequisites:** Apple gate (App ID, profiles, new ASC app record) complete.
+**Status:** Repo changes in Phase 2 PR — scripts + [QWON bundle memo](./qwon_bundle_id_decision_memo.md) + regenerated `project.pbxproj`. **Apple gate** (profiles, ASC app id) remains **operator** before Phase 3 upload.
 
 - Update `tools/scripts/generate_xcodeproj.rb` and related scripts to `jp.studio-prospect.qwon.ios`.
-- Regenerate Xcode project; update `ExportOptions` / signing docs.
-- Match test bundle IDs (`*.tests`, `*.uitests`, eval targets) under consistent `jp.studio-prospect.qwon.ios.*` naming in a dedicated decision table PR if needed.
-- **No** upload in the same PR unless Phase 3 is explicitly authorized.
+- Regenerate Xcode project (`ruby tools/scripts/generate_xcodeproj.rb` on no-llama checkout).
+- Test bundle IDs: `jp.studio-prospect.qwon.ios.tests`, `.uitests`, `.literteval` — see [QWON bundle memo](./qwon_bundle_id_decision_memo.md).
+- **No** TestFlight upload or git tag in Phase 2 PR.
 
 ### Phase 3: TestFlight rebuild under QWON bundle
 
@@ -124,6 +124,7 @@ Execute in order. Each phase is a **separate PR** unless explicitly combined in 
 | --- | --- |
 | PREXUS alpha (historical) | [qwen_text_only_alpha_docs_index.md](./qwen_text_only_alpha_docs_index.md) |
 | PREXUS bundle decision | [bundle_id_decision_memo.md](./bundle_id_decision_memo.md) |
-| QWON execution (future) | This plan — Phase 1+ PRs after Apple gate |
+| QWON bundle IDs (current repo) | [qwon_bundle_id_decision_memo.md](./qwon_bundle_id_decision_memo.md) |
+| QWON execution | This plan — Phase 3 after Apple gate |
 
 **Future release and rename implementation** start from this plan, not from ad hoc global find-replace.

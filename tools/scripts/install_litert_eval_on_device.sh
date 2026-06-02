@@ -14,7 +14,7 @@ ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 IOS="$ROOT/app/ios"
 DERIVED="$ROOT/.derivedData-litert-eval"
 TEAM="${DEVELOPMENT_TEAM:-BWSS94LH28}"
-BUNDLE_ID="jp.studio-prospect.prexus.ios.literteval"
+BUNDLE_ID="jp.studio-prospect.qwon.ios.literteval"
 APP="$DERIVED/Build/Products/Debug-iphoneos/PREXUSLiteRTEval.app"
 DEVICE_FILTER="${1:-}"
 

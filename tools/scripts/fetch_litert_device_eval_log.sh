@@ -9,7 +9,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 OUT="${PREXUS_LITERT_EVAL_LOG_OUTPUT:-$ROOT/.eval-logs/litert-device-eval.log}"
-BUNDLE_ID="jp.studio-prospect.prexus.ios.literteval"
+BUNDLE_ID="jp.studio-prospect.qwon.ios.literteval"
 DEVICE_FILTER="${1:-Wang}"
 DEVICE_JSON="$(mktemp)"
 trap 'rm -f "$DEVICE_JSON"' EXIT
