@@ -90,7 +90,7 @@ Execute in order. Each phase is a **separate PR** unless explicitly combined in 
 
 ### Phase 3: TestFlight rebuild under QWON bundle
 
-**Status:** **TestFlight uploaded** (2026-06-02) — [prep doc](./qwon_text_alpha_testflight_prep.md). **Wang + Matisse** TestFlight install + QWON launch confirmed; tag and full lab Chat evidence **pending**.
+**Status:** **TestFlight uploaded** (2026-06-02) — [prep doc](./qwon_text_alpha_testflight_prep.md). **Wang** TestFlight Chat + llama.cpp verified; **Matisse** Chat and git tag **pending**.
 
 **Prerequisites met:** Apple gate; Distribution archive + export; Wang Debug smoke; upload to QWON ASC `6775685841`.
 

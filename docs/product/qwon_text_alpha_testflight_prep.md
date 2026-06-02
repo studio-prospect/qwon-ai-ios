@@ -1,7 +1,7 @@
 # QWON Text Alpha — TestFlight Preparation (Phase 3)
 
 **Last updated:** 2026-06-02
-**Status:** **TestFlight `0.1.0 (1)` installed and QWON launched** on Wang + Matisse (2026-06-02). **Git tag** and full Chat/GGUF lab verification **pending**. ASC `6775685841`.
+**Status:** **Wang TestFlight Chat verified** with **llama.cpp** (2026-06-02). Matisse Chat evidence and **git tag** **pending**. ASC `6775685841`.
 
 **Historical line:** PREXUS alpha `0.1.0 (1)` on `jp.studio-prospect.prexus.ios` remains frozen — see [Qwen text-only alpha TestFlight prep](./qwen_text_only_alpha_testflight_prep.md). **Do not** upload QWON builds to ASC app **PREXUS** (Apple ID `6775110218`).
 
@@ -19,7 +19,7 @@
 | Distribution archive (QWON bundle + llama) | Release engineering | **Done** (2026-06-02) | [Distribution archive validation](#distribution-archive-validation-2026-06-02) |
 | Device smoke on QWON bundle | Release engineering | **Done** (2026-06-02, Wang) | [`alpha_smoke_wang.sh`](../../tools/scripts/alpha_smoke_wang.sh) — `VALIDATION PASSED` |
 | TestFlight upload | Release engineering | **Done** (2026-06-02) | [TestFlight upload record](#testflight-upload-2026-06-02) · ASC `6775685841` |
-| Lab TestFlight install (Wang + Matisse) | Release engineering | **Done** (2026-06-02) | [Wang](#wang-testflight-verification-2026-06-02) · [Matisse](#matisse-testflight-verification-2026-06-02) — launch only |
+| Lab TestFlight install (Wang + Matisse) | Release engineering | **Done** (2026-06-02) | Install + launch — [Wang Chat](#wang-testflight-verification-2026-06-02) **Pass**; [Matisse](#matisse-testflight-verification-2026-06-02) launch only |
 | Git tag | Release engineering | **Not created** | Proposed: `qwon-text-alpha-0.1.0-rc1` on archive commit `d4f2a0b` |
 | Ops evidence folder | Release engineering | **Path decided** | `~/QWON-alpha-evidence/qwon-text-0.1.0-build1/` (no overwrite of PREXUS build `1` paths) |
 
@@ -162,7 +162,7 @@ xcodebuild -exportArchive \
 | Internal TestFlight group | _pending_ — assign in ASC (**Wang + Matisse** policy) |
 | Upload result | **Upload succeeded** (`xcodebuild -exportArchive`, `destination=upload`) |
 
-**Still pending after upload:** ASC export compliance (if not already completed); full Chat/GGUF lab turns per [PREXUS lab policy](./qwen_text_only_alpha_testflight_prep.md#physical-device-lab-ops-policy); git tag; ops evidence PNG/logs under `~/QWON-alpha-evidence/qwon-text-0.1.0-build1/`.
+**Still pending after upload:** Matisse Chat/Diagnostics verification; git tag; additional ops evidence under `~/QWON-alpha-evidence/qwon-text-0.1.0-build1/`.
 
 **Not uploaded to:** PREXUS ASC (`6775110218`).
 
@@ -172,9 +172,16 @@ xcodebuild -exportArchive \
 
 | Step | Result |
 | --- | --- |
-| TestFlight install `0.1.0 (1)` on **QWON** bundle | **Pass** — operator confirmed |
+| TestFlight install `0.1.0 (1)` on **QWON** bundle | **Pass** |
 | App launch (display name **QWON**) | **Pass** |
-| Chat turn / GGUF / Diagnostics | _pending_ — follow [PREXUS Wang verification](./qwen_text_only_alpha_testflight_prep.md#wang-testflight-verification-2026-05-31) pattern when recording evidence |
+| GGUF on device (`prexus-local-mvp.gguf`) | **Pass** — required for llama.cpp path on TestFlight build |
+| Chat turn with local route | **Pass** — prompt: *6月最初の満月は何日？*; model replied (alpha accuracy not gated) |
+| UI: primary chip | **Local runtime** |
+| UI: backend chip | **llama.cpp On-Device Runtime** |
+| Executed route | **Local** · Tier 2 · Prefer · Local default |
+| Screenshot (ops, not in git) | `~/QWON-alpha-evidence/qwon-text-0.1.0-build1/wang-qwon-testflight-chat-2026-06-02.png` |
+
+**UI note:** Same as [PREXUS Wang verification](./qwen_text_only_alpha_testflight_prep.md#wang-testflight-verification-2026-05-31) — **Local runtime** banner = `executionMode=local`; backend name may read `llama.cpp On-Device Runtime` in detail.
 
 ## Matisse TestFlight verification (2026-06-02)
 
@@ -193,7 +200,7 @@ Archive validation and initial upload are **done** (2026-06-02). Remaining opera
 2. [ ] Complete export compliance in ASC if prompted.
 3. [ ] Assign build `0.1.0 (1)` to internal group (**Wang + Matisse** policy).
 4. [ ] Paste [ASC What to Test](#asc-what-to-test-copy) + link [PREXUS-era tester instructions](./qwen_text_only_alpha_tester_instructions.md) until QWON-specific copy exists.
-5. [x] Reinstall on Wang + Matisse — TestFlight install + **QWON** launch confirmed (2026-06-02); capture Chat/Diagnostics evidence under `~/QWON-alpha-evidence/qwon-text-0.1.0-build1/` when ready.
+5. [x] Wang TestFlight Chat + **llama.cpp** path verified (2026-06-02); Matisse Chat evidence _pending_; screenshot on file under `~/QWON-alpha-evidence/qwon-text-0.1.0-build1/`.
 6. [ ] Tag archive commit `d4f2a0b`: `qwon-text-alpha-0.1.0-rc1` (manual; not in automation).
 7. [ ] Docs-only follow-up: ledger subsection for QWON build `1` (new doc or appendix — **do not** edit PREXUS frozen ledger).
 
