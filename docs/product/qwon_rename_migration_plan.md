@@ -92,7 +92,7 @@ Execute in order. Each phase is a **separate PR** unless explicitly combined in 
 
 **Status:** **Complete** for build `1` (2026-06-02) — [prep doc](./qwon_text_alpha_testflight_prep.md).
 
-**Delivered:** Archive/export/upload to ASC `6775685841`; Wang/Matisse lab build `1`; tag `qwon-text-alpha-0.1.0-rc1` on `d4f2a0b`. **Follow-up:** build `2` UX fix (#56) on TestFlight — see [build 2](./qwon_text_alpha_testflight_prep.md#testflight-build-2-2026-06-02).
+**Delivered:** Archive/export/upload to ASC `6775685841`; Wang/Matisse lab build `1`; tag `qwon-text-alpha-0.1.0-rc1` on `d4f2a0b`. **Follow-up:** build `2` UX fix (#56) on TestFlight — Wang + Matisse Return-key verified; [tiered lab policy](./qwon_text_alpha_testflight_prep.md#physical-device-lab-tier-policy).
 
 ### Phase 4: Optional internal target / module / path rename
 
