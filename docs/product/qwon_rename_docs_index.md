@@ -1,7 +1,9 @@
 # QWON Rename — Documentation Index
 
-**Last updated:** 2026-06-02 (post PR #66 on `main`)
+**Last updated:** 2026-06-02 (post PR #67 on `main`)
 **Purpose:** **Information architecture only** — where to start reading QWON rename / Phase 4 docs and in what order. Does **not** add new policy; it summarizes and links existing decisions.
+
+**Next work (post-rename docs):** [QWON next work queue](./qwon_next_work_queue.md) — what to do / not do after rename docs are complete.
 
 **Historical PREXUS alpha:** frozen under [qwen_text_only_alpha_docs_index.md](./qwen_text_only_alpha_docs_index.md) — do not rewrite; append or link from QWON docs instead.
 
@@ -61,8 +63,9 @@
 | [qwon_text_alpha_lab_evidence.md](./qwon_text_alpha_lab_evidence.md) | QWON lab evidence — frozen ledger, device policy |
 | [qwon_bundle_id_decision_memo.md](./qwon_bundle_id_decision_memo.md) | QWON Bundle ID / signing / ASC app record |
 | [qwen_text_only_alpha_docs_index.md](./qwen_text_only_alpha_docs_index.md) | **Historical** PREXUS alpha index — separate product line |
+| [qwon_next_work_queue.md](./qwon_next_work_queue.md) | **Post-rename work queue** — ready vs gated vs deferred |
 
-**Related (outside this index):** [models/README.md](../../models/README.md) (GGUF placement) · [agent_collaboration_workflow.md](./agent_collaboration_workflow.md) (Codex/Cursor roles)
+**Related (outside this index):** [models/README.md](../../models/README.md) (GGUF placement) · [agent_collaboration_workflow.md](./agent_collaboration_workflow.md) (Codex/Cursor roles) · [next work queue](./qwon_next_work_queue.md)
 
 ---
 
