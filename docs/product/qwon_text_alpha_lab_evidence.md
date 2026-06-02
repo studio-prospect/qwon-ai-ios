@@ -92,7 +92,7 @@ Full frozen ledger rows apply on **baseline / runtime-change** builds only — s
 
 When `CFBundleVersion` increments with **runtime or routing changes** (not minor UX-only):
 
-1. Create ops folder, e.g. `~/QWON-alpha-evidence/qwen-text-0.1.0-build3/`.
+1. Create ops folder, e.g. `~/QWON-alpha-evidence/qwon-text-0.1.0-build3/`.
 2. Capture per [PREXUS adding subsection steps](./qwen_text_only_alpha_lab_evidence.md#adding-a-new-ledger-subsection) — use **QWON** bundle paths and this file.
 3. Append `### Frozen ledger: QWON 0.1.0 build N` below — **do not** edit [build 1 rows](#frozen-ledger-qwon-010-build-1).
 4. Docs PR: metadata only; `git diff --check` before merge.
