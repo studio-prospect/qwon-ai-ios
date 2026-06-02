@@ -194,7 +194,7 @@ Not required to close Phase 4 naming internally.
 
 ---
 
-## Preserve list (do not rename in 4C/4D)
+## Preserve list (do not rename in 4C-a–4D)
 
 | Surface | Examples | Reason |
 | --- | --- | --- |
