@@ -40,6 +40,7 @@ Then open the doc for your task using the table below.
 | [qwon_bundle_id_decision_memo.md](./qwon_bundle_id_decision_memo.md) | **QWON Bundle ID** — `jp.studio-prospect.qwon.ios` (repo default after Phase 2) |
 | [qwon_text_alpha_testflight_prep.md](./qwon_text_alpha_testflight_prep.md) | **QWON TestFlight prep** — Phase 3 ops; PREXUS alpha docs above stay historical |
 | [qwon_text_alpha_lab_evidence.md](./qwon_text_alpha_lab_evidence.md) | **QWON evidence / frozen ledger** — build `1` on `jp.studio-prospect.qwon.ios`; PREXUS ledger unchanged |
+| [qwon_phase4_target_rename_plan.md](./qwon_phase4_target_rename_plan.md) | **QWON Phase 4** — target/scheme/module/path rename gates and PR split |
 
 **Related (outside this index):** [models/README.md](../../models/README.md) (GGUF placement) · [local_inference_mvp.md](../requirements/local_inference_mvp.md) (P1-1 architecture)
 
@@ -59,6 +60,7 @@ Then open the doc for your task using the table below.
 | Prepare ASC / TestFlight / GGUF push (PREXUS historical) | [TestFlight prep](./qwen_text_only_alpha_testflight_prep.md) |
 | Prepare QWON bundle TestFlight (new app line) | [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) |
 | File or check QWON lab screenshots | [QWON lab evidence](./qwon_text_alpha_lab_evidence.md) — **do not** edit [PREXUS frozen ledger](./qwen_text_only_alpha_lab_evidence.md#frozen-ledger-010-build-1) |
+| Decide whether to start QWON Phase 4 target rename | [QWON Phase 4 plan](./qwon_phase4_target_rename_plan.md) |
 | Confirm alpha scope | [release scope](./qwen_text_only_alpha_release.md) |
 | Ship a fix after Release blocker | [handoff: if blocker](./qwen_text_only_alpha_handoff.md#if-a-release-blocker-appears) → minimal implementation PR → then ops steps in [readiness](./qwen_text_only_alpha_release_readiness.md) |
 

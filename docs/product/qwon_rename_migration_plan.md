@@ -1,7 +1,7 @@
 # QWON Rename Migration Plan
 
 **Last updated:** 2026-06-02
-**Status:** **Phase 3 build `1` complete**; **active TestFlight `0.1.0 (2)`** (keyboard fix, 2026-06-02) — [prep doc](./qwon_text_alpha_testflight_prep.md). Phase 4 **deferred**.
+**Status:** **Phase 3 build `1` complete**; **active TestFlight `0.1.0 (2)`** (keyboard fix, 2026-06-02) — [prep doc](./qwon_text_alpha_testflight_prep.md). Phase 4 **planned / deferred** — [Phase 4 plan](./qwon_phase4_target_rename_plan.md).
 **Audience:** Product, release engineering, Cursor/Codex agents.
 
 **Purpose:** Migrate the product from **PREXUS** to **QWON** without a blind mass-replace. Fix impact scope, execution order, and Apple-side gates before implementation PRs.
@@ -96,11 +96,12 @@ Execute in order. Each phase is a **separate PR** unless explicitly combined in 
 
 ### Phase 4: Optional internal target / module / path rename
 
-**Optional and explicitly scoped.** Default: **defer**.
+**Optional and explicitly scoped.** Default: **defer** until [Phase 4 entry gates](./qwon_phase4_target_rename_plan.md#entry-gates) are satisfied.
 
 - Swift module name, Xcode target `PREXUS` → `QWON`, directory renames.
-- High churn; only after Phase 3 smoke passes.
+- High churn; split by [Phase 4 PR plan](./qwon_phase4_target_rename_plan.md#pr-split).
 - Not required for App Store identity if display name and Bundle ID are correct.
+- Do not start from global find-replace; use the [review checklist](./qwon_phase4_target_rename_plan.md#review-checklist).
 
 ---
 
@@ -125,6 +126,7 @@ Execute in order. Each phase is a **separate PR** unless explicitly combined in 
 | PREXUS bundle decision | [bundle_id_decision_memo.md](./bundle_id_decision_memo.md) |
 | QWON bundle IDs (current repo) | [qwon_bundle_id_decision_memo.md](./qwon_bundle_id_decision_memo.md) |
 | QWON TestFlight prep | [qwon_text_alpha_testflight_prep.md](./qwon_text_alpha_testflight_prep.md) |
+| QWON Phase 4 target rename | [qwon_phase4_target_rename_plan.md](./qwon_phase4_target_rename_plan.md) |
 | QWON execution | Phase 3 build `1` **complete** — Phase 4 optional |
 
 **Future release and rename implementation** start from this plan, not from ad hoc global find-replace.
