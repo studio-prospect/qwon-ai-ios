@@ -1,7 +1,7 @@
 # QWON Rename Migration Plan
 
 **Last updated:** 2026-06-02
-**Status:** **Phase 1–2 merged** (#47, #48). **Phase 3 prep** in [qwon_text_alpha_testflight_prep.md](./qwon_text_alpha_testflight_prep.md) — upload pending Apple gate.
+**Status:** **Phase 1–2 merged** (#47, #48). **Apple gate complete** (ASC `6775685841`, profiles 2026-06-02). **Phase 3 upload** pending Distribution archive validation — [prep doc](./qwon_text_alpha_testflight_prep.md).
 **Audience:** Product, release engineering, Cursor/Codex agents.
 
 **Purpose:** Migrate the product from **PREXUS** to **QWON** without a blind mass-replace. Fix impact scope, execution order, and Apple-side gates before implementation PRs.
@@ -26,19 +26,19 @@
 
 ## Apple gate (operator — before Phase 3 upload)
 
-**Repo status:** Phases **1–2** are **merged** on `main` (user-facing rename + `jp.studio-prospect.qwon.ios` in scripts/pbxproj). This gate blocks **Phase 3** TestFlight upload and ASC work — not further repo Bundle ID changes.
+**Repo status:** Phases **1–2** are **merged** on `main`. **Apple gate (App ID, ASC app, profiles)** is **complete** (2026-06-02) — see [QWON bundle memo](./qwon_bundle_id_decision_memo.md). **Phase 3** TestFlight upload remains blocked until **Distribution archive validation** succeeds.
 
 **Critical:** If an App Store Connect app record already has **uploaded builds**, the **Bundle ID cannot be changed** on that record. The historical PREXUS alpha (`jp.studio-prospect.prexus.ios`) therefore stays as-is in ASC and docs.
 
 QWON ships as a **new** identifier and app record, not an in-place Bundle ID edit.
 
-| Step | Owner | Action |
+| Step | Owner | Status (2026-06-02) |
 | --- | --- | --- |
-| 1 | Product / release engineering | Register **App ID** / Bundle ID `jp.studio-prospect.qwon.ios` in Apple Developer |
-| 2 | Release engineering | Create **Development** and **App Store** (Distribution) provisioning profiles for `jp.studio-prospect.qwon.ios` |
-| 3 | Release engineering | Create a **new ASC app record** for QWON if the old PREXUS bundle already has uploaded builds |
-| 4 | Release engineering | Note the **new Apple ID** (ASC app id) issued for the QWON app record — do not assume it matches the PREXUS record |
-| 5 | Release engineering | Confirm signing, archive, and TestFlight upload target the **QWON** record only after profiles exist |
+| 1 | Product / release engineering | **Done** — App ID / Bundle ID `jp.studio-prospect.qwon.ios` |
+| 2 | Release engineering | **Done** — `DevelopmentQWON_20260602`, `AppStoreQWON_20260602` (expiry **2026-10-07**) |
+| 3 | Release engineering | **Done** — new ASC app **QWON** (not PREXUS record) |
+| 4 | Release engineering | **Done** — ASC Apple ID **`6775685841`** (PREXUS remains `6775110218`) |
+| 5 | Release engineering | _pending_ — Distribution archive + TestFlight upload target **QWON** record only |
 
 **Do not claim** that `jp.studio-prospect.prexus.ios` can be retargeted to QWON after upload. **Do not** upload QWON builds to the PREXUS ASC app without an explicit product decision to retire that line.
 
@@ -81,7 +81,7 @@ Execute in order. Each phase is a **separate PR** unless explicitly combined in 
 
 ### Phase 2: Bundle ID / signing / scripts / Xcode project generation
 
-**Status:** **Merged** (#48) — scripts + [QWON bundle memo](./qwon_bundle_id_decision_memo.md) + regenerated `project.pbxproj`. **Apple gate** (profiles, ASC app id) remains **operator** before Phase 3 upload.
+**Status:** **Merged** (#48) — scripts + [QWON bundle memo](./qwon_bundle_id_decision_memo.md) + regenerated `project.pbxproj`.
 
 - Update `tools/scripts/generate_xcodeproj.rb` and related scripts to `jp.studio-prospect.qwon.ios`.
 - Regenerate Xcode project (`ruby tools/scripts/generate_xcodeproj.rb` on no-llama checkout).
@@ -90,9 +90,9 @@ Execute in order. Each phase is a **separate PR** unless explicitly combined in 
 
 ### Phase 3: TestFlight rebuild under QWON bundle
 
-**Status:** **Prep doc published** — [qwon_text_alpha_testflight_prep.md](./qwon_text_alpha_testflight_prep.md). Upload/tag **not executed** until Apple gate completes.
+**Status:** **Apple gate recorded** (2026-06-02) — [qwon_text_alpha_testflight_prep.md](./qwon_text_alpha_testflight_prep.md). Archive / upload / tag **not executed**.
 
-**Prerequisites:** Phase 2 merged; Distribution profile validated for `jp.studio-prospect.qwon.ios`.
+**Prerequisites:** Phase 2 merged; Apple gate complete; **Distribution archive validation** for `jp.studio-prospect.qwon.ios` still required before upload.
 
 - Archive and upload to the **new** ASC app record (operator).
 - Git tag lineage: `qwon-text-alpha-0.1.0-rc1` proposed for first build (see prep doc).
@@ -130,6 +130,6 @@ Execute in order. Each phase is a **separate PR** unless explicitly combined in 
 | PREXUS bundle decision | [bundle_id_decision_memo.md](./bundle_id_decision_memo.md) |
 | QWON bundle IDs (current repo) | [qwon_bundle_id_decision_memo.md](./qwon_bundle_id_decision_memo.md) |
 | QWON TestFlight prep | [qwon_text_alpha_testflight_prep.md](./qwon_text_alpha_testflight_prep.md) |
-| QWON execution | This plan — Phase 3 upload after Apple gate |
+| QWON execution | Phase 3 upload after Distribution archive validation |
 
 **Future release and rename implementation** start from this plan, not from ad hoc global find-replace.

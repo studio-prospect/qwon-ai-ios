@@ -1,6 +1,6 @@
 # QWON Bundle ID — Decision Memo
 
-**Status:** Approved for **repo Phase 2** (scripts + Xcode project generation). ASC app record and provisioning profile names are **operator-filled** after Apple gate.
+**Status:** **Apple gate complete** (2026-06-02) — App ID, ASC app, Development + App Store profiles recorded below. **Distribution archive validation** and TestFlight upload remain **pending** ([Phase 3 prep](./qwon_text_alpha_testflight_prep.md)).
 **Purpose:** Canonical Bundle IDs for **QWON** (`jp.studio-prospect.qwon.ios`). Does **not** replace [PREXUS bundle memo](./bundle_id_decision_memo.md) (historical alpha on `jp.studio-prospect.prexus.ios`).
 **Migration plan:** [qwon_rename_migration_plan.md](./qwon_rename_migration_plan.md)
 
@@ -20,15 +20,28 @@ Set in `tools/scripts/generate_xcodeproj.rb` and device scripts after Phase 2 me
 
 ---
 
+## ASC app record (QWON)
+
+| Field | Value |
+| --- | --- |
+| ASC app name | **QWON** (display; confirm in ASC UI) |
+| ASC Apple ID | `6775685841` |
+| Bundle ID | `jp.studio-prospect.qwon.ios` |
+| Primary category | ユーティリティ |
+| Secondary category | 仕事効率化 |
+| Historical PREXUS ASC Apple ID | `6775110218` — **do not** upload QWON builds there |
+
+---
+
 ## Apple gate (operator — before Phase 3 upload)
 
 | Step | Status | Notes |
 | --- | --- | --- |
-| Register App ID `jp.studio-prospect.qwon.ios` | _pending_ | Apple Developer → Identifiers |
-| Development provisioning profile | _pending_ | e.g. `DevelopmentQWON_YYYYMMDD` (name TBD) |
-| App Store / Distribution provisioning profile | _pending_ | e.g. `AppStoreQWON_YYYYMMDD` (name TBD) |
-| New ASC app record (QWON) | _pending_ | **Do not** reuse PREXUS ASC app (`6775110218`) |
-| ASC Apple ID for QWON app | _pending_ | Record here when issued |
+| Register App ID `jp.studio-prospect.qwon.ios` | **Done** (2026-06-02) | Apple Developer → Identifiers |
+| Development provisioning profile | **Done** (2026-06-02) | `DevelopmentQWON_20260602` — expires **2026-10-07** |
+| App Store / Distribution provisioning profile | **Done** (2026-06-02) | `AppStoreQWON_20260602` — expires **2026-10-07** |
+| New ASC app record (QWON) | **Done** (2026-06-02) | Apple ID `6775685841` — **not** PREXUS (`6775110218`) |
+| ASC Apple ID for QWON app | **Done** | `6775685841` |
 | Distribution archive validates for QWON bundle | _pending_ | [Phase 3 prep](./qwon_text_alpha_testflight_prep.md#distribution-archive-validation-not-executed) |
 
 **Historical PREXUS:** `jp.studio-prospect.prexus.ios` remains on its existing ASC record; uploaded builds are **not** migrated in place.
@@ -46,8 +59,9 @@ Set in `tools/scripts/generate_xcodeproj.rb` and device scripts after Phase 2 me
 
 ---
 
-## Sign-off (repo)
+## Sign-off (repo + operator)
 
 - [x] Bundle ID string approved: `jp.studio-prospect.qwon.ios`
-- [ ] Apple gate steps complete (operator)
-- [ ] Phase 3 upload authorized (separate PR)
+- [x] Apple gate: App ID, ASC app `6775685841`, profiles `DevelopmentQWON_20260602` / `AppStoreQWON_20260602` (expiry 2026-10-07)
+- [ ] Distribution archive validation for QWON bundle
+- [ ] Phase 3 TestFlight upload authorized (after archive validation)

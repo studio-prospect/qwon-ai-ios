@@ -1,7 +1,7 @@
 # QWON Text Alpha — TestFlight Preparation (Phase 3)
 
 **Last updated:** 2026-06-02
-**Status:** **Prep only** — Apple gate and TestFlight upload **not executed**. Repo defaults to `jp.studio-prospect.qwon.ios` after Phase 2 merge (#48).
+**Status:** **Apple gate complete** (2026-06-02). **Distribution archive**, device smoke, TestFlight upload, and git tag **not executed**. Repo defaults to `jp.studio-prospect.qwon.ios` after Phase 2 merge (#48).
 
 **Historical line:** PREXUS alpha `0.1.0 (1)` on `jp.studio-prospect.prexus.ios` remains frozen — see [Qwen text-only alpha TestFlight prep](./qwen_text_only_alpha_testflight_prep.md). **Do not** upload QWON builds to ASC app **PREXUS** (Apple ID `6775110218`).
 
@@ -15,7 +15,7 @@
 | --- | --- | --- | --- |
 | Repo Bundle ID + scripts | Engineering | **Done** (Phase 2, #48) | `generate_xcodeproj.rb`, device scripts, committed `project.pbxproj` |
 | Display name | Engineering | **Done** (Phase 1, #47) | `CFBundleDisplayName` = **QWON** |
-| Apple gate (App ID, profiles, ASC app) | Release engineering | **Pending** | [Apple gate checklist](#apple-gate-checklist-operator) |
+| Apple gate (App ID, profiles, ASC app) | Release engineering | **Done** (2026-06-02) | [Apple gate checklist](#apple-gate-checklist-operator) · ASC `6775685841` |
 | Distribution archive (QWON bundle + llama) | Release engineering | **Pending** | [Distribution archive validation](#distribution-archive-validation-not-executed) |
 | Device smoke on QWON bundle | Release engineering | **Pending** | [`alpha_smoke_wang.sh`](../../tools/scripts/alpha_smoke_wang.sh) on `jp.studio-prospect.qwon.ios` |
 | TestFlight upload | Release engineering | **Not started** | [Upload outline](#testflight-upload-outline-operator) |
@@ -30,17 +30,20 @@
 
 ## Apple gate checklist (operator)
 
-Complete before [upload outline](#testflight-upload-outline-operator). Record outcomes in [QWON bundle memo](./qwon_bundle_id_decision_memo.md) when issued.
+**Completed 2026-06-02** for App ID, profiles, and ASC app record. Canonical values: [QWON bundle memo](./qwon_bundle_id_decision_memo.md).
+
+Complete [distribution validation](#distribution-archive-validation-not-executed) before [upload outline](#testflight-upload-outline-operator).
 
 | Step | Status | Notes |
 | --- | --- | --- |
-| Register App ID `jp.studio-prospect.qwon.ios` | [ ] | Apple Developer → Identifiers |
-| Development provisioning profile | [ ] | e.g. `DevelopmentQWON_YYYYMMDD` |
-| App Store / Distribution provisioning profile | [ ] | e.g. `AppStoreQWON_YYYYMMDD` |
-| **New** ASC app record for **QWON** | [ ] | **Not** PREXUS (`6775110218`) |
-| ASC Apple ID for QWON app | [ ] | Record in bundle memo when created |
-| Distribution archive validates for QWON bundle | [ ] | Release + `app-store-connect` export |
-| Internal TestFlight group on **QWON** app | [ ] | Suggest reusing policy: **Wang + Matisse only** (`internal_tester` or equivalent on new app) |
+| Register App ID `jp.studio-prospect.qwon.ios` | [x] | **Done** 2026-06-02 |
+| Development provisioning profile | [x] | `DevelopmentQWON_20260602` — expires **2026-10-07** |
+| App Store / Distribution provisioning profile | [x] | `AppStoreQWON_20260602` — expires **2026-10-07** |
+| **New** ASC app record for **QWON** | [x] | Apple ID `6775685841` — **not** PREXUS (`6775110218`) |
+| ASC Apple ID for QWON app | [x] | `6775685841` |
+| ASC categories | [x] | Primary **ユーティリティ** / Secondary **仕事効率化** |
+| Distribution archive validates for QWON bundle | [ ] | Release + `app-store-connect` export — **not executed** |
+| Internal TestFlight group on **QWON** app | [ ] | Suggest **Wang + Matisse only** (`internal_tester` or equivalent) — configure at upload |
 
 ---
 
