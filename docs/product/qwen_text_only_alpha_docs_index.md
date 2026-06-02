@@ -5,7 +5,7 @@
 
 **Release state (unchanged):** TestFlight `0.1.0 (1)` · tag `qwen-text-alpha-0.1.0-rc1` · build `2` **not approved** · lab **Wang + Matisse** only.
 
-**Product rename:** This index and linked alpha docs are **PREXUS-era historical** (`jp.studio-prospect.prexus.ios`). Future product work under display name **QWON** follows [qwon_rename_migration_plan.md](./qwon_rename_migration_plan.md).
+**Product rename:** This index and linked alpha docs are **PREXUS-era historical** (`jp.studio-prospect.prexus.ios`). **QWON** TestFlight work: [qwon_text_alpha_testflight_prep.md](./qwon_text_alpha_testflight_prep.md) · [migration plan](./qwon_rename_migration_plan.md).
 
 **Last validation:** 2026-05-31 — relative link / anchor validation passed after PR #41. **Docs setup:** complete; start from [status summary](./qwen_text_only_alpha_status_summary.md) then this index.
 
@@ -38,6 +38,7 @@ Then open the doc for your task using the table below.
 | [agent_collaboration_workflow.md](./agent_collaboration_workflow.md) | **Codex / Cursor roles** — planning vs implementation vs merge readiness |
 | [qwon_rename_migration_plan.md](./qwon_rename_migration_plan.md) | **QWON rename** — PREXUS alpha docs here are historical |
 | [qwon_bundle_id_decision_memo.md](./qwon_bundle_id_decision_memo.md) | **QWON Bundle ID** — `jp.studio-prospect.qwon.ios` (repo default after Phase 2) |
+| [qwon_text_alpha_testflight_prep.md](./qwon_text_alpha_testflight_prep.md) | **QWON TestFlight prep** — Phase 3 ops; PREXUS alpha docs above stay historical |
 
 **Related (outside this index):** [models/README.md](../../models/README.md) (GGUF placement) · [local_inference_mvp.md](../requirements/local_inference_mvp.md) (P1-1 architecture)
 
@@ -54,7 +55,8 @@ Then open the doc for your task using the table below.
 | Intake / triage one report (build `1`) | [status summary § feedback intake](./qwen_text_only_alpha_status_summary.md#feedback-intake-readiness) → [processing rules](./qwen_text_only_alpha_release_notes.md#feedback-intake-processing-build-1) → [feedback log](./qwen_text_only_alpha_release_notes.md#tester-feedback-log-build-1) |
 | Real feedback — Cursor PR order | [handoff § Cursor PR steps](./qwen_text_only_alpha_handoff.md#cursor-pr-steps-real-feedback-received) |
 | Triage an issue | [release notes: known issues](./qwen_text_only_alpha_release_notes.md#known-issues-triage-for-build-1) · [feedback log](./qwen_text_only_alpha_release_notes.md#tester-feedback-log-build-1) |
-| Prepare ASC / TestFlight / GGUF push | [TestFlight prep](./qwen_text_only_alpha_testflight_prep.md) |
+| Prepare ASC / TestFlight / GGUF push (PREXUS historical) | [TestFlight prep](./qwen_text_only_alpha_testflight_prep.md) |
+| Prepare QWON bundle TestFlight (new app line) | [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) |
 | Confirm alpha scope | [release scope](./qwen_text_only_alpha_release.md) |
 | Ship a fix after Release blocker | [handoff: if blocker](./qwen_text_only_alpha_handoff.md#if-a-release-blocker-appears) → minimal implementation PR → then ops steps in [readiness](./qwen_text_only_alpha_release_readiness.md) |
 

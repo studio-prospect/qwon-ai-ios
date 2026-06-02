@@ -29,7 +29,7 @@ Set in `tools/scripts/generate_xcodeproj.rb` and device scripts after Phase 2 me
 | App Store / Distribution provisioning profile | _pending_ | e.g. `AppStoreQWON_YYYYMMDD` (name TBD) |
 | New ASC app record (QWON) | _pending_ | **Do not** reuse PREXUS ASC app (`6775110218`) |
 | ASC Apple ID for QWON app | _pending_ | Record here when issued |
-| Distribution archive validates for QWON bundle | _pending_ | Phase 3 gate |
+| Distribution archive validates for QWON bundle | _pending_ | [Phase 3 prep](./qwon_text_alpha_testflight_prep.md#distribution-archive-validation-not-executed) |
 
 **Historical PREXUS:** `jp.studio-prospect.prexus.ios` remains on its existing ASC record; uploaded builds are **not** migrated in place.
 
@@ -39,7 +39,7 @@ Set in `tools/scripts/generate_xcodeproj.rb` and device scripts after Phase 2 me
 
 | In scope | Out of scope |
 | --- | --- |
-| `generate_xcodeproj.rb` + shell `BUNDLE_ID` defaults | TestFlight upload / git tag (Phase 3) |
+| `generate_xcodeproj.rb` + shell `BUNDLE_ID` defaults | TestFlight upload / git tag — [Phase 3 prep](./qwon_text_alpha_testflight_prep.md) |
 | Regenerated `project.pbxproj` bundle identifiers | Target rename `PREXUS` → `QWON` (Phase 4) |
 | Non-historical dev docs (this memo, migration plan, models README eval bundle) | [Qwen alpha docs](./qwen_text_only_alpha_docs_index.md) — PREXUS-era |
 | | [bundle_id_decision_memo.md](./bundle_id_decision_memo.md) rows |
