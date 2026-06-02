@@ -162,7 +162,7 @@ PREXUS uses `tools/scripts/generate_xcodeproj.rb` to recreate `app/ios/PREXUS.xc
 Cursor should run regeneration when a change touches any of:
 
 - files under `app/ios/QWON/`
-- files under `app/ios/PREXUSTests/` or `app/ios/PREXUSUITests/`
+- files under `app/ios/QWONTests/` or `app/ios/QWONUITests/`
 - files under `runtime/` that are compiled into the iOS app target
 - test targets, bundle identifiers, or shared scheme test bundles
 
@@ -203,7 +203,7 @@ Codex still owns merge readiness, architecture-sensitive policy decisions, and t
 When a PR touches Chat layout, Liquid Glass, keyboard behavior, or iPhone safe-area presentation:
 
 - install on a physical device with `./tools/scripts/install_on_device.sh` (see `docs/design/device_install_and_screenshot_workflow.md`)
-- run the stable `PREXUSTests` command from that doc before requesting review
+- run the stable `QWONTests` command from that doc before requesting review
 - attach optional device QA PNGs under `docs/design/screenshots/device-qa/` and link them in the PR test plan
 
 Simulator runtime-surface refreshes remain separate: `docs/design/runtime_surface_capture_workflow.md`.

@@ -15,7 +15,7 @@ Use this document when:
 
 The first screenshot smoke is now implemented in:
 
-- `app/ios/PREXUSUITests/PREXUSUITests.swift`
+- `app/ios/QWONUITests/QWONUITests.swift`
 
 Current first-pass behavior:
 

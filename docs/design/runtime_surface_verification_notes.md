@@ -50,7 +50,7 @@ Verified on 2026-05-18 and expanded on 2026-05-19:
 
 Validation command:
 
-- `xcodebuild -project app/ios/PREXUS.xcodeproj -scheme QWON -destination 'platform=iOS Simulator,name=iPhone SE (3rd generation),OS=18.2' -only-testing:PREXUSUITests test`
+- `xcodebuild -project app/ios/PREXUS.xcodeproj -scheme QWON -destination 'platform=iOS Simulator,name=iPhone SE (3rd generation),OS=18.2' -only-testing:QWONUITests test`
 
 Evidence:
 

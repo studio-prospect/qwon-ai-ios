@@ -89,7 +89,7 @@ devices.each do |device_slug|
       '-project', project_path.to_s,
       '-scheme', options[:scheme],
       '-destination', config.fetch(:destination),
-      '-only-testing:PREXUSUITests',
+      '-only-testing:QWONUITests',
       '-resultBundlePath', result_bundle.to_s,
       'test'
     ])

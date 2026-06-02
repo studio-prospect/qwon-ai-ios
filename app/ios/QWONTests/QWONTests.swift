@@ -1,7 +1,7 @@
 import XCTest
 @testable import PREXUS
 
-final class PREXUSTests: XCTestCase {
+final class QWONTests: XCTestCase {
     func testSensitivityLevelsExposeConsistentLabelsAndDescriptions() {
         XCTAssertEqual(
             SensitivityLevel.allCases,
@@ -454,7 +454,7 @@ final class PREXUSTests: XCTestCase {
 
     @MainActor
     func testChatViewModelIgnoresStaleSendResults() async {
-        let suiteName = "PREXUSTests.ChatViewModelStale.\(UUID().uuidString)"
+        let suiteName = "QWONTests.ChatViewModelStale.\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: suiteName)!
         defaults.removePersistentDomain(forName: suiteName)
         defer { defaults.removePersistentDomain(forName: suiteName) }
@@ -504,7 +504,7 @@ final class PREXUSTests: XCTestCase {
 
     @MainActor
     func testChatViewModelPinsActiveTurnStateWhileSending() async {
-        let suiteName = "PREXUSTests.ChatViewModel.\(UUID().uuidString)"
+        let suiteName = "QWONTests.ChatViewModel.\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: suiteName)!
         defaults.removePersistentDomain(forName: suiteName)
         defer { defaults.removePersistentDomain(forName: suiteName) }
@@ -545,7 +545,7 @@ final class PREXUSTests: XCTestCase {
 
     @MainActor
     func testChatViewModelKeepsAssistantReplyConversationOnly() async {
-        let suiteName = "PREXUSTests.ChatViewModelConversation.\(UUID().uuidString)"
+        let suiteName = "QWONTests.ChatViewModelConversation.\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: suiteName)!
         defaults.removePersistentDomain(forName: suiteName)
         defer { defaults.removePersistentDomain(forName: suiteName) }
@@ -604,7 +604,7 @@ final class PREXUSTests: XCTestCase {
     }
 
     func testPersistentMemoryStoreReloadsSavedEpisodes() {
-        let suiteName = "PREXUSTests.PersistentMemory.\(UUID().uuidString)"
+        let suiteName = "QWONTests.PersistentMemory.\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: suiteName)!
         defaults.removePersistentDomain(forName: suiteName)
         defer { defaults.removePersistentDomain(forName: suiteName) }
@@ -636,7 +636,7 @@ final class PREXUSTests: XCTestCase {
     }
 
     func testPersistentMemoryStoreSupportsDeletionAndClear() {
-        let suiteName = "PREXUSTests.PersistentMemory.Delete.\(UUID().uuidString)"
+        let suiteName = "QWONTests.PersistentMemory.Delete.\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: suiteName)!
         defaults.removePersistentDomain(forName: suiteName)
         defer { defaults.removePersistentDomain(forName: suiteName) }
@@ -668,7 +668,7 @@ final class PREXUSTests: XCTestCase {
 
     @MainActor
     func testAppSettingsStorePersistsConfigAndKeys() {
-        let suiteName = "PREXUSTests.Settings.\(UUID().uuidString)"
+        let suiteName = "QWONTests.Settings.\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: suiteName)!
         defaults.removePersistentDomain(forName: suiteName)
         defer { defaults.removePersistentDomain(forName: suiteName) }
@@ -704,7 +704,7 @@ final class PREXUSTests: XCTestCase {
 
     @MainActor
     func testAppSettingsStoreReportsProviderAvailability() {
-        let suiteName = "PREXUSTests.ProviderAvailability.\(UUID().uuidString)"
+        let suiteName = "QWONTests.ProviderAvailability.\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: suiteName)!
         defaults.removePersistentDomain(forName: suiteName)
         defer { defaults.removePersistentDomain(forName: suiteName) }
@@ -729,7 +729,7 @@ final class PREXUSTests: XCTestCase {
 
     @MainActor
     func testAppSettingsStorePersistsRestrictedProviderApprovals() {
-        let suiteName = "PREXUSTests.RestrictedProviders.\(UUID().uuidString)"
+        let suiteName = "QWONTests.RestrictedProviders.\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: suiteName)!
         defaults.removePersistentDomain(forName: suiteName)
         defer { defaults.removePersistentDomain(forName: suiteName) }

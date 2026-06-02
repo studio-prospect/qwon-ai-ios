@@ -4,7 +4,7 @@ require "xcodeproj"
 # Regenerates PREXUS.xcodeproj (container name unchanged in Phase 4B). Main app
 # target/scheme: QWON. Links llama.xcframework only when
 # vendor/llama-cpp-artifacts/llama.xcframework exists. Commit the output from a
-# machine without that artifact so clean checkouts can run PREXUSTests.
+# machine without that artifact so clean checkouts can run QWONTests.
 #
 # Optional LiteRT-LM evaluation target (isolated app, does not link into PREXUS):
 #   PREXUS_LITERT_LM_EVAL=1 ruby tools/scripts/generate_xcodeproj.rb
@@ -19,6 +19,8 @@ UI_TEST_BUNDLE_ID = "#{MAIN_BUNDLE_ID}.uitests"
 LITERT_EVAL_BUNDLE_ID = "#{MAIN_BUNDLE_ID}.literteval"
 IOS_ROOT = ROOT.join("app", "ios")
 APP_SOURCE_DIR = "QWON"
+UNIT_TEST_TARGET = "QWONTests"
+UI_TEST_TARGET = "QWONUITests"
 PROJECT_PATH = IOS_ROOT.join("PREXUS.xcodeproj")
 APP_TARGET_NAME = "QWON"
 LEGACY_APP_SCHEME = "PREXUS"
@@ -35,8 +37,8 @@ app_sources = Dir.glob(IOS_ROOT.join(APP_SOURCE_DIR, "**", "*.swift").to_s).reje
   litert_prototype_only_source_names.include?(File.basename(path))
 end
 runtime_sources = Dir.glob(ROOT.join("runtime", "**", "*.swift").to_s)
-test_sources = Dir.glob(IOS_ROOT.join("PREXUSTests", "**", "*.swift").to_s)
-ui_test_sources = Dir.glob(IOS_ROOT.join("PREXUSUITests", "**", "*.swift").to_s)
+test_sources = Dir.glob(IOS_ROOT.join(UNIT_TEST_TARGET, "**", "*.swift").to_s)
+ui_test_sources = Dir.glob(IOS_ROOT.join(UI_TEST_TARGET, "**", "*.swift").to_s)
 resource_root = IOS_ROOT.join(APP_SOURCE_DIR, "Resources")
 asset_catalogs = Dir.glob(resource_root.join("**", "*.xcassets").to_s)
 resources = Dir.glob(resource_root.join("**", "*").to_s).reject do |path|
@@ -55,21 +57,21 @@ project.root_object.attributes["LastSwiftUpdateCheck"] = "1600"
 project.root_object.attributes["LastUpgradeCheck"] = "1600"
 
 app_target = project.new_target(:application, APP_TARGET_NAME, :ios, "17.0")
-test_target = project.new_target(:unit_test_bundle, "PREXUSTests", :ios, "17.0")
-ui_test_target = project.new_target(:ui_test_bundle, "PREXUSUITests", :ios, "17.0")
+test_target = project.new_target(:unit_test_bundle, UNIT_TEST_TARGET, :ios, "17.0")
+ui_test_target = project.new_target(:ui_test_bundle, UI_TEST_TARGET, :ios, "17.0")
 test_target.add_dependency(app_target)
 ui_test_target.add_dependency(app_target)
 
 app_target.product_reference.name = "#{APP_TARGET_NAME}.app"
-test_target.product_reference.name = "PREXUSTests.xctest"
-ui_test_target.product_reference.name = "PREXUSUITests.xctest"
+test_target.product_reference.name = "#{UNIT_TEST_TARGET}.xctest"
+ui_test_target.product_reference.name = "#{UI_TEST_TARGET}.xctest"
 
 main_group = project.main_group
 app_group = main_group.new_group(APP_SOURCE_DIR, APP_SOURCE_DIR)
 runtime_group = main_group.new_group("runtime", "../../runtime")
 shared_group = main_group.new_group("shared", "../shared")
-tests_group = main_group.new_group("PREXUSTests", "PREXUSTests")
-ui_tests_group = main_group.new_group("PREXUSUITests", "PREXUSUITests")
+tests_group = main_group.new_group(UNIT_TEST_TARGET, UNIT_TEST_TARGET)
+ui_tests_group = main_group.new_group(UI_TEST_TARGET, UI_TEST_TARGET)
 
 def ensure_groups(parent_group, absolute_path, root_path)
   relative = Pathname.new(absolute_path).relative_path_from(root_path).to_s
@@ -100,11 +102,11 @@ bridge_sources.each do |path|
 end
 
 test_sources.each do |path|
-  add_file(test_target, tests_group, path, IOS_ROOT.join("PREXUSTests"))
+  add_file(test_target, tests_group, path, IOS_ROOT.join(UNIT_TEST_TARGET))
 end
 
 ui_test_sources.each do |path|
-  add_file(ui_test_target, ui_tests_group, path, IOS_ROOT.join("PREXUSUITests"))
+  add_file(ui_test_target, ui_tests_group, path, IOS_ROOT.join(UI_TEST_TARGET))
 end
 
 resources_group = app_group["Resources"] || app_group.new_group("Resources", "Resources")
@@ -349,8 +351,8 @@ scheme_xml = <<~XML
               <BuildableReference
                  BuildableIdentifier="primary"
                  BlueprintIdentifier="#{test_target.uuid}"
-                 BuildableName="PREXUSTests.xctest"
-                 BlueprintName="PREXUSTests"
+                 BuildableName="#{UNIT_TEST_TARGET}.xctest"
+                 BlueprintName="#{UNIT_TEST_TARGET}"
                  ReferencedContainer="container:PREXUS.xcodeproj">
               </BuildableReference>
            </TestableReference>
@@ -358,8 +360,8 @@ scheme_xml = <<~XML
               <BuildableReference
                  BuildableIdentifier="primary"
                  BlueprintIdentifier="#{ui_test_target.uuid}"
-                 BuildableName="PREXUSUITests.xctest"
-                 BlueprintName="PREXUSUITests"
+                 BuildableName="#{UI_TEST_TARGET}.xctest"
+                 BlueprintName="#{UI_TEST_TARGET}"
                  ReferencedContainer="container:PREXUS.xcodeproj">
               </BuildableReference>
            </TestableReference>
