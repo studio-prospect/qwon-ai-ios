@@ -4,7 +4,7 @@
 **Audience:** Cursor/Codex agents, release engineering, future rename work.
 **Purpose:** Record **why PREXUS names still exist** after the QWON rename series, classify them, and prevent blind global replace.
 
-Related: [QWON migration plan](./qwon_rename_migration_plan.md) · [Phase 4 target rename plan](./qwon_phase4_target_rename_plan.md) · [Rename surface audit](./qwon_phase4_rename_surface_audit.md) · [Phase 4E decision gate](./qwon_phase4_target_rename_plan.md#pr-4e--optional-archive-smoke-decision-gate)
+Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [QWON migration plan](./qwon_rename_migration_plan.md) · [Phase 4 target rename plan](./qwon_phase4_target_rename_plan.md) · [Rename surface audit](./qwon_phase4_rename_surface_audit.md) · [Phase 4E decision gate](./qwon_phase4_target_rename_plan.md#pr-4e--optional-archive-smoke-decision-gate)
 
 ---
 

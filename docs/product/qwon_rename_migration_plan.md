@@ -1,7 +1,7 @@
 # QWON Rename Migration Plan
 
 **Last updated:** 2026-06-02
-**Status:** **Phase 3 build `1` complete**; **active TestFlight `0.1.0 (2)`** (keyboard fix, 2026-06-02) — [prep doc](./qwon_text_alpha_testflight_prep.md). Phase 4 **4D complete** (#64); **4E optional archive-smoke decision** documented — [Phase 4 plan](./qwon_phase4_target_rename_plan.md#pr-4e--optional-archive-smoke-decision-gate).
+**Status:** **Phase 3 build `1`–`2` on TestFlight** — active **`0.1.0 (2)`** ([prep doc](./qwon_text_alpha_testflight_prep.md)). **Phase 4 rename complete** (#59–#65); **preserved PREXUS guardrail** (#66). **Build `3` not approved.** Start: [QWON rename docs index](./qwon_rename_docs_index.md).
 **Audience:** Product, release engineering, Cursor/Codex agents.
 
 **Purpose:** Migrate the product from **PREXUS** to **QWON** without a blind mass-replace. Fix impact scope, execution order, and Apple-side gates before implementation PRs.
@@ -122,6 +122,7 @@ Execute in order. Each phase is a **separate PR** unless explicitly combined in 
 
 | Topic | Document |
 | --- | --- |
+| **QWON rename (start here)** | [qwon_rename_docs_index.md](./qwon_rename_docs_index.md) |
 | PREXUS alpha (historical) | [qwen_text_only_alpha_docs_index.md](./qwen_text_only_alpha_docs_index.md) |
 | PREXUS bundle decision | [bundle_id_decision_memo.md](./bundle_id_decision_memo.md) |
 | QWON bundle IDs (current repo) | [qwon_bundle_id_decision_memo.md](./qwon_bundle_id_decision_memo.md) |
