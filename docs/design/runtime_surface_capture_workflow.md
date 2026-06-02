@@ -80,7 +80,7 @@ Supported slugs today:
 When you need new live screenshots:
 
 1. Run the first UI smoke:
-   - `xcodebuild -project app/ios/PREXUS.xcodeproj -scheme PREXUS -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' -only-testing:PREXUSUITests test`
+   - `xcodebuild -project app/ios/PREXUS.xcodeproj -scheme QWON -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' -only-testing:PREXUSUITests test`
 2. Export the attachments into a deterministic directory:
    - `ruby tools/scripts/export_prexus_xcuitest_screenshots.rb --xcresult '<xcresult-path>' --output-dir docs/design/runtime-surface-captures/iphone16`
 3. Record:

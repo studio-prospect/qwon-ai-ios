@@ -1,9 +1,8 @@
 require "pathname"
-require "rexml/document"
-require "rexml/xpath"
 require "xcodeproj"
 
-# Regenerates PREXUS.xcodeproj. Links llama.xcframework only when
+# Regenerates PREXUS.xcodeproj (container name unchanged in Phase 4B). Main app
+# target/scheme: QWON. Links llama.xcframework only when
 # vendor/llama-cpp-artifacts/llama.xcframework exists. Commit the output from a
 # machine without that artifact so clean checkouts can run PREXUSTests.
 #
@@ -20,7 +19,10 @@ UI_TEST_BUNDLE_ID = "#{MAIN_BUNDLE_ID}.uitests"
 LITERT_EVAL_BUNDLE_ID = "#{MAIN_BUNDLE_ID}.literteval"
 IOS_ROOT = ROOT.join("app", "ios")
 PROJECT_PATH = IOS_ROOT.join("PREXUS.xcodeproj")
-SCHEME_PATH = PROJECT_PATH.join("xcshareddata", "xcschemes", "PREXUS.xcscheme")
+APP_TARGET_NAME = "QWON"
+LEGACY_APP_SCHEME = "PREXUS"
+SCHEME_PATH = PROJECT_PATH.join("xcshareddata", "xcschemes", "#{APP_TARGET_NAME}.xcscheme")
+LEGACY_SCHEME_PATH = PROJECT_PATH.join("xcshareddata", "xcschemes", "#{LEGACY_APP_SCHEME}.xcscheme")
 
 litert_prototype_only_source_names = %w[
   LiteRTLocalModelClient.swift
@@ -51,13 +53,13 @@ project = Xcodeproj::Project.new(PROJECT_PATH.to_s)
 project.root_object.attributes["LastSwiftUpdateCheck"] = "1600"
 project.root_object.attributes["LastUpgradeCheck"] = "1600"
 
-app_target = project.new_target(:application, "PREXUS", :ios, "17.0")
+app_target = project.new_target(:application, APP_TARGET_NAME, :ios, "17.0")
 test_target = project.new_target(:unit_test_bundle, "PREXUSTests", :ios, "17.0")
 ui_test_target = project.new_target(:ui_test_bundle, "PREXUSUITests", :ios, "17.0")
 test_target.add_dependency(app_target)
 ui_test_target.add_dependency(app_target)
 
-app_target.product_reference.name = "PREXUS.app"
+app_target.product_reference.name = "#{APP_TARGET_NAME}.app"
 test_target.product_reference.name = "PREXUSTests.xctest"
 ui_test_target.product_reference.name = "PREXUSUITests.xctest"
 
@@ -140,6 +142,7 @@ end
 
 app_target.build_configurations.each do |config|
   config.build_settings["PRODUCT_BUNDLE_IDENTIFIER"] = MAIN_BUNDLE_ID
+  config.build_settings["PRODUCT_MODULE_NAME"] = "PREXUS"
   config.build_settings["INFOPLIST_FILE"] = "PREXUS/Resources/Info.plist"
   config.build_settings["SWIFT_VERSION"] = "5.0"
   config.build_settings["IPHONEOS_DEPLOYMENT_TARGET"] = "17.0"
@@ -177,7 +180,7 @@ test_target.build_configurations.each do |config|
   config.build_settings["SWIFT_VERSION"] = "5.0"
   config.build_settings["IPHONEOS_DEPLOYMENT_TARGET"] = "17.0"
   config.build_settings["TARGETED_DEVICE_FAMILY"] = "1"
-  config.build_settings["TEST_HOST"] = "$(BUILT_PRODUCTS_DIR)/PREXUS.app/PREXUS"
+  config.build_settings["TEST_HOST"] = "$(BUILT_PRODUCTS_DIR)/#{APP_TARGET_NAME}.app/#{APP_TARGET_NAME}"
   config.build_settings["BUNDLE_LOADER"] = "$(TEST_HOST)"
 end
 
@@ -188,7 +191,7 @@ ui_test_target.build_configurations.each do |config|
   config.build_settings["SWIFT_VERSION"] = "5.0"
   config.build_settings["IPHONEOS_DEPLOYMENT_TARGET"] = "17.0"
   config.build_settings["TARGETED_DEVICE_FAMILY"] = "1"
-  config.build_settings["TEST_TARGET_NAME"] = "PREXUS"
+  config.build_settings["TEST_TARGET_NAME"] = APP_TARGET_NAME
   config.build_settings["CLANG_ENABLE_OBJC_WEAK"] = "NO"
 end
 
@@ -321,26 +324,80 @@ end
 
 project.save
 
-if SCHEME_PATH.exist?
-  scheme = REXML::Document.new(SCHEME_PATH.read)
-  targets_by_name = {
-    app_target.name => app_target,
-    test_target.name => test_target,
-    ui_test_target.name => ui_test_target
-  }
-
-  REXML::XPath.each(scheme, "//BuildableReference") do |reference|
-    target = targets_by_name[reference.attributes["BlueprintName"]]
-    next unless target
-
-    reference.attributes["BlueprintIdentifier"] = target.uuid
-    reference.attributes["BuildableName"] = target.product_reference.path || target.product_reference.name
-  end
-
-  formatter = REXML::Formatters::Pretty.new(3)
-  formatter.compact = true
-  output = +""
-  formatter.write(scheme, output)
-  output << "\n"
-  SCHEME_PATH.write(output)
-end
+scheme_path = SCHEME_PATH
+scheme_path.parent.mkpath
+scheme_xml = <<~XML
+  <?xml version="1.0" encoding="UTF-8"?>
+  <Scheme LastUpgradeVersion="1600" version="1.7">
+     <BuildAction parallelizeBuildables="YES" buildImplicitDependencies="YES">
+        <BuildActionEntries>
+           <BuildActionEntry buildForTesting="YES" buildForRunning="YES" buildForProfiling="YES" buildForArchiving="YES" buildForAnalyzing="YES">
+              <BuildableReference
+                 BuildableIdentifier="primary"
+                 BlueprintIdentifier="#{app_target.uuid}"
+                 BuildableName="#{APP_TARGET_NAME}.app"
+                 BlueprintName="#{APP_TARGET_NAME}"
+                 ReferencedContainer="container:PREXUS.xcodeproj">
+              </BuildableReference>
+           </BuildActionEntry>
+        </BuildActionEntries>
+     </BuildAction>
+     <TestAction buildConfiguration="Debug" selectedDebuggerIdentifier="Xcode.DebuggerFoundation.Debugger.LLDB" selectedLauncherIdentifier="Xcode.DebuggerFoundation.Launcher.LLDB" shouldUseLaunchSchemeArgsEnv="YES">
+        <Testables>
+           <TestableReference skipped="NO" parallelizable="YES">
+              <BuildableReference
+                 BuildableIdentifier="primary"
+                 BlueprintIdentifier="#{test_target.uuid}"
+                 BuildableName="PREXUSTests.xctest"
+                 BlueprintName="PREXUSTests"
+                 ReferencedContainer="container:PREXUS.xcodeproj">
+              </BuildableReference>
+           </TestableReference>
+           <TestableReference skipped="NO" parallelizable="NO">
+              <BuildableReference
+                 BuildableIdentifier="primary"
+                 BlueprintIdentifier="#{ui_test_target.uuid}"
+                 BuildableName="PREXUSUITests.xctest"
+                 BlueprintName="PREXUSUITests"
+                 ReferencedContainer="container:PREXUS.xcodeproj">
+              </BuildableReference>
+           </TestableReference>
+        </Testables>
+        <MacroExpansion>
+           <BuildableReference
+              BuildableIdentifier="primary"
+              BlueprintIdentifier="#{app_target.uuid}"
+              BuildableName="#{APP_TARGET_NAME}.app"
+              BlueprintName="#{APP_TARGET_NAME}"
+              ReferencedContainer="container:PREXUS.xcodeproj">
+           </BuildableReference>
+        </MacroExpansion>
+     </TestAction>
+     <LaunchAction buildConfiguration="Debug" selectedDebuggerIdentifier="Xcode.DebuggerFoundation.Debugger.LLDB" selectedLauncherIdentifier="Xcode.DebuggerFoundation.Launcher.LLDB" launchStyle="0" useCustomWorkingDirectory="NO" ignoresPersistentStateOnLaunch="NO" debugDocumentVersioning="YES" debugServiceExtension="internal" allowLocationSimulation="YES">
+        <BuildableProductRunnable runnableDebuggingMode="0">
+           <BuildableReference
+              BuildableIdentifier="primary"
+              BlueprintIdentifier="#{app_target.uuid}"
+              BuildableName="#{APP_TARGET_NAME}.app"
+              BlueprintName="#{APP_TARGET_NAME}"
+              ReferencedContainer="container:PREXUS.xcodeproj">
+           </BuildableReference>
+        </BuildableProductRunnable>
+     </LaunchAction>
+     <ProfileAction buildConfiguration="Release" shouldUseLaunchSchemeArgsEnv="YES" savedToolIdentifier="" useCustomWorkingDirectory="NO" debugDocumentVersioning="YES">
+        <BuildableProductRunnable runnableDebuggingMode="0">
+           <BuildableReference
+              BuildableIdentifier="primary"
+              BlueprintIdentifier="#{app_target.uuid}"
+              BuildableName="#{APP_TARGET_NAME}.app"
+              BlueprintName="#{APP_TARGET_NAME}"
+              ReferencedContainer="container:PREXUS.xcodeproj">
+           </BuildableReference>
+        </BuildableProductRunnable>
+     </ProfileAction>
+     <AnalyzeAction buildConfiguration="Debug"> </AnalyzeAction>
+     <ArchiveAction buildConfiguration="Release" revealArchiveInOrganizer="YES"> </ArchiveAction>
+  </Scheme>
+XML
+scheme_path.write(scheme_xml)
+LEGACY_SCHEME_PATH.delete if LEGACY_SCHEME_PATH.exist?

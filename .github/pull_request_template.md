@@ -6,7 +6,7 @@
 
 - [ ] `git diff --check` (required when changing `*.md`, `*.rb`, `*.sh`, `*.yml`, or other text under version control)
 - [ ] `ruby tools/scripts/generate_xcodeproj.rb` (if iOS targets, scheme, or compiled sources changed)
-- [ ] `xcodebuild -project app/ios/PREXUS.xcodeproj -scheme PREXUS -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' test`
+- [ ] `xcodebuild -project app/ios/PREXUS.xcodeproj -scheme QWON -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' test`
 
 ### Results
 

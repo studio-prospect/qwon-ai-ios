@@ -12,7 +12,7 @@ DEVICE_FILTER="${1:-Wang}"
 IOS="$ROOT/app/ios"
 DERIVED="$ROOT/.derivedData-alpha-smoke"
 TEAM="${DEVELOPMENT_TEAM:-BWSS94LH28}"
-APP="$DERIVED/Build/Products/Debug-iphoneos/PREXUS.app"
+APP="$DERIVED/Build/Products/Debug-iphoneos/QWON.app"
 BUNDLE_ID="jp.studio-prospect.qwon.ios"
 LOG_DIR="$ROOT/.eval-logs"
 RESULT_OUT="$LOG_DIR/wang-alpha-smoke-with_model.json"
@@ -32,11 +32,11 @@ fi
 ruby "$ROOT/tools/scripts/generate_xcodeproj.rb"
 
 if [[ "${PREXUS_SKIP_BUILD:-0}" != "1" ]]; then
-  echo "==> Build Debug PREXUS for device"
+  echo "==> Build Debug QWON for device"
   cd "$IOS"
   xcodebuild \
     -project PREXUS.xcodeproj \
-    -scheme PREXUS \
+    -scheme QWON \
     -destination 'generic/platform=iOS' \
     -derivedDataPath "$DERIVED" \
     DEVELOPMENT_TEAM="$TEAM" \
@@ -71,7 +71,7 @@ print(matches[0][2])
 PY
 )"
 
-echo "==> Install PREXUS"
+echo "==> Install QWON"
 xcrun devicectl device install app --device "$DEVICE_ID" "$APP"
 
 resolve_device() {
@@ -164,7 +164,7 @@ PY
     echo "Launch attempt ${attempt} failed (unlock Wang?)" >&2
     sleep 8
   done
-  echo "error: could not launch PREXUS for smoke ($scenario)" >&2
+  echo "error: could not launch QWON for smoke ($scenario)" >&2
   exit 1
 }
 

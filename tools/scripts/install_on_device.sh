@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Build PREXUS for a physical iPhone and install/launch via devicectl.
+# Build QWON for a physical iPhone and install/launch via devicectl.
 #
 # Prerequisites:
 #   - iPhone connected by USB, unlocked, "Trust This Computer" accepted
@@ -17,14 +17,14 @@ IOS="$ROOT/app/ios"
 DERIVED="$ROOT/.derivedData"
 TEAM="${DEVELOPMENT_TEAM:-BWSS94LH28}"
 BUNDLE_ID="jp.studio-prospect.qwon.ios"
-APP="$DERIVED/Build/Products/Debug-iphoneos/PREXUS.app"
+APP="$DERIVED/Build/Products/Debug-iphoneos/QWON.app"
 DEVICE_FILTER="${1:-}"
 
 echo "==> Building for device (DEVELOPMENT_TEAM=$TEAM)"
 cd "$IOS"
 xcodebuild \
   -project PREXUS.xcodeproj \
-  -scheme PREXUS \
+  -scheme QWON \
   -destination 'generic/platform=iOS' \
   -derivedDataPath "$DERIVED" \
   DEVELOPMENT_TEAM="$TEAM" \

@@ -166,13 +166,13 @@ Cursor should run regeneration when a change touches any of:
 - files under `runtime/` that are compiled into the iOS app target
 - test targets, bundle identifiers, or shared scheme test bundles
 
-The script also syncs `PREXUS.xcscheme` target UUIDs after regeneration. Do not hand-edit stale `BlueprintIdentifier` values.
+The script also writes the active shared scheme `QWON.xcscheme` (and removes legacy `PREXUS.xcscheme`) after regeneration. Do not hand-edit stale `BlueprintIdentifier` values.
 
 Suggested verification after regeneration:
 
 ```bash
 ruby tools/scripts/generate_xcodeproj.rb
-xcodebuild -project app/ios/PREXUS.xcodeproj -scheme PREXUS \
+xcodebuild -project app/ios/PREXUS.xcodeproj -scheme QWON \
   -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' test
 ```
 

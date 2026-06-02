@@ -65,7 +65,7 @@ It does **not** mean QWON is feature-complete as a cognitive runtime. It marks a
 | Main branch status | Integrated and pushed through `origin/main` |
 | iPhone 16 simulator check | Route labels and sensitivity UI verified |
 | Unit test suite | Passing |
-| Most recent local verification | `xcodebuild -project app/ios/PREXUS.xcodeproj -scheme PREXUS -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' test` |
+| Most recent local verification | `xcodebuild -project app/ios/PREXUS.xcodeproj -scheme QWON -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' test` |
 | Current test count | 30 passing tests |
 | Current MVP checkpoint | Achieved for the present iOS routing scaffold |
 
