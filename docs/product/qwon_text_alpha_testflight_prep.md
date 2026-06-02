@@ -1,6 +1,6 @@
 # QWON Text Alpha — TestFlight Preparation (Phase 3)
 
-**Last updated:** 2026-06-02  
+**Last updated:** 2026-06-02
 **Status:** **Prep only** — Apple gate and TestFlight upload **not executed**. Repo defaults to `jp.studio-prospect.qwon.ios` after Phase 2 merge (#48).
 
 **Historical line:** PREXUS alpha `0.1.0 (1)` on `jp.studio-prospect.prexus.ios` remains frozen — see [Qwen text-only alpha TestFlight prep](./qwen_text_only_alpha_testflight_prep.md). **Do not** upload QWON builds to ASC app **PREXUS** (Apple ID `6775110218`).

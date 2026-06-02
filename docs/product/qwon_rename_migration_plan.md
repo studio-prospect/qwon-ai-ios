@@ -1,6 +1,6 @@
 # QWON Rename Migration Plan
 
-**Last updated:** 2026-06-02  
+**Last updated:** 2026-06-02
 **Status:** **Phase 1–2 merged** (#47, #48). **Phase 3 prep** in [qwon_text_alpha_testflight_prep.md](./qwon_text_alpha_testflight_prep.md) — upload pending Apple gate.
 **Audience:** Product, release engineering, Cursor/Codex agents.
 
@@ -24,7 +24,9 @@
 
 ---
 
-## Apple gate (must complete before Phase 2+)
+## Apple gate (operator — before Phase 3 upload)
+
+**Repo status:** Phases **1–2** are **merged** on `main` (user-facing rename + `jp.studio-prospect.qwon.ios` in scripts/pbxproj). This gate blocks **Phase 3** TestFlight upload and ASC work — not further repo Bundle ID changes.
 
 **Critical:** If an App Store Connect app record already has **uploaded builds**, the **Bundle ID cannot be changed** on that record. The historical PREXUS alpha (`jp.studio-prospect.prexus.ios`) therefore stays as-is in ASC and docs.
 
