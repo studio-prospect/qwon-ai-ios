@@ -24,7 +24,7 @@ Per `docs/product/mvp_completion_plan.md`, the **policy + UI scaffold** checkpoi
 
 - routing preview, sensitivity modes, diagnostics, settings policy copy
 - Chat control-surface polish, device install workflow documented
-- **37** `PREXUSTests` passing
+- **66** `QWONTests` passing (simulator, no-llama project)
 
 ### What is still stubbed in `runtime/`
 
@@ -167,7 +167,7 @@ flowchart TD
 
 | Order | ID | Name | Exit criteria (merge gate) |
 | --- | --- | --- | --- |
-| **1** | **P1-1** | **Local inference MVP** (A-1) | On physical iPhone, `deviceRuntime` backend runs one bundled small model; streaming or chunked reply; fallback to heuristic on failure; PREXUSTests + device checklist; no regression to routing/diagnostics |
+| **1** | **P1-1** | **Local inference MVP** (A-1) | On physical iPhone, `deviceRuntime` backend runs one bundled small model; streaming or chunked reply; fallback to heuristic on failure; QWONTests + device checklist; no regression to routing/diagnostics |
 | **2** | **P1-2** | **Compression v0** (A-3 partial) | Structured context blocks + token budget enforcement + tests; cloud prompt size measurably reduced vs suffix-4 heuristic |
 | **3** | **P1-3** | **Compression v1** (A-3 + A-1) | Local model summarizes transcript slice under policy; documented failure mode when local unavailable |
 | **4** | **P1-4** | **OCR input MVP** (A-2 narrow) | User attaches/captures image → on-device OCR text → `RuntimeTurnInput.text` / modality policy; routing reasons visible; sensitivity rules honored |

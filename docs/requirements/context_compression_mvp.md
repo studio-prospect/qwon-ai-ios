@@ -22,4 +22,4 @@ Compression v0 replaces suffix-only transcript joining with structured, budgeted
 
 ## Tests
 
-See `PREXUSTests` compression cases comparing structured output vs legacy suffix-4 baseline.
+See `QWONTests` compression cases comparing structured output vs legacy suffix-4 baseline.

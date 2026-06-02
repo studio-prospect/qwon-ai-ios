@@ -41,7 +41,7 @@ ROUTING_PROMPT='Classify the user intent as one of: chat, summarize, memory_writ
 User: この長いメモを3点に要約して、あとで見返せるようにして
 Return only JSON.'
 
-echo "==> PREXUS local GGUF benchmark"
+echo "==> QWON local GGUF benchmark"
 echo "    model: $MODEL"
 echo "    cli:   $CLI"
 echo "    n_predict=$N_PRED n_ctx=$N_CTX n_gpu_layers=$N_GPU"

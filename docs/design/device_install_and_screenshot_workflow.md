@@ -138,7 +138,7 @@ xcodebuild -project PREXUS.xcodeproj -scheme QWON \
   -parallel-testing-enabled NO
 ```
 
-Expect **37** `QWONTests` on success.
+Expect **66** `QWONTests` on success.
 
 ---
 
@@ -210,7 +210,7 @@ Seeded Chat / Diagnostics / Memory states use launch argument `PREXUS_UI_TEST_SE
 When a change touches Chat layout on device:
 
 ```markdown
-- [x] QWONTests (37, 0 failures) — command in device_install_and_screenshot_workflow.md
+- [x] QWONTests (66, 0 failures) — command in device_install_and_screenshot_workflow.md
 - [x] Physical iPhone — `./tools/scripts/install_on_device.sh "<name>"` — Chat checklist passed
 - [x] Screenshots — `docs/design/screenshots/device-qa/<file>.png` (if UI-visible)
 ```

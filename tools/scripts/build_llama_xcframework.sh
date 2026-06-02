@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Build llama.cpp XCFramework for PREXUS iOS integration.
+# Build llama.cpp XCFramework for QWON iOS integration.
 #
 # Prerequisites:
 #   - git submodule: vendor/llama.cpp (see .gitmodules)

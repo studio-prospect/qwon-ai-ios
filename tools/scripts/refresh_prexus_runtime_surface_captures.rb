@@ -82,7 +82,7 @@ devices.each do |device_slug|
   FileUtils.mkdir_p(capture_dir)
 
   Dir.mktmpdir("prexus-runtime-captures-#{device_slug}-") do |temp_dir|
-    result_bundle = Pathname(temp_dir).join("PREXUS-#{device_slug}.xcresult")
+    result_bundle = Pathname(temp_dir).join("QWON-#{device_slug}.xcresult")
 
     run_command!([
       'xcodebuild',

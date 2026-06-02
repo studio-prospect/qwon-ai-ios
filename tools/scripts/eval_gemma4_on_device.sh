@@ -40,7 +40,7 @@ PREXUS_LOCAL_MODEL_DEST="prexus-local-mvp.gguf" \
 "$ROOT/tools/scripts/push_local_model_to_device.sh" "$DEVICE_FILTER"
 
 echo ""
-echo "==> Step 3/4: launch PREXUS (Debug build runs one device smoke prompt on large models)"
+echo "==> Step 3/4: launch QWON (Debug build runs one device smoke prompt on large models)"
 xcrun devicectl device process launch --device "$(
   DEVICE_JSON="$(mktemp)"
   xcrun devicectl list devices --json-output "$DEVICE_JSON" --quiet
@@ -64,7 +64,7 @@ PY
 
 echo ""
 echo "==> Step 4/4: optional manual prompts + log capture"
-echo "Send these in PREXUS Chat (local route):"
+echo "Send these in QWON Chat (local route):"
 echo "  1) 明日の予定を整理する時、最初に何を確認すべきですか？"
 echo "  2) Classify intent as JSON: chat|summarize|memory_write|tool_request|cloud_needed"
 echo ""

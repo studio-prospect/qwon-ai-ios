@@ -32,11 +32,11 @@ if [[ ! -f "$ROOT/models/prexus-local-mvp.gguf" ]]; then
   exit 1
 fi
 
-echo "==> Vendor + regenerate PREXUS with LiteRT prototype"
+echo "==> Vendor + regenerate QWON with LiteRT prototype"
 "$ROOT/tools/scripts/vendor_litert_lm.sh"
 PREXUS_LITERT_LM_PROTOTYPE=1 ruby "$ROOT/tools/scripts/generate_xcodeproj.rb"
 
-echo "==> Build Debug PREXUS for device"
+echo "==> Build Debug QWON for device"
 cd "$IOS"
 xcodebuild \
   -project PREXUS.xcodeproj \
@@ -68,7 +68,7 @@ print(matches[0][2])
 PY
 )"
 
-echo "==> Install PREXUS Debug"
+echo "==> Install QWON Debug"
 xcrun devicectl device install app --device "$DEVICE_ID" "$APP"
 
 echo "==> Push models"
@@ -129,7 +129,7 @@ for attempt in 1 2 3 4 5 6 7 8 9 10; do
 done
 
 if [[ "$LAUNCHED" -ne 1 ]]; then
-  echo "error: could not launch PREXUS on device (locked or unavailable)" >&2
+  echo "error: could not launch QWON on device (locked or unavailable)" >&2
   exit 1
 fi
 
