@@ -4,7 +4,7 @@
 **Scope:** Internal repo/Xcode naming only: target, scheme, Swift module, tests, paths, and scripts that still use `PREXUS` as the active app name.
 **Non-goal:** Product identity, Bundle ID, ASC app, TestFlight history, and historical PREXUS alpha docs are already handled elsewhere and must not be rewritten here.
 
-Related: [QWON rename migration plan](./qwon_rename_migration_plan.md) · [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [QWON lab evidence](./qwon_text_alpha_lab_evidence.md) · [Rename surface audit](./qwon_phase4_rename_surface_audit.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md)
+Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [QWON rename migration plan](./qwon_rename_migration_plan.md) · [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [QWON lab evidence](./qwon_text_alpha_lab_evidence.md) · [Rename surface audit](./qwon_phase4_rename_surface_audit.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md)
 
 ---
 

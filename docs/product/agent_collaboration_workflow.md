@@ -210,6 +210,7 @@ Simulator runtime-surface refreshes remain separate: `docs/design/runtime_surfac
 
 ## Related Docs
 
+- [qwon_rename_docs_index.md](./qwon_rename_docs_index.md) — QWON rename / Phase 4 doc entry point and reading order
 - [AGENTS.md](../../AGENTS.md) — repository engineering rules
 - [device_install_and_screenshot_workflow.md](../design/device_install_and_screenshot_workflow.md) — physical device install and QA captures
 - [architecture.md](../requirements/architecture.md) — runtime architecture
