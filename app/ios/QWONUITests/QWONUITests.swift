@@ -1,6 +1,6 @@
 import XCTest
 
-final class PREXUSUITests: XCTestCase {
+final class QWONUITests: XCTestCase {
     private enum UIID {
         static let chatScreen = "chat.screen"
         static let openSettings = "chat.open-settings"

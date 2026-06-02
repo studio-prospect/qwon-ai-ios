@@ -114,7 +114,7 @@ Production **PREXUS** and **Qwen MVP** are unchanged. Evaluation uses a separate
 
 ### Xcode project generation
 
-Committed `PREXUS.xcodeproj` stays **without** the LiteRT eval target so clean checkouts can run `PREXUSTests` without resolving LiteRT-LM.
+Committed `PREXUS.xcodeproj` stays **without** the LiteRT eval target so clean checkouts can run `QWONTests` without resolving LiteRT-LM.
 
 ```bash
 # Default — production + unit tests only

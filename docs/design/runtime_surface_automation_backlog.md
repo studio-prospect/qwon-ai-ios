@@ -68,7 +68,7 @@ Add a dedicated UI automation target or screenshot-oriented UI tests that can:
 Current state:
 
 - **implemented as the preferred first pass**
-- the initial smoke lives in `app/ios/PREXUSUITests/PREXUSUITests.swift`
+- the initial smoke lives in `app/ios/QWONUITests/QWONUITests.swift`
 - it is intentionally navigation-only and light on assertions
 - `tools/scripts/refresh_prexus_runtime_surface_captures.rb` now wraps the current smoke + export flow for the supported device slugs
 

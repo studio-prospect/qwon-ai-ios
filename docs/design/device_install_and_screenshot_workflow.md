@@ -127,18 +127,18 @@ cd app/ios
 xcodebuild -project PREXUS.xcodeproj -scheme QWON \
   -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' \
   -derivedDataPath ../../.derivedData \
-  -only-testing:PREXUSTests build-for-testing
+  -only-testing:QWONTests build-for-testing
 
 xcodebuild -project PREXUS.xcodeproj -scheme QWON \
   -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' \
   -derivedDataPath ../../.derivedData \
   test-without-building \
-  -only-testing:PREXUSTests \
-  -skip-testing:PREXUSUITests \
+  -only-testing:QWONTests \
+  -skip-testing:QWONUITests \
   -parallel-testing-enabled NO
 ```
 
-Expect **37** `PREXUSTests` on success.
+Expect **37** `QWONTests` on success.
 
 ---
 
@@ -193,7 +193,7 @@ For the supported simulator matrix (`iphone16`, `iphonese3`):
 ruby tools/scripts/refresh_prexus_runtime_surface_captures.rb --all
 ```
 
-This runs `PREXUSUITests`, exports attachments, and updates `manifest.json` per device slug.
+This runs `QWONUITests`, exports attachments, and updates `manifest.json` per device slug.
 
 Details:
 
@@ -210,7 +210,7 @@ Seeded Chat / Diagnostics / Memory states use launch argument `PREXUS_UI_TEST_SE
 When a change touches Chat layout on device:
 
 ```markdown
-- [x] PREXUSTests (37, 0 failures) — command in device_install_and_screenshot_workflow.md
+- [x] QWONTests (37, 0 failures) — command in device_install_and_screenshot_workflow.md
 - [x] Physical iPhone — `./tools/scripts/install_on_device.sh "<name>"` — Chat checklist passed
 - [x] Screenshots — `docs/design/screenshots/device-qa/<file>.png` (if UI-visible)
 ```

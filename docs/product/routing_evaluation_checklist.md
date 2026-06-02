@@ -147,7 +147,7 @@ Fail when any of the following occurs:
 
 ## Current MVP Evidence Sources
 
-- unit tests in `app/ios/PREXUSTests/PREXUSTests.swift`
+- unit tests in `app/ios/QWONTests/QWONTests.swift`
 - route contract docs in `docs/requirements/routing_design.md`
 - memory retention docs in `docs/requirements/memory_design.md`
 - multimodal routing docs in `docs/requirements/multimodal_strategy.md`
