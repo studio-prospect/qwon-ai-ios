@@ -48,6 +48,7 @@
 | **Can I edit PREXUS historical docs?** | **No** — [PREXUS alpha index](./qwen_text_only_alpha_docs_index.md); append-only QWON docs or link; never rewrite frozen rows |
 | **Where is Phase 4 implementation detail?** | [Phase 4 target rename plan](./qwon_phase4_target_rename_plan.md) PR table + [surface audit](./qwon_phase4_rename_surface_audit.md) |
 | **Ordinary feature work — global replace OK?** | **No** — [inventory agent guardrail](./qwon_preserved_prexus_surface_inventory.md#agent-guardrail-read-first) |
+| **Submit or triage tester feedback?** | [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) — build **`0.1.0 (2)`** |
 
 ---
 
@@ -64,6 +65,7 @@
 | [qwon_bundle_id_decision_memo.md](./qwon_bundle_id_decision_memo.md) | QWON Bundle ID / signing / ASC app record |
 | [qwen_text_only_alpha_docs_index.md](./qwen_text_only_alpha_docs_index.md) | **Historical** PREXUS alpha index — separate product line |
 | [qwon_next_work_queue.md](./qwon_next_work_queue.md) | **Post-rename work queue** — ready vs gated vs deferred |
+| [qwon_text_alpha_feedback_intake.md](./qwon_text_alpha_feedback_intake.md) | **Build `2` feedback template + triage log** |
 
 **Related (outside this index):** [models/README.md](../../models/README.md) (GGUF placement) · [agent_collaboration_workflow.md](./agent_collaboration_workflow.md) (Codex/Cursor roles) · [next work queue](./qwon_next_work_queue.md)
 

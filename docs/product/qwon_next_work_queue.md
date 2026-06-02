@@ -43,8 +43,8 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 | Field | Detail |
 | --- | --- |
 | **Trigger** | New tester report arrives for QWON build `2`; ongoing alpha lab |
-| **Required evidence** | Report using [PREXUS-era feedback template](./qwen_text_only_alpha_tester_instructions.md#tester-feedback-report-template) until QWON-specific copy exists; device + build number |
-| **First doc to read** | [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) → [PREXUS intake rules](./qwen_text_only_alpha_release_notes.md#feedback-intake-processing-build-1) (process pattern; log rows append-only) |
+| **Required evidence** | Report using [QWON feedback intake template](./qwon_text_alpha_feedback_intake.md#copy-paste-template); device + build **`0.1.0 (2)`** |
+| **First doc to read** | [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) · [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) |
 | **Do not start if** | Treating intake as approval for build `3`; rewriting historical PREXUS feedback log baseline rows |
 
 ### QWON rename docs index maintenance
@@ -74,8 +74,8 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 | Field | Detail |
 | --- | --- |
 | **Trigger** | Intake classifies an issue as **release blocker** vs watch / defer |
-| **Required evidence** | Repro on **`0.1.0 (2)`**; steps; device; severity aligned with [known-issues triage pattern](./qwen_text_only_alpha_release_notes.md#known-issues-triage-for-build-1) |
-| **First doc to read** | [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [Phase 4 plan — release blocker rule](./qwon_phase4_target_rename_plan.md#entry-gates) |
+| **Required evidence** | Repro on **`0.1.0 (2)`**; steps; device; classification per [QWON intake rules](./qwon_text_alpha_feedback_intake.md#classification-rules) |
+| **First doc to read** | [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) · [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [Phase 4 plan — release blocker rule](./qwon_phase4_target_rename_plan.md#entry-gates) |
 | **Do not start if** | Issue is cosmetic, model-quality-only, or unverified; using triage to justify build `3` or rename cleanup |
 
 ### Minimal fix PR (verified release blocker only)
@@ -177,7 +177,7 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 | I want to… | Lane | Start here |
 | --- | --- | --- |
-| Log tester feedback | Ready / docs-ops | [Feedback intake](#tester-feedback-intake-ongoing) |
+| Log tester feedback | Ready / docs-ops | [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) |
 | Fix a bug | Ready / code if blocker | [Triage](#build-2-feedback-triage) → [Minimal fix](#minimal-fix-pr-verified-release-blocker-only) |
 | Archive build `3` | Conditional | [4E gate](./qwon_phase4_target_rename_plan.md#pr-4e--optional-archive-smoke-decision-gate) — **not approved** |
 | Rename `PREXUS.xcodeproj` | Conditional | [Inventory](./qwon_preserved_prexus_surface_inventory.md) — **deferred** |
