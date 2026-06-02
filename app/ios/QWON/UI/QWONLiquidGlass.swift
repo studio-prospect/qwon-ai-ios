@@ -1,14 +1,14 @@
 import SwiftUI
 
-enum PREXUSControlGlassShape {
+enum QWONControlGlassShape {
     case roundedRect(cornerRadius: CGFloat)
     case capsule
 }
 
-private struct PREXUSControlGlassModifier: ViewModifier {
+private struct QWONControlGlassModifier: ViewModifier {
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
 
-    let shape: PREXUSControlGlassShape
+    let shape: QWONControlGlassShape
     let fallbackMaterial: Material
 
     func body(content: Content) -> some View {
@@ -59,11 +59,11 @@ private struct PREXUSControlGlassModifier: ViewModifier {
 
 extension View {
     func prexusControlGlass(
-        shape: PREXUSControlGlassShape = .roundedRect(cornerRadius: 18),
+        shape: QWONControlGlassShape = .roundedRect(cornerRadius: 18),
         fallbackMaterial: Material = .thinMaterial
     ) -> some View {
         modifier(
-            PREXUSControlGlassModifier(
+            QWONControlGlassModifier(
                 shape: shape,
                 fallbackMaterial: fallbackMaterial
             )
@@ -71,7 +71,7 @@ extension View {
     }
 }
 
-struct PREXUSControlGlassBar<Content: View>: View {
+struct QWONControlGlassBar<Content: View>: View {
     @ViewBuilder let content: () -> Content
 
     var body: some View {
@@ -83,7 +83,7 @@ struct PREXUSControlGlassBar<Content: View>: View {
     }
 }
 
-struct PREXUSRuntimeStrip<Content: View>: View {
+struct QWONRuntimeStrip<Content: View>: View {
     @ViewBuilder let content: () -> Content
 
     var body: some View {

@@ -9,13 +9,13 @@ struct RuntimeDiagnosticsView: View {
                 LazyVStack(alignment: .leading, spacing: 14) {
                     screenIntro
 
-                    PREXUSEmptyState(
+                    QWONEmptyState(
                         title: "No Runtime Diagnostics Yet",
                         systemImage: "waveform.path.ecg",
                         message: "QWON will capture recent route and execution decisions here after the first runtime turn.",
                         tint: .blue
                     )
-                    .accessibilityIdentifier(PREXUSAccessibilityID.Diagnostics.empty)
+                    .accessibilityIdentifier(QWONAccessibilityID.Diagnostics.empty)
                 }
                 .padding()
                 .padding(.top, 24)
@@ -40,15 +40,15 @@ struct RuntimeDiagnosticsView: View {
                     Button("Clear", role: .destructive) {
                         diagnostics.clear()
                     }
-                    .accessibilityIdentifier(PREXUSAccessibilityID.Diagnostics.clear)
+                    .accessibilityIdentifier(QWONAccessibilityID.Diagnostics.clear)
                 }
             }
         }
-        .accessibilityIdentifier(PREXUSAccessibilityID.Diagnostics.screen)
+        .accessibilityIdentifier(QWONAccessibilityID.Diagnostics.screen)
     }
 
     private var screenIntro: some View {
-        PREXUSScreenIntro(
+        QWONScreenIntro(
             eyebrow: "Runtime visibility",
             title: "Diagnostics",
             message: "Review how QWON routed and executed recent turns without dropping into raw logs."
@@ -56,15 +56,15 @@ struct RuntimeDiagnosticsView: View {
     }
 
     private var diagnosticsSummaryCard: some View {
-        PREXUSSurfaceCard {
+        QWONSurfaceCard {
             VStack(alignment: .leading, spacing: 8) {
                 Text("Recent Runtime Decisions")
                     .font(.caption)
                     .foregroundStyle(.secondary)
 
                 HStack(spacing: 8) {
-                    PREXUSStatusChip("\(diagnostics.entries.count) kept", tint: .blue)
-                    PREXUSStatusChip("Local-only history", tint: .secondary)
+                    QWONStatusChip("\(diagnostics.entries.count) kept", tint: .blue)
+                    QWONStatusChip("Local-only history", tint: .secondary)
                 }
 
                 Text("Entries show route target, execution path, and detail (including answered_by, primary_failure, and fallback_reason when the embedded heuristic answered after a local backend failure).")
@@ -73,11 +73,11 @@ struct RuntimeDiagnosticsView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .accessibilityIdentifier(PREXUSAccessibilityID.Diagnostics.summary)
+        .accessibilityIdentifier(QWONAccessibilityID.Diagnostics.summary)
     }
 
     private func diagnosticCard(_ entry: RuntimeDiagnosticEntry) -> some View {
-        PREXUSSurfaceCard(borderTint: Color(uiColor: .quaternaryLabel)) {
+        QWONSurfaceCard(borderTint: Color(uiColor: .quaternaryLabel)) {
             VStack(alignment: .leading, spacing: 10) {
                 Text(entry.userText)
                     .font(.body)
@@ -113,22 +113,22 @@ struct RuntimeDiagnosticsView: View {
     private func diagnosticChipRow(_ entry: RuntimeDiagnosticEntry) -> some View {
         ViewThatFits(in: .horizontal) {
             HStack(spacing: 8) {
-                PREXUSStatusChip(entry.executionBadgeLabel, tint: color(for: entry.executionTint))
-                PREXUSStatusChip(entry.routeBadgeLabel, tint: color(for: entry.routeTint))
+                QWONStatusChip(entry.executionBadgeLabel, tint: color(for: entry.executionTint))
+                QWONStatusChip(entry.routeBadgeLabel, tint: color(for: entry.routeTint))
 
                 if !entry.primaryReasonSummary.isEmpty {
-                    PREXUSStatusChip(entry.primaryReasonSummary, tint: .secondary)
+                    QWONStatusChip(entry.primaryReasonSummary, tint: .secondary)
                 }
             }
 
             VStack(alignment: .leading, spacing: 6) {
                 HStack(spacing: 8) {
-                    PREXUSStatusChip(entry.executionBadgeLabel, tint: color(for: entry.executionTint))
-                    PREXUSStatusChip(entry.routeBadgeLabel, tint: color(for: entry.routeTint))
+                    QWONStatusChip(entry.executionBadgeLabel, tint: color(for: entry.executionTint))
+                    QWONStatusChip(entry.routeBadgeLabel, tint: color(for: entry.routeTint))
                 }
 
                 if !entry.primaryReasonSummary.isEmpty {
-                    PREXUSStatusChip(entry.primaryReasonSummary, tint: .secondary)
+                    QWONStatusChip(entry.primaryReasonSummary, tint: .secondary)
                 }
             }
         }
@@ -160,13 +160,13 @@ struct RuntimeDiagnosticsView: View {
 
 #Preview("Empty") {
     NavigationStack {
-        RuntimeDiagnosticsView(diagnostics: RuntimeDiagnosticsStore(defaults: UserDefaults(suiteName: "PREXUS.DiagnosticsEmptyPreview.\(UUID().uuidString)")!))
+        RuntimeDiagnosticsView(diagnostics: RuntimeDiagnosticsStore(defaults: UserDefaults(suiteName: "QWON.DiagnosticsEmptyPreview.\(UUID().uuidString)")!))
     }
 }
 
 private extension RuntimeDiagnosticsView {
     static func preview() -> RuntimeDiagnosticsView {
-        let suiteName = "PREXUS.DiagnosticsPreview.\(UUID().uuidString)"
+        let suiteName = "QWON.DiagnosticsPreview.\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: suiteName)!
         defaults.removePersistentDomain(forName: suiteName)
         let store = RuntimeDiagnosticsStore(defaults: defaults)

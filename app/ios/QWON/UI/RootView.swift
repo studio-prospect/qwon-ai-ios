@@ -1,6 +1,6 @@
 import SwiftUI
 
-enum PREXUSAccessibilityID {
+enum QWONAccessibilityID {
     enum Chat {
         static let screen = "chat.screen"
         static let openSettings = "chat.open-settings"

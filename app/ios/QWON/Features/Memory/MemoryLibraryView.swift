@@ -13,13 +13,13 @@ struct MemoryLibraryView: View {
                 LazyVStack(alignment: .leading, spacing: 14) {
                     screenIntro
 
-                    PREXUSEmptyState(
+                    QWONEmptyState(
                         title: "No Local Memory Yet",
                         systemImage: "memorychip",
                         message: "QWON will keep compact local episodes here after eligible runtime turns.",
                         tint: .purple
                     )
-                    .accessibilityIdentifier(PREXUSAccessibilityID.Memory.empty)
+                    .accessibilityIdentifier(QWONAccessibilityID.Memory.empty)
                 }
                 .padding()
                 .padding(.top, 24)
@@ -51,18 +51,18 @@ struct MemoryLibraryView: View {
                     Button("Clear All", role: .destructive) {
                         viewModel.clearAll()
                     }
-                    .accessibilityIdentifier(PREXUSAccessibilityID.Memory.clearAll)
+                    .accessibilityIdentifier(QWONAccessibilityID.Memory.clearAll)
                 }
             }
         }
         .onAppear {
             viewModel.refresh()
         }
-        .accessibilityIdentifier(PREXUSAccessibilityID.Memory.screen)
+        .accessibilityIdentifier(QWONAccessibilityID.Memory.screen)
     }
 
     private var screenIntro: some View {
-        PREXUSScreenIntro(
+        QWONScreenIntro(
             eyebrow: "Local context",
             title: "Memory",
             message: "Browse the compact on-device episodes QWON retained for future context."
@@ -70,15 +70,15 @@ struct MemoryLibraryView: View {
     }
 
     private var summaryCard: some View {
-        PREXUSSurfaceCard {
+        QWONSurfaceCard {
             VStack(alignment: .leading, spacing: 8) {
                 Text("Local Memory Overview")
                     .font(.caption)
                     .foregroundStyle(.secondary)
 
                 HStack(spacing: 8) {
-                    PREXUSStatusChip("\(viewModel.memories.count) stored", tint: .purple)
-                    PREXUSStatusChip("On-device only", tint: .secondary)
+                    QWONStatusChip("\(viewModel.memories.count) stored", tint: .purple)
+                    QWONStatusChip("On-device only", tint: .secondary)
                 }
 
                 Text("Episodes are compact summaries QWON keeps locally for future context. Retention follows the sensitivity policy, so local-only and provider-restricted turns are excluded from automatic storage.")
@@ -87,11 +87,11 @@ struct MemoryLibraryView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .accessibilityIdentifier(PREXUSAccessibilityID.Memory.summary)
+        .accessibilityIdentifier(QWONAccessibilityID.Memory.summary)
     }
 
     private func memoryCard(_ memory: EpisodicMemory) -> some View {
-        PREXUSSurfaceCard(borderTint: Color(uiColor: .quaternaryLabel)) {
+        QWONSurfaceCard(borderTint: Color(uiColor: .quaternaryLabel)) {
             VStack(alignment: .leading, spacing: 10) {
                 Text(memory.summary)
                     .font(.body)
@@ -105,13 +105,13 @@ struct MemoryLibraryView: View {
     private func memoryChipRow(_ memory: EpisodicMemory) -> some View {
         ViewThatFits(in: .horizontal) {
             HStack(spacing: 8) {
-                PREXUSStatusChip(memory.sensitivity.displayLabel, tint: sensitivityColor(for: memory.sensitivity))
-                PREXUSStatusChip(memory.createdAt.formatted(date: .abbreviated, time: .shortened), tint: .secondary)
+                QWONStatusChip(memory.sensitivity.displayLabel, tint: sensitivityColor(for: memory.sensitivity))
+                QWONStatusChip(memory.createdAt.formatted(date: .abbreviated, time: .shortened), tint: .secondary)
             }
 
             VStack(alignment: .leading, spacing: 6) {
-                PREXUSStatusChip(memory.sensitivity.displayLabel, tint: sensitivityColor(for: memory.sensitivity))
-                PREXUSStatusChip(memory.createdAt.formatted(date: .abbreviated, time: .shortened), tint: .secondary)
+                QWONStatusChip(memory.sensitivity.displayLabel, tint: sensitivityColor(for: memory.sensitivity))
+                QWONStatusChip(memory.createdAt.formatted(date: .abbreviated, time: .shortened), tint: .secondary)
             }
         }
     }

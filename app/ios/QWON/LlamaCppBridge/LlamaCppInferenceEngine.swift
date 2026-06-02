@@ -1,20 +1,20 @@
 import Foundation
 
 final class LlamaCppCancellationHandle: @unchecked Sendable {
-    private let token = PREXUSLlamaCancellationToken()
+    private let token = QWONLlamaCancellationToken()
 
     func cancel() {
         token.cancel()
     }
 
-    var bridgeToken: PREXUSLlamaCancellationToken {
+    var bridgeToken: QWONLlamaCancellationToken {
         token
     }
 }
 
 final class LlamaCppInferenceEngine: @unchecked Sendable {
     private let lock = NSLock()
-    private var bridge: PREXUSLlamaBridge?
+    private var bridge: QWONLlamaBridge?
     private var loadedModelPath: String?
 
     var isReady: Bool {
@@ -36,7 +36,7 @@ final class LlamaCppInferenceEngine: @unchecked Sendable {
         loadedModelPath = nil
 
         do {
-            let loadedBridge = try PREXUSLlamaBridge(modelPath: modelPath)
+            let loadedBridge = try QWONLlamaBridge(modelPath: modelPath)
             bridge = loadedBridge
             loadedModelPath = modelPath
         } catch {
@@ -88,8 +88,8 @@ final class LlamaCppInferenceEngine: @unchecked Sendable {
 
             return output
         } catch let error as NSError {
-            if error.domain == PREXUSLlamaBridgeErrorDomain,
-               error.code == PREXUSLlamaBridgeError.cancelled.rawValue {
+            if error.domain == QWONLlamaBridgeErrorDomain,
+               error.code == QWONLlamaBridgeError.cancelled.rawValue {
                 throw LocalModelError.generationCancelled
             }
             throw LocalModelError.generationFailed(error.localizedDescription)

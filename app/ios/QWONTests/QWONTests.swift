@@ -1,5 +1,5 @@
 import XCTest
-@testable import PREXUS
+@testable import QWON
 
 final class QWONTests: XCTestCase {
     func testSensitivityLevelsExposeConsistentLabelsAndDescriptions() {
@@ -31,12 +31,12 @@ final class QWONTests: XCTestCase {
     }
 
     func testPriorityOneAccessibilityIdentifiersStayStable() {
-        XCTAssertEqual(PREXUSAccessibilityID.Chat.openSettings, "chat.open-settings")
-        XCTAssertEqual(PREXUSAccessibilityID.Settings.done, "settings.done")
-        XCTAssertEqual(PREXUSAccessibilityID.Settings.openDiagnostics, "settings.open-diagnostics")
-        XCTAssertEqual(PREXUSAccessibilityID.Settings.openMemory, "settings.open-memory")
-        XCTAssertEqual(PREXUSAccessibilityID.Diagnostics.clear, "diagnostics.clear")
-        XCTAssertEqual(PREXUSAccessibilityID.Memory.clearAll, "memory.clear-all")
+        XCTAssertEqual(QWONAccessibilityID.Chat.openSettings, "chat.open-settings")
+        XCTAssertEqual(QWONAccessibilityID.Settings.done, "settings.done")
+        XCTAssertEqual(QWONAccessibilityID.Settings.openDiagnostics, "settings.open-diagnostics")
+        XCTAssertEqual(QWONAccessibilityID.Settings.openMemory, "settings.open-memory")
+        XCTAssertEqual(QWONAccessibilityID.Diagnostics.clear, "diagnostics.clear")
+        XCTAssertEqual(QWONAccessibilityID.Memory.clearAll, "memory.clear-all")
     }
 
     @MainActor

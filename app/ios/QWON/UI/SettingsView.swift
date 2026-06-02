@@ -28,7 +28,7 @@ struct SettingsView: View {
                                 value: "\(runtimeDiagnostics.entries.count)"
                             )
                         }
-                        .accessibilityIdentifier(PREXUSAccessibilityID.Settings.openDiagnostics)
+                        .accessibilityIdentifier(QWONAccessibilityID.Settings.openDiagnostics)
 
                         NavigationLink {
                             MemoryLibraryView(viewModel: memoryLibrary)
@@ -39,9 +39,9 @@ struct SettingsView: View {
                                 value: "\(memoryLibrary.memories.count)"
                             )
                         }
-                        .accessibilityIdentifier(PREXUSAccessibilityID.Settings.openMemory)
+                        .accessibilityIdentifier(QWONAccessibilityID.Settings.openMemory)
                     } header: {
-                        PREXUSFormSectionHeader(
+                        QWONFormSectionHeader(
                             title: "Workspace",
                             detail: "Inspect the local runtime history QWON keeps on device."
                         )
@@ -54,7 +54,7 @@ struct SettingsView: View {
                             "Escalation",
                             subtitle: "Controls whether QWON may leave the on-device runtime.",
                             accessory: AnyView(
-                                PREXUSStatusChip(
+                                QWONStatusChip(
                                     settings.config.allowsCloudEscalation ? "Enabled" : "Local Only",
                                     tint: settings.config.allowsCloudEscalation ? .blue : .secondary
                                 )
@@ -65,7 +65,7 @@ struct SettingsView: View {
                             "Restricted Mode",
                             subtitle: restrictedProviderSummary,
                             accessory: AnyView(
-                                PREXUSStatusChip(
+                                QWONStatusChip(
                                     settings.config.approvedProvidersForRestrictedMode.isEmpty ? "Local fallback" : "Allowlist active",
                                     tint: settings.config.approvedProvidersForRestrictedMode.isEmpty ? .orange : .green
                                 )
@@ -76,11 +76,11 @@ struct SettingsView: View {
                             "Cloud-Ready Providers",
                             subtitle: readyProviderSummary,
                             accessory: AnyView(
-                                PREXUSStatusChip(readyProviderCountLabel, tint: readyProviderCount > 0 ? .green : .secondary)
+                                QWONStatusChip(readyProviderCountLabel, tint: readyProviderCount > 0 ? .green : .secondary)
                             )
                         )
                     } header: {
-                        PREXUSFormSectionHeader(
+                        QWONFormSectionHeader(
                             title: "Routing Policy",
                             detail: "Define when QWON may escalate beyond the on-device runtime."
                         )
@@ -102,7 +102,7 @@ struct SettingsView: View {
                             .textInputAutocapitalization(.never)
                             .autocorrectionDisabled()
                     } header: {
-                        PREXUSFormSectionHeader(
+                        QWONFormSectionHeader(
                             title: "Cloud",
                             detail: "Configure the default cloud routing budget and primary OpenAI model."
                         )
@@ -119,7 +119,7 @@ struct SettingsView: View {
                             )
                         }
                     } header: {
-                        PREXUSFormSectionHeader(
+                        QWONFormSectionHeader(
                             title: "Provider-Restricted Mode",
                             detail: "Limit restricted turns to an explicit provider allowlist."
                         )
@@ -132,7 +132,7 @@ struct SettingsView: View {
                         providerAvailabilityRow("Anthropic", provider: .anthropic)
                         providerAvailabilityRow("Gemini", provider: .gemini)
                     } header: {
-                        PREXUSFormSectionHeader(
+                        QWONFormSectionHeader(
                             title: "Provider Availability",
                             detail: "See which providers are actually ready for cloud execution."
                         )
@@ -147,7 +147,7 @@ struct SettingsView: View {
                             }
                         }
                     } header: {
-                        PREXUSFormSectionHeader(
+                        QWONFormSectionHeader(
                             title: "Local Runtime",
                             detail: "Select the on-device backend QWON should favor locally."
                         )
@@ -172,7 +172,7 @@ struct SettingsView: View {
                             .textInputAutocapitalization(.never)
                             .autocorrectionDisabled()
                     } header: {
-                        PREXUSFormSectionHeader(
+                        QWONFormSectionHeader(
                             title: "API Keys",
                             detail: "Store provider credentials locally so QWON can verify cloud readiness."
                         )
@@ -183,7 +183,7 @@ struct SettingsView: View {
             }
             .toolbar(.hidden, for: .navigationBar)
             .background(Color(uiColor: .systemGroupedBackground))
-            .accessibilityIdentifier(PREXUSAccessibilityID.Settings.screen)
+            .accessibilityIdentifier(QWONAccessibilityID.Settings.screen)
         }
     }
 
@@ -212,7 +212,7 @@ struct SettingsView: View {
                 Capsule(style: .continuous)
                     .fill(.thinMaterial)
             )
-            .accessibilityIdentifier(PREXUSAccessibilityID.Settings.done)
+            .accessibilityIdentifier(QWONAccessibilityID.Settings.done)
         }
         .padding(.horizontal)
         .padding(.top, 12)
@@ -265,13 +265,13 @@ struct SettingsView: View {
                 tint: settings.config.allowsCloudEscalation ? .green : .secondary
             )
         }
-        .accessibilityIdentifier(PREXUSAccessibilityID.Settings.summarySurface)
+        .accessibilityIdentifier(QWONAccessibilityID.Settings.summarySurface)
     }
 
     private var settingsIntroCard: some View {
-        PREXUSSurfaceCard(borderTint: Color.blue.opacity(0.16)) {
+        QWONSurfaceCard(borderTint: Color.blue.opacity(0.16)) {
             VStack(alignment: .leading, spacing: 12) {
-                PREXUSScreenIntro(
+                QWONScreenIntro(
                     eyebrow: "Runtime control",
                     title: "Settings",
                     message: "Tune how QWON routes work between the on-device runtime, approved cloud providers, diagnostics, and local memory."
@@ -279,18 +279,18 @@ struct SettingsView: View {
 
                 ViewThatFits(in: .horizontal) {
                     HStack(spacing: 8) {
-                        PREXUSStatusChip(settings.config.allowsCloudEscalation ? "Cloud available" : "Local only", tint: settings.config.allowsCloudEscalation ? .blue : .secondary)
-                        PREXUSStatusChip(settings.config.approvedProvidersForRestrictedMode.isEmpty ? "Restricted → Local" : "Restricted allowlist", tint: settings.config.approvedProvidersForRestrictedMode.isEmpty ? .orange : .green)
-                        PREXUSStatusChip(readyProviderCountLabel, tint: readyProviderCount > 0 ? .green : .secondary)
+                        QWONStatusChip(settings.config.allowsCloudEscalation ? "Cloud available" : "Local only", tint: settings.config.allowsCloudEscalation ? .blue : .secondary)
+                        QWONStatusChip(settings.config.approvedProvidersForRestrictedMode.isEmpty ? "Restricted → Local" : "Restricted allowlist", tint: settings.config.approvedProvidersForRestrictedMode.isEmpty ? .orange : .green)
+                        QWONStatusChip(readyProviderCountLabel, tint: readyProviderCount > 0 ? .green : .secondary)
                     }
 
                     VStack(alignment: .leading, spacing: 8) {
                         HStack(spacing: 8) {
-                            PREXUSStatusChip(settings.config.allowsCloudEscalation ? "Cloud available" : "Local only", tint: settings.config.allowsCloudEscalation ? .blue : .secondary)
-                            PREXUSStatusChip(readyProviderCountLabel, tint: readyProviderCount > 0 ? .green : .secondary)
+                            QWONStatusChip(settings.config.allowsCloudEscalation ? "Cloud available" : "Local only", tint: settings.config.allowsCloudEscalation ? .blue : .secondary)
+                            QWONStatusChip(readyProviderCountLabel, tint: readyProviderCount > 0 ? .green : .secondary)
                         }
 
-                        PREXUSStatusChip(settings.config.approvedProvidersForRestrictedMode.isEmpty ? "Restricted → Local" : "Restricted allowlist", tint: settings.config.approvedProvidersForRestrictedMode.isEmpty ? .orange : .green)
+                        QWONStatusChip(settings.config.approvedProvidersForRestrictedMode.isEmpty ? "Restricted → Local" : "Restricted allowlist", tint: settings.config.approvedProvidersForRestrictedMode.isEmpty ? .orange : .green)
                     }
                 }
             }
@@ -300,7 +300,7 @@ struct SettingsView: View {
     }
 
     private func summaryCard(title: String, value: String, caption: String, tint: Color) -> some View {
-        PREXUSSurfaceCard(borderTint: tint.opacity(0.18)) {
+        QWONSurfaceCard(borderTint: tint.opacity(0.18)) {
             VStack(alignment: .leading, spacing: 6) {
                 Text(title)
                     .font(.caption)
@@ -323,7 +323,7 @@ struct SettingsView: View {
                 Text(title)
                     .foregroundStyle(.primary)
                 Spacer(minLength: 0)
-                PREXUSStatusChip(value, tint: .secondary)
+                QWONStatusChip(value, tint: .secondary)
             }
 
             Text(subtitle)
@@ -366,7 +366,7 @@ struct SettingsView: View {
                 .font(.caption)
                 .foregroundStyle(.secondary)
         } header: {
-            PREXUSFormSectionHeader(
+            QWONFormSectionHeader(
                 title: "LiteRT-LM Prototype (Debug)",
                 detail: "Off by default. Does not change production automatic routing."
             )
@@ -405,7 +405,7 @@ struct SettingsView: View {
                 Text(title)
                     .foregroundStyle(.primary)
                 Spacer(minLength: 0)
-                PREXUSStatusChip(status.label, tint: color(for: status))
+                QWONStatusChip(status.label, tint: color(for: status))
             }
 
             Text(providerAvailabilityDescription(for: status))
@@ -464,7 +464,7 @@ struct SettingsView: View {
     }
 }
 
-struct PREXUSSurfaceCard<Content: View>: View {
+struct QWONSurfaceCard<Content: View>: View {
     let borderTint: Color
     @ViewBuilder let content: () -> Content
 
@@ -487,24 +487,24 @@ struct PREXUSSurfaceCard<Content: View>: View {
     }
 }
 
-enum PREXUSChipAppearance {
+enum QWONChipAppearance {
     case standard
     case controlSurface
 }
 
-struct PREXUSStatusChip: View {
+struct QWONStatusChip: View {
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
 
     let title: String
     let systemImage: String?
     let tint: Color
-    let appearance: PREXUSChipAppearance
+    let appearance: QWONChipAppearance
 
     init(
         _ title: String,
         systemImage: String? = nil,
         tint: Color,
-        appearance: PREXUSChipAppearance = .standard
+        appearance: QWONChipAppearance = .standard
     ) {
         self.title = title
         self.systemImage = systemImage
@@ -561,7 +561,7 @@ struct PREXUSStatusChip: View {
     }
 }
 
-struct PREXUSEmptyState: View {
+struct QWONEmptyState: View {
     let title: String
     let systemImage: String
     let message: String
@@ -575,7 +575,7 @@ struct PREXUSEmptyState: View {
     }
 
     var body: some View {
-        PREXUSSurfaceCard(borderTint: tint.opacity(0.18)) {
+        QWONSurfaceCard(borderTint: tint.opacity(0.18)) {
             VStack(alignment: .leading, spacing: 12) {
                 HStack(spacing: 10) {
                     Image(systemName: systemImage)
@@ -608,7 +608,7 @@ struct PREXUSEmptyState: View {
     }
 }
 
-struct PREXUSScreenIntro: View {
+struct QWONScreenIntro: View {
     let eyebrow: String
     let title: String
     let message: String
@@ -638,7 +638,7 @@ struct PREXUSScreenIntro: View {
     }
 }
 
-struct PREXUSFormSectionHeader: View {
+struct QWONFormSectionHeader: View {
     let title: String
     let detail: String
 
@@ -677,7 +677,7 @@ struct PREXUSFormSectionHeader: View {
 
 private extension SettingsView {
     static func preview() -> SettingsView {
-        let suiteName = "PREXUS.SettingsPreview.\(UUID().uuidString)"
+        let suiteName = "QWON.SettingsPreview.\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: suiteName)!
         defaults.removePersistentDomain(forName: suiteName)
 
