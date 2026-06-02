@@ -1,7 +1,7 @@
 # QWON Rename Migration Plan
 
 **Last updated:** 2026-06-02
-**Status:** **Phase 1–2 merged** (#47, #48). **TestFlight upload complete** (2026-06-02, ASC `6775685841`). **Internal group / device installs / tag** pending — [prep doc](./qwon_text_alpha_testflight_prep.md).
+**Status:** **Phase 3 build `1` complete** (2026-06-02) — [prep doc](./qwon_text_alpha_testflight_prep.md). Phase 4 (target rename) **deferred**.
 **Audience:** Product, release engineering, Cursor/Codex agents.
 
 **Purpose:** Migrate the product from **PREXUS** to **QWON** without a blind mass-replace. Fix impact scope, execution order, and Apple-side gates before implementation PRs.
@@ -26,7 +26,7 @@
 
 ## Apple gate (operator — before Phase 3 upload)
 
-**Repo status:** Phases **1–2** merged. **TestFlight upload** to QWON ASC **`6775685841`** succeeded (2026-06-02). Internal group, lab installs, and git tag remain pending.
+**Repo status:** **QWON text alpha `0.1.0 (1)` on TestFlight** — upload, lab, tag complete (2026-06-02). See [QWON prep](./qwon_text_alpha_testflight_prep.md).
 
 **Critical:** If an App Store Connect app record already has **uploaded builds**, the **Bundle ID cannot be changed** on that record. The historical PREXUS alpha (`jp.studio-prospect.prexus.ios`) therefore stays as-is in ASC and docs.
 
@@ -38,7 +38,7 @@ QWON ships as a **new** identifier and app record, not an in-place Bundle ID edi
 | 2 | Release engineering | **Done** — `DevelopmentQWON_20260602`, `AppStoreQWON_20260602` (expiry **2026-10-07**) |
 | 3 | Release engineering | **Done** — new ASC app **QWON** (not PREXUS record) |
 | 4 | Release engineering | **Done** — ASC Apple ID **`6775685841`** (PREXUS remains `6775110218`) |
-| 5 | Release engineering | **Upload done** (2026-06-02) — internal group, installs, tag _pending_ |
+| 5 | Release engineering | **Done** (2026-06-02) — upload, lab, tag `qwon-text-alpha-0.1.0-rc1` |
 
 **Do not claim** that `jp.studio-prospect.prexus.ios` can be retargeted to QWON after upload. **Do not** upload QWON builds to the PREXUS ASC app without an explicit product decision to retire that line.
 
@@ -90,14 +90,9 @@ Execute in order. Each phase is a **separate PR** unless explicitly combined in 
 
 ### Phase 3: TestFlight rebuild under QWON bundle
 
-**Status:** **TestFlight uploaded** (2026-06-02) — [prep doc](./qwon_text_alpha_testflight_prep.md). **Wang + Matisse** lab verified; git tag **pending**.
+**Status:** **Complete** for build `1` (2026-06-02) — [prep doc](./qwon_text_alpha_testflight_prep.md).
 
-**Prerequisites met:** Apple gate; Distribution archive + export; Wang Debug smoke; upload to QWON ASC `6775685841`.
-
-- Archive and upload to the **new** ASC app record (operator).
-- Git tag lineage: `qwon-text-alpha-0.1.0-rc1` proposed for first build (see prep doc).
-- Ops evidence: `~/QWON-alpha-evidence/qwon-text-0.1.0-build1/` — do not rewrite PREXUS build `1` artifacts.
-- Wang + Matisse lab policy carries forward unless product changes device policy.
+**Delivered:** Archive/export/upload to ASC `6775685841`; Wang llama.cpp + Matisse Embedded Heuristic lab; tag `qwon-text-alpha-0.1.0-rc1` on `d4f2a0b`; ops evidence PNGs on file.
 
 ### Phase 4: Optional internal target / module / path rename
 
@@ -130,6 +125,6 @@ Execute in order. Each phase is a **separate PR** unless explicitly combined in 
 | PREXUS bundle decision | [bundle_id_decision_memo.md](./bundle_id_decision_memo.md) |
 | QWON bundle IDs (current repo) | [qwon_bundle_id_decision_memo.md](./qwon_bundle_id_decision_memo.md) |
 | QWON TestFlight prep | [qwon_text_alpha_testflight_prep.md](./qwon_text_alpha_testflight_prep.md) |
-| QWON execution | Git tag `qwon-text-alpha-0.1.0-rc1` on `d4f2a0b` (lab verified 2026-06-02) |
+| QWON execution | Phase 3 build `1` **complete** — Phase 4 optional |
 
 **Future release and rename implementation** start from this plan, not from ad hoc global find-replace.
