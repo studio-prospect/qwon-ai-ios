@@ -109,7 +109,7 @@ Execute in order. Each phase is a **separate PR** unless explicitly combined in 
 
 | Rule | Rationale |
 | --- | --- |
-| Do **not** mass-replace **PREXUS** in historical alpha evidence, frozen ledger, or closed feedback log baseline rows | Audit trail and TestFlight history |
+| Do **not** mass-replace **PREXUS** in historical alpha evidence, frozen ledger, or closed feedback log baseline rows | Audit trail and TestFlight history — see [preserved surface inventory](./qwon_preserved_prexus_surface_inventory.md) |
 | Do **not** rename Swift module / Xcode target unless Phase 4 is explicitly approved | Avoid mixed signing + module drift |
 | Do **not** change Bundle ID in code without matching App ID, profiles, and ASC app record | Upload failures and signing errors |
 | Do **not** treat QWON rename as approval for PREXUS alpha **build `2`** | Separate products/records |
@@ -127,6 +127,7 @@ Execute in order. Each phase is a **separate PR** unless explicitly combined in 
 | QWON bundle IDs (current repo) | [qwon_bundle_id_decision_memo.md](./qwon_bundle_id_decision_memo.md) |
 | QWON TestFlight prep | [qwon_text_alpha_testflight_prep.md](./qwon_text_alpha_testflight_prep.md) |
 | QWON Phase 4 target rename | [qwon_phase4_target_rename_plan.md](./qwon_phase4_target_rename_plan.md) · [rename surface audit](./qwon_phase4_rename_surface_audit.md) |
-| QWON execution | Phase 3 build `1`–`2` on TestFlight; Phase 4 rename **4D done**; **4E decision** pending |
+| Preserved PREXUS surfaces (guardrail) | [qwon_preserved_prexus_surface_inventory.md](./qwon_preserved_prexus_surface_inventory.md) |
+| QWON execution | Phase 3 build `1`–`2` on TestFlight; Phase 4 rename **complete**; build `3` via 4E gate only |
 
 **Future release and rename implementation** start from this plan, not from ad hoc global find-replace.
