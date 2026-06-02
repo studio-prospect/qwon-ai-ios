@@ -4,7 +4,7 @@
 **Scope:** Internal repo/Xcode naming only: target, scheme, Swift module, tests, paths, and scripts that still use `PREXUS` as the active app name.
 **Non-goal:** Product identity, Bundle ID, ASC app, TestFlight history, and historical PREXUS alpha docs are already handled elsewhere and must not be rewritten here.
 
-Related: [QWON rename migration plan](./qwon_rename_migration_plan.md) · [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [QWON lab evidence](./qwon_text_alpha_lab_evidence.md)
+Related: [QWON rename migration plan](./qwon_rename_migration_plan.md) · [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [QWON lab evidence](./qwon_text_alpha_lab_evidence.md) · [Rename surface audit](./qwon_phase4_rename_surface_audit.md)
 
 ---
 
@@ -82,15 +82,41 @@ xcodebuild -project app/ios/PREXUS.xcodeproj -scheme QWON -destination 'platform
 
 If the project path is renamed in this PR, replace the project path in the command and document that as an intentional scope choice.
 
-### PR 4C — Source/test path rename
+### PR 4C-a — App source path move
 
-**Type:** file moves only, plus import/build fixes.
+**Type:** file moves (app tree only) + generator app paths.
 
-- Rename active source directories after target/scheme generation is green.
-- Update imports, script paths, docs commands, and test references.
-- Avoid behavioral changes.
+- Rename `app/ios/PREXUS/` → `app/ios/QWON/` after PR 4B is green.
+- Update `generate_xcodeproj.rb` app globs, groups, `INFOPLIST_FILE`, bridging header **path** (filename may stay until 4C-c).
+- Keep `PRODUCT_MODULE_NAME = PREXUS` so tests keep `@testable import PREXUS`.
+- **Do not** rename test directories/targets (4C-b) or Swift module/types (4C-c).
 
-**Validation:** same simulator test as PR 4B, plus `git diff --check`.
+**Validation:** same simulator test as PR 4B + `git diff --check` + no-llama committed project.
+
+### PR 4C-b — Test path and target rename
+
+**Type:** test directory moves + Xcode test target rename.
+
+- Rename `PREXUSTests` / `PREXUSUITests` directories and targets → `QWONTests` / `QWONUITests`.
+- Update `generate_xcodeproj.rb` test wiring and `QWON.xcscheme` testables.
+- Update `-only-testing:` in active scripts/docs.
+- Keep `PRODUCT_MODULE_NAME = PREXUS`.
+
+**Validation:** same simulator test + `git diff --check`.
+
+### PR 4C-c — Swift module and symbol rename
+
+**Type:** module/import/type renames only — no behavior changes.
+
+- Remove `PRODUCT_MODULE_NAME = PREXUS` override; module becomes `QWON`.
+- Update `@testable import QWON`, entry point (`PREXUSApp` → `QWONApp`), UI/bridge type and file names.
+- Keep UI **accessibility identifier string values** stable.
+
+**Alternative:** defer to an early **4D** slice if product wants extra soak time after 4C-b. Default: **4C-c** as its own PR before broad 4D cleanup.
+
+**Validation:** same simulator test + `git diff --check`.
+
+Detail: [rename surface audit](./qwon_phase4_rename_surface_audit.md).
 
 ### PR 4D — Script and docs active-command cleanup
 

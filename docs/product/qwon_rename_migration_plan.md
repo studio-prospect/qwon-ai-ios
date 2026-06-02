@@ -99,7 +99,7 @@ Execute in order. Each phase is a **separate PR** unless explicitly combined in 
 **Optional and explicitly scoped.** Default: **defer** until [Phase 4 entry gates](./qwon_phase4_target_rename_plan.md#entry-gates) are satisfied.
 
 - Swift module name, Xcode target `PREXUS` → `QWON`, directory renames.
-- High churn; split by [Phase 4 PR plan](./qwon_phase4_target_rename_plan.md#pr-split).
+- High churn; split by [Phase 4 PR plan](./qwon_phase4_target_rename_plan.md#pr-split). Inventory: [rename surface audit](./qwon_phase4_rename_surface_audit.md).
 - Not required for App Store identity if display name and Bundle ID are correct.
 - Do not start from global find-replace; use the [review checklist](./qwon_phase4_target_rename_plan.md#review-checklist).
 
@@ -126,7 +126,7 @@ Execute in order. Each phase is a **separate PR** unless explicitly combined in 
 | PREXUS bundle decision | [bundle_id_decision_memo.md](./bundle_id_decision_memo.md) |
 | QWON bundle IDs (current repo) | [qwon_bundle_id_decision_memo.md](./qwon_bundle_id_decision_memo.md) |
 | QWON TestFlight prep | [qwon_text_alpha_testflight_prep.md](./qwon_text_alpha_testflight_prep.md) |
-| QWON Phase 4 target rename | [qwon_phase4_target_rename_plan.md](./qwon_phase4_target_rename_plan.md) |
+| QWON Phase 4 target rename | [qwon_phase4_target_rename_plan.md](./qwon_phase4_target_rename_plan.md) · [rename surface audit](./qwon_phase4_rename_surface_audit.md) |
 | QWON execution | Phase 3 build `1` **complete** — Phase 4 optional |
 
 **Future release and rename implementation** start from this plan, not from ad hoc global find-replace.
