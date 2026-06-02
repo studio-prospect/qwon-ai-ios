@@ -1,7 +1,7 @@
 # QWON Rename Migration Plan
 
 **Last updated:** 2026-06-02
-**Status:** **Phase 3 build `1` complete**; **active TestFlight `0.1.0 (2)`** (keyboard fix, 2026-06-02) — [prep doc](./qwon_text_alpha_testflight_prep.md). Phase 4 **4C complete** (#59–#63); **4D** active docs/scripts cleanup — [Phase 4 plan](./qwon_phase4_target_rename_plan.md).
+**Status:** **Phase 3 build `1` complete**; **active TestFlight `0.1.0 (2)`** (keyboard fix, 2026-06-02) — [prep doc](./qwon_text_alpha_testflight_prep.md). Phase 4 **4D complete** (#64); **4E optional archive-smoke decision** documented — [Phase 4 plan](./qwon_phase4_target_rename_plan.md#pr-4e--optional-archive-smoke-decision-gate).
 **Audience:** Product, release engineering, Cursor/Codex agents.
 
 **Purpose:** Migrate the product from **PREXUS** to **QWON** without a blind mass-replace. Fix impact scope, execution order, and Apple-side gates before implementation PRs.
@@ -96,12 +96,12 @@ Execute in order. Each phase is a **separate PR** unless explicitly combined in 
 
 ### Phase 4: Optional internal target / module / path rename
 
-**Status:** **4C complete** (#59–#63). **4D** (active docs/scripts) in progress; **4E** (optional TestFlight smoke) deferred.
+**Status:** **4D complete** (#64). Internal rename series **closed** for repo/docs/scripts. **4E** (optional TestFlight archive smoke) is a **product decision gate only** — see [PR 4E](./qwon_phase4_target_rename_plan.md#pr-4e--optional-archive-smoke-decision-gate) and [build 3 gate](./qwon_text_alpha_testflight_prep.md#phase-4-build-3-decision-gate). **No archive/upload in 4E docs prep.**
 
-- Xcode target/scheme, app path, test targets, and Swift module are **QWON**.
-- Project container remains **`PREXUS.xcodeproj`** until explicitly scoped.
-- Split by [Phase 4 PR plan](./qwon_phase4_target_rename_plan.md#pr-split). Inventory: [rename surface audit](./qwon_phase4_rename_surface_audit.md).
+- Xcode target/scheme, app path, test targets, Swift module, and active docs/scripts narrative are **QWON** (#59–#64).
+- **Preserved/deferred:** `PREXUS.xcodeproj` container, `PREXUS_*` runtime contracts, `prexus-local-mvp.gguf`, `PREXUSLiteRTEval`, historical PREXUS alpha docs.
 - Not required for App Store identity if display name and Bundle ID are correct.
+- Active TestFlight remains **`0.1.0 (2)`** until product approves build `3` via 4E.
 
 ---
 
@@ -127,6 +127,6 @@ Execute in order. Each phase is a **separate PR** unless explicitly combined in 
 | QWON bundle IDs (current repo) | [qwon_bundle_id_decision_memo.md](./qwon_bundle_id_decision_memo.md) |
 | QWON TestFlight prep | [qwon_text_alpha_testflight_prep.md](./qwon_text_alpha_testflight_prep.md) |
 | QWON Phase 4 target rename | [qwon_phase4_target_rename_plan.md](./qwon_phase4_target_rename_plan.md) · [rename surface audit](./qwon_phase4_rename_surface_audit.md) |
-| QWON execution | Phase 3 build `1` **complete** — Phase 4 optional |
+| QWON execution | Phase 3 build `1`–`2` on TestFlight; Phase 4 rename **4D done**; **4E decision** pending |
 
 **Future release and rename implementation** start from this plan, not from ad hoc global find-replace.

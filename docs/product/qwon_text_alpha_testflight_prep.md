@@ -1,7 +1,7 @@
 # QWON Text Alpha — TestFlight Preparation (Phase 3)
 
 **Last updated:** 2026-06-02
-**Status:** **Active lab build `0.1.0 (2)`** on TestFlight (keyboard Return → Send fix). Build `1` baseline + tag `qwon-text-alpha-0.1.0-rc1` remain historical. ASC `6775685841`.
+**Status:** **Active lab build `0.1.0 (2)`** on TestFlight (keyboard Return → Send fix). Build `1` baseline + tag `qwon-text-alpha-0.1.0-rc1` remain historical. ASC `6775685841`. Phase 4 rename **4D complete** (#64); **build `3`** requires explicit product gate — [Phase 4 build 3 decision](#phase-4-build-3-decision-gate).
 
 **Historical line:** PREXUS alpha `0.1.0 (1)` on `jp.studio-prospect.prexus.ios` remains frozen — see [Qwen text-only alpha TestFlight prep](./qwen_text_only_alpha_testflight_prep.md). **Do not** upload QWON builds to ASC app **PREXUS** (Apple ID `6775110218`).
 
@@ -30,7 +30,54 @@
 
 **Active build:** marketing `0.1.0`, **`CFBundleVersion` `2`** on `main` (keyboard fix). Bump build number for each TestFlight binary upload.
 
-**Explicitly out of scope:** App Store public release; **PREXUS** alpha **build `2`** (separate product line — not this QWON build `2`); rewriting PREXUS frozen ledger or upload history.
+**Explicitly out of scope:** App Store public release; **PREXUS** alpha **build `2`** (separate product line — not this QWON build `2`); rewriting PREXUS frozen ledger or upload history; **automatic TestFlight upload** as part of Phase 4E decision docs.
+
+---
+
+## Phase 4 build 3 decision gate
+
+**Context:** Phase 4 internal rename (#59–#64) is complete for active target/scheme **`QWON`**, sources **`app/ios/QWON/`**, tests **`QWONTests`** / **`QWONUITests`**, Swift module **`QWON`**, and active docs/scripts narrative (#64). Still **preserved/deferred:** project container **`PREXUS.xcodeproj`**, runtime **`PREXUS_*`** env/compile flags, model file **`prexus-local-mvp.gguf`**, **`PREXUSLiteRTEval`**.
+
+**Current TestFlight:** marketing **`0.1.0`**, **`CFBundleVersion` `2`** — this remains the **active lab build** until product explicitly ships build `3`.
+
+**Phase 4E (optional archive smoke)** is a **decision gate**, not an automatic next step. It asks: “Should we produce a **build `3` candidate** binary to validate rename closure on device/archive tooling?” **4E does not imply upload** — archive/export validation and lab smoke may stop before ASC upload.
+
+### When to proceed toward build `3` (4E + optional upload)
+
+Proceed only if **all** entry gates in [Phase 4E plan](./qwon_phase4_target_rename_plan.md#pr-4e--optional-archive-smoke-decision-gate) are true **and** at least one motivator applies:
+
+- Need **Distribution archive/export proof** on the post-rename QWON target/module/scheme.
+- Need **Wang primary + Matisse secondary** device evidence tied to rename closure.
+- There is a **clear product reason** for testers to receive a new binary (not rename docs alone).
+
+### When to stay on build `2` (defer 4E)
+
+- **No release blocker** on TestFlight **`0.1.0 (2)`**.
+- Rename impact is **repo/docs/scripts only** — testers see no functional delta.
+- Avoid extra **TestFlight operational cost** (export compliance, internal processing, lab time).
+
+### Build `3` numbering rules (if 4E runs)
+
+| Rule | Detail |
+| --- | --- |
+| Line | **QWON** ASC `6775685841` / `jp.studio-prospect.qwon.ios` only |
+| Version | Marketing **`0.1.0`** unless product bumps marketing version separately |
+| Build number | **`CFBundleVersion` `3`** — next after current **`2`** |
+| Not to be confused with | **PREXUS** historical alpha **build `2`** (separate product line — never uploaded for PREXUS) |
+| Tag | **Optional** and **separate** from archive smoke; build `1` tag `qwon-text-alpha-0.1.0-rc1` remains on archive commit `d4f2a0b` |
+| Upload | **Explicit product approval after** archive smoke passes — not part of 4E docs gate |
+
+### Minimal 4E operator checklist (reference — do not run from docs-only PR)
+
+1. No-llama committed `project.pbxproj` on archive commit.
+2. Local llama: `fetch_local_model.sh` · `build_llama_xcframework.sh` · `generate_xcodeproj.rb` (do not commit llama pbxproj).
+3. Release archive + export — [Distribution archive validation](#distribution-archive-validation-2026-06-02).
+4. Wang: `alpha_smoke_wang.sh` (primary).
+5. Matisse: install + launch crash-free (secondary tier).
+6. Update [QWON lab evidence](./qwon_text_alpha_lab_evidence.md) — build `3` row when executed.
+7. Upload/tag only if product approves after steps 3–6 pass.
+
+Full criteria: [Phase 4 target rename plan — PR 4E](./qwon_phase4_target_rename_plan.md#pr-4e--optional-archive-smoke-decision-gate).
 
 ---
 

@@ -1,6 +1,6 @@
 # QWON Phase 4 — Target Rename Plan
 
-**Status:** Phase 4 **4C complete** (#59–#63); **4D** active docs/scripts cleanup in progress.
+**Status:** Phase 4 **4D complete** (#64); **4E** optional archive-smoke **decision gate** (docs-only — no archive/upload in this step).
 **Scope:** Internal repo/Xcode naming only: target, scheme, Swift module, tests, paths, and scripts that still use `PREXUS` as the active app name.
 **Non-goal:** Product identity, Bundle ID, ASC app, TestFlight history, and historical PREXUS alpha docs are already handled elsewhere and must not be rewritten here.
 
@@ -128,7 +128,7 @@ Detail: [rename surface audit](./qwon_phase4_rename_surface_audit.md).
 
 ### PR 4D — Script and docs active-command cleanup
 
-**Status:** **In progress** (this PR).
+**Status:** **Done** (#64).
 
 **Type:** tooling/docs cleanup — active QWON operational narrative only.
 
@@ -138,16 +138,72 @@ Detail: [rename surface audit](./qwon_phase4_rename_surface_audit.md).
 
 **Validation:** `git diff --check`; targeted script smoke where practical.
 
-### PR 4E — Optional archive smoke
+### PR 4E — Optional archive smoke (decision gate)
 
-**Type:** release validation, only if product wants a renamed-target TestFlight binary.
+**Status:** **Decision pending** — this PR documents the gate only; **no archive, upload, or tag**.
 
-- Rebuild llama locally.
-- Archive with Distribution signing.
-- Run Wang primary smoke and Matisse secondary install/launch if uploaded.
-- Record evidence in QWON docs only.
+**Type:** optional release validation after Phase 4 rename series (#59–#64).
 
-**Validation:** archive/export result, Wang/Matisse tier result, and docs record.
+**Purpose:** Decide whether to produce a **QWON line build `3`** binary that proves renamed target/scheme/module/path still archives, exports, signs, and runs on lab devices. This is **not** required to close Phase 4 internal naming.
+
+Detail also in [QWON TestFlight prep — build 3+ gate](./qwon_text_alpha_testflight_prep.md#phase-4-build-3-decision-gate).
+
+#### Entry gate (all must be true before starting 4E work)
+
+| Gate | Required state |
+| --- | --- |
+| Phase 4 rename series | **4B–4D complete** (#59–#64) on `main` |
+| Active TestFlight | **`0.1.0 (2)`** is current on ASC `6775685841`; no unresolved release blocker on build `2` |
+| Simulator baseline | Committed `project.pbxproj` is **no-llama**; `QWON` scheme tests green on archive commit |
+| Product decision | Explicit approval to spend lab/archive time on a **build `3` candidate** (not implied by docs cleanup alone) |
+| Apple identity | Bundle ID remains `jp.studio-prospect.qwon.ios`; upload target remains **QWON** ASC only |
+
+#### Proceed with 4E when **any** of these apply
+
+- Product wants **binary evidence** that post-rename target/module/scheme still **archive + export + sign** under Distribution profiles.
+- Product wants a **device install smoke** record tied to the renamed QWON module/scheme (Wang primary, Matisse secondary tier).
+- There is a **clear reason to ship build `3`** (e.g. rename closure sign-off, tester-facing “post-rename” binary, or runtime-adjacent fix bundled with validation).
+
+#### Defer / skip 4E when **any** of these apply
+
+- **`0.1.0 (2)` has no release blocker** and rename was docs/scripts-only from a tester perspective.
+- **Docs/scripts cleanup (#64) is sufficient** — no need to prove binary diff on device/TestFlight.
+- Team wants to **avoid extra TestFlight churn** (export compliance, internal group processing, lab install time).
+- Only goal is **internal repo naming closure** — already achieved by #59–#64.
+
+#### Exit criteria (if 4E is executed)
+
+| Criterion | Pass condition |
+| --- | --- |
+| Repo baseline | Archive commit on `main` (or release branch) with **no-llama** committed project; llama linked **locally only** for Release archive |
+| Archive / export | Release archive + App Store Connect export **succeed** for `jp.studio-prospect.qwon.ios` / display name **QWON** |
+| Wang (primary) | `alpha_smoke_wang.sh` **VALIDATION PASSED** on archive commit **or** equivalent documented smoke on TestFlight build `3` after upload |
+| Matisse (secondary) | TestFlight **install + launch crash-free**; UX spot per [tier policy](./qwon_text_alpha_testflight_prep.md#physical-device-lab-tier-policy) |
+| Docs | [QWON lab evidence](./qwon_text_alpha_lab_evidence.md) updated; **PREXUS** frozen ledger untouched |
+| Versioning | Treat as **QWON line build `3`** — **not** PREXUS alpha build `2`; tag decision is separate from archive smoke |
+
+#### Minimal procedure (if 4E approved — operator, not this PR)
+
+1. Confirm no-llama committed `project.pbxproj` on chosen commit (`git grep` no `llama.xcframework` / `PREXUS_LLAMA_CPP_AVAILABLE` in committed pbxproj).
+2. `./tools/scripts/fetch_local_model.sh` · `./tools/scripts/build_llama_xcframework.sh` · `ruby tools/scripts/generate_xcodeproj.rb` **with** llama present (**local only** — do not commit llama-linked pbxproj).
+3. Bump `CFBundleVersion` to **`3`** in `app/ios/QWON/Resources/Info.plist` only when product approves build `3` (separate commit/PR from rename docs).
+4. Release archive + export validation — commands in [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md#distribution-archive-validation-2026-06-02) (`-project PREXUS.xcodeproj` container, `-scheme QWON`).
+5. Wang: `./tools/scripts/alpha_smoke_wang.sh "Wang"` (primary).
+6. Matisse: install/launch spot check (secondary tier).
+7. Update [QWON lab evidence](./qwon_text_alpha_lab_evidence.md); upload/tag only if product explicitly approves **after** archive smoke passes.
+
+#### Preserved / out of scope for 4E
+
+| Surface | Policy |
+| --- | --- |
+| `PREXUS.xcodeproj` container | **Deferred** — archive uses existing path |
+| `PREXUS_*` env / compile flags | **Preserved** runtime contracts |
+| `prexus-local-mvp.gguf` | **Preserved** model filename |
+| `PREXUSLiteRTEval` | **Unchanged** isolated eval target |
+| Historical `qwen_text_only_alpha_*` docs | **Do not edit** |
+| Automatic TestFlight upload | **Not part of 4E gate** — upload is a follow-on product decision |
+
+**Validation (when 4E runs):** archive/export logs, Wang/Matisse tier results, lab evidence doc update — not simulator-only.
 
 ---
 
