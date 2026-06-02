@@ -162,7 +162,7 @@ struct ChatView: View {
             }
         }
         .padding(14)
-        .prexusControlGlass(shape: .roundedRect(cornerRadius: 20), fallbackMaterial: .thinMaterial)
+        .qwonControlGlass(shape: .roundedRect(cornerRadius: 20), fallbackMaterial: .thinMaterial)
         .accessibilityIdentifier(QWONAccessibilityID.Chat.composer)
     }
 
@@ -185,7 +185,7 @@ struct ChatView: View {
                     .font(.body.weight(.semibold))
                     .foregroundStyle(.primary)
                     .frame(width: 36, height: 36)
-                    .prexusControlGlass(shape: .capsule, fallbackMaterial: .ultraThinMaterial)
+                    .qwonControlGlass(shape: .capsule, fallbackMaterial: .ultraThinMaterial)
             }
             .buttonStyle(.plain)
             .accessibilityLabel("Open Settings")
@@ -193,7 +193,7 @@ struct ChatView: View {
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 10)
-        .prexusControlGlass(shape: .roundedRect(cornerRadius: 0), fallbackMaterial: .bar)
+        .qwonControlGlass(shape: .roundedRect(cornerRadius: 0), fallbackMaterial: .bar)
     }
 
     @ViewBuilder
@@ -289,7 +289,7 @@ struct ChatView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(12)
-        .prexusControlGlass(shape: .roundedRect(cornerRadius: 16), fallbackMaterial: .ultraThinMaterial)
+        .qwonControlGlass(shape: .roundedRect(cornerRadius: 16), fallbackMaterial: .ultraThinMaterial)
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier(QWONAccessibilityID.Chat.routePreview)
     }

@@ -25,7 +25,7 @@ static NSString *QWONLocalSystemPrompt(void) {
     NSString *today = [formatter stringFromDate:[NSDate date]];
 
     return [NSString stringWithFormat:
-        @"You are PREXUS, a helpful on-device assistant. Today's date is %@. "
+        @"You are QWON, a helpful on-device assistant. Today's date is %@. "
         @"Answer the user's question directly. Use the same language as the user. "
         @"If you are not confident about a fact, say you do not know instead of inventing names or dates. "
         @"Keep answers short (one to three sentences).",

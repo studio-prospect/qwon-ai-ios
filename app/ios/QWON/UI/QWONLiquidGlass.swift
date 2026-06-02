@@ -58,7 +58,7 @@ private struct QWONControlGlassModifier: ViewModifier {
 }
 
 extension View {
-    func prexusControlGlass(
+    func qwonControlGlass(
         shape: QWONControlGlassShape = .roundedRect(cornerRadius: 18),
         fallbackMaterial: Material = .thinMaterial
     ) -> some View {
@@ -79,7 +79,7 @@ struct QWONControlGlassBar<Content: View>: View {
             .padding(.horizontal, 16)
             .padding(.vertical, 10)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .prexusControlGlass(shape: .roundedRect(cornerRadius: 0), fallbackMaterial: .bar)
+            .qwonControlGlass(shape: .roundedRect(cornerRadius: 0), fallbackMaterial: .bar)
     }
 }
 
@@ -91,7 +91,7 @@ struct QWONRuntimeStrip<Content: View>: View {
             .padding(.horizontal, 16)
             .padding(.vertical, 10)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .prexusControlGlass(shape: .roundedRect(cornerRadius: 16), fallbackMaterial: .ultraThinMaterial)
+            .qwonControlGlass(shape: .roundedRect(cornerRadius: 16), fallbackMaterial: .ultraThinMaterial)
             .padding(.horizontal, 12)
             .padding(.vertical, 4)
     }
