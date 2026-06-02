@@ -1,6 +1,6 @@
 # QWON Bundle ID — Decision Memo
 
-**Status:** **TestFlight upload succeeded** (2026-06-02, ASC `6775685841`). Internal group assignment, device installs, and git tag remain **pending** ([Phase 3 prep](./qwon_text_alpha_testflight_prep.md)).
+**Status:** **Phase 3 build `1` complete** (2026-06-02) — TestFlight on ASC `6775685841`, lab verified, tag `qwon-text-alpha-0.1.0-rc1` ([Phase 3 prep](./qwon_text_alpha_testflight_prep.md)).
 **Purpose:** Canonical Bundle IDs for **QWON** (`jp.studio-prospect.qwon.ios`). Does **not** replace [PREXUS bundle memo](./bundle_id_decision_memo.md) (historical alpha on `jp.studio-prospect.prexus.ios`).
 **Migration plan:** [qwon_rename_migration_plan.md](./qwon_rename_migration_plan.md)
 
@@ -64,4 +64,5 @@ Set in `tools/scripts/generate_xcodeproj.rb` and device scripts after Phase 2 me
 - [x] Bundle ID string approved: `jp.studio-prospect.qwon.ios`
 - [x] Apple gate: App ID, ASC app `6775685841`, profiles `DevelopmentQWON_20260602` / `AppStoreQWON_20260602` (expiry 2026-10-07)
 - [x] Distribution archive validation for QWON bundle (2026-06-02 — archive + export on `d4f2a0b`)
-- [x] Phase 3 TestFlight upload to ASC `6775685841` (2026-06-02 — build `0.1.0 (1)`; tag _pending_)
+- [x] Phase 3 TestFlight upload to ASC `6775685841` (2026-06-02 — build `0.1.0 (1)`)
+- [x] Git tag `qwon-text-alpha-0.1.0-rc1` on archive commit `d4f2a0b` (2026-06-02)

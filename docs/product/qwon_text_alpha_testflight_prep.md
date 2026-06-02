@@ -1,7 +1,7 @@
 # QWON Text Alpha — TestFlight Preparation (Phase 3)
 
 **Last updated:** 2026-06-02
-**Status:** **Wang + Matisse TestFlight lab verified** (2026-06-02). **Git tag** **pending**. ASC `6775685841`.
+**Status:** **QWON text alpha `0.1.0 (1)` stable on TestFlight** — upload, Wang/Matisse lab, tag `qwon-text-alpha-0.1.0-rc1` (2026-06-02). ASC `6775685841`.
 
 **Historical line:** PREXUS alpha `0.1.0 (1)` on `jp.studio-prospect.prexus.ios` remains frozen — see [Qwen text-only alpha TestFlight prep](./qwen_text_only_alpha_testflight_prep.md). **Do not** upload QWON builds to ASC app **PREXUS** (Apple ID `6775110218`).
 
@@ -20,8 +20,8 @@
 | Device smoke on QWON bundle | Release engineering | **Done** (2026-06-02, Wang) | [`alpha_smoke_wang.sh`](../../tools/scripts/alpha_smoke_wang.sh) — `VALIDATION PASSED` |
 | TestFlight upload | Release engineering | **Done** (2026-06-02) | [TestFlight upload record](#testflight-upload-2026-06-02) · ASC `6775685841` |
 | Lab TestFlight install (Wang + Matisse) | Release engineering | **Done** (2026-06-02) | [Wang](#wang-testflight-verification-2026-06-02) llama.cpp · [Matisse](#matisse-testflight-verification-2026-06-02) Embedded Heuristic |
-| Git tag | Release engineering | **Not created** | Proposed: `qwon-text-alpha-0.1.0-rc1` on archive commit `d4f2a0b` |
-| Ops evidence folder | Release engineering | **Path decided** | `~/QWON-alpha-evidence/qwon-text-0.1.0-build1/` (no overwrite of PREXUS build `1` paths) |
+| Git tag | Release engineering | **Done** (2026-06-02) | `qwon-text-alpha-0.1.0-rc1` on `d4f2a0b` — [tag record](#git-tag-2026-06-02) |
+| Ops evidence folder | Release engineering | **In use** | `~/QWON-alpha-evidence/qwon-text-0.1.0-build1/` — Wang + Matisse Chat PNGs on file |
 
 **Version proposal (first QWON TestFlight):** marketing `0.1.0`, build `1` (matches current `Info.plist`; bump build only on respin).
 
@@ -158,11 +158,11 @@ xcodebuild -exportArchive \
 | Bundle ID | `jp.studio-prospect.qwon.ios` |
 | ASC app | **QWON** (Apple ID `6775685841`) |
 | Archive commit | `d4f2a0b` |
-| Git tag | _pending_ — proposed `qwon-text-alpha-0.1.0-rc1` |
-| Internal TestFlight group | _pending_ — assign in ASC (**Wang + Matisse** policy) |
+| Git tag | `qwon-text-alpha-0.1.0-rc1` on `d4f2a0b` |
+| Internal TestFlight group | **Wang + Matisse** — install confirmed via TestFlight (2026-06-02) |
 | Upload result | **Upload succeeded** (`xcodebuild -exportArchive`, `destination=upload`) |
 
-**Still pending after upload:** git tag; optional Diagnostics screenshots in ops folder.
+**Phase 3 build `1` baseline complete** (2026-06-02). Optional: additional Diagnostics PNGs in ops folder; ASC “What to Test” copy refresh.
 
 **Not uploaded to:** PREXUS ASC (`6775110218`).
 
@@ -205,10 +205,10 @@ xcodebuild -exportArchive \
 Archive validation and initial upload are **done** (2026-06-02). Remaining operator steps:
 1. [x] Upload to **QWON** ASC (`6775685841`) — [record](#testflight-upload-2026-06-02).
 2. [ ] Complete export compliance in ASC if prompted.
-3. [ ] Assign build `0.1.0 (1)` to internal group (**Wang + Matisse** policy).
+3. [x] Internal TestFlight access for **Wang + Matisse** — install confirmed (2026-06-02).
 4. [ ] Paste [ASC What to Test](#asc-what-to-test-copy) + link [PREXUS-era tester instructions](./qwen_text_only_alpha_tester_instructions.md) until QWON-specific copy exists.
 5. [x] Wang + Matisse TestFlight Chat verified (2026-06-02); screenshots on file under `~/QWON-alpha-evidence/qwon-text-0.1.0-build1/`.
-6. [ ] Tag archive commit `d4f2a0b`: `qwon-text-alpha-0.1.0-rc1` (manual; not in automation).
+6. [x] Tag archive commit `d4f2a0b`: `qwon-text-alpha-0.1.0-rc1` — [record](#git-tag-2026-06-02).
 7. [ ] Docs-only follow-up: ledger subsection for QWON build `1` (new doc or appendix — **do not** edit PREXUS frozen ledger).
 
 **Re-upload / respin:** Confirm version/build bump, re-archive with llama locally, validate, then upload to **QWON** ASC only.
@@ -232,7 +232,23 @@ QWON 0.1.0 is the text-only alpha on a new bundle (internal lab: Wang + Matisse 
 
 ---
 
-## Git tag procedure (do not run in automation)
+## Git tag (2026-06-02)
+
+| Field | Value |
+| --- | --- |
+| Tag | `qwon-text-alpha-0.1.0-rc1` |
+| Commit | `d4f2a0b` (archive source; Apple gate docs on `main`) |
+| Pushed | `origin` (2026-06-02) |
+| Notes | First QWON-bundle TestFlight; separate from `qwen-text-alpha-0.1.0-rc1` (PREXUS) |
+
+```bash
+git tag -a qwon-text-alpha-0.1.0-rc1 d4f2a0b -m "QWON text alpha 0.1.0 build 1 (TestFlight internal, archive commit)"
+git push origin qwon-text-alpha-0.1.0-rc1
+```
+
+---
+
+## Git tag procedure (historical — executed 2026-06-02)
 
 | Field | Proposed value |
 | --- | --- |
