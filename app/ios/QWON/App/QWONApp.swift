@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct PREXUSApp: App {
+struct QWONApp: App {
     private let environment = AppEnvironment.bootstrap()
 
     var body: some Scene {

@@ -97,7 +97,7 @@ final class AppEnvironment: ObservableObject {
     }
 
     private static func seededDiagnosticsStore() -> RuntimeDiagnosticsStore {
-        let suiteName = "PREXUS.UITests.Diagnostics.\(UUID().uuidString)"
+        let suiteName = "QWON.UITests.Diagnostics.\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: suiteName)!
         defaults.removePersistentDomain(forName: suiteName)
 

@@ -1,23 +1,23 @@
-#import "PREXUSLlamaBridge.h"
+#import "QWONLlamaBridge.h"
 
 #import <atomic>
 #import <string>
 #import <string.h>
 #import <vector>
 
-NSString * const PREXUSLlamaBridgeErrorDomain = @"PREXUSLlamaBridgeErrorDomain";
+NSString * const QWONLlamaBridgeErrorDomain = @"QWONLlamaBridgeErrorDomain";
 
 #if PREXUS_LLAMA_CPP_AVAILABLE
 #import <llama/llama.h>
 
-static void PREXUSEnsureLlamaBackendInitialized(void) {
+static void QWONEnsureLlamaBackendInitialized(void) {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         llama_backend_init();
     });
 }
 
-static NSString *PREXUSLocalSystemPrompt(void) {
+static NSString *QWONLocalSystemPrompt(void) {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.locale = [NSLocale localeWithLocaleIdentifier:@"ja_JP"];
     formatter.timeZone = [NSTimeZone localTimeZone];
@@ -25,14 +25,14 @@ static NSString *PREXUSLocalSystemPrompt(void) {
     NSString *today = [formatter stringFromDate:[NSDate date]];
 
     return [NSString stringWithFormat:
-        @"You are PREXUS, a helpful on-device assistant. Today's date is %@. "
+        @"You are QWON, a helpful on-device assistant. Today's date is %@. "
         @"Answer the user's question directly. Use the same language as the user. "
         @"If you are not confident about a fact, say you do not know instead of inventing names or dates. "
         @"Keep answers short (one to three sentences).",
         today];
 }
 
-static NSString *PREXUSExtractUserMessage(NSString *prompt) {
+static NSString *QWONExtractUserMessage(NSString *prompt) {
     NSString *marker = @"User:\n";
     NSRange range = [prompt rangeOfString:marker options:NSBackwardsSearch];
     if (range.location != NSNotFound) {
@@ -42,14 +42,14 @@ static NSString *PREXUSExtractUserMessage(NSString *prompt) {
     return [prompt stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
-static std::string PREXUSFormattedChatPrompt(struct llama_model *model, NSString *runtimePrompt) {
+static std::string QWONFormattedChatPrompt(struct llama_model *model, NSString *runtimePrompt) {
     const char *templateText = llama_model_chat_template(model, nullptr);
     if (templateText == nullptr || templateText[0] == '\0') {
         return runtimePrompt.UTF8String;
     }
 
-    NSString *systemPrompt = PREXUSLocalSystemPrompt();
-    NSString *userMessage = PREXUSExtractUserMessage(runtimePrompt);
+    NSString *systemPrompt = QWONLocalSystemPrompt();
+    NSString *userMessage = QWONExtractUserMessage(runtimePrompt);
     llama_chat_message messages[] = {
         {
             "system",
@@ -94,7 +94,7 @@ static std::string PREXUSFormattedChatPrompt(struct llama_model *model, NSString
 }
 #endif
 
-@implementation PREXUSLlamaGenerationMetrics {
+@implementation QWONLlamaGenerationMetrics {
     NSTimeInterval _coldLoadMs;
     NSTimeInterval _firstTokenLatencyMs;
     NSTimeInterval _totalGenerationMs;
@@ -126,7 +126,7 @@ static std::string PREXUSFormattedChatPrompt(struct llama_model *model, NSString
 
 @end
 
-@implementation PREXUSLlamaCancellationToken {
+@implementation QWONLlamaCancellationToken {
     std::atomic_bool _flag;
 }
 
@@ -152,19 +152,19 @@ static std::string PREXUSFormattedChatPrompt(struct llama_model *model, NSString
 
 @end
 
-static BOOL PREXUSLocalInferenceBenchmarkEnabled(void) {
+static BOOL QWONLocalInferenceBenchmarkEnabled(void) {
     const char *flag = getenv("PREXUS_LOCAL_INFERENCE_BENCHMARK");
     return flag != nullptr && flag[0] != '\0' && strcmp(flag, "0") != 0;
 }
 
-static void PREXUSLogBenchmarkMetrics(PREXUSLlamaGenerationMetrics *metrics) {
+static void QWONLogBenchmarkMetrics(QWONLlamaGenerationMetrics *metrics) {
     if (metrics == nil) {
         return;
     }
 #if DEBUG
     const BOOL shouldLog = YES;
 #else
-    const BOOL shouldLog = PREXUSLocalInferenceBenchmarkEnabled();
+    const BOOL shouldLog = QWONLocalInferenceBenchmarkEnabled();
 #endif
     if (!shouldLog) {
         return;
@@ -179,13 +179,13 @@ static void PREXUSLogBenchmarkMetrics(PREXUSLlamaGenerationMetrics *metrics) {
     );
 }
 
-@implementation PREXUSLlamaBridge {
+@implementation QWONLlamaBridge {
 #if PREXUS_LLAMA_CPP_AVAILABLE
     struct llama_model *_model;
     struct llama_context *_context;
 #endif
     BOOL _ready;
-    PREXUSLlamaGenerationMetrics *_lastGenerationMetrics;
+    QWONLlamaGenerationMetrics *_lastGenerationMetrics;
     NSTimeInterval _coldLoadMs;
 }
 
@@ -196,7 +196,7 @@ static void PREXUSLogBenchmarkMetrics(PREXUSLlamaGenerationMetrics *metrics) {
     }
 
 #if PREXUS_LLAMA_CPP_AVAILABLE
-    PREXUSEnsureLlamaBackendInitialized();
+    QWONEnsureLlamaBackendInitialized();
 
     const CFAbsoluteTime loadStart = CFAbsoluteTimeGetCurrent();
 
@@ -205,8 +205,8 @@ static void PREXUSLogBenchmarkMetrics(PREXUSLlamaGenerationMetrics *metrics) {
     _model = llama_model_load_from_file(modelPath.UTF8String, modelParams);
     if (_model == nullptr) {
         if (error) {
-            *error = [NSError errorWithDomain:PREXUSLlamaBridgeErrorDomain
-                                         code:PREXUSLlamaBridgeErrorModelLoadFailed
+            *error = [NSError errorWithDomain:QWONLlamaBridgeErrorDomain
+                                         code:QWONLlamaBridgeErrorModelLoadFailed
                                      userInfo:@{NSLocalizedDescriptionKey: @"Failed to load GGUF model."}];
         }
         return nil;
@@ -223,8 +223,8 @@ static void PREXUSLogBenchmarkMetrics(PREXUSLlamaGenerationMetrics *metrics) {
         llama_model_free(_model);
         _model = nullptr;
         if (error) {
-            *error = [NSError errorWithDomain:PREXUSLlamaBridgeErrorDomain
-                                         code:PREXUSLlamaBridgeErrorModelLoadFailed
+            *error = [NSError errorWithDomain:QWONLlamaBridgeErrorDomain
+                                         code:QWONLlamaBridgeErrorModelLoadFailed
                                      userInfo:@{NSLocalizedDescriptionKey: @"Failed to create llama context."}];
         }
         return nil;
@@ -235,8 +235,8 @@ static void PREXUSLogBenchmarkMetrics(PREXUSLlamaGenerationMetrics *metrics) {
     return self;
 #else
     if (error) {
-        *error = [NSError errorWithDomain:PREXUSLlamaBridgeErrorDomain
-                                     code:PREXUSLlamaBridgeErrorUnavailable
+        *error = [NSError errorWithDomain:QWONLlamaBridgeErrorDomain
+                                     code:QWONLlamaBridgeErrorUnavailable
                                  userInfo:@{NSLocalizedDescriptionKey: @"llama.cpp XCFramework is not linked."}];
     }
     return nil;
@@ -247,7 +247,7 @@ static void PREXUSLogBenchmarkMetrics(PREXUSLlamaGenerationMetrics *metrics) {
     return _ready;
 }
 
-- (PREXUSLlamaGenerationMetrics *)lastGenerationMetrics {
+- (QWONLlamaGenerationMetrics *)lastGenerationMetrics {
     return _lastGenerationMetrics;
 }
 
@@ -258,25 +258,25 @@ static void PREXUSLogBenchmarkMetrics(PREXUSLlamaGenerationMetrics *metrics) {
 #if PREXUS_LLAMA_CPP_AVAILABLE
     if (!_ready || _model == nullptr || _context == nullptr) {
         if (error) {
-            *error = [NSError errorWithDomain:PREXUSLlamaBridgeErrorDomain
-                                         code:PREXUSLlamaBridgeErrorUnavailable
+            *error = [NSError errorWithDomain:QWONLlamaBridgeErrorDomain
+                                         code:QWONLlamaBridgeErrorUnavailable
                                      userInfo:@{NSLocalizedDescriptionKey: @"llama bridge is not ready."}];
         }
         return nil;
     }
 
-    PREXUSLlamaCancellationToken *token = nil;
+    QWONLlamaCancellationToken *token = nil;
     std::atomic_bool localFlag { false };
     std::atomic_bool *cancelFlag = &localFlag;
 
-    if ([cancellationToken isKindOfClass:[PREXUSLlamaCancellationToken class]]) {
-        token = (PREXUSLlamaCancellationToken *)cancellationToken;
+    if ([cancellationToken isKindOfClass:[QWONLlamaCancellationToken class]]) {
+        token = (QWONLlamaCancellationToken *)cancellationToken;
         cancelFlag = token.atomicFlag;
     }
 
     llama_memory_clear(llama_get_memory(_context), true);
 
-    const std::string formattedPrompt = PREXUSFormattedChatPrompt(_model, prompt);
+    const std::string formattedPrompt = QWONFormattedChatPrompt(_model, prompt);
     const char *promptText = formattedPrompt.c_str();
     const int32_t promptByteLength = static_cast<int32_t>(formattedPrompt.size());
 
@@ -295,8 +295,8 @@ static void PREXUSLogBenchmarkMetrics(PREXUSLlamaGenerationMetrics *metrics) {
 
     if (tokenizedCount <= 0) {
         if (error) {
-            *error = [NSError errorWithDomain:PREXUSLlamaBridgeErrorDomain
-                                         code:PREXUSLlamaBridgeErrorGenerationFailed
+            *error = [NSError errorWithDomain:QWONLlamaBridgeErrorDomain
+                                         code:QWONLlamaBridgeErrorGenerationFailed
                                      userInfo:@{NSLocalizedDescriptionKey: @"Prompt tokenization failed."}];
         }
         return nil;
@@ -307,8 +307,8 @@ static void PREXUSLogBenchmarkMetrics(PREXUSLlamaGenerationMetrics *metrics) {
     llama_batch batch = llama_batch_get_one(promptTokens.data(), tokenizedCount);
     if (llama_decode(_context, batch) != 0) {
         if (error) {
-            *error = [NSError errorWithDomain:PREXUSLlamaBridgeErrorDomain
-                                         code:PREXUSLlamaBridgeErrorGenerationFailed
+            *error = [NSError errorWithDomain:QWONLlamaBridgeErrorDomain
+                                         code:QWONLlamaBridgeErrorGenerationFailed
                                      userInfo:@{NSLocalizedDescriptionKey: @"Initial llama decode failed."}];
         }
         return nil;
@@ -332,8 +332,8 @@ static void PREXUSLogBenchmarkMetrics(PREXUSLlamaGenerationMetrics *metrics) {
         if (cancelFlag->load()) {
             llama_sampler_free(sampler);
             if (error) {
-                *error = [NSError errorWithDomain:PREXUSLlamaBridgeErrorDomain
-                                             code:PREXUSLlamaBridgeErrorCancelled
+                *error = [NSError errorWithDomain:QWONLlamaBridgeErrorDomain
+                                             code:QWONLlamaBridgeErrorCancelled
                                          userInfo:@{NSLocalizedDescriptionKey: @"Generation cancelled."}];
             }
             return nil;
@@ -363,8 +363,8 @@ static void PREXUSLogBenchmarkMetrics(PREXUSLlamaGenerationMetrics *metrics) {
         if (llama_decode(_context, nextBatch) != 0) {
             llama_sampler_free(sampler);
             if (error) {
-                *error = [NSError errorWithDomain:PREXUSLlamaBridgeErrorDomain
-                                             code:PREXUSLlamaBridgeErrorGenerationFailed
+                *error = [NSError errorWithDomain:QWONLlamaBridgeErrorDomain
+                                             code:QWONLlamaBridgeErrorGenerationFailed
                                          userInfo:@{NSLocalizedDescriptionKey: @"llama decode failed during generation."}];
             }
             return nil;
@@ -392,8 +392,8 @@ static void PREXUSLogBenchmarkMetrics(PREXUSLlamaGenerationMetrics *metrics) {
 
     if (output.length == 0) {
         if (error) {
-            *error = [NSError errorWithDomain:PREXUSLlamaBridgeErrorDomain
-                                         code:PREXUSLlamaBridgeErrorGenerationFailed
+            *error = [NSError errorWithDomain:QWONLlamaBridgeErrorDomain
+                                         code:QWONLlamaBridgeErrorGenerationFailed
                                      userInfo:@{NSLocalizedDescriptionKey: @"llama produced an empty completion."}];
         }
         return nil;
@@ -411,19 +411,19 @@ static void PREXUSLogBenchmarkMetrics(PREXUSLlamaGenerationMetrics *metrics) {
         ? (static_cast<double>(generatedTokenCount) * 1000.0) / decodeWindowMs
         : 0.0;
 
-    _lastGenerationMetrics = [[PREXUSLlamaGenerationMetrics alloc]
+    _lastGenerationMetrics = [[QWONLlamaGenerationMetrics alloc]
         initWithColdLoadMs:_coldLoadMs
         firstTokenLatencyMs:firstTokenLatencyMs
         totalGenerationMs:totalGenerationMs
         generatedTokenCount:generatedTokenCount
         decodeTokensPerSecond:decodeTokensPerSecond];
-    PREXUSLogBenchmarkMetrics(_lastGenerationMetrics);
+    QWONLogBenchmarkMetrics(_lastGenerationMetrics);
 
     return output;
 #else
     if (error) {
-        *error = [NSError errorWithDomain:PREXUSLlamaBridgeErrorDomain
-                                     code:PREXUSLlamaBridgeErrorUnavailable
+        *error = [NSError errorWithDomain:QWONLlamaBridgeErrorDomain
+                                     code:QWONLlamaBridgeErrorUnavailable
                                  userInfo:@{NSLocalizedDescriptionKey: @"llama.cpp XCFramework is not linked."}];
     }
     return nil;

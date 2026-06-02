@@ -1,14 +1,14 @@
 import SwiftUI
 
-enum PREXUSControlGlassShape {
+enum QWONControlGlassShape {
     case roundedRect(cornerRadius: CGFloat)
     case capsule
 }
 
-private struct PREXUSControlGlassModifier: ViewModifier {
+private struct QWONControlGlassModifier: ViewModifier {
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
 
-    let shape: PREXUSControlGlassShape
+    let shape: QWONControlGlassShape
     let fallbackMaterial: Material
 
     func body(content: Content) -> some View {
@@ -58,12 +58,12 @@ private struct PREXUSControlGlassModifier: ViewModifier {
 }
 
 extension View {
-    func prexusControlGlass(
-        shape: PREXUSControlGlassShape = .roundedRect(cornerRadius: 18),
+    func qwonControlGlass(
+        shape: QWONControlGlassShape = .roundedRect(cornerRadius: 18),
         fallbackMaterial: Material = .thinMaterial
     ) -> some View {
         modifier(
-            PREXUSControlGlassModifier(
+            QWONControlGlassModifier(
                 shape: shape,
                 fallbackMaterial: fallbackMaterial
             )
@@ -71,7 +71,7 @@ extension View {
     }
 }
 
-struct PREXUSControlGlassBar<Content: View>: View {
+struct QWONControlGlassBar<Content: View>: View {
     @ViewBuilder let content: () -> Content
 
     var body: some View {
@@ -79,11 +79,11 @@ struct PREXUSControlGlassBar<Content: View>: View {
             .padding(.horizontal, 16)
             .padding(.vertical, 10)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .prexusControlGlass(shape: .roundedRect(cornerRadius: 0), fallbackMaterial: .bar)
+            .qwonControlGlass(shape: .roundedRect(cornerRadius: 0), fallbackMaterial: .bar)
     }
 }
 
-struct PREXUSRuntimeStrip<Content: View>: View {
+struct QWONRuntimeStrip<Content: View>: View {
     @ViewBuilder let content: () -> Content
 
     var body: some View {
@@ -91,7 +91,7 @@ struct PREXUSRuntimeStrip<Content: View>: View {
             .padding(.horizontal, 16)
             .padding(.vertical, 10)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .prexusControlGlass(shape: .roundedRect(cornerRadius: 16), fallbackMaterial: .ultraThinMaterial)
+            .qwonControlGlass(shape: .roundedRect(cornerRadius: 16), fallbackMaterial: .ultraThinMaterial)
             .padding(.horizontal, 12)
             .padding(.vertical, 4)
     }

@@ -273,7 +273,7 @@ extension ChatViewModel {
 
     private static func previewEnvironment() -> AppEnvironment {
         let apiKeyStore = InMemoryAPIKeyStore()
-        let suiteName = "PREXUS.ChatViewModelPreview.\(UUID().uuidString)"
+        let suiteName = "QWON.ChatViewModelPreview.\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: suiteName)!
         defaults.removePersistentDomain(forName: suiteName)
         let settings = AppSettingsStore(defaults: defaults, apiKeyStore: apiKeyStore)

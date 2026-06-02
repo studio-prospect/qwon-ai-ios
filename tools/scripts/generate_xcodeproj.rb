@@ -50,7 +50,7 @@ shared_resources = Dir.glob(IOS_ROOT.join("shared", "**", "*").to_s).reject { |p
 bridge_sources = Dir.glob(IOS_ROOT.join(APP_SOURCE_DIR, "LlamaCppBridge", "*.{mm,h}").to_s)
 llama_xcframework = ROOT.join("vendor", "llama-cpp-artifacts", "llama.xcframework")
 llama_available = llama_xcframework.exist?
-bridging_header = IOS_ROOT.join(APP_SOURCE_DIR, "LlamaCppBridge", "PREXUS-Bridging-Header.h")
+bridging_header = IOS_ROOT.join(APP_SOURCE_DIR, "LlamaCppBridge", "QWON-Bridging-Header.h")
 
 project = Xcodeproj::Project.new(PROJECT_PATH.to_s)
 project.root_object.attributes["LastSwiftUpdateCheck"] = "1600"
@@ -145,7 +145,6 @@ end
 
 app_target.build_configurations.each do |config|
   config.build_settings["PRODUCT_BUNDLE_IDENTIFIER"] = MAIN_BUNDLE_ID
-  config.build_settings["PRODUCT_MODULE_NAME"] = "PREXUS"
   config.build_settings["INFOPLIST_FILE"] = "#{APP_SOURCE_DIR}/Resources/Info.plist"
   config.build_settings["SWIFT_VERSION"] = "5.0"
   config.build_settings["IPHONEOS_DEPLOYMENT_TARGET"] = "17.0"
@@ -156,7 +155,7 @@ app_target.build_configurations.each do |config|
   config.build_settings["SWIFT_EMIT_LOC_STRINGS"] = "NO"
   config.build_settings["ASSETCATALOG_COMPILER_APPICON_NAME"] = "AppIcon"
   config.build_settings["CLANG_CXX_LANGUAGE_STANDARD"] = "gnu++17"
-  config.build_settings["SWIFT_OBJC_BRIDGING_HEADER"] = "#{APP_SOURCE_DIR}/LlamaCppBridge/PREXUS-Bridging-Header.h"
+  config.build_settings["SWIFT_OBJC_BRIDGING_HEADER"] = "#{APP_SOURCE_DIR}/LlamaCppBridge/QWON-Bridging-Header.h"
   config.build_settings["OTHER_LDFLAGS"] = ["$(inherited)", "-lc++"]
 
   next unless llama_available

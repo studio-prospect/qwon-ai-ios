@@ -69,7 +69,7 @@ struct ChatView: View {
         .safeAreaInset(edge: .bottom, spacing: 0) {
             composerDock
         }
-        .accessibilityIdentifier(PREXUSAccessibilityID.Chat.screen)
+        .accessibilityIdentifier(QWONAccessibilityID.Chat.screen)
     }
 
     private var composerDock: some View {
@@ -162,8 +162,8 @@ struct ChatView: View {
             }
         }
         .padding(14)
-        .prexusControlGlass(shape: .roundedRect(cornerRadius: 20), fallbackMaterial: .thinMaterial)
-        .accessibilityIdentifier(PREXUSAccessibilityID.Chat.composer)
+        .qwonControlGlass(shape: .roundedRect(cornerRadius: 20), fallbackMaterial: .thinMaterial)
+        .accessibilityIdentifier(QWONAccessibilityID.Chat.composer)
     }
 
     private var header: some View {
@@ -185,15 +185,15 @@ struct ChatView: View {
                     .font(.body.weight(.semibold))
                     .foregroundStyle(.primary)
                     .frame(width: 36, height: 36)
-                    .prexusControlGlass(shape: .capsule, fallbackMaterial: .ultraThinMaterial)
+                    .qwonControlGlass(shape: .capsule, fallbackMaterial: .ultraThinMaterial)
             }
             .buttonStyle(.plain)
             .accessibilityLabel("Open Settings")
-            .accessibilityIdentifier(PREXUSAccessibilityID.Chat.openSettings)
+            .accessibilityIdentifier(QWONAccessibilityID.Chat.openSettings)
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 10)
-        .prexusControlGlass(shape: .roundedRect(cornerRadius: 0), fallbackMaterial: .bar)
+        .qwonControlGlass(shape: .roundedRect(cornerRadius: 0), fallbackMaterial: .bar)
     }
 
     @ViewBuilder
@@ -221,15 +221,15 @@ struct ChatView: View {
 
     @ViewBuilder
     private func turnStateBanner(_ summary: String) -> some View {
-        PREXUSRuntimeStrip {
+        QWONRuntimeStrip {
             ViewThatFits(in: .horizontal) {
                 HStack(spacing: 8) {
                     ProgressView()
                         .controlSize(.small)
                         .tint(.blue)
 
-                    PREXUSStatusChip("In Progress", tint: .blue, appearance: .controlSurface)
-                    PREXUSStatusChip(viewModel.displayedSensitivity.compactDisplayLabel, tint: .secondary, appearance: .controlSurface)
+                    QWONStatusChip("In Progress", tint: .blue, appearance: .controlSurface)
+                    QWONStatusChip(viewModel.displayedSensitivity.compactDisplayLabel, tint: .secondary, appearance: .controlSurface)
 
                     Text(summary)
                         .font(.caption)
@@ -243,8 +243,8 @@ struct ChatView: View {
                             .controlSize(.small)
                             .tint(.blue)
 
-                        PREXUSStatusChip("In Progress", tint: .blue, appearance: .controlSurface)
-                        PREXUSStatusChip(viewModel.displayedSensitivity.compactDisplayLabel, tint: .secondary, appearance: .controlSurface)
+                        QWONStatusChip("In Progress", tint: .blue, appearance: .controlSurface)
+                        QWONStatusChip(viewModel.displayedSensitivity.compactDisplayLabel, tint: .secondary, appearance: .controlSurface)
                     }
 
                     Text(summary)
@@ -258,7 +258,7 @@ struct ChatView: View {
 
     @ViewBuilder
     private func runtimeStatusBanner(_ execution: RuntimeExecutionMetadata) -> some View {
-        PREXUSRuntimeStrip {
+        QWONRuntimeStrip {
             VStack(alignment: .leading, spacing: 8) {
                 runtimeBadgeRow(for: execution)
 
@@ -289,9 +289,9 @@ struct ChatView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(12)
-        .prexusControlGlass(shape: .roundedRect(cornerRadius: 16), fallbackMaterial: .ultraThinMaterial)
+        .qwonControlGlass(shape: .roundedRect(cornerRadius: 16), fallbackMaterial: .ultraThinMaterial)
         .accessibilityElement(children: .contain)
-        .accessibilityIdentifier(PREXUSAccessibilityID.Chat.routePreview)
+        .accessibilityIdentifier(QWONAccessibilityID.Chat.routePreview)
     }
 
     private func sensitivitySegmentedPicker(useCompactLabels: Bool) -> some View {
@@ -426,7 +426,7 @@ struct ChatView: View {
     private func runtimeBadgeRow(for execution: RuntimeExecutionMetadata) -> some View {
         ViewThatFits(in: .horizontal) {
             HStack(spacing: 8) {
-                PREXUSStatusChip(
+                QWONStatusChip(
                     executionModeLabel(for: execution.mode),
                     systemImage: iconName(for: execution.mode),
                     tint: accentColor(for: execution.mode),
@@ -434,16 +434,16 @@ struct ChatView: View {
                 )
 
                 if let provider = execution.provider?.rawValue {
-                    PREXUSStatusChip(provider, tint: .secondary, appearance: .controlSurface)
+                    QWONStatusChip(provider, tint: .secondary, appearance: .controlSurface)
                 }
 
                 if let model = execution.model, !model.isEmpty {
-                    PREXUSStatusChip(model, tint: .secondary, appearance: .controlSurface)
+                    QWONStatusChip(model, tint: .secondary, appearance: .controlSurface)
                 }
             }
 
             VStack(alignment: .leading, spacing: 6) {
-                PREXUSStatusChip(
+                QWONStatusChip(
                     executionModeLabel(for: execution.mode),
                     systemImage: iconName(for: execution.mode),
                     tint: accentColor(for: execution.mode),
@@ -452,11 +452,11 @@ struct ChatView: View {
 
                 HStack(spacing: 8) {
                     if let provider = execution.provider?.rawValue {
-                        PREXUSStatusChip(provider, tint: .secondary, appearance: .controlSurface)
+                        QWONStatusChip(provider, tint: .secondary, appearance: .controlSurface)
                     }
 
                     if let model = execution.model, !model.isEmpty {
-                        PREXUSStatusChip(model, tint: .secondary, appearance: .controlSurface)
+                        QWONStatusChip(model, tint: .secondary, appearance: .controlSurface)
                     }
                 }
             }
@@ -466,17 +466,17 @@ struct ChatView: View {
     private func routeBadgeRow(for route: RouteDecision) -> some View {
         ViewThatFits(in: .horizontal) {
             HStack(spacing: 8) {
-                PREXUSStatusChip(
+                QWONStatusChip(
                     route.targetLabel,
                     systemImage: route.target == .local ? "arrow.triangle.branch" : "arrow.up.right.square",
                     tint: route.target == .local ? .green : .blue,
                     appearance: .controlSurface
                 )
-                PREXUSStatusChip(route.tierLabel, tint: .secondary, appearance: .controlSurface)
-                PREXUSStatusChip(viewModel.displayedSensitivity.compactDisplayLabel, tint: .secondary, appearance: .controlSurface)
+                QWONStatusChip(route.tierLabel, tint: .secondary, appearance: .controlSurface)
+                QWONStatusChip(viewModel.displayedSensitivity.compactDisplayLabel, tint: .secondary, appearance: .controlSurface)
 
                 if let primaryReason = RouteDecision.primaryReasonCode(from: route.reasonCodes) {
-                    PREXUSStatusChip(
+                    QWONStatusChip(
                         RouteDecision.displayLabel(forReasonCode: primaryReason),
                         tint: .secondary,
                         appearance: .controlSurface
@@ -486,20 +486,20 @@ struct ChatView: View {
 
             VStack(alignment: .leading, spacing: 6) {
                 HStack(spacing: 8) {
-                    PREXUSStatusChip(
+                    QWONStatusChip(
                         route.targetLabel,
                         systemImage: route.target == .local ? "arrow.triangle.branch" : "arrow.up.right.square",
                         tint: route.target == .local ? .green : .blue,
                         appearance: .controlSurface
                     )
-                    PREXUSStatusChip(route.tierLabel, tint: .secondary, appearance: .controlSurface)
+                    QWONStatusChip(route.tierLabel, tint: .secondary, appearance: .controlSurface)
                 }
 
                 HStack(spacing: 8) {
-                    PREXUSStatusChip(viewModel.displayedSensitivity.compactDisplayLabel, tint: .secondary, appearance: .controlSurface)
+                    QWONStatusChip(viewModel.displayedSensitivity.compactDisplayLabel, tint: .secondary, appearance: .controlSurface)
 
                     if let primaryReason = RouteDecision.primaryReasonCode(from: route.reasonCodes) {
-                        PREXUSStatusChip(
+                        QWONStatusChip(
                             RouteDecision.displayLabel(forReasonCode: primaryReason),
                             tint: .secondary,
                             appearance: .controlSurface
