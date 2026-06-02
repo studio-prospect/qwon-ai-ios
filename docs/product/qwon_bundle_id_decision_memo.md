@@ -1,6 +1,6 @@
 # QWON Bundle ID — Decision Memo
 
-**Status:** **Distribution archive validated** (2026-06-02). TestFlight upload remains **pending** ([Phase 3 prep](./qwon_text_alpha_testflight_prep.md)).
+**Status:** **TestFlight upload succeeded** (2026-06-02, ASC `6775685841`). Internal group assignment, device installs, and git tag remain **pending** ([Phase 3 prep](./qwon_text_alpha_testflight_prep.md)).
 **Purpose:** Canonical Bundle IDs for **QWON** (`jp.studio-prospect.qwon.ios`). Does **not** replace [PREXUS bundle memo](./bundle_id_decision_memo.md) (historical alpha on `jp.studio-prospect.prexus.ios`).
 **Migration plan:** [qwon_rename_migration_plan.md](./qwon_rename_migration_plan.md)
 
@@ -42,7 +42,7 @@ Set in `tools/scripts/generate_xcodeproj.rb` and device scripts after Phase 2 me
 | App Store / Distribution provisioning profile | **Done** (2026-06-02) | `AppStoreQWON_20260602` — expires **2026-10-07** |
 | New ASC app record (QWON) | **Done** (2026-06-02) | Apple ID `6775685841` — **not** PREXUS (`6775110218`) |
 | ASC Apple ID for QWON app | **Done** | `6775685841` |
-| Distribution archive validates for QWON bundle | **Done** (2026-06-02) | [Validation record](./qwon_text_alpha_testflight_prep.md#distribution-archive-validation-2026-06-02) — export succeeded; **upload not executed** |
+| Distribution archive validates for QWON bundle | **Done** (2026-06-02) | [Validation + upload](./qwon_text_alpha_testflight_prep.md#testflight-upload-2026-06-02) |
 
 **Historical PREXUS:** `jp.studio-prospect.prexus.ios` remains on its existing ASC record; uploaded builds are **not** migrated in place.
 
@@ -64,4 +64,4 @@ Set in `tools/scripts/generate_xcodeproj.rb` and device scripts after Phase 2 me
 - [x] Bundle ID string approved: `jp.studio-prospect.qwon.ios`
 - [x] Apple gate: App ID, ASC app `6775685841`, profiles `DevelopmentQWON_20260602` / `AppStoreQWON_20260602` (expiry 2026-10-07)
 - [x] Distribution archive validation for QWON bundle (2026-06-02 — archive + export on `d4f2a0b`)
-- [ ] Phase 3 TestFlight upload (IPA exported locally; not uploaded to ASC `6775685841`)
+- [x] Phase 3 TestFlight upload to ASC `6775685841` (2026-06-02 — build `0.1.0 (1)`; tag _pending_)
