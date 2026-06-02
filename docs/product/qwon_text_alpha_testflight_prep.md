@@ -5,7 +5,7 @@
 
 **Historical line:** PREXUS alpha `0.1.0 (1)` on `jp.studio-prospect.prexus.ios` remains frozen — see [Qwen text-only alpha TestFlight prep](./qwen_text_only_alpha_testflight_prep.md). **Do not** upload QWON builds to ASC app **PREXUS** (Apple ID `6775110218`).
 
-**Related:** [QWON rename docs index](./qwon_rename_docs_index.md) · [QWON next work queue](./qwon_next_work_queue.md) · [QWON rename migration plan](./qwon_rename_migration_plan.md) · [QWON bundle memo](./qwon_bundle_id_decision_memo.md) · [QWON lab evidence](./qwon_text_alpha_lab_evidence.md) · [PREXUS bundle memo](./bundle_id_decision_memo.md) (historical)
+**Related:** [QWON rename docs index](./qwon_rename_docs_index.md) · [QWON next work queue](./qwon_next_work_queue.md) · [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) · [QWON rename migration plan](./qwon_rename_migration_plan.md) · [QWON bundle memo](./qwon_bundle_id_decision_memo.md) · [QWON lab evidence](./qwon_text_alpha_lab_evidence.md) · [PREXUS bundle memo](./bundle_id_decision_memo.md) (historical)
 
 ---
 
@@ -332,7 +332,7 @@ Archive validation and build `1` upload are **done** (2026-06-02). **Build `2`**
 
 **Applied 2026-06-02** to **QWON** ASC (`6775685841`) internal TestFlight builds **`0.1.0 (1)`** and **`0.1.0 (2)`**. Re-paste when marketing version or lab policy changes.
 
-Link testers to [PREXUS-era tester instructions](./qwen_text_only_alpha_tester_instructions.md) (feedback template and Diagnostics steps) until QWON-specific onboarding exists.
+Link testers to [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) (report template and triage). Manual lab steps still align with [PREXUS-era tester instructions](./qwen_text_only_alpha_tester_instructions.md) where not yet duplicated for QWON copy.
 
 ```text
 QWON 0.1.0 — text-only alpha on jp.studio-prospect.qwon.ios (internal lab: Wang primary + Matisse secondary).
