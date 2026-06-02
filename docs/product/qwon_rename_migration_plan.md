@@ -1,7 +1,7 @@
 # QWON Rename Migration Plan
 
 **Last updated:** 2026-06-02
-**Status:** **Phase 3 build `1` complete** (2026-06-02) — [prep doc](./qwon_text_alpha_testflight_prep.md). Phase 4 (target rename) **deferred**.
+**Status:** **Phase 3 build `1` complete**; **active TestFlight `0.1.0 (2)`** (keyboard fix, 2026-06-02) — [prep doc](./qwon_text_alpha_testflight_prep.md). Phase 4 **deferred**.
 **Audience:** Product, release engineering, Cursor/Codex agents.
 
 **Purpose:** Migrate the product from **PREXUS** to **QWON** without a blind mass-replace. Fix impact scope, execution order, and Apple-side gates before implementation PRs.
@@ -92,7 +92,7 @@ Execute in order. Each phase is a **separate PR** unless explicitly combined in 
 
 **Status:** **Complete** for build `1` (2026-06-02) — [prep doc](./qwon_text_alpha_testflight_prep.md).
 
-**Delivered:** Archive/export/upload to ASC `6775685841`; Wang llama.cpp + Matisse Embedded Heuristic lab; tag `qwon-text-alpha-0.1.0-rc1` on `d4f2a0b`; ops evidence PNGs on file.
+**Delivered:** Archive/export/upload to ASC `6775685841`; Wang/Matisse lab build `1`; tag `qwon-text-alpha-0.1.0-rc1` on `d4f2a0b`. **Follow-up:** build `2` UX fix (#56) on TestFlight — see [build 2](./qwon_text_alpha_testflight_prep.md#testflight-build-2-2026-06-02).
 
 ### Phase 4: Optional internal target / module / path rename
 

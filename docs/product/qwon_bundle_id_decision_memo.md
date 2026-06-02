@@ -1,6 +1,6 @@
 # QWON Bundle ID — Decision Memo
 
-**Status:** **Phase 3 build `1` complete** (2026-06-02) — TestFlight on ASC `6775685841`, lab verified, tag `qwon-text-alpha-0.1.0-rc1` ([Phase 3 prep](./qwon_text_alpha_testflight_prep.md)).
+**Status:** **Phase 3 build `1` complete**; **active TestFlight `0.1.0 (2)`** on ASC `6775685841` (keyboard fix, 2026-06-02). Tag `qwon-text-alpha-0.1.0-rc1` on build `1` archive commit `d4f2a0b`.
 **Purpose:** Canonical Bundle IDs for **QWON** (`jp.studio-prospect.qwon.ios`). Does **not** replace [PREXUS bundle memo](./bundle_id_decision_memo.md) (historical alpha on `jp.studio-prospect.prexus.ios`).
 **Migration plan:** [qwon_rename_migration_plan.md](./qwon_rename_migration_plan.md)
 
