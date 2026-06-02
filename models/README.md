@@ -48,7 +48,7 @@ Copy `models/prexus-local-mvp.gguf` into the app sandbox `Documents/Models/` on 
 | Model file | `prexus-local-mvp.gguf` | **Preserved** filename — separate migration if product approves |
 | Env vars | `PREXUS_LOCAL_MODEL_PATH`, `PREXUS_RUN_*`, … | **Preserved** runtime contracts until a dedicated migration |
 
-Historical PREXUS alpha docs (`qwen_text_only_alpha_*`) keep frozen command snippets for audit trail.
+Historical PREXUS alpha docs (`qwen_text_only_alpha_*`) keep frozen command snippets for audit trail. Full preserve/defer catalog: [Preserved PREXUS surface inventory](../docs/product/qwon_preserved_prexus_surface_inventory.md).
 
 Evaluation-only Gemma push (does not replace default filename):
 

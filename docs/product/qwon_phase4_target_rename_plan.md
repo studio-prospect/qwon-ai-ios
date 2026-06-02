@@ -1,10 +1,10 @@
 # QWON Phase 4 — Target Rename Plan
 
-**Status:** Phase 4 **4D complete** (#64); **4E** optional archive-smoke **decision gate** (docs-only — no archive/upload in this step).
+**Status:** Phase 4 **4E decision gate complete** (#65). Rename series closed; remaining PREXUS strings cataloged in [preserved surface inventory](./qwon_preserved_prexus_surface_inventory.md).
 **Scope:** Internal repo/Xcode naming only: target, scheme, Swift module, tests, paths, and scripts that still use `PREXUS` as the active app name.
 **Non-goal:** Product identity, Bundle ID, ASC app, TestFlight history, and historical PREXUS alpha docs are already handled elsewhere and must not be rewritten here.
 
-Related: [QWON rename migration plan](./qwon_rename_migration_plan.md) · [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [QWON lab evidence](./qwon_text_alpha_lab_evidence.md) · [Rename surface audit](./qwon_phase4_rename_surface_audit.md)
+Related: [QWON rename migration plan](./qwon_rename_migration_plan.md) · [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [QWON lab evidence](./qwon_text_alpha_lab_evidence.md) · [Rename surface audit](./qwon_phase4_rename_surface_audit.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md)
 
 ---
 

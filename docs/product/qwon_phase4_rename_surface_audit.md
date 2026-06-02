@@ -3,7 +3,7 @@
 **Status:** Phase 4 **4D complete** (#64); **4E** optional archive-smoke decision gate documented (no archive in gate PR).
 **Baseline:** `main` after Phase 4 PR **4C-c** (#63) — active target/scheme **`QWON`**; Swift module **`QWON`**; app sources **`app/ios/QWON/`**; test targets **`QWONTests`** / **`QWONUITests`**; project container **`PREXUS.xcodeproj`** (deferred).
 
-Related: [Phase 4 target rename plan](./qwon_phase4_target_rename_plan.md) · [QWON migration plan](./qwon_rename_migration_plan.md)
+Related: [Phase 4 target rename plan](./qwon_phase4_target_rename_plan.md) · [QWON migration plan](./qwon_rename_migration_plan.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md)
 
 ---
 
@@ -254,4 +254,4 @@ Not required to close Phase 4 naming internally.
 
 ## Next step
 
-Phase 4 **4D** complete (#64). **4E** decision gate: [target rename plan — PR 4E](./qwon_phase4_target_rename_plan.md#pr-4e--optional-archive-smoke-decision-gate) · [TestFlight build 3 gate](./qwon_text_alpha_testflight_prep.md#phase-4-build-3-decision-gate). Archive/upload only if product approves after gate criteria are met.
+Phase 4 **4D** complete (#64). **4E decision gate** documented (#65). **Remaining PREXUS strings:** [preserved surface inventory](./qwon_preserved_prexus_surface_inventory.md) — guardrail for agents; not a cleanup ticket. Build `3` archive only if product approves [4E gate](./qwon_phase4_target_rename_plan.md#pr-4e--optional-archive-smoke-decision-gate).
