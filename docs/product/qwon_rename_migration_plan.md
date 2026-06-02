@@ -1,7 +1,7 @@
 # QWON Rename Migration Plan
 
-**Last updated:** 2026-05-31 (docs-first plan on `main`)
-**Status:** **Phase 0 — plan only.** No code, signing, ASC, or provisioning changes in this document’s landing PR.
+**Last updated:** 2026-06-02  
+**Status:** **Phase 1–2 merged** (#47, #48). **Phase 3 prep** in [qwon_text_alpha_testflight_prep.md](./qwon_text_alpha_testflight_prep.md) — upload pending Apple gate.
 **Audience:** Product, release engineering, Cursor/Codex agents.
 
 **Purpose:** Migrate the product from **PREXUS** to **QWON** without a blind mass-replace. Fix impact scope, execution order, and Apple-side gates before implementation PRs.
@@ -70,16 +70,16 @@ Execute in order. Each phase is a **separate PR** unless explicitly combined in 
 
 ### Phase 1: User-facing product name and website URL
 
-**Status:** Executed in repo via Phase 1 PR (user-facing rename only).
+**Status:** **Merged** (#47) — user-facing rename on `main`.
 
 - Display strings, marketing copy, `https://qwon.ai` as canonical website.
 - **Scope PR explicitly** — no Bundle ID change in the same PR unless Phase 2 is approved and gates are done.
 - Historical PREXUS strings in [Qwen text-only alpha](./qwen_text_only_alpha_docs_index.md) docs, frozen ledger, and TestFlight upload history **unchanged** (audit trail).
-- `CFBundleDisplayName` = **QWON** allowed; `PRODUCT_BUNDLE_IDENTIFIER` remains `jp.studio-prospect.prexus.ios` until Phase 2.
+- `CFBundleDisplayName` = **QWON** on `main`.
 
 ### Phase 2: Bundle ID / signing / scripts / Xcode project generation
 
-**Status:** Repo changes in Phase 2 PR — scripts + [QWON bundle memo](./qwon_bundle_id_decision_memo.md) + regenerated `project.pbxproj`. **Apple gate** (profiles, ASC app id) remains **operator** before Phase 3 upload.
+**Status:** **Merged** (#48) — scripts + [QWON bundle memo](./qwon_bundle_id_decision_memo.md) + regenerated `project.pbxproj`. **Apple gate** (profiles, ASC app id) remains **operator** before Phase 3 upload.
 
 - Update `tools/scripts/generate_xcodeproj.rb` and related scripts to `jp.studio-prospect.qwon.ios`.
 - Regenerate Xcode project (`ruby tools/scripts/generate_xcodeproj.rb` on no-llama checkout).
@@ -88,11 +88,13 @@ Execute in order. Each phase is a **separate PR** unless explicitly combined in 
 
 ### Phase 3: TestFlight rebuild under QWON bundle
 
+**Status:** **Prep doc published** — [qwon_text_alpha_testflight_prep.md](./qwon_text_alpha_testflight_prep.md). Upload/tag **not executed** until Apple gate completes.
+
 **Prerequisites:** Phase 2 merged; Distribution profile validated for `jp.studio-prospect.qwon.ios`.
 
-- Archive and upload to the **new** ASC app record.
-- New git tag lineage (e.g. `qwon-text-alpha-*` — exact naming in a follow-up ops doc).
-- New ops evidence folder (e.g. under `~/PREXUS-alpha-evidence/` or a new `~/QWON-alpha-evidence/` path — decide in Phase 3 PR, do not rewrite old PNG filenames).
+- Archive and upload to the **new** ASC app record (operator).
+- Git tag lineage: `qwon-text-alpha-0.1.0-rc1` proposed for first build (see prep doc).
+- Ops evidence: `~/QWON-alpha-evidence/qwon-text-0.1.0-build1/` — do not rewrite PREXUS build `1` artifacts.
 - Wang + Matisse lab policy carries forward unless product changes device policy.
 
 ### Phase 4: Optional internal target / module / path rename
@@ -125,6 +127,7 @@ Execute in order. Each phase is a **separate PR** unless explicitly combined in 
 | PREXUS alpha (historical) | [qwen_text_only_alpha_docs_index.md](./qwen_text_only_alpha_docs_index.md) |
 | PREXUS bundle decision | [bundle_id_decision_memo.md](./bundle_id_decision_memo.md) |
 | QWON bundle IDs (current repo) | [qwon_bundle_id_decision_memo.md](./qwon_bundle_id_decision_memo.md) |
-| QWON execution | This plan — Phase 3 after Apple gate |
+| QWON TestFlight prep | [qwon_text_alpha_testflight_prep.md](./qwon_text_alpha_testflight_prep.md) |
+| QWON execution | This plan — Phase 3 upload after Apple gate |
 
 **Future release and rename implementation** start from this plan, not from ad hoc global find-replace.
