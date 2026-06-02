@@ -90,7 +90,7 @@ Execute in order. Each phase is a **separate PR** unless explicitly combined in 
 
 ### Phase 3: TestFlight rebuild under QWON bundle
 
-**Status:** **TestFlight uploaded** (2026-06-02) — [prep doc](./qwon_text_alpha_testflight_prep.md). Internal group / Wang+Matisse install / tag **not complete**.
+**Status:** **TestFlight uploaded** (2026-06-02) — [prep doc](./qwon_text_alpha_testflight_prep.md). **Wang + Matisse** TestFlight install + QWON launch confirmed; tag and full lab Chat evidence **pending**.
 
 **Prerequisites met:** Apple gate; Distribution archive + export; Wang Debug smoke; upload to QWON ASC `6775685841`.
 
@@ -130,6 +130,6 @@ Execute in order. Each phase is a **separate PR** unless explicitly combined in 
 | PREXUS bundle decision | [bundle_id_decision_memo.md](./bundle_id_decision_memo.md) |
 | QWON bundle IDs (current repo) | [qwon_bundle_id_decision_memo.md](./qwon_bundle_id_decision_memo.md) |
 | QWON TestFlight prep | [qwon_text_alpha_testflight_prep.md](./qwon_text_alpha_testflight_prep.md) |
-| QWON execution | Internal group + lab installs + tag (post-upload) |
+| QWON execution | Git tag + full lab Chat/GGUF evidence (install/launch done 2026-06-02) |
 
 **Future release and rename implementation** start from this plan, not from ad hoc global find-replace.
