@@ -5,7 +5,7 @@ final class ChatViewModel: ObservableObject {
     @Published var selectedSensitivity: SensitivityLevel = .localPreferred
     @Published var draftText = ""
     @Published private(set) var messages: [ChatMessage] = [
-        ChatMessage(role: .system, content: "QWON runtime initialized.")
+        ChatMessage(role: .system, content: QWONUILabelCopy.Chat.systemWelcome)
     ]
     @Published private(set) var isSending = false
     @Published private(set) var latestExecution: RuntimeExecutionMetadata?
@@ -180,7 +180,7 @@ extension ChatViewModel {
             selectedSensitivity: selectedSensitivity,
             draftText: draftText,
             messages: [
-                ChatMessage(role: .system, content: "QWON runtime initialized."),
+                ChatMessage(role: .system, content: QWONUILabelCopy.Chat.systemWelcome),
                 ChatMessage(role: .user, content: "Give me a quick routing sanity check."),
                 ChatMessage(role: .assistant, content: "I can preview the route, show why it stays local or escalates, and keep the secondary runtime surfaces ready for capture.")
             ],
@@ -206,7 +206,7 @@ extension ChatViewModel {
             selectedSensitivity: .escalationAllowed,
             draftText: "Review this runtime policy change for edge cases.",
             messages: [
-                ChatMessage(role: .system, content: "QWON runtime initialized."),
+                ChatMessage(role: .system, content: QWONUILabelCopy.Chat.systemWelcome),
                 ChatMessage(role: .user, content: "Can you help audit the routing policy?"),
                 ChatMessage(role: .assistant, content: "Yes — I can review the policy and call out escalation and fallback risks.")
             ],
@@ -230,7 +230,7 @@ extension ChatViewModel {
             selectedSensitivity: .providerRestricted,
             draftText: "",
             messages: [
-                ChatMessage(role: .system, content: "QWON runtime initialized."),
+                ChatMessage(role: .system, content: QWONUILabelCopy.Chat.systemWelcome),
                 ChatMessage(role: .user, content: "Inspect this code path for concurrency issues.")
             ],
             isSending: true,
@@ -252,7 +252,7 @@ extension ChatViewModel {
             selectedSensitivity: .localPreferred,
             draftText: "",
             messages: [
-                ChatMessage(role: .system, content: "QWON runtime initialized."),
+                ChatMessage(role: .system, content: QWONUILabelCopy.Chat.systemWelcome),
                 ChatMessage(role: .user, content: "Summarize the latest routing changes."),
                 ChatMessage(role: .assistant, content: "The runtime now treats restricted providers as an allowlist policy, keeps local-only turns on device, and surfaces routing reasons through compact status chips."),
                 ChatMessage(role: .user, content: "What should we polish next?"),

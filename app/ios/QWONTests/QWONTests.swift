@@ -2,6 +2,15 @@ import XCTest
 @testable import QWON
 
 final class QWONTests: XCTestCase {
+    func testUILabelCopyPreservesAlphaOnboardingMeanings() {
+        XCTAssertTrue(QWONUILabelCopy.Chat.systemWelcome.contains("llama.cpp On-Device Runtime"))
+        XCTAssertTrue(QWONUILabelCopy.Chat.systemWelcome.contains("Embedded Heuristic Runtime"))
+        XCTAssertTrue(QWONUILabelCopy.Settings.introMessage.contains("Matisse"))
+        XCTAssertTrue(QWONUILabelCopy.Diagnostics.summaryDetail.contains("answered_by"))
+        XCTAssertFalse(QWONUILabelCopy.Settings.localRuntimeFooter.localizedCaseInsensitiveContains("download"))
+        XCTAssertFalse(QWONUILabelCopy.Chat.systemWelcome.localizedCaseInsensitiveContains("fully offline"))
+    }
+
     func testSensitivityLevelsExposeConsistentLabelsAndDescriptions() {
         XCTAssertEqual(
             SensitivityLevel.allCases,
@@ -207,7 +216,7 @@ final class QWONTests: XCTestCase {
             cloudModel: MockCloudModelClient()
         )
         let transcript = [
-            ChatMessage(role: .system, content: "QWON runtime initialized."),
+            ChatMessage(role: .system, content: QWONUILabelCopy.Chat.systemWelcome),
             ChatMessage(role: .user, content: "Hello")
         ]
 
@@ -443,13 +452,13 @@ final class QWONTests: XCTestCase {
     func testRuntimeTranscriptExcludesCanceledInFlightUserTurn() {
         let transcript = ChatRuntimeTranscript.messages(
             from: [
-                ChatMessage(role: .system, content: "QWON runtime initialized."),
+                ChatMessage(role: .system, content: QWONUILabelCopy.Chat.systemWelcome),
                 ChatMessage(role: .user, content: "First turn")
             ],
             replacingInFlightTurn: true
         )
 
-        XCTAssertEqual(transcript.map(\.content), ["QWON runtime initialized."])
+        XCTAssertEqual(transcript.map(\.content), [QWONUILabelCopy.Chat.systemWelcome])
     }
 
     @MainActor
@@ -1362,8 +1371,8 @@ final class QWONTests: XCTestCase {
     func testStructuredContextCompressorLabelsRolesAndDeduplicatesSystemLines() {
         let compressor = StructuredContextCompressor(recencyWindow: 8)
         let messages = [
-            RuntimeMessage(role: .system, content: "QWON runtime initialized."),
-            RuntimeMessage(role: .system, content: "QWON runtime initialized."),
+            RuntimeMessage(role: .system, content: QWONUILabelCopy.Chat.systemWelcome),
+            RuntimeMessage(role: .system, content: QWONUILabelCopy.Chat.systemWelcome),
             RuntimeMessage(role: .user, content: "First question"),
             RuntimeMessage(role: .assistant, content: "First answer"),
             RuntimeMessage(role: .user, content: "Second question")
@@ -1371,7 +1380,7 @@ final class QWONTests: XCTestCase {
 
         let result = compressor.compress(messages: messages, maxEstimatedTokens: 256)
 
-        XCTAssertTrue(result.text.contains("System: QWON runtime initialized."))
+        XCTAssertTrue(result.text.contains("System: \(QWONUILabelCopy.Chat.systemWelcome)"))
         XCTAssertTrue(result.text.contains("User: First question"))
         XCTAssertTrue(result.text.contains("Assistant: First answer"))
         XCTAssertEqual(result.metrics.deduplicatedMessageCount, 1)

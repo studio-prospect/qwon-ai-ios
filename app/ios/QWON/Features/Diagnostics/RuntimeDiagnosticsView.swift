@@ -12,7 +12,7 @@ struct RuntimeDiagnosticsView: View {
                     QWONEmptyState(
                         title: "No Runtime Diagnostics Yet",
                         systemImage: "waveform.path.ecg",
-                        message: "QWON will capture recent route and execution decisions here after the first runtime turn.",
+                        message: QWONUILabelCopy.Diagnostics.emptyMessage,
                         tint: .blue
                     )
                     .accessibilityIdentifier(QWONAccessibilityID.Diagnostics.empty)
@@ -51,7 +51,7 @@ struct RuntimeDiagnosticsView: View {
         QWONScreenIntro(
             eyebrow: "Runtime visibility",
             title: "Diagnostics",
-            message: "Review how QWON routed and executed recent turns without dropping into raw logs."
+            message: QWONUILabelCopy.Diagnostics.introMessage
         )
     }
 
@@ -67,7 +67,7 @@ struct RuntimeDiagnosticsView: View {
                     QWONStatusChip("Local-only history", tint: .secondary)
                 }
 
-                Text("Entries show route target, execution path, and detail (including answered_by, primary_failure, and fallback_reason when the embedded heuristic answered after a local backend failure).")
+                Text(QWONUILabelCopy.Diagnostics.summaryDetail)
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }

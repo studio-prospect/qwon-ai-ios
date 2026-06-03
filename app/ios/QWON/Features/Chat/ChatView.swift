@@ -122,10 +122,15 @@ struct ChatView: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
+
+                Text(QWONUILabelCopy.Chat.sensitivityFootnote)
+                    .font(.caption2)
+                    .foregroundStyle(.tertiary)
+                    .fixedSize(horizontal: false, vertical: true)
             }
 
             HStack(alignment: .bottom, spacing: 12) {
-                TextField("Ask QWON", text: $viewModel.draftText)
+                TextField(QWONUILabelCopy.Chat.composerPlaceholder, text: $viewModel.draftText)
                     .font(.body)
                     .lineLimit(1)
                     .focused($isComposerFocused)
@@ -173,7 +178,7 @@ struct ChatView: View {
                     .font(.title2.weight(.semibold))
                     .tracking(-0.4)
 
-                Text("Local-first runtime")
+                Text(QWONUILabelCopy.Chat.headerSubtitle)
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -268,6 +273,13 @@ struct ChatView: View {
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
                         .textSelection(.enabled)
+                }
+
+                if execution.mode == .fallback {
+                    Text(QWONUILabelCopy.Chat.fallbackStatusHelper)
+                        .font(.caption2)
+                        .foregroundStyle(.tertiary)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
             }
         }
