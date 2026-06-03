@@ -20,7 +20,9 @@ Same rules as [PREXUS lab evidence](./qwen_text_only_alpha_lab_evidence.md#reten
 ~/QWON-alpha-evidence/qwon-text-0.1.0-build1/
   wang-qwon-testflight-chat-2026-06-02.png
   matisse-qwon-testflight-chat-2026-06-02.png
-  (optional diagnostics PNGs — on file (ops) when captured)
+~/QWON-alpha-evidence/qwen-text-0.1.0-build3/
+  wang-0.1.0-3-chat.png
+  wang-0.1.0-3-diagnostics.png
 ```
 
 Build `2` keyboard verification: verbal / spot-check on device; no new frozen ledger required per [secondary tier](./qwon_text_alpha_testflight_prep.md#physical-device-lab-tier-policy). **Previous active** before build `3` upload.
@@ -29,20 +31,46 @@ Never add PNG, IPA, GGUF, or raw logs under `docs/`.
 
 ---
 
-## Build 3 verification (pending — 2026-06-02)
+## Build 3 lab verification (2026-06-03)
 
-Post–Phase 4E upload. **No fabricated pass/fail.** Update this section when ops confirms each item.
+Post–Phase 4E upload on TestFlight **`0.1.0 (3)`**. **Wang primary** manual verification; **Matisse secondary** launch spot check only.
+
+**Ops folder:** `~/QWON-alpha-evidence/qwen-text-0.1.0-build3/`
 
 | Item | Status | Notes |
 | --- | --- | --- |
-| TestFlight upload `0.1.0 (3)` | **Done** | Intentional Product/RE — [prep record](./qwon_text_alpha_testflight_prep.md#testflight-build-3-2026-06-02) |
-| Wang TestFlight install | **Confirmed** | 2026-06-02 |
-| Wang GGUF (`Documents/Models/prexus-local-mvp.gguf`) | **Pending / unconfirmed** | Fallback on Wang observed — verify file exists; TestFlight update may retain Documents; reinstall may clear |
-| Wang smoke (`alpha_smoke_wang.sh`) | **Pending** | |
-| Matisse install + spot check | **Pending** | |
-| Frozen ledger subsection | **Not created** | Append only after full primary-tier evidence — [adding subsection](#adding-a-new-ledger-subsection) |
+| TestFlight upload `0.1.0 (3)` | **Done** | [prep record](./qwon_text_alpha_testflight_prep.md#testflight-build-3-2026-06-02) |
+| Wang GGUF | **Present** | Re-pushed **2026-06-03** — `Documents/Models/prexus-local-mvp.gguf` (379.4 MB); was **missing** before push (Fallback on 2026-06-02) |
+| Wang TestFlight smoke | **Pass** | Manual TestFlight verification **2026-06-03 16:30** — see Wang row below |
+| Matisse launch spot check | **Pass** | Install + launch crash-free **2026-06-03** — see Matisse row below |
+| `alpha_smoke_wang.sh` on TestFlight | **N/A** | `LocalAlphaSmokeRunner` is **DEBUG-only**; Release TestFlight ignores `PREXUS_RUN_ALPHA_SMOKE` |
+| Frozen ledger subsection | **Not created** | Wang primary evidence captured; Matisse secondary launch-only — sufficient per [tier policy](./qwon_text_alpha_testflight_prep.md#physical-device-lab-tier-policy) |
 
-**Ops folder (when capturing):** `~/QWON-alpha-evidence/qwen-text-0.1.0-build3/`
+### Wang (build `3` — 2026-06-03)
+
+| Field | Value |
+| --- | --- |
+| Lab name | Wang |
+| Device model | iPhone 17 (`iPhone18,3`) |
+| TestFlight build | `0.1.0 (3)` |
+| GGUF pushed | **yes** — re-pushed 2026-06-03 after initial missing file |
+| Chat result | **pass** — prompt: *今日のスケジュールを整理する時に優先すべきことは？*; structured local reply |
+| UI: primary chip | **Local runtime** |
+| UI: backend chip | **llama.cpp On-Device Runtime** |
+| Diagnostics | **Local runtime** · Local \| Tier 2 · Local default; detail: *llama.cpp GGUF inference on A17 Pro-class hardware* |
+| Chat screenshot (ops) | `wang-0.1.0-3-chat.png` |
+| Diagnostics screenshot (ops) | `wang-0.1.0-3-diagnostics.png` |
+| Known deviation | Pre-push Fallback (2026-06-02) resolved by GGUF re-push — **docs/ops**, not release blocker |
+
+### Matisse build `3` spot check (2026-06-03)
+
+Secondary tier — install + launch only; full Diagnostics not required unless runtime changes on A12 path.
+
+| Step | Result |
+| --- | --- |
+| TestFlight install `0.1.0 (3)` | **Pass** |
+| App launch (display name **QWON**) | **Pass** — devicectl launch 2026-06-03, crash-free |
+| Chat / Diagnostics ledger | **Deferred** — secondary tier; Embedded Heuristic path unchanged from build `1` policy |
 
 ---
 
