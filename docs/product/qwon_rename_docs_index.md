@@ -5,7 +5,7 @@
 
 **Next decision (release vs post-alpha):** [QWON next work queue — decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint)
 
-**Post-alpha option lanes (v0.2+ planning):** [qwon_post_alpha_options.md](./qwon_post_alpha_options.md)
+**Post-alpha option lanes (v0.2+ planning):** [qwon_post_alpha_options.md](./qwon_post_alpha_options.md) — compare lanes via [selection matrix](./qwon_post_alpha_options.md#selection-matrix); product chooses; build **`4` not approved**
 
 **Next work (post-rename docs):** [QWON next work queue](./qwon_next_work_queue.md) — what to do / not do after rename docs are complete.
 
@@ -26,7 +26,7 @@
 | **Build `3` feedback intake** | **Closed** (2026-06-03) — **QWON-FB-001**, **QWON-FB-002** pass; **no blockers** · [intake](./qwon_text_alpha_feedback_intake.md#feedback-window-close-2026-06-03) |
 | **Build `4`** | **Not approved** |
 | **Next decision** | [Decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) — Stay · build `4` gate · post-alpha planning |
-| **Post-alpha / v0.2 candidates** | [Post-alpha option lanes](./qwon_post_alpha_options.md) — planning only; build **`4` not approved** |
+| **Post-alpha / v0.2 candidates** | [Post-alpha option lanes](./qwon_post_alpha_options.md) — [selection matrix](./qwon_post_alpha_options.md#selection-matrix) for product compare; build **`4` not approved** |
 | **Xcode project container** | **`PREXUS.xcodeproj`** — deferred; see [preserved inventory](./qwon_preserved_prexus_surface_inventory.md) |
 
 ---
@@ -51,7 +51,7 @@
 | Question | Read first |
 | --- | --- |
 | **What should I do next?** | [Next decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) — Stay · build `4` product gate · post-alpha planning |
-| **Which post-alpha lane should product pick?** | [Post-alpha option lanes](./qwon_post_alpha_options.md) |
+| **Which post-alpha lane should product pick?** | [Selection matrix](./qwon_post_alpha_options.md#selection-matrix) — compare only; product decides |
 | **Should I rename a PREXUS string?** | [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md) — default **no** unless listed as safe or product opens a scoped migration PR |
 | **Should we ship build `4`?** | **Not approved** — build **`3` stable alpha**; feedback **closed** · [intake close](./qwon_text_alpha_feedback_intake.md#feedback-window-close-2026-06-03) |
 | **Which app / Bundle ID is active?** | [QWON bundle memo](./qwon_bundle_id_decision_memo.md) + [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) — QWON `6775685841`; PREXUS `6775110218` is historical only |
