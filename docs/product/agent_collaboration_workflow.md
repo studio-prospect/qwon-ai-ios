@@ -212,6 +212,7 @@ Simulator runtime-surface refreshes remain separate: `docs/design/runtime_surfac
 
 - [qwon_rename_docs_index.md](./qwon_rename_docs_index.md) — QWON rename / Phase 4 doc entry point and reading order
 - [qwon_next_work_queue.md](./qwon_next_work_queue.md) — post-rename work queue (ready / gated / deferred)
+- [qwon_post_alpha_options.md](./qwon_post_alpha_options.md) — v0.2+ post-alpha option lanes (planning only; product chooses lane → Codex plan → Cursor implements)
 - [qwon_text_alpha_feedback_intake.md](./qwon_text_alpha_feedback_intake.md) — QWON build `3` feedback template and triage log
 - [AGENTS.md](../../AGENTS.md) — repository engineering rules
 - [device_install_and_screenshot_workflow.md](../design/device_install_and_screenshot_workflow.md) — physical device install and QA captures
