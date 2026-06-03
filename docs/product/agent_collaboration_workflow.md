@@ -212,7 +212,8 @@ Simulator runtime-surface refreshes remain separate: `docs/design/runtime_surfac
 
 - [qwon_rename_docs_index.md](./qwon_rename_docs_index.md) — QWON rename / Phase 4 doc entry point and reading order
 - [qwon_next_work_queue.md](./qwon_next_work_queue.md) — post-rename work queue (ready / gated / deferred)
-- [qwon_post_alpha_options.md](./qwon_post_alpha_options.md) — v0.2+ post-alpha option lanes; **selected first lane:** UI polish / onboarding ([product decision](./qwon_post_alpha_options.md#product-lane-decision) — **Codex scoped plan next**, then Cursor implements)
+- [qwon_post_alpha_options.md](./qwon_post_alpha_options.md) — v0.2+ post-alpha option lanes; **selected first lane:** UI polish / onboarding ([product decision](./qwon_post_alpha_options.md#product-lane-decision))
+- [qwon_ui_polish_onboarding_plan.md](./qwon_ui_polish_onboarding_plan.md) — first post-alpha scoped plan; Cursor implements only after plan merge and only inside the UI-1 boundary unless Codex/Product expands scope
 - [qwon_text_alpha_feedback_intake.md](./qwon_text_alpha_feedback_intake.md) — QWON build `3` feedback template and triage log
 - [AGENTS.md](../../AGENTS.md) — repository engineering rules
 - [device_install_and_screenshot_workflow.md](../design/device_install_and_screenshot_workflow.md) — physical device install and QA captures

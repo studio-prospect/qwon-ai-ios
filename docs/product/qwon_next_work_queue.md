@@ -1,10 +1,10 @@
 # QWON — Next Work Queue
 
-**Last updated:** 2026-06-03 (stable alpha decision checkpoint)
+**Last updated:** 2026-06-03 (UI polish / onboarding scoped plan)
 **Status:** **Queue / guardrail only** — no implementation authorization in this document.
 **Purpose:** After Phase 4 rename docs are complete, classify what agents **may** do next vs what requires **product gates**. Prevents drift into ungated **build `4`**, project-container rename, or blind PREXUS cleanup.
 
-Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision checkpoint](#next-decision-checkpoint) · [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
+Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision checkpoint](#next-decision-checkpoint) · [UI polish / onboarding scoped plan](./qwon_ui_polish_onboarding_plan.md) · [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
 
 ---
 
@@ -39,7 +39,7 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 | **Feedback** | **Closed** — **QWON-FB-001**, **QWON-FB-002** operational pass only; **no blockers** · [intake close](./qwon_text_alpha_feedback_intake.md#feedback-window-close-2026-06-03) |
 | **Build `4`** | **Not approved** — no upload, tag, or version bump without explicit product gate |
 | **Lab** | Wang + Matisse build `3` verified · [lab evidence](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) |
-| **First post-alpha lane (planning)** | **UI polish / onboarding** — [Product lane decision](./qwon_post_alpha_options.md#product-lane-decision) · **Codex scoped plan next** · implementation **not approved** |
+| **First post-alpha lane (planning)** | **UI polish / onboarding** — [Product lane decision](./qwon_post_alpha_options.md#product-lane-decision) · [scoped plan](./qwon_ui_polish_onboarding_plan.md) · implementation **not approved until plan merge + Cursor task** |
 
 ### Choose a branch
 
@@ -47,7 +47,7 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 | --- | --- | --- | --- |
 | **Stay** | Maintain build **`3`**; no new binary; docs/readme hygiene only | This queue — [Ready / low-risk docs-ops](#ready--low-risk-docs-ops) | **Yes** — unless product opens another branch |
 | **Product gate: build `4` decision** | Product explicitly evaluates whether a **new TestFlight binary** is warranted | [TestFlight prep — build `4` gate](./qwon_text_alpha_testflight_prep.md#phase-4-build-3-decision-gate) · [Conditional upload build `4`](#testflight-upload-build-4) | **No** — gate docs only until product approves |
-| **Post-alpha planning** | First lane **selected** — UI polish / onboarding; Codex scoped plan next | [Product lane decision](./qwon_post_alpha_options.md#product-lane-decision) · [Selection matrix](./qwon_post_alpha_options.md#selection-matrix) | **No** — **Codex plan** next; **no** Cursor implementation until plan merge |
+| **Post-alpha planning** | First lane **selected** — UI polish / onboarding scoped plan created | [UI polish / onboarding scoped plan](./qwon_ui_polish_onboarding_plan.md) · [Product lane decision](./qwon_post_alpha_options.md#product-lane-decision) · [Selection matrix](./qwon_post_alpha_options.md#selection-matrix) | **No** — **no** Cursor implementation until plan merge |
 
 **Build `4` decision ≠ build `4` approved.** Documenting criteria or opening a product discussion does **not** authorize archive, upload, tag, or `CFBundleVersion` bump.
 
@@ -57,7 +57,7 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 | --- | --- |
 | Docs / README / index maintenance | [Ready / low-risk docs-ops](#ready--low-risk-docs-ops) |
 | **Product-approved build `4` planning** docs only (criteria, checklist, gate memo — **not** upload) | [Conditional — build `4`](#testflight-upload-build-4) |
-| Post-alpha planning — **selected lane** | [Product lane decision — UI polish / onboarding](./qwon_post_alpha_options.md#product-lane-decision) |
+| Post-alpha planning — **selected lane** | [UI polish / onboarding scoped plan](./qwon_ui_polish_onboarding_plan.md) · [Product lane decision](./qwon_post_alpha_options.md#product-lane-decision) |
 | Post-alpha planning — compare deferred lanes | [Selection matrix](./qwon_post_alpha_options.md#selection-matrix) · [Post-alpha option lanes](./qwon_post_alpha_options.md) |
 | Minimal fix on build **`3`** | **Only** with [verified release blocker](#minimal-fix-pr-verified-release-blocker-only) + Codex/Product sign-off |
 
@@ -195,7 +195,7 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 **Not in the current work queue for agents.** Track for planning; do not pull forward without a new Codex plan.
 
-**Option catalog (v0.2+ lanes):** [QWON post-alpha option lanes](./qwon_post_alpha_options.md) — **selected:** [UI polish / onboarding](./qwon_post_alpha_options.md#product-lane-decision) (Codex scoped plan next).
+**Option catalog (v0.2+ lanes):** [QWON post-alpha option lanes](./qwon_post_alpha_options.md) — **selected:** [UI polish / onboarding](./qwon_post_alpha_options.md#product-lane-decision) with [scoped plan](./qwon_ui_polish_onboarding_plan.md).
 
 ### LiteRT adoption decision
 
@@ -246,10 +246,11 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 | Upload build `4` | Conditional | **Not approved** — product gate required |
 | Rename `PREXUS.xcodeproj` | Conditional | [Inventory](./qwon_preserved_prexus_surface_inventory.md) — **deferred** |
 | Clean up remaining PREXUS strings | **Stop** | [Inventory](./qwon_preserved_prexus_surface_inventory.md) first — default **preserve** |
+| Plan UI polish / onboarding | Post-alpha planning | [UI polish / onboarding scoped plan](./qwon_ui_polish_onboarding_plan.md) |
 | Add OCR / LiteRT / App Store | Deferred | [Selection matrix](./qwon_post_alpha_options.md#selection-matrix) |
 
 ---
 
 ## Agent note
 
-Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **First post-alpha lane selected:** [UI polish / onboarding](./qwon_post_alpha_options.md#product-lane-decision) — **Codex scoped plan next**; Cursor waits. Build **`4`** requires **explicit product gate**. Ordinary QWON work should **not** reopen rename series, global replace, or ungated upload.
+Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **First post-alpha lane selected:** [UI polish / onboarding](./qwon_post_alpha_options.md#product-lane-decision) with [scoped plan](./qwon_ui_polish_onboarding_plan.md); Cursor waits until plan merge and a separate implementation task. Build **`4`** requires **explicit product gate**. Ordinary QWON work should **not** reopen rename series, global replace, or ungated upload.

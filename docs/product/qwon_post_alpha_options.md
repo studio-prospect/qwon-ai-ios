@@ -1,10 +1,10 @@
 # QWON — Post-Alpha Option Lanes (v0.2+ Planning)
 
-**Last updated:** 2026-06-03 (product lane decision — UI polish / onboarding)
-**Status:** **Planning only** — **first post-alpha lane selected** for scoped plan; **implementation not approved** in this document.
+**Last updated:** 2026-06-03 (UI polish / onboarding scoped plan)
+**Status:** **Planning only** — **first post-alpha lane selected** and [scoped plan created](./qwon_ui_polish_onboarding_plan.md); **implementation not approved** in this document.
 **Purpose:** After **QWON `0.1.0 (3)` stable alpha** and [closed feedback intake](./qwon_text_alpha_feedback_intake.md#feedback-window-close-2026-06-03), outline **v0.2 / post-alpha candidate lanes** for product to choose from. Does **not** approve build **`4`**, TestFlight upload, tag, version bump, or code work.
 
-Related: [Next decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) · [QWON next work queue — deferred](./qwon_next_work_queue.md#deferred--post-alpha) · [Agent collaboration workflow](./agent_collaboration_workflow.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md)
+Related: [UI polish / onboarding scoped plan](./qwon_ui_polish_onboarding_plan.md) · [Next decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) · [QWON next work queue — deferred](./qwon_next_work_queue.md#deferred--post-alpha) · [Agent collaboration workflow](./agent_collaboration_workflow.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md)
 
 ---
 
@@ -15,7 +15,7 @@ Related: [Next decision checkpoint](./qwon_next_work_queue.md#next-decision-chec
 | **Active TestFlight** | **QWON `0.1.0 (3)`** — **stable alpha** |
 | **Feedback** | **Closed** — **QWON-FB-001**, **QWON-FB-002** operational pass; **no blockers** |
 | **Build `4`** | **Not approved** |
-| **Selected first lane (planning)** | **UI polish / onboarding** — [Product lane decision](#product-lane-decision) |
+| **Selected first lane (planning)** | **UI polish / onboarding** — [Product lane decision](#product-lane-decision) · [Scoped plan](./qwon_ui_polish_onboarding_plan.md) |
 | **This doc** | Lane catalog + product decision record — selection does **not** authorize implementation |
 
 **v0.2** below means **post-alpha product direction candidates**, not an approved release or marketing version bump.
@@ -27,8 +27,8 @@ Related: [Next decision checkpoint](./qwon_next_work_queue.md#next-decision-chec
 Do **not** start with a broad implementation PR. Use this sequence:
 
 1. **Product chooses one lane** (or explicitly defers all — Stay on build **`3`**).
-2. **Codex creates a scoped plan** — architecture, memory/battery impact, preserved-surface check, test plan, PR split.
-3. **Cursor implements** — only after plan merge and any required product gate (separate from this catalog).
+2. ~~**Codex creates a scoped plan**~~ **Done** — [UI polish / onboarding scoped plan](./qwon_ui_polish_onboarding_plan.md).
+3. **Cursor implements** — only after scoped plan merge and any required product gate (separate from this catalog).
 
 Planning PRs for this doc are **docs-only**. First engineering PR after selection is usually **spike** or **narrow implementation**, never upload/tag/bump without an explicit release gate.
 
@@ -81,7 +81,7 @@ Planning PRs for this doc are **docs-only**. First engineering PR after selectio
 ### After product selects a lane
 
 1. ~~Product records the choice~~ **Done** — [Product lane decision](#product-lane-decision) (2026-06-03).
-2. **Codex opens a scoped plan** for **UI polish / onboarding** — **next step**.
+2. ~~**Codex opens a scoped plan** for **UI polish / onboarding**~~ **Done** — [scoped plan](./qwon_ui_polish_onboarding_plan.md).
 3. Cursor implements per [Recommended workflow](#recommended-workflow) — **only after plan merge**; **no** TestFlight upload/tag/bump unless a **separate** product gate approves.
 
 ---
@@ -96,7 +96,7 @@ Planning PRs for this doc are **docs-only**. First engineering PR after selectio
 | Field | Value |
 | --- | --- |
 | **Lane** | **[UI polish / onboarding](#7-ui-polish--onboarding)** |
-| **Status** | **Selected for planning** — Codex scoped plan is **next**; Cursor implementation **after** plan merge |
+| **Status** | **Selected for planning** — [scoped plan created](./qwon_ui_polish_onboarding_plan.md); Cursor implementation **after** plan merge |
 | **Build `4`** | **Not approved** — lane work does not authorize upload, tag, or version bump |
 
 ### Rationale
@@ -121,8 +121,8 @@ Planning PRs for this doc are **docs-only**. First engineering PR after selectio
 
 | Agent | Action |
 | --- | --- |
-| **Codex** | Create **scoped plan** for UI polish / onboarding (copy map, screen scope, preserved-surface check, device QA, PR split) |
-| **Cursor** | **Wait** — implement only after merged Codex plan |
+| **Codex** | Maintain/review the [scoped plan](./qwon_ui_polish_onboarding_plan.md) and review implementation PRs against it |
+| **Cursor** | **Wait until plan is merged** — then implement only the first scoped UI-1 PR |
 | **All** | **No** implementation PR, **no** TestFlight/tag/bump from this decision record |
 
 ---
