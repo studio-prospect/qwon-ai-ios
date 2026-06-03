@@ -1,10 +1,10 @@
 # QWON — Next Work Queue
 
-**Last updated:** 2026-06-03 (post build `3` lab verification)
+**Last updated:** 2026-06-03 (post build `3` lab verification; feedback intake handoff)
 **Status:** **Queue / guardrail only** — no implementation authorization in this document.
 **Purpose:** After Phase 4 rename docs are complete, classify what agents **may** do next vs what requires **product gates**. Prevents drift into ungated **build `4`**, project-container rename, or blind PREXUS cleanup.
 
-Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
+Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
 
 ---
 
@@ -47,7 +47,7 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 | --- | --- |
 | **Trigger** | New tester report arrives for QWON build **`3`**; ongoing alpha lab |
 | **Required evidence** | Report using [QWON feedback intake template](./qwon_text_alpha_feedback_intake.md#copy-paste-template); device + build **`0.1.0 (3)`** |
-| **First doc to read** | [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) · [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) |
+| **First doc to read** | [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) · [operational handoff](./qwon_text_alpha_feedback_intake.md#operational-handoff-when-a-real-report-arrives) · [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) |
 | **Do not start if** | Treating intake as approval for build **`4`**; rewriting historical PREXUS feedback log baseline rows |
 
 ### QWON rename docs index maintenance
@@ -101,7 +101,7 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 | Field | Detail |
 | --- | --- |
 | **Status** | **Done** — Wang primary manual smoke **pass**; Matisse secondary launch **pass** |
-| **Evidence** | [lab evidence § build 3](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) · ops PNGs under `~/QWON-alpha-evidence/qwen-text-0.1.0-build3/` |
+| **Evidence** | [lab evidence § build 3](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) · ops PNGs under `~/QWON-alpha-evidence/` (`qwon-text-0.1.0-build3/` preferred; legacy `qwen-text-0.1.0-build3/` for 2026-06-03 lab captures) |
 | **Note** | `alpha_smoke_wang.sh` is DEBUG-only; TestFlight Release uses manual verification |
 
 ### TestFlight upload build `4`

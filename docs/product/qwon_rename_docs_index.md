@@ -44,7 +44,7 @@
 | Question | Read first |
 | --- | --- |
 | **Should I rename a PREXUS string?** | [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md) — default **no** unless listed as safe or product opens a scoped migration PR |
-| **Should we ship build `4`?** | **Not approved** — build **`3` uploaded**; [lab verification pending](./qwon_text_alpha_lab_evidence.md#build-3-verification-pending-2026-06-02) |
+| **Should we ship build `4`?** | **Not approved** — build **`3` active**; [lab verification done](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) |
 | **Which app / Bundle ID is active?** | [QWON bundle memo](./qwon_bundle_id_decision_memo.md) + [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) — QWON `6775685841`; PREXUS `6775110218` is historical only |
 | **Can I edit PREXUS historical docs?** | **No** — [PREXUS alpha index](./qwen_text_only_alpha_docs_index.md); append-only QWON docs or link; never rewrite frozen rows |
 | **Where is Phase 4 implementation detail?** | [Phase 4 target rename plan](./qwon_phase4_target_rename_plan.md) PR table + [surface audit](./qwon_phase4_rename_surface_audit.md) |
@@ -66,9 +66,9 @@
 | [qwon_bundle_id_decision_memo.md](./qwon_bundle_id_decision_memo.md) | QWON Bundle ID / signing / ASC app record |
 | [qwen_text_only_alpha_docs_index.md](./qwen_text_only_alpha_docs_index.md) | **Historical** PREXUS alpha index — separate product line |
 | [qwon_next_work_queue.md](./qwon_next_work_queue.md) | **Post-rename work queue** — ready vs gated vs deferred |
-| [qwon_text_alpha_feedback_intake.md](./qwon_text_alpha_feedback_intake.md) | **Build `2` feedback template + triage log** |
+| [qwon_text_alpha_feedback_intake.md](./qwon_text_alpha_feedback_intake.md) | **Build `3` feedback template + triage log** — live intake entry point |
 
-**Related (outside this index):** [models/README.md](../../models/README.md) (GGUF placement) · [agent_collaboration_workflow.md](./agent_collaboration_workflow.md) (Codex/Cursor roles) · [next work queue](./qwon_next_work_queue.md)
+**Related (outside this index):** [models/README.md](../../models/README.md) (GGUF placement) · [agent_collaboration_workflow.md](./agent_collaboration_workflow.md) (Codex/Cursor roles) · [feedback intake](./qwon_text_alpha_feedback_intake.md) · [next work queue](./qwon_next_work_queue.md)
 
 ---
 
