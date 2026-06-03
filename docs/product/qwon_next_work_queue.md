@@ -1,6 +1,6 @@
 # QWON — Next Work Queue
 
-**Last updated:** 2026-06-03 (post build `3` upload record)
+**Last updated:** 2026-06-03 (post build `3` lab verification)
 **Status:** **Queue / guardrail only** — no implementation authorization in this document.
 **Purpose:** After Phase 4 rename docs are complete, classify what agents **may** do next vs what requires **product gates**. Prevents drift into ungated **build `4`**, project-container rename, or blind PREXUS cleanup.
 
@@ -15,8 +15,8 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Preserved PRE
 | **Active TestFlight** | **QWON `0.1.0 (3)`** · ASC **`6775685841`** · Bundle **`jp.studio-prospect.qwon.ios`** |
 | **Phase 4 rename docs** | **Complete** — index (#67), inventory (#66), Phase 4 series (#59–#65) |
 | **Phase 4E ops** | **Upload done** (2026-06-02) — intentional Product/RE; docs record catches up |
-| **Wang GGUF (build `3`)** | **Pending / unconfirmed** — verify `Documents/Models/prexus-local-mvp.gguf` |
-| **Wang smoke / Matisse check (build `3`)** | **Pending** — no fabricated pass/fail |
+| **Wang GGUF (build `3`)** | **Present** — re-pushed 2026-06-03 · [lab evidence](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) |
+| **Wang smoke / Matisse check (build `3`)** | **Done** (2026-06-03) — Wang manual smoke **pass** · Matisse launch **pass** |
 | **Active app (repo)** | Target/scheme/module **`QWON`** · sources **`app/ios/QWON/`** |
 | **Build `4`** | **Not approved** |
 | **Project container rename** | **`PREXUS.xcodeproj`** — **deferred** |
@@ -96,14 +96,13 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 **Do not start any item in this section without explicit product approval.** Docs describe gates; they do **not** approve execution.
 
-### Build `3` lab verification (post-upload — pending)
+### Build `3` lab verification — completed (2026-06-03)
 
 | Field | Detail |
 | --- | --- |
-| **Trigger** | Complete build `3` sign-off after [upload record](./qwon_text_alpha_testflight_prep.md#testflight-build-3-2026-06-02) |
-| **Required evidence** | Wang `alpha_smoke_wang.sh` pass **or** equivalent; Matisse install + spot check; Wang GGUF file confirmed |
-| **First doc to read** | [QWON TestFlight prep — build 3](./qwon_text_alpha_testflight_prep.md#testflight-build-3-2026-06-02) · [QWON lab evidence](./qwon_text_alpha_lab_evidence.md#build-3-verification-pending-2026-06-02) |
-| **Do not start if** | Fabricating smoke results; logging triage rows without template-complete reports |
+| **Status** | **Done** — Wang primary manual smoke **pass**; Matisse secondary launch **pass** |
+| **Evidence** | [lab evidence § build 3](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) · ops PNGs under `~/QWON-alpha-evidence/qwen-text-0.1.0-build3/` |
+| **Note** | `alpha_smoke_wang.sh` is DEBUG-only; TestFlight Release uses manual verification |
 
 ### TestFlight upload build `4`
 
@@ -116,11 +115,11 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 ### Build `3` archive smoke (Phase 4E) — completed (upload)
 
-**Status:** 4E docs gate (#65) + **intentional upload** (2026-06-02). Lab smoke evidence **pending**. Do not re-run upload without product approval.
+**Status:** 4E docs gate (#65) + **intentional upload** (2026-06-02) + **lab verification** (2026-06-03). Do not re-run upload without product approval.
 
 ### TestFlight upload build `3` — completed
 
-**Status:** **Done** — see [build 3 record](./qwon_text_alpha_testflight_prep.md#testflight-build-3-2026-06-02). Wang install confirmed; smoke/GGUF **pending**.
+**Status:** **Done** — see [build 3 record](./qwon_text_alpha_testflight_prep.md#testflight-build-3-2026-06-02). Wang smoke **pass**; Matisse launch **pass**.
 
 ### Project container `PREXUS.xcodeproj` rename
 
@@ -190,7 +189,7 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 | --- | --- | --- |
 | Log tester feedback | Ready / docs-ops | [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) |
 | Fix a bug | Ready / code if blocker | [Triage](#build-3-feedback-triage) → [Minimal fix](#minimal-fix-pr-verified-release-blocker-only) |
-| Verify build `3` lab | Conditional — pending | [Build 3 record](./qwon_text_alpha_testflight_prep.md#testflight-build-3-2026-06-02) · Wang GGUF **unconfirmed** |
+| Verify build `3` lab | **Done** (2026-06-03) | [Lab evidence](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) |
 | Upload build `4` | Conditional | **Not approved** — product gate required |
 | Rename `PREXUS.xcodeproj` | Conditional | [Inventory](./qwon_preserved_prexus_surface_inventory.md) — **deferred** |
 | Clean up remaining PREXUS strings | **Stop** | [Inventory](./qwon_preserved_prexus_surface_inventory.md) first — default **preserve** |

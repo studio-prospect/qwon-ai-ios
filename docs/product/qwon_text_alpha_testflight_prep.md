@@ -23,8 +23,8 @@
 | TestFlight upload (build `3`) | Release engineering | **Done** (2026-06-02) | [Build 3 — Phase 4E ops upload](#testflight-build-3-2026-06-02) — intentional Product/RE upload |
 | Lab TestFlight install (Wang + Matisse) | Release engineering | **Done** (build `1`, 2026-06-02) | [Wang](#wang-testflight-verification-2026-06-02) · [Matisse](#matisse-testflight-verification-2026-06-02) |
 | Lab build `2` verification | Release engineering | **Done** (2026-06-02) | Return **sends** on Wang + Matisse — [build 2 record](#testflight-build-2-2026-06-02) · [tier policy](#physical-device-lab-tier-policy) |
-| Lab build `3` verification | Release engineering | **Pending** | Wang smoke **pending** · Matisse spot check **pending** — [build 3 record](#testflight-build-3-2026-06-02) |
-| Wang GGUF on build `3` | Release engineering | **Pending / unconfirmed** | Check `Documents/Models/prexus-local-mvp.gguf` on Wang after TestFlight update |
+| Lab build `3` verification | Release engineering | **Done** (2026-06-03) | Wang manual smoke **pass** · Matisse launch **pass** — [build 3 record](#testflight-build-3-2026-06-02) · [lab evidence](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) |
+| Wang GGUF on build `3` | Release engineering | **Done** (2026-06-03) | Re-pushed; `prexus-local-mvp.gguf` present (379.4 MB) |
 | Export compliance (ASC) | Release engineering | **Done** (build `2`, 2026-06-02) | [Export compliance gate](#export-compliance-operator-gate) — required before build `2` TestFlight install |
 | Git tag | Release engineering | **Done** (2026-06-02) | `qwon-text-alpha-0.1.0-rc1` on `d4f2a0b` — [tag record](#git-tag-2026-06-02) |
 | Ops evidence folder | Release engineering | **In use** | [QWON build `1` ledger](./qwon_text_alpha_lab_evidence.md#frozen-ledger-qwon-010-build-1) — Chat PNGs on file |
@@ -45,14 +45,15 @@
 
 **Current TestFlight:** marketing **`0.1.0`**, **`CFBundleVersion` `3`** — **active lab build** (Wang TestFlight install confirmed 2026-06-02).
 
-**Pending verification (no fabricated results):**
+**Lab verification (2026-06-03):**
 
 | Item | Status |
 | --- | --- |
 | Archive commit / IPA path in git | **Not recorded** — ops artifact outside repo |
-| Wang `alpha_smoke_wang.sh` on build `3` | **Pending** |
-| Matisse install + spot check on build `3` | **Pending** |
-| Wang GGUF (`Documents/Models/prexus-local-mvp.gguf`) | **Pending / unconfirmed** — Fallback on Wang observed; verify file exists after TestFlight update |
+| Wang manual TestFlight smoke | **Pass** — [Wang build `3` verification](#wang-build-3-verification-2026-06-03) |
+| Matisse launch spot check | **Pass** — [Matisse build `3` spot check](#matisse-build-3-spot-check-2026-06-03) |
+| Wang GGUF | **Present** — re-pushed 2026-06-03 |
+| `alpha_smoke_wang.sh` on TestFlight Release | **N/A** — DEBUG-only runner |
 | Export compliance (ASC) for build `3` | **Not re-verified in docs** — installable on Wang implies processing cleared |
 
 **Build `4`:** **Not approved.** Triage and feedback intake alone do not authorize a new binary.
@@ -82,9 +83,9 @@ Proceed only if **all** entry gates in [Phase 4E plan](./qwon_phase4_target_rena
 | Build number | **`CFBundleVersion` `3`** — uploaded to ASC |
 | Not to be confused with | **PREXUS** historical alpha **build `2`** (separate product line — never uploaded for PREXUS) |
 | Tag | **Optional** and **separate** from upload; build `1` tag `qwon-text-alpha-0.1.0-rc1` remains on archive commit `d4f2a0b` |
-| Upload | **Done** (2026-06-02) — intentional Product/RE; lab smoke evidence **pending** |
+| Upload | **Done** (2026-06-02) — intentional Product/RE; lab verification **2026-06-03** |
 
-### Minimal 4E operator checklist (reference — build `3` upload done; smoke pending)
+### Minimal 4E operator checklist (reference — build `3` upload + lab verification done)
 
 1. No-llama committed `project.pbxproj` on archive commit.
 2. Local llama: `fetch_local_model.sh` · `build_llama_xcframework.sh` · `generate_xcodeproj.rb` (do not commit llama pbxproj).
@@ -110,16 +111,38 @@ Full criteria: [Phase 4 target rename plan — PR 4E](./qwon_phase4_target_renam
 | ASC app | **QWON** (`6775685841`) |
 | Upload | **Done** — Wang TestFlight shows **`0.1.0 (3)`** (2026-06-02) |
 | Wang TestFlight install | **Confirmed** (2026-06-02) |
-| Wang GGUF | **Pending / unconfirmed** — verify `Documents/Models/prexus-local-mvp.gguf`; Fallback observed if absent (TestFlight container may retain Documents across update; reinstall may clear) |
-| Wang smoke (`alpha_smoke_wang.sh`) | **Pending** — no recorded pass on build `3` |
-| Matisse spot check | **Pending** |
+| Wang GGUF | **Present** — re-pushed **2026-06-03** (`prexus-local-mvp.gguf`, 379.4 MB) |
+| Wang TestFlight smoke | **Pass** — manual verification **2026-06-03** — **Local runtime** + **llama.cpp On-Device Runtime** |
+| Matisse spot check | **Pass** — install + launch crash-free **2026-06-03** |
 | PREXUS alpha build `2` | **Unrelated** — do not conflate with QWON line |
 
-**Observed on Wang (2026-06-02, not triage-logged):** Runtime Diagnostics shows **Fallback** + *llama.cpp runtime waiting for a GGUF model asset* — consistent with **GGUF unconfirmed**; not logged as triage row in this PR.
+**Historical note (2026-06-02, pre-push):** Wang showed **Fallback** + *waiting for GGUF* — resolved by GGUF re-push; **not** a triage row.
 
 No new git tag for build `3` unless product adds one later.
 
 **Previous active:** [build `2`](#testflight-build-2-2026-06-02) (keyboard Return → Send).
+
+### Wang build `3` verification (2026-06-03)
+
+| Step | Result |
+| --- | --- |
+| TestFlight install `0.1.0 (3)` | **Pass** |
+| GGUF on device | **Pass** — re-pushed 2026-06-03 |
+| Chat turn (local route) | **Pass** — *今日のスケジュールを整理する時に優先すべきことは？* |
+| UI: primary chip | **Local runtime** |
+| UI: backend chip | **llama.cpp On-Device Runtime** |
+| Runtime Diagnostics | **Pass** — Local runtime · *llama.cpp GGUF inference on A17 Pro-class hardware* |
+| Verification method | **Manual TestFlight** — `PREXUS_RUN_ALPHA_SMOKE` is DEBUG-only on Release builds |
+| Screenshot (ops, not in git) | `~/QWON-alpha-evidence/qwen-text-0.1.0-build3/wang-0.1.0-3-chat.png` · `wang-0.1.0-3-diagnostics.png` |
+
+### Matisse build `3` spot check (2026-06-03)
+
+Secondary tier — launch regression only.
+
+| Step | Result |
+| --- | --- |
+| TestFlight install `0.1.0 (3)` | **Pass** |
+| App launch (display name **QWON**) | **Pass** — crash-free (devicectl, 2026-06-03) |
 
 ---
 
@@ -279,7 +302,7 @@ After each upload, ASC may hold the build until **暗号化に関する輸出コ
 | --- | --- | --- | --- |
 | `0.1.0 (1)` | 2026-06-02 | Completed at first upload | Wang + Matisse verified |
 | `0.1.0 (2)` | 2026-06-02 | **Re-submission required** — was pending; **submitted 2026-06-02** | Wang + Matisse — Return sends (secondary tier) — **previous active** |
-| `0.1.0 (3)` | 2026-06-02 | **Not re-verified in docs** — Wang installable | Wang install confirmed; Matisse **pending** |
+| `0.1.0 (3)` | 2026-06-02 | **Not re-verified in docs** — Wang installable | Wang smoke **pass** + Matisse launch **pass** (2026-06-03) |
 
 **Operator checklist (every new build):**
 
@@ -360,7 +383,7 @@ Archive validation and build `1` upload are **done** (2026-06-02). **Build `2`**
 1. [x] Upload to **QWON** ASC (`6775685841`) — [build 1](#testflight-upload-2026-06-02) · [build 2](#testflight-build-2-2026-06-02) · [build 3](#testflight-build-3-2026-06-02).
 2. [x] Complete **export compliance** in ASC when prompted — [gate notes](#export-compliance-operator-gate) (build `2` required re-submission; build `3` not re-verified in docs).
 3. [x] Internal TestFlight access for **Wang + Matisse** — build `1` full lab; build `2` install on both ([tier policy](#physical-device-lab-tier-policy)).
-4. [ ] Build `3` lab verification — Wang smoke + Matisse spot check **pending**; Wang GGUF **pending / unconfirmed**.
+4. [x] Build `3` lab verification — Wang manual smoke **pass** · Matisse launch **pass** (2026-06-03); Wang GGUF re-pushed.
 5. [x] Paste [ASC What to Test](#asc-what-to-test-copy) — build `3` may include [feedback intake template](./qwon_text_alpha_feedback_intake.md#copy-paste-template) excerpt (review copy for testers).
 6. [x] Build `1`: Wang + Matisse Chat verified (2026-06-02). Build `2`: Return-key **sends** on Wang + Matisse (2026-06-02).
 7. [x] Tag archive commit `d4f2a0b`: `qwon-text-alpha-0.1.0-rc1` — [record](#git-tag-2026-06-02) (build `1` only).
