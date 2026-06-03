@@ -1,6 +1,6 @@
 # QWON Text Alpha — Two-Device Lab Evidence
 
-**Build line:** TestFlight `0.1.0` (build `1` baseline · build `2` active) · tag `qwon-text-alpha-0.1.0-rc1` on build `1` archive commit `d4f2a0b`
+**Build line:** TestFlight `0.1.0` (build `1` baseline · build `2` previous active · **build `3` active**) · tag `qwon-text-alpha-0.1.0-rc1` on build `1` archive commit `d4f2a0b`
 
 **Bundle ID:** `jp.studio-prospect.qwon.ios` · ASC **QWON** (`6775685841`)
 
@@ -23,9 +23,26 @@ Same rules as [PREXUS lab evidence](./qwen_text_only_alpha_lab_evidence.md#reten
   (optional diagnostics PNGs — on file (ops) when captured)
 ```
 
-Build `2` keyboard verification: verbal / spot-check on device; no new frozen ledger required per [secondary tier](./qwon_text_alpha_testflight_prep.md#physical-device-lab-tier-policy).
+Build `2` keyboard verification: verbal / spot-check on device; no new frozen ledger required per [secondary tier](./qwon_text_alpha_testflight_prep.md#physical-device-lab-tier-policy). **Previous active** before build `3` upload.
 
 Never add PNG, IPA, GGUF, or raw logs under `docs/`.
+
+---
+
+## Build 3 verification (pending — 2026-06-02)
+
+Post–Phase 4E upload. **No fabricated pass/fail.** Update this section when ops confirms each item.
+
+| Item | Status | Notes |
+| --- | --- | --- |
+| TestFlight upload `0.1.0 (3)` | **Done** | Intentional Product/RE — [prep record](./qwon_text_alpha_testflight_prep.md#testflight-build-3-2026-06-02) |
+| Wang TestFlight install | **Confirmed** | 2026-06-02 |
+| Wang GGUF (`Documents/Models/prexus-local-mvp.gguf`) | **Pending / unconfirmed** | Fallback on Wang observed — verify file exists; TestFlight update may retain Documents; reinstall may clear |
+| Wang smoke (`alpha_smoke_wang.sh`) | **Pending** | |
+| Matisse install + spot check | **Pending** | |
+| Frozen ledger subsection | **Not created** | Append only after full primary-tier evidence — [adding subsection](#adding-a-new-ledger-subsection) |
+
+**Ops folder (when capturing):** `~/QWON-alpha-evidence/qwen-text-0.1.0-build3/`
 
 ---
 
