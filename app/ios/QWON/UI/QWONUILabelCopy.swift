@@ -6,7 +6,8 @@ enum QWONUILabelCopy {
     enum Chat {
         static let headerSubtitle = "Local-first runtime · text alpha"
         static let sensitivityFootnote = "Sensitivity controls cloud escalation — not which on-device backend runs. See Settings for device path notes."
-        static let systemWelcome = "QWON answers locally first when a model path is available. Wang expects llama.cpp On-Device Runtime; Matisse may use Embedded Heuristic Runtime — see Settings."
+        /// UI-only onboarding copy — not injected into chat transcript or runtime prompts.
+        static let onboardingHint = "QWON answers locally first when a model path is available. Wang expects llama.cpp On-Device Runtime; Matisse may use Embedded Heuristic Runtime — see Settings."
         static let fallbackStatusHelper = "Fallback may mean the local model file is unavailable, or Embedded Heuristic is the expected path on older hardware."
         static let composerPlaceholder = "Ask QWON"
     }

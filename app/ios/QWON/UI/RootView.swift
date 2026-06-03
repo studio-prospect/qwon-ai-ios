@@ -6,6 +6,7 @@ enum QWONAccessibilityID {
         static let openSettings = "chat.open-settings"
         static let routePreview = "chat.route-preview"
         static let composer = "chat.composer"
+        static let onboardingHint = "chat.onboarding-hint"
     }
 
     enum Settings {

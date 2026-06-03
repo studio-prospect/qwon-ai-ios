@@ -27,6 +27,11 @@ struct ChatView: View {
             ScrollViewReader { scrollProxy in
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 0) {
+                        if showsOnboardingHint {
+                            onboardingHintCard
+                                .padding(.bottom, 18)
+                        }
+
                         ForEach(Array(viewModel.messages.enumerated()), id: \.element.id) { index, message in
                             messageBubble(message)
                                 .padding(.bottom, spacingAfterMessage(at: index))
@@ -107,6 +112,20 @@ struct ChatView: View {
 
     private var sensitivityDescription: LocalizedStringKey {
         LocalizedStringKey(viewModel.displayedSensitivity.helperDescription)
+    }
+
+    private var showsOnboardingHint: Bool {
+        !viewModel.messages.contains { $0.role == .user || $0.role == .assistant }
+    }
+
+    private var onboardingHintCard: some View {
+        QWONRuntimeStrip {
+            Text(QWONUILabelCopy.Chat.onboardingHint)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .accessibilityIdentifier(QWONAccessibilityID.Chat.onboardingHint)
     }
 
     private var composerCard: some View {
