@@ -1,7 +1,9 @@
 # QWON Rename — Documentation Index
 
-**Last updated:** 2026-06-03 (build `3` stable alpha; feedback window closed)
+**Last updated:** 2026-06-03 (stable alpha decision checkpoint)
 **Purpose:** **Information architecture only** — where to start reading QWON rename / Phase 4 docs and in what order. Does **not** add new policy; it summarizes and links existing decisions.
+
+**Next decision (release vs post-alpha):** [QWON next work queue — decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint)
 
 **Next work (post-rename docs):** [QWON next work queue](./qwon_next_work_queue.md) — what to do / not do after rename docs are complete.
 
@@ -21,6 +23,7 @@
 | **Build `3` lab / Wang GGUF** | **Verified** (2026-06-03) — [lab evidence](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) |
 | **Build `3` feedback intake** | **Closed** (2026-06-03) — **QWON-FB-001**, **QWON-FB-002** pass; **no blockers** · [intake](./qwon_text_alpha_feedback_intake.md#feedback-window-close-2026-06-03) |
 | **Build `4`** | **Not approved** |
+| **Next decision** | [Decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) — Stay · build `4` gate · post-alpha planning |
 | **Xcode project container** | **`PREXUS.xcodeproj`** — deferred; see [preserved inventory](./qwon_preserved_prexus_surface_inventory.md) |
 
 ---
@@ -44,6 +47,7 @@
 
 | Question | Read first |
 | --- | --- |
+| **What should I do next?** | [Next decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) — Stay · build `4` product gate · post-alpha planning |
 | **Should I rename a PREXUS string?** | [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md) — default **no** unless listed as safe or product opens a scoped migration PR |
 | **Should we ship build `4`?** | **Not approved** — build **`3` stable alpha**; feedback **closed** · [intake close](./qwon_text_alpha_feedback_intake.md#feedback-window-close-2026-06-03) |
 | **Which app / Bundle ID is active?** | [QWON bundle memo](./qwon_bundle_id_decision_memo.md) + [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) — QWON `6775685841`; PREXUS `6775110218` is historical only |
