@@ -15,6 +15,7 @@ enum QWONAccessibilityID {
         static let openDiagnostics = "settings.open-diagnostics"
         static let openMemory = "settings.open-memory"
         static let summarySurface = "settings.summary-surface"
+        static let modelStatus = "settings.model-status"
     }
 
     enum Diagnostics {
@@ -22,6 +23,7 @@ enum QWONAccessibilityID {
         static let clear = "diagnostics.clear"
         static let summary = "diagnostics.summary"
         static let empty = "diagnostics.empty"
+        static let modelStatus = "diagnostics.model-status"
     }
 
     enum Memory {

@@ -8,6 +8,7 @@ final class QWONTests: XCTestCase {
         XCTAssertTrue(QWONUILabelCopy.Settings.introMessage.contains("Matisse"))
         XCTAssertTrue(QWONUILabelCopy.Diagnostics.summaryDetail.contains("answered_by"))
         XCTAssertFalse(QWONUILabelCopy.Settings.localRuntimeFooter.localizedCaseInsensitiveContains("download"))
+        XCTAssertFalse(QWONUILabelCopy.ModelStatus.settingsFooter.localizedCaseInsensitiveContains("download"))
         XCTAssertFalse(QWONUILabelCopy.Chat.onboardingHint.localizedCaseInsensitiveContains("fully offline"))
     }
 
@@ -987,6 +988,93 @@ final class QWONTests: XCTestCase {
         )
 
         try FileManager.default.removeItem(at: root)
+    }
+
+    func testQWONLocalModelStatusReportsMissingAtExpectedPath() throws {
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString, isDirectory: true)
+        try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+
+        let status = QWONLocalModelStatusInspector(
+            fileManager: .default,
+            environment: [:],
+            documentsDirectory: root,
+            machineIdentifierProvider: { "iPhone16,1" },
+            isSimulatorProvider: { false }
+        ).inspect()
+
+        XCTAssertEqual(status.placementState, .missing)
+        XCTAssertEqual(status.chipTier, .a17ProOrNewer)
+        XCTAssertFalse(status.expectedPathPresent)
+        XCTAssertEqual(QWONLocalModelStatus.expectedFileName, LocalGGUFModelPlacement.defaultModelFileName)
+        XCTAssertEqual(QWONLocalModelStatus.expectedRelativePlacement, "Documents/Models/prexus-local-mvp.gguf")
+        XCTAssertEqual(QWONLocalModelStatusPresentation.statusChipLabel(for: status), "Missing")
+        XCTAssertEqual(QWONLocalModelStatusPresentation.expectedRuntimeLabel(for: status), "Embedded Heuristic fallback")
+        XCTAssertTrue(QWONUILabelCopy.ModelStatus.summaryDetail(for: status).contains("prexus-local-mvp.gguf"))
+        XCTAssertTrue(QWONUILabelCopy.ModelStatus.diagnosticsMappingDetail(for: status).contains("model_asset_unavailable"))
+
+        try FileManager.default.removeItem(at: root)
+    }
+
+    func testQWONLocalModelStatusReportsPresentUnverifiedAtDefaultPath() throws {
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString, isDirectory: true)
+        let modelsDirectory = root.appendingPathComponent("Models", isDirectory: true)
+        try FileManager.default.createDirectory(at: modelsDirectory, withIntermediateDirectories: true)
+
+        let defaultModel = modelsDirectory.appendingPathComponent(LocalGGUFModelPlacement.defaultModelFileName)
+        let payload = Data("gguf-placeholder".utf8)
+        try payload.write(to: defaultModel)
+
+        let status = QWONLocalModelStatusInspector(
+            fileManager: .default,
+            environment: [:],
+            documentsDirectory: root,
+            machineIdentifierProvider: { "iPhone16,1" },
+            isSimulatorProvider: { false }
+        ).inspect()
+
+        if case let .presentUnverified(source, byteCount) = status.placementState {
+            XCTAssertEqual(source, .documentsDefault)
+            XCTAssertEqual(byteCount, Int64(payload.count))
+        } else {
+            XCTFail("Expected presentUnverified at default path")
+        }
+        XCTAssertTrue(status.expectedPathPresent)
+        XCTAssertEqual(QWONLocalModelStatusPresentation.statusChipLabel(for: status), "Present (unverified)")
+        XCTAssertEqual(QWONLocalModelStatusPresentation.expectedRuntimeLabel(for: status), "llama.cpp On-Device Runtime")
+        XCTAssertTrue(QWONUILabelCopy.ModelStatus.diagnosticsMappingDetail(for: status).contains("llama.cpp On-Device Runtime"))
+
+        try FileManager.default.removeItem(at: root)
+    }
+
+    func testQWONLocalModelStatusUsesMatisseExpectedHeuristicCopy() {
+        let status = QWONLocalModelStatus(
+            placementState: .missing,
+            chipTier: .unsupported,
+            machineIdentifier: "iPhone11,6",
+            isSimulator: false,
+            resolvedFileName: nil,
+            expectedPathPresent: false
+        )
+
+        XCTAssertEqual(QWONLocalModelStatusPresentation.tierChipLabel(for: status), "Matisse-class (A12)")
+        XCTAssertEqual(QWONLocalModelStatusPresentation.expectedRuntimeLabel(for: status), "Embedded Heuristic Runtime")
+        XCTAssertTrue(QWONUILabelCopy.ModelStatus.summaryDetail(for: status).contains("expected local path"))
+        XCTAssertFalse(QWONUILabelCopy.ModelStatus.diagnosticsMappingDetail(for: status).contains("Matisse failed"))
+    }
+
+    func testQWONLocalModelStatusUsesSimulatorCopy() {
+        let status = QWONLocalModelStatus(
+            placementState: .missing,
+            chipTier: .a17ProOrNewer,
+            machineIdentifier: "iPhone16,1",
+            isSimulator: true,
+            resolvedFileName: nil,
+            expectedPathPresent: false
+        )
+
+        XCTAssertEqual(QWONLocalModelStatusPresentation.statusChipLabel(for: status), "Simulator")
+        XCTAssertEqual(QWONLocalModelStatusPresentation.expectedRuntimeLabel(for: status), "Simulator Mock Runtime")
+        XCTAssertTrue(QWONUILabelCopy.ModelStatus.summaryDetail(for: status).contains("Simulator uses a stub runtime"))
     }
 
     func testFallbackLocalModelClientUsesFallbackWhenPrimaryFails() async throws {

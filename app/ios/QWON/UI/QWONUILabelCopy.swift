@@ -27,4 +27,54 @@ enum QWONUILabelCopy {
         static let summaryDetail = "Entries list route target, execution mode, and detail. On Wang with a local model, answered_by should read llama.cpp On-Device Runtime. On Matisse, Embedded Heuristic Runtime with Local runtime is the expected alpha path."
         static let emptyMessage = "After your first chat turn, this screen shows how QWON answered — including local model, heuristic fallback, or cloud escalation."
     }
+
+    enum ModelStatus {
+        static let cardTitle = "Local Model File"
+        static let expectedPlacementLine = "Place prexus-local-mvp.gguf in Documents/Models/prexus-local-mvp.gguf."
+        static let settingsFooter = "Model status is read-only in this alpha. Check Runtime Diagnostics for answered_by, primary_failure, and fallback_reason after each turn."
+        static let diagnosticsFooter = "Model file state here is read-only. Turn entries below show answered_by, primary_failure, and fallback_reason when a local fallback occurs."
+
+        static func summaryDetail(for status: QWONLocalModelStatus) -> String {
+            if status.isSimulator {
+                return "Simulator uses a stub runtime — no GGUF proof required. \(expectedPlacementLine)"
+            }
+
+            switch status.chipTier {
+            case .unsupported:
+                return "Matisse-class devices use Embedded Heuristic Runtime as the expected local path for this alpha. A missing GGUF is not a failure. \(expectedPlacementLine)"
+            case .a17ProOrNewer:
+                switch status.placementState {
+                case .missing:
+                    return "Wang-class devices can use llama.cpp On-Device Runtime after the expected file is placed. Until then, Embedded Heuristic fallback runs without crashing. \(expectedPlacementLine)"
+                case .emptyFile:
+                    return "The resolved model file is empty and is treated as unusable. QWON falls back to Embedded Heuristic Runtime without crashing. Replace the file at the expected placement path."
+                case .presentUnverified:
+                    if status.resolvedFileName == QWONLocalModelStatus.expectedFileName {
+                        return "Wang-class devices with the expected GGUF should use llama.cpp On-Device Runtime. Hash verification is not shown in this alpha — treat the file as present but unverified."
+                    }
+                    return "A GGUF file is present at an alternate resolved path. Wang-class devices attempt llama.cpp On-Device Runtime when load succeeds; otherwise Embedded Heuristic fallback runs without crashing."
+                }
+            }
+        }
+
+        static func diagnosticsMappingDetail(for status: QWONLocalModelStatus) -> String {
+            if status.isSimulator {
+                return "Simulator: answered_by may show Simulator Mock Runtime. No model_asset_unavailable proof is required here."
+            }
+
+            switch status.chipTier {
+            case .unsupported:
+                return "Matisse expected mapping: answered_by=Embedded Heuristic Runtime is normal on A12-class hardware for this alpha."
+            case .a17ProOrNewer:
+                switch status.placementState {
+                case .presentUnverified where status.resolvedFileName == QWONLocalModelStatus.expectedFileName:
+                    return "Wang mapping: answered_by=llama.cpp On-Device Runtime when load succeeds."
+                case .missing, .emptyFile:
+                    return "Wang missing/corrupt mapping: primary_failure=model_asset_unavailable and fallback_reason=embedded_heuristic are expected until a usable GGUF is placed."
+                case .presentUnverified:
+                    return "Wang alternate-file mapping: llama.cpp On-Device Runtime when load succeeds; otherwise primary_failure=model_asset_unavailable with embedded_heuristic fallback."
+                }
+            }
+        }
+    }
 }
