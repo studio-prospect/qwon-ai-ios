@@ -1,10 +1,10 @@
 # QWON — Next Work Queue
 
-**Last updated:** 2026-06-03 (build `3` feedback window closed)
+**Last updated:** 2026-06-03 (stable alpha decision checkpoint)
 **Status:** **Queue / guardrail only** — no implementation authorization in this document.
 **Purpose:** After Phase 4 rename docs are complete, classify what agents **may** do next vs what requires **product gates**. Prevents drift into ungated **build `4`**, project-container rename, or blind PREXUS cleanup.
 
-Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
+Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision checkpoint](#next-decision-checkpoint) · [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
 
 ---
 
@@ -24,6 +24,50 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [QWON feedback
 | **Preserved PREXUS surfaces** | [Inventory](./qwon_preserved_prexus_surface_inventory.md) — env vars, model filenames, eval target, historical docs |
 
 **Default posture:** Stay on TestFlight **`0.1.0 (3)`** as **stable alpha**. Feedback intake is **closed** — no new reports expected. Code work requires a **verified release blocker** on build **`3`** or an **explicit product-approved build `4` gate** — not “waiting for feedback.”
+
+---
+
+## Next decision checkpoint
+
+**Start here** when choosing what to do after build **`3`** stable alpha — release vs post-alpha planning. This section is the **decision entry point**; lanes below are detail.
+
+### Current (2026-06-03)
+
+| Field | Value |
+| --- | --- |
+| **TestFlight** | **QWON `0.1.0 (3)`** — **stable alpha** · ASC **`6775685841`** |
+| **Feedback** | **Closed** — **QWON-FB-001**, **QWON-FB-002** operational pass only; **no blockers** · [intake close](./qwon_text_alpha_feedback_intake.md#feedback-window-close-2026-06-03) |
+| **Build `4`** | **Not approved** — no upload, tag, or version bump without explicit product gate |
+| **Lab** | Wang + Matisse build `3` verified · [lab evidence](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) |
+
+### Choose a branch
+
+| Branch | When | First doc | Agent default |
+| --- | --- | --- | --- |
+| **Stay** | Maintain build **`3`**; no new binary; docs/readme hygiene only | This queue — [Ready / low-risk docs-ops](#ready--low-risk-docs-ops) | **Yes** — unless product opens another branch |
+| **Product gate: build `4` decision** | Product explicitly evaluates whether a **new TestFlight binary** is warranted | [TestFlight prep — build `4` gate](./qwon_text_alpha_testflight_prep.md#phase-4-build-3-decision-gate) · [Conditional upload build `4`](#testflight-upload-build-4) | **No** — gate docs only until product approves |
+| **Post-alpha planning** | LiteRT, OCR/camera, model download UX, **`PREXUS.xcodeproj`** rename, App Store — planning docs, not alpha execution | [Deferred / post-alpha](#deferred--post-alpha) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md) | **No** — planning/docs memos only; no implementation PR |
+
+**Build `4` decision ≠ build `4` approved.** Documenting criteria or opening a product discussion does **not** authorize archive, upload, tag, or `CFBundleVersion` bump.
+
+### Next allowed actions (without product gate)
+
+| Action | Lane |
+| --- | --- |
+| Docs / README / index maintenance | [Ready / low-risk docs-ops](#ready--low-risk-docs-ops) |
+| **Product-approved build `4` planning** docs only (criteria, checklist, gate memo — **not** upload) | [Conditional — build `4`](#testflight-upload-build-4) |
+| Post-alpha planning docs (LiteRT, OCR, model download, project container rename scope) | [Deferred / post-alpha](#deferred--post-alpha) |
+| Minimal fix on build **`3`** | **Only** with [verified release blocker](#minimal-fix-pr-verified-release-blocker-only) + Codex/Product sign-off |
+
+### Not allowed (default)
+
+| Action | Why |
+| --- | --- |
+| TestFlight **upload**, **tag**, or **`CFBundleVersion` / build number bump** | Build **`4` not approved**; RE ops require explicit product gate |
+| Implementation PR without **verified blocker** or **product gate** | Stable alpha — no drive-by features or rename cleanup |
+| Edit PREXUS historical docs (`qwen_text_only_alpha_*`) or frozen ledger rows | Immutable baseline — link from QWON docs only |
+| Append **`QWON-FB-*`** triage rows while intake is closed | [Feedback window closed](./qwon_text_alpha_feedback_intake.md#feedback-window-close-2026-06-03) |
+| Commit PNG / logs / GGUF / IPA to git | Ops storage only (`~/QWON-alpha-evidence/`) |
 
 ---
 
@@ -191,7 +235,8 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 | I want to… | Lane | Start here |
 | --- | --- | --- |
-| Log tester feedback | **Closed** — [Feedback window close](./qwon_text_alpha_feedback_intake.md#feedback-window-close-2026-06-03) |
+| **Decide what to do next** | **Checkpoint** | [Next decision checkpoint](#next-decision-checkpoint) |
+| Log tester feedback | **Closed** | [Feedback window close](./qwon_text_alpha_feedback_intake.md#feedback-window-close-2026-06-03) |
 | Fix a bug | Ready / code if blocker | [Triage (closed)](#build-3-feedback-triage--closed) → [Minimal fix](#minimal-fix-pr-verified-release-blocker-only) |
 | Verify build `3` lab | **Done** (2026-06-03) | [Lab evidence](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) |
 | Upload build `4` | Conditional | **Not approved** — product gate required |
@@ -203,4 +248,4 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 ## Agent note
 
-Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). Build **`4`** and post-alpha work require **explicit product gates** — not closed-intake follow-up. Ordinary QWON work should **not** reopen rename series, global replace, or ungated upload.
+Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). Use [Next decision checkpoint](#next-decision-checkpoint) before starting work. Build **`4`** and post-alpha execution require **explicit product gates** — planning docs alone do not approve them. Ordinary QWON work should **not** reopen rename series, global replace, or ungated upload.

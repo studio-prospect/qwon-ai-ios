@@ -5,7 +5,7 @@
 
 **Historical line:** PREXUS alpha `0.1.0 (1)` on `jp.studio-prospect.prexus.ios` remains frozen — see [Qwen text-only alpha TestFlight prep](./qwen_text_only_alpha_testflight_prep.md). **Do not** upload QWON builds to ASC app **PREXUS** (Apple ID `6775110218`).
 
-**Related:** [QWON rename docs index](./qwon_rename_docs_index.md) · [QWON next work queue](./qwon_next_work_queue.md) · [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) · [QWON rename migration plan](./qwon_rename_migration_plan.md) · [QWON bundle memo](./qwon_bundle_id_decision_memo.md) · [QWON lab evidence](./qwon_text_alpha_lab_evidence.md) · [PREXUS bundle memo](./bundle_id_decision_memo.md) (historical)
+**Related:** [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) · [QWON next work queue](./qwon_next_work_queue.md) · [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) · [QWON rename migration plan](./qwon_rename_migration_plan.md) · [QWON bundle memo](./qwon_bundle_id_decision_memo.md) · [QWON lab evidence](./qwon_text_alpha_lab_evidence.md) · [PREXUS bundle memo](./bundle_id_decision_memo.md) (historical)
 
 ---
 
