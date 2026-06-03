@@ -142,8 +142,8 @@ Release engineering assigns the **final** class after intake. Tester **Initial c
 
 | ID | Date | Device | Build | Summary | Classification | Evidence | Decision | Follow-up PR |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **QWON-FB-001** | 2026-06-03 | Wang | `0.1.0 (3)` | Pass — general chat (18:31): expected Local + llama.cpp after GGUF; got **Local runtime** + **llama.cpp On-Device Runtime**, 6月最終日 Q answered, no Fallback | **Operational pass** | `wang-0.1.0-3-chat-pass.png`, `wang-0.1.0-3-diagnostics-pass.png`, `wang-0.1.0-3-testflight.png` | Monitor on build 3 — Wang primary pass, no blocker | pending |
-| **QWON-FB-002** | 2026-06-03 | Matisse | `0.1.0 (3)` | Pass — general chat (18:34): expected Embedded Heuristic on A12; got **Local runtime** + embedded heuristic reply, detail *without a packaged LLM* | **Operational pass** | `matisse-0.1.0-3-chat-pass.png`, `matisse-0.1.0-3-diagnostics-pass.png`, `matisse-0.1.0-3-testflight.png` | Monitor on build 3 — Matisse secondary pass, no blocker | pending |
+| **QWON-FB-001** | 2026-06-03 | Wang | `0.1.0 (3)` | Pass — general chat (18:31): expected Local + llama.cpp after GGUF; got **Local runtime** + **llama.cpp On-Device Runtime**, 6月最終日 Q answered, no Fallback | **Operational pass** | `wang-0.1.0-3-chat-pass.png`, `wang-0.1.0-3-diagnostics-pass.png`, `wang-0.1.0-3-testflight.png` | Monitor on build 3 — Wang primary pass, no blocker | `—` |
+| **QWON-FB-002** | 2026-06-03 | Matisse | `0.1.0 (3)` | Pass — general chat (18:34): expected Embedded Heuristic on A12; got **Local runtime** + embedded heuristic reply, detail *without a packaged LLM* | **Operational pass** | `matisse-0.1.0-3-chat-pass.png`, `matisse-0.1.0-3-diagnostics-pass.png`, `matisse-0.1.0-3-testflight.png` | Monitor on build 3 — Matisse secondary pass, no blocker | `—` |
 
 ### QWON-FB-001 (2026-06-03) — Wang pass
 
@@ -229,7 +229,7 @@ Suggested next action: Monitor on build 3 — Matisse secondary pass, no blocker
 | **Classification** | Yes | Final class from [Classification rules](#classification-rules) |
 | **Evidence** | When not **Needs evidence** | Ops filename(s) only, e.g. `wang-0.1.0-3-diagnostics.png`; `—` while incomplete |
 | **Decision** | Yes | e.g. `Monitor on build 3`, `Re-request Diagnostics`, `GGUF push`, `Codex review for blocker`, `Docs PR` |
-| **Follow-up PR** | When known | GitHub PR link or `—` / `pending` |
+| **Follow-up PR** | When known | GitHub PR link; `—` when **Operational pass** / no follow-up required; `pending` only when a fix/docs PR is expected |
 
 **Update-in-place:** If a report starts as **Needs evidence**, **update the same row** when the template is completed — do not append a duplicate.
 
