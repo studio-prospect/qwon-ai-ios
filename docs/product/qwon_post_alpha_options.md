@@ -1,7 +1,7 @@
 # QWON — Post-Alpha Option Lanes (v0.2+ Planning)
 
-**Last updated:** 2026-06-03 (selection matrix)
-**Status:** **Planning only** — no implementation authorization in this document.
+**Last updated:** 2026-06-03 (product lane decision — UI polish / onboarding)
+**Status:** **Planning only** — **first post-alpha lane selected** for scoped plan; **implementation not approved** in this document.
 **Purpose:** After **QWON `0.1.0 (3)` stable alpha** and [closed feedback intake](./qwon_text_alpha_feedback_intake.md#feedback-window-close-2026-06-03), outline **v0.2 / post-alpha candidate lanes** for product to choose from. Does **not** approve build **`4`**, TestFlight upload, tag, version bump, or code work.
 
 Related: [Next decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) · [QWON next work queue — deferred](./qwon_next_work_queue.md#deferred--post-alpha) · [Agent collaboration workflow](./agent_collaboration_workflow.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md)
@@ -15,7 +15,8 @@ Related: [Next decision checkpoint](./qwon_next_work_queue.md#next-decision-chec
 | **Active TestFlight** | **QWON `0.1.0 (3)`** — **stable alpha** |
 | **Feedback** | **Closed** — **QWON-FB-001**, **QWON-FB-002** operational pass; **no blockers** |
 | **Build `4`** | **Not approved** |
-| **This doc** | Option catalog only — choosing a lane does **not** authorize implementation |
+| **Selected first lane (planning)** | **UI polish / onboarding** — [Product lane decision](#product-lane-decision) |
+| **This doc** | Lane catalog + product decision record — selection does **not** authorize implementation |
 
 **v0.2** below means **post-alpha product direction candidates**, not an approved release or marketing version bump.
 
@@ -51,7 +52,7 @@ Planning PRs for this doc are **docs-only**. First engineering PR after selectio
 
 ## Selection matrix
 
-**Purpose:** Help **product** compare lanes before choosing one. **Codex and Cursor do not select the lane** — they execute after product names a single lane (or defers all).
+**Purpose:** Help **product** compare lanes. **Product decision recorded** — [UI polish / onboarding](#product-lane-decision) selected 2026-06-03. Matrix retained for audit of deferred lanes.
 
 **Scale (qualitative, 2026-06-03):**
 
@@ -73,17 +74,56 @@ Planning PRs for this doc are **docs-only**. First engineering PR after selectio
 | **Runtime memory / retention** | Medium–High | **High** | Low–Medium — architecture principles; no retention policy doc | **High** — SQLite/vectors, retention law, battery | Medium–Long — policy doc before schema | Product prioritizes **cognitive runtime** core thesis | Privacy/retention policy undefined; cloud dump acceptable shortcut |
 | **UI polish / onboarding** | **High** (near term) | **Low–Medium** | **High** — [FB-001/002 pass](./qwon_text_alpha_feedback_intake.md#triage-log-build-3), tier policy, ops PNGs | **Low** — mostly copy/UI; watch runtime coupling | **Short** — copy/screen map docs-only PR | Product wants **lowest-risk first useful PR** after stable alpha | Backend/routing must change first; gamified UI pressure |
 
-### Low-risk first candidate (comparison only — not a decision)
+### Low-risk first candidate (superseded by product decision)
 
-**UI polish / onboarding** scores best on **engineering risk**, **evidence readiness**, and **time to first useful PR** given closed intake with Wang/Matisse pass evidence. That makes it a **reasonable first lane to evaluate** — not a default choice.
-
-Product should still **explicitly choose one lane** (or Stay on build **`3`**) using this matrix plus [option detail](#option-detail). Agents must **not** treat this row as authorization to implement UI without product selection and Codex scoped plan.
+**UI polish / onboarding** scored best on the [selection matrix](#selection-matrix) for engineering risk and evidence readiness. Product has **selected** this lane — see [Product lane decision](#product-lane-decision). Matrix rows remain for audit; agents must **not** implement without Codex scoped plan.
 
 ### After product selects a lane
 
-1. Product records the choice (issue/memo — outside this repo if preferred).
-2. Codex opens a **scoped plan** for that lane only.
-3. Cursor implements per [Recommended workflow](#recommended-workflow) — **no** TestFlight upload/tag/bump unless a **separate** product gate approves.
+1. ~~Product records the choice~~ **Done** — [Product lane decision](#product-lane-decision) (2026-06-03).
+2. **Codex opens a scoped plan** for **UI polish / onboarding** — **next step**.
+3. Cursor implements per [Recommended workflow](#recommended-workflow) — **only after plan merge**; **no** TestFlight upload/tag/bump unless a **separate** product gate approves.
+
+---
+
+## Product lane decision (2026-06-03)
+
+**Recorded by:** Product
+**Scope:** First post-alpha lane for **planning** on build **`3`** stable alpha line — **not** implementation approval, **not** build **`4`** approval.
+
+### Selected first lane
+
+| Field | Value |
+| --- | --- |
+| **Lane** | **[UI polish / onboarding](#7-ui-polish--onboarding)** |
+| **Status** | **Selected for planning** — Codex scoped plan is **next**; Cursor implementation **after** plan merge |
+| **Build `4`** | **Not approved** — lane work does not authorize upload, tag, or version bump |
+
+### Rationale
+
+- Build **`3`** stable alpha has Wang/Matisse **operational pass** evidence (**QWON-FB-001**, **QWON-FB-002**) and ops PNGs on file.
+- **Near-term user value** — improve first-run experience without reopening feedback intake.
+- **Lower risk** than runtime, privacy-permission, or TestFlight-ops lanes: mostly copy/UI; minimal orchestrator change if scoped correctly.
+- Target improvements: first-run clarity, **GGUF status** communication, **Matisse Embedded Heuristic** as expected path, **Diagnostics** literacy (Wang llama vs Matisse heuristic).
+
+### Not selected for first lane (deferred)
+
+| Lane | Why deferred (summary) |
+| --- | --- |
+| **LiteRT / local backend** | Runtime risk and eval debt are **high** |
+| **OCR / camera** | Privacy, permissions, and runtime scope are **high** |
+| **Model download / GGUF UX** | Valuable — needs storage, network, and integrity design **first** |
+| **Project container rename** | **Dev-only** value; no user impact |
+| **App Store readiness** | Public release gate is **premature** for text-alpha |
+| **Runtime memory / context retention** | Privacy, schema, and battery policy needed **first** |
+
+### Next step (agents)
+
+| Agent | Action |
+| --- | --- |
+| **Codex** | Create **scoped plan** for UI polish / onboarding (copy map, screen scope, preserved-surface check, device QA, PR split) |
+| **Cursor** | **Wait** — implement only after merged Codex plan |
+| **All** | **No** implementation PR, **no** TestFlight/tag/bump from this decision record |
 
 ---
 
@@ -209,7 +249,8 @@ Product should still **explicitly choose one lane** (or Stay on build **`3`**) u
 
 | Product question | Read |
 | --- | --- |
-| Which lane should we explore first? | [Selection matrix](#selection-matrix) → [Option detail](#option-detail) |
+| Which lane should we explore first? | **[Product lane decision](#product-lane-decision)** — UI polish / onboarding selected; [Selection matrix](#selection-matrix) for audit |
+| What is the next agent step? | **Codex scoped plan** — implementation **not** approved yet |
 | Can we ship code now? | **No** — [Recommended workflow](#recommended-workflow) |
 | Can we upload the next TestFlight build? | **Build `4` not approved** — [checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) |
 | Stay on build **`3`** only? | **Yes** — default; no lane selection required |
