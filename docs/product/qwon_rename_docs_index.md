@@ -1,6 +1,6 @@
 # QWON Rename — Documentation Index
 
-**Last updated:** 2026-06-03 (post build `3` upload record)
+**Last updated:** 2026-06-03 (build `3` stable alpha; feedback window closed)
 **Purpose:** **Information architecture only** — where to start reading QWON rename / Phase 4 docs and in what order. Does **not** add new policy; it summarizes and links existing decisions.
 
 **Next work (post-rename docs):** [QWON next work queue](./qwon_next_work_queue.md) — what to do / not do after rename docs are complete.
@@ -14,11 +14,12 @@
 | Field | Value |
 | --- | --- |
 | **Active product** | **QWON** — target/scheme/module **`QWON`**, sources **`app/ios/QWON/`** |
-| **Active TestFlight** | marketing **`0.1.0`**, **`CFBundleVersion` `3`** — [upload record](./qwon_text_alpha_testflight_prep.md#testflight-build-3-2026-06-02) |
+| **Active TestFlight** | marketing **`0.1.0`**, **`CFBundleVersion` `3`** — **stable alpha** · [upload record](./qwon_text_alpha_testflight_prep.md#testflight-build-3-2026-06-02) |
 | **Bundle ID** | **`jp.studio-prospect.qwon.ios`** · ASC Apple ID **`6775685841`** |
 | **Phase 4 rename** | **Complete** — implementation **4A–4D** (#59–#64); **4E decision gate** documented (#65); **upload ops done** (2026-06-02) |
 | **Preserved PREXUS guardrail** | [Preserved surface inventory](./qwon_preserved_prexus_surface_inventory.md) (PR #66) — intentional remaining PREXUS strings |
 | **Build `3` lab / Wang GGUF** | **Verified** (2026-06-03) — [lab evidence](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) |
+| **Build `3` feedback intake** | **Closed** (2026-06-03) — **QWON-FB-001**, **QWON-FB-002** pass; **no blockers** · [intake](./qwon_text_alpha_feedback_intake.md#feedback-window-close-2026-06-03) |
 | **Build `4`** | **Not approved** |
 | **Xcode project container** | **`PREXUS.xcodeproj`** — deferred; see [preserved inventory](./qwon_preserved_prexus_surface_inventory.md) |
 
@@ -44,12 +45,12 @@
 | Question | Read first |
 | --- | --- |
 | **Should I rename a PREXUS string?** | [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md) — default **no** unless listed as safe or product opens a scoped migration PR |
-| **Should we ship build `4`?** | **Not approved** — build **`3` active**; [lab verification done](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) |
+| **Should we ship build `4`?** | **Not approved** — build **`3` stable alpha**; feedback **closed** · [intake close](./qwon_text_alpha_feedback_intake.md#feedback-window-close-2026-06-03) |
 | **Which app / Bundle ID is active?** | [QWON bundle memo](./qwon_bundle_id_decision_memo.md) + [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) — QWON `6775685841`; PREXUS `6775110218` is historical only |
 | **Can I edit PREXUS historical docs?** | **No** — [PREXUS alpha index](./qwen_text_only_alpha_docs_index.md); append-only QWON docs or link; never rewrite frozen rows |
 | **Where is Phase 4 implementation detail?** | [Phase 4 target rename plan](./qwon_phase4_target_rename_plan.md) PR table + [surface audit](./qwon_phase4_rename_surface_audit.md) |
 | **Ordinary feature work — global replace OK?** | **No** — [inventory agent guardrail](./qwon_preserved_prexus_surface_inventory.md#agent-guardrail-read-first) |
-| **Submit or triage tester feedback?** | [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) — build **`0.1.0 (3)`** |
+| **Submit or triage tester feedback?** | **Window closed** — [QWON feedback intake](./qwon_text_alpha_feedback_intake.md#feedback-window-close-2026-06-03); final rows **QWON-FB-001**, **QWON-FB-002** |
 
 ---
 

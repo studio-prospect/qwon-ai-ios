@@ -1,7 +1,7 @@
 # QWON Text Alpha — TestFlight Preparation (Phase 3)
 
-**Last updated:** 2026-06-03
-**Status:** **Active lab build `0.1.0 (3)`** on TestFlight — intentional Product / release engineering upload after Phase 4E docs gate (#65); ops executed outside repo before this record. Build `2` (keyboard fix) and build `1` + tag `qwon-text-alpha-0.1.0-rc1` are **previous active / historical**. ASC `6775685841`.
+**Last updated:** 2026-06-03 (feedback window closed)
+**Status:** **Stable alpha build `0.1.0 (3)`** on TestFlight — lab + feedback intake **complete**; **feedback window closed** (2026-06-03). Intentional Product / release engineering upload after Phase 4E docs gate (#65); ops executed outside repo before this record. Build `2` (keyboard fix) and build `1` + tag `qwon-text-alpha-0.1.0-rc1` are **previous active / historical**. ASC `6775685841`.
 
 **Historical line:** PREXUS alpha `0.1.0 (1)` on `jp.studio-prospect.prexus.ios` remains frozen — see [Qwen text-only alpha TestFlight prep](./qwen_text_only_alpha_testflight_prep.md). **Do not** upload QWON builds to ASC app **PREXUS** (Apple ID `6775110218`).
 
@@ -24,6 +24,7 @@
 | Lab TestFlight install (Wang + Matisse) | Release engineering | **Done** (build `1`, 2026-06-02) | [Wang](#wang-testflight-verification-2026-06-02) · [Matisse](#matisse-testflight-verification-2026-06-02) |
 | Lab build `2` verification | Release engineering | **Done** (2026-06-02) | Return **sends** on Wang + Matisse — [build 2 record](#testflight-build-2-2026-06-02) · [tier policy](#physical-device-lab-tier-policy) |
 | Lab build `3` verification | Release engineering | **Done** (2026-06-03) | Wang manual smoke **pass** · Matisse launch **pass** — [build 3 record](#testflight-build-3-2026-06-02) · [lab evidence](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) |
+| Build `3` feedback intake | Release engineering | **Closed** (2026-06-03) | **QWON-FB-001**, **QWON-FB-002** operational pass; **no blockers** — [intake close](./qwon_text_alpha_feedback_intake.md#feedback-window-close-2026-06-03) |
 | Wang GGUF on build `3` | Release engineering | **Done** (2026-06-03) | Re-pushed; `prexus-local-mvp.gguf` present (379.4 MB) |
 | Export compliance (ASC) | Release engineering | **Done** (build `2`, 2026-06-02) | [Export compliance gate](#export-compliance-operator-gate) — required before build `2` TestFlight install |
 | Git tag | Release engineering | **Done** (2026-06-02) | `qwon-text-alpha-0.1.0-rc1` on `d4f2a0b` — [tag record](#git-tag-2026-06-02) |
@@ -56,7 +57,9 @@
 | `alpha_smoke_wang.sh` on TestFlight Release | **N/A** — DEBUG-only runner |
 | Export compliance (ASC) for build `3` | **Not re-verified in docs** — installable on Wang implies processing cleared |
 
-**Build `4`:** **Not approved.** Triage and feedback intake alone do not authorize a new binary.
+**Build `4`:** **Not approved.** Triage and feedback intake **closed** (2026-06-03) — close does not authorize a new binary.
+
+**Feedback intake (2026-06-03):** Final logged reports **QWON-FB-001** (Wang pass), **QWON-FB-002** (Matisse pass); **no release blockers**; no new reports expected — [intake window close](./qwon_text_alpha_feedback_intake.md#feedback-window-close-2026-06-03).
 
 ### Historical: when build `3` was gated (pre-upload)
 

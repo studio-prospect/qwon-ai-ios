@@ -1,6 +1,6 @@
 # QWON — Next Work Queue
 
-**Last updated:** 2026-06-03 (post build `3` lab verification; feedback intake handoff)
+**Last updated:** 2026-06-03 (build `3` feedback window closed)
 **Status:** **Queue / guardrail only** — no implementation authorization in this document.
 **Purpose:** After Phase 4 rename docs are complete, classify what agents **may** do next vs what requires **product gates**. Prevents drift into ungated **build `4`**, project-container rename, or blind PREXUS cleanup.
 
@@ -17,12 +17,13 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [QWON feedback
 | **Phase 4E ops** | **Upload done** (2026-06-02) — intentional Product/RE; docs record catches up |
 | **Wang GGUF (build `3`)** | **Present** — re-pushed 2026-06-03 · [lab evidence](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) |
 | **Wang smoke / Matisse check (build `3`)** | **Done** (2026-06-03) — Wang manual smoke **pass** · Matisse launch **pass** |
+| **Feedback intake (build `3`)** | **Closed** (2026-06-03) — **QWON-FB-001**, **QWON-FB-002** operational pass; **no blockers** · [#74](https://github.com/studio-prospect/qwon-ai-ios/pull/74) |
 | **Active app (repo)** | Target/scheme/module **`QWON`** · sources **`app/ios/QWON/`** |
 | **Build `4`** | **Not approved** |
 | **Project container rename** | **`PREXUS.xcodeproj`** — **deferred** |
 | **Preserved PREXUS surfaces** | [Inventory](./qwon_preserved_prexus_surface_inventory.md) — env vars, model filenames, eval target, historical docs |
 
-**Default posture:** Stay on TestFlight **`0.1.0 (3)`**; intake feedback and docs-ops unless a **verified release blocker** or **explicit product gate** says otherwise.
+**Default posture:** Stay on TestFlight **`0.1.0 (3)`** as **stable alpha**. Feedback intake is **closed** — no new reports expected. Code work requires a **verified release blocker** on build **`3`** or an **explicit product-approved build `4` gate** — not “waiting for feedback.”
 
 ---
 
@@ -41,14 +42,16 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 ## Ready / low-risk docs-ops
 
-### Tester feedback intake (ongoing)
+### Tester feedback intake — closed (2026-06-03)
 
 | Field | Detail |
 | --- | --- |
-| **Trigger** | New tester report arrives for QWON build **`3`**; ongoing alpha lab |
-| **Required evidence** | Report using [QWON feedback intake template](./qwon_text_alpha_feedback_intake.md#copy-paste-template); device + build **`0.1.0 (3)`** |
-| **First doc to read** | [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) · [operational handoff](./qwon_text_alpha_feedback_intake.md#operational-handoff-when-a-real-report-arrives) · [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) |
-| **Do not start if** | Treating intake as approval for build **`4`**; rewriting historical PREXUS feedback log baseline rows |
+| **Status** | **Closed** — no new reports expected |
+| **Final reports** | **QWON-FB-001** (Wang pass), **QWON-FB-002** (Matisse pass) — [intake triage log](./qwon_text_alpha_feedback_intake.md#triage-log-build-3) |
+| **Outcome** | **Operational pass**; **no release blockers**; **build `4` not approved** |
+| **Trigger to reopen** | Explicit product decision only (new binary, lab policy change, verified blocker on build `3`) |
+| **First doc to read** | [QWON feedback intake — window close](./qwon_text_alpha_feedback_intake.md#feedback-window-close-2026-06-03) |
+| **Do not start if** | Treating closed intake as build **`4`** approval; appending triage rows without reopen |
 
 ### QWON rename docs index maintenance
 
@@ -72,14 +75,15 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 ## Ready / code only if blocker
 
-### Build `3` feedback triage
+### Build `3` feedback triage — closed
 
 | Field | Detail |
 | --- | --- |
-| **Trigger** | Intake classifies an issue as **release blocker** vs watch / defer |
-| **Required evidence** | Repro on **`0.1.0 (3)`**; steps; device; classification per [QWON intake rules](./qwon_text_alpha_feedback_intake.md#classification-rules); Wang llama issues require **confirmed GGUF** |
-| **First doc to read** | [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) · [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [Phase 4 plan — release blocker rule](./qwon_phase4_target_rename_plan.md#entry-gates) |
-| **Do not start if** | Issue is cosmetic, model-quality-only, or unverified; Wang Fallback before GGUF confirmed; using triage to justify build **`4`** or rename cleanup |
+| **Status** | **Closed** (2026-06-03) — final triage rows logged; no blockers |
+| **Trigger to reopen** | Product reopens intake or **verified release blocker** on **`0.1.0 (3)`** |
+| **Required evidence** | Repro on **`0.1.0 (3)`**; template-complete report; Wang llama issues require **confirmed GGUF** |
+| **First doc to read** | [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) · [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) |
+| **Do not start if** | Issue is cosmetic, model-quality-only, or unverified; using triage to justify build **`4`**; appending rows while window is closed |
 
 ### Minimal fix PR (verified release blocker only)
 
@@ -187,8 +191,8 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 | I want to… | Lane | Start here |
 | --- | --- | --- |
-| Log tester feedback | Ready / docs-ops | [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) |
-| Fix a bug | Ready / code if blocker | [Triage](#build-3-feedback-triage) → [Minimal fix](#minimal-fix-pr-verified-release-blocker-only) |
+| Log tester feedback | **Closed** — [Feedback window close](./qwon_text_alpha_feedback_intake.md#feedback-window-close-2026-06-03) |
+| Fix a bug | Ready / code if blocker | [Triage (closed)](#build-3-feedback-triage--closed) → [Minimal fix](#minimal-fix-pr-verified-release-blocker-only) |
 | Verify build `3` lab | **Done** (2026-06-03) | [Lab evidence](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) |
 | Upload build `4` | Conditional | **Not approved** — product gate required |
 | Rename `PREXUS.xcodeproj` | Conditional | [Inventory](./qwon_preserved_prexus_surface_inventory.md) — **deferred** |
@@ -199,4 +203,4 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 ## Agent note
 
-Phase 4 rename **documentation is complete**. Build **`3` upload is done**; complete lab verification and intake before build **`4`**. Ordinary QWON work should **not** reopen rename series, global replace, or ungated upload.
+Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). Build **`4`** and post-alpha work require **explicit product gates** — not closed-intake follow-up. Ordinary QWON work should **not** reopen rename series, global replace, or ungated upload.
