@@ -1,7 +1,7 @@
 # QWON Text Alpha — Feedback Intake (Build `3`)
 
-**Last updated:** 2026-06-03 (post build `3` lab verification #71)
-**Status:** **Ready for live intake** — template + triage rules; **no reports logged yet**.
+**Last updated:** 2026-06-03 (post QWON-FB-001 intake)
+**Status:** **Live intake** — **`QWON-FB-001`** logged (**Needs evidence**); build `3` active.
 **Active build:** TestFlight **QWON `0.1.0 (3)`** · ASC **`6775685841`** · Bundle **`jp.studio-prospect.qwon.ios`**
 
 Related: [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [Tier policy (Wang/Matisse)](./qwon_text_alpha_testflight_prep.md#physical-device-lab-tier-policy) · [QWON next work queue](./qwon_next_work_queue.md) · [QWON lab evidence — build `3`](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
@@ -141,6 +141,44 @@ Release engineering assigns the **final** class after intake. Tester **Initial c
 
 | ID | Date | Device | Build | Summary | Classification | Evidence | Decision | Follow-up PR |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| **QWON-FB-001** | 2026-06-03 | Wang | `0.1.0 (3)` | General chat (18:17): expected Local + llama.cpp after GGUF; got **Local runtime** + **llama.cpp On-Device Runtime** badge, 初夢 Q answered, no Fallback badge | **Needs evidence** | `—` | Monitor on build 3 — operational pass, no blocker. Re-request missing fields — see [QWON-FB-001 detail](#qwon-fb-001-2026-06-03). Save ops PNGs per detail. | pending |
+
+### QWON-FB-001 (2026-06-03)
+
+Tester report: **Wangでテスト** — Chat + Runtime Diagnostics screenshots received **2026-06-03 ~18:18**.
+
+```text
+Device lab name: Wang
+Device model: (not in screenshot — lab baseline iPhone 17 / iPhone18,3)
+iOS version: (not in screenshot — lab baseline 26.5)
+TestFlight build: 0.1.0 (3)  (active build; not visible in screenshot — Needs evidence)
+
+GGUF pushed: yes (inferred — llama.cpp On-Device Runtime badge; baseline present 2026-06-03)
+
+Scenario: first chat / general chat
+Expected result: Local runtime + llama.cpp On-Device Runtime on Wang after GGUF push
+Actual result: Local runtime + llama.cpp badges; 初夢 Q answered; Executed Route Local | Tier 2 | Prefer
+
+Runtime Diagnostics (Settings → Recent Runtime Decisions):
+  execution mode: Local
+  backend/model: llama.cpp On-Device Runtime (detail: llama.cpp GGUF inference on A17 Pro-class hardware)
+  answered_by: (not captured — list view truncated)
+  primary_failure: (not captured)
+  fallback_reason: (not captured — detail text shows capability "Falls back to Embedded…", not a failure)
+
+Ops artifacts (filenames only — stored outside git):
+  chat: wang-0.1.0-3-chat-1818.png
+  diagnostics: wang-0.1.0-3-diagnostics-1818.png
+
+Repro rate: once (pass observation; no defect reported)
+
+Initial classification candidate (tester guess): (not provided — operational test share)
+Final classification: Needs evidence
+
+Suggested next action: Save PNGs to ops folder; expand Diagnostics entry for answered_by / primary_failure / fallback_reason; confirm TestFlight build in screenshot or tester reply
+```
+
+**Note:** Diagnostics also lists an earlier turn at **16:30** (schedule Q) from the same build `3` lab day — overlaps [lab evidence](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) Wang row; **QWON-FB-001** covers the **18:17** 初夢 session.
 
 ### Column definitions
 
@@ -169,7 +207,7 @@ Release engineering assigns the **final** class after intake. Tester **Initial c
 | **Build `4`** | **Not approved** by this intake doc or triage alone |
 | **Matisse heuristic path** | Expected on A12 — **not** failure by itself |
 | **PREXUS historical logs** | **Do not edit** [PREXUS feedback log](./qwen_text_only_alpha_release_notes.md#tester-feedback-log-build-1) or frozen ledger rows |
-| **No fake rows** | Empty triage table until first real report |
+| **No fake rows** | First real report: **QWON-FB-001** (2026-06-03) |
 | **No implementation in intake PRs** | Intake docs only; fixes are separate PRs after real data |
 
 ---
