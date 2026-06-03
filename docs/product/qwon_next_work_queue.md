@@ -46,7 +46,7 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 | --- | --- | --- | --- |
 | **Stay** | Maintain build **`3`**; no new binary; docs/readme hygiene only | This queue — [Ready / low-risk docs-ops](#ready--low-risk-docs-ops) | **Yes** — unless product opens another branch |
 | **Product gate: build `4` decision** | Product explicitly evaluates whether a **new TestFlight binary** is warranted | [TestFlight prep — build `4` gate](./qwon_text_alpha_testflight_prep.md#phase-4-build-3-decision-gate) · [Conditional upload build `4`](#testflight-upload-build-4) | **No** — gate docs only until product approves |
-| **Post-alpha planning** | LiteRT, OCR/camera, model download UX, **`PREXUS.xcodeproj`** rename, App Store — planning docs, not alpha execution | [Deferred / post-alpha](#deferred--post-alpha) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md) | **No** — planning/docs memos only; no implementation PR |
+| **Post-alpha planning** | LiteRT, OCR/camera, model download UX, **`PREXUS.xcodeproj`** rename, App Store — planning docs, not alpha execution | [Post-alpha option lanes](./qwon_post_alpha_options.md) · [Deferred / post-alpha](#deferred--post-alpha) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md) | **No** — planning/docs memos only; no implementation PR |
 
 **Build `4` decision ≠ build `4` approved.** Documenting criteria or opening a product discussion does **not** authorize archive, upload, tag, or `CFBundleVersion` bump.
 
@@ -56,7 +56,7 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 | --- | --- |
 | Docs / README / index maintenance | [Ready / low-risk docs-ops](#ready--low-risk-docs-ops) |
 | **Product-approved build `4` planning** docs only (criteria, checklist, gate memo — **not** upload) | [Conditional — build `4`](#testflight-upload-build-4) |
-| Post-alpha planning docs (LiteRT, OCR, model download, project container rename scope) | [Deferred / post-alpha](#deferred--post-alpha) |
+| Post-alpha planning docs (LiteRT, OCR, model download, project container rename scope) | [Post-alpha option lanes](./qwon_post_alpha_options.md) · [Deferred / post-alpha](#deferred--post-alpha) |
 | Minimal fix on build **`3`** | **Only** with [verified release blocker](#minimal-fix-pr-verified-release-blocker-only) + Codex/Product sign-off |
 
 ### Not allowed (default)
@@ -193,6 +193,8 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 **Not in the current work queue for agents.** Track for planning; do not pull forward without a new Codex plan.
 
+**Option catalog (v0.2+ lanes):** [QWON post-alpha option lanes](./qwon_post_alpha_options.md) — product chooses one lane → Codex scoped plan → Cursor implements.
+
 ### LiteRT adoption decision
 
 | Field | Detail |
@@ -242,7 +244,7 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 | Upload build `4` | Conditional | **Not approved** — product gate required |
 | Rename `PREXUS.xcodeproj` | Conditional | [Inventory](./qwon_preserved_prexus_surface_inventory.md) — **deferred** |
 | Clean up remaining PREXUS strings | **Stop** | [Inventory](./qwon_preserved_prexus_surface_inventory.md) first — default **preserve** |
-| Add OCR / LiteRT / App Store | Deferred | This queue — **post-alpha** |
+| Add OCR / LiteRT / App Store | Deferred | [Post-alpha option lanes](./qwon_post_alpha_options.md) |
 
 ---
 
