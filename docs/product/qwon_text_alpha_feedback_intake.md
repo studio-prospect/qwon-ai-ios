@@ -1,10 +1,10 @@
 # QWON Text Alpha — Feedback Intake (Build `3`)
 
-**Last updated:** 2026-06-03
-**Status:** **Intake template + triage rules only** — no open reports logged yet.
+**Last updated:** 2026-06-03 (post build `3` lab verification #71)
+**Status:** **Ready for live intake** — template + triage rules; **no reports logged yet**.
 **Active build:** TestFlight **QWON `0.1.0 (3)`** · ASC **`6775685841`** · Bundle **`jp.studio-prospect.qwon.ios`**
 
-Related: [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [QWON next work queue](./qwon_next_work_queue.md) · [QWON lab evidence](./qwon_text_alpha_lab_evidence.md) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
+Related: [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [Tier policy (Wang/Matisse)](./qwon_text_alpha_testflight_prep.md#physical-device-lab-tier-policy) · [QWON next work queue](./qwon_next_work_queue.md) · [QWON lab evidence — build `3`](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
 
 **Previous active:** build **`0.1.0 (2)`** (keyboard fix) — historical for intake; new reports target **`0.1.0 (3)`**.
 
@@ -17,9 +17,9 @@ Related: [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [QWON n
 | Field | Value |
 | --- | --- |
 | **Purpose** | Tester feedback report template + triage classification for QWON text alpha |
-| **Lab devices** | **Wang** (A17 Pro+, llama.cpp path) · **Matisse** (A12, Embedded Heuristic path) |
+| **Lab devices** | **Wang** (primary — A17 Pro+, llama.cpp after GGUF) · **Matisse** (secondary — A12, Embedded Heuristic) — [tier policy](./qwon_text_alpha_testflight_prep.md#physical-device-lab-tier-policy) |
 | **Build** | **`0.1.0 (3)`** — reports must cite this build unless explicitly noting a mismatch |
-| **Wang GGUF** | **Pending / unconfirmed** on build `3` — verify `Documents/Models/prexus-local-mvp.gguf` before classifying llama path failures |
+| **Wang GGUF (baseline)** | **Present** on Wang as of **2026-06-03** — re-pushed; [lab evidence](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03). Re-verify after TestFlight reinstall or if Fallback returns. |
 | **Not in scope** | Build `4` approval · bugfix implementation · fake log rows |
 
 This document **prepares intake**. A **Release blocker** or **minimal fix PR** requires real template-complete reports, Codex/Product sign-off, and a **separate** implementation PR.
@@ -32,7 +32,9 @@ Use this form for **every** issue or pass report on TestFlight **`0.1.0 (3)`**. 
 
 **Wang and Matisse:** Use the **same** template. On Matisse, **Embedded Heuristic** without `llama.cpp` is **expected**, not a failure.
 
-**Do not** attach PNG/JPEG to git or commit binaries to the repo. Save screenshots under `~/QWON-alpha-evidence/qwen-text-0.1.0-build3/` and list **filenames only** below.
+**Do not** attach PNG/JPEG to git or commit binaries to the repo. Save screenshots under ops storage and list **filenames only** in the template.
+
+**Ops folder (build `3`):** prefer `~/QWON-alpha-evidence/qwon-text-0.1.0-build3/`. Lab verification PNGs from **2026-06-03** live under legacy `~/QWON-alpha-evidence/qwen-text-0.1.0-build3/` — [lab evidence](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03). Unify `qwen-text` / `qwon-text` prefix in a future ops-only rename; do not move files as part of intake docs PRs.
 
 ### Copy-paste template
 
@@ -116,7 +118,20 @@ Release engineering assigns the **final** class after intake. Tester **Initial c
 7. If **Docs/ops only:** docs PR, ASC copy edit, or GGUF push — **no** `CFBundleVersion` bump without product gate.
 8. Store PNG/log artifacts under `~/QWON-alpha-evidence/` — **never** commit binaries to git.
 
-**Matisse / A12:** Embedded Heuristic fallback without `answered_by=llama.cpp` is **expected** — not **Release blocker**, not build `4` justification.
+**Matisse / A12:** Embedded Heuristic without `answered_by=llama.cpp` is **expected** — not **Release blocker**, not build `4` justification. Matisse reports still use the **same template**; full Diagnostics ledger is optional on secondary tier unless runtime changes.
+
+---
+
+## Operational handoff (when a real report arrives)
+
+1. Tester sends [copy-paste template](#copy-paste-template) (or mark **Needs evidence** and re-request missing fields).
+2. Confirm **TestFlight build `0.1.0 (3)`** and device lab name (**Wang** or **Matisse**).
+3. Assign **final classification** — see [classification rules](#classification-rules).
+4. **Append one row** to [triage log](#triage-log-build-3) — or **update the same row** if completing **Needs evidence**.
+5. Store PNG/log under `~/QWON-alpha-evidence/` — **never** commit binaries to git.
+6. **Release blocker:** record decision; wait for Codex/Product sign-off before implementation PR — [next work queue](./qwon_next_work_queue.md#minimal-fix-pr-verified-release-blocker-only).
+
+**Do not:** add placeholder rows; approve build `4`; edit [PREXUS feedback log](./qwen_text_only_alpha_release_notes.md#tester-feedback-log-build-1).
 
 ---
 
