@@ -2,6 +2,15 @@ import XCTest
 @testable import QWON
 
 final class QWONTests: XCTestCase {
+    func testUILabelCopyPreservesAlphaOnboardingMeanings() {
+        XCTAssertTrue(QWONUILabelCopy.Chat.onboardingHint.contains("llama.cpp On-Device Runtime"))
+        XCTAssertTrue(QWONUILabelCopy.Chat.onboardingHint.contains("Embedded Heuristic Runtime"))
+        XCTAssertTrue(QWONUILabelCopy.Settings.introMessage.contains("Matisse"))
+        XCTAssertTrue(QWONUILabelCopy.Diagnostics.summaryDetail.contains("answered_by"))
+        XCTAssertFalse(QWONUILabelCopy.Settings.localRuntimeFooter.localizedCaseInsensitiveContains("download"))
+        XCTAssertFalse(QWONUILabelCopy.Chat.onboardingHint.localizedCaseInsensitiveContains("fully offline"))
+    }
+
     func testSensitivityLevelsExposeConsistentLabelsAndDescriptions() {
         XCTAssertEqual(
             SensitivityLevel.allCases,

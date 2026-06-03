@@ -5,7 +5,7 @@
          <BuildActionEntry buildForTesting="YES" buildForRunning="YES" buildForProfiling="YES" buildForArchiving="YES" buildForAnalyzing="YES">
             <BuildableReference
                BuildableIdentifier="primary"
-               BlueprintIdentifier="A56AFE2A132B6F55E053813F"
+               BlueprintIdentifier="F90B8F4FD15A18AEED0DF583"
                BuildableName="QWON.app"
                BlueprintName="QWON"
                ReferencedContainer="container:PREXUS.xcodeproj">
@@ -18,7 +18,7 @@
          <TestableReference skipped="NO" parallelizable="YES">
             <BuildableReference
                BuildableIdentifier="primary"
-               BlueprintIdentifier="9840B0A4366766F3C9C992E9"
+               BlueprintIdentifier="792235AFB24FFA50DCD3A26E"
                BuildableName="QWONTests.xctest"
                BlueprintName="QWONTests"
                ReferencedContainer="container:PREXUS.xcodeproj">
@@ -27,7 +27,7 @@
          <TestableReference skipped="NO" parallelizable="NO">
             <BuildableReference
                BuildableIdentifier="primary"
-               BlueprintIdentifier="CF0048411271F50554939859"
+               BlueprintIdentifier="EDC5FAAF10BA22FC30DCC552"
                BuildableName="QWONUITests.xctest"
                BlueprintName="QWONUITests"
                ReferencedContainer="container:PREXUS.xcodeproj">
@@ -37,7 +37,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier="primary"
-            BlueprintIdentifier="A56AFE2A132B6F55E053813F"
+            BlueprintIdentifier="F90B8F4FD15A18AEED0DF583"
             BuildableName="QWON.app"
             BlueprintName="QWON"
             ReferencedContainer="container:PREXUS.xcodeproj">
@@ -48,7 +48,7 @@
       <BuildableProductRunnable runnableDebuggingMode="0">
          <BuildableReference
             BuildableIdentifier="primary"
-            BlueprintIdentifier="A56AFE2A132B6F55E053813F"
+            BlueprintIdentifier="F90B8F4FD15A18AEED0DF583"
             BuildableName="QWON.app"
             BlueprintName="QWON"
             ReferencedContainer="container:PREXUS.xcodeproj">
@@ -59,7 +59,7 @@
       <BuildableProductRunnable runnableDebuggingMode="0">
          <BuildableReference
             BuildableIdentifier="primary"
-            BlueprintIdentifier="A56AFE2A132B6F55E053813F"
+            BlueprintIdentifier="F90B8F4FD15A18AEED0DF583"
             BuildableName="QWON.app"
             BlueprintName="QWON"
             ReferencedContainer="container:PREXUS.xcodeproj">

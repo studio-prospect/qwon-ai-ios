@@ -24,7 +24,7 @@ struct SettingsView: View {
                         } label: {
                             settingsNavigationRow(
                                 title: "Recent Runtime Decisions",
-                                subtitle: "Inspect recent route and execution outcomes.",
+                                subtitle: QWONUILabelCopy.Settings.diagnosticsNavSubtitle,
                                 value: "\(runtimeDiagnostics.entries.count)"
                             )
                         }
@@ -43,10 +43,10 @@ struct SettingsView: View {
                     } header: {
                         QWONFormSectionHeader(
                             title: "Workspace",
-                            detail: "Inspect the local runtime history QWON keeps on device."
+                            detail: QWONUILabelCopy.Settings.workspaceDetail
                         )
                     } footer: {
-                        Text("QWON keeps local-only summaries for memory and runtime inspection, and trims older diagnostics automatically.")
+                        Text(QWONUILabelCopy.Settings.workspaceFooter)
                     }
 
                     Section {
@@ -85,7 +85,7 @@ struct SettingsView: View {
                             detail: "Define when QWON may escalate beyond the on-device runtime."
                         )
                     } footer: {
-                        Text("Cloud escalation must be enabled before QWON can leave the local runtime. Provider Restricted turns may use only the approved providers below, and providers without valid keys still fall back to local execution.")
+                        Text(QWONUILabelCopy.Settings.routingPolicyFooter)
                     }
 
                     Section {
@@ -124,7 +124,7 @@ struct SettingsView: View {
                             detail: "Limit restricted turns to an explicit provider allowlist."
                         )
                     } footer: {
-                        Text("These providers are the only cloud targets allowed when a turn uses Provider Restricted sensitivity. If none are approved, QWON keeps the turn local.")
+                        Text(QWONUILabelCopy.Settings.providerRestrictedFooter)
                     }
 
                     Section {
@@ -152,7 +152,7 @@ struct SettingsView: View {
                             detail: "Select the on-device backend QWON should favor locally."
                         )
                     } footer: {
-                        Text("Automatic uses a simulator stub on Simulator and llama.cpp on A17 Pro-class iPhones when a GGUF model is present.")
+                        Text(QWONUILabelCopy.Settings.localRuntimeFooter)
                     }
 
                     #if DEBUG && PREXUS_LITERT_LM_PROTOTYPE
@@ -274,7 +274,7 @@ struct SettingsView: View {
                 QWONScreenIntro(
                     eyebrow: "Runtime control",
                     title: "Settings",
-                    message: "Tune how QWON routes work between the on-device runtime, approved cloud providers, diagnostics, and local memory."
+                    message: QWONUILabelCopy.Settings.introMessage
                 )
 
                 ViewThatFits(in: .horizontal) {
