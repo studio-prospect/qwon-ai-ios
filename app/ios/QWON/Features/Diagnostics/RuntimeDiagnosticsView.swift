@@ -9,6 +9,8 @@ struct RuntimeDiagnosticsView: View {
                 LazyVStack(alignment: .leading, spacing: 14) {
                     screenIntro
 
+                    modelStatusCard
+
                     QWONEmptyState(
                         title: "No Runtime Diagnostics Yet",
                         systemImage: "waveform.path.ecg",
@@ -22,6 +24,8 @@ struct RuntimeDiagnosticsView: View {
             } else {
                 LazyVStack(alignment: .leading, spacing: 14) {
                     screenIntro
+
+                    modelStatusCard
 
                     diagnosticsSummaryCard
 
@@ -53,6 +57,15 @@ struct RuntimeDiagnosticsView: View {
             title: "Diagnostics",
             message: QWONUILabelCopy.Diagnostics.introMessage
         )
+    }
+
+    private var localModelStatus: QWONLocalModelStatus {
+        QWONLocalModelStatusInspector.current()
+    }
+
+    private var modelStatusCard: some View {
+        QWONLocalModelStatusCard(status: localModelStatus, showsDiagnosticsMapping: true)
+            .accessibilityIdentifier(QWONAccessibilityID.Diagnostics.modelStatus)
     }
 
     private var diagnosticsSummaryCard: some View {

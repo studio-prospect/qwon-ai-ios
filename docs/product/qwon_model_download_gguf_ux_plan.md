@@ -308,3 +308,41 @@ Initial task boundary for Cursor:
 - Preserve historical PREXUS docs and preserved runtime/env names.
 
 Anything beyond M1 requires a new Product/Codex gate.
+
+---
+
+## PR M1 Implementation Evidence
+
+| Field | Result |
+| --- | --- |
+| Branch | `feat/qwon-m1-model-status-ux` |
+| Scope | Settings + Runtime Diagnostics read-only model status/copy only |
+| Runtime changes | None to lookup order, filename, env names, routing, or LiteRT |
+| Download | Not implemented |
+
+### Surfaces added
+
+| Surface | Content |
+| --- | --- |
+| Settings → Local Runtime | Model status card: filename, `Documents/Models/prexus-local-mvp.gguf`, device tier chip, expected runtime label |
+| Runtime Diagnostics | Same status card plus diagnostic mapping copy for `answered_by`, `primary_failure`, and `fallback_reason` |
+
+### Validation commands
+
+```sh
+ruby tools/scripts/generate_xcodeproj.rb
+xcodebuild -project app/ios/PREXUS.xcodeproj -scheme QWON \
+  -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' test
+git diff --check
+```
+
+### Automated coverage
+
+| Test | Intent |
+| --- | --- |
+| `testQWONLocalModelStatusReportsMissingAtExpectedPath` | Wang-class missing copy + expected placement path |
+| `testQWONLocalModelStatusReportsPresentUnverifiedAtDefaultPath` | Present-unverified + llama.cpp expectation |
+| `testQWONLocalModelStatusUsesMatisseExpectedHeuristicCopy` | Matisse heuristic is expected, not failure |
+| `testQWONLocalModelStatusUsesSimulatorCopy` | Simulator stub copy |
+
+Device evidence (Wang present/missing, Matisse install) remains ops-side per plan; no PNG or GGUF commits in this PR.

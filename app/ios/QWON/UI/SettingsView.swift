@@ -141,6 +141,11 @@ struct SettingsView: View {
                     }
 
                     Section {
+                        QWONLocalModelStatusCard(status: localModelStatus)
+                            .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
+                            .listRowBackground(Color.clear)
+                            .accessibilityIdentifier(QWONAccessibilityID.Settings.modelStatus)
+
                         Picker("Backend", selection: $settings.config.localModelBackend) {
                             ForEach(availableLocalModelBackends, id: \.self) { backend in
                                 Text(backend.displayName).tag(backend)
@@ -149,10 +154,10 @@ struct SettingsView: View {
                     } header: {
                         QWONFormSectionHeader(
                             title: "Local Runtime",
-                            detail: "Select the on-device backend QWON should favor locally."
+                            detail: "Inspect local model placement, device tier, and on-device backend selection."
                         )
                     } footer: {
-                        Text(QWONUILabelCopy.Settings.localRuntimeFooter)
+                        Text(QWONUILabelCopy.ModelStatus.settingsFooter)
                     }
 
                     #if DEBUG && PREXUS_LITERT_LM_PROTOTYPE
@@ -388,6 +393,10 @@ struct SettingsView: View {
         return "Requires A17 Pro-class hardware."
     }
     #endif
+
+    private var localModelStatus: QWONLocalModelStatus {
+        QWONLocalModelStatusInspector.current()
+    }
 
     private var availableLocalModelBackends: [LocalModelBackend] {
         #if targetEnvironment(simulator)
