@@ -1,7 +1,7 @@
 # QWON UI Polish / Onboarding — Scoped Plan
 
-**Last updated:** 2026-06-03
-**Status:** **Scoped plan only** — implementation is **not approved** until this plan is merged and Cursor receives a separate implementation task.
+**Last updated:** 2026-06-03 (PR UI-1 merged · post-merge verification)
+**Status:** **PR UI-1 merged** (`fbee72f`, #80) — post-merge simulator verification **pass**; **Build `4` not approved**; UI-2/UI-3 not opened.
 **Purpose:** Define the first post-alpha UI polish / onboarding lane after **QWON `0.1.0 (3)` stable alpha**. Keep runtime behavior, model placement, TestFlight build number, and historical PREXUS records unchanged.
 
 Related: [Post-alpha option lanes](./qwon_post_alpha_options.md#product-lane-decision) · [Next work queue](./qwon_next_work_queue.md#next-decision-checkpoint) · [QWON feedback intake close](./qwon_text_alpha_feedback_intake.md#feedback-window-close-2026-06-03) · [QWON lab evidence](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
@@ -163,6 +163,44 @@ Recommended manual QA for implementation PRs:
 | **Matisse** | If device QA is run, heuristic wording reads as expected secondary-tier fallback. |
 
 Do not run TestFlight upload or tag from UI polish PRs unless product opens a separate release-engineering gate.
+
+---
+
+## Post-merge verification (2026-06-03)
+
+**Base commit:** `fbee72f` — [PR #80](https://github.com/studio-prospect/qwon-ai-ios/pull/80) merged to `main`.
+
+**Scope:** Simulator layout/copy sanity only. **No additional implementation.** **Build `4`**, TestFlight upload, tag, and version bump **not approved**.
+
+| Check | Device / surface | Result | Notes |
+| --- | --- | --- | --- |
+| Chat composer + Send | iPhone SE (3rd generation), iOS 18.2 Simulator | **Pass** | `Ask QWON` field and Send button visible; no horizontal clip. |
+| Sensitivity selector (compact fallback) | iPhone SE width | **Pass** | `ViewThatFits` falls back to menu picker (`Local Preferred ▾`); four modes reachable. |
+| Sensitivity footnote | iPhone SE width | **Pass** | Helper + footnote wrap; composer remains usable. |
+| Onboarding hint (UI-only strip) | iPhone SE width | **Pass** | Wang / Matisse copy wraps inside `QWONRuntimeStrip`; system seed stays `QWON runtime initialized.` |
+| Fallback status helper | iPhone SE width | **Pass (structural)** | Same strip + `fixedSize` pattern as onboarding hint; not triggered in default UI-test launch (no post-turn Fallback banner). |
+| Chat / Settings / Diagnostics copy | iPhone 16, iOS 18.4 Simulator | **Pass** | `QWONUITests` navigation + seeded surfaces passed; updated copy readable on all three screens. |
+| Runtime / routing / backend | — | **Unchanged** | Verification docs-only; no code changes in this step. |
+
+**Commands run:**
+
+```sh
+xcodebuild -project app/ios/PREXUS.xcodeproj -scheme QWON \
+  -destination 'platform=iOS Simulator,name=iPhone SE (3rd generation),OS=18.2' \
+  -only-testing:QWONUITests test
+# ** TEST SUCCEEDED ** (2 tests)
+
+xcodebuild -project app/ios/PREXUS.xcodeproj -scheme QWON \
+  -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' \
+  -only-testing:QWONUITests test
+# ** TEST SUCCEEDED ** (2 tests)
+
+git diff --check
+```
+
+**Artifacts:** UI-test screenshots exported locally from `.xcresult` bundles (`/tmp/qwon-ui1-se.xcresult`, `/tmp/qwon-ui1-16.xcresult`); **not committed** to git per artifact rules.
+
+**Outcome:** Closes PR #80 residual risk — iPhone SE width layout sanity for UI-1 copy surfaces. **UI-2** remains gated; open only if product/Codex decides copy alone is insufficient.
 
 ---
 
