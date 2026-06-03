@@ -1,14 +1,31 @@
 # QWON Text Alpha — Feedback Intake (Build `3`)
 
-**Last updated:** 2026-06-03 (post QWON-FB-001 / QWON-FB-002 pass intake)
-**Status:** **Live intake** — Wang + Matisse **operational pass** logged; build `3` active; **no blockers**.
+**Last updated:** 2026-06-03 (feedback window closed — post #74)
+**Status:** **Feedback window closed** — build `3` **stable alpha**; logged reports **QWON-FB-001**, **QWON-FB-002** only (**Operational pass**); **no blockers**; **no new reports expected**.
 **Active build:** TestFlight **QWON `0.1.0 (3)`** · ASC **`6775685841`** · Bundle **`jp.studio-prospect.qwon.ios`**
 
 Related: [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [Tier policy (Wang/Matisse)](./qwon_text_alpha_testflight_prep.md#physical-device-lab-tier-policy) · [QWON next work queue](./qwon_next_work_queue.md) · [QWON lab evidence — build `3`](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
 
-**Previous active:** build **`0.1.0 (2)`** (keyboard fix) — historical for intake; new reports target **`0.1.0 (3)`**.
+**Build `4`:** **Not approved.** Next binary and post-alpha work require a **separate product gate** — not this intake window.
+
+---
+
+## Feedback window close (2026-06-03)
+
+| Field | Value |
+| --- | --- |
+| **Window** | QWON text alpha build **`3`** tester feedback |
+| **Closed** | **2026-06-03** — no additional reports expected |
+| **Final logged reports** | **QWON-FB-001** (Wang pass) · **QWON-FB-002** (Matisse pass) — [triage log](#triage-log-build-3) |
+| **Outcome** | **Operational pass** on both lab devices; **no release blockers** |
+| **Build `4`** | **Not approved** — triage close does not authorize upload |
+| **Reopen** | Only on explicit product decision (new binary, new lab policy, or verified blocker on build `3`) |
+
+**Do not** append new triage rows unless product reopens intake. Late-arriving reports: archive under ops storage; do not treat window close as build `4` approval.
 
 **Historical PREXUS alpha:** [PREXUS feedback log](./qwen_text_only_alpha_release_notes.md#tester-feedback-log-build-1) and [PREXUS template](./qwen_text_only_alpha_tester_instructions.md#tester-feedback-report-template) remain frozen — **do not edit**.
+
+**Previous active:** build **`0.1.0 (2)`** (keyboard fix) — historical for intake.
 
 ---
 
@@ -16,19 +33,22 @@ Related: [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [Tier p
 
 | Field | Value |
 | --- | --- |
-| **Purpose** | Tester feedback report template + triage classification for QWON text alpha |
+| **Purpose** | **Closed** intake record + template reference for QWON text alpha build **`3`** |
+| **Intake status** | **Feedback window closed** (2026-06-03) — **QWON-FB-001**, **QWON-FB-002** final; no new rows expected |
 | **Lab devices** | **Wang** (primary — A17 Pro+, llama.cpp after GGUF) · **Matisse** (secondary — A12, Embedded Heuristic) — [tier policy](./qwon_text_alpha_testflight_prep.md#physical-device-lab-tier-policy) |
 | **Build** | **`0.1.0 (3)`** — reports must cite this build unless explicitly noting a mismatch |
 | **Wang GGUF (baseline)** | **Present** on Wang as of **2026-06-03** — re-pushed; [lab evidence](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03). Re-verify after TestFlight reinstall or if Fallback returns. |
 | **Not in scope** | Build `4` approval · bugfix implementation · fake log rows |
 
-This document **prepares intake**. A **Release blocker** or **minimal fix PR** requires real template-complete reports, Codex/Product sign-off, and a **separate** implementation PR.
+This document **records closed intake** (#74). A **Release blocker** fix or new binary requires product re-open / sign-off — see [next work queue](./qwon_next_work_queue.md).
 
 ---
 
-## Tester feedback report template
+## Tester feedback report template (reference — window closed)
 
-Use this form for **every** issue or pass report on TestFlight **`0.1.0 (3)`**. Send to release engineering (Slack/issue channel — team choice).
+**Window closed:** Do not submit new reports unless product reopens intake — see [Feedback window close](#feedback-window-close-2026-06-03).
+
+Use this form for **historical reference** or if intake is reopened on TestFlight **`0.1.0 (3)`**.
 
 **Wang and Matisse:** Use the **same** template. On Matisse, **Embedded Heuristic** without `llama.cpp` is **expected**, not a failure.
 
@@ -138,7 +158,7 @@ Release engineering assigns the **final** class after intake. Tester **Initial c
 
 ## Triage log (build `3`)
 
-**Policy:** Append rows only when **real** template-based reports arrive. **Do not** add placeholder, sample, or synthetic rows.
+**Policy:** **Closed** — final rows **QWON-FB-001**, **QWON-FB-002** only. **Do not** append unless product reopens intake.
 
 | ID | Date | Device | Build | Summary | Classification | Evidence | Decision | Follow-up PR |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -244,7 +264,8 @@ Suggested next action: Monitor on build 3 — Matisse secondary pass, no blocker
 | **Build `4`** | **Not approved** by this intake doc or triage alone |
 | **Matisse heuristic path** | Expected on A12 — **not** failure by itself |
 | **PREXUS historical logs** | **Do not edit** [PREXUS feedback log](./qwen_text_only_alpha_release_notes.md#tester-feedback-log-build-1) or frozen ledger rows |
-| **No fake rows** | Real pass reports: **QWON-FB-001** (Wang), **QWON-FB-002** (Matisse) — 2026-06-03 |
+| **No fake rows** | Final reports only: **QWON-FB-001**, **QWON-FB-002** (2026-06-03); window **closed** |
+| **Window closed** | No new triage append; build **`4`** / post-alpha require **separate product gate** |
 | **No implementation in intake PRs** | Intake docs only; fixes are separate PRs after real data |
 
 ---
@@ -253,8 +274,8 @@ Suggested next action: Monitor on build 3 — Matisse secondary pass, no blocker
 
 | I need to… | Go to |
 | --- | --- |
-| Submit feedback (tester) | [Copy-paste template](#copy-paste-template) |
-| Process a report (ops) | [Intake processing](#intake-processing-release-engineering) → [Triage log](#triage-log-build-3) |
+| Submit feedback (tester) | **Window closed** — [Feedback window close](#feedback-window-close-2026-06-03); template [reference only](#tester-feedback-report-template-reference--window-closed) |
+| Process a report (ops) | **Closed** — [Triage log](#triage-log-build-3) is final unless product reopens |
 | Ship a fix | [Next work queue — minimal fix](./qwon_next_work_queue.md#minimal-fix-pr-verified-release-blocker-only) — **after** blocker sign-off |
 | Ship build `4` | **Not approved** — product gate required |
 | PREXUS build `1` history | [PREXUS release notes log](./qwen_text_only_alpha_release_notes.md#tester-feedback-log-build-1) — read-only |
