@@ -1,6 +1,6 @@
 # QWON — Post-Alpha Option Lanes (v0.2+ Planning)
 
-**Last updated:** 2026-06-03
+**Last updated:** 2026-06-03 (selection matrix)
 **Status:** **Planning only** — no implementation authorization in this document.
 **Purpose:** After **QWON `0.1.0 (3)` stable alpha** and [closed feedback intake](./qwon_text_alpha_feedback_intake.md#feedback-window-close-2026-06-03), outline **v0.2 / post-alpha candidate lanes** for product to choose from. Does **not** approve build **`4`**, TestFlight upload, tag, version bump, or code work.
 
@@ -44,6 +44,46 @@ Planning PRs for this doc are **docs-only**. First engineering PR after selectio
 | [Public / App Store readiness](#5-public--app-store-readiness) | Exit TestFlight-only phase | Public availability | High — compliance, support, quality bar | **docs-only** only until product gate |
 | [Runtime memory / context retention](#6-runtime-memory--context-retention) | Durable cognitive layer; compression | Longer sessions; less re-explaining | High — privacy, battery, SQLite/vectors | **docs-only** → spike |
 | [UI polish / onboarding](#7-ui-polish--onboarding) | Calm first-run; clearer local/heuristic story | Lower friction; fewer misreads | Low–medium — mostly UI/copy | **docs-only** → implementation |
+
+**Compare lanes:** [Selection matrix](#selection-matrix) — product decision aid; does **not** pick a winner.
+
+---
+
+## Selection matrix
+
+**Purpose:** Help **product** compare lanes before choosing one. **Codex and Cursor do not select the lane** — they execute after product names a single lane (or defers all).
+
+**Scale (qualitative, 2026-06-03):**
+
+| Scale | Meaning |
+| --- | --- |
+| **User value** | Near-term tester/user benefit on build **`3`** stable alpha line |
+| **Engineering risk** | Runtime regression, preserved-surface breakage, review blast radius |
+| **Evidence readiness** | Existing docs/eval/ops proof in repo today |
+| **Runtime / privacy impact** | Touch to orchestrator, retention, permissions, cloud egress |
+| **Time to first useful PR** | Calendar effort to a mergeable **docs-only** or **spike** PR (not full feature) |
+
+| Lane | User value | Engineering risk | Evidence readiness | Runtime / privacy impact | Time to first useful PR | Recommended if | Avoid if |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| **LiteRT / local backend** | Medium–High | **High** | Medium — [research memo](../research/litert_lm_adoption_decision.md) exists; device eval incomplete | **High** — routing, Metal, tier policy | Medium — docs memo + eval plan first | Product prioritizes **backend strategy** and A12+ path clarity before UX | Need quick user-visible win; no eval bandwidth; want to avoid `runtime/` churn |
+| **OCR / camera** | High (long term) | **High** | Low — architecture sketches only | **High** — camera permission, vision pipeline, routing | Medium–Long — design memo before spike | Product commits to **multimodal sensor** roadmap | Text-alpha scope still primary; no Codex architecture plan |
+| **Model download / GGUF UX** | **High** (testers) | Medium | Medium — [models/README](../../models/README.md), USB push ops proven; no in-app UX | Medium — storage, network, file integrity | Medium — UX memo → download spike | Product wants to **remove USB push friction** for lab + future testers | Filename migration bundled; upload implied |
+| **Project container rename** | **Low** (dev-only) | Medium | High — [inventory](./qwon_preserved_prexus_surface_inventory.md), Phase 4 audit complete | **Low** — infra only | Medium — checklist then scoped PR | Product prioritizes **contributor/CI clarity** over user features | Any user-facing lane active; no migration plan |
+| **App Store readiness** | High (long term) | **High** | Low — TestFlight prep only; no public checklist | Medium — compliance, support, privacy labels | Long — checklist doc only at first | Product plans **public release horizon** explicitly | Conflated with build **`4`** gate; alpha still internal-only |
+| **Runtime memory / retention** | Medium–High | **High** | Low–Medium — architecture principles; no retention policy doc | **High** — SQLite/vectors, retention law, battery | Medium–Long — policy doc before schema | Product prioritizes **cognitive runtime** core thesis | Privacy/retention policy undefined; cloud dump acceptable shortcut |
+| **UI polish / onboarding** | **High** (near term) | **Low–Medium** | **High** — [FB-001/002 pass](./qwon_text_alpha_feedback_intake.md#triage-log-build-3), tier policy, ops PNGs | **Low** — mostly copy/UI; watch runtime coupling | **Short** — copy/screen map docs-only PR | Product wants **lowest-risk first useful PR** after stable alpha | Backend/routing must change first; gamified UI pressure |
+
+### Low-risk first candidate (comparison only — not a decision)
+
+**UI polish / onboarding** scores best on **engineering risk**, **evidence readiness**, and **time to first useful PR** given closed intake with Wang/Matisse pass evidence. That makes it a **reasonable first lane to evaluate** — not a default choice.
+
+Product should still **explicitly choose one lane** (or Stay on build **`3`**) using this matrix plus [option detail](#option-detail). Agents must **not** treat this row as authorization to implement UI without product selection and Codex scoped plan.
+
+### After product selects a lane
+
+1. Product records the choice (issue/memo — outside this repo if preferred).
+2. Codex opens a **scoped plan** for that lane only.
+3. Cursor implements per [Recommended workflow](#recommended-workflow) — **no** TestFlight upload/tag/bump unless a **separate** product gate approves.
 
 ---
 
@@ -169,7 +209,7 @@ Planning PRs for this doc are **docs-only**. First engineering PR after selectio
 
 | Product question | Read |
 | --- | --- |
-| Which lane should we explore first? | [Option summary](#option-summary) → one [option detail](#option-detail) section |
+| Which lane should we explore first? | [Selection matrix](#selection-matrix) → [Option detail](#option-detail) |
 | Can we ship code now? | **No** — [Recommended workflow](#recommended-workflow) |
 | Can we upload the next TestFlight build? | **Build `4` not approved** — [checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) |
 | Stay on build **`3`** only? | **Yes** — default; no lane selection required |
