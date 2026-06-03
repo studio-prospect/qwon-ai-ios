@@ -1,11 +1,11 @@
 # QWON Rename — Documentation Index
 
-**Last updated:** 2026-06-03 (UI polish / onboarding scoped plan)
+**Last updated:** 2026-06-03 (UI-1 complete · UI-2 need assessment)
 **Purpose:** **Information architecture only** — where to start reading QWON rename / Phase 4 docs and in what order. Does **not** add new policy; it summarizes and links existing decisions.
 
 **Next decision (release vs post-alpha):** [QWON next work queue — decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint)
 
-**Post-alpha option lanes (v0.2+ planning):** [qwon_post_alpha_options.md](./qwon_post_alpha_options.md) — **selected first lane:** [UI polish / onboarding](./qwon_post_alpha_options.md#product-lane-decision) with [scoped plan](./qwon_ui_polish_onboarding_plan.md) (planning only; build **`4` not approved**)
+**Post-alpha option lanes (v0.2+ planning):** [qwon_post_alpha_options.md](./qwon_post_alpha_options.md) — **selected first lane:** [UI polish / onboarding](./qwon_post_alpha_options.md#product-lane-decision) — UI-1 **merged**; [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) (**defer / not opened**; build **`4` not approved**)
 
 **Next work (post-rename docs):** [QWON next work queue](./qwon_next_work_queue.md) — what to do / not do after rename docs are complete.
 
@@ -27,7 +27,7 @@
 | **Build `4`** | **Not approved** |
 | **Next decision** | [Decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) — Stay · build `4` gate · post-alpha planning |
 | **Post-alpha / v0.2 candidates** | [Selection matrix](./qwon_post_alpha_options.md#selection-matrix) — compare deferred lanes |
-| **Current next lane (planning)** | **[UI polish / onboarding](./qwon_post_alpha_options.md#product-lane-decision)** — selected; [scoped plan](./qwon_ui_polish_onboarding_plan.md) created; implementation **not approved until plan merge + Cursor task** |
+| **Current next lane** | **[UI polish / onboarding](./qwon_post_alpha_options.md#product-lane-decision)** — UI-1 **merged** (#80, #81); **UI-2 deferred** — [need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) |
 | **Xcode project container** | **`PREXUS.xcodeproj`** — deferred; see [preserved inventory](./qwon_preserved_prexus_surface_inventory.md) |
 
 ---
@@ -52,7 +52,8 @@
 | Question | Read first |
 | --- | --- |
 | **What should I do next?** | [Next decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) — Stay · build `4` product gate · post-alpha planning |
-| **Which post-alpha lane should product pick?** | **Decided** — [UI polish / onboarding](./qwon_post_alpha_options.md#product-lane-decision); implementation scope in [UI polish / onboarding plan](./qwon_ui_polish_onboarding_plan.md); deferred lanes in [selection matrix](./qwon_post_alpha_options.md#selection-matrix) |
+| **Which post-alpha lane should product pick?** | **Decided** — [UI polish / onboarding](./qwon_post_alpha_options.md#product-lane-decision); UI-1 **done**; [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) |
+| **Should we open UI-2 (onboarding structure)?** | **Not now** — **defer / not opened** · [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) · **UI-2 not approved** |
 | **Should I rename a PREXUS string?** | [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md) — default **no** unless listed as safe or product opens a scoped migration PR |
 | **Should we ship build `4`?** | **Not approved** — build **`3` stable alpha**; feedback **closed** · [intake close](./qwon_text_alpha_feedback_intake.md#feedback-window-close-2026-06-03) |
 | **Which app / Bundle ID is active?** | [QWON bundle memo](./qwon_bundle_id_decision_memo.md) + [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) — QWON `6775685841`; PREXUS `6775110218` is historical only |
@@ -77,7 +78,7 @@
 | [qwen_text_only_alpha_docs_index.md](./qwen_text_only_alpha_docs_index.md) | **Historical** PREXUS alpha index — separate product line |
 | [qwon_next_work_queue.md](./qwon_next_work_queue.md) | **Post-rename work queue** — ready vs gated vs deferred |
 | [qwon_text_alpha_feedback_intake.md](./qwon_text_alpha_feedback_intake.md) | **Build `3` feedback template + triage log** — live intake entry point |
-| [qwon_ui_polish_onboarding_plan.md](./qwon_ui_polish_onboarding_plan.md) | **First post-alpha scoped plan** — copy/UI boundary, PR split, verification, Cursor task |
+| [qwon_ui_polish_onboarding_plan.md](./qwon_ui_polish_onboarding_plan.md) | **First post-alpha scoped plan** — UI-1 complete, [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03), PR split, verification |
 
 **Related (outside this index):** [models/README.md](../../models/README.md) (GGUF placement) · [agent_collaboration_workflow.md](./agent_collaboration_workflow.md) (Codex/Cursor roles) · [feedback intake](./qwon_text_alpha_feedback_intake.md) · [next work queue](./qwon_next_work_queue.md)
 
