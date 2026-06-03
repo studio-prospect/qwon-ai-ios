@@ -4,7 +4,7 @@
 **Status:** **Selected for scoped planning only** — **not** implementation, spike, or build **`4`** approval.
 **Purpose:** Record Product selection of **Model download / GGUF UX** as the **second post-alpha lane** after [UI polish / onboarding](./qwon_ui_polish_onboarding_plan.md) (UI-1 complete). Enables Codex to author a scoped plan; does **not** authorize Cursor implementation.
 
-Related: [Post-alpha next lane checkpoint](./qwon_post_alpha_options.md#next-lane-selection-checkpoint-2026-06-03) · [Option detail — Model download / GGUF UX](./qwon_post_alpha_options.md#3-model-download--gguf-placement-ux) · [Next work queue](./qwon_next_work_queue.md#next-decision-checkpoint) · [models/README.md](../../models/README.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md)
+Related: [Scoped plan](./qwon_model_download_gguf_ux_plan.md) · [Post-alpha next lane checkpoint](./qwon_post_alpha_options.md#next-lane-selection-checkpoint-2026-06-03) · [Option detail — Model download / GGUF UX](./qwon_post_alpha_options.md#3-model-download--gguf-placement-ux) · [Next work queue](./qwon_next_work_queue.md#next-decision-checkpoint) · [models/README.md](../../models/README.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md)
 
 ---
 
@@ -16,7 +16,8 @@ Related: [Post-alpha next lane checkpoint](./qwon_post_alpha_options.md#next-lan
 | **First post-alpha lane** | **UI polish / onboarding** — **complete** (UI-1 #80, #81) · UI-2 **deferred** (#82) |
 | **Build `4`** | **Not approved** |
 | **Model filename** | **`prexus-local-mvp.gguf`** — **preserved** until dedicated migration PR |
-| **This doc** | Lane **selection** only — Codex scoped plan is **next** |
+| **Scoped plan** | [qwon_model_download_gguf_ux_plan.md](./qwon_model_download_gguf_ux_plan.md) |
+| **This doc** | Lane **selection** only |
 
 ---
 
@@ -88,7 +89,7 @@ Codex should produce **`docs/product/qwon_model_download_gguf_ux_plan.md`** (or 
 | Agent | Action |
 | --- | --- |
 | **Product** | **Done** — lane selected in this memo |
-| **Codex** | **Next** — author scoped plan per [Required scoped plan contents](#required-scoped-plan-contents-codex) |
+| **Codex** | **Done** — [scoped plan](./qwon_model_download_gguf_ux_plan.md) authored for review |
 | **Cursor** | **Wait** — no implementation or spike until scoped plan merge and explicit task |
 | **All** | **No** build **`4`**, upload, tag, bump, GGUF commit, or filename migration from this decision |
 

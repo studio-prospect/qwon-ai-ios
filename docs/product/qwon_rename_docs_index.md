@@ -1,11 +1,11 @@
 # QWON Rename — Documentation Index
 
-**Last updated:** 2026-06-03 (Model download / GGUF UX lane selected)
+**Last updated:** 2026-06-03 (Model download / GGUF UX scoped plan)
 **Purpose:** **Information architecture only** — where to start reading QWON rename / Phase 4 docs and in what order. Does **not** add new policy; it summarizes and links existing decisions.
 
-**Next decision (release vs post-alpha):** [QWON next work queue — decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) · [Model download / GGUF UX decision](./qwon_model_download_gguf_ux_decision.md)
+**Next decision (release vs post-alpha):** [QWON next work queue — decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) · [Model download / GGUF UX scoped plan](./qwon_model_download_gguf_ux_plan.md)
 
-**Post-alpha option lanes (v0.2+ planning):** [qwon_post_alpha_options.md](./qwon_post_alpha_options.md) — **selected next lane:** [Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md) (scoped planning only; build **`4` not approved**)
+**Post-alpha option lanes (v0.2+ planning):** [qwon_post_alpha_options.md](./qwon_post_alpha_options.md) — **selected next lane:** [Model download / GGUF UX](./qwon_model_download_gguf_ux_plan.md) (scoped plan; build **`4` not approved**)
 
 **Next work (post-rename docs):** [QWON next work queue](./qwon_next_work_queue.md) — what to do / not do after rename docs are complete.
 
@@ -28,7 +28,7 @@
 | **Next decision** | [Decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) — **Stay** · build `4` gate · [Model download / GGUF UX decision](./qwon_model_download_gguf_ux_decision.md) |
 | **Post-alpha / v0.2 candidates** | [Option lanes](./qwon_post_alpha_options.md) · [Selection matrix](./qwon_post_alpha_options.md#selection-matrix) |
 | **First post-alpha lane** | **UI polish — complete** (UI-1 #80, #81) · UI-2 **deferred** (#82) |
-| **Selected next lane** | **[Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md)** — scoped planning only |
+| **Selected next lane** | **[Model download / GGUF UX](./qwon_model_download_gguf_ux_plan.md)** — scoped plan available; implementation still gated |
 | **Xcode project container** | **`PREXUS.xcodeproj`** — deferred; see [preserved inventory](./qwon_preserved_prexus_surface_inventory.md) |
 
 ---
@@ -52,7 +52,7 @@
 
 | Question | Read first |
 | --- | --- |
-| **What should I do next?** | [Next decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) — Codex scoped plan for [Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md) |
+| **What should I do next?** | [Next decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) — use the [Model download / GGUF UX scoped plan](./qwon_model_download_gguf_ux_plan.md) |
 | **Which post-alpha lane should product pick next?** | **Decided** — [Model download / GGUF UX decision](./qwon_model_download_gguf_ux_decision.md) |
 | **Should we open UI-2 (onboarding structure)?** | **Not now** — **defer / not opened** · [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) |
 | **Should I rename a PREXUS string?** | [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md) — default **no** unless listed as safe or product opens a scoped migration PR |
@@ -81,6 +81,7 @@
 | [qwon_text_alpha_feedback_intake.md](./qwon_text_alpha_feedback_intake.md) | **Build `3` feedback template + triage log** — live intake entry point |
 | [qwon_post_alpha_options.md](./qwon_post_alpha_options.md) | **Post-alpha lane catalog** — UI polish complete; Model download / GGUF UX selected |
 | [qwon_model_download_gguf_ux_decision.md](./qwon_model_download_gguf_ux_decision.md) | **Second post-alpha lane decision** — scoped planning gate, Codex plan requirements |
+| [qwon_model_download_gguf_ux_plan.md](./qwon_model_download_gguf_ux_plan.md) | **Second post-alpha scoped plan** — model status UX first, guided placement next, in-app download gated later |
 | [qwon_ui_polish_onboarding_plan.md](./qwon_ui_polish_onboarding_plan.md) | **First post-alpha scoped plan** — UI-1 complete, [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) |
 
 **Related (outside this index):** [models/README.md](../../models/README.md) (GGUF placement) · [agent_collaboration_workflow.md](./agent_collaboration_workflow.md) (Codex/Cursor roles) · [feedback intake](./qwon_text_alpha_feedback_intake.md) · [next work queue](./qwon_next_work_queue.md)
