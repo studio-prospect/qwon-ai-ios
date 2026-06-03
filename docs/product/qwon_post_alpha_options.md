@@ -4,7 +4,7 @@
 **Status:** **Second post-alpha lane selected** — [Model download / GGUF UX decision](./qwon_model_download_gguf_ux_decision.md); **scoped planning only**; **no implementation or spike approved**.
 **Purpose:** After **QWON `0.1.0 (3)` stable alpha** and [UI polish / onboarding UI-1 complete](./qwon_ui_polish_onboarding_plan.md), outline **remaining v0.2 / post-alpha candidate lanes** and record lane selections. Does **not** approve build **`4`**, TestFlight upload, tag, version bump, or code work.
 
-Related: [Model download / GGUF UX decision](./qwon_model_download_gguf_ux_decision.md) · [Next lane selection checkpoint](#next-lane-selection-checkpoint-2026-06-03) · [UI polish / onboarding plan](./qwon_ui_polish_onboarding_plan.md) · [Next decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) · [QWON next work queue — deferred](./qwon_next_work_queue.md#deferred--post-alpha) · [Agent collaboration workflow](./agent_collaboration_workflow.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md)
+Related: [Model download / GGUF UX scoped plan](./qwon_model_download_gguf_ux_plan.md) · [Model download / GGUF UX decision](./qwon_model_download_gguf_ux_decision.md) · [Next lane selection checkpoint](#next-lane-selection-checkpoint-2026-06-03) · [UI polish / onboarding plan](./qwon_ui_polish_onboarding_plan.md) · [Next decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) · [QWON next work queue — deferred](./qwon_next_work_queue.md#deferred--post-alpha) · [Agent collaboration workflow](./agent_collaboration_workflow.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md)
 
 ---
 
@@ -16,8 +16,9 @@ Related: [Model download / GGUF UX decision](./qwon_model_download_gguf_ux_decis
 | **Feedback** | **Closed** — **QWON-FB-001**, **QWON-FB-002** operational pass; **no blockers** |
 | **Build `4`** | **Not approved** |
 | **First post-alpha lane** | **UI polish / onboarding** — **complete** (#80 UI-1, #81 verification) · [UI-2 deferred](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) (#82) |
-| **Selected next lane** | **[Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md)** — scoped planning only |
-| **Next agent step** | **Codex scoped plan** — [required contents](./qwon_model_download_gguf_ux_decision.md#required-scoped-plan-contents-codex) |
+| **Selected next lane** | **[Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md)** |
+| **Scoped plan** | **[qwon_model_download_gguf_ux_plan.md](./qwon_model_download_gguf_ux_plan.md)** |
+| **Next agent step** | PR M1 only after explicit Product/Codex assignment |
 | **This doc** | Lane catalog + decisions — selection does **not** authorize implementation or spike |
 
 **v0.2** below means **post-alpha product direction candidates**, not an approved release or marketing version bump.
@@ -57,13 +58,13 @@ Planning PRs for this doc are **docs-only**. First engineering PR after a **new*
 | Field | Value |
 | --- | --- |
 | **Product decision (2026-06-03)** | **[Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md)** selected for scoped planning |
-| **Default agent posture** | **Wait** — Codex scoped plan next; Cursor **no** implementation/spike |
-| **After scoped plan merge** | Cursor spike/implementation only with explicit gate |
+| **Default agent posture** | **Wait** — scoped plan available; Cursor **no** implementation/spike without assignment |
+| **After scoped plan merge** | Cursor may start **PR M1** only with explicit Product/Codex assignment |
 | **UI-2** | **Not opened** unless new evidence per [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) |
 
 ### Next lane candidates (historical — selection closed 2026-06-03)
 
-**Selected:** [Model download / GGUF UX](#3-model-download--gguf-placement-ux) — see [decision memo](./qwon_model_download_gguf_ux_decision.md).
+**Selected:** [Model download / GGUF UX](#3-model-download--gguf-placement-ux) — see [decision memo](./qwon_model_download_gguf_ux_decision.md) and [scoped plan](./qwon_model_download_gguf_ux_plan.md).
 
 **Remaining deferred:**
 

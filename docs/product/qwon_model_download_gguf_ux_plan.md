@@ -1,0 +1,310 @@
+# QWON - Model Download / GGUF UX - Scoped Plan
+
+**Last updated:** 2026-06-03
+**Status:** **Scoped plan** - implementation, spike, Build `4`, TestFlight upload, tag, version bump, GGUF commit, and filename migration are **not approved** by this document.
+**Purpose:** Define the safe implementation boundary for reducing QWON text-alpha model acquisition friction after [Product selected Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md). This plan turns that lane decision into a staged UX/ops path without changing the current runtime contract.
+
+Related: [Decision memo](./qwon_model_download_gguf_ux_decision.md) · [models/README.md](../../models/README.md) · [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [QWON lab evidence](./qwon_text_alpha_lab_evidence.md) · [UI polish / onboarding](./qwon_ui_polish_onboarding_plan.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md)
+
+---
+
+## Baseline (do not override)
+
+| Field | Value |
+| --- | --- |
+| **Active TestFlight** | **QWON `0.1.0 (3)`** - stable alpha |
+| **Build `4`** | **Not approved** |
+| **Current local model file** | `prexus-local-mvp.gguf` - preserved until a dedicated migration PR |
+| **Current default local model** | Qwen2.5-0.5B-Instruct Q4_K_M (`~379-400 MB`) |
+| **Current placement contract** | `PREXUS_LOCAL_MODEL_PATH` -> app bundle `prexus-local-mvp.gguf` -> on-device `Documents/Models/prexus-local-mvp.gguf` |
+| **Wang path** | A17 Pro+ tier; GGUF present; expected backend is `llama.cpp On-Device Runtime` |
+| **Matisse path** | A12 tier; Embedded Heuristic Runtime is expected; GGUF is optional/not required |
+| **Model binaries** | Not committed to git; stored locally or on device only |
+
+---
+
+## Product Goal
+
+Reduce model-acquisition friction before tester expansion while preserving QWON alpha stability.
+
+| Goal | Intended result |
+| --- | --- |
+| **Tester clarity** | A tester can understand whether the local model is present and what to do if it is missing. |
+| **Ops reliability** | Release engineering can verify model placement without ad-hoc screenshots or ambiguous fallback reports. |
+| **Runtime safety** | Missing, corrupt, or unsupported model states still fall back without crash. |
+| **Scope control** | Guided placement and status UX can ship before any fully in-app download work. |
+
+---
+
+## Non-goals
+
+| Do not do | Reason |
+| --- | --- |
+| Bundle or commit GGUF files | Model weights remain git-excluded and ops/device-local. |
+| Rename `prexus-local-mvp.gguf` | Preserved filename; migration needs a separate product-approved PR. |
+| Rename `PREXUS_LOCAL_MODEL_*` env vars | Preserved runtime/script contracts. |
+| Change `LocalGGUFModelPlacement` order in the first implementation PR | Current lookup order is the stability contract. |
+| Add LiteRT, OCR, memory retention, or backend selector work | Separate post-alpha lanes. |
+| Claim "fully offline" or "fully in-app download" until implementation proves it | QWON is local-first, not offline-only; guided ops may still be required. |
+| Approve Build `4`, TestFlight upload, tag, or version bump | Release engineering gate remains separate. |
+
+---
+
+## Current USB Push Flow
+
+Today, QWON alpha relies on release engineering or developer ops to place the GGUF file.
+
+| Step | Command / surface | Result |
+| --- | --- | --- |
+| 1 | `./tools/scripts/fetch_local_model.sh` | Downloads `models/prexus-local-mvp.gguf` locally. |
+| 2 | `./tools/scripts/build_llama_xcframework.sh` + `ruby tools/scripts/generate_xcodeproj.rb` | Prepares llama.cpp local builds for device validation when needed. |
+| 3 | `./tools/scripts/install_on_device.sh "Wang"` | Installs debug/device build for smoke workflows. |
+| 4 | `./tools/scripts/push_local_model_to_device.sh "Wang"` | Copies the GGUF into the app sandbox as `Documents/Models/prexus-local-mvp.gguf`. |
+| 5 | TestFlight/manual smoke | Confirms Chat local runtime and Diagnostics `answered_by=llama.cpp On-Device Runtime`. |
+
+### Current tester pain
+
+| Pain | Consequence |
+| --- | --- |
+| USB push is outside TestFlight | New testers cannot self-serve local Qwen setup. |
+| Missing GGUF looks like fallback behavior | Wang can be misread as broken unless Diagnostics are checked. |
+| Filename remains PREXUS-branded | Correct but surprising; global rename would break placement. |
+| Manual evidence lives in ops folders | Repo docs need filename-only ledger entries, not artifacts. |
+
+---
+
+## Placement Contract
+
+The plan preserves the current `LocalGGUFModelPlacement` lookup order until a scoped implementation explicitly changes it:
+
+1. `PREXUS_LOCAL_MODEL_PATH` environment variable, absolute path.
+2. App bundle resource `prexus-local-mvp.gguf`, optional debug packaging.
+3. On-device `Documents/Models/prexus-local-mvp.gguf`.
+
+### Contract rules
+
+| Rule | Requirement |
+| --- | --- |
+| Filename | Keep `prexus-local-mvp.gguf` for QWON alpha. |
+| Location | Guided placement must target `Documents/Models/prexus-local-mvp.gguf`. |
+| Discovery | UI may read/reflect model availability, but must not silently alter lookup order in the first PR. |
+| Migration | Any future `qwon-local-mvp.gguf` rename needs migration design for already-pushed devices. |
+| Env vars | Keep `PREXUS_LOCAL_MODEL_PATH`, `PREXUS_LOCAL_MODEL_SOURCE`, and `PREXUS_LOCAL_MODEL_DEST` unless a dedicated env migration lands. |
+
+---
+
+## Integrity And Storage Requirements
+
+Any future download or guided-placement implementation must treat model availability as a state machine, not a boolean.
+
+| State | Meaning | Required UX / runtime behavior |
+| --- | --- | --- |
+| `missing` | No file at resolved model path | Explain local model is not installed; fallback path is expected; no crash. |
+| `present-unverified` | File exists but hash/size not confirmed | Show caution in Settings/Diagnostics; allow runtime attempt only if current code path already does so. |
+| `verified` | File exists and expected hash/size match | Wang should use llama.cpp on supported hardware. |
+| `partial` | Temporary or size-mismatch file | Do not present as installed; clean retry path required before download implementation. |
+| `corrupt` | Hash mismatch or load failure | Keep file quarantined or report failure; fallback remains embedded heuristic. |
+| `unsupported-device` | Device below required tier | Matisse path remains expected heuristic; do not encourage repeated model install attempts. |
+
+### Minimum metadata for future implementation
+
+| Metadata | Purpose |
+| --- | --- |
+| Expected byte size | Fast partial-file detection before hash. |
+| SHA-256 | Integrity verification after copy/download. |
+| Model family / quant label | User-readable Settings/Diagnostics copy. |
+| Source URL or source label | Support reproducibility; do not expose unstable third-party URLs as product promises. |
+| Verified timestamp | Ops/debugging evidence. |
+
+### Storage constraints
+
+| Constraint | Plan requirement |
+| --- | --- |
+| App sandbox storage | Check available space before download/copy UX claims success. |
+| Temporary files | Use a temporary filename and atomic move for any future download. |
+| Deletion | Do not add delete UX in the first implementation unless product explicitly gates it. |
+| Backup | Model files should not be treated as user data requiring backup. |
+
+---
+
+## UX Options
+
+### Option A - Guided placement/status UX (recommended first implementation)
+
+Add Settings/Diagnostics surfaces that explain and verify the existing manual model path without adding network download.
+
+| Field | Plan |
+| --- | --- |
+| User value | High; converts opaque ops state into actionable guidance. |
+| Risk | Low-medium; mostly UI/status plus file presence/metadata reads. |
+| Runtime change | None to lookup order or fallback chain. |
+| Best first PR | Settings + Diagnostics model status card, copy, tests. |
+| Exit evidence | Simulator copy tests; Wang with GGUF present; Wang with GGUF missing; Matisse expected heuristic copy. |
+
+Recommended wording direction:
+
+- "Local model file: installed / missing / unsupported on this device."
+- "Wang-class devices can use Qwen locally after `prexus-local-mvp.gguf` is placed in Documents/Models."
+- "Matisse-class devices may use Embedded Heuristic Runtime; this is expected for the alpha."
+- Avoid "download in QWON" until actual in-app download exists.
+
+### Option B - Guided external acquisition
+
+Provide in-app or tester-doc guided steps for obtaining and placing the model while the actual transfer still happens outside QWON.
+
+| Field | Plan |
+| --- | --- |
+| User value | Medium-high for internal testers. |
+| Risk | Medium; copy must not imply QWON can complete the transfer alone. |
+| Runtime change | None required. |
+| Best PR timing | After Option A status UX proves model-state copy. |
+| Key constraint | If USB/Mac ops remain required, state that clearly. |
+
+### Option C - In-app HTTPS download (gated later)
+
+Allow QWON to fetch the GGUF itself.
+
+| Field | Plan |
+| --- | --- |
+| User value | Highest for tester expansion. |
+| Risk | High; hosting, bandwidth, integrity, partial downloads, storage, backgrounding, and legal/distribution questions. |
+| Runtime change | Likely storage/download manager plus model-state UI; lookup order may remain unchanged if file lands at `Documents/Models/prexus-local-mvp.gguf`. |
+| Gate | Product + Codex implementation plan after Option A/B evidence. |
+| Must not start if | No approved hosting URL, checksum policy, legal/distribution review, or device evidence plan. |
+
+### Recommendation
+
+Start with **Option A**. It directly reduces support ambiguity, does not require Build `4` by itself, and creates the evidence needed to decide whether Option B or C is worth implementing.
+
+---
+
+## Settings / Diagnostics Copy Plan
+
+| Surface | Required content | Do not say |
+| --- | --- | --- |
+| Settings - Local Runtime | Model status, expected filename, device support tier, and where to check Diagnostics. | "Tap to download" unless download exists. |
+| Runtime Diagnostics | `answered_by`, `primary_failure`, `fallback_reason`, model file state, and device-tier explanation. | "Matisse failed" when heuristic is expected. |
+| Chat helper / fallback strip | Plain missing-model or heuristic-state explanation after fallback. | "Fully offline" or "Qwen unavailable forever." |
+| Tester docs | Exact ops command and evidence filename conventions. | Anything implying GGUF is bundled in TestFlight. |
+
+### Diagnostic mapping
+
+| Diagnostic | Plain meaning |
+| --- | --- |
+| `answered_by=llama.cpp On-Device Runtime` | QWON answered with the local GGUF-backed runtime. |
+| `answered_by=Embedded Heuristic Runtime` | QWON answered with the built-in fallback. Expected on older devices or when model is unavailable. |
+| `primary_failure=model_asset_unavailable` | The GGUF was not found at the expected placement path. |
+| `fallback_reason=embedded_heuristic` | Fallback answered after the primary local runtime could not. |
+
+---
+
+## Device Expectations
+
+| Device tier | Expected behavior | Evidence requirement |
+| --- | --- | --- |
+| **Wang / A17 Pro+ primary** | With verified `prexus-local-mvp.gguf`, Chat should use local llama.cpp. Missing/corrupt file should fall back without crash. | Chat + Diagnostics screenshots/log names in ops storage; no PNG commit. |
+| **Matisse / A12 secondary** | Embedded Heuristic Runtime is expected. GGUF install is optional and should not be required for pass. | Install/launch and copy sanity; full Diagnostics only for baseline/runtime changes. |
+| **Simulator** | Simulator may use stub/fallback behavior; no GGUF runtime proof. | Copy/layout/tests only. |
+
+---
+
+## Fallback And Rollback
+
+| Failure | Required behavior |
+| --- | --- |
+| Missing model | Existing embedded heuristic fallback; Diagnostics explains missing asset. |
+| Corrupt model | Treat as unusable; fallback without crash; expose actionable diagnostic detail. |
+| Partial download/copy | Do not mark installed; retry or guided re-copy required. |
+| Unsupported device | Do not loop download prompts; explain heuristic path. |
+| Future implementation regression | Roll back to manual USB push flow and existing placement contract. |
+
+Rollback principle: the current build `3` path remains the known-good baseline. Any implementation PR must leave manual `push_local_model_to_device.sh "Wang"` usable.
+
+---
+
+## PR Split
+
+### PR M1 - Model status UX and docs (recommended first)
+
+| Field | Requirement |
+| --- | --- |
+| Scope | Settings/Diagnostics status for model presence, filename, device tier, and fallback explanation. |
+| Allowed | SwiftUI copy/status, read-only file presence/metadata helper, tests, docs. |
+| Forbidden | Download manager, network fetch, filename/env migration, lookup-order change, Build `4`. |
+| Validation | `generate_xcodeproj.rb`, simulator tests, Wang present/missing if device available. |
+
+### PR M2 - Guided placement flow
+
+| Field | Requirement |
+| --- | --- |
+| Scope | Step-by-step guidance for internal testers and support, still using external ops/USB. |
+| Allowed | Settings/help copy, tester instructions, optional copy-to-clipboard command text. |
+| Forbidden | Claiming self-serve download; changing storage contract. |
+| Gate | M1 merged and reviewed. |
+
+### PR M3 - In-app download spike (conditional)
+
+| Field | Requirement |
+| --- | --- |
+| Scope | Prototype downloader only after hosting/checksum/legal/storage gates are answered. |
+| Allowed | Spike branch/PR with explicit Product/Codex gate. |
+| Forbidden | Shipping default UX, Build `4`, or TestFlight upload bundled with spike. |
+| Gate | Approved source URL, SHA-256, file-size policy, storage plan, and fallback evidence plan. |
+
+---
+
+## Acceptance Criteria
+
+| Area | Criteria |
+| --- | --- |
+| Scope | Plan or implementation does not approve Build `4`, upload, tag, or version bump. |
+| Model contract | `prexus-local-mvp.gguf` remains the active filename; `PREXUS_LOCAL_MODEL_PATH` remains valid. |
+| Runtime behavior | Existing fallback chain remains intact; no backend selector or LiteRT changes. |
+| Wang | GGUF present path is legible and verifies local llama.cpp. |
+| Matisse | Heuristic expected path is not reported as failure. |
+| Integrity | Any future download/copy implementation distinguishes missing, partial, corrupt, and verified states. |
+| Evidence | Ops artifacts stay outside git; docs record filenames/results only. |
+
+---
+
+## Verification Plan
+
+For this docs-only plan PR:
+
+```sh
+git diff --check
+```
+
+For PR M1 if implemented later:
+
+```sh
+ruby tools/scripts/generate_xcodeproj.rb
+xcodebuild -project app/ios/PREXUS.xcodeproj -scheme QWON \
+  -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' test
+```
+
+Recommended device evidence for implementation PRs:
+
+| Scenario | Expected |
+| --- | --- |
+| Wang with GGUF present | Chat local answer; Diagnostics `answered_by=llama.cpp On-Device Runtime`. |
+| Wang with GGUF missing/renamed locally | Fallback without crash; Diagnostics `primary_failure` + `fallback_reason=embedded_heuristic`. |
+| Matisse | Install/launch; heuristic expected copy; no false failure. |
+| iPhone SE width simulator | Status/copy surfaces fit without blocking Chat composer. |
+
+---
+
+## Cursor Handoff After This Plan Merges
+
+Cursor may begin **PR M1 only** after this plan is merged and Product/Codex explicitly assigns it.
+
+Initial task boundary for Cursor:
+
+- Implement model status UX/copy in Settings and Runtime Diagnostics.
+- Keep model lookup order and filename unchanged.
+- Do not add network download.
+- Do not add Build `4` release ops.
+- Do not commit model binaries or artifacts.
+- Preserve historical PREXUS docs and preserved runtime/env names.
+
+Anything beyond M1 requires a new Product/Codex gate.

@@ -1,10 +1,10 @@
 # QWON — Next Work Queue
 
-**Last updated:** 2026-06-03 (Model download / GGUF UX lane selected)
+**Last updated:** 2026-06-03 (Model download / GGUF UX scoped plan)
 **Status:** **Queue / guardrail only** — no implementation authorization in this document.
 **Purpose:** After Phase 4 rename docs are complete, classify what agents **may** do next vs what requires **product gates**. Prevents drift into ungated **build `4`**, project-container rename, or blind PREXUS cleanup.
 
-Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision checkpoint](#next-decision-checkpoint) · [Model download / GGUF UX decision](./qwon_model_download_gguf_ux_decision.md) · [Post-alpha next lane checkpoint](./qwon_post_alpha_options.md#next-lane-selection-checkpoint-2026-06-03) · [UI polish / onboarding plan](./qwon_ui_polish_onboarding_plan.md) · [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
+Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision checkpoint](#next-decision-checkpoint) · [Model download / GGUF UX plan](./qwon_model_download_gguf_ux_plan.md) · [Model download / GGUF UX decision](./qwon_model_download_gguf_ux_decision.md) · [Post-alpha next lane checkpoint](./qwon_post_alpha_options.md#next-lane-selection-checkpoint-2026-06-03) · [UI polish / onboarding plan](./qwon_ui_polish_onboarding_plan.md) · [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
 
 ---
 
@@ -40,16 +40,17 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 | **Build `4`** | **Not approved** — no upload, tag, or version bump without explicit product gate |
 | **Lab** | Wang + Matisse build `3` verified · [lab evidence](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) |
 | **First post-alpha lane** | **UI polish / onboarding — complete** (UI-1 #80, #81) · UI-2 **deferred** (#82) |
-| **Selected next lane** | **[Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md)** — scoped planning only |
-| **Next agent step** | **Codex scoped plan** — [required contents](./qwon_model_download_gguf_ux_decision.md#required-scoped-plan-contents-codex) |
+| **Selected next lane** | **[Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md)** |
+| **Scoped plan** | **[qwon_model_download_gguf_ux_plan.md](./qwon_model_download_gguf_ux_plan.md)** — recommends status/guided placement first; no Build `4` |
+| **Next agent step** | Cursor may start **PR M1 only** after explicit Product/Codex assignment |
 
 ### Choose a branch
 
 | Branch | When | First doc | Agent default |
 | --- | --- | --- | --- |
-| **Stay** | Maintain build **`3`**; no new binary; docs/readme hygiene only | This queue — [Ready / low-risk docs-ops](#ready--low-risk-docs-ops) | **Yes** — while Codex drafts scoped plan |
+| **Stay** | Maintain build **`3`**; no new binary; docs/readme hygiene only | This queue — [Ready / low-risk docs-ops](#ready--low-risk-docs-ops) | **Yes** — unless PR M1 is explicitly assigned |
 | **Product gate: build `4` decision** | Product explicitly evaluates whether a **new TestFlight binary** is warranted | [TestFlight prep — build `4` gate](./qwon_text_alpha_testflight_prep.md#phase-4-build-3-decision-gate) · [Conditional upload build `4`](#testflight-upload-build-4) | **No** — gate docs only until product approves |
-| **Post-alpha: Model download / GGUF UX** | Lane **selected** for scoped planning | [Decision memo](./qwon_model_download_gguf_ux_decision.md) · [Option detail](./qwon_post_alpha_options.md#3-model-download--gguf-placement-ux) | **No** — **no** implementation/spike until Codex scoped plan |
+| **Post-alpha: Model download / GGUF UX** | Lane selected; scoped plan available | [Scoped plan](./qwon_model_download_gguf_ux_plan.md) · [Decision memo](./qwon_model_download_gguf_ux_decision.md) | **No default** — PR M1 only after explicit Product/Codex assignment |
 
 **Build `4` decision ≠ build `4` approved.** Documenting criteria or opening a product discussion does **not** authorize archive, upload, tag, or `CFBundleVersion` bump.
 
@@ -59,7 +60,7 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 | --- | --- |
 | Docs / README / index maintenance | [Ready / low-risk docs-ops](#ready--low-risk-docs-ops) |
 | **Product-approved build `4` planning** docs only (criteria, checklist, gate memo — **not** upload) | [Conditional — build `4`](#testflight-upload-build-4) |
-| Post-alpha — **Model download / GGUF UX** | [Decision memo](./qwon_model_download_gguf_ux_decision.md) · [Option lanes](./qwon_post_alpha_options.md) |
+| Post-alpha — **Model download / GGUF UX** | [Scoped plan](./qwon_model_download_gguf_ux_plan.md) · [Decision memo](./qwon_model_download_gguf_ux_decision.md) |
 | UI polish **UI-2** (gated) | [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) — **not opened** unless new evidence |
 | Minimal fix on build **`3`** | **Only** with [verified release blocker](#minimal-fix-pr-verified-release-blocker-only) + Codex/Product sign-off |
 
