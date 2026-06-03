@@ -1,7 +1,7 @@
 # QWON Text Alpha — Feedback Intake (Build `3`)
 
-**Last updated:** 2026-06-03 (post QWON-FB-001 intake)
-**Status:** **Live intake** — **`QWON-FB-001`** logged (**Needs evidence**); build `3` active.
+**Last updated:** 2026-06-03 (post QWON-FB-001 / QWON-FB-002 intake)
+**Status:** **Live intake** — **`QWON-FB-001`**, **`QWON-FB-002`** logged (**Needs evidence**); build `3` active.
 **Active build:** TestFlight **QWON `0.1.0 (3)`** · ASC **`6775685841`** · Bundle **`jp.studio-prospect.qwon.ios`**
 
 Related: [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [Tier policy (Wang/Matisse)](./qwon_text_alpha_testflight_prep.md#physical-device-lab-tier-policy) · [QWON next work queue](./qwon_next_work_queue.md) · [QWON lab evidence — build `3`](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
@@ -142,6 +142,7 @@ Release engineering assigns the **final** class after intake. Tester **Initial c
 | ID | Date | Device | Build | Summary | Classification | Evidence | Decision | Follow-up PR |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | **QWON-FB-001** | 2026-06-03 | Wang | `0.1.0 (3)` | General chat (18:17): expected Local + llama.cpp after GGUF; got **Local runtime** + **llama.cpp On-Device Runtime** badge, 初夢 Q answered, no Fallback badge | **Needs evidence** | `—` | Monitor on build 3 — operational pass, no blocker. Re-request missing fields — see [QWON-FB-001 detail](#qwon-fb-001-2026-06-03). Save ops PNGs per detail. | pending |
+| **QWON-FB-002** | 2026-06-03 | Matisse | `0.1.0 (3)` | General chat (18:19): expected Embedded Heuristic on A12; got **Local runtime** + embedded heuristic reply, detail *without a packaged LLM* — **expected Matisse path**, not Wang GGUF issue | **Needs evidence** | `—` | Monitor on build 3 — expected secondary-tier path; **not** release blocker. Re-request missing fields — see [QWON-FB-002 detail](#qwon-fb-002-2026-06-03). Save ops PNGs per detail. | pending |
 
 ### QWON-FB-001 (2026-06-03)
 
@@ -180,6 +181,43 @@ Suggested next action: Save PNGs to ops folder; expand Diagnostics entry for ans
 
 **Note:** Diagnostics also lists an earlier turn at **16:30** (schedule Q) from the same build `3` lab day — overlaps [lab evidence](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) Wang row; **QWON-FB-001** covers the **18:17** 初夢 session.
 
+### QWON-FB-002 (2026-06-03)
+
+Tester report: **Matisseでテスト** — Chat + Runtime Diagnostics screenshots received **2026-06-03 ~18:19**.
+
+```text
+Device lab name: Matisse
+Device model: (not in screenshot — lab baseline iPhone XS Max / iPhone11,6)
+iOS version: (not in screenshot — lab baseline 18.7.9)
+TestFlight build: 0.1.0 (3)  (active build; not visible in screenshot — Needs evidence)
+
+GGUF pushed: not applicable (A12 — llama.cpp not required; Embedded Heuristic expected)
+
+Scenario: first chat / general chat
+Expected result: Local runtime + Embedded Heuristic on Matisse (A12 secondary tier)
+Actual result: Local runtime badge; reply "Embedded local runtime handled 倒置法とは with compact on-device heuristics."; detail "Local lightweight fallback path without a packaged LLM."
+
+Runtime Diagnostics (Settings → Recent Runtime Decisions):
+  execution mode: Local
+  backend/model: Embedded heuristic path (detail: Local lightweight fallback path without a packaged LLM)
+  answered_by: embedded heuristic (inferred from chat reply text — not explicit Diagnostics field)
+  primary_failure: (none observed — expected path)
+  fallback_reason: N/A on Matisse — heuristic path is tier policy, not llama failure
+
+Ops artifacts (filenames only — stored outside git):
+  chat: matisse-0.1.0-3-chat-1819.png
+  diagnostics: matisse-0.1.0-3-diagnostics-1819.png
+
+Repro rate: once (pass observation; no defect reported)
+
+Initial classification candidate (tester guess): (not provided — operational test share)
+Final classification: Needs evidence
+
+Suggested next action: Save PNGs to ops folder; confirm TestFlight build in screenshot or tester reply; optional iOS confirm — row may close as operational pass without code change
+```
+
+**Note:** Diagnostics history includes **Jun 2** turns (こんにちは, 満月 Q) on the same embedded path — predates build `3` chat verification; **QWON-FB-002** covers the **18:19** 倒置法 session only.
+
 ### Column definitions
 
 | Column | Required | Content |
@@ -207,7 +245,7 @@ Suggested next action: Save PNGs to ops folder; expand Diagnostics entry for ans
 | **Build `4`** | **Not approved** by this intake doc or triage alone |
 | **Matisse heuristic path** | Expected on A12 — **not** failure by itself |
 | **PREXUS historical logs** | **Do not edit** [PREXUS feedback log](./qwen_text_only_alpha_release_notes.md#tester-feedback-log-build-1) or frozen ledger rows |
-| **No fake rows** | First real report: **QWON-FB-001** (2026-06-03) |
+| **No fake rows** | Real reports: **QWON-FB-001**, **QWON-FB-002** (2026-06-03) |
 | **No implementation in intake PRs** | Intake docs only; fixes are separate PRs after real data |
 
 ---
