@@ -1,10 +1,10 @@
 # QWON — Post-Alpha Option Lanes (v0.2+ Planning)
 
-**Last updated:** 2026-06-03 (UI polish lane complete · next lane selection checkpoint)
-**Status:** **Planning only** — **first post-alpha lane complete**; **next lane selection checkpoint** open; **no implementation or spike approved** in this document.
-**Purpose:** After **QWON `0.1.0 (3)` stable alpha** and [UI polish / onboarding UI-1 complete](./qwon_ui_polish_onboarding_plan.md), outline **remaining v0.2 / post-alpha candidate lanes** for product to choose from. Does **not** approve build **`4`**, TestFlight upload, tag, version bump, or code work.
+**Last updated:** 2026-06-03 (Model download / GGUF UX lane selected)
+**Status:** **Second post-alpha lane selected** — [Model download / GGUF UX decision](./qwon_model_download_gguf_ux_decision.md); **scoped planning only**; **no implementation or spike approved**.
+**Purpose:** After **QWON `0.1.0 (3)` stable alpha** and [UI polish / onboarding UI-1 complete](./qwon_ui_polish_onboarding_plan.md), outline **remaining v0.2 / post-alpha candidate lanes** and record lane selections. Does **not** approve build **`4`**, TestFlight upload, tag, version bump, or code work.
 
-Related: [Next lane selection checkpoint](#next-lane-selection-checkpoint-2026-06-03) · [UI polish / onboarding plan](./qwon_ui_polish_onboarding_plan.md) · [Next decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) · [QWON next work queue — deferred](./qwon_next_work_queue.md#deferred--post-alpha) · [Agent collaboration workflow](./agent_collaboration_workflow.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md)
+Related: [Model download / GGUF UX decision](./qwon_model_download_gguf_ux_decision.md) · [Next lane selection checkpoint](#next-lane-selection-checkpoint-2026-06-03) · [UI polish / onboarding plan](./qwon_ui_polish_onboarding_plan.md) · [Next decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) · [QWON next work queue — deferred](./qwon_next_work_queue.md#deferred--post-alpha) · [Agent collaboration workflow](./agent_collaboration_workflow.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md)
 
 ---
 
@@ -16,8 +16,9 @@ Related: [Next lane selection checkpoint](#next-lane-selection-checkpoint-2026-0
 | **Feedback** | **Closed** — **QWON-FB-001**, **QWON-FB-002** operational pass; **no blockers** |
 | **Build `4`** | **Not approved** |
 | **First post-alpha lane** | **UI polish / onboarding** — **complete** (#80 UI-1, #81 verification) · [UI-2 deferred](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) (#82) |
-| **Next product action** | Choose **Stay** or **one next lane** for scoped planning — [Next lane selection checkpoint](#next-lane-selection-checkpoint-2026-06-03) |
-| **This doc** | Lane catalog + checkpoint — selection does **not** authorize implementation or spike |
+| **Selected next lane** | **[Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md)** — scoped planning only |
+| **Next agent step** | **Codex scoped plan** — [required contents](./qwon_model_download_gguf_ux_decision.md#required-scoped-plan-contents-codex) |
+| **This doc** | Lane catalog + decisions — selection does **not** authorize implementation or spike |
 
 **v0.2** below means **post-alpha product direction candidates**, not an approved release or marketing version bump.
 
@@ -55,23 +56,26 @@ Planning PRs for this doc are **docs-only**. First engineering PR after a **new*
 
 | Field | Value |
 | --- | --- |
-| **Product should choose** | **Stay** on build **`3`**, **or** **one next lane** for **scoped planning only** |
-| **Default agent posture** | **Stay** — no default implementation lane |
-| **After selection** | Codex scoped plan for chosen lane → then Cursor spike/implementation only with explicit gate |
+| **Product decision (2026-06-03)** | **[Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md)** selected for scoped planning |
+| **Default agent posture** | **Wait** — Codex scoped plan next; Cursor **no** implementation/spike |
+| **After scoped plan merge** | Cursor spike/implementation only with explicit gate |
 | **UI-2** | **Not opened** unless new evidence per [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) |
 
-### Next lane candidates (open for selection)
+### Next lane candidates (historical — selection closed 2026-06-03)
+
+**Selected:** [Model download / GGUF UX](#3-model-download--gguf-placement-ux) — see [decision memo](./qwon_model_download_gguf_ux_decision.md).
+
+**Remaining deferred:**
 
 | Lane | Detail anchor |
 | --- | --- |
-| [Model download / GGUF UX](#3-model-download--gguf-placement-ux) | In-app or guided model acquisition vs USB push |
 | [Runtime memory / context retention](#6-runtime-memory--context-retention) | Durable cognitive layer; compression and retrieval |
 | [OCR / camera input](#2-ocr--camera-input) | Multimodal sensor input into orchestrator |
 | [LiteRT / local backend policy](#1-litert--local-backend-policy) | Non–llama.cpp on-device backend strategy |
 | [Project container rename](#4-project-container-rename-prexusxcodeproj) | **`PREXUS.xcodeproj`** → QWON-aligned container |
 | [App Store readiness](#5-public--app-store-readiness) | Exit TestFlight-only phase (long-term) |
 
-**Closed lane (do not re-select as “first”):** [UI polish / onboarding](#7-ui-polish--onboarding) — **complete** (UI-1); UI-2 gated separately.
+**Closed lanes:** [UI polish / onboarding](#7-ui-polish--onboarding) — **complete** (UI-1); UI-2 gated separately · **Model download / GGUF UX** — **selected** for scoped planning.
 
 ### Candidate comparison (next lane selection)
 
@@ -86,7 +90,7 @@ Qualitative scale matches [Selection matrix](#selection-matrix). Rows below **ex
 | **Project container rename** | **Low** (dev-only) | Medium | **Low** — infra only | **High** — Phase 4 audit + inventory | **docs-only** migration checklist → scoped implementation |
 | **App Store readiness** | High (long term) | **High** | Medium — compliance, support, labels | Low — TestFlight prep only | **docs-only** readiness checklist |
 
-**No default winner.** Product picks **Stay** or one lane; agents do **not** start implementation without a new scoped plan.
+**Selected lane:** [Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md). Comparison table retained for audit.
 
 ### Guardrails (checkpoint)
 
@@ -172,14 +176,28 @@ Qualitative scale matches [Selection matrix](#selection-matrix). Rows below **ex
 - Build **`3`** stable alpha had Wang/Matisse operational pass; UI-1 improved first-run copy without runtime changes.
 - [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03): copy sufficient; structural onboarding **not opened**.
 
-### Next step (agents)
+### Next step (agents) — historical
 
 | Agent | Action |
 | --- | --- |
-| **Product** | Choose **Stay** or **one next lane** — [Next lane selection checkpoint](#next-lane-selection-checkpoint-2026-06-03) |
-| **Codex** | Scoped plan for **selected next lane only** — not automatic |
-| **Cursor** | **No** implementation/spike until new scoped plan + gate |
-| **All** | **No** TestFlight/tag/bump; **no** UI-2 unless new evidence |
+| **Product** | ~~Choose **Stay** or **one next lane**~~ **Done** — [Model download / GGUF UX decision](./qwon_model_download_gguf_ux_decision.md) |
+| **Codex** | Scoped plan for selected lane |
+| **Cursor** | **No** implementation/spike until scoped plan + gate |
+
+---
+
+## Product lane decision (2026-06-03) — second lane (selected)
+
+**Recorded by:** Product
+**Scope:** Second post-alpha lane on build **`3`** stable alpha — **scoped planning only**.
+
+| Field | Value |
+| --- | --- |
+| **Lane** | **[Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md)** |
+| **Status** | **Selected for scoped planning** — Codex plan is **next** |
+| **Build `4`** | **Not approved** |
+
+**Full memo:** [qwon_model_download_gguf_ux_decision.md](./qwon_model_download_gguf_ux_decision.md)
 
 ---
 
@@ -306,9 +324,9 @@ Qualitative scale matches [Selection matrix](#selection-matrix). Rows below **ex
 
 | Product question | Read |
 | --- | --- |
-| Which **next** lane should product pick? | **[Next lane selection checkpoint](#next-lane-selection-checkpoint-2026-06-03)** · [Selection matrix](#selection-matrix) |
+| Which **next** lane should product pick? | **Decided** — [Model download / GGUF UX decision](./qwon_model_download_gguf_ux_decision.md) |
 | Is UI polish still the active lane? | **No** — **UI-1 complete**; UI-2 **deferred** · [UI polish plan](./qwon_ui_polish_onboarding_plan.md) |
-| What is the next agent step? | **Stay** default, or Codex scoped plan after product picks **one** next lane |
+| What is the next agent step? | **Codex scoped plan** for Model download / GGUF UX — implementation **not** approved |
 | Can we ship code now? | **No** — [Recommended workflow](#recommended-workflow) |
 | Can we upload the next TestFlight build? | **Build `4` not approved** — [checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) |
-| Stay on build **`3`** only? | **Yes** — valid default; no lane selection required |
+| Stay on build **`3`** only? | **Yes** — valid while scoped plan is drafted; no implementation without plan merge |
