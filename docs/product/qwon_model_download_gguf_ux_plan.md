@@ -405,24 +405,33 @@ xcodebuild -project app/ios/PREXUS.xcodeproj -scheme QWON \
 
 **Results:** all commands **pass** (`** TEST SUCCEEDED **`).
 
-### Artifacts (ops-only, not in git)
+### Device evidence (2026-06-04)
+
+Physical devices connected via USB (unlocked). Debug build from `6894be7` + M1 model-status smoke export (`PREXUS_ALPHA_SMOKE_SCENARIO=model_status`).
+
+| Scenario | Device | Result |
+| --- | --- | --- |
+| **Wang with GGUF present** | Wang (`iPhone18,3`, iOS 26.5.1) | **Pass** — `Present (unverified)` · `prexus-local-mvp.gguf` at expected path · `llama.cpp On-Device Runtime` |
+| **Matisse heuristic expected** | Matisse (`iPhone11,6`, iOS 18.7.9) | **Pass** — `Matisse-class (A12)` · `Embedded Heuristic Runtime` · missing GGUF **not** framed as failure |
+
+### Ops artifacts (not in git)
 
 | Artifact | Location |
 | --- | --- |
+| Wang model-status JSON | `~/QWON-alpha-evidence/qwon-m1-post-merge/wang-m1-model-status.json` |
+| Matisse model-status JSON | `~/QWON-alpha-evidence/qwon-m1-post-merge/matisse-m1-model-status.json` |
 | iPhone 16 UI-test xcresult | `/tmp/qwon-m1-postmerge-iphone16.xcresult` |
 | iPhone SE UI-test xcresult | `/tmp/qwon-m1-postmerge-iphonese.xcresult` |
 
-Screenshots exported from `.xcresult` bundles remain local; **not committed** per artifact rules.
+Command used for device JSON export:
 
-### Optional device evidence
+```sh
+./tools/scripts/m1_model_status_device_evidence.sh "Wang"
+./tools/scripts/m1_model_status_device_evidence.sh "Matisse"
+```
 
-| Scenario | Status in this pass |
-| --- | --- |
-| **Wang with GGUF present** | **Not re-run** on physical device in this docs pass. Logic covered by `testQWONLocalModelStatusReportsPresentUnverifiedAtDefaultPath`; build `3` Wang GGUF baseline remains in [lab evidence](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03). |
-| **Matisse heuristic expected** | **Not re-run** on physical device in this docs pass. Copy gate covered by `testQWONLocalModelStatusUsesMatisseExpectedHeuristicCopy`; build `3` Matisse launch pass remains in lab evidence. |
-
-Record new Wang/Matisse PNG/log filenames in ops storage only when a fresh post-M1 device pass occurs.
+Screenshots and JSON remain in ops storage; **not committed** per artifact rules.
 
 ### Outcome
 
-M1 model status UX is **verified on simulator** for visibility, placement copy, tier/runtime wording, and SE-width navigation sanity. **M2** and **M3** remain **gated** — do not start without Product/Codex approval.
+M1 model status UX is **verified on simulator and physical devices** for visibility, placement copy, tier/runtime wording, and SE-width navigation sanity. **M2** and **M3** remain **gated** — do not start without Product/Codex approval.
