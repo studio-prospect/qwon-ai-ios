@@ -1,6 +1,6 @@
 # QWON — M3 Model Distribution Compliance Memo (Gate 3)
 
-**Last updated:** 2026-06-04
+**Last updated:** 2026-05-28
 **Status:** **Investigation memo only** — **not** M3 implementation approval, **not** Gate 3 **Ready**, **not** Build `4` approval.
 **Purpose:** Document open **license / redistribution / export compliance** questions for a future **M3 in-app download** spike of `prexus-local-mvp.gguf`.
 
@@ -45,14 +45,38 @@ This memo addresses **Gate 3 only**. It does **not** mark Gates 1, 2, or 4+ **Re
 
 ---
 
+## Primary source links (Product / legal traceability)
+
+Use these Hugging Face pages to review upstream license text and artifact provenance. Links are for **reference tracking only** — **not** approved product hosting URLs and **not** Gate 3 sign-off.
+
+### Qwen2.5-0.5B-Instruct (base model)
+
+| Resource | URL |
+| --- | --- |
+| **Model card** | [Qwen/Qwen2.5-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct) |
+| **LICENSE file** | [Qwen/Qwen2.5-0.5B-Instruct — LICENSE](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct/blob/main/LICENSE) |
+| **License tag (HF metadata)** | `apache-2.0` (on model card; **Product/legal must confirm** applicability) |
+
+### bartowski GGUF quant (current ops default for `prexus-local-mvp.gguf`)
+
+| Resource | URL |
+| --- | --- |
+| **Model card / README** | [bartowski/Qwen2.5-0.5B-Instruct-GGUF](https://huggingface.co/bartowski/Qwen2.5-0.5B-Instruct-GGUF) |
+| **README metadata** (includes `license_link`, `base_model`, `quantized_by`) | [README.md](https://huggingface.co/bartowski/Qwen2.5-0.5B-Instruct-GGUF/blob/main/README.md) |
+| **License link (README metadata)** | Points to [Qwen base LICENSE](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct/blob/main/LICENSE) — **no separate LICENSE file** in bartowski repo at time of memo |
+| **Q4_K_M GGUF artifact (blob view)** | [Qwen2.5-0.5B-Instruct-Q4_K_M.gguf](https://huggingface.co/bartowski/Qwen2.5-0.5B-Instruct-GGUF/blob/main/Qwen2.5-0.5B-Instruct-Q4_K_M.gguf) |
+| **Dev ops fetch default (`fetch_local_model.sh`)** | [resolve/main/...Q4_K_M.gguf](https://huggingface.co/bartowski/Qwen2.5-0.5B-Instruct-GGUF/resolve/main/Qwen2.5-0.5B-Instruct-Q4_K_M.gguf) — **developer convenience only**, not approved M3 product URL |
+
+---
+
 ## License stack (research summary — needs Product/legal confirmation)
 
-| Layer | Source (current ops default) | Notes for legal review |
-| --- | --- | --- |
-| **Base model** | Qwen2.5-0.5B-Instruct (Alibaba / Qwen team) | Public model cards commonly cite **Apache-2.0**; **Product/legal must confirm** license text, attribution requirements, and whether mobile on-device use + re-download UX is permitted without additional notices. |
-| **GGUF quant artifact** | Community quant published under `bartowski/Qwen2.5-0.5B-Instruct-GGUF` on Hugging Face | **Third-party repack**, not an official QWON-hosted build. Rights to **redistribute this specific file** to end users via QWON servers or embedded URLs are **unconfirmed**. |
-| **Fetch script default URL** | `fetch_local_model.sh` resolves a Hugging Face `resolve/main/...Q4_K_M.gguf` URL | Documented as **developer convenience**, **not** an approved product hosting URL or stable checksum source. |
-| **Runtime** | llama.cpp (local inference) | Separate from model **weight** redistribution; still relevant to encryption/export questionnaires only indirectly. |
+| Layer | Source (current ops default) | Primary links | Notes for legal review |
+| --- | --- | --- | --- |
+| **Base model** | Qwen2.5-0.5B-Instruct (Alibaba / Qwen team) | [Model card](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct) · [LICENSE](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct/blob/main/LICENSE) | Public model cards commonly cite **Apache-2.0**; **Product/legal must confirm** license text, attribution requirements, and whether mobile on-device use + re-download UX is permitted without additional notices. |
+| **GGUF quant artifact** | Community quant under `bartowski/Qwen2.5-0.5B-Instruct-GGUF` | [Model card](https://huggingface.co/bartowski/Qwen2.5-0.5B-Instruct-GGUF) · [Q4_K_M artifact](https://huggingface.co/bartowski/Qwen2.5-0.5B-Instruct-GGUF/blob/main/Qwen2.5-0.5B-Instruct-Q4_K_M.gguf) | **Third-party repack**, not an official QWON-hosted build. README metadata cites base-model license link; rights to **redistribute this specific file** to end users via QWON servers or embedded URLs are **unconfirmed**. |
+| **Fetch script default URL** | `fetch_local_model.sh` | [resolve URL](https://huggingface.co/bartowski/Qwen2.5-0.5B-Instruct-GGUF/resolve/main/Qwen2.5-0.5B-Instruct-Q4_K_M.gguf) | Documented as **developer convenience**, **not** an approved product hosting URL or stable checksum source. |
+| **Runtime** | llama.cpp (local inference) | — | Separate from model **weight** redistribution; still relevant to encryption/export questionnaires only indirectly. |
 
 **Do not treat this table as sign-off.** It records what engineering uses today so legal can review M3 implications.
 
@@ -119,5 +143,6 @@ This memo addresses **Gate 3 only**. It does **not** mark Gates 1, 2, or 4+ **Re
 | --- | --- |
 | Questions and current-alpha facts | Final SHA-256 publication |
 | Link from M3 checklist | Approved hosting URL |
+| Hugging Face model card / LICENSE / artifact links for Product/legal traceability | Gate 3 **Ready** sign-off |
 | Ops script references as **dev default** | GGUF binary or PNG commit |
 | | Gate 1/2/4+ marked **Ready** |
