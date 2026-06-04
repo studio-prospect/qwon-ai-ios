@@ -9,6 +9,8 @@ final class QWONTests: XCTestCase {
         XCTAssertTrue(QWONUILabelCopy.Diagnostics.summaryDetail.contains("answered_by"))
         XCTAssertFalse(QWONUILabelCopy.Settings.localRuntimeFooter.localizedCaseInsensitiveContains("download"))
         XCTAssertFalse(QWONUILabelCopy.ModelStatus.settingsFooter.localizedCaseInsensitiveContains("download"))
+        XCTAssertFalse(QWONUILabelCopy.GuidedPlacement.introMessage.localizedCaseInsensitiveContains("tap to download"))
+        XCTAssertFalse(QWONUILabelCopy.GuidedPlacement.settingsNavSubtitle.localizedCaseInsensitiveContains("download in qwon"))
         XCTAssertFalse(QWONUILabelCopy.Chat.onboardingHint.localizedCaseInsensitiveContains("fully offline"))
     }
 
@@ -45,6 +47,8 @@ final class QWONTests: XCTestCase {
         XCTAssertEqual(QWONAccessibilityID.Settings.done, "settings.done")
         XCTAssertEqual(QWONAccessibilityID.Settings.openDiagnostics, "settings.open-diagnostics")
         XCTAssertEqual(QWONAccessibilityID.Settings.openMemory, "settings.open-memory")
+        XCTAssertEqual(QWONAccessibilityID.Settings.openGuidedPlacement, "settings.open-guided-placement")
+        XCTAssertEqual(QWONAccessibilityID.Settings.guidedPlacementScreen, "settings.guided-placement")
         XCTAssertEqual(QWONAccessibilityID.Diagnostics.clear, "diagnostics.clear")
         XCTAssertEqual(QWONAccessibilityID.Memory.clearAll, "memory.clear-all")
     }
@@ -1075,6 +1079,24 @@ final class QWONTests: XCTestCase {
         XCTAssertEqual(QWONLocalModelStatusPresentation.statusChipLabel(for: status), "Simulator")
         XCTAssertEqual(QWONLocalModelStatusPresentation.expectedRuntimeLabel(for: status), "Simulator Mock Runtime")
         XCTAssertTrue(QWONUILabelCopy.ModelStatus.summaryDetail(for: status).contains("Simulator uses a stub runtime"))
+    }
+
+    func testGuidedPlacementCommandsTargetExpectedOpsScripts() {
+        XCTAssertEqual(
+            QWONLocalModelGuidedPlacementCommands.fetchLocalModel,
+            "./tools/scripts/fetch_local_model.sh"
+        )
+        XCTAssertEqual(
+            QWONLocalModelGuidedPlacementCommands.pushLocalModelTemplate,
+            "./tools/scripts/push_local_model_to_device.sh \"DEVICE_NAME\""
+        )
+        XCTAssertEqual(
+            QWONLocalModelGuidedPlacementCommands.pushLocalModel(deviceName: "Wang"),
+            "./tools/scripts/push_local_model_to_device.sh \"Wang\""
+        )
+        XCTAssertTrue(QWONUILabelCopy.GuidedPlacement.stepPushModelDetail.contains("Documents/Models/prexus-local-mvp.gguf"))
+        XCTAssertTrue(QWONUILabelCopy.GuidedPlacement.matisseExpectation.contains("Embedded Heuristic Runtime"))
+        XCTAssertTrue(QWONUILabelCopy.GuidedPlacement.wangExpectation.contains("llama.cpp On-Device Runtime"))
     }
 
     func testFallbackLocalModelClientUsesFallbackWhenPrimaryFails() async throws {

@@ -16,6 +16,10 @@ enum QWONAccessibilityID {
         static let openMemory = "settings.open-memory"
         static let summarySurface = "settings.summary-surface"
         static let modelStatus = "settings.model-status"
+        static let openGuidedPlacement = "settings.open-guided-placement"
+        static let guidedPlacementScreen = "settings.guided-placement"
+        static let guidedPlacementStep = "settings.guided-placement.step"
+        static let guidedPlacementCopy = "settings.guided-placement.copy"
     }
 
     enum Diagnostics {

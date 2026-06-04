@@ -146,6 +146,17 @@ struct SettingsView: View {
                             .listRowBackground(Color.clear)
                             .accessibilityIdentifier(QWONAccessibilityID.Settings.modelStatus)
 
+                        NavigationLink {
+                            QWONLocalModelGuidedPlacementView(status: localModelStatus)
+                        } label: {
+                            settingsNavigationRow(
+                                title: "Place GGUF via Mac",
+                                subtitle: QWONUILabelCopy.GuidedPlacement.settingsNavSubtitle,
+                                value: "USB"
+                            )
+                        }
+                        .accessibilityIdentifier(QWONAccessibilityID.Settings.openGuidedPlacement)
+
                         Picker("Backend", selection: $settings.config.localModelBackend) {
                             ForEach(availableLocalModelBackends, id: \.self) { backend in
                                 Text(backend.displayName).tag(backend)

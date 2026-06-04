@@ -31,7 +31,7 @@ enum QWONUILabelCopy {
     enum ModelStatus {
         static let cardTitle = "Local Model File"
         static let expectedPlacementLine = "Place prexus-local-mvp.gguf in Documents/Models/prexus-local-mvp.gguf."
-        static let settingsFooter = "Model status is read-only in this alpha. Check Runtime Diagnostics for answered_by, primary_failure, and fallback_reason after each turn."
+        static let settingsFooter = "Model status is read-only in this alpha. Use Place GGUF via Mac for USB push steps. Check Runtime Diagnostics for answered_by, primary_failure, and fallback_reason after each turn."
         static let diagnosticsFooter = "Model file state here is read-only. Turn entries below show answered_by, primary_failure, and fallback_reason when a local fallback occurs."
 
         static func summaryDetail(for status: QWONLocalModelStatus) -> String {
@@ -76,5 +76,28 @@ enum QWONUILabelCopy {
                 }
             }
         }
+    }
+
+    enum GuidedPlacement {
+        static let settingsNavSubtitle = "USB push steps from a Mac — QWON does not download the GGUF in-app."
+        static let introMessage = "QWON cannot download or install the local model inside the app in this alpha. Internal testers copy Mac-side ops commands, push prexus-local-mvp.gguf over USB, then verify status here."
+        static let stepsTitle = "Mac + USB placement steps"
+        static let stepPrepareMacTitle = "Open the QWON repo on a Mac"
+        static let stepPrepareMacDetail = "Release engineering or a developer with repo access runs the scripts below from the repository root. TestFlight builds still require external ops for the GGUF file."
+        static let stepFetchModelTitle = "Fetch the GGUF on the Mac"
+        static let stepFetchModelDetail = "Downloads models/prexus-local-mvp.gguf locally. This happens outside QWON on the Mac — not inside the iPhone app."
+        static let stepConnectDeviceTitle = "Connect the iPhone via USB"
+        static let stepConnectDeviceDetail = "Unlock the device, tap Trust This Computer, and keep Developer Mode enabled. Replace DEVICE_NAME in the push command with your device name (for example Wang)."
+        static let stepPushModelTitle = "Push into Documents/Models"
+        static let stepPushModelDetail = "Copies the file to Documents/Models/prexus-local-mvp.gguf in the QWON sandbox. QWON does not perform this transfer itself."
+        static let stepVerifyTitle = "Verify in Settings and Diagnostics"
+        static let stepVerifyDetail = "Return to Settings → Local Runtime. Wang-class devices should show Present (unverified) and expect llama.cpp On-Device Runtime. Matisse-class devices may stay on Embedded Heuristic Runtime — that is expected, not a failure."
+        static let deviceExpectationsTitle = "Device expectations"
+        static let wangExpectation = "Wang (A17 Pro+): after placement, expect llama.cpp On-Device Runtime when Chat runs locally. Missing or corrupt files fall back without crashing."
+        static let matisseExpectation = "Matisse (A12): Embedded Heuristic Runtime is the expected alpha path. GGUF placement is optional and not required for pass."
+        static let supportTitle = "Support note"
+        static let supportDetail = "Do not tell testers to tap download in QWON — in-app download is not available. If placement fails, re-run the push command, confirm the filename prexus-local-mvp.gguf, and check Runtime Diagnostics."
+        static let copyButtonTitle = "Copy"
+        static let copiedButtonTitle = "Copied"
     }
 }
