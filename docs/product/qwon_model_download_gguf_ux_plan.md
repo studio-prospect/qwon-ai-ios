@@ -228,6 +228,7 @@ Rollback principle: the current build `3` path remains the known-good baseline. 
 
 | Field | Requirement |
 | --- | --- |
+| Status | **Merged** — [#86](https://github.com/studio-prospect/qwon-ai-ios/pull/86) · [post-merge verification](#pr-m1-post-merge-verification-2026-06-04) |
 | Scope | Settings/Diagnostics status for model presence, filename, device tier, and fallback explanation. |
 | Allowed | SwiftUI copy/status, read-only file presence/metadata helper, tests, docs. |
 | Forbidden | Download manager, network fetch, filename/env migration, lookup-order change, Build `4`. |
@@ -346,3 +347,92 @@ git diff --check
 | `testQWONLocalModelStatusUsesSimulatorCopy` | Simulator stub copy |
 
 Device evidence (Wang present/missing, Matisse install) remains ops-side per plan; no PNG or GGUF commits in this PR.
+
+---
+
+## PR M1 post-merge verification (2026-06-04)
+
+**Purpose:** Confirm merged model status UX from [PR #86](https://github.com/studio-prospect/qwon-ai-ios/pull/86) is visible and correctly worded on simulator and physical devices. **Evidence-only** — includes DEBUG `model_status` smoke export and ops helper script (`tools/scripts/m1_model_status_device_evidence.sh`); **no M2/M3 implementation**. DEBUG smoke runs under `#if DEBUG && !targetEnvironment(simulator)` and does not ship in Release/TestFlight.
+
+**Base:** `origin/main` @ **`6894be7`** — `Surface QWON local model status before download work (#86)`.
+
+### Merge state
+
+| Field | Value |
+| --- | --- |
+| **PR** | [#86](https://github.com/studio-prospect/qwon-ai-ios/pull/86) merged · [#87](https://github.com/studio-prospect/qwon-ai-ios/pull/87) post-merge evidence |
+| **PR #87 scope** | Evidence docs + DEBUG `model_status` smoke export + ops helper script — not M2/M3 |
+| **Scope delivered** | Read-only model status card in Settings → Local Runtime and Runtime Diagnostics |
+| **M2 guided placement** | **Still gated** — not started |
+| **M3 in-app download** | **Still gated** — not started |
+| **Build `4` / TestFlight** | **Not approved** |
+
+### Simulator verification
+
+| Check | Device | Result |
+| --- | --- | --- |
+| Settings accessibility surface | iPhone 16 (iOS 18.4) | **Pass** — `settings.model-status` wired in merged `SettingsView` |
+| Diagnostics accessibility surface | iPhone 16 (iOS 18.4) | **Pass** — `diagnostics.model-status` wired in merged `RuntimeDiagnosticsView` |
+| Expected filename copy | Unit tests + merged card | **Pass** — `prexus-local-mvp.gguf` present in status card and copy helpers |
+| Expected placement copy | Unit tests + merged card | **Pass** — `Documents/Models/prexus-local-mvp.gguf` present |
+| Simulator runtime wording | `testQWONLocalModelStatusUsesSimulatorCopy` | **Pass** — Simulator Mock Runtime / stub copy |
+| Matisse heuristic wording | `testQWONLocalModelStatusUsesMatisseExpectedHeuristicCopy` | **Pass** — Embedded Heuristic expected; no failure framing |
+| Wang missing fallback wording | `testQWONLocalModelStatusReportsMissingAtExpectedPath` | **Pass** — missing + Embedded Heuristic fallback without crash language |
+| Wang present-unverified wording | `testQWONLocalModelStatusReportsPresentUnverifiedAtDefaultPath` | **Pass** — Present (unverified) + llama.cpp On-Device Runtime |
+| No download CTA in M1 copy | `testUILabelCopyPreservesAlphaOnboardingMeanings` | **Pass** — ModelStatus footer excludes “download” |
+| Settings/Diagnostics navigation usability | iPhone 16 (iOS 18.4) UI tests | **Pass** — `QWONUITests` **TEST SUCCEEDED** |
+| SE-width layout / wrap sanity | iPhone SE (3rd gen, iOS 18.2) UI tests | **Pass** — `QWONUITests` **TEST SUCCEEDED**; no navigation blocker observed |
+
+### Commands run
+
+```sh
+git diff --check
+xcodebuild -project app/ios/PREXUS.xcodeproj -scheme QWON \
+  -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' \
+  -only-testing:QWONTests/testQWONLocalModelStatusReportsMissingAtExpectedPath \
+  -only-testing:QWONTests/testQWONLocalModelStatusReportsPresentUnverifiedAtDefaultPath \
+  -only-testing:QWONTests/testQWONLocalModelStatusUsesMatisseExpectedHeuristicCopy \
+  -only-testing:QWONTests/testQWONLocalModelStatusUsesSimulatorCopy \
+  -only-testing:QWONTests/testUILabelCopyPreservesAlphaOnboardingMeanings test
+xcodebuild -project app/ios/PREXUS.xcodeproj -scheme QWON \
+  -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' \
+  -only-testing:QWONUITests test \
+  -resultBundlePath /tmp/qwon-m1-postmerge-iphone16.xcresult
+xcodebuild -project app/ios/PREXUS.xcodeproj -scheme QWON \
+  -destination 'platform=iOS Simulator,name=iPhone SE (3rd generation),OS=18.2' \
+  -only-testing:QWONUITests test \
+  -resultBundlePath /tmp/qwon-m1-postmerge-iphonese.xcresult
+```
+
+**Results:** all commands **pass** (`** TEST SUCCEEDED **`).
+
+### Device evidence (2026-06-04)
+
+Physical devices connected via USB (unlocked). Debug build from `6894be7` + M1 model-status smoke export (`PREXUS_ALPHA_SMOKE_SCENARIO=model_status`).
+
+| Scenario | Device | Result |
+| --- | --- | --- |
+| **Wang with GGUF present** | Wang (`iPhone18,3`, iOS 26.5.1) | **Pass** — `Present (unverified)` · `prexus-local-mvp.gguf` at expected path · `llama.cpp On-Device Runtime` |
+| **Matisse heuristic expected** | Matisse (`iPhone11,6`, iOS 18.7.9) | **Pass** — `Matisse-class (A12)` · `Embedded Heuristic Runtime` · missing GGUF **not** framed as failure |
+
+### Ops artifacts (not in git)
+
+| Artifact | Location |
+| --- | --- |
+| Wang model-status JSON | `~/QWON-alpha-evidence/qwon-m1-post-merge/wang-m1-model-status.json` |
+| Matisse model-status JSON | `~/QWON-alpha-evidence/qwon-m1-post-merge/matisse-m1-model-status.json` |
+| iPhone 16 UI-test xcresult | `/tmp/qwon-m1-postmerge-iphone16.xcresult` |
+| iPhone SE UI-test xcresult | `/tmp/qwon-m1-postmerge-iphonese.xcresult` |
+
+Command used for device JSON export:
+
+```sh
+./tools/scripts/m1_model_status_device_evidence.sh "Wang"
+./tools/scripts/m1_model_status_device_evidence.sh "Matisse"
+```
+
+Screenshots and JSON remain in ops storage; **not committed** per artifact rules.
+
+### Outcome
+
+M1 model status UX is **verified on simulator and physical devices** for visibility, placement copy, tier/runtime wording, and SE-width navigation sanity. **M2** and **M3** remain **gated** — do not start without Product/Codex approval.

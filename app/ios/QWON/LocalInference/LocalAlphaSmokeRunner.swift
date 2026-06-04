@@ -29,6 +29,22 @@ enum LocalAlphaSmokeRunner {
         let results: [SmokeResult]
     }
 
+    struct ModelStatusSnapshot: Encodable {
+        let scenario: String
+        let generatedAt: String
+        let expectedFileName: String
+        let expectedRelativePlacement: String
+        let statusChipLabel: String
+        let tierChipLabel: String
+        let expectedRuntimeLabel: String
+        let summaryDetail: String
+        let diagnosticsMappingDetail: String
+        let machineIdentifier: String
+        let resolvedFileName: String?
+        let expectedPathPresent: Bool
+        let placementState: String
+    }
+
     @MainActor
     static func runIfRequested(environment: AppEnvironment) async {
         guard ProcessInfo.processInfo.environment[launchEnvironmentKey] == "1" else { return }
@@ -37,8 +53,55 @@ enum LocalAlphaSmokeRunner {
         switch scenario {
         case "sensitivity_matrix":
             await runSensitivityMatrix(environment: environment)
+        case "model_status":
+            writeModelStatusSnapshot()
         default:
             await runSingleTurn(environment: environment, scenario: scenario)
+        }
+    }
+
+    @MainActor
+    private static func writeModelStatusSnapshot() {
+        let status = QWONLocalModelStatusInspector.current()
+        let placementState: String
+        switch status.placementState {
+        case .missing:
+            placementState = "missing"
+        case .emptyFile:
+            placementState = "emptyFile"
+        case let .presentUnverified(source, byteCount):
+            placementState = "presentUnverified(\(sourceLabel(source)),\(byteCount))"
+        }
+
+        writeModelStatus(
+            ModelStatusSnapshot(
+                scenario: "model_status",
+                generatedAt: isoTimestamp(),
+                expectedFileName: QWONLocalModelStatus.expectedFileName,
+                expectedRelativePlacement: QWONLocalModelStatus.expectedRelativePlacement,
+                statusChipLabel: QWONLocalModelStatusPresentation.statusChipLabel(for: status),
+                tierChipLabel: QWONLocalModelStatusPresentation.tierChipLabel(for: status),
+                expectedRuntimeLabel: QWONLocalModelStatusPresentation.expectedRuntimeLabel(for: status),
+                summaryDetail: QWONLocalModelStatusPresentation.summaryDetail(for: status),
+                diagnosticsMappingDetail: QWONLocalModelStatusPresentation.diagnosticsMappingDetail(for: status),
+                machineIdentifier: status.machineIdentifier,
+                resolvedFileName: status.resolvedFileName,
+                expectedPathPresent: status.expectedPathPresent,
+                placementState: placementState
+            )
+        )
+    }
+
+    private static func sourceLabel(_ source: QWONLocalModelFileSource) -> String {
+        switch source {
+        case .documentsDefault:
+            return "documentsDefault"
+        case .documentsEvaluation:
+            return "documentsEvaluation"
+        case .bundledResource:
+            return "bundledResource"
+        case .environmentOverride:
+            return "environmentOverride"
         }
     }
 
@@ -169,6 +232,20 @@ enum LocalAlphaSmokeRunner {
     }
 
     private static func write(_ payload: SmokeResult) {
+        guard let data = encode(payload),
+              let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        else {
+            return
+        }
+
+        let url = documents.appendingPathComponent(resultFileName(for: payload.scenario))
+        try? data.write(to: url, options: .atomic)
+        if let json = String(data: data, encoding: .utf8) {
+            print("[PREXUS][alpha-smoke]\n\(json)")
+        }
+    }
+
+    private static func writeModelStatus(_ payload: ModelStatusSnapshot) {
         guard let data = encode(payload),
               let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
         else {
