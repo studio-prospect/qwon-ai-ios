@@ -1,6 +1,6 @@
 # QWON — Next Work Queue
 
-**Last updated:** 2026-06-04 (PR M2 guided placement in progress)
+**Last updated:** 2026-06-04 (PR M2 in review — [#88](https://github.com/studio-prospect/qwon-ai-ios/pull/88))
 **Status:** **Queue / guardrail only** — no implementation authorization in this document.
 **Purpose:** After Phase 4 rename docs are complete, classify what agents **may** do next vs what requires **product gates**. Prevents drift into ungated **build `4`**, project-container rename, or blind PREXUS cleanup.
 
@@ -41,16 +41,16 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 | **Lab** | Wang + Matisse build `3` verified · [lab evidence](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) |
 | **First post-alpha lane** | **UI polish / onboarding — complete** (UI-1 #80, #81) · UI-2 **deferred** (#82) |
 | **Selected next lane** | **[Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md)** |
-| **Scoped plan** | **[qwon_model_download_gguf_ux_plan.md](./qwon_model_download_gguf_ux_plan.md)** — M1 **merged** ([#86](https://github.com/studio-prospect/qwon-ai-ios/pull/86), [#87](https://github.com/studio-prospect/qwon-ai-ios/pull/87)); **M2 guided placement active** |
-| **Next agent step** | **M2 implementation** — guided external placement in Settings; **M3 still gated** |
+| **Scoped plan** | **[qwon_model_download_gguf_ux_plan.md](./qwon_model_download_gguf_ux_plan.md)** — M1 **merged** ([#86](https://github.com/studio-prospect/qwon-ai-ios/pull/86), [#87](https://github.com/studio-prospect/qwon-ai-ios/pull/87)); **M2 in review** ([#88](https://github.com/studio-prospect/qwon-ai-ios/pull/88)) |
+| **Next agent step** | **M2 in review** — guided external placement in Settings ([#88](https://github.com/studio-prospect/qwon-ai-ios/pull/88)); **M3 still gated** |
 
 ### Choose a branch
 
 | Branch | When | First doc | Agent default |
 | --- | --- | --- | --- |
-| **Stay** | Maintain build **`3`**; no new binary; docs/readme hygiene only | This queue — [Ready / low-risk docs-ops](#ready--low-risk-docs-ops) | **Yes** — M1 complete; M2 not started |
+| **Stay** | Maintain build **`3`**; no new binary; docs/readme hygiene only | This queue — [Ready / low-risk docs-ops](#ready--low-risk-docs-ops) | **Yes** — M1 complete; M2 in review ([#88](https://github.com/studio-prospect/qwon-ai-ios/pull/88)) |
 | **Product gate: build `4` decision** | Product explicitly evaluates whether a **new TestFlight binary** is warranted | [TestFlight prep — build `4` gate](./qwon_text_alpha_testflight_prep.md#phase-4-build-3-decision-gate) · [Conditional upload build `4`](#testflight-upload-build-4) | **No** — gate docs only until product approves |
-| **Post-alpha: Model download / GGUF UX** | Lane selected; M2 active | [Scoped plan](./qwon_model_download_gguf_ux_plan.md) · [Decision memo](./qwon_model_download_gguf_ux_decision.md) | **M2 only** — no M3 download |
+| **Post-alpha: Model download / GGUF UX** | Lane selected; M2 in review | [Scoped plan](./qwon_model_download_gguf_ux_plan.md) · [Decision memo](./qwon_model_download_gguf_ux_decision.md) | **No default** — await M2 merge; **M3 gated** |
 
 **Build `4` decision ≠ build `4` approved.** Documenting criteria or opening a product discussion does **not** authorize archive, upload, tag, or `CFBundleVersion` bump.
 
@@ -251,7 +251,7 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 | Clean up remaining PREXUS strings | **Stop** | [Inventory](./qwon_preserved_prexus_surface_inventory.md) first — default **preserve** |
 | Plan UI polish / onboarding | **Complete** (UI-1) | [UI polish plan](./qwon_ui_polish_onboarding_plan.md) · UI-2 **deferred** |
 | Select next post-alpha lane | **Done** — [Model download / GGUF UX decision](./qwon_model_download_gguf_ux_decision.md) |
-| Plan Model download / GGUF UX | **M1 complete** · **M2 active** | [Scoped plan](./qwon_model_download_gguf_ux_plan.md#pr-m2-implementation-evidence) · [Decision memo](./qwon_model_download_gguf_ux_decision.md) |
+| Plan Model download / GGUF UX | **M1 complete** · **M2 in review** ([#88](https://github.com/studio-prospect/qwon-ai-ios/pull/88)) | [Scoped plan](./qwon_model_download_gguf_ux_plan.md#pr-m2-implementation-evidence) · [Decision memo](./qwon_model_download_gguf_ux_decision.md) |
 | Open UI-2 onboarding structure | **Deferred** | **Not approved** — [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) |
 | Add OCR / LiteRT / App Store | Deferred | [Selection matrix](./qwon_post_alpha_options.md#selection-matrix) |
 
@@ -259,4 +259,4 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 ## Agent note
 
-Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **UI polish UI-1 complete**; **UI-2 deferred**. **Model download / GGUF UX M1 merged**; **M2 guided placement active**; **M3 gated**. Build **`4`** requires **explicit product gate**. No in-app download, TestFlight upload, GGUF commit, or UI-2 without gates.
+Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **UI polish UI-1 complete**; **UI-2 deferred**. **Model download / GGUF UX M1 merged**; **M2 in review** ([#88](https://github.com/studio-prospect/qwon-ai-ios/pull/88)); **M3 gated**. Build **`4`** requires **explicit product gate**. No in-app download, TestFlight upload, GGUF commit, or UI-2 without gates.
