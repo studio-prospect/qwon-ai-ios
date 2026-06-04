@@ -248,10 +248,13 @@ Rollback principle: the current build `3` path remains the known-good baseline. 
 
 | Field | Requirement |
 | --- | --- |
+| Status | **Gated** — [M3 readiness checklist](#m3-readiness-gate-checklist) must be satisfied before any spike PR |
 | Scope | Prototype downloader only after hosting/checksum/legal/storage gates are answered. |
-| Allowed | Spike branch/PR with explicit Product/Codex gate. |
+| Allowed | Spike branch/PR with explicit Product/Codex gate **after checklist sign-off**. |
 | Forbidden | Shipping default UX, Build `4`, or TestFlight upload bundled with spike. |
-| Gate | Approved source URL, SHA-256, file-size policy, storage plan, and fallback evidence plan. |
+| Gate | All rows in [M3 readiness gate checklist](#m3-readiness-gate-checklist) answered; Product + Codex explicit approval. |
+
+**This checklist does not authorize M3 implementation.** It records prerequisites only.
 
 ---
 
@@ -554,3 +557,58 @@ Screenshots/JSON remain ops-side only.
 ### Outcome
 
 M2 guided external placement is **verified on simulator** (reachability, placement copy, no in-app download claims). **Physical device evidence in this pass:** debug install + model-status JSON only (Wang/Matisse M1 contract holds after M2 merge). **M3** in-app download remains **gated**. **Build `4` not approved**.
+
+---
+
+## M3 readiness gate checklist
+
+**Purpose:** After M1/M2 completion, record the **prerequisites** that must be satisfied before opening an **M3 in-app download spike**. This section is a **readiness gate only** — it does **not** approve M3 implementation, network fetch, storage schema work, or TestFlight upload.
+
+**Base:** `origin/main` @ **`cccd9e3`** — M1/M2 merged ([#86](https://github.com/studio-prospect/qwon-ai-ios/pull/86)–[#89](https://github.com/studio-prospect/qwon-ai-ios/pull/89)).
+
+### Lane status
+
+| Field | Value |
+| --- | --- |
+| **M1 model status UX** | **Complete** — merged + verified |
+| **M2 guided placement** | **Complete** — merged + verified |
+| **M3 in-app download spike** | **Gated** — pending checklist |
+| **Build `4` / TestFlight** | **Separate gate** — **not approved** by this checklist |
+
+### Checklist (all required before M3 spike)
+
+| # | Gate | Required evidence / decision | Status |
+| --- | --- | --- | --- |
+| 1 | **Model hosting source / URL ownership** | Named owner for hosting; approved HTTPS source URL or CDN path; no unstable third-party URLs as product promises; reproducibility plan documented | **Pending** |
+| 2 | **SHA-256 checksum and expected byte size** | Published SHA-256 for `prexus-local-mvp.gguf`; expected byte size for partial-file detection; verification policy after download/copy | **Pending** |
+| 3 | **License / redistribution / export compliance** | Model license review; App Store / export compliance impact; redistribution rights for in-app fetch documented | **Pending** |
+| 4 | **iOS storage budget and available-space check** | Minimum free-space threshold before download starts; user-visible failure when space insufficient; no silent sandbox fill | **Pending** |
+| 5 | **Partial download / resume / atomic move plan** | Temp filename strategy; resume or clean retry policy; atomic move to `Documents/Models/prexus-local-mvp.gguf`; corrupt/partial state handling per [integrity states](#integrity-and-storage-requirements) | **Pending** |
+| 6 | **Privacy / network disclosure copy** | Settings/onboarding copy for network use; no surprise background fetch; alignment with local-first positioning | **Pending** |
+| 7 | **Wang / Matisse behavior expectation** | **Wang:** verified GGUF → llama.cpp On-Device Runtime; missing/corrupt → embedded heuristic fallback without crash. **Matisse:** Embedded Heuristic Runtime remains expected; download must not imply Matisse failure or required GGUF install | **Pending** |
+| 8 | **Rollback to Mac + USB guided placement** | M2 guided path (`Place GGUF via Mac`, `push_local_model_to_device.sh`) remains supported fallback; spike regression must not break manual ops | **Pending** |
+| 9 | **Build `4` / TestFlight gate (separate)** | M3 spike ≠ Build `4` approval; no upload, tag, or `CFBundleVersion` bump implied; product gate for any binary that ships download UX to testers | **Pending** — **not approved** |
+
+### Explicit non-approvals
+
+| Item | Status |
+| --- | --- |
+| M3 Swift implementation | **Not approved** |
+| Network fetch / downloader prototype in app | **Not approved** |
+| Storage schema change | **Not approved** |
+| `LocalGGUFModelPlacement` lookup order change | **Not approved** |
+| `prexus-local-mvp.gguf` rename | **Not approved** |
+| `PREXUS_*` env rename | **Not approved** |
+| GGUF or binary commit to git | **Not approved** |
+
+### Exit criteria to open M3 spike (future)
+
+1. All checklist rows marked **Ready** with linked Product/Codex evidence (docs or decision memo — no artifact commit).
+2. Codex scoped implementation plan for spike-only branch.
+3. Rollback path verified: M2 guided placement + manual USB push remain usable.
+4. Build `4` decision remains a **separate** product gate even if M3 spike succeeds.
+
+### Cursor / agent boundary
+
+- **Allowed now:** docs-only updates to this checklist and queue status.
+- **Not allowed until checklist sign-off:** downloader code, network fetch, background transfer schema, TestFlight upload, Build `4` ops.
