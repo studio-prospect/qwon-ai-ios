@@ -1,6 +1,6 @@
 # QWON — M3 Model Hosting + Checksum Memo (Gates 1 & 2)
 
-**Last updated:** 2026-05-28
+**Last updated:** 2026-06-04
 **Status:** **Investigation memo only** — **not** M3 implementation approval, **not** Gates 1/2 **Ready**, **not** Build `4` approval.
 **Purpose:** Document open **hosting / URL ownership** (Gate 1) and **SHA-256 / byte size** (Gate 2) questions for a future **M3 in-app download** spike of `prexus-local-mvp.gguf`. Gate 1 and Gate 2 are coupled: the approved source artifact defines which checksum policy applies.
 
