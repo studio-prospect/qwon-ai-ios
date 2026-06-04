@@ -238,7 +238,7 @@ Rollback principle: the current build `3` path remains the known-good baseline. 
 
 | Field | Requirement |
 | --- | --- |
-| Status | **In progress** — Settings guided external placement (Option B) |
+| Status | **Merged** — [#88](https://github.com/studio-prospect/qwon-ai-ios/pull/88) · [post-merge verification](#pr-m2-post-merge-verification-2026-06-04) |
 | Scope | Step-by-step guidance for internal testers and support, still using external ops/USB. |
 | Allowed | Settings/help copy, tester instructions, optional copy-to-clipboard command text. |
 | Forbidden | Claiming self-serve download; changing storage contract. |
@@ -364,7 +364,7 @@ Device evidence (Wang present/missing, Matisse install) remains ops-side per pla
 | **PR** | [#86](https://github.com/studio-prospect/qwon-ai-ios/pull/86) merged · [#87](https://github.com/studio-prospect/qwon-ai-ios/pull/87) post-merge evidence |
 | **PR #87 scope** | Evidence docs + DEBUG `model_status` smoke export + ops helper script — not M2/M3 |
 | **Scope delivered** | Read-only model status card in Settings → Local Runtime and Runtime Diagnostics |
-| **M2 guided placement** | **Active** — Settings USB ops guide (Option B) |
+| **M2 guided placement** | **Merged** ([#88](https://github.com/studio-prospect/qwon-ai-ios/pull/88)) · [post-merge verification](#pr-m2-post-merge-verification-2026-06-04) |
 | **M3 in-app download** | **Still gated** — not started |
 | **Build `4` / TestFlight** | **Not approved** |
 
@@ -436,7 +436,7 @@ Screenshots and JSON remain in ops storage; **not committed** per artifact rules
 
 ### Outcome
 
-M1 model status UX is **verified on simulator and physical devices** for visibility, placement copy, tier/runtime wording, and SE-width navigation sanity. **M2** guided placement opened after M1 verification; **M3** in-app download remains **gated**.
+M1 model status UX is **verified on simulator and physical devices** for visibility, placement copy, tier/runtime wording, and SE-width navigation sanity. **M2 merged** ([#88](https://github.com/studio-prospect/qwon-ai-ios/pull/88)); **M3** in-app download remains **gated**.
 
 ---
 
@@ -477,3 +477,80 @@ xcodebuild -project app/ios/PREXUS.xcodeproj -scheme QWON \
 ```
 
 Committed `PREXUS.xcodeproj` remains **no-llama**.
+
+---
+
+## PR M2 post-merge verification (2026-06-04)
+
+**Purpose:** Confirm merged guided placement flow from [PR #88](https://github.com/studio-prospect/qwon-ai-ios/pull/88) is reachable and correctly worded on simulator and physical devices. **Evidence-only** — no M3 in-app download; **Build `4` not approved**.
+
+**Base:** `origin/main` @ **`07ed9b5`** — `Add QWON guided GGUF placement flow (#88)`.
+
+### Merge state
+
+| Field | Value |
+| --- | --- |
+| **PR** | [#88](https://github.com/studio-prospect/qwon-ai-ios/pull/88) merged |
+| **Scope delivered** | Settings → Local Runtime → **Place GGUF via Mac** with USB ops steps and copy-to-clipboard commands |
+| **M3 in-app download** | **Still gated** — not started |
+| **Build `4` / TestFlight** | **Not approved** |
+
+### Simulator verification
+
+| Check | Device | Result |
+| --- | --- | --- |
+| Settings → Place GGUF via Mac reachable | iPhone 16 (iOS 18.4) | **Pass** — `testSettingsGuidedPlacementFlowIsReachable` |
+| Guided screen accessibility id | iPhone 16 | **Pass** — `settings.guided-placement` |
+| `prexus-local-mvp.gguf` visible on guided screen | iPhone 16 UI test | **Pass** |
+| `Documents/Models/prexus-local-mvp.gguf` in copy | `testGuidedPlacementCommandsTargetExpectedOpsScripts` | **Pass** |
+| QWON does not download in-app wording | `testUILabelCopyPreservesAlphaOnboardingMeanings` + `GuidedPlacement` copy | **Pass** — no “tap to download”; intro states QWON cannot download in-app |
+| Copy buttons wired | Merged UI (`settings.guided-placement.copy.fetch-model`, `.push-model`) | **Pass** — present in `#88` implementation |
+| SE-width layout sanity | iPhone SE (3rd gen, iOS 18.2) UI test | **Pass** — `testSettingsGuidedPlacementFlowIsReachable` |
+
+### Device verification (debug build @ `07ed9b5`)
+
+| Scenario | Device | Result |
+| --- | --- | --- |
+| Debug install | Wang (`iPhone18,3`) · Matisse (`iPhone11,6`) | **Pass** — `install_on_device.sh` |
+| Wang Local Model File + runtime expectation | Wang | **Pass** — `Present (unverified)` · `llama.cpp On-Device Runtime` · `Documents/Models/prexus-local-mvp.gguf` |
+| Matisse heuristic expected (not failure) | Matisse | **Pass** — `Embedded Heuristic Runtime` · missing GGUF not framed as failure |
+| Guided placement UI on device | Wang · Matisse | **Pass (same debug build)** — M2 UI ships in installed debug build; navigation verified on simulator; device UI automation deferred to ops manual check |
+
+### Commands run
+
+```sh
+git diff --check
+xcodebuild -project app/ios/PREXUS.xcodeproj -scheme QWON \
+  -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' \
+  -only-testing:QWONUITests/testSettingsGuidedPlacementFlowIsReachable test \
+  -resultBundlePath /tmp/qwon-m2-postmerge-iphone16.xcresult
+xcodebuild -project app/ios/PREXUS.xcodeproj -scheme QWON \
+  -destination 'platform=iOS Simulator,id=79219540-9B52-4DDD-A3C4-35CBA6BFBD8A' \
+  -only-testing:QWONUITests/testSettingsGuidedPlacementFlowIsReachable test \
+  -resultBundlePath /tmp/qwon-m2-postmerge-iphonese.xcresult
+xcodebuild -project app/ios/PREXUS.xcodeproj -scheme QWON \
+  -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' \
+  -only-testing:QWONTests/testGuidedPlacementCommandsTargetExpectedOpsScripts \
+  -only-testing:QWONTests/testUILabelCopyPreservesAlphaOnboardingMeanings test
+./tools/scripts/install_on_device.sh "Wang"
+./tools/scripts/install_on_device.sh "Matisse"
+./tools/scripts/m1_model_status_device_evidence.sh "Wang"
+./tools/scripts/m1_model_status_device_evidence.sh "Matisse"
+```
+
+**Results:** all commands **pass** (`** TEST SUCCEEDED **` where applicable).
+
+### Ops artifacts (not in git)
+
+| Artifact | Location |
+| --- | --- |
+| iPhone 16 UI-test xcresult | `/tmp/qwon-m2-postmerge-iphone16.xcresult` |
+| iPhone SE UI-test xcresult | `/tmp/qwon-m2-postmerge-iphonese.xcresult` |
+| Wang model-status JSON (post-M2 debug) | `~/QWON-alpha-evidence/qwon-m2-post-merge/wang-m2-model-status.json` |
+| Matisse model-status JSON (post-M2 debug) | `~/QWON-alpha-evidence/qwon-m2-post-merge/matisse-m2-model-status.json` |
+
+Screenshots/JSON remain ops-side only.
+
+### Outcome
+
+M2 guided external placement is **verified** on simulator (reachability, placement copy, no in-app download claims) and on physical devices (M1 model-status contract holds after M2 merge). **M3** in-app download remains **gated**. **Build `4` not approved**.
