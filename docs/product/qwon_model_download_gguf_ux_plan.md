@@ -514,7 +514,7 @@ Committed `PREXUS.xcodeproj` remains **no-llama**.
 | Debug install | Wang (`iPhone18,3`) · Matisse (`iPhone11,6`) | **Pass** — `install_on_device.sh` |
 | Wang Local Model File + runtime expectation | Wang | **Pass** — `Present (unverified)` · `llama.cpp On-Device Runtime` · `Documents/Models/prexus-local-mvp.gguf` |
 | Matisse heuristic expected (not failure) | Matisse | **Pass** — `Embedded Heuristic Runtime` · missing GGUF not framed as failure |
-| Guided placement UI on device | Wang · Matisse | **Pass (same debug build)** — M2 UI ships in installed debug build; navigation verified on simulator; device UI automation deferred to ops manual check |
+| Guided placement UI navigation on device | Wang · Matisse | **Not separately verified on device** — no device UI automation in this pass; guided placement reachability verified on simulator only |
 
 ### Commands run
 
@@ -553,4 +553,4 @@ Screenshots/JSON remain ops-side only.
 
 ### Outcome
 
-M2 guided external placement is **verified** on simulator (reachability, placement copy, no in-app download claims) and on physical devices (M1 model-status contract holds after M2 merge). **M3** in-app download remains **gated**. **Build `4` not approved**.
+M2 guided external placement is **verified on simulator** (reachability, placement copy, no in-app download claims). **Physical device evidence in this pass:** debug install + model-status JSON only (Wang/Matisse M1 contract holds after M2 merge). **M3** in-app download remains **gated**. **Build `4` not approved**.
