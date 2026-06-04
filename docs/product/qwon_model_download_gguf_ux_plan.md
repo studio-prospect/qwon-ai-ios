@@ -352,7 +352,7 @@ Device evidence (Wang present/missing, Matisse install) remains ops-side per pla
 
 ## PR M1 post-merge verification (2026-06-04)
 
-**Purpose:** Confirm merged model status UX from [PR #86](https://github.com/studio-prospect/qwon-ai-ios/pull/86) is visible and correctly worded on simulator. **Docs-only** — no M2/M3 implementation.
+**Purpose:** Confirm merged model status UX from [PR #86](https://github.com/studio-prospect/qwon-ai-ios/pull/86) is visible and correctly worded on simulator and physical devices. **Evidence-only** — includes DEBUG `model_status` smoke export and ops helper script (`tools/scripts/m1_model_status_device_evidence.sh`); **no M2/M3 implementation**. DEBUG smoke runs under `#if DEBUG && !targetEnvironment(simulator)` and does not ship in Release/TestFlight.
 
 **Base:** `origin/main` @ **`6894be7`** — `Surface QWON local model status before download work (#86)`.
 
@@ -360,7 +360,8 @@ Device evidence (Wang present/missing, Matisse install) remains ops-side per pla
 
 | Field | Value |
 | --- | --- |
-| **PR** | [#86](https://github.com/studio-prospect/qwon-ai-ios/pull/86) merged |
+| **PR** | [#86](https://github.com/studio-prospect/qwon-ai-ios/pull/86) merged · [#87](https://github.com/studio-prospect/qwon-ai-ios/pull/87) post-merge evidence |
+| **PR #87 scope** | Evidence docs + DEBUG `model_status` smoke export + ops helper script — not M2/M3 |
 | **Scope delivered** | Read-only model status card in Settings → Local Runtime and Runtime Diagnostics |
 | **M2 guided placement** | **Still gated** — not started |
 | **M3 in-app download** | **Still gated** — not started |
