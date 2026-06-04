@@ -238,10 +238,11 @@ Rollback principle: the current build `3` path remains the known-good baseline. 
 
 | Field | Requirement |
 | --- | --- |
+| Status | **In progress** — Settings guided external placement (Option B) |
 | Scope | Step-by-step guidance for internal testers and support, still using external ops/USB. |
 | Allowed | Settings/help copy, tester instructions, optional copy-to-clipboard command text. |
 | Forbidden | Claiming self-serve download; changing storage contract. |
-| Gate | M1 merged and reviewed. |
+| Gate | M1 merged and reviewed — **met** ([#86](https://github.com/studio-prospect/qwon-ai-ios/pull/86), [#87](https://github.com/studio-prospect/qwon-ai-ios/pull/87)). |
 
 ### PR M3 - In-app download spike (conditional)
 
@@ -363,7 +364,7 @@ Device evidence (Wang present/missing, Matisse install) remains ops-side per pla
 | **PR** | [#86](https://github.com/studio-prospect/qwon-ai-ios/pull/86) merged · [#87](https://github.com/studio-prospect/qwon-ai-ios/pull/87) post-merge evidence |
 | **PR #87 scope** | Evidence docs + DEBUG `model_status` smoke export + ops helper script — not M2/M3 |
 | **Scope delivered** | Read-only model status card in Settings → Local Runtime and Runtime Diagnostics |
-| **M2 guided placement** | **Still gated** — not started |
+| **M2 guided placement** | **Active** — Settings USB ops guide (Option B) |
 | **M3 in-app download** | **Still gated** — not started |
 | **Build `4` / TestFlight** | **Not approved** |
 
@@ -435,4 +436,44 @@ Screenshots and JSON remain in ops storage; **not committed** per artifact rules
 
 ### Outcome
 
-M1 model status UX is **verified on simulator and physical devices** for visibility, placement copy, tier/runtime wording, and SE-width navigation sanity. **M2** and **M3** remain **gated** — do not start without Product/Codex approval.
+M1 model status UX is **verified on simulator and physical devices** for visibility, placement copy, tier/runtime wording, and SE-width navigation sanity. **M2** guided placement opened after M1 verification; **M3** in-app download remains **gated**.
+
+---
+
+## PR M2 Implementation Evidence
+
+| Field | Result |
+| --- | --- |
+| Branch | `feat/qwon-m2-guided-placement` |
+| Scope | Settings → Local Runtime guided external placement (Mac + USB ops) |
+| Download | **Not implemented** — copy states QWON cannot fetch GGUF in-app |
+| Storage / lookup | Unchanged — `Documents/Models/prexus-local-mvp.gguf` contract preserved |
+
+### Surfaces added
+
+| Surface | Content |
+| --- | --- |
+| Settings → Local Runtime | **Place GGUF via Mac** navigation to step-by-step USB ops guide |
+| Guided placement screen | Mac fetch + USB push commands with copy-to-clipboard; Wang/Matisse expectations; verify-in-Settings step |
+
+### Copy-to-clipboard commands
+
+| Command | Purpose |
+| --- | --- |
+| `./tools/scripts/fetch_local_model.sh` | Fetch GGUF on Mac |
+| `./tools/scripts/push_local_model_to_device.sh "DEVICE_NAME"` | Push into app sandbox `Documents/Models/prexus-local-mvp.gguf` |
+
+### Validation commands
+
+```sh
+ruby tools/scripts/generate_xcodeproj.rb
+git diff --check
+xcodebuild -project app/ios/PREXUS.xcodeproj -scheme QWON \
+  -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' \
+  -only-testing:QWONTests test
+xcodebuild -project app/ios/PREXUS.xcodeproj -scheme QWON \
+  -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' \
+  -only-testing:QWONUITests/testSettingsGuidedPlacementFlowIsReachable test
+```
+
+Committed `PREXUS.xcodeproj` remains **no-llama**.

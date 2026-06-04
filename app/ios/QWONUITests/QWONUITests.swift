@@ -5,6 +5,8 @@ final class QWONUITests: XCTestCase {
         static let chatScreen = "chat.screen"
         static let openSettings = "chat.open-settings"
         static let settingsScreen = "settings.screen"
+        static let openGuidedPlacement = "settings.open-guided-placement"
+        static let guidedPlacementScreen = "settings.guided-placement"
         static let diagnosticsScreen = "diagnostics.screen"
         static let diagnosticsSummary = "diagnostics.summary"
         static let memoryScreen = "memory.screen"
@@ -49,6 +51,43 @@ final class QWONUITests: XCTestCase {
 
         XCTAssertTrue(element(UIID.memoryScreen, in: app).waitForExistence(timeout: 5))
         attachScreenshot(named: "prexus-memory-\(deviceSlug)")
+    }
+
+    func testSettingsGuidedPlacementFlowIsReachable() {
+        let app = makeApp()
+        app.launch()
+
+        XCTAssertTrue(element(UIID.chatScreen, in: app).waitForExistence(timeout: 5))
+
+        let openSettingsButton = app.buttons["Open Settings"]
+        XCTAssertTrue(openSettingsButton.waitForExistence(timeout: 2))
+        openSettingsButton.tap()
+
+        XCTAssertTrue(element(UIID.settingsScreen, in: app).waitForExistence(timeout: 5))
+
+        let guidedPlacementLink = scrollToGuidedPlacementLink(in: app)
+        XCTAssertTrue(guidedPlacementLink.waitForExistence(timeout: 2))
+        guidedPlacementLink.tap()
+
+        XCTAssertTrue(element(UIID.guidedPlacementScreen, in: app).waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["Place GGUF via Mac"].waitForExistence(timeout: 2))
+        XCTAssertTrue(app.staticTexts["prexus-local-mvp.gguf"].waitForExistence(timeout: 2))
+    }
+
+    private func scrollToGuidedPlacementLink(in app: XCUIApplication) -> XCUIElement {
+        let byIdentifier = element(UIID.openGuidedPlacement, in: app)
+        if byIdentifier.waitForExistence(timeout: 1) {
+            return byIdentifier
+        }
+
+        for _ in 0..<5 {
+            app.swipeUp()
+            if byIdentifier.waitForExistence(timeout: 1) {
+                return byIdentifier
+            }
+        }
+
+        return labeledElement("Place GGUF via Mac", in: app)
     }
 
     func testSeededRuntimeSurfacesShowNonEmptyDiagnosticsAndMemory() {

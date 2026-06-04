@@ -37,6 +37,27 @@ ruby tools/scripts/generate_xcodeproj.rb
 
 Copy `models/prexus-local-mvp.gguf` into the app sandbox `Documents/Models/` on first device run, or set `PREXUS_LOCAL_MODEL_PATH` in the Xcode scheme.
 
+## Internal tester placement (TestFlight / USB)
+
+QWON **does not download** the GGUF inside the app in this alpha. Internal testers and support use **Mac + USB ops**:
+
+| Step | Action |
+| --- | --- |
+| 1 | On a Mac with repo access: `./tools/scripts/fetch_local_model.sh` |
+| 2 | Connect iPhone via USB (unlock, Trust, Developer Mode on) |
+| 3 | `./tools/scripts/push_local_model_to_device.sh "DEVICE_NAME"` — e.g. `"Wang"` |
+| 4 | In QWON: **Settings → Local Runtime → Place GGUF via Mac** for the full checklist |
+| 5 | Verify **Local Model File** status and **Runtime Diagnostics** after a chat turn |
+
+| Device tier | Expected after placement |
+| --- | --- |
+| **Wang (A17 Pro+)** | `Present (unverified)` → llama.cpp On-Device Runtime when Chat runs locally |
+| **Matisse (A12)** | Embedded Heuristic Runtime remains expected; GGUF optional |
+
+Do **not** tell testers the model is bundled in TestFlight or that QWON can download it in-app. Evidence PNG/JSON stays in `~/QWON-alpha-evidence/` — not in git.
+
+See [Model download / GGUF UX plan](../docs/product/qwon_model_download_gguf_ux_plan.md).
+
 ## Naming notes (Phase 4)
 
 | Surface | Current active value | Notes |
