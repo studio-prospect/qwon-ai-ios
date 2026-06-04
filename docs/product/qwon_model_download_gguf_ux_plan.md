@@ -581,7 +581,7 @@ M2 guided external placement is **verified on simulator** (reachability, placeme
 | --- | --- | --- | --- |
 | 1 | **Model hosting source / URL ownership** | Named owner for hosting; approved HTTPS source URL or CDN path; no unstable third-party URLs as product promises; reproducibility plan documented | **Pending** |
 | 2 | **SHA-256 checksum and expected byte size** | Published SHA-256 for `prexus-local-mvp.gguf`; expected byte size for partial-file detection; verification policy after download/copy | **Pending** |
-| 3 | **License / redistribution / export compliance** | Model license review; App Store / export compliance impact; redistribution rights for in-app fetch documented | **Pending** |
+| 3 | **License / redistribution / export compliance** | [Compliance memo](./qwon_m3_model_distribution_compliance_memo.md) — questions documented; **not** sign-off. Model license review; App Store / export compliance impact; redistribution rights for in-app fetch documented | **Pending** — needs product/legal confirmation |
 | 4 | **iOS storage budget and available-space check** | Minimum free-space threshold before download starts; user-visible failure when space insufficient; no silent sandbox fill | **Pending** |
 | 5 | **Partial download / resume / atomic move plan** | Temp filename strategy; resume or clean retry policy; atomic move to `Documents/Models/prexus-local-mvp.gguf`; corrupt/partial state handling per [integrity states](#integrity-and-storage-requirements) | **Pending** |
 | 6 | **Privacy / network disclosure copy** | Settings/onboarding copy for network use; no surprise background fetch; alignment with local-first positioning | **Pending** |
