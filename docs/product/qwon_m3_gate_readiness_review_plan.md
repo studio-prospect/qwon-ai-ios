@@ -1,6 +1,6 @@
 # QWON — M3 Gate Readiness Review Plan
 
-**Last updated:** 2026-06-05 (Batch A + Batch B review documented — all gates Pending)
+**Last updated:** 2026-06-05 (Batch A–C review documented — all gates Pending)
 **Status:** **Review plan only** — **not** gate Ready sign-off, **not** M3 implementation approval, **not** Build `4` approval.
 **Purpose:** Define **review order**, **owners**, **required evidence**, and **exit criteria** for moving M3 checklist Gates **1–9** from **Pending** to **Ready**. Evidence memos exist ([#91](https://github.com/studio-prospect/qwon-ai-ios/pull/91)–[#95](https://github.com/studio-prospect/qwon-ai-ios/pull/95)); this plan does **not** mark any gate **Ready**.
 
@@ -367,6 +367,96 @@ Answer **in writing** in a future sign-off PR. Do **not** publish final threshol
 | --- | --- |
 | **Status** | **Pending** |
 | **Ready?** | **No** |
+| **Batch C review (docs-only)** | **Documented** — [2026-06-05 session](#batch-c-review-session-2026-06-05) — open items + Product/Codex questions; **does not** mark Ready |
+| **Blocked-by** | Gate **3** (privacy/ASC); Gate **5** (integrity → Diagnostics copy) |
+
+---
+
+## Batch C review session (2026-06-05)
+
+**Type:** Docs-only readiness review — **not** gate Ready sign-off, **not** final UI copy approval, **not** privacy label / ASC final answers.
+
+**Outcome:** Gate **6–7** open items **concretized** below. Checklist rows remain **Pending**. Draft strings in [network memo](./qwon_m3_network_device_expectation_memo.md) stay **drafts only**.
+
+Related evidence: [Network + device memo — Batch C status](./qwon_m3_network_device_expectation_memo.md#batch-c-review-status-2026-06-05)
+
+### Gate 6 — Open items (privacy / network disclosure copy)
+
+| # | Open item | Current state | Blocks Ready until |
+| --- | --- | --- | --- |
+| G6-1 | **Pre-download network disclosure copy** | Draft A/B in memo — **not approved** | Product copy owner |
+| G6-2 | **Download confirmation step** | Undecided — one-tap consent before fetch | Product + Codex UX flow |
+| G6-3 | **No surprise background fetch** | Required in principle — background URLSession **not approved** | Product explicit policy if ever needed |
+| G6-4 | **Local-first vs offline-only wording** | Must not claim fully offline after download exists | Product approved positioning |
+| G6-5 | **Settings → Local Runtime strings** | M2 “does not download in-app” active on build `3` | [M2 ↔ M3 migration checklist](./qwon_m3_network_device_expectation_memo.md#m2--m3-copy-transition-undecided) |
+| G6-6 | **Onboarding disclosure** | Undecided — reuse Settings vs separate screen | Product |
+| G6-7 | **App Store privacy label impact** | **Undecided** — **Gate 3 blocked** | Legal/Product ASC review ([compliance memo](./qwon_m3_model_distribution_compliance_memo.md#app-store--testflight--export-compliance)) |
+| G6-8 | **Export compliance questionnaire (network download)** | App TLS documented — model download angle **unreviewed** | **Gate 3 blocked** |
+| G6-9 | **TestFlight tester notes** | Undecided — separate from in-app copy | Product / release comms |
+| G6-10 | **In-progress download visibility** | Progress UI copy **undecided**; no hidden retry loops (principle) | Codex + Product |
+| G6-11 | **Wi‑Fi vs cellular disclosure** | Draft A mentions cellular — **not approved** | Product policy |
+| G6-12 | **First-launch fetch prohibition** | Product rule documented — enforcement spec **undecided** | Codex |
+
+**Gate 6 status:** **Pending** — **not Ready** — **Gate 3 blocked** on G6-7, G6-8
+
+### Gate 7 — Open items (Wang / Matisse device expectation)
+
+| # | Open item | Current state | Blocks Ready until |
+| --- | --- | --- | --- |
+| G7-1 | **Wang optional download framing** | Draft in memo — **not approved** | Product |
+| G7-2 | **Matisse heuristic expected copy** | M1/M2 aligned drafts — **not approved** | Product |
+| G7-3 | **Download visibility by tier** | Undecided: Wang-only entry vs Matisse de-emphasized vs hidden | Product hardware policy |
+| G7-4 | **Matisse must not read as device failure** | Principle documented — final strings **undecided** | Product |
+| G7-5 | **Post-download Matisse runtime expectation** | Heuristic remains expected even if GGUF present — copy **undecided** | Product + Codex |
+| G7-6 | **Diagnostics — `answered_by` mapping** | Reference table in memo — M3 download states **Gate 5 blocked** | Gate **5** integrity → UI mapping |
+| G7-7 | **Diagnostics — `partial` / in-progress** | Direction in [Gate 5 review](./qwon_m3_gate_readiness_review_plan.md#gate-5--open-items-partial-download--integrity) — **Gate 5 blocked** | Gate **5** Ready |
+| G7-8 | **Diagnostics — corrupt / failed download** | `primary_failure` / `fallback_reason` for download failures **undecided** | Codex spec; **Gate 5 blocked** |
+| G7-9 | **Chat fallback strip copy** | Draft for Wang missing model — **not approved** | Product |
+| G7-10 | **Settings model status during download** | Must not show “installed” — overlaps G5-11 — **Gate 5 blocked** | Gate **5** + Product |
+| G7-11 | **M2 Place GGUF via Mac coexistence** | Must remain visible — copy priority **undecided** | Product ([Gate 8](./qwon_m3_rollback_release_gate_memo.md)) |
+| G7-12 | **Verified vs present-unverified copy** | Ties to Gate **2** verification — **Batch A blocked** | Gate **2** Ready |
+
+**Gate 7 status:** **Pending** — **not Ready**
+
+### Product / Codex question list (Batch C — answer to unblock Ready sign-off)
+
+Answer **in writing** in a future sign-off PR. **Do not** treat memo drafts as final UI copy.
+
+#### Network disclosure (Gate 6 — Product + Legal via Product)
+
+1. What **exact disclosure** appears before the user starts a model download (G6-1, G6-2)?
+2. Is **background download** ever allowed, or **user-initiated foreground only** (G6-3)?
+3. What is the approved **local-first positioning** sentence — network for acquisition only (G6-4)?
+4. Which **M2 strings retire** when download ships vs remain for USB fallback (G6-5)?
+5. Are **onboarding** strings required, or Settings-only disclosure (G6-6)?
+6. Does model download require **App Store privacy label** or **ASC export** updates (G6-7, G6-8)? *(Gate 3 dependency)*
+7. What do **TestFlight tester notes** say about optional ~400 MB download (G6-9)?
+8. Must copy **explicitly mention cellular** data use (G6-11)?
+
+#### Device expectation (Gate 7 — Product + Codex)
+
+9. Which **device tiers** see a download entry point: Wang only, both with Matisse de-emphasis, or other (G7-3)?
+10. What **Matisse copy** confirms Embedded Heuristic is expected — not failure (G7-2, G7-4)?
+11. After download on Matisse (if offered), what **runtime expectation** copy is shown (G7-5)?
+12. What **Diagnostics strings** map to download `partial`, `corrupt`, and success paths (G7-6–G7-8)? *(Gate 5 dependency)*
+13. What **chat fallback strip** text is shown when Wang lacks a verified GGUF (G7-9)?
+14. How does **Place GGUF via Mac** appear alongside download UX (G7-11)?
+
+**Blocked-by summary:** Gate **3** blocks G6-7/G6-8 (privacy label / ASC). Gate **5** blocks G7-6–G7-8, G7-10 (integrity states in UI). Batch **A** blocks G7-12 (`verified` copy needs Gate **2**).
+
+### Batch C review exit (not yet met)
+
+| Criterion | Met? |
+| --- | --- |
+| Open items documented | **Yes** (this section) |
+| Product/Codex questions issued | **Yes** (above) |
+| Gates 6–7 marked **Ready** | **No** |
+| Final UI copy approved | **No** |
+| Privacy label / ASC answered | **No** — **Gate 3 blocked** |
+| M3 spike approved | **No** |
+| Build `4` approved | **No** |
+
+**Next docs-only step:** Batch **D** review (Gates 8–9) for planning. Batch **C Ready** sign-off waits on Gate **3** legal input + Gate **5** integrity UI mapping + Product copy answers above.
 
 ---
 
