@@ -109,6 +109,18 @@ Owner: **Legal via Product**
 | **Q-A-12** | in-app model download は export compliance または App Store privacy label の回答を変えますか？ | download UX を含む TestFlight build 前に必要な ASC/export/privacy action。 |
 | **Q-A-13** | Gate 1 で Hugging Face URL を選ぶ場合、production app fetch に関する Hugging Face ToS 制約はありますか？ | Legal の yes/no と third-party URL fetch の制約。 |
 
+### Legal レビュー用の推奨ドラフト（回答ではない）
+
+以下は Product/Codex から Legal に提示するためのドラフトです。**この表は回答記録ではありません**。Legal が明示的に承認・修正した後にのみ、[answer intake ledger](./qwon_m3_gate_answer_intake.md) の該当行を `Answered` にできます。
+
+| ID | 推奨ドラフト |
+| --- | --- |
+| **Q-A-09** | **Yes, pending Legal confirmation.** Qwen2.5-0.5B-Instruct は Hugging Face 上で Apache-2.0 と表示されているため、Apache-2.0 の条件を満たす前提で、QWON アプリによる user device への model download 促進は許容される方向で進める。ただし Gate 3 Ready 前に Legal が確認する。 |
+| **Q-A-10** | **Conditionally yes, pending Legal confirmation.** QWON は、bartowski `Q4_K_M` GGUF が Qwen Apache-2.0 license path を継承しており、redistribution/mirroring が許容されることを確認した後にのみ、QWON-owned storage で mirror / self-host する。Product-facing build は Hugging Face direct download URL をデフォルトにしない。 |
+| **Q-A-11** | QWON は in-app / docs に attribution を含める。最低限、Qwen2.5-0.5B-Instruct by Qwen、bartowski Qwen2.5-0.5B-Instruct-GGUF quantization source、Apache License 2.0、upstream model card / license link を示す。upstream NOTICE や追加 attribution 条件がある場合は保持する。正確な文言は Legal が確認する。 |
+| **Q-A-12** | in-app model download を含む TestFlight / product-facing build の前に、Product / Legal / App Store Connect の再確認を必須とする。アプリの HTTPS/TLS 回答と、model weights 配布は別の compliance surface として扱い、既存の export/privacy 回答で足りるとは仮定しない。 |
+| **Q-A-13** | Hugging Face URL は traceability / source reference として docs に残す方針。ただし Legal が ToS 上の問題を指摘しないことが前提。Hugging Face URL は Legal が明示承認しない限り product-facing download endpoint にはしない。QWON-owned hosting を product path とする。 |
+
 ### Gate 3 回答チェックリスト
 
 | Gate 3 Ready 前に必要なもの | 状態 |

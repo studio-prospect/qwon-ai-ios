@@ -109,6 +109,18 @@ These answers must come from Product/legal sources. Engineering should not infer
 | **Q-A-12** | Does in-app model download change export compliance or App Store privacy label answers? | Required ASC/export/privacy actions before any TestFlight build with download UX. |
 | **Q-A-13** | If Gate 1 selects a Hugging Face URL, are there Hugging Face ToS constraints for production app fetch? | Legal yes/no and constraints for third-party URL fetch. |
 
+### Recommended draft for Legal review (not an answer)
+
+The following is a Product/Codex draft to send to Legal. **This table is not an answer record.** Update rows in the [answer intake ledger](./qwon_m3_gate_answer_intake.md) to `Answered` only after Legal explicitly approves or revises the relevant response.
+
+| ID | Recommended draft |
+| --- | --- |
+| **Q-A-09** | **Yes, pending Legal confirmation.** Qwen2.5-0.5B-Instruct is published as Apache-2.0 on Hugging Face, so QWON may proceed on the assumption that app-facilitated download is acceptable if Apache-2.0 obligations are preserved. Legal must confirm before Gate 3 Ready. |
+| **Q-A-10** | **Conditionally yes, pending Legal confirmation.** QWON should mirror or self-host the bartowski `Q4_K_M` GGUF only after confirming that the GGUF repo inherits the Qwen Apache-2.0 license path and redistribution/mirroring is acceptable. Product-facing builds should not rely on Hugging Face direct download URLs by default. |
+| **Q-A-11** | QWON should include in-app / docs attribution identifying Qwen2.5-0.5B-Instruct by Qwen, bartowski Qwen2.5-0.5B-Instruct-GGUF as the quantization source, Apache License 2.0, and upstream model card / license links. Preserve any upstream NOTICE or additional attribution terms. Legal should confirm exact copy. |
+| **Q-A-12** | Product / Legal / App Store Connect re-check is required before any TestFlight or product-facing build with in-app model download. App HTTPS/TLS answers and model weight distribution should be treated as separate compliance surfaces; do not assume existing export/privacy answers remain sufficient. |
+| **Q-A-13** | Hugging Face URLs may remain in docs for traceability / source reference unless Legal identifies a ToS issue. However, Hugging Face URLs should not be the product-facing download endpoint unless Legal explicitly approves that use. QWON-owned hosting remains the recommended product path. |
+
 ### Gate 3 answer checklist
 
 | Required before Gate 3 Ready | Status |
