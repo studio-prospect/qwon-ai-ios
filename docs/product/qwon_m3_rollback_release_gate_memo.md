@@ -1,10 +1,10 @@
 # QWON — M3 Rollback + Release Gate Memo (Gates 8 & 9)
 
-**Last updated:** 2026-06-05
+**Last updated:** 2026-06-05 (Batch D review — Gates 8–9 still Pending)
 **Status:** **Investigation memo only** — **not** M3 implementation approval, **not** Gates 8/9 **Ready**, **not** Build `4` approval.
 **Purpose:** Document **Mac + USB rollback** requirements (Gate 8) and the **Build `4` / TestFlight release gate** (Gate 9) for M3 readiness. Completes evidence memos for all nine checklist rows — **every gate remains Pending** until Product/Codex sign-off.
 
-Related: [M3 readiness checklist — Gates 8 & 9](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Fallback and rollback](./qwon_model_download_gguf_ux_plan.md#fallback-and-rollback) · [M2 guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement) · [TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [models/README.md](../../models/README.md)
+Related: [M3 readiness checklist — Gates 8 & 9](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Batch D review](./qwon_m3_gate_readiness_review_plan.md#batch-d-review-session-2026-06-05) · [Fallback and rollback](./qwon_model_download_gguf_ux_plan.md#fallback-and-rollback) · [M2 guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement) · [TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [models/README.md](../../models/README.md)
 
 ---
 
@@ -121,6 +121,34 @@ M3 in-app download — if ever implemented — is **additive**. The following M2
 | **Gate 5** | Failed download → manual re-push via Gate 8 |
 | **Gate 6–7** | Download copy must not remove M2 USB guidance |
 | **Gates 1–8** | All must be Ready before M3 spike; Gate 9 still separate for any TestFlight ship |
+
+---
+
+## Batch D review status (2026-06-05)
+
+**Review:** [Batch D session](./qwon_m3_gate_readiness_review_plan.md#batch-d-review-session-2026-06-05) — open items documented; Gates **8–9** remain **Pending**. **All batches A–D** review documented — **no gate Ready**.
+
+### Gate 8 — unresolved (summary)
+
+| Topic | Status |
+| --- | --- |
+| M2 guided placement preservation | Pre-spike verified — **post-spike regression undecided** |
+| fetch/push scripts | Documented — **spike test plan blocked** for RE sign-off |
+| Rollback runbook | **Not published** |
+| Manual recovery path | Principle only — **test plan undecided** |
+
+Full item list: [G8-1 … G8-10](./qwon_m3_gate_readiness_review_plan.md#gate-8--open-items-mac--usb-rollback)
+
+### Gate 9 — unresolved (summary)
+
+| Topic | Status |
+| --- | --- |
+| Build `4` decision boundary | Documented — **Product release decision blocked** |
+| TestFlight upload / tag / CFBundleVersion | **Not approved** |
+| ASC/export re-check | **Undecided** — Gate 3 overlap |
+| Tester communication | **Undecided** |
+
+Full item list: [G9-1 … G9-10](./qwon_m3_gate_readiness_review_plan.md#gate-9--open-items-build-4--testflight-release-gate)
 
 ---
 
