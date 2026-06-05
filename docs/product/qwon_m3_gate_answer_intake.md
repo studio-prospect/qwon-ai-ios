@@ -1,7 +1,7 @@
 # QWON — M3 Gate Answer Intake Ledger
 
 **Last updated:** 2026-06-05
-**Status:** **Intake ledger only** — Batch A Product answers **Q-A-01…Q-A-05 recorded**, **no gate Ready sign-off**, **not** M3 implementation approval, **not** Build `4` approval.
+**Status:** **Intake ledger only** — Batch A Product answers **Q-A-01…Q-A-05** and Legal answers **Q-A-09…Q-A-13 recorded**, **no gate Ready sign-off**, **not** M3 implementation approval, **not** Build `4` approval.
 **Purpose:** Track **Product / Codex / Legal / Release Engineering** answers to [Batch A–D review questions](./qwon_m3_gate_readiness_review_plan.md) and record what each answer **unblocks** toward a future **gate Ready sign-off PR**.
 
 Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) · [Batch A external questionnaire](./qwon_m3_batch_a_external_questionnaire.md) · [M3 checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Queue — M3 status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05)
@@ -51,11 +51,11 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | Q-A-06 | 2 | Product, Codex | Unanswered | — | Q-B-01; G4-1, G5-4; Batch B threshold | Gate **2** Ready sign-off | — |
 | Q-A-07 | 2 | Product, Codex | Unanswered | — | G5-4; verify-before-promote | Gate **2** Ready sign-off | — |
 | Q-A-08 | 2 | Product, Codex | Unanswered | — | G5-12; Q-B-11; legacy USB files | Gate **2** Ready sign-off | — |
-| Q-A-09 | 3 | Legal | Unanswered | — | Q-A-10, G1-7 | Gate **3** Ready sign-off | — |
-| Q-A-10 | 3 | Legal | Unanswered | — | G1 hosting model; G3-2 | Gate **3** Ready sign-off | — |
-| Q-A-11 | 3 | Legal | Unanswered | — | G3-3, G3-4 | Gate **3** Ready sign-off | — |
-| Q-A-12 | 3 | Legal, Product | Unanswered | — | Q-C-06; G6-7, G6-8; Q-D-10 | Gate **3** Ready sign-off | — |
-| Q-A-13 | 3 | Legal | Unanswered | — | Q-A-05; G1-7 HF pin | Gate **3** Ready sign-off | — |
+| Q-A-09 | 3 | Legal | Answered | [Legal answer details](#batch-a-legal-answer-details-2026-06-05) | Q-A-10, G1-7 | Gate **3** Ready sign-off | This PR |
+| Q-A-10 | 3 | Legal | Answered | [Legal answer details](#batch-a-legal-answer-details-2026-06-05) | G1 hosting model; G3-2 | Gate **3** Ready sign-off | This PR |
+| Q-A-11 | 3 | Legal | Answered | [Legal answer details](#batch-a-legal-answer-details-2026-06-05) | G3-3, G3-4 | Gate **3** Ready sign-off | This PR |
+| Q-A-12 | 3 | Legal, Product | Answered | [Legal answer details](#batch-a-legal-answer-details-2026-06-05) | Q-C-06; G6-7, G6-8; Q-D-10 | Gate **3** Ready sign-off | This PR |
+| Q-A-13 | 3 | Legal | Answered | [Legal answer details](#batch-a-legal-answer-details-2026-06-05) | Q-A-05; G1-7 HF pin | Gate **3** Ready sign-off | This PR |
 
 **Question text:** [Batch A — external questionnaire](./qwon_m3_batch_a_external_questionnaire.md) · [日本語版](./qwon_m3_batch_a_external_questionnaire_ja.md) · [Product / legal question list](./qwon_m3_gate_readiness_review_plan.md#product--legal-question-list-batch-a--answer-to-unblock-ready-sign-off)
 
@@ -72,7 +72,22 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | **Q-A-04** | Reproducibility pinning direction: **QWON object key/version ID + SHA-256 + exact byte size**, to be recorded in a later Gate **2** sign-off PR after the hosted object is finalized. |
 | **Q-A-05** | Product stance: **No third-party Hugging Face URL for product/tester-facing builds unless Legal explicitly approves HF URL use**. Hugging Face may remain a traceability/source reference, not the default product URL. |
 
-**Remaining dependencies:** Q-A-06…Q-A-08 still need Gate **2** byte-size/checksum decisions. Q-A-09…Q-A-13 still need Legal/Product compliance answers. Gates **1–3** remain **Pending** until a separate Batch A Ready sign-off PR.
+**Remaining dependencies:** Q-A-06…Q-A-08 still need Gate **2** byte-size/checksum decisions. Gates **1–3** remain **Pending** until a separate Batch A Ready sign-off PR.
+
+### Batch A legal answer details (2026-06-05)
+
+**Source:** Legal approval of the recommended draft in Codex conversation, 2026-06-05.
+**Scope:** Legal-owned Gate **3** answers for Q-A-09…Q-A-13. This records compliance direction for the selected QWON-hosted model distribution path. It does **not** mark Gates **1–3** Ready, does **not** approve M3 spike, and does **not** approve Build `4`.
+
+| Question ID | Answer |
+| --- | --- |
+| **Q-A-09** | **Yes, with Apache-2.0 obligations preserved.** Qwen2.5-0.5B-Instruct is treated as Apache-2.0 for this use, so QWON may facilitate user-device model download through the app if license obligations are preserved. |
+| **Q-A-10** | **Conditionally yes.** QWON may mirror or self-host the bartowski `Q4_K_M` GGUF after confirming it follows the Qwen Apache-2.0 license path. Product-facing builds should not rely on Hugging Face direct download URLs by default. |
+| **Q-A-11** | QWON should include in-app / docs attribution identifying Qwen2.5-0.5B-Instruct by Qwen, bartowski Qwen2.5-0.5B-Instruct-GGUF as the quantization source, Apache License 2.0, and upstream model card / license links. Any upstream NOTICE or additional attribution terms should be preserved. |
+| **Q-A-12** | Product / Legal / App Store Connect re-check is required before any TestFlight or product-facing build with in-app model download. App HTTPS/TLS answers and model weight distribution should be treated as separate compliance surfaces; existing export/privacy answers should not be assumed sufficient. |
+| **Q-A-13** | Hugging Face URLs may remain in docs for traceability / source reference unless a ToS issue is identified later. Hugging Face URLs should not be the product-facing download endpoint unless explicitly approved for that use. QWON-owned hosting remains the recommended product path. |
+
+**Remaining dependencies:** Gate **2** values (Q-A-06…Q-A-08) are still required before Batch A can proceed to a Ready sign-off PR.
 
 ---
 
@@ -143,11 +158,11 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 
 | Batch | Questions | Answered | Gates |
 | --- | --- | --- | --- |
-| **A** | 13 | **5** | 1–3 — **Pending** |
+| **A** | 13 | **10** | 1–3 — **Pending** |
 | **B** | 11 | **0** | 4–5 — **Pending** |
 | **C** | 14 | **0** | 6–7 — **Pending** |
 | **D** | 11 | **0** | 8–9 — **Pending** |
-| **Total** | **49** | **5** | **All Pending** |
+| **Total** | **49** | **10** | **All Pending** |
 
 ---
 
@@ -171,6 +186,7 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | --- | --- |
 | Question ID ledger (49 rows) | Fabricated answers |
 | Batch A Product answers Q-A-01…Q-A-05 | Gate Ready sign-off |
+| Batch A Legal answers Q-A-09…Q-A-13 | Gate Ready sign-off |
 | Workflow for future answer PRs | Gate Ready sign-off |
 | Ready impact mapping | Final URL / SHA / legal / UI / release values |
 | All gates **Pending** | Swift, spike, TestFlight upload |
