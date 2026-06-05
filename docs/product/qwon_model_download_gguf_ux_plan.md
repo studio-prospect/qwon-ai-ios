@@ -1,6 +1,6 @@
 # QWON - Model Download / GGUF UX - Scoped Plan
 
-**Last updated:** 2026-06-05
+**Last updated:** 2026-06-05 (M3 checklist — all 9 gates documented, all Pending)
 **Status:** **Scoped plan** - implementation, spike, Build `4`, TestFlight upload, tag, version bump, GGUF commit, and filename migration are **not approved** by this document.
 **Purpose:** Define the safe implementation boundary for reducing QWON text-alpha model acquisition friction after [Product selected Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md). This plan turns that lane decision into a staged UX/ops path without changing the current runtime contract.
 
@@ -564,7 +564,9 @@ M2 guided external placement is **verified on simulator** (reachability, placeme
 
 **Purpose:** After M1/M2 completion, record the **prerequisites** that must be satisfied before opening an **M3 in-app download spike**. This section is a **readiness gate only** — it does **not** approve M3 implementation, network fetch, storage schema work, or TestFlight upload.
 
-**Base:** `origin/main` @ **`cccd9e3`** — M1/M2 merged ([#86](https://github.com/studio-prospect/qwon-ai-ios/pull/86)–[#89](https://github.com/studio-prospect/qwon-ai-ios/pull/89)).
+**Status (2026-06-05):** Gates **1–9** each have linked evidence memos ([#91](https://github.com/studio-prospect/qwon-ai-ios/pull/91)–[#95](https://github.com/studio-prospect/qwon-ai-ios/pull/95)). **All gates remain Pending** — **none Ready**. **Do not open M3 spike** until Product/Codex sign-off on every row. **Build `4` / TestFlight upload / tag / version bump not approved.** Next docs-only step: gate **Ready** sign-off PR or gate readiness review plan — see [queue status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05).
+
+**Base:** `origin/main` @ **`dc43e69`** — M3 evidence memos complete ([#91](https://github.com/studio-prospect/qwon-ai-ios/pull/91)–[#95](https://github.com/studio-prospect/qwon-ai-ios/pull/95)); M1/M2 merged ([#86](https://github.com/studio-prospect/qwon-ai-ios/pull/86)–[#89](https://github.com/studio-prospect/qwon-ai-ios/pull/89)).
 
 ### Lane status
 
@@ -572,7 +574,7 @@ M2 guided external placement is **verified on simulator** (reachability, placeme
 | --- | --- |
 | **M1 model status UX** | **Complete** — merged + verified |
 | **M2 guided placement** | **Complete** — merged + verified |
-| **M3 in-app download spike** | **Gated** — pending checklist |
+| **M3 in-app download spike** | **Gated** — all 9 gates documented; **all Pending**; spike **not open** |
 | **Build `4` / TestFlight** | **Separate gate** — **not approved** by this checklist |
 
 ### Checklist (all required before M3 spike)
