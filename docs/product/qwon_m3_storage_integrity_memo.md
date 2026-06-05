@@ -1,6 +1,6 @@
 # QWON — M3 Storage + Partial Download Integrity Memo (Gates 4 & 5)
 
-**Last updated:** 2026-06-04
+**Last updated:** 2026-06-05
 **Status:** **Investigation memo only** — **not** M3 implementation approval, **not** Gates 4/5 **Ready**, **not** Build `4` approval.
 **Purpose:** Document open **iOS storage budget / available-space check** (Gate 4) and **partial download / resume / atomic move** (Gate 5) questions for a future **M3 in-app download** spike of `prexus-local-mvp.gguf`.
 
