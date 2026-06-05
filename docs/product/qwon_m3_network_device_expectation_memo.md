@@ -1,10 +1,10 @@
 # QWON — M3 Network Disclosure + Device Expectation Memo (Gates 6 & 7)
 
-**Last updated:** 2026-06-05
+**Last updated:** 2026-06-05 (Batch C review — Gates 6–7 still Pending)
 **Status:** **Investigation memo only** — **not** M3 implementation approval, **not** Gates 6/7 **Ready**, **not** Build `4` approval.
 **Purpose:** Document open **privacy / network disclosure copy** (Gate 6) and **Wang / Matisse behavior expectation** (Gate 7) for a future **M3 in-app download** spike of `prexus-local-mvp.gguf`.
 
-Related: [M3 readiness checklist — Gates 6 & 7](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Settings / Diagnostics copy plan](./qwon_model_download_gguf_ux_plan.md#settings--diagnostics-copy-plan) · [Device expectations](./qwon_model_download_gguf_ux_plan.md#device-expectations) · [M2 guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement) · [Gate 3 compliance memo](./qwon_m3_model_distribution_compliance_memo.md) · [Gate 4/5 storage memo](./qwon_m3_storage_integrity_memo.md)
+Related: [M3 readiness checklist — Gates 6 & 7](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Batch C review](./qwon_m3_gate_readiness_review_plan.md#batch-c-review-session-2026-06-05) · [Settings / Diagnostics copy plan](./qwon_model_download_gguf_ux_plan.md#settings--diagnostics-copy-plan) · [Device expectations](./qwon_model_download_gguf_ux_plan.md#device-expectations) · [M2 guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement) · [Gate 3 compliance memo](./qwon_m3_model_distribution_compliance_memo.md) · [Gate 4/5 storage memo](./qwon_m3_storage_integrity_memo.md)
 
 ---
 
@@ -185,6 +185,37 @@ Product must publish a **copy migration checklist** before Gate 6/7 → Ready (w
 | **Gate 5** | Partial/corrupt states affect Settings/Diagnostics strings |
 | **Gate 8** | Mac + USB copy remains; download is additive |
 | **Gate 9** | TestFlight notes for any build shipping download UX — **not approved** |
+
+---
+
+## Batch C review status (2026-06-05)
+
+**Review:** [Batch C session](./qwon_m3_gate_readiness_review_plan.md#batch-c-review-session-2026-06-05) — open items documented; Gates **6–7** remain **Pending**.
+
+### Gate 6 — unresolved (summary)
+
+| Topic | Status |
+| --- | --- |
+| Network disclosure copy | **Undecided** (drafts only) |
+| No surprise background fetch | Required in principle — policy **undecided** |
+| Privacy label / ASC impact | **Undecided** — **Gate 3 blocked** |
+| TestFlight tester notes | **Undecided** |
+| Settings / onboarding strings | **Undecided**; M2 migration list **undecided** |
+
+Full item list: [G6-1 … G6-12](./qwon_m3_gate_readiness_review_plan.md#gate-6--open-items-privacy--network-disclosure-copy)
+
+### Gate 7 — unresolved (summary)
+
+| Topic | Status |
+| --- | --- |
+| Wang optional download framing | Draft only — **not approved** |
+| Matisse heuristic expected copy | Draft only — **not approved** |
+| Download visibility by tier | **Undecided** |
+| Diagnostics mapping (partial/corrupt) | **Gate 5 blocked** |
+| Fallback / chat strip copy | **Undecided** |
+| Verified vs unverified copy | **Batch A blocked** (Gate 2) |
+
+Full item list: [G7-1 … G7-12](./qwon_m3_gate_readiness_review_plan.md#gate-7--open-items-wang--matisse-device-expectation)
 
 ---
 
