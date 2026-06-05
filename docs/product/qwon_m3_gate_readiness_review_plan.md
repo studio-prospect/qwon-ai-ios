@@ -1,6 +1,6 @@
 # QWON — M3 Gate Readiness Review Plan
 
-**Last updated:** 2026-06-05 (Batch A review documented — Gates 1–3 still Pending)
+**Last updated:** 2026-06-05 (Batch A + Batch B review documented — all gates Pending)
 **Status:** **Review plan only** — **not** gate Ready sign-off, **not** M3 implementation approval, **not** Build `4` approval.
 **Purpose:** Define **review order**, **owners**, **required evidence**, and **exit criteria** for moving M3 checklist Gates **1–9** from **Pending** to **Ready**. Evidence memos exist ([#91](https://github.com/studio-prospect/qwon-ai-ios/pull/91)–[#95](https://github.com/studio-prospect/qwon-ai-ios/pull/95)); this plan does **not** mark any gate **Ready**.
 
@@ -236,6 +236,91 @@ Product and legal should answer **in writing** (future memo revision or sign-off
 | --- | --- |
 | **Status** | **Pending** |
 | **Ready?** | **No** |
+| **Batch B review (docs-only)** | **Documented** — [2026-06-05 session](#batch-b-review-session-2026-06-05) — open items + Product/Codex questions; **does not** mark Ready |
+| **Batch A blocked** | Gate **4–5 Ready** blocked on Gate **2** final byte size (and Gate **1** artifact) until Batch A sign-off |
+
+---
+
+## Batch B review session (2026-06-05)
+
+**Type:** Docs-only readiness review — **not** gate Ready sign-off, **not** final threshold/temp path decisions, **not** downloader implementation.
+
+**Outcome:** Gate **4–5** open items **concretized** below. Checklist rows remain **Pending**. Several items are **Batch A blocked** until Gate **2** publishes exact byte size.
+
+Related evidence: [Storage + integrity memo — Batch B status](./qwon_m3_storage_integrity_memo.md#batch-b-review-status-2026-06-05)
+
+### Gate 4 — Open items (storage budget / available-space check)
+
+| # | Open item | Current state | Blocks Ready until |
+| --- | --- | --- | --- |
+| G4-1 | **Minimum free-space threshold (bytes)** | **Undecided** — planning range ~379–400 MB artifact only | **Batch A blocked:** Gate **2** exact byte size + temp peak model |
+| G4-2 | **Pre-download sandbox capacity check** | Required in principle — **API choice undecided** (`volumeAvailableCapacityForImportantUsage` vs equivalent) | Codex documents check timing (before URLSession start) |
+| G4-3 | **Temp peak size assumption** | Undecided: ~1× artifact (temp then replace) vs ~2× (temp + existing partial) | Gate **5** temp strategy; feeds G4-1 math |
+| G4-4 | **Safety margin above artifact + peak** | Fixed MB vs % vs tier-specific — **undecided** | Product policy |
+| G4-5 | **Mid-download space exhaustion** | Abort vs pause vs resume — **undecided** | Gate **5** resume policy |
+| G4-6 | **User-visible insufficient-space copy** | **Undecided** — no approved Settings/alert strings | Product copy owner |
+| G4-7 | **Matisse / low-storage devices** | Download must not pressure install ([Gate 7](./qwon_m3_network_device_expectation_memo.md)) | Product: hide vs de-emphasize download on A12 |
+| G4-8 | **Re-check after failed download** | Undecided whether to re-query capacity on retry | Codex + Product |
+| G4-9 | **Lookup order / final path** | `Documents/Models/prexus-local-mvp.gguf` — **unchanged** | Confirm no schema migration in M3 spike |
+
+**Gate 4 status:** **Pending** — **not Ready** — **Batch A blocked** on G4-1 until Gate **2** final byte size
+
+### Gate 5 — Open items (partial download / integrity)
+
+| # | Open item | Current state | Blocks Ready until |
+| --- | --- | --- | --- |
+| G5-1 | **Temp filename / path** | Examples only (`.part`, `.downloading`, `tmp/`) — **not selected** | Product/Codex pick one strategy |
+| G5-2 | **Runtime must not load temp file** | Required direction — enforcement mechanism **undecided** | Codex: placement resolver ignores non-final names |
+| G5-3 | **Atomic move to final path** | Required direction — `rename` vs copy+delete **undecided** | Codex spec; must land at `prexus-local-mvp.gguf` |
+| G5-4 | **Verify before promote** | Size + SHA-256 on temp — **Batch A blocked:** Gate **2** values | Gate **2** Ready |
+| G5-5 | **Resume vs clean retry** | **Undecided** — full restart vs HTTP Range vs URLSession background | Product scope for M3 spike; Gate **1** server support if Range |
+| G5-6 | **Partial file cleanup on failure** | Delete temp vs quarantine — **undecided** | Codex policy; must not leave final path at partial size |
+| G5-7 | **Corrupt hash mismatch handling** | Fallback without crash — **undecided** quarantine vs delete | Align with [integrity states](./qwon_model_download_gguf_ux_plan.md#integrity-and-storage-requirements) |
+| G5-8 | **Existing verified file on retry** | Must not overwrite without user action — deletion UX **not approved** | Product decision |
+| G5-9 | **Diagnostics mapping — `partial`** | Direction in memo — **no final field names/copy** | Product + Codex strings |
+| G5-10 | **Diagnostics mapping — `corrupt`** | `primary_failure` / `fallback_reason` alignment **undecided** for download failures | Codex spec tied to Gate **7** |
+| G5-11 | **Settings → Local Runtime in-progress UI** | Must not show “installed” during download — **copy undecided** | Gate **6** overlap; Product |
+| G5-12 | **M2 USB-placed unverified files** | M1 **Present (unverified)** today — **Batch A blocked:** Gate **2-7** legacy policy | Batch A Gate **2** answer |
+
+**Gate 5 status:** **Pending** — **not Ready**
+
+### Product / Codex question list (Batch B — answer to unblock Ready sign-off)
+
+Answer **in writing** in a future sign-off PR. Do **not** publish final threshold bytes or temp path in this review.
+
+#### Storage budget (Gate 4 — Product + Codex)
+
+1. After Gate **2** byte size is fixed (**Batch A**), what **minimum free bytes** are required before download starts (G4-1)? *(artifact + temp peak + margin)*
+2. Is temp peak **~1×** or **~2×** artifact size during download (G4-3)?
+3. What **safety margin** policy applies: fixed MB, percentage, or tier-specific (G4-4)?
+4. What **user-visible copy** appears when space is insufficient (G4-6)?
+5. Should download entry be **hidden or de-emphasized** on Matisse / low-storage devices (G4-7)?
+6. If free space drops **mid-download**, abort only or attempt resume (G4-5)? *(ties to G5-5)*
+
+#### Download integrity (Gate 5 — Codex + Product)
+
+7. What is the **exact temp filename/path** under the sandbox (G5-1)?
+8. Is **HTTP Range resume** required for M3 spike, or **clean restart only** (G5-5)?
+9. On verification failure, **delete** temp file, quarantine, or leave for support (G5-6, G5-7)?
+10. What **Diagnostics / Settings strings** map to `partial`, `corrupt`, and in-progress states (G5-9, G5-10, G5-11)?
+11. May a **new download** replace an existing **USB-placed unverified** GGUF without explicit user consent (G5-12)? *(Batch A Gate 2-7 dependency)*
+
+**Batch A blocked items (do not finalize in Batch B alone):** G4-1 threshold math, G5-4 verify constants, G5-12 legacy file policy — require Gate **2** (and Gate **1** artifact) from Batch A sign-off.
+
+### Batch B review exit (not yet met)
+
+| Criterion | Met? |
+| --- | --- |
+| Open items documented | **Yes** (this section) |
+| Product/Codex questions issued | **Yes** (above) |
+| Gates 4–5 marked **Ready** | **No** |
+| Final minimum free-space threshold | **No** |
+| Final temp filename/path | **No** |
+| Gate 2 byte size available | **No** — **Batch A blocked** |
+| M3 spike approved | **No** |
+| Build `4` approved | **No** |
+
+**Next docs-only step:** Batch **C** review (Gates 6–7) may proceed for planning. Batch **B Ready** sign-off waits on Batch **A** Gate **2** answers + Batch B question answers above.
 
 ---
 

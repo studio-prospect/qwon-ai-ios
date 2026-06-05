@@ -1,10 +1,10 @@
 # QWON — M3 Storage + Partial Download Integrity Memo (Gates 4 & 5)
 
-**Last updated:** 2026-06-05
+**Last updated:** 2026-06-05 (Batch B review — Gates 4–5 still Pending)
 **Status:** **Investigation memo only** — **not** M3 implementation approval, **not** Gates 4/5 **Ready**, **not** Build `4` approval.
 **Purpose:** Document open **iOS storage budget / available-space check** (Gate 4) and **partial download / resume / atomic move** (Gate 5) questions for a future **M3 in-app download** spike of `prexus-local-mvp.gguf`.
 
-Related: [M3 readiness checklist — Gates 4 & 5](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Integrity states](./qwon_model_download_gguf_ux_plan.md#integrity-and-storage-requirements) · [Gate 1/2 hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md) · [Gate 3 compliance memo](./qwon_m3_model_distribution_compliance_memo.md) · [M2 guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement) · [models/README.md](../../models/README.md)
+Related: [M3 readiness checklist — Gates 4 & 5](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Batch B review](./qwon_m3_gate_readiness_review_plan.md#batch-b-review-session-2026-06-05) · [Integrity states](./qwon_model_download_gguf_ux_plan.md#integrity-and-storage-requirements) · [Gate 1/2 hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md) · [Gate 3 compliance memo](./qwon_m3_model_distribution_compliance_memo.md) · [M2 guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement) · [models/README.md](../../models/README.md)
 
 ---
 
@@ -195,6 +195,36 @@ If in-app download fails or Gates 4/5 are not Ready for ship, testers and suppor
 | **Gate 7** | Wang/Matisse download expectations |
 | **Gate 8** | M2 USB rollback — must remain valid regardless of Gates 4/5 outcome |
 | **Gate 9** | Build `4` / TestFlight — **not approved** |
+
+---
+
+## Batch B review status (2026-06-05)
+
+**Review:** [Batch B session](./qwon_m3_gate_readiness_review_plan.md#batch-b-review-session-2026-06-05) — open items documented; Gates **4–5** remain **Pending**.
+
+### Gate 4 — unresolved (summary)
+
+| Topic | Status |
+| --- | --- |
+| Minimum free-space threshold | **Undecided** — **Batch A blocked** (Gate 2 byte size) |
+| Sandbox available-capacity check | Required in principle; API/timing **undecided** |
+| Temp peak size (1× vs 2×) | **Undecided** |
+| Insufficient-space user copy | **Undecided** |
+
+Full item list: [G4-1 … G4-9](./qwon_m3_gate_readiness_review_plan.md#gate-4--open-items-storage-budget--available-space-check)
+
+### Gate 5 — unresolved (summary)
+
+| Topic | Status |
+| --- | --- |
+| Temp filename/path | **Not selected** |
+| Resume vs clean retry | **Undecided** |
+| Atomic move mechanism | Direction only — spec **undecided** |
+| Partial/corrupt cleanup | **Undecided** |
+| Diagnostics mapping | Direction only — final copy **undecided** |
+| Verify-before-promote | **Batch A blocked** (Gate 2 SHA/size) |
+
+Full item list: [G5-1 … G5-12](./qwon_m3_gate_readiness_review_plan.md#gate-5--open-items-partial-download--integrity)
 
 ---
 
