@@ -4,7 +4,7 @@
 **Status:** **Review plan only** — **not** gate Ready sign-off, **not** M3 implementation approval, **not** Build `4` approval.
 **Purpose:** Define **review order**, **owners**, **required evidence**, and **exit criteria** for moving M3 checklist Gates **1–9** from **Pending** to **Ready**. Evidence memos exist ([#91](https://github.com/studio-prospect/qwon-ai-ios/pull/91)–[#95](https://github.com/studio-prospect/qwon-ai-ios/pull/95)); this plan does **not** mark any gate **Ready**.
 
-Related: [M3 readiness checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Queue — M3 status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
+Related: [M3 readiness checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Answer intake ledger](./qwon_m3_gate_answer_intake.md) · [Queue — M3 status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
 
 ---
 
@@ -586,7 +586,7 @@ Answer **in writing** in future sign-off PRs. **Do not** approve Build `4` or up
 | Build `4` / TestFlight approved | **No** |
 | M3 spike approved | **No** |
 
-**Next docs-only step:** After Batch **A–D** answers accumulate, open **gate Ready sign-off PR(s)** per batch — still docs-only, still **not** implementation. M3 spike remains **forbidden** until **all nine** gates Ready.
+**Next docs-only step:** Record stakeholder answers in the [M3 gate answer intake ledger](./qwon_m3_gate_answer_intake.md) (**real answers only** — separate PR per batch or topic). After answers accumulate, open **gate Ready sign-off PR(s)** per batch — still docs-only, still **not** implementation. M3 spike remains **forbidden** until **all nine** gates Ready.
 
 ---
 
