@@ -88,7 +88,7 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 | **Build `4` / TestFlight upload / tag / version bump** | **Not approved** — Gate 9 separate from spike |
 | **M2 rollback** | **Place GGUF via Mac** + USB ops remain known-good path |
 | **Review plan** | [M3 gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) — batches A–D documented; **all gates still Pending** |
-| **Batch A questionnaire** | [M3 Batch A external questionnaire](./qwon_m3_batch_a_external_questionnaire.md) — shareable Product/legal/Codex question set; **no answers recorded** |
+| **Batch A questionnaire** | [M3 Batch A external questionnaire](./qwon_m3_batch_a_external_questionnaire.md) / [日本語版](./qwon_m3_batch_a_external_questionnaire_ja.md) — shareable Product/legal/Codex question set; **no answers recorded** |
 | **Answer intake** | [M3 gate answer intake ledger](./qwon_m3_gate_answer_intake.md) — **49 questions · all Unanswered**; record stakeholder answers in separate PRs |
 
 ### Evidence memos (by gate)

@@ -4,6 +4,8 @@
 **Status:** **Questionnaire only** — **no answers recorded**, **no gate Ready sign-off**, **not** M3 implementation approval, **not** Build `4` approval.
 **Purpose:** Provide a compact shareable question set for Product / Legal / Codex review of M3 Batch A: Gates **1–3** (hosting, checksum, compliance).
 
+Japanese version: [M3 Batch A 外部共有用質問票](./qwon_m3_batch_a_external_questionnaire_ja.md)
+
 Related: [Gate answer intake ledger](./qwon_m3_gate_answer_intake.md) · [Batch A review session](./qwon_m3_gate_readiness_review_plan.md#batch-a-review-session-2026-06-05) · [Hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md) · [Compliance memo](./qwon_m3_model_distribution_compliance_memo.md)
 
 ---
