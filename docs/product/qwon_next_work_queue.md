@@ -1,6 +1,6 @@
 # QWON — Next Work Queue
 
-**Last updated:** 2026-06-05 (M3 readiness — all 9 gates documented, all Pending)
+**Last updated:** 2026-06-05 (M3 gate readiness review plan — docs-only)
 **Status:** **Queue / guardrail only** — no implementation authorization in this document.
 **Purpose:** After Phase 4 rename docs are complete, classify what agents **may** do next vs what requires **product gates**. Prevents drift into ungated **build `4`**, project-container rename, or blind PREXUS cleanup.
 
@@ -42,7 +42,7 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 | **First post-alpha lane** | **UI polish / onboarding — complete** (UI-1 #80, #81) · UI-2 **deferred** (#82) |
 | **Selected next lane** | **[Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md)** |
 | **Scoped plan** | **[qwon_model_download_gguf_ux_plan.md](./qwon_model_download_gguf_ux_plan.md)** — M1/M2 **complete** ([#86](https://github.com/studio-prospect/qwon-ai-ios/pull/86)–[#89](https://github.com/studio-prospect/qwon-ai-ios/pull/89)); M3 **all 9 gates documented · all Pending** ([#91](https://github.com/studio-prospect/qwon-ai-ios/pull/91)–[#95](https://github.com/studio-prospect/qwon-ai-ios/pull/95)) |
-| **Next agent step** | **Do not open M3 spike** — await Product/Codex **gate Ready sign-off** (docs-only PR) or **gate readiness review plan** (docs-only PR); **Build `4` not approved** |
+| **Next agent step** | **Do not open M3 spike** — execute [gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) with Product/Codex; then **gate Ready sign-off** docs-only PR(s); **Build `4` not approved** |
 
 ### Choose a branch
 
@@ -87,6 +87,7 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 | **M3 in-app download spike** | **Not approved** — do **not** open until every gate is Ready + Codex scoped plan |
 | **Build `4` / TestFlight upload / tag / version bump** | **Not approved** — Gate 9 separate from spike |
 | **M2 rollback** | **Place GGUF via Mac** + USB ops remain known-good path |
+| **Review plan** | [M3 gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) — batches A–D; **all gates still Pending** |
 
 ### Evidence memos (by gate)
 
@@ -102,8 +103,8 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 
 | Action | Owner | Notes |
 | --- | --- | --- |
-| **Gate Ready sign-off PR** | Product / Codex | Mark individual checklist rows **Ready** with linked decision evidence — **not** implementation |
-| **Gate readiness review plan** | Product / Codex | Docs-only schedule for reviewing Gates 1–9 before spike decision |
+| **Gate readiness review plan** | Product / Codex | [Review plan](./qwon_m3_gate_readiness_review_plan.md) — batches A→D; **does not** mark Ready |
+| **Gate Ready sign-off PR** | Product / Codex | Mark individual checklist rows **Ready** with linked decision evidence — **after** review plan; **not** implementation |
 | **M3 spike implementation** | — | **Forbidden** until all gates Ready |
 
 ---
@@ -283,7 +284,7 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 | Clean up remaining PREXUS strings | **Stop** | [Inventory](./qwon_preserved_prexus_surface_inventory.md) first — default **preserve** |
 | Plan UI polish / onboarding | **Complete** (UI-1) | [UI polish plan](./qwon_ui_polish_onboarding_plan.md) · UI-2 **deferred** |
 | Select next post-alpha lane | **Done** — [Model download / GGUF UX decision](./qwon_model_download_gguf_ux_decision.md) |
-| Plan Model download / GGUF UX | **M1/M2 complete** · **M3 all 9 gates documented / all Pending** | [M3 readiness status](#m3-readiness-status-2026-06-05) · [Checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) |
+| Plan Model download / GGUF UX | **M1/M2 complete** · **M3 all 9 gates documented / all Pending** | [Review plan](./qwon_m3_gate_readiness_review_plan.md) · [M3 status](#m3-readiness-status-2026-06-05) |
 | Open UI-2 onboarding structure | **Deferred** | **Not approved** — [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) |
 | Add OCR / LiteRT / App Store | Deferred | [Selection matrix](./qwon_post_alpha_options.md#selection-matrix) |
 
