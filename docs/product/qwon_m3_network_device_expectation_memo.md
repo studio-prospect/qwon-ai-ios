@@ -1,6 +1,6 @@
 # QWON — M3 Network Disclosure + Device Expectation Memo (Gates 6 & 7)
 
-**Last updated:** 2026-06-06
+**Last updated:** 2026-06-05
 **Status:** **Investigation memo only** — **not** M3 implementation approval, **not** Gates 6/7 **Ready**, **not** Build `4` approval.
 **Purpose:** Document open **privacy / network disclosure copy** (Gate 6) and **Wang / Matisse behavior expectation** (Gate 7) for a future **M3 in-app download** spike of `prexus-local-mvp.gguf`.
 
