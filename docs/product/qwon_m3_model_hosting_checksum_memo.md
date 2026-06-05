@@ -1,10 +1,10 @@
 # QWON — M3 Model Hosting + Checksum Memo (Gates 1 & 2)
 
-**Last updated:** 2026-06-04
+**Last updated:** 2026-06-05 (Batch A review — Gates 1–2 still Pending)
 **Status:** **Investigation memo only** — **not** M3 implementation approval, **not** Gates 1/2 **Ready**, **not** Build `4` approval.
 **Purpose:** Document open **hosting / URL ownership** (Gate 1) and **SHA-256 / byte size** (Gate 2) questions for a future **M3 in-app download** spike of `prexus-local-mvp.gguf`. Gate 1 and Gate 2 are coupled: the approved source artifact defines which checksum policy applies.
 
-Related: [M3 readiness checklist — Gates 1 & 2](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Gate 3 compliance memo](./qwon_m3_model_distribution_compliance_memo.md) · [GGUF UX plan — integrity states](./qwon_model_download_gguf_ux_plan.md#integrity-and-storage-requirements) · [models/README.md](../../models/README.md)
+Related: [M3 readiness checklist — Gates 1 & 2](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Batch A review](./qwon_m3_gate_readiness_review_plan.md#batch-a-review-session-2026-06-05) · [Gate 3 compliance memo](./qwon_m3_model_distribution_compliance_memo.md) · [GGUF UX plan — integrity states](./qwon_model_download_gguf_ux_plan.md#integrity-and-storage-requirements) · [models/README.md](../../models/README.md)
 
 ---
 
@@ -163,6 +163,34 @@ Store ops hash/size in `~/QWON-alpha-evidence/` if needed; **do not commit** GGU
 | **Gate 3 → Gate 1** | Redistribution rights may forbid certain hosting options ([compliance memo](./qwon_m3_model_distribution_compliance_memo.md)) |
 | **Gate 5** | Partial/resume/atomic move implementation — see [integrity states](./qwon_model_download_gguf_ux_plan.md#integrity-and-storage-requirements) |
 | **Gate 8** | M2 Mac + USB path remains fallback regardless of Gates 1/2 outcome |
+
+---
+
+## Batch A review status (2026-06-05)
+
+**Review:** [Batch A session](./qwon_m3_gate_readiness_review_plan.md#batch-a-review-session-2026-06-05) — open items documented; Gates **1–2** remain **Pending**.
+
+### Gate 1 — unresolved (summary)
+
+| Topic | Status |
+| --- | --- |
+| Hosting owner | **Unassigned** |
+| Product URL / CDN | **Undecided** |
+| Artifact pin (bartowski vs QWON-built) | **Undecided** |
+| HF URL as product promise | **Not approved** |
+
+Full item list: [G1-1 … G1-8](./qwon_m3_gate_readiness_review_plan.md#gate-1--open-items-hosting--url-ownership)
+
+### Gate 2 — unresolved (summary)
+
+| Topic | Status |
+| --- | --- |
+| Final exact byte size | **Not established** (ops range only) |
+| Published SHA-256 | **Not published** |
+| Verification policy | **Undecided** |
+| Blocked by Gate 1 artifact | **Yes** |
+
+Full item list: [G2-1 … G2-8](./qwon_m3_gate_readiness_review_plan.md#gate-2--open-items-sha-256--byte-size--verification)
 
 ---
 

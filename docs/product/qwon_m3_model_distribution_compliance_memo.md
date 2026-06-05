@@ -1,10 +1,10 @@
 # QWON — M3 Model Distribution Compliance Memo (Gate 3)
 
-**Last updated:** 2026-05-28
+**Last updated:** 2026-06-05 (Batch A review — Gate 3 still Pending)
 **Status:** **Investigation memo only** — **not** M3 implementation approval, **not** Gate 3 **Ready**, **not** Build `4` approval.
 **Purpose:** Document open **license / redistribution / export compliance** questions for a future **M3 in-app download** spike of `prexus-local-mvp.gguf`.
 
-Related: [M3 readiness checklist — Gate 3](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [GGUF UX plan](./qwon_model_download_gguf_ux_plan.md) · [models/README.md](../../models/README.md) · [TestFlight prep — export compliance](./qwon_text_alpha_testflight_prep.md#export-compliance-operator-gate)
+Related: [M3 readiness checklist — Gate 3](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Batch A review](./qwon_m3_gate_readiness_review_plan.md#batch-a-review-session-2026-06-05) · [GGUF UX plan](./qwon_model_download_gguf_ux_plan.md) · [models/README.md](../../models/README.md) · [TestFlight prep — export compliance](./qwon_text_alpha_testflight_prep.md#export-compliance-operator-gate)
 
 ---
 
@@ -134,6 +134,24 @@ Use these Hugging Face pages to review upstream license text and artifact proven
 | **Ready?** | **No** — open questions above remain |
 | **M3 implementation** | **Not approved** |
 | **Build `4` / TestFlight upload** | **Not approved** |
+
+---
+
+## Batch A review status (2026-06-05)
+
+**Review:** [Batch A session](./qwon_m3_gate_readiness_review_plan.md#batch-a-review-session-2026-06-05) — Product/legal confirmation **incomplete**; Gate **3** remains **Pending — needs product/legal confirmation**.
+
+### Gate 3 — unresolved (summary)
+
+| Topic | Status |
+| --- | --- |
+| Qwen base license (on-device + re-download) | **Unconfirmed** |
+| bartowski GGUF redistribution to end users | **Unconfirmed** |
+| Attribution / NOTICE for in-app path | **Unknown** |
+| Export compliance (model weights vs app TLS) | **Unreviewed** |
+| App Store / privacy label for large download | **Unreviewed** |
+
+Full item list: [G3-1 … G3-9](./qwon_m3_gate_readiness_review_plan.md#gate-3--open-items-compliance--productlegal-confirmation-incomplete) · **Questions for legal:** [Product / legal question list](./qwon_m3_gate_readiness_review_plan.md#product--legal-question-list-batch-a--answer-to-unblock-ready-sign-off)
 
 ---
 
