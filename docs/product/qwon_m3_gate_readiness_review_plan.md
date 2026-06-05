@@ -1,6 +1,6 @@
 # QWON — M3 Gate Readiness Review Plan
 
-**Last updated:** 2026-06-05
+**Last updated:** 2026-06-05 (Batch A review documented — Gates 1–3 still Pending)
 **Status:** **Review plan only** — **not** gate Ready sign-off, **not** M3 implementation approval, **not** Build `4` approval.
 **Purpose:** Define **review order**, **owners**, **required evidence**, and **exit criteria** for moving M3 checklist Gates **1–9** from **Pending** to **Ready**. Evidence memos exist ([#91](https://github.com/studio-prospect/qwon-ai-ios/pull/91)–[#95](https://github.com/studio-prospect/qwon-ai-ios/pull/95)); this plan does **not** mark any gate **Ready**.
 
@@ -92,6 +92,104 @@ Related: [M3 readiness checklist](./qwon_model_download_gguf_ux_plan.md#m3-readi
 | --- | --- |
 | **Status** | **Pending** |
 | **Ready?** | **No** |
+| **Batch A review (docs-only)** | **Documented** — [2026-06-05 session](#batch-a-review-session-2026-06-05) — open items + Product/legal questions; **does not** mark Ready |
+
+---
+
+## Batch A review session (2026-06-05)
+
+**Type:** Docs-only readiness review — **not** gate Ready sign-off, **not** legal approval, **not** hosting/checksum final values.
+
+**Outcome:** Gate **1–3** open items **concretized** below. Checklist rows remain **Pending**. Next step: Product/legal answers → future **Batch A Ready sign-off** docs-only PR.
+
+Related evidence: [Hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md#batch-a-review-status-2026-06-05) · [Compliance memo](./qwon_m3_model_distribution_compliance_memo.md#batch-a-review-status-2026-06-05)
+
+### Gate 1 — Open items (hosting / URL ownership)
+
+| # | Open item | Current state | Blocks Ready until |
+| --- | --- | --- | --- |
+| G1-1 | **Named hosting owner** (team / role) | **Unassigned** | Product assigns owner (release engineering, infra, or vendor) |
+| G1-2 | **Hosting model selection** | Options A–D in [hosting memo](./qwon_m3_model_hosting_checksum_memo.md#hosting-options-for-productcodex-review--not-a-recommendation) — **no decision** | Product picks: QWON CDN / QWON-built artifact / defer M3 / explicit HF pin (if legal allows) |
+| G1-3 | **Product HTTPS URL** | Dev ops [HF resolve URL](./qwon_m3_model_hosting_checksum_memo.md#current-dev-ops-fetch-not-product-hosting) — **not** product promise | Approved stable URL or object key documented |
+| G1-4 | **Artifact pinning** | No immutable version ID, commit hash, or object etag policy | Reproducibility plan: pin bartowski file revision **or** QWON-built blob ID |
+| G1-5 | **Upstream artifact identity** | Ops default: `Qwen2.5-0.5B-Instruct-Q4_K_M.gguf` → renamed `prexus-local-mvp.gguf` on device | Product confirms whether shipped artifact is **bartowski binary as-is**, **QWON repack**, or **new build** |
+| G1-6 | **Rollback URL / migration** | Undocumented if hosting object rotates | Plan for in-flight clients when Gate 1 URL changes |
+| G1-7 | **Third-party HF as in-app target** | **Not approved** today | Explicit Product + Gate 3 legal yes/no |
+| G1-8 | **Availability / SLA expectation** | None for M3 spike | Product defines minimum (best-effort vs contracted CDN) |
+
+**Gate 1 status:** **Pending** — **not Ready**
+
+### Gate 2 — Open items (SHA-256 / byte size / verification)
+
+| # | Open item | Current state | Blocks Ready until |
+| --- | --- | --- | --- |
+| G2-1 | **Gate 1 pinned artifact** | Checksum undefined without G1-4/G1-5 | Gate **1** artifact identity finalized |
+| G2-2 | **Exact expected byte size** | Ops range **~379–398 MB** only — [observed sizes](./qwon_m3_model_hosting_checksum_memo.md#observed-file-sizes-ops-evidence--not-gate-2-final) | Single integer for M3 verification (not a range) |
+| G2-3 | **Published SHA-256** | **Not published** — ad-hoc `shasum` ops-only | SHA-256 of **Gate 1 artifact** in sign-off doc |
+| G2-4 | **Verification timing** | Undecided: verify on temp before atomic move (preferred in Gate 5) vs post-move | Codex policy doc aligned with Gate 5 |
+| G2-5 | **Verification failure UX** | Undecided | Product/Codex: delete temp, retry, fallback to M2 USB |
+| G2-6 | **Checksum rotation process** | Undecided | When Gate 1 artifact updates, how Gate 2 constants version |
+| G2-7 | **Mismatch with M2 USB-placed files** | M1 **Present (unverified)** today — no hash in alpha | Whether legacy unverified files remain valid or require re-download |
+| G2-8 | **Source label for Diagnostics** | Gate 2 memo mentions metadata — no user-facing label | Product-approved label (not raw HF URL) |
+
+**Gate 2 status:** **Pending** — **not Ready**
+
+### Gate 3 — Open items (compliance — Product/legal confirmation incomplete)
+
+| # | Open item | Current state | Blocks Ready until |
+| --- | --- | --- | --- |
+| G3-1 | **Qwen base model license** | HF tag `apache-2.0`; [LICENSE](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct/blob/main/LICENSE) linked — **unconfirmed** for mobile re-download | Legal confirms on-device use + **app-initiated redistribution** |
+| G3-2 | **bartowski GGUF quant rights** | Third-party quant; README `license_link` → Qwen LICENSE — **redistribute to end users unconfirmed** | Legal/Product: deliver bartowski file vs QWON-built |
+| G3-3 | **Attribution / NOTICE** | Requirements **unknown** for in-app download path | Legal specifies in-app Settings/legal notice content |
+| G3-4 | **Re-packaging as `prexus-local-mvp.gguf`** | Filename branding vs upstream — **unconfirmed** | Legal OK with rename + any required credit |
+| G3-5 | **Export compliance (model weights)** | ASC encryption answer covers **app TLS** — model weight export **unreviewed** | Product/legal: M3 download impact on export questionnaire |
+| G3-6 | **App Store / privacy label** | Large optional download — **unreviewed** | Product: ASC privacy nutrition label updates if needed |
+| G3-7 | **TestFlight internal distribution** | Build `3` without bundled GGUF | Legal/Product: in-app fetch to internal testers — disclosure requirements |
+| G3-8 | **Hugging Face ToS** | Not reviewed for embedded/production URL fetch | Legal review if G1-7 selects HF |
+| G3-9 | **Regional (e.g. France) declarations** | Build `2` export resubmission history | Ops/Product re-check if network download ships |
+
+**Gate 3 status:** **Pending** — **needs product/legal confirmation** — **not Ready**
+
+### Product / legal question list (Batch A — answer to unblock Ready sign-off)
+
+Product and legal should answer **in writing** (future memo revision or sign-off PR). Engineering **must not** infer approval from silence.
+
+#### Hosting & artifact (Gate 1 — Product owner)
+
+1. Who is the **named owner** for model hosting (G1-1)?
+2. Which **hosting model** is approved: QWON CDN (A), HF pin (B), QWON-built artifact (C), or defer M3 download (D)?
+3. What is the **exact artifact** M3 will ship: bartowski `Q4_K_M` as-is, or a QWON-built/repackaged blob?
+4. How is the artifact **pinned** for reproducibility (G1-4)?
+5. Is embedding or hardcoding a **third-party Hugging Face URL** acceptable for any tester-facing build (G1-7)?
+
+#### Checksum policy (Gate 2 — Product + Codex)
+
+6. After Gate 1 artifact is fixed, what is the **exact byte size** for verification (G2-2)?
+7. What is the **SHA-256** of that artifact (G2-3)? *(Publish in sign-off PR only — not in this review)*
+8. Do **existing USB-placed** GGUF files without matching hash remain supported, or must users re-acquire (G2-7)?
+
+#### Legal / compliance (Gate 3 — Legal via Product)
+
+9. Does **Apache-2.0** (Qwen base) permit QWON to **facilitate download** of weights to user devices via the app?
+10. May QWON **redistribute** the bartowski GGUF quant to end users (directly or via QWON-hosted mirror)?
+11. What **attribution / NOTICE** text is required in-app or in documentation (G3-3, G3-4)?
+12. Does in-app model download change **export compliance** or **App Store privacy label** answers (G3-5, G3-6)?
+13. If Gate 1 selects HF URL: any **Hugging Face ToS** constraints for production app fetch (G3-8)?
+
+### Batch A review exit (not yet met)
+
+| Criterion | Met? |
+| --- | --- |
+| Open items documented | **Yes** (this section) |
+| Product/legal questions issued | **Yes** (above) |
+| Gates 1–3 marked **Ready** | **No** |
+| Final hosting URL decided | **No** |
+| Final SHA-256 / byte size published | **No** |
+| Legal sign-off recorded | **No** |
+| M3 spike approved | **No** |
+| Build `4` approved | **No** |
+
+**Next docs-only step:** Batch **B** review session (Gates 4–5) may proceed in parallel **only for planning** — Batch B **Ready** still blocked on Gate 2 final byte size. Recommended order: obtain Batch A answers → Batch A Ready sign-off PR → then Batch B review.
 
 ---
 
