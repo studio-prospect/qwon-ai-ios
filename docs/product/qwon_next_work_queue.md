@@ -42,7 +42,7 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 | **First post-alpha lane** | **UI polish / onboarding — complete** (UI-1 #80, #81) · UI-2 **deferred** (#82) |
 | **Selected next lane** | **[Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md)** |
 | **Scoped plan** | **[qwon_model_download_gguf_ux_plan.md](./qwon_model_download_gguf_ux_plan.md)** — M1/M2 **complete** ([#86](https://github.com/studio-prospect/qwon-ai-ios/pull/86)–[#89](https://github.com/studio-prospect/qwon-ai-ios/pull/89)); M3 **all 9 gates documented · all Pending** ([#91](https://github.com/studio-prospect/qwon-ai-ios/pull/91)–[#95](https://github.com/studio-prospect/qwon-ai-ios/pull/95)) |
-| **Next agent step** | **Do not open M3 spike** — append **real answers only** to [M3 gate answer intake ledger](./qwon_m3_gate_answer_intake.md) when Product/Codex/Legal/RE respond; then **gate Ready sign-off** docs-only PR(s); **Build `4` not approved** |
+| **Next agent step** | **Do not open M3 spike** — share [Batch A external questionnaire](./qwon_m3_batch_a_external_questionnaire.md), then append **real answers only** to [M3 gate answer intake ledger](./qwon_m3_gate_answer_intake.md) when Product/Codex/Legal/RE respond; then **gate Ready sign-off** docs-only PR(s); **Build `4` not approved** |
 
 ### Choose a branch
 
@@ -88,6 +88,7 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 | **Build `4` / TestFlight upload / tag / version bump** | **Not approved** — Gate 9 separate from spike |
 | **M2 rollback** | **Place GGUF via Mac** + USB ops remain known-good path |
 | **Review plan** | [M3 gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) — batches A–D documented; **all gates still Pending** |
+| **Batch A questionnaire** | [M3 Batch A external questionnaire](./qwon_m3_batch_a_external_questionnaire.md) — shareable Product/legal/Codex question set; **no answers recorded** |
 | **Answer intake** | [M3 gate answer intake ledger](./qwon_m3_gate_answer_intake.md) — **49 questions · all Unanswered**; record stakeholder answers in separate PRs |
 
 ### Evidence memos (by gate)
@@ -104,7 +105,8 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 
 | Action | Owner | Notes |
 | --- | --- | --- |
-| **Answer intake — append real answers** | Product / Codex / Legal / RE | [Answer intake ledger](./qwon_m3_gate_answer_intake.md) — **next step**; one or more docs-only PRs when stakeholders respond; **no fabricated answers** |
+| **Share Batch A questionnaire** | Product / Codex | [External questionnaire](./qwon_m3_batch_a_external_questionnaire.md) — send to Product/legal stakeholders before editing intake rows |
+| **Answer intake — append real answers** | Product / Codex / Legal / RE | [Answer intake ledger](./qwon_m3_gate_answer_intake.md) — only after stakeholders respond; one or more docs-only PRs; **no fabricated answers** |
 | **Gate Ready sign-off PR** | Product / Codex | Mark individual checklist rows **Ready** with linked decision evidence — **after** intake answers; **not** implementation |
 | **M3 spike implementation** | — | **Forbidden** until all gates Ready |
 

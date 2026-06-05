@@ -4,7 +4,7 @@
 **Status:** **Intake ledger only** — **no answers recorded**, **no gate Ready sign-off**, **not** M3 implementation approval, **not** Build `4` approval.
 **Purpose:** Track **Product / Codex / Legal / Release Engineering** answers to [Batch A–D review questions](./qwon_m3_gate_readiness_review_plan.md) and record what each answer **unblocks** toward a future **gate Ready sign-off PR**.
 
-Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) · [M3 checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Queue — M3 status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05)
+Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) · [Batch A external questionnaire](./qwon_m3_batch_a_external_questionnaire.md) · [M3 checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Queue — M3 status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05)
 
 ---
 
@@ -57,7 +57,7 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | Q-A-12 | 3 | Legal, Product | Unanswered | — | Q-C-06; G6-7, G6-8; Q-D-10 | Gate **3** Ready sign-off | — |
 | Q-A-13 | 3 | Legal | Unanswered | — | Q-A-05; G1-7 HF pin | Gate **3** Ready sign-off | — |
 
-**Question text:** [Batch A — Product / legal question list](./qwon_m3_gate_readiness_review_plan.md#product--legal-question-list-batch-a--answer-to-unblock-ready-sign-off)
+**Question text:** [Batch A — external questionnaire](./qwon_m3_batch_a_external_questionnaire.md) · [Product / legal question list](./qwon_m3_gate_readiness_review_plan.md#product--legal-question-list-batch-a--answer-to-unblock-ready-sign-off)
 
 ---
 
