@@ -116,7 +116,7 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | Q-B-08 | 5 | Product, Codex | Unanswered | — | Q-B-06; G5-5 | Gate **5** Ready sign-off | — |
 | Q-B-09 | 5 | Codex | Unanswered | — | G5-6, G5-7; Q-C-12 | Gate **5** Ready sign-off | — |
 | Q-B-10 | 5, 6, 7 | Product, Codex | Unanswered | — | Q-C-12; G7-6–G7-8 | Gate **5** + **7** Ready sign-off | — |
-| Q-B-11 | 5 | Product, Codex | Unanswered | — | **Batch A blocked** (Q-A-08) | Gate **5** Ready sign-off | — |
+| Q-B-11 | 5 | Product, Codex | Unanswered | — | Q-A-08 answered; replacement consent / recovery details | Gate **5** Ready sign-off | — |
 
 **Question text:** [Batch B — Product / Codex question list](./qwon_m3_gate_readiness_review_plan.md#product--codex-question-list-batch-b--answer-to-unblock-ready-sign-off)
 
