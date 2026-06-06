@@ -1,10 +1,10 @@
 # QWON - Model Download / GGUF UX - Scoped Plan
 
 **Last updated:** 2026-06-07 (M3 checklist — Gates 1–9 Ready; spike plan still separate)
-**Status:** **Scoped plan** - implementation, spike, Build `4`, TestFlight upload, tag, version bump, GGUF commit, and filename migration are **not approved** by this document.
+**Status:** **Scoped plan** - M1/M2 complete; M3 readiness Gates **1–9 Ready**. M3 implementation is controlled by the separate [M3 spike plan](./qwon_m3_spike_plan.md). Build `4`, TestFlight upload, tag, version bump, GGUF commit, and filename migration remain **not approved**.
 **Purpose:** Define the safe implementation boundary for reducing QWON text-alpha model acquisition friction after [Product selected Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md). This plan turns that lane decision into a staged UX/ops path without changing the current runtime contract.
 
-Related: [Decision memo](./qwon_model_download_gguf_ux_decision.md) · [models/README.md](../../models/README.md) · [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [QWON lab evidence](./qwon_text_alpha_lab_evidence.md) · [UI polish / onboarding](./qwon_ui_polish_onboarding_plan.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md)
+Related: [Decision memo](./qwon_model_download_gguf_ux_decision.md) · [M3 spike plan](./qwon_m3_spike_plan.md) · [models/README.md](../../models/README.md) · [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [QWON lab evidence](./qwon_text_alpha_lab_evidence.md) · [UI polish / onboarding](./qwon_ui_polish_onboarding_plan.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md)
 
 ---
 
@@ -574,7 +574,7 @@ M2 guided external placement is **verified on simulator** (reachability, placeme
 | --- | --- |
 | **M1 model status UX** | **Complete** — merged + verified |
 | **M2 guided placement** | **Complete** — merged + verified |
-| **M3 in-app download spike** | **Plan-gated** — Gates **1–9 Ready**; spike **not open** until Codex scoped plan |
+| **M3 in-app download spike** | **Plan-gated** — Gates **1–9 Ready**; [M3 spike plan](./qwon_m3_spike_plan.md) defines compile-gated implementation boundary |
 | **Build `4` / TestFlight** | **Separate gate** — **not approved** by this checklist |
 
 ### Checklist (all required before M3 spike)
@@ -595,22 +595,22 @@ M2 guided external placement is **verified on simulator** (reachability, placeme
 
 | Item | Status |
 | --- | --- |
-| M3 Swift implementation | **Not approved** |
-| Network fetch / downloader prototype in app | **Not approved** |
-| Storage schema change | **Not approved** |
+| M3 Swift implementation outside [M3 spike plan](./qwon_m3_spike_plan.md) | **Not approved** |
+| Network fetch / downloader outside `QWON_M3_MODEL_DOWNLOAD_SPIKE` | **Not approved** |
+| Storage schema change beyond approved temp/final paths | **Not approved** |
 | `LocalGGUFModelPlacement` lookup order change | **Not approved** |
 | `prexus-local-mvp.gguf` rename | **Not approved** |
 | `PREXUS_*` env rename | **Not approved** |
 | GGUF or binary commit to git | **Not approved** |
 
-### Exit criteria to open M3 spike (future)
+### Exit criteria to open M3 spike
 
 1. All checklist rows marked **Ready** with linked Product/Codex evidence (docs or decision memo — no artifact commit).
-2. Codex scoped implementation plan for spike-only branch.
+2. Codex scoped implementation plan for spike-only branch — [M3 spike plan](./qwon_m3_spike_plan.md).
 3. Rollback path verified: M2 guided placement + manual USB push remain usable.
 4. Build `4` decision remains a **separate** product gate even if M3 spike succeeds.
 
 ### Cursor / agent boundary
 
-- **Allowed now:** docs-only updates to this checklist and queue status.
-- **Not allowed until checklist sign-off:** downloader code, network fetch, background transfer schema, TestFlight upload, Build `4` ops.
+- **Allowed after spike plan merge:** compile-gated M3 spike implementation per [M3 spike plan](./qwon_m3_spike_plan.md).
+- **Still not allowed:** TestFlight upload, Build `4` ops, tag, version bump, GGUF commit, product-facing release changes, or changing `LocalGGUFModelPlacement` lookup order.
