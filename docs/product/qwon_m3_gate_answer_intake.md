@@ -88,6 +88,7 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) Â
 | --- | --- |
 | **Bucket** | `qwon-094469122222-ap-northeast-1-an` |
 | **Object key** | `models/qwen2.5-0.5b-instruct/q4_k_m/prexus-local-mvp.gguf` |
+| **Canonical HTTPS endpoint** | `https://models.qwon.ai/models/qwen2.5-0.5b-instruct/q4_k_m/prexus-local-mvp.gguf` â€” selected product-facing URL; DNS/CDN/object routing verification remains a Release Engineering operation before downloader network code is exercised |
 | **LastModified** | `2026-06-06T04:11:44+00:00` |
 | **ContentLength / exact byte size** | `397808192` |
 | **ETag** | `"9027dfcbb8ab4852ad705c35c6c3ce29-48"` |
