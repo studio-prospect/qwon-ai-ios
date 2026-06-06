@@ -1,6 +1,6 @@
 # QWON — M3 Network Disclosure + Device Expectation Memo (Gates 6 & 7)
 
-**Last updated:** 2026-06-05 (Batch C review — Gates 6–7 still Pending)
+**Last updated:** 2026-06-06 (Batch C review — Gates 6–7 still Pending; Gate 3/5 dependencies resolved)
 **Status:** **Investigation memo only** — **not** M3 implementation approval, **not** Gates 6/7 **Ready**, **not** Build `4` approval.
 **Purpose:** Document open **privacy / network disclosure copy** (Gate 6) and **Wang / Matisse behavior expectation** (Gate 7) for a future **M3 in-app download** spike of `prexus-local-mvp.gguf`.
 
@@ -198,7 +198,7 @@ Product must publish a **copy migration checklist** before Gate 6/7 → Ready (w
 | --- | --- |
 | Network disclosure copy | **Undecided** (drafts only) |
 | No surprise background fetch | Required in principle — policy **undecided** |
-| Privacy label / ASC impact | **Undecided** — **Gate 3 blocked** |
+| Privacy label / ASC impact | **Undecided** — Gate **3** legal direction is Ready; release-time ASC/privacy-label answer still required |
 | TestFlight tester notes | **Undecided** |
 | Settings / onboarding strings | **Undecided**; M2 migration list **undecided** |
 
@@ -211,9 +211,9 @@ Full item list: [G6-1 … G6-12](./qwon_m3_gate_readiness_review_plan.md#gate-6-
 | Wang optional download framing | Draft only — **not approved** |
 | Matisse heuristic expected copy | Draft only — **not approved** |
 | Download visibility by tier | **Undecided** |
-| Diagnostics mapping (partial/corrupt) | **Gate 5 blocked** |
+| Diagnostics mapping (partial/corrupt) | Gate **5** integrity mapping is Ready; final Gate **7** device-facing copy still required |
 | Fallback / chat strip copy | **Undecided** |
-| Verified vs unverified copy | **Batch A blocked** (Gate 2) |
+| Verified vs unverified copy | Gate **2** artifact record is Ready; final user-facing copy still required |
 
 Full item list: [G7-1 … G7-12](./qwon_m3_gate_readiness_review_plan.md#gate-7--open-items-wang--matisse-device-expectation)
 
@@ -225,7 +225,7 @@ Full item list: [G7-1 … G7-12](./qwon_m3_gate_readiness_review_plan.md#gate-7-
 2. **Approve network disclosure** pattern (user-initiated, no background surprise).
 3. **Finalize tier matrix:** which surfaces show download on Wang only vs both tiers with Matisse de-emphasis.
 4. **Reconcile M2 strings** — explicit list of retired vs kept copy when download lands.
-5. **Privacy label / ASC review** with Gate 3 legal input.
+5. **Privacy label / ASC review** using the Gate 3 legal direction plus release-time ASC context.
 6. **Record written sign-off** — drafts in this memo are **not** sign-off.
 
 ---

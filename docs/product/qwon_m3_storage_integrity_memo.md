@@ -1,7 +1,7 @@
 # QWON — M3 Storage + Partial Download Integrity Memo (Gates 4 & 5)
 
-**Last updated:** 2026-06-06 (Batch B answers recorded — Gates 4–5 still Pending)
-**Status:** **Evidence memo** — Batch B answers recorded; **not** M3 implementation approval, **not** Gates 4/5 **Ready**, **not** Build `4` approval.
+**Last updated:** 2026-06-06 (Batch B / Gates 4–5 Ready)
+**Status:** **Evidence memo** — Batch B answers recorded and Gates **4–5** marked **Ready** for readiness tracking; **not** M3 implementation approval, **not** Build `4` approval.
 **Purpose:** Document open **iOS storage budget / available-space check** (Gate 4) and **partial download / resume / atomic move** (Gate 5) questions for a future **M3 in-app download** spike of `prexus-local-mvp.gguf`.
 
 Related: [M3 readiness checklist — Gates 4 & 5](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Batch B review](./qwon_m3_gate_readiness_review_plan.md#batch-b-review-session-2026-06-05) · [Integrity states](./qwon_model_download_gguf_ux_plan.md#integrity-and-storage-requirements) · [Gate 1/2 hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md) · [Gate 3 compliance memo](./qwon_m3_model_distribution_compliance_memo.md) · [M2 guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement) · [models/README.md](../../models/README.md)
@@ -47,7 +47,7 @@ Gate **2** Ready sign-off records the hosted artifact byte size as **`397808192`
 
 ## Gate 4 — iOS storage budget and available-space check
 
-### Requirement (directional — not Ready)
+### Requirement (Ready direction)
 
 Any future M3 download must **check available capacity in the app sandbox before starting a network fetch or claiming success**. Do **not** silently fill `Documents/` until the OS rejects the write.
 
@@ -69,7 +69,7 @@ Any future M3 download must **check available capacity in the app sandbox before
 
 M3 must write into the **same final path** M1/M2 already surface in Settings → Local Runtime. No alternate schema without a separate approved migration.
 
-### Threshold planning questions (Product / Codex — all **open**)
+### Threshold planning answers (Product / Codex)
 
 | Question | Notes |
 | --- | --- |
@@ -83,9 +83,9 @@ M3 must write into the **same final path** M1/M2 already surface in Settings →
 
 | Field | Value |
 | --- | --- |
-| **Recommended status** | **Pending** |
-| **Ready?** | **No** — Batch B answers recorded; separate Gate 4 Ready sign-off still required |
-| **Blocked by** | Gate **4** Ready sign-off |
+| **Recommended status** | **Ready** |
+| **Ready?** | **Yes** — closed by Batch B Ready sign-off |
+| **Blocked by** | — |
 
 ---
 
@@ -159,9 +159,9 @@ Copy must **not** say “Tap to download” until Product approves network UX ([
 
 | Field | Value |
 | --- | --- |
-| **Recommended status** | **Pending** |
-| **Ready?** | **No** — Batch B answers recorded; separate Gate 5 Ready sign-off still required |
-| **Blocked by** | Gate **5** Ready sign-off |
+| **Recommended status** | **Ready** |
+| **Ready?** | **Yes** — closed by Batch B Ready sign-off |
+| **Blocked by** | — |
 
 ---
 
@@ -176,7 +176,7 @@ M3 spike must **not** remove or regress the known-good manual path:
 | **`fetch_local_model.sh`** | Mac-side fetch (dev ops; not in-app) |
 | **Gate 8 checklist row** | Formal rollback gate — see [M3 checklist Gate 8](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) |
 
-If in-app download fails or Gates 4/5 are not Ready for ship, testers and support continue on **Build `3` baseline + M2 ops**. Partial or failed M3 download must **not** block manual USB recovery.
+If in-app download fails or the future spike is not approved for ship, testers and support continue on **Build `3` baseline + M2 ops**. Partial or failed M3 download must **not** block manual USB recovery.
 
 ---
 
@@ -196,9 +196,9 @@ If in-app download fails or Gates 4/5 are not Ready for ship, testers and suppor
 
 ## Batch B review status (2026-06-06)
 
-**Review:** [Batch B session](./qwon_m3_gate_readiness_review_plan.md#batch-b-review-session-2026-06-05) documented open items; [answer intake](./qwon_m3_gate_answer_intake.md#batch-b-storage-and-integrity-answer-details-2026-06-06) records Q-B-01…Q-B-11. Gates **4–5** remain **Pending** until separate Ready sign-off.
+**Review:** [Batch B session](./qwon_m3_gate_readiness_review_plan.md#batch-b-review-session-2026-06-05) documented open items; [answer intake](./qwon_m3_gate_answer_intake.md#batch-b-storage-and-integrity-answer-details-2026-06-06) records Q-B-01…Q-B-11; [Batch B Ready sign-off](./qwon_m3_gate_readiness_review_plan.md#batch-b-ready-sign-off-2026-06-06) marks Gates **4–5** **Ready**.
 
-### Gate 4 — answered, Ready sign-off pending (summary)
+### Gate 4 — Ready (summary)
 
 | Topic | Status |
 | --- | --- |
@@ -209,7 +209,7 @@ If in-app download fails or Gates 4/5 are not Ready for ship, testers and suppor
 
 Full item list: [G4-1 … G4-9](./qwon_m3_gate_readiness_review_plan.md#gate-4--open-items-storage-budget--available-space-check)
 
-### Gate 5 — answered, Ready sign-off pending (summary)
+### Gate 5 — Ready (summary)
 
 | Topic | Status |
 | --- | --- |
@@ -224,9 +224,9 @@ Full item list: [G5-1 … G5-12](./qwon_m3_gate_readiness_review_plan.md#gate-5-
 
 ---
 
-## Recommended Product / Codex actions before Gates 4/5 Ready sign-off
+## Recommended Product / Codex actions after Gates 4/5 Ready sign-off
 
-1. Open a docs-only Gates **4–5** Ready sign-off PR if Product/Codex accepts the recorded Batch B answers.
+1. Proceed to Batch **C** / Gates **6–7** answer intake and Ready review.
 2. Keep `Documents/Models/prexus-local-mvp.gguf` and `prexus-local-mvp.gguf.download` scoped to M3 planning; no Swift implementation until all gates are Ready.
 3. Verify M2 rollback in the later spike test plan (Gate **8**) before any TestFlight binary with download UX.
 
@@ -236,10 +236,10 @@ Full item list: [G5-1 … G5-12](./qwon_m3_gate_readiness_review_plan.md#gate-5-
 
 | Gate | Recommended status | M3 implementation | Build `4` |
 | --- | --- | --- | --- |
-| **4 — Storage / available-space check** | **Pending** | **Not approved** | **Not approved** |
-| **5 — Partial download / atomic move** | **Pending** | **Not approved** | **Not approved** |
+| **4 — Storage / available-space check** | **Ready** | **Not approved** | **Not approved** |
+| **5 — Partial download / atomic move** | **Ready** | **Not approved** | **Not approved** |
 
-Gates **1–3** are Ready; Gates **4–9** remain **Pending** until individually marked **Ready** with Product/Codex evidence. **Do not open M3 spike** until **all** gates are Ready.
+Gates **1–5** are Ready; Gates **6–9** remain **Pending** until individually marked **Ready** with Product/Codex evidence. **Do not open M3 spike** until **all** gates are Ready.
 
 ---
 
@@ -247,8 +247,8 @@ Gates **1–3** are Ready; Gates **4–9** remain **Pending** until individually
 
 | Included | Excluded |
 | --- | --- |
-| Storage check requirement (principle) | Final minimum free-space threshold |
-| Integrity state + Diagnostics direction | Swift / downloader implementation |
-| Temp/resume/atomic move options as open questions | Storage schema or lookup order change |
-| M2 rollback path affirmation | Gates 4/5 marked **Ready** |
+| Storage check requirement and final minimum free-space threshold | Swift / downloader implementation |
+| Integrity state + Diagnostics direction | Final Gate 6/7 user-facing copy |
+| Temp/resume/atomic move decisions for M3 planning | Storage schema or lookup order change |
+| M2 rollback path affirmation | M3 spike approval |
 | Links from M3 checklist | GGUF commit; Build `4` approval |
