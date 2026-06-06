@@ -1,6 +1,6 @@
 # QWON — Next Work Queue
 
-**Last updated:** 2026-06-06 (M3 Batch B / Gates 4–5 Ready — docs-only)
+**Last updated:** 2026-06-06 (M3 Batch C / Gates 6–7 Ready — docs-only)
 **Status:** **Queue / guardrail only** — no implementation authorization in this document.
 **Purpose:** After Phase 4 rename docs are complete, classify what agents **may** do next vs what requires **product gates**. Prevents drift into ungated **build `4`**, project-container rename, or blind PREXUS cleanup.
 
@@ -41,16 +41,16 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 | **Lab** | Wang + Matisse build `3` verified · [lab evidence](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) |
 | **First post-alpha lane** | **UI polish / onboarding — complete** (UI-1 #80, #81) · UI-2 **deferred** (#82) |
 | **Selected next lane** | **[Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md)** |
-| **Scoped plan** | **[qwon_model_download_gguf_ux_plan.md](./qwon_model_download_gguf_ux_plan.md)** — M1/M2 **complete** ([#86](https://github.com/studio-prospect/qwon-ai-ios/pull/86)–[#89](https://github.com/studio-prospect/qwon-ai-ios/pull/89)); M3 Gates **1–5 Ready**; Gates **6–9 Pending** |
-| **Next agent step** | **Do not open M3 spike** — next valid M3 docs step is Gates **6–7** Ready sign-off or Batch **D** answer intake; **Build `4` not approved** |
+| **Scoped plan** | **[qwon_model_download_gguf_ux_plan.md](./qwon_model_download_gguf_ux_plan.md)** — M1/M2 **complete** ([#86](https://github.com/studio-prospect/qwon-ai-ios/pull/86)–[#89](https://github.com/studio-prospect/qwon-ai-ios/pull/89)); M3 Gates **1–7 Ready**; Gates **8–9 Pending** |
+| **Next agent step** | **Do not open M3 spike** — next valid M3 docs step is Batch **D** answer intake; **Build `4` not approved** |
 
 ### Choose a branch
 
 | Branch | When | First doc | Agent default |
 | --- | --- | --- | --- |
-| **Stay** | Maintain build **`3`**; no new binary; docs/readme hygiene only | This queue — [Ready / low-risk docs-ops](#ready--low-risk-docs-ops) | **Yes** — M1/M2 complete; M3 Gates **1–5 Ready**; Gates **6–9 Pending** |
+| **Stay** | Maintain build **`3`**; no new binary; docs/readme hygiene only | This queue — [Ready / low-risk docs-ops](#ready--low-risk-docs-ops) | **Yes** — M1/M2 complete; M3 Gates **1–7 Ready**; Gates **8–9 Pending** |
 | **Product gate: build `4` decision** | Product explicitly evaluates whether a **new TestFlight binary** is warranted | [TestFlight prep — build `4` gate](./qwon_text_alpha_testflight_prep.md#phase-4-build-3-decision-gate) · [Conditional upload build `4`](#testflight-upload-build-4) | **No** — gate docs only until product approves |
-| **Post-alpha: Model download / GGUF UX** | M1/M2 complete; M3 checklist documented | [M3 readiness checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [M3 readiness status](#m3-readiness-status-2026-06-05) | **No default** — Gates **6–9 Pending**; no in-app download spike |
+| **Post-alpha: Model download / GGUF UX** | M1/M2 complete; M3 checklist documented | [M3 readiness checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [M3 readiness status](#m3-readiness-status-2026-06-05) | **No default** — Gates **8–9 Pending**; no in-app download spike |
 
 **Build `4` decision ≠ build `4` approved.** Documenting criteria or opening a product discussion does **not** authorize archive, upload, tag, or `CFBundleVersion` bump.
 
@@ -78,18 +78,18 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 
 ## M3 readiness status (2026-06-05)
 
-**Batch A Ready · Batch B Ready · Batch C answered · Gates 6–9 Pending · M3 spike not open · Build `4` not approved.**
+**Batch A Ready · Batch B Ready · Batch C Ready · Gates 8–9 Pending · M3 spike not open · Build `4` not approved.**
 
 | Field | Value |
 | --- | --- |
 | **Checklist** | [M3 readiness gate checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) — Gates **1–9** each have linked evidence memos ([#91](https://github.com/studio-prospect/qwon-ai-ios/pull/91)–[#95](https://github.com/studio-prospect/qwon-ai-ios/pull/95)) |
-| **Gate status** | Gates **1–5 Ready**; Gates **6–9 Pending** |
+| **Gate status** | Gates **1–7 Ready**; Gates **8–9 Pending** |
 | **M3 in-app download spike** | **Not approved** — do **not** open until every gate is Ready + Codex scoped plan |
 | **Build `4` / TestFlight upload / tag / version bump** | **Not approved** — Gate 9 separate from spike |
 | **M2 rollback** | **Place GGUF via Mac** + USB ops remain known-good path |
-| **Review plan** | [M3 gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) — batches A–D documented; Batch **A/B** Ready sign-offs recorded |
+| **Review plan** | [M3 gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) — batches A–D documented; Batch **A/B/C** Ready sign-offs recorded |
 | **Batch A questionnaire** | [M3 Batch A external questionnaire](./qwon_m3_batch_a_external_questionnaire.md) / [日本語版](./qwon_m3_batch_a_external_questionnaire_ja.md) — shareable Product/legal/Codex question set |
-| **Answer intake** | [M3 gate answer intake ledger](./qwon_m3_gate_answer_intake.md) — **49 questions · 38 answered**; Batch **A/B fully answered** and Gates **1–5 Ready**; Batch **C answered**, Gates **6–7 Pending** |
+| **Answer intake** | [M3 gate answer intake ledger](./qwon_m3_gate_answer_intake.md) — **49 questions · 38 answered**; Batch **A/B/C fully answered** and Gates **1–7 Ready**; Batch **D unanswered**, Gates **8–9 Pending** |
 | **Gate 2 artifact record** | [Artifact finalization runbook](./qwon_m3_gate2_artifact_finalization_runbook.md) + [record template](./qwon_m3_gate2_artifact_record_template.md) — Q-A-06/Q-A-07 values recorded in intake and signed off for Gate **2** |
 
 ### Evidence memos (by gate)
@@ -106,8 +106,7 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 
 | Action | Owner | Notes |
 | --- | --- | --- |
-| **Gates 6–7 Ready sign-off PR** | Product / Codex | Next candidate after Batch C answers; docs-only; **not** implementation |
-| **Batch D answer intake** | Product / Codex / RE | Optional next planning lane for rollback / release gates if sign-off waits |
+| **Batch D answer intake** | Product / Codex / RE | Next candidate for rollback / release gates; docs-only; **not** implementation |
 | **M3 spike implementation** | — | **Forbidden** until all gates Ready |
 
 ---
@@ -287,7 +286,7 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 | Clean up remaining PREXUS strings | **Stop** | [Inventory](./qwon_preserved_prexus_surface_inventory.md) first — default **preserve** |
 | Plan UI polish / onboarding | **Complete** (UI-1) | [UI polish plan](./qwon_ui_polish_onboarding_plan.md) · UI-2 **deferred** |
 | Select next post-alpha lane | **Done** — [Model download / GGUF UX decision](./qwon_model_download_gguf_ux_decision.md) |
-| Plan Model download / GGUF UX | **M1/M2 complete** · **M3 Gates 1–5 Ready / Gates 6–9 Pending** | [Review plan](./qwon_m3_gate_readiness_review_plan.md) · [M3 status](#m3-readiness-status-2026-06-05) |
+| Plan Model download / GGUF UX | **M1/M2 complete** · **M3 Gates 1–7 Ready / Gates 8–9 Pending** | [Review plan](./qwon_m3_gate_readiness_review_plan.md) · [M3 status](#m3-readiness-status-2026-06-05) |
 | Open UI-2 onboarding structure | **Deferred** | **Not approved** — [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) |
 | Add OCR / LiteRT / App Store | Deferred | [Selection matrix](./qwon_post_alpha_options.md#selection-matrix) |
 
@@ -295,4 +294,4 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 ## Agent note
 
-Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **UI polish UI-1 complete**; **UI-2 deferred**. **Model download / GGUF UX M1/M2 merged**; **M3 readiness: Gates 1–5 Ready, Gates 6–9 Pending** — [status section](#m3-readiness-status-2026-06-05); **M3 spike not approved**. Build **`4`** / TestFlight upload / tag / version bump require **explicit product gate**. No in-app download, GGUF commit, or UI-2 without gates.
+Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **UI polish UI-1 complete**; **UI-2 deferred**. **Model download / GGUF UX M1/M2 merged**; **M3 readiness: Gates 1–7 Ready, Gates 8–9 Pending** — [status section](#m3-readiness-status-2026-06-05); **M3 spike not approved**. Build **`4`** / TestFlight upload / tag / version bump require **explicit product gate**. No in-app download, GGUF commit, or UI-2 without gates.

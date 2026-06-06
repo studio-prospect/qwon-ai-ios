@@ -1,6 +1,6 @@
 # QWON - Model Download / GGUF UX - Scoped Plan
 
-**Last updated:** 2026-06-06 (M3 checklist — Batch A/B Gates 1–5 Ready; Gates 6–9 Pending)
+**Last updated:** 2026-06-06 (M3 checklist — Batch A–C Gates 1–7 Ready; Gates 8–9 Pending)
 **Status:** **Scoped plan** - implementation, spike, Build `4`, TestFlight upload, tag, version bump, GGUF commit, and filename migration are **not approved** by this document.
 **Purpose:** Define the safe implementation boundary for reducing QWON text-alpha model acquisition friction after [Product selected Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md). This plan turns that lane decision into a staged UX/ops path without changing the current runtime contract.
 
@@ -564,7 +564,7 @@ M2 guided external placement is **verified on simulator** (reachability, placeme
 
 **Purpose:** After M1/M2 completion, record the **prerequisites** that must be satisfied before opening an **M3 in-app download spike**. This section is a **readiness gate only** — it does **not** approve M3 implementation, network fetch, storage schema work, or TestFlight upload.
 
-**Status (2026-06-06):** Gates **1–9** evidence memos + **Batch A–D review sessions** documented ([#91](https://github.com/studio-prospect/qwon-ai-ios/pull/91)–[#95](https://github.com/studio-prospect/qwon-ai-ios/pull/95), [review plan](./qwon_m3_gate_readiness_review_plan.md)). **Batch A / Gates 1–3** and **Batch B / Gates 4–5** are Ready after answer intake and sign-off; **Gates 6–9 remain Pending**. **Do not open M3 spike.** **Build `4` / TestFlight / tag / version bump not approved.** [Queue status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05).
+**Status (2026-06-06):** Gates **1–9** evidence memos + **Batch A–D review sessions** documented ([#91](https://github.com/studio-prospect/qwon-ai-ios/pull/91)–[#95](https://github.com/studio-prospect/qwon-ai-ios/pull/95), [review plan](./qwon_m3_gate_readiness_review_plan.md)). **Batch A / Gates 1–3**, **Batch B / Gates 4–5**, and **Batch C / Gates 6–7** are Ready after answer intake and sign-off; **Gates 8–9 remain Pending**. **Do not open M3 spike.** **Build `4` / TestFlight / tag / version bump not approved.** [Queue status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05).
 
 **Base:** `origin/main` @ **`dc43e69`** — M3 evidence memos complete ([#91](https://github.com/studio-prospect/qwon-ai-ios/pull/91)–[#95](https://github.com/studio-prospect/qwon-ai-ios/pull/95)); M1/M2 merged ([#86](https://github.com/studio-prospect/qwon-ai-ios/pull/86)–[#89](https://github.com/studio-prospect/qwon-ai-ios/pull/89)).
 
@@ -574,7 +574,7 @@ M2 guided external placement is **verified on simulator** (reachability, placeme
 | --- | --- |
 | **M1 model status UX** | **Complete** — merged + verified |
 | **M2 guided placement** | **Complete** — merged + verified |
-| **M3 in-app download spike** | **Gated** — Gates **1–5 Ready**; Gates **6–9 Pending**; spike **not open** |
+| **M3 in-app download spike** | **Gated** — Gates **1–7 Ready**; Gates **8–9 Pending**; spike **not open** |
 | **Build `4` / TestFlight** | **Separate gate** — **not approved** by this checklist |
 
 ### Checklist (all required before M3 spike)
@@ -586,8 +586,8 @@ M2 guided external placement is **verified on simulator** (reachability, placeme
 | 3 | **License / redistribution / export compliance** | [Compliance memo](./qwon_m3_model_distribution_compliance_memo.md) — Legal/Product approved the Apache-2.0 direction, conditional QWON-hosted bartowski `Q4_K_M` mirror, attribution requirement, HF traceability-only stance, and ASC/export re-check before any product-facing download build. | **Ready** |
 | 4 | **iOS storage budget and available-space check** | [Storage + integrity memo](./qwon_m3_storage_integrity_memo.md) — Gate 4 section; pre-download sandbox capacity check required; minimum free-space threshold `1064051840` bytes; insufficient-space copy direction recorded; no silent sandbox fill. | **Ready** |
 | 5 | **Partial download / resume / atomic move plan** | [Storage + integrity memo](./qwon_m3_storage_integrity_memo.md) — Gate 5 section; temp path `Documents/Models/prexus-local-mvp.gguf.download`; clean restart selected; atomic promote after Gate 2 size/SHA verification; corrupt/partial state handling per [integrity states](#integrity-and-storage-requirements); no silent replacement of USB-placed GGUF. | **Ready** |
-| 6 | **Privacy / network disclosure copy** | [Network + device expectation memo](./qwon_m3_network_device_expectation_memo.md) — Gate 6 section; answer direction recorded: user-initiated foreground download only, pre-download ~400 MB disclosure, local-first/not offline-only wording, Wi-Fi recommended with cellular warning, Settings-first disclosure, release-time ASC/privacy/export re-check. | **Pending** |
-| 7 | **Wang / Matisse behavior expectation** | [Network + device expectation memo](./qwon_m3_network_device_expectation_memo.md) — Gate 7 section; answer direction recorded: Wang-primary optional download; Matisse Embedded Heuristic Runtime remains expected and not failure; diagnostics map partial/corrupt/success without claiming llama readiness until verified final file loads. | **Pending** |
+| 6 | **Privacy / network disclosure copy** | [Network + device expectation memo](./qwon_m3_network_device_expectation_memo.md) — Gate 6 section; user-initiated foreground download only, pre-download ~400 MB disclosure, local-first/not offline-only wording, Wi-Fi recommended with cellular warning, Settings-first disclosure, and release-time ASC/privacy/export re-check are signed off for M3 readiness. | **Ready** |
+| 7 | **Wang / Matisse behavior expectation** | [Network + device expectation memo](./qwon_m3_network_device_expectation_memo.md) — Gate 7 section; Wang-primary optional download, Matisse Embedded Heuristic Runtime as expected/not failure, and diagnostics mapping for partial/corrupt/success are signed off for M3 readiness. | **Ready** |
 | 8 | **Rollback to Mac + USB guided placement** | [Rollback + release gate memo](./qwon_m3_rollback_release_gate_memo.md) — Gate 8 section; M2 **Place GGUF via Mac**, `fetch_local_model.sh`, `push_local_model_to_device.sh` **must remain** as fallback. M2 guided path (`Place GGUF via Mac`, `push_local_model_to_device.sh`) remains supported fallback; spike regression must not break manual ops | **Pending** |
 | 9 | **Build `4` / TestFlight gate (separate)** | [Rollback + release gate memo](./qwon_m3_rollback_release_gate_memo.md) — Gate 9 section; M3 spike **≠** Build `4` approval. M3 spike ≠ Build `4` approval; no upload, tag, or `CFBundleVersion` bump implied; product gate for any binary that ships download UX to testers | **Pending** — **not approved** |
 
