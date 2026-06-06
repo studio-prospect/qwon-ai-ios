@@ -1,8 +1,8 @@
 # QWON — M3 Rollback + Release Gate Memo (Gates 8 & 9)
 
-**Last updated:** 2026-06-06 (Batch D review — Gates 8–9 still Pending; Gates 1–5 Ready)
-**Status:** **Investigation memo only** — **not** M3 implementation approval, **not** Gates 8/9 **Ready**, **not** Build `4` approval.
-**Purpose:** Document **Mac + USB rollback** requirements (Gate 8) and the **Build `4` / TestFlight release gate** (Gate 9) for M3 readiness. Evidence memos exist for all nine checklist rows; Gates **1–5** are Ready, while Gates **6–9** remain Pending until Product/Codex sign-off.
+**Last updated:** 2026-06-07 (Batch D answers recorded — Gates 8–9 still Pending)
+**Status:** **Evidence memo** — Batch D answers recorded; **not** M3 implementation approval, **not** Gates 8/9 **Ready**, **not** Build `4` approval.
+**Purpose:** Document **Mac + USB rollback** requirements (Gate 8) and the **Build `4` / TestFlight release gate** (Gate 9) for M3 readiness. Evidence memos exist for all nine checklist rows; Gates **1–7** are Ready, while Gates **8–9** remain Pending until Product/Codex sign-off.
 
 Related: [M3 readiness checklist — Gates 8 & 9](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Batch D review](./qwon_m3_gate_readiness_review_plan.md#batch-d-review-session-2026-06-05) · [Fallback and rollback](./qwon_model_download_gguf_ux_plan.md#fallback-and-rollback) · [M2 guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement) · [TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [models/README.md](../../models/README.md)
 
@@ -22,7 +22,7 @@ Related: [M3 readiness checklist — Gates 8 & 9](./qwon_model_download_gguf_ux_
 
 ## Checklist completion note
 
-With this memo, Gates **1–9** each have linked investigation or evidence documentation. Gates **1–5** are **Ready**; Gates **6–9** remain **Pending**. M3 spike approval requires **all** rows marked Ready plus Codex scoped plan — see [exit criteria](./qwon_model_download_gguf_ux_plan.md#exit-criteria-to-open-m3-spike-future).
+With this memo, Gates **1–9** each have linked investigation or evidence documentation. Gates **1–7** are **Ready**; Gates **8–9** remain **Pending**. M3 spike approval requires **all** rows marked Ready plus Codex scoped plan — see [exit criteria](./qwon_model_download_gguf_ux_plan.md#exit-criteria-to-open-m3-spike-future).
 
 | Gate | Memo |
 | --- | --- |
@@ -66,7 +66,7 @@ M3 in-app download — if ever implemented — is **additive**. The following M2
 | --- | --- |
 | Guided placement screen reachable | **Verified** on simulator (M2 post-merge [#89](https://github.com/studio-prospect/qwon-ai-ios/pull/89)) |
 | Push script + fetch script documented | **Yes** — [models/README.md](../../models/README.md), M2 section in [UX plan](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement) |
-| M3 spike must re-verify after any Settings/Local Runtime change | **Undecided** — required in principle before Gate 8 Ready |
+| M3 spike must re-verify after any Settings/Local Runtime change | **Answered direction** — include guided placement reachability, copy commands, model path, and Wang/Matisse expectations |
 | Spike must not change `LocalGGUFModelPlacement` lookup order | **Not approved** to change |
 
 ### Gate 8 disposition
@@ -74,7 +74,7 @@ M3 in-app download — if ever implemented — is **additive**. The following M2
 | Field | Value |
 | --- | --- |
 | **Recommended status** | **Pending** |
-| **Ready?** | **No** — formal post-spike rollback re-verification not yet scheduled |
+| **Ready?** | **No** — Batch D answers recorded; separate Ready sign-off still required |
 | **M2 path** | **Must remain** — not replaced by M3 download |
 
 ---
@@ -101,7 +101,7 @@ M3 in-app download — if ever implemented — is **additive**. The following M2
 | Ship download UX to TestFlight testers | Product | **Undecided** |
 | ASC export compliance re-check | Ops | **Undecided** — see [TestFlight prep](./qwon_text_alpha_testflight_prep.md) |
 | Tester communication (GGUF still not bundled vs download available) | Product / support | **Undecided** |
-| Gates 1–8 Ready with evidence | Product / Codex | Gates **1–5 Ready**; Gates **6–8 Pending** |
+| Gates 1–8 Ready with evidence | Product / Codex | Gates **1–7 Ready**; Gate **8 Pending** |
 
 ### Gate 9 disposition
 
@@ -126,27 +126,27 @@ M3 in-app download — if ever implemented — is **additive**. The following M2
 
 ## Batch D review status (2026-06-05)
 
-**Review:** [Batch D session](./qwon_m3_gate_readiness_review_plan.md#batch-d-review-session-2026-06-05) — open items documented; Gates **8–9** remain **Pending**. **All batches A–D** review documented — **no gate Ready**.
+**Review:** [Batch D session](./qwon_m3_gate_readiness_review_plan.md#batch-d-review-session-2026-06-05) — open items documented; [answer intake](./qwon_m3_gate_answer_intake.md#batch-d-rollback-and-release-answer-details-2026-06-07) records Q-D-01…Q-D-11. Gates **8–9** remain **Pending** until separate Ready / disposition sign-off.
 
-### Gate 8 — unresolved (summary)
+### Gate 8 — answered, Ready sign-off pending (summary)
 
 | Topic | Status |
 | --- | --- |
-| M2 guided placement preservation | Pre-spike verified — **post-spike regression undecided** |
-| fetch/push scripts | Documented — **spike test plan blocked** for RE sign-off |
-| Rollback runbook | **Not published** |
-| Manual recovery path | Principle only — **test plan undecided** |
+| M2 guided placement preservation | Must remain reachable after spike |
+| fetch/push scripts | RE signs off fetch/push scripts after spike |
+| Rollback runbook | Publish in M3 UX plan or linked rollback memo during sign-off |
+| Manual recovery path | Cancel/delete temp, use Mac + USB, restart, verify Settings/Diagnostics |
 
 Full item list: [G8-1 … G8-10](./qwon_m3_gate_readiness_review_plan.md#gate-8--open-items-mac--usb-rollback)
 
-### Gate 9 — unresolved (summary)
+### Gate 9 — answered, disposition sign-off pending (summary)
 
 | Topic | Status |
 | --- | --- |
-| Build `4` decision boundary | Documented — **Product release decision blocked** |
+| Build `4` decision boundary | Spike may proceed internally after all gates Ready; release remains separate |
 | TestFlight upload / tag / CFBundleVersion | **Not approved** |
-| ASC/export re-check | **Undecided** — Gate 3 overlap |
-| Tester communication | **Undecided** |
+| ASC/export re-check | Required before any build shipping download UX |
+| Tester communication | Optional ~400 MB user-initiated download; Mac + USB remains available |
 
 Full item list: [G9-1 … G9-10](./qwon_m3_gate_readiness_review_plan.md#gate-9--open-items-build-4--testflight-release-gate)
 
@@ -156,7 +156,7 @@ Full item list: [G9-1 … G9-10](./qwon_m3_gate_readiness_review_plan.md#gate-9-
 
 ### Gate 8
 
-1. **Define spike regression test plan** — guided placement + push script still pass after M3 code lands.
+1. **Open Gates 8–9 Ready / disposition sign-off PR** — keep Build `4` not approved unless Product explicitly changes it.
 2. **Document rollback runbook** — ops steps when in-app download fails (link M2 screen + scripts).
 3. **Sign off** that M2 surfaces remain in shipping binary for any build that includes download UX.
 
