@@ -51,10 +51,10 @@ This spike is allowed to answer: “Can QWON safely download, verify, promote, a
 | **Final sandbox path** | `Documents/Models/prexus-local-mvp.gguf` |
 | **Temp path** | `Documents/Models/prexus-local-mvp.gguf.download` |
 | **Minimum free space before start** | `1064051840` bytes |
-| **Product-facing URL** | `https://models.qwon.ai/models/qwen2.5-0.5b-instruct/q4_k_m/prexus-local-mvp.gguf` |
-| **HTTPS endpoint operations** | Canonical endpoint selected; Release Engineering must provision and verify DNS/CDN/object routing before downloader network code is exercised |
+| **Development HTTPS URL** | `https://models.qwon.dev/models/qwen2.5-0.5b-instruct/q4_k_m/prexus-local-mvp.gguf` |
+| **HTTPS endpoint operations** | Development endpoint selected; Release Engineering must provision and verify DNS/CDN/object routing before downloader network code is exercised |
 
-Do **not** use Hugging Face resolve URL as the app endpoint. If the selected QWON-owned HTTPS URL is not live when Cursor starts implementation, Cursor must stop before downloader network code and report the missing endpoint. It may still prepare code boundaries/tests that do not require a live URL.
+Do **not** use Hugging Face resolve URL as the app endpoint. During M3 development, use the `qwon.dev` endpoint rather than `qwon.ai`. If the selected QWON-owned HTTPS URL is not live when Cursor starts implementation, Cursor must stop before downloader network code and report the missing endpoint. It may still prepare code boundaries/tests that do not require a live URL.
 
 ---
 

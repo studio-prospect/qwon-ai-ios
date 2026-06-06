@@ -176,7 +176,7 @@ Store ops hash/size in `~/QWON-alpha-evidence/` if needed; **do not commit** GGU
 | Topic | Status |
 | --- | --- |
 | Hosting owner | Product distribution decision owner; Release Engineering operational storage/CDN owner |
-| Product URL / CDN | `https://models.qwon.ai/models/qwen2.5-0.5b-instruct/q4_k_m/prexus-local-mvp.gguf` selected as the canonical QWON-owned HTTPS endpoint; DNS/CDN provisioning and live verification remain Release Engineering operations |
+| Product URL / CDN | `https://models.qwon.dev/models/qwen2.5-0.5b-instruct/q4_k_m/prexus-local-mvp.gguf` selected as the QWON-owned development HTTPS endpoint; DNS/CDN provisioning and live verification remain Release Engineering operations. `qwon.ai` remains reserved for production/marketing use. |
 | Artifact pin (bartowski vs QWON-built) | QWON-hosted mirror of bartowski Qwen2.5 `Q4_K_M` GGUF |
 | HF URL as product promise | **Not approved** — traceability/dev ops only |
 
