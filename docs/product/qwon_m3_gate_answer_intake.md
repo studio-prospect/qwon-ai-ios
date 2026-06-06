@@ -223,19 +223,40 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 
 | Question ID | Gate | Owner | Answer status | Answer source | Blocks | Ready impact | Follow-up PR |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Q-D-01 | 8 | Codex | Unanswered | — | G8-6; **spike test plan blocked** | Gate **8** Ready sign-off | — |
-| Q-D-02 | 8 | Release Engineering | Unanswered | — | G8-2, G8-3 | Gate **8** Ready sign-off | — |
-| Q-D-03 | 8 | Codex, RE | Unanswered | — | G8-4, G8-5 | Gate **8** Ready sign-off | — |
-| Q-D-04 | 8, 7 | Product, Codex | Unanswered | — | G8-7; Q-C-14 | Gate **8** Ready sign-off | — |
-| Q-D-05 | 8, 5, 7 | Product | Unanswered | — | G8-9; Q-B-09 | Gate **8** Ready sign-off | — |
-| Q-D-06 | 9 | Product | Unanswered | — | G9-1; M3 spike vs TestFlight | Gate **9** disposition (not Build `4` approval by default) | — |
-| Q-D-07 | 9 | Product | Unanswered | — | G9-2, G9-5; **Product release decision blocked** | Gate **9** / Build `4` gate | — |
-| Q-D-08 | 9 | Product | Unanswered | — | G9-3, G9-4 | Gate **9** / Build `4` gate | — |
-| Q-D-09 | 9 | Product | Unanswered | — | G9-7 | Gate **9** Ready sign-off | — |
-| Q-D-10 | 9, 3 | Ops, Legal | Unanswered | — | G9-6; Gate **3** Ready; release-time ASC/export re-check still required | Gate **9** Ready sign-off | — |
-| Q-D-11 | 9 | Product | Unanswered | — | G9-8; sign-off PR format | Gate **9** Ready sign-off | — |
+| Q-D-01 | 8 | Codex | Answered | [Batch D answer details](#batch-d-rollback-and-release-answer-details-2026-06-07) | G8-6; spike test plan | Gate **8** Ready sign-off | This PR |
+| Q-D-02 | 8 | Release Engineering | Answered | [Batch D answer details](#batch-d-rollback-and-release-answer-details-2026-06-07) | G8-2, G8-3 | Gate **8** Ready sign-off | This PR |
+| Q-D-03 | 8 | Codex, RE | Answered | [Batch D answer details](#batch-d-rollback-and-release-answer-details-2026-06-07) | G8-4, G8-5 | Gate **8** Ready sign-off | This PR |
+| Q-D-04 | 8, 7 | Product, Codex | Answered | [Batch D answer details](#batch-d-rollback-and-release-answer-details-2026-06-07) | G8-7; Q-C-14 | Gate **8** Ready sign-off | This PR |
+| Q-D-05 | 8, 5, 7 | Product | Answered | [Batch D answer details](#batch-d-rollback-and-release-answer-details-2026-06-07) | G8-9; Q-B-09 | Gate **8** Ready sign-off | This PR |
+| Q-D-06 | 9 | Product | Answered | [Batch D answer details](#batch-d-rollback-and-release-answer-details-2026-06-07) | G9-1; M3 spike vs TestFlight | Gate **9** disposition (not Build `4` approval by default) | This PR |
+| Q-D-07 | 9 | Product | Answered | [Batch D answer details](#batch-d-rollback-and-release-answer-details-2026-06-07) | G9-2, G9-5; Product release decision | Gate **9** / Build `4` gate | This PR |
+| Q-D-08 | 9 | Product | Answered | [Batch D answer details](#batch-d-rollback-and-release-answer-details-2026-06-07) | G9-3, G9-4 | Gate **9** / Build `4` gate | This PR |
+| Q-D-09 | 9 | Product | Answered | [Batch D answer details](#batch-d-rollback-and-release-answer-details-2026-06-07) | G9-7 | Gate **9** Ready sign-off | This PR |
+| Q-D-10 | 9, 3 | Ops, Legal | Answered | [Batch D answer details](#batch-d-rollback-and-release-answer-details-2026-06-07) | G9-6; Gate **3** Ready; release-time ASC/export re-check still required | Gate **9** Ready sign-off | This PR |
+| Q-D-11 | 9 | Product | Answered | [Batch D answer details](#batch-d-rollback-and-release-answer-details-2026-06-07) | G9-8; sign-off PR format | Gate **9** Ready sign-off | This PR |
 
 **Question text:** [Batch D — stakeholder question list](./qwon_m3_gate_readiness_review_plan.md#product--codex--release-engineering-question-list-batch-d)
+
+### Batch D rollback and release answer details (2026-06-07)
+
+**Source:** Product/Codex/Release Engineering policy decision in Codex conversation, 2026-06-07.
+**Scope:** Gate **8–9** answers only. This records rollback regression expectations, runbook location, UI coexistence, recovery copy, M3 spike / TestFlight separation, Build `4` disposition, tester copy, and ASC/privacy/export re-check direction for Q-D-01…Q-D-11. It does **not** mark Gates **8–9** Ready, does **not** approve M3 spike, and does **not** approve Build `4`.
+
+| Question ID | Answer |
+| --- | --- |
+| **Q-D-01** | Post-spike regression must prove the M2 guided placement path still works: Settings → Local Runtime → **Place GGUF via Mac** remains reachable, the copyable `fetch_local_model.sh` and `push_local_model_to_device.sh "DEVICE_NAME"` commands remain visible, model status still points to `Documents/Models/prexus-local-mvp.gguf`, and Wang/Matisse expectations remain unchanged. |
+| **Q-D-02** | Release Engineering signs off the shell scripts after the spike branch: `fetch_local_model.sh` can fetch the local model to `models/prexus-local-mvp.gguf`, and `push_local_model_to_device.sh` can place it into the app sandbox on Wang. Codex reviews that the spike did not change script contracts or model placement lookup order. |
+| **Q-D-03** | Rollback runbook should live in the M3 UX plan or a linked rollback memo section. Required steps: cancel/delete failed in-app temp file if present, use **Place GGUF via Mac**, run `fetch_local_model.sh`, connect/unlock device, run `push_local_model_to_device.sh "DEVICE_NAME"`, restart QWON, verify Settings/Diagnostics. |
+| **Q-D-04** | Download UX must not hide or remove **Place GGUF via Mac**. The M3 UI may make download the primary Wang path, but Mac + USB remains visible as a fallback/support path in Settings → Local Runtime. |
+| **Q-D-05** | Support copy direction: “If download fails or verification does not complete, use Place GGUF via Mac from Settings → Local Runtime. QWON will keep using built-in fallback until a verified local model is available.” Final wording can be polished later but must preserve this meaning. |
+| **Q-D-06** | M3 spike is allowed only as an internal branch/PR after all gates are Ready and Codex scopes a spike plan. It does **not** authorize TestFlight upload, Build `4`, tag, or version bump. |
+| **Q-D-07** | Build `4` remains **not approved**. Product may consider Build `4` only after a successful M3 spike, Gate 8 rollback verification, release-time ASC/privacy/export re-check, tester copy approval, and an explicit release decision. |
+| **Q-D-08** | Tag and `CFBundleVersion` bump are deferred until Product explicitly approves a TestFlight build. They are not in scope for the first M3 spike. |
+| **Q-D-09** | Tester-facing message direction for any future download build: “QWON can optionally download the local model (~400 MB) to this iPhone. Download is user-initiated; Mac + USB placement remains available from Settings → Local Runtime.” |
+| **Q-D-10** | Any build that ships in-app download UX requires release-time Product/Legal/RE re-check of ASC export compliance and privacy disclosures. Gate **3** cleared distribution planning, but it does not remove Gate **9** release-time checks. |
+| **Q-D-11** | Gate **9 Ready** means the release boundary is explicitly recorded, not that Build `4` is approved. For this planning lane, Gate **9** can be Ready with **Build `4` still not approved**, as long as the sign-off states that TestFlight upload/tag/version bump require a separate Product release gate. |
+
+**Remaining dependencies:** Gates **8–9** still need a separate Ready / disposition sign-off PR before any M3 spike can be scoped.
 
 ---
 
@@ -246,8 +267,8 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | **A** | 13 | **13** | 1–3 — **Ready** |
 | **B** | 11 | **11** | 4–5 — **Ready** |
 | **C** | 14 | **14** | 6–7 — **Ready** |
-| **D** | 11 | **0** | 8–9 — **Pending** |
-| **Total** | **49** | **38** | Gates **1–7 Ready**; Gates **8–9 Pending** |
+| **D** | 11 | **11** | 8–9 — **Pending** |
+| **Total** | **49** | **49** | Gates **1–7 Ready**; Gates **8–9 Pending** |
 
 ---
 
@@ -258,7 +279,7 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | 1 | Stakeholder provides **written** answer | Product / Legal / Codex / RE |
 | 2 | **Answer intake PR** — update row(s) in this ledger only | Docs agent |
 | 3 | When **all** questions for a batch are **Answered**, open **batch Ready sign-off PR** | Product + Codex |
-| 4 | Sign-off PR updates checklist row(s) to **Ready** with linked evidence. Batches **A/B** are complete; next candidate is Batch **C** Ready sign-off after Q-C answers. | Product + Codex |
+| 4 | Sign-off PR updates checklist row(s) to **Ready** with linked evidence. Batches **A/B/C** are complete; next candidate is Batch **D** Ready / disposition sign-off after Q-D answers. | Product + Codex |
 | 5 | When **all nine** gates **Ready**, Codex may scope **M3 spike plan** | Codex |
 
 **M3 spike** and **Build `4`** remain **not approved** until step 5 and separate Gate **9** / Product release decisions respectively.
@@ -276,6 +297,7 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | Batch A Legal answers Q-A-09…Q-A-13 | M3 implementation approval |
 | Batch B Product/Codex answers Q-B-01…Q-B-11 | M3 implementation approval |
 | Batch C Product/Codex answers Q-C-01…Q-C-14 | M3 implementation approval |
+| Batch D Product/Codex/RE answers Q-D-01…Q-D-11 | Gate Ready sign-off |
 | Workflow for future answer PRs | Gate Ready sign-off |
 | Ready impact mapping | Final URL / SHA / legal / UI / release values |
 | Gates **8–9 Pending** | Swift, spike, TestFlight upload |
