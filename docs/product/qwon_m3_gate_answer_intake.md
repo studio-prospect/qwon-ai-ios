@@ -1,7 +1,7 @@
 # QWON — M3 Gate Answer Intake Ledger
 
 **Last updated:** 2026-06-06
-**Status:** **Intake ledger** — Batch A Product answers **Q-A-01…Q-A-05**, Gate 2 artifact answers **Q-A-06…Q-A-08**, and Legal answers **Q-A-09…Q-A-13 recorded**. Batch A / Gates **1–3** have separate Ready sign-off; Gates **4–9** remain Pending. **Not** M3 implementation approval, **not** Build `4` approval.
+**Status:** **Intake ledger** — Batch A answers **Q-A-01…Q-A-13** and Batch B answers **Q-B-01…Q-B-11** recorded. Batch A / Gates **1–3** have separate Ready sign-off; Gates **4–9** remain Pending. **Not** M3 implementation approval, **not** Build `4` approval.
 **Purpose:** Track **Product / Codex / Legal / Release Engineering** answers to [Batch A–D review questions](./qwon_m3_gate_readiness_review_plan.md) and record what each answer **unblocks** toward a future **gate Ready sign-off PR**.
 
 Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) · [Batch A external questionnaire](./qwon_m3_batch_a_external_questionnaire.md) · [Gate 2 artifact finalization runbook](./qwon_m3_gate2_artifact_finalization_runbook.md) · [M3 checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Queue — M3 status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05)
@@ -133,19 +133,40 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 
 | Question ID | Gate | Owner | Answer status | Answer source | Blocks | Ready impact | Follow-up PR |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Q-B-01 | 4 | Product, Codex | Unanswered | — | Q-A-06 answered; threshold math still required | Gate **4** Ready sign-off | — |
-| Q-B-02 | 4, 5 | Product, Codex | Unanswered | — | Q-B-01; G4-3 | Gate **4** Ready sign-off | — |
-| Q-B-03 | 4 | Product | Unanswered | — | Q-B-01 | Gate **4** Ready sign-off | — |
-| Q-B-04 | 4 | Product | Unanswered | — | — | Gate **4** Ready sign-off | — |
-| Q-B-05 | 4, 7 | Product | Unanswered | — | Q-C-09 | Gate **4** + **7** Ready sign-off | — |
-| Q-B-06 | 4, 5 | Product, Codex | Unanswered | — | Q-B-08 | Gate **4** + **5** Ready sign-off | — |
-| Q-B-07 | 5 | Codex, Product | Unanswered | — | G5-1; G8-6 indirect | Gate **5** Ready sign-off | — |
-| Q-B-08 | 5 | Product, Codex | Unanswered | — | Q-B-06; G5-5 | Gate **5** Ready sign-off | — |
-| Q-B-09 | 5 | Codex | Unanswered | — | G5-6, G5-7; Q-C-12 | Gate **5** Ready sign-off | — |
-| Q-B-10 | 5, 6, 7 | Product, Codex | Unanswered | — | Q-C-12; G7-6–G7-8 | Gate **5** + **7** Ready sign-off | — |
-| Q-B-11 | 5 | Product, Codex | Unanswered | — | Q-A-08 answered; replacement consent / recovery details | Gate **5** Ready sign-off | — |
+| Q-B-01 | 4 | Product, Codex | Answered | [Batch B answer details](#batch-b-storage-and-integrity-answer-details-2026-06-06) | Gate 4 threshold sign-off | Gate **4** Ready sign-off | This PR |
+| Q-B-02 | 4, 5 | Product, Codex | Answered | [Batch B answer details](#batch-b-storage-and-integrity-answer-details-2026-06-06) | Q-B-01; G4-3 | Gate **4** Ready sign-off | This PR |
+| Q-B-03 | 4 | Product | Answered | [Batch B answer details](#batch-b-storage-and-integrity-answer-details-2026-06-06) | Q-B-01 | Gate **4** Ready sign-off | This PR |
+| Q-B-04 | 4 | Product | Answered | [Batch B answer details](#batch-b-storage-and-integrity-answer-details-2026-06-06) | — | Gate **4** Ready sign-off | This PR |
+| Q-B-05 | 4, 7 | Product | Answered | [Batch B answer details](#batch-b-storage-and-integrity-answer-details-2026-06-06) | Q-C-09 | Gate **4** + **7** Ready sign-off | This PR |
+| Q-B-06 | 4, 5 | Product, Codex | Answered | [Batch B answer details](#batch-b-storage-and-integrity-answer-details-2026-06-06) | Q-B-08 | Gate **4** + **5** Ready sign-off | This PR |
+| Q-B-07 | 5 | Codex, Product | Answered | [Batch B answer details](#batch-b-storage-and-integrity-answer-details-2026-06-06) | G5-1; G8-6 indirect | Gate **5** Ready sign-off | This PR |
+| Q-B-08 | 5 | Product, Codex | Answered | [Batch B answer details](#batch-b-storage-and-integrity-answer-details-2026-06-06) | Q-B-06; G5-5 | Gate **5** Ready sign-off | This PR |
+| Q-B-09 | 5 | Codex | Answered | [Batch B answer details](#batch-b-storage-and-integrity-answer-details-2026-06-06) | G5-6, G5-7; Q-C-12 | Gate **5** Ready sign-off | This PR |
+| Q-B-10 | 5, 6, 7 | Product, Codex | Answered | [Batch B answer details](#batch-b-storage-and-integrity-answer-details-2026-06-06) | Q-C-12; G7-6–G7-8 | Gate **5** + **7** Ready sign-off | This PR |
+| Q-B-11 | 5 | Product, Codex | Answered | [Batch B answer details](#batch-b-storage-and-integrity-answer-details-2026-06-06) | Q-A-08 answered; replacement consent / recovery details | Gate **5** Ready sign-off | This PR |
 
 **Question text:** [Batch B — Product / Codex question list](./qwon_m3_gate_readiness_review_plan.md#product--codex-question-list-batch-b--answer-to-unblock-ready-sign-off)
+
+### Batch B storage and integrity answer details (2026-06-06)
+
+**Source:** Product/Codex policy decision in Codex conversation, 2026-06-06.
+**Scope:** Gate **4–5** answers only. This records storage threshold, temp-file, retry, cleanup, diagnostics, and replacement policy for Q-B-01…Q-B-11. It does **not** mark Gates **4–5** Ready, does **not** approve M3 spike, and does **not** approve Build `4`.
+
+| Question ID | Answer |
+| --- | --- |
+| **Q-B-01** | Minimum free bytes before M3 download start: **`1064051840` bytes**. Formula: Gate 2 artifact size `397808192` × **2** temp peak + **256 MiB** (`268435456`) safety margin. |
+| **Q-B-02** | Temp peak model: **~2× artifact size**. M3 should budget for an existing final file plus a temp download file before atomic promotion or explicit replacement. |
+| **Q-B-03** | Safety margin policy: **fixed 256 MiB** for the M3 spike/readiness gate. Do not use percentage or device-tier-specific margin until evidence shows a need. |
+| **Q-B-04** | Insufficient-space copy direction: explain that QWON needs about **1.1 GB free** to safely prepare the local model, does not delete user data, and the user can free space or continue with **Place GGUF via Mac** / fallback behavior. |
+| **Q-B-05** | Matisse / A12 behavior: **de-emphasize** download. Do not show Matisse as failed and do not make download a primary required action; Embedded Heuristic Runtime remains expected. |
+| **Q-B-06** | Mid-download space exhaustion: **abort and clean retry** for M3. Do not attempt pause/resume recovery in the first spike. Re-check available capacity before retry. |
+| **Q-B-07** | Temp filename/path: `Documents/Models/prexus-local-mvp.gguf.download`. Runtime placement must continue resolving only the final `Documents/Models/prexus-local-mvp.gguf` path. |
+| **Q-B-08** | HTTP Range resume is **not required** for M3. Use **clean restart only** after failure/cancel. Resume can be reconsidered after downloader evidence exists. |
+| **Q-B-09** | Verification failure handling: delete the temp `.download` file after hash/size mismatch or failed download. Keep any previous final GGUF untouched; fall back to existing runtime behavior and M2 guided placement. |
+| **Q-B-10** | Diagnostics / Settings mapping: `partial` = temp/incomplete file present and not installed; `corrupt` = size/hash mismatch and temp removed or final rejected; `in-progress` = download preparation active and not installed. Surfaces must not report llama.cpp readiness until final file verifies and loads. |
+| **Q-B-11** | A new download must **not** silently replace an existing USB-placed `present-unverified` GGUF. Replacement requires explicit user action in a future approved UX or documented support/recovery flow. M2 Mac + USB rollback remains valid. |
+
+**Remaining dependencies:** Gates **4–5** still need a separate Ready sign-off PR before any M3 spike can be scoped.
 
 ---
 
@@ -197,10 +218,10 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | Batch | Questions | Answered | Gates |
 | --- | --- | --- | --- |
 | **A** | 13 | **13** | 1–3 — **Ready** |
-| **B** | 11 | **0** | 4–5 — **Pending** |
+| **B** | 11 | **11** | 4–5 — **Pending** |
 | **C** | 14 | **0** | 6–7 — **Pending** |
 | **D** | 11 | **0** | 8–9 — **Pending** |
-| **Total** | **49** | **13** | Gates **1–3 Ready**; Gates **4–9 Pending** |
+| **Total** | **49** | **24** | Gates **1–3 Ready**; Gates **4–9 Pending** |
 
 ---
 
@@ -227,6 +248,7 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | Batch A artifact answers Q-A-06…Q-A-07 | Gate Ready sign-off |
 | Batch A Codex/Product legacy USB answer Q-A-08 | Gate Ready sign-off |
 | Batch A Legal answers Q-A-09…Q-A-13 | Gate Ready sign-off |
+| Batch B Product/Codex answers Q-B-01…Q-B-11 | Gate Ready sign-off |
 | Workflow for future answer PRs | Gate Ready sign-off |
 | Ready impact mapping | Final URL / SHA / legal / UI / release values |
 | All gates **Pending** | Swift, spike, TestFlight upload |

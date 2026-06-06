@@ -1,7 +1,7 @@
 # QWON — M3 Storage + Partial Download Integrity Memo (Gates 4 & 5)
 
-**Last updated:** 2026-06-05 (Batch B review — Gates 4–5 still Pending)
-**Status:** **Investigation memo only** — **not** M3 implementation approval, **not** Gates 4/5 **Ready**, **not** Build `4` approval.
+**Last updated:** 2026-06-06 (Batch B answers recorded — Gates 4–5 still Pending)
+**Status:** **Evidence memo** — Batch B answers recorded; **not** M3 implementation approval, **not** Gates 4/5 **Ready**, **not** Build `4` approval.
 **Purpose:** Document open **iOS storage budget / available-space check** (Gate 4) and **partial download / resume / atomic move** (Gate 5) questions for a future **M3 in-app download** spike of `prexus-local-mvp.gguf`.
 
 Related: [M3 readiness checklist — Gates 4 & 5](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Batch B review](./qwon_m3_gate_readiness_review_plan.md#batch-b-review-session-2026-06-05) · [Integrity states](./qwon_model_download_gguf_ux_plan.md#integrity-and-storage-requirements) · [Gate 1/2 hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md) · [Gate 3 compliance memo](./qwon_m3_model_distribution_compliance_memo.md) · [M2 guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement) · [models/README.md](../../models/README.md)
@@ -31,9 +31,9 @@ Gate 4 without Gate 5 risks silent partial files filling Documents. Gate 5 witho
 
 ---
 
-## Model size context (Gate 2 reference — not Gate 4 threshold)
+## Model size context (Gate 2 reference)
 
-Artifact byte size is **not final** until Gates 1/2 are Ready. For storage planning, use the observed range from [hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md#observed-file-sizes-ops-evidence--not-gate-2-final):
+Gate **2** Ready sign-off records the hosted artifact byte size as **`397808192`** and SHA-256 as **`6eb923e7d26e9cea28811e1a8e852009b21242fb157b26149d3b188f3a8c8653`**. Historical observed ranges remain useful for context only.
 
 | Source | Approximate size |
 | --- | --- |
@@ -41,7 +41,7 @@ Artifact byte size is **not final** until Gates 1/2 are Ready. For storage plann
 | bartowski HF listing (Q4_K_M) | **~398 MB** |
 | Engineering estimate | **~379–400 MB** |
 
-**Gate 4 minimum free-space threshold is undecided.** Product must choose headroom above the Gate 2 pinned byte size (temp file peak, OS overhead, user-visible margin).
+**Gate 4 threshold answer:** M3 should require **`1064051840` bytes** free before download start: `397808192 * 2 + 268435456`.
 
 ---
 
@@ -54,8 +54,8 @@ Any future M3 download must **check available capacity in the app sandbox before
 | Requirement | Status |
 | --- | --- |
 | Pre-download **available-space check** | **Required in principle** — implementation **not approved** |
-| **Minimum free-space threshold** (bytes) | **Undecided** — not fixed in this memo |
-| User-visible failure when space insufficient | **Required in principle** — copy **undecided** |
+| **Minimum free-space threshold** (bytes) | **Answered** — `1064051840` bytes before download start |
+| User-visible failure when space insufficient | **Answered direction** — explain QWON needs about **1.1 GB free**, does not delete user data, and can fall back to M2 placement / heuristic behavior |
 | No silent sandbox fill / no “installed” UX on failure | **Required in principle** |
 | Storage schema change | **Not approved** |
 | `LocalGGUFModelPlacement` lookup order change | **Not approved** |
@@ -73,19 +73,19 @@ M3 must write into the **same final path** M1/M2 already surface in Settings →
 
 | Question | Notes |
 | --- | --- |
-| Base threshold | Gate 2 **expected byte size** + how much headroom? |
-| Temp-file peak | During Gate 5 download, is peak usage **~1×** artifact (write temp, then atomic replace) or **~2×** (temp + existing partial)? |
-| Safety margin | Fixed MB buffer vs percentage vs device-tier-specific — **undecided** |
-| Re-check during download | If available space drops mid-transfer (other apps), abort vs resume — ties to Gate 5 |
-| Matisse / low-storage devices | Download UX should not pressure installs; see [Gate 7](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) |
+| Base threshold | `397808192 * 2 + 268435456 = 1064051840` bytes |
+| Temp-file peak | **~2×** artifact size for M3 planning |
+| Safety margin | Fixed **256 MiB** buffer |
+| Re-check during download | Abort and clean retry; re-check capacity before retry |
+| Matisse / low-storage devices | De-emphasize download; Embedded Heuristic Runtime remains expected |
 
 ### Gate 4 disposition
 
 | Field | Value |
 | --- | --- |
 | **Recommended status** | **Pending** |
-| **Ready?** | **No** — minimum threshold not decided |
-| **Blocked by** | Gate 2 pinned byte size; Product margin policy |
+| **Ready?** | **No** — Batch B answers recorded; separate Gate 4 Ready sign-off still required |
+| **Blocked by** | Gate **4** Ready sign-off |
 
 ---
 
@@ -104,17 +104,15 @@ M3 download/copy must align with [integrity and storage requirements](./qwon_mod
 | `corrupt` | Hash mismatch or load failure | Fallback without crash; actionable Diagnostics |
 | `unsupported-device` | Below required tier | No download pressure; heuristic path expected |
 
-### Temp filename strategy — **undecided**
+### Temp filename strategy — answered for M3
 
 Any in-app download must use a **non-final temp name** until Gate 2 verification passes, then **atomically** promote to `prexus-local-mvp.gguf`.
 
-| Option (examples only — **not selected**) | Tradeoff |
+| Temp path | Reason |
 | --- | --- |
-| `prexus-local-mvp.gguf.part` in `Documents/Models/` | Simple; must ensure runtime never loads `.part` |
-| `prexus-local-mvp.gguf.downloading` | Explicit state in filename |
-| Temp under `tmp/` or `Caches/` then move | Different peak storage location; move must remain atomic at final path |
+| `Documents/Models/prexus-local-mvp.gguf.download` | Same directory as final path for atomic promotion; non-final name remains outside `LocalGGUFModelPlacement` resolution |
 
-**Product/Codex must pick one strategy before Gate 5 → Ready.**
+Runtime placement must continue resolving only `Documents/Models/prexus-local-mvp.gguf`.
 
 ### Atomic move to final path — **required direction**
 
@@ -134,18 +132,16 @@ Lookup order remains: `PREXUS_LOCAL_MODEL_PATH` → bundle → `Documents/Models
 | --- | --- |
 | User cancels mid-download | Temp removed or marked `partial`; final path unchanged or previous good file retained |
 | Download fails (network) | Same — no `prexus-local-mvp.gguf` at partial size presented as installed |
-| Retry | **Undecided:** wipe temp and restart vs resume (see below) |
+| Retry | Wipe temp and clean restart; re-check available capacity first |
 | Existing good file | Retry must not destroy verified file without explicit user action (deletion UX **not approved** for M3 spike unless Product gates it) |
 
-### Resume — **required vs optional: undecided**
+### Resume — clean restart for M3
 
 | Approach | Gate 5 status |
 | --- | --- |
-| **No resume — clean restart only** | Simpler; re-download full artifact; higher bandwidth cost |
-| **HTTP Range resume** | Requires server support (Gate 1); more complex temp/state tracking |
-| **Background URLSession resume** | iOS API considerations; separate from foreground spike scope |
-
-**Product/Codex must decide whether resume is required for M3 spike or deferrable to a later iteration.** This memo does **not** mark resume as required or optional.
+| **No resume — clean restart only** | **Selected for M3**; simpler and sufficient for first spike |
+| **HTTP Range resume** | Deferred; reconsider after downloader evidence exists |
+| **Background URLSession resume** | Deferred; separate from first M3 spike scope |
 
 ### Diagnostics and Settings display requirements
 
@@ -164,8 +160,8 @@ Copy must **not** say “Tap to download” until Product approves network UX ([
 | Field | Value |
 | --- | --- |
 | **Recommended status** | **Pending** |
-| **Ready?** | **No** — temp name, resume policy, and verification-on-promote details undecided |
-| **Blocked by** | Gates 1/2 (artifact + checksum); Gate 4 (space headroom for temp peak) |
+| **Ready?** | **No** — Batch B answers recorded; separate Gate 5 Ready sign-off still required |
+| **Blocked by** | Gate **5** Ready sign-off |
 
 ---
 
@@ -198,44 +194,41 @@ If in-app download fails or Gates 4/5 are not Ready for ship, testers and suppor
 
 ---
 
-## Batch B review status (2026-06-05)
+## Batch B review status (2026-06-06)
 
-**Review:** [Batch B session](./qwon_m3_gate_readiness_review_plan.md#batch-b-review-session-2026-06-05) — open items documented; Gates **4–5** remain **Pending**.
+**Review:** [Batch B session](./qwon_m3_gate_readiness_review_plan.md#batch-b-review-session-2026-06-05) documented open items; [answer intake](./qwon_m3_gate_answer_intake.md#batch-b-storage-and-integrity-answer-details-2026-06-06) records Q-B-01…Q-B-11. Gates **4–5** remain **Pending** until separate Ready sign-off.
 
-### Gate 4 — unresolved (summary)
+### Gate 4 — answered, Ready sign-off pending (summary)
 
 | Topic | Status |
 | --- | --- |
-| Minimum free-space threshold | **Undecided** — **Batch A blocked** (Gate 2 byte size) |
-| Sandbox available-capacity check | Required in principle; API/timing **undecided** |
-| Temp peak size (1× vs 2×) | **Undecided** |
-| Insufficient-space user copy | **Undecided** |
+| Minimum free-space threshold | `1064051840` bytes |
+| Sandbox available-capacity check | Required before download starts; exact API/timing remains implementation detail |
+| Temp peak size (1× vs 2×) | **~2×** artifact size |
+| Insufficient-space user copy | About **1.1 GB free** required; QWON does not delete user data; M2/fallback path remains |
 
 Full item list: [G4-1 … G4-9](./qwon_m3_gate_readiness_review_plan.md#gate-4--open-items-storage-budget--available-space-check)
 
-### Gate 5 — unresolved (summary)
+### Gate 5 — answered, Ready sign-off pending (summary)
 
 | Topic | Status |
 | --- | --- |
-| Temp filename/path | **Not selected** |
-| Resume vs clean retry | **Undecided** |
-| Atomic move mechanism | Direction only — spec **undecided** |
-| Partial/corrupt cleanup | **Undecided** |
-| Diagnostics mapping | Direction only — final copy **undecided** |
-| Verify-before-promote | **Batch A blocked** (Gate 2 SHA/size) |
+| Temp filename/path | `Documents/Models/prexus-local-mvp.gguf.download` |
+| Resume vs clean retry | Clean restart only for M3; resume deferred |
+| Atomic move mechanism | Verify temp before atomic promote to final path |
+| Partial/corrupt cleanup | Delete failed temp; keep prior final file untouched |
+| Diagnostics mapping | `partial`, `corrupt`, and `in-progress` mappings recorded in answer intake |
+| Verify-before-promote | Use Gate **2** byte size and SHA-256 |
 
 Full item list: [G5-1 … G5-12](./qwon_m3_gate_readiness_review_plan.md#gate-5--open-items-partial-download--integrity)
 
 ---
 
-## Recommended Product / Codex actions (before Gates 4/5 → Ready)
+## Recommended Product / Codex actions before Gates 4/5 Ready sign-off
 
-1. **Pin Gate 2 byte size** so Gate 4 threshold math is deterministic.
-2. **Set minimum free-space threshold** (artifact + temp peak + margin) — document in a future decision memo, not here.
-3. **Choose temp filename strategy** and atomic promote mechanism.
-4. **Decide resume policy** (required for spike vs clean-retry-only).
-5. **Specify Diagnostics/Settings strings** per integrity state for M3 spike scope.
-6. **Verify M2 rollback** in spike test plan (Gate 8) before any TestFlight binary with download UX.
+1. Open a docs-only Gates **4–5** Ready sign-off PR if Product/Codex accepts the recorded Batch B answers.
+2. Keep `Documents/Models/prexus-local-mvp.gguf` and `prexus-local-mvp.gguf.download` scoped to M3 planning; no Swift implementation until all gates are Ready.
+3. Verify M2 rollback in the later spike test plan (Gate **8**) before any TestFlight binary with download UX.
 
 ---
 
@@ -246,7 +239,7 @@ Full item list: [G5-1 … G5-12](./qwon_m3_gate_readiness_review_plan.md#gate-5-
 | **4 — Storage / available-space check** | **Pending** | **Not approved** | **Not approved** |
 | **5 — Partial download / atomic move** | **Pending** | **Not approved** | **Not approved** |
 
-All M3 checklist gates remain **Pending** until individually marked **Ready** with Product/Codex evidence. **Do not open M3 spike** until **all** gates are Ready.
+Gates **1–3** are Ready; Gates **4–9** remain **Pending** until individually marked **Ready** with Product/Codex evidence. **Do not open M3 spike** until **all** gates are Ready.
 
 ---
 
