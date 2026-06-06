@@ -260,9 +260,9 @@ Product and legal should answer **in writing** (future memo revision or sign-off
 
 | Field | Value |
 | --- | --- |
-| **Status** | **Pending** |
+| **Status** | **Answered — Ready sign-off pending** |
 | **Ready?** | **No** |
-| **Batch B review (docs-only)** | **Documented** — [2026-06-05 session](#batch-b-review-session-2026-06-05) — open items + Product/Codex questions; **does not** mark Ready |
+| **Batch B review (docs-only)** | **Documented** — [2026-06-05 session](#batch-b-review-session-2026-06-05) identified open items; [answer intake](./qwon_m3_gate_answer_intake.md#batch-b-storage-and-integrity-answer-details-2026-06-06) records Q-B-01…Q-B-11 |
 | **Batch A dependency** | **Resolved** — Gate **2** final byte size and SHA-256 are available; Batch **B** still needs its own answers |
 
 ---
@@ -271,48 +271,48 @@ Product and legal should answer **in writing** (future memo revision or sign-off
 
 **Type:** Docs-only readiness review — **not** gate Ready sign-off, **not** final threshold/temp path decisions, **not** downloader implementation.
 
-**Outcome:** Gate **4–5** open items **concretized** below. Checklist rows remain **Pending**. Former Batch A dependencies now have Gate **2** byte size and SHA-256 inputs, but Batch B policy answers are still required.
+**Outcome:** Gate **4–5** open items were **concretized** below and later answered in the [answer intake ledger](./qwon_m3_gate_answer_intake.md#batch-b-storage-and-integrity-answer-details-2026-06-06). Checklist rows remain **Pending** until a separate Gates **4–5** Ready sign-off PR.
 
-Related evidence: [Storage + integrity memo — Batch B status](./qwon_m3_storage_integrity_memo.md#batch-b-review-status-2026-06-05)
+Related evidence: [Storage + integrity memo — Batch B status](./qwon_m3_storage_integrity_memo.md#batch-b-review-status-2026-06-06)
 
 ### Gate 4 — Open items (storage budget / available-space check)
 
 | # | Open item | Current state | Blocks Ready until |
 | --- | --- | --- | --- |
-| G4-1 | **Minimum free-space threshold (bytes)** | **Undecided** — Gate **2** byte size is `397808192`; temp peak model and margin still unresolved | Batch B threshold math |
+| G4-1 | **Minimum free-space threshold (bytes)** | **Answered** — `1064051840` bytes (`397808192 * 2 + 268435456`) | Gate **4** Ready sign-off |
 | G4-2 | **Pre-download sandbox capacity check** | Required in principle — **API choice undecided** (`volumeAvailableCapacityForImportantUsage` vs equivalent) | Codex documents check timing (before URLSession start) |
-| G4-3 | **Temp peak size assumption** | Undecided: ~1× artifact (temp then replace) vs ~2× (temp + existing partial) | Gate **5** temp strategy; feeds G4-1 math |
-| G4-4 | **Safety margin above artifact + peak** | Fixed MB vs % vs tier-specific — **undecided** | Product policy |
-| G4-5 | **Mid-download space exhaustion** | Abort vs pause vs resume — **undecided** | Gate **5** resume policy |
-| G4-6 | **User-visible insufficient-space copy** | **Undecided** — no approved Settings/alert strings | Product copy owner |
-| G4-7 | **Matisse / low-storage devices** | Download must not pressure install ([Gate 7](./qwon_m3_network_device_expectation_memo.md)) | Product: hide vs de-emphasize download on A12 |
+| G4-3 | **Temp peak size assumption** | **Answered** — plan for ~2× artifact size | Gate **4** Ready sign-off |
+| G4-4 | **Safety margin above artifact + peak** | **Answered** — fixed 256 MiB margin | Gate **4** Ready sign-off |
+| G4-5 | **Mid-download space exhaustion** | **Answered** — abort and clean retry; re-check capacity before retry | Gate **4–5** Ready sign-off |
+| G4-6 | **User-visible insufficient-space copy** | **Answered direction** — about 1.1 GB free required, QWON does not delete user data, M2/fallback path remains | Gate **4** Ready sign-off |
+| G4-7 | **Matisse / low-storage devices** | **Answered** — de-emphasize download; Embedded Heuristic Runtime expected | Gate **4** + **7** Ready sign-off |
 | G4-8 | **Re-check after failed download** | Undecided whether to re-query capacity on retry | Codex + Product |
 | G4-9 | **Lookup order / final path** | `Documents/Models/prexus-local-mvp.gguf` — **unchanged** | Confirm no schema migration in M3 spike |
 
-**Gate 4 status:** **Pending** — **not Ready** — Gate **2** size is available; threshold policy still unanswered
+**Gate 4 status:** **Pending** — **not Ready** — Batch B answers recorded; Ready sign-off still separate
 
 ### Gate 5 — Open items (partial download / integrity)
 
 | # | Open item | Current state | Blocks Ready until |
 | --- | --- | --- | --- |
-| G5-1 | **Temp filename / path** | Examples only (`.part`, `.downloading`, `tmp/`) — **not selected** | Product/Codex pick one strategy |
-| G5-2 | **Runtime must not load temp file** | Required direction — enforcement mechanism **undecided** | Codex: placement resolver ignores non-final names |
-| G5-3 | **Atomic move to final path** | Required direction — `rename` vs copy+delete **undecided** | Codex spec; must land at `prexus-local-mvp.gguf` |
-| G5-4 | **Verify before promote** | Size + SHA-256 values available from Gate **2**; temp verification timing still undecided | Batch B verification policy |
-| G5-5 | **Resume vs clean retry** | **Undecided** — full restart vs HTTP Range vs URLSession background | Product scope for M3 spike; Gate **1** server support if Range |
-| G5-6 | **Partial file cleanup on failure** | Delete temp vs quarantine — **undecided** | Codex policy; must not leave final path at partial size |
-| G5-7 | **Corrupt hash mismatch handling** | Fallback without crash — **undecided** quarantine vs delete | Align with [integrity states](./qwon_model_download_gguf_ux_plan.md#integrity-and-storage-requirements) |
+| G5-1 | **Temp filename / path** | **Answered** — `Documents/Models/prexus-local-mvp.gguf.download` | Gate **5** Ready sign-off |
+| G5-2 | **Runtime must not load temp file** | **Answered** — resolver keeps final exact filename only | Gate **5** Ready sign-off |
+| G5-3 | **Atomic move to final path** | **Answered direction** — verify temp before atomic promote to final path | Gate **5** Ready sign-off |
+| G5-4 | **Verify before promote** | **Answered** — use Gate **2** size + SHA-256 on temp file before promote | Gate **5** Ready sign-off |
+| G5-5 | **Resume vs clean retry** | **Answered** — clean restart only for M3; Range/background resume deferred | Gate **5** Ready sign-off |
+| G5-6 | **Partial file cleanup on failure** | **Answered** — delete temp on failure/cancel; re-check capacity on retry | Gate **5** Ready sign-off |
+| G5-7 | **Corrupt hash mismatch handling** | **Answered** — delete failed temp, keep prior final file untouched, fallback without crash | Gate **5** Ready sign-off |
 | G5-8 | **Existing verified file on retry** | Must not overwrite without user action — deletion UX **not approved** | Product decision |
-| G5-9 | **Diagnostics mapping — `partial`** | Direction in memo — **no final field names/copy** | Product + Codex strings |
-| G5-10 | **Diagnostics mapping — `corrupt`** | `primary_failure` / `fallback_reason` alignment **undecided** for download failures | Codex spec tied to Gate **7** |
-| G5-11 | **Settings → Local Runtime in-progress UI** | Must not show “installed” during download — **copy undecided** | Gate **6** overlap; Product |
-| G5-12 | **M2 USB-placed unverified files** | M1 **Present (unverified)** remains supported; silent overwrite is disallowed; replacement consent/recovery details still unresolved | Batch B replacement policy |
+| G5-9 | **Diagnostics mapping — `partial`** | **Answered** — temp/incomplete file exists; not installed | Gate **5** + **7** Ready sign-off |
+| G5-10 | **Diagnostics mapping — `corrupt`** | **Answered** — size/hash mismatch; temp removed or final rejected; no llama readiness claim | Gate **5** + **7** Ready sign-off |
+| G5-11 | **Settings → Local Runtime in-progress UI** | **Answered** — in-progress/preparing, not installed, until verified final file loads | Gate **5** + Gate **6** copy sign-off |
+| G5-12 | **M2 USB-placed unverified files** | **Answered** — no silent replacement; explicit user/support flow required | Gate **5** Ready sign-off |
 
-**Gate 5 status:** **Pending** — **not Ready**
+**Gate 5 status:** **Pending** — **not Ready** — Batch B answers recorded; Ready sign-off still separate
 
 ### Product / Codex question list (Batch B — answer to unblock Ready sign-off)
 
-Answer **in writing** in a future sign-off PR. Do **not** publish final threshold bytes or temp path in this review.
+Answered in [Batch B storage and integrity answer details](./qwon_m3_gate_answer_intake.md#batch-b-storage-and-integrity-answer-details-2026-06-06). Gates **4–5** still need a separate Ready sign-off PR.
 
 #### Storage budget (Gate 4 — Product + Codex)
 
@@ -340,13 +340,13 @@ Answer **in writing** in a future sign-off PR. Do **not** publish final threshol
 | Open items documented | **Yes** (this section) |
 | Product/Codex questions issued | **Yes** (above) |
 | Gates 4–5 marked **Ready** | **No** |
-| Final minimum free-space threshold | **No** |
-| Final temp filename/path | **No** |
+| Final minimum free-space threshold | **Yes** — `1064051840` bytes |
+| Final temp filename/path | **Yes** — `Documents/Models/prexus-local-mvp.gguf.download` |
 | Gate 2 byte size available | **Yes** — `397808192` bytes |
 | M3 spike approved | **No** |
 | Build `4` approved | **No** |
 
-**Next docs-only step:** Batch **C** review (Gates 6–7) may proceed for planning. Batch **B Ready** sign-off waits on Batch **A** Gate **2** answers + Batch B question answers above.
+**Next docs-only step:** Open a separate Gates **4–5** Ready sign-off PR, or proceed to Batch **C** answer intake if Product/Codex wants to resolve network disclosure / device-tier copy first. M3 spike remains forbidden until **all nine** gates Ready.
 
 ---
 

@@ -1,6 +1,6 @@
 # QWON — Next Work Queue
 
-**Last updated:** 2026-06-06 (M3 Batch A Ready sign-off — docs-only)
+**Last updated:** 2026-06-06 (M3 Batch B answers recorded — docs-only)
 **Status:** **Queue / guardrail only** — no implementation authorization in this document.
 **Purpose:** After Phase 4 rename docs are complete, classify what agents **may** do next vs what requires **product gates**. Prevents drift into ungated **build `4`**, project-container rename, or blind PREXUS cleanup.
 
@@ -41,8 +41,8 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 | **Lab** | Wang + Matisse build `3` verified · [lab evidence](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) |
 | **First post-alpha lane** | **UI polish / onboarding — complete** (UI-1 #80, #81) · UI-2 **deferred** (#82) |
 | **Selected next lane** | **[Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md)** |
-| **Scoped plan** | **[qwon_model_download_gguf_ux_plan.md](./qwon_model_download_gguf_ux_plan.md)** — M1/M2 **complete** ([#86](https://github.com/studio-prospect/qwon-ai-ios/pull/86)–[#89](https://github.com/studio-prospect/qwon-ai-ios/pull/89)); M3 Gates **1–3 Ready**; Gates **4–9 Pending** |
-| **Next agent step** | **Do not open M3 spike** — Batch **B** / Gates **4–5** answer intake is the next valid M3 docs step; **Build `4` not approved** |
+| **Scoped plan** | **[qwon_model_download_gguf_ux_plan.md](./qwon_model_download_gguf_ux_plan.md)** — M1/M2 **complete** ([#86](https://github.com/studio-prospect/qwon-ai-ios/pull/86)–[#89](https://github.com/studio-prospect/qwon-ai-ios/pull/89)); M3 Gates **1–3 Ready**; Gates **4–9 Pending**; Batch **B** answered |
+| **Next agent step** | **Do not open M3 spike** — next valid M3 docs step is Gates **4–5** Ready sign-off or Batch **C** answer intake; **Build `4` not approved** |
 
 ### Choose a branch
 
@@ -78,7 +78,7 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 
 ## M3 readiness status (2026-06-05)
 
-**Batch A Ready · Gates 4–9 Pending · M3 spike not open · Build `4` not approved.**
+**Batch A Ready · Batch B answered · Gates 4–9 Pending · M3 spike not open · Build `4` not approved.**
 
 | Field | Value |
 | --- | --- |
@@ -89,7 +89,7 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 | **M2 rollback** | **Place GGUF via Mac** + USB ops remain known-good path |
 | **Review plan** | [M3 gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) — batches A–D documented; Batch **A** Ready sign-off recorded |
 | **Batch A questionnaire** | [M3 Batch A external questionnaire](./qwon_m3_batch_a_external_questionnaire.md) / [日本語版](./qwon_m3_batch_a_external_questionnaire_ja.md) — shareable Product/legal/Codex question set |
-| **Answer intake** | [M3 gate answer intake ledger](./qwon_m3_gate_answer_intake.md) — **49 questions · 13 answered**; Batch **A fully answered** and Gates **1–3 Ready** |
+| **Answer intake** | [M3 gate answer intake ledger](./qwon_m3_gate_answer_intake.md) — **49 questions · 24 answered**; Batch **A fully answered** and Gates **1–3 Ready**; Batch **B answered**, Gates **4–5 Pending** |
 | **Gate 2 artifact record** | [Artifact finalization runbook](./qwon_m3_gate2_artifact_finalization_runbook.md) + [record template](./qwon_m3_gate2_artifact_record_template.md) — Q-A-06/Q-A-07 values recorded in intake and signed off for Gate **2** |
 
 ### Evidence memos (by gate)
@@ -106,8 +106,8 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 
 | Action | Owner | Notes |
 | --- | --- | --- |
-| **Batch B answer intake** | Product / Codex | Record Q-B-01…Q-B-11 answers only when real decisions exist; use Gate **2** byte size / SHA-256 as inputs |
-| **Gate Ready sign-off PR** | Product / Codex | Next candidate is Gates **4–5** after Batch B answers; **not** implementation |
+| **Gates 4–5 Ready sign-off PR** | Product / Codex | Next candidate after Batch B answers; docs-only; **not** implementation |
+| **Batch C answer intake** | Product / Codex | Optional next planning lane for network disclosure / device-tier copy if sign-off waits |
 | **M3 spike implementation** | — | **Forbidden** until all gates Ready |
 
 ---
