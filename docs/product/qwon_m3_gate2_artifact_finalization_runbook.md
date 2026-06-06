@@ -4,7 +4,7 @@
 **Status:** **Runbook only** — **not** Gate 2 Ready sign-off, **not** M3 implementation approval, **not** Build `4` approval.
 **Purpose:** Define the Release Engineering evidence needed to answer **Q-A-06** (exact byte size) and **Q-A-07** (SHA-256) for the approved QWON-hosted M3 model artifact.
 
-Related: [Gate answer intake ledger](./qwon_m3_gate_answer_intake.md) · [Hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md) · [M3 checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Batch A questionnaire](./qwon_m3_batch_a_external_questionnaire.md)
+Related: [Gate answer intake ledger](./qwon_m3_gate_answer_intake.md) · [Artifact record template](./qwon_m3_gate2_artifact_record_template.md) · [Hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md) · [M3 checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Batch A questionnaire](./qwon_m3_batch_a_external_questionnaire.md)
 
 ---
 
@@ -25,7 +25,7 @@ Batch A cannot move to Ready until Q-A-06 and Q-A-07 are answered from a finaliz
 
 ## Required artifact record
 
-Release Engineering should produce one written record with these fields.
+Release Engineering should produce one written record with these fields. Use the [artifact record template](./qwon_m3_gate2_artifact_record_template.md) to keep the evidence shape stable.
 
 | Field | Requirement |
 | --- | --- |

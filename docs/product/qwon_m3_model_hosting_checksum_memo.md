@@ -4,7 +4,7 @@
 **Status:** **Investigation memo only** — **not** M3 implementation approval, **not** Gates 1/2 **Ready**, **not** Build `4` approval.
 **Purpose:** Document open **hosting / URL ownership** (Gate 1) and **SHA-256 / byte size** (Gate 2) questions for a future **M3 in-app download** spike of `prexus-local-mvp.gguf`. Gate 1 and Gate 2 are coupled: the approved source artifact defines which checksum policy applies.
 
-Related: [M3 readiness checklist — Gates 1 & 2](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Batch A review](./qwon_m3_gate_readiness_review_plan.md#batch-a-review-session-2026-06-05) · [Gate 2 artifact finalization runbook](./qwon_m3_gate2_artifact_finalization_runbook.md) · [Gate 3 compliance memo](./qwon_m3_model_distribution_compliance_memo.md) · [GGUF UX plan — integrity states](./qwon_model_download_gguf_ux_plan.md#integrity-and-storage-requirements) · [models/README.md](../../models/README.md)
+Related: [M3 readiness checklist — Gates 1 & 2](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Batch A review](./qwon_m3_gate_readiness_review_plan.md#batch-a-review-session-2026-06-05) · [Gate 2 artifact finalization runbook](./qwon_m3_gate2_artifact_finalization_runbook.md) · [Artifact record template](./qwon_m3_gate2_artifact_record_template.md) · [Gate 3 compliance memo](./qwon_m3_model_distribution_compliance_memo.md) · [GGUF UX plan — integrity states](./qwon_model_download_gguf_ux_plan.md#integrity-and-storage-requirements) · [models/README.md](../../models/README.md)
 
 ---
 
@@ -198,7 +198,7 @@ Full item list: [G2-1 … G2-8](./qwon_m3_gate_readiness_review_plan.md#gate-2--
 
 1. **Assign hosting owner** and choose among self-host / QWON-built artifact / defer M3 download.
 2. **Pin one immutable source artifact** (URL + object version or build ID).
-3. **Publish SHA-256 + exact byte size** for that artifact using the [Gate 2 artifact finalization runbook](./qwon_m3_gate2_artifact_finalization_runbook.md).
+3. **Publish SHA-256 + exact byte size** for that artifact using the [Gate 2 artifact finalization runbook](./qwon_m3_gate2_artifact_finalization_runbook.md) and [artifact record template](./qwon_m3_gate2_artifact_record_template.md).
 4. **Confirm** third-party HF is **excluded** from in-app product promises unless explicitly approved with drift monitoring.
 5. **Align Gate 3** redistribution/NOTICE before any QWON CDN upload.
 6. **Record written sign-off** — this memo alone is **not** sign-off.
