@@ -42,7 +42,7 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 | **First post-alpha lane** | **UI polish / onboarding — complete** (UI-1 #80, #81) · UI-2 **deferred** (#82) |
 | **Selected next lane** | **[Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md)** |
 | **Scoped plan** | **[qwon_model_download_gguf_ux_plan.md](./qwon_model_download_gguf_ux_plan.md)** — M1/M2 **complete** ([#86](https://github.com/studio-prospect/qwon-ai-ios/pull/86)–[#89](https://github.com/studio-prospect/qwon-ai-ios/pull/89)); M3 **all 9 gates documented · all Pending** ([#91](https://github.com/studio-prospect/qwon-ai-ios/pull/91)–[#95](https://github.com/studio-prospect/qwon-ai-ios/pull/95)) |
-| **Next agent step** | **Do not open M3 spike** — finalize the QWON-hosted artifact record using the [Gate 2 artifact finalization runbook](./qwon_m3_gate2_artifact_finalization_runbook.md), then record **Q-A-06/Q-A-07 real answers only** in [M3 gate answer intake ledger](./qwon_m3_gate_answer_intake.md); **Build `4` not approved** |
+| **Next agent step** | **Do not open M3 spike** — Batch A is fully answered in the [M3 gate answer intake ledger](./qwon_m3_gate_answer_intake.md); next valid M3 docs step is a separate Batch A / Gate 1–3 Ready sign-off PR; **Build `4` not approved** |
 
 ### Choose a branch
 
@@ -89,8 +89,8 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 | **M2 rollback** | **Place GGUF via Mac** + USB ops remain known-good path |
 | **Review plan** | [M3 gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) — batches A–D documented; **all gates still Pending** |
 | **Batch A questionnaire** | [M3 Batch A external questionnaire](./qwon_m3_batch_a_external_questionnaire.md) / [日本語版](./qwon_m3_batch_a_external_questionnaire_ja.md) — shareable Product/legal/Codex question set |
-| **Answer intake** | [M3 gate answer intake ledger](./qwon_m3_gate_answer_intake.md) — **49 questions · 11 answered**; **Q-A-06/Q-A-07** remain unresolved |
-| **Gate 2 artifact runbook** | [Artifact finalization runbook](./qwon_m3_gate2_artifact_finalization_runbook.md) + [record template](./qwon_m3_gate2_artifact_record_template.md) — required before Q-A-06/Q-A-07 can be answered |
+| **Answer intake** | [M3 gate answer intake ledger](./qwon_m3_gate_answer_intake.md) — **49 questions · 13 answered**; Batch **A fully answered**, all gates still **Pending** |
+| **Gate 2 artifact record** | [Artifact finalization runbook](./qwon_m3_gate2_artifact_finalization_runbook.md) + [record template](./qwon_m3_gate2_artifact_record_template.md) — Q-A-06/Q-A-07 values recorded in intake; Ready sign-off still separate |
 
 ### Evidence memos (by gate)
 
@@ -106,9 +106,8 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 
 | Action | Owner | Notes |
 | --- | --- | --- |
-| **Finalize Gate 2 artifact record** | Product / Release Engineering / Codex | [Artifact finalization runbook](./qwon_m3_gate2_artifact_finalization_runbook.md) + [record template](./qwon_m3_gate2_artifact_record_template.md) — produce hosted object identity, exact byte size, and SHA-256 |
-| **Answer intake — append Q-A-06/Q-A-07 only** | Product / Codex / RE | [Answer intake ledger](./qwon_m3_gate_answer_intake.md) — only after the artifact record exists; **no approximate MB values or ops-only hashes** |
-| **Gate Ready sign-off PR** | Product / Codex | Mark individual checklist rows **Ready** with linked decision evidence — **after** intake answers; **not** implementation |
+| **Batch A Ready sign-off PR** | Product / Codex | Gates **1–3** can be reviewed for Ready sign-off now that Batch A is fully answered; **not** implementation |
+| **Gate Ready sign-off PR** | Product / Codex | Mark individual checklist rows **Ready** with linked decision evidence — **after** sign-off review; **not** implementation |
 | **M3 spike implementation** | — | **Forbidden** until all gates Ready |
 
 ---
