@@ -417,10 +417,10 @@ Answered in [Batch B storage and integrity answer details](./qwon_m3_gate_answer
 
 | Field | Value |
 | --- | --- |
-| **Status** | **Pending** |
+| **Status** | **Answered — Ready sign-off pending** |
 | **Ready?** | **No** |
-| **Batch C review (docs-only)** | **Documented** — [2026-06-05 session](#batch-c-review-session-2026-06-05) — open items + Product/Codex questions; **does not** mark Ready |
-| **Blocked-by** | Gate **3** (privacy/ASC); Gate **5** (integrity → Diagnostics copy) |
+| **Batch C review (docs-only)** | **Documented** — [2026-06-05 session](#batch-c-review-session-2026-06-05) identified open items; [answer intake](./qwon_m3_gate_answer_intake.md#batch-c-network-disclosure-and-device-expectation-answer-details-2026-06-06) records Q-C-01…Q-C-14 |
+| **Blocked-by** | Gate **6–7** Ready sign-off |
 
 ---
 
@@ -428,7 +428,7 @@ Answered in [Batch B storage and integrity answer details](./qwon_m3_gate_answer
 
 **Type:** Docs-only readiness review — **not** gate Ready sign-off, **not** final UI copy approval, **not** privacy label / ASC final answers.
 
-**Outcome:** Gate **6–7** open items **concretized** below. Checklist rows remain **Pending**. Draft strings in [network memo](./qwon_m3_network_device_expectation_memo.md) stay **drafts only**.
+**Outcome:** Gate **6–7** open items were **concretized** below and later answered in the [answer intake ledger](./qwon_m3_gate_answer_intake.md#batch-c-network-disclosure-and-device-expectation-answer-details-2026-06-06). Checklist rows remain **Pending** until a separate Gates **6–7** Ready sign-off PR.
 
 Related evidence: [Network + device memo — Batch C status](./qwon_m3_network_device_expectation_memo.md#batch-c-review-status-2026-06-05)
 
@@ -436,43 +436,43 @@ Related evidence: [Network + device memo — Batch C status](./qwon_m3_network_d
 
 | # | Open item | Current state | Blocks Ready until |
 | --- | --- | --- | --- |
-| G6-1 | **Pre-download network disclosure copy** | Draft A/B in memo — **not approved** | Product copy owner |
-| G6-2 | **Download confirmation step** | Undecided — one-tap consent before fetch | Product + Codex UX flow |
-| G6-3 | **No surprise background fetch** | Required in principle — background URLSession **not approved** | Product explicit policy if ever needed |
-| G6-4 | **Local-first vs offline-only wording** | Must not claim fully offline after download exists | Product approved positioning |
-| G6-5 | **Settings → Local Runtime strings** | M2 “does not download in-app” active on build `3` | [M2 ↔ M3 migration checklist](./qwon_m3_network_device_expectation_memo.md#m2--m3-copy-transition-undecided) |
-| G6-6 | **Onboarding disclosure** | Undecided — reuse Settings vs separate screen | Product |
-| G6-7 | **App Store privacy label impact** | **Undecided** — Gate **3** legal direction is Ready; release-time ASC/privacy-label answer still required | Legal/Product ASC review ([compliance memo](./qwon_m3_model_distribution_compliance_memo.md#app-store--testflight--export-compliance)) |
-| G6-8 | **Export compliance questionnaire (network download)** | App TLS documented — model download angle **unreviewed**; Gate **3** legal direction is Ready | Product / Legal / Release Engineering re-check |
-| G6-9 | **TestFlight tester notes** | Undecided — separate from in-app copy | Product / release comms |
-| G6-10 | **In-progress download visibility** | Progress UI copy **undecided**; no hidden retry loops (principle) | Codex + Product |
-| G6-11 | **Wi‑Fi vs cellular disclosure** | Draft A mentions cellular — **not approved** | Product policy |
-| G6-12 | **First-launch fetch prohibition** | Product rule documented — enforcement spec **undecided** | Codex |
+| G6-1 | **Pre-download network disclosure copy** | **Answered direction** — disclose ~400 MB one-time model download before fetch | Gate **6** Ready sign-off |
+| G6-2 | **Download confirmation step** | **Answered** — explicit user action required before network fetch | Gate **6** Ready sign-off |
+| G6-3 | **No surprise background fetch** | **Answered** — foreground user-initiated only for M3; no background URLSession policy | Gate **6** Ready sign-off |
+| G6-4 | **Local-first vs offline-only wording** | **Answered** — local-first, not offline-only; network is for acquisition | Gate **6** Ready sign-off |
+| G6-5 | **Settings → Local Runtime strings** | **Answered** — retire “does not download in-app” only in builds with download UX; keep M2 fallback | Gate **6** Ready sign-off |
+| G6-6 | **Onboarding disclosure** | **Answered** — Settings-first; no persistent first-launch onboarding by default | Gate **6** Ready sign-off |
+| G6-7 | **App Store privacy label impact** | **Answered direction** — release-time ASC/privacy-label re-check required before any download build | Gate **6** + **9** Ready sign-off |
+| G6-8 | **Export compliance questionnaire (network download)** | **Answered direction** — release-time Product/Legal/RE re-check required; no automatic change in this PR | Gate **6** + **9** Ready sign-off |
+| G6-9 | **TestFlight tester notes** | **Answered direction** — optional ~400 MB user-initiated local model download; Build `4` separately gated | Gate **6** + **9** Ready sign-off |
+| G6-10 | **In-progress download visibility** | **Answered direction** — visible in-progress state; no hidden retry loops | Gate **6–7** Ready sign-off |
+| G6-11 | **Wi‑Fi vs cellular disclosure** | **Answered** — Wi-Fi recommended; cellular may use data if user proceeds | Gate **6** Ready sign-off |
+| G6-12 | **First-launch fetch prohibition** | **Answered** — no first-launch fetch; explicit Settings/user action only | Gate **6** Ready sign-off |
 
-**Gate 6 status:** **Pending** — **not Ready** — Product/Legal/ASC copy and disclosure answers still required
+**Gate 6 status:** **Pending** — **not Ready** — Batch C answers recorded; Ready sign-off still separate
 
 ### Gate 7 — Open items (Wang / Matisse device expectation)
 
 | # | Open item | Current state | Blocks Ready until |
 | --- | --- | --- | --- |
-| G7-1 | **Wang optional download framing** | Draft in memo — **not approved** | Product |
-| G7-2 | **Matisse heuristic expected copy** | M1/M2 aligned drafts — **not approved** | Product |
-| G7-3 | **Download visibility by tier** | Undecided: Wang-only entry vs Matisse de-emphasized vs hidden | Product hardware policy |
-| G7-4 | **Matisse must not read as device failure** | Principle documented — final strings **undecided** | Product |
-| G7-5 | **Post-download Matisse runtime expectation** | Heuristic remains expected even if GGUF present — copy **undecided** | Product + Codex |
-| G7-6 | **Diagnostics — `answered_by` mapping** | Reference table in memo; Gate **5** integrity mapping is Ready; final Gate **7** device-facing mapping still required | Product + Codex |
-| G7-7 | **Diagnostics — `partial` / in-progress** | Direction in [Gate 5 review](./qwon_m3_gate_readiness_review_plan.md#gate-5--open-items-partial-download--integrity) is Ready; final copy still pending | Gate **7** copy policy |
-| G7-8 | **Diagnostics — corrupt / failed download** | Gate **5** cleanup behavior is Ready; `primary_failure` / `fallback_reason` wording remains **undecided** | Codex + Product |
-| G7-9 | **Chat fallback strip copy** | Draft for Wang missing model — **not approved** | Product |
-| G7-10 | **Settings model status during download** | Must not show “installed” — overlaps G5-11; Gate **5** is Ready, final Product copy remains | Product |
-| G7-11 | **M2 Place GGUF via Mac coexistence** | Must remain visible — copy priority **undecided** | Product ([Gate 8](./qwon_m3_rollback_release_gate_memo.md)) |
-| G7-12 | **Verified vs present-unverified copy** | Gate **2** values available; final user-facing copy still tied to Gate **5** integrity state mapping | Gate **7** copy policy |
+| G7-1 | **Wang optional download framing** | **Answered** — Wang-primary optional local model download | Gate **7** Ready sign-off |
+| G7-2 | **Matisse heuristic expected copy** | **Answered** — Embedded Heuristic Runtime is expected, not failure | Gate **7** Ready sign-off |
+| G7-3 | **Download visibility by tier** | **Answered** — Wang-primary; Matisse de-emphasized if visible | Gate **7** Ready sign-off |
+| G7-4 | **Matisse must not read as device failure** | **Answered** — Matisse heuristic path remains normal alpha behavior | Gate **7** Ready sign-off |
+| G7-5 | **Post-download Matisse runtime expectation** | **Answered** — llama.cpp not guaranteed; Embedded Heuristic may remain expected | Gate **7** Ready sign-off |
+| G7-6 | **Diagnostics — `answered_by` mapping** | **Answered** — Wang verified success maps to llama.cpp; Matisse may remain Embedded Heuristic | Gate **7** Ready sign-off |
+| G7-7 | **Diagnostics — `partial` / in-progress** | **Answered** — not installed / not ready; no llama readiness claim | Gate **7** Ready sign-off |
+| G7-8 | **Diagnostics — corrupt / failed download** | **Answered** — verification failed, fallback remains available | Gate **7** Ready sign-off |
+| G7-9 | **Chat fallback strip copy** | **Answered direction** — local model not ready; answered with built-in fallback; see Settings | Gate **7** Ready sign-off |
+| G7-10 | **Settings model status during download** | **Answered** — must not show installed until verified final loads | Gate **7** Ready sign-off |
+| G7-11 | **M2 Place GGUF via Mac coexistence** | **Answered** — remains visible as manual fallback/support path | Gate **7** + **8** Ready sign-off |
+| G7-12 | **Verified vs present-unverified copy** | **Answered** — use Gate 2/5 verification states; final copy may be polished but meaning fixed | Gate **7** Ready sign-off |
 
-**Gate 7 status:** **Pending** — **not Ready**
+**Gate 7 status:** **Pending** — **not Ready** — Batch C answers recorded; Ready sign-off still separate
 
 ### Product / Codex question list (Batch C — answer to unblock Ready sign-off)
 
-Answer **in writing** in a future sign-off PR. **Do not** treat memo drafts as final UI copy.
+Answered in [Batch C network disclosure and device expectation answer details](./qwon_m3_gate_answer_intake.md#batch-c-network-disclosure-and-device-expectation-answer-details-2026-06-06). Gates **6–7** still need a separate Ready sign-off PR.
 
 #### Network disclosure (Gate 6 — Product + Legal via Product)
 
@@ -494,7 +494,7 @@ Answer **in writing** in a future sign-off PR. **Do not** treat memo drafts as f
 13. What **chat fallback strip** text is shown when Wang lacks a verified GGUF (G7-9)?
 14. How does **Place GGUF via Mac** appear alongside download UX (G7-11)?
 
-**Blocked-by summary:** Gate **3** blocks G6-7/G6-8 (privacy label / ASC). Gate **5** blocks G7-6–G7-8, G7-10 (integrity states in UI). Batch **A** blocks G7-12 (`verified` copy needs Gate **2**).
+**Blocked-by summary:** Gate **3** and Gate **5** prerequisites are Ready. Batch **C** answers are recorded, but Gates **6–7** still require separate Ready sign-off. Gate **9** remains responsible for release-time ASC/export and TestFlight approval.
 
 ### Batch C review exit (not yet met)
 
@@ -503,12 +503,12 @@ Answer **in writing** in a future sign-off PR. **Do not** treat memo drafts as f
 | Open items documented | **Yes** (this section) |
 | Product/Codex questions issued | **Yes** (above) |
 | Gates 6–7 marked **Ready** | **No** |
-| Final UI copy approved | **No** |
-| Privacy label / ASC answered | **No** — Gate **3** legal direction is Ready; release-time ASC/privacy-label answer still required |
+| Final UI copy approved | **Direction answered** — separate Ready sign-off still required |
+| Privacy label / ASC answered | **Direction answered** — release-time ASC/privacy-label re-check still required under Gate **9** |
 | M3 spike approved | **No** |
 | Build `4` approved | **No** |
 
-**Next docs-only step:** Batch **C** answer intake for Product/Legal/ASC disclosure, device-tier, and final copy answers. Batch **C Ready** sign-off waits on those answers.
+**Next docs-only step:** Open a separate Gates **6–7** Ready sign-off PR, or proceed to Batch **D** answer intake if Product/Codex wants to resolve rollback/release questions first. M3 spike remains forbidden until **all nine** gates Ready.
 
 ---
 

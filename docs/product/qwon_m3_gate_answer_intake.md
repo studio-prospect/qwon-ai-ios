@@ -1,7 +1,7 @@
 # QWON — M3 Gate Answer Intake Ledger
 
 **Last updated:** 2026-06-06
-**Status:** **Intake ledger** — Batch A answers **Q-A-01…Q-A-13** and Batch B answers **Q-B-01…Q-B-11** recorded. Batch A / Gates **1–3** and Batch B / Gates **4–5** have separate Ready sign-offs; Gates **6–9** remain Pending. **Not** M3 implementation approval, **not** Build `4` approval.
+**Status:** **Intake ledger** — Batch A answers **Q-A-01…Q-A-13**, Batch B answers **Q-B-01…Q-B-11**, and Batch C answers **Q-C-01…Q-C-14** recorded. Batch A / Gates **1–3** and Batch B / Gates **4–5** have separate Ready sign-offs; Gates **6–9** remain Pending. **Not** M3 implementation approval, **not** Build `4` approval.
 **Purpose:** Track **Product / Codex / Legal / Release Engineering** answers to [Batch A–D review questions](./qwon_m3_gate_readiness_review_plan.md) and record what each answer **unblocks** toward a future **gate Ready sign-off PR**.
 
 Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) · [Batch A external questionnaire](./qwon_m3_batch_a_external_questionnaire.md) · [Gate 2 artifact finalization runbook](./qwon_m3_gate2_artifact_finalization_runbook.md) · [M3 checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Queue — M3 status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05)
@@ -175,22 +175,46 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 
 | Question ID | Gate | Owner | Answer status | Answer source | Blocks | Ready impact | Follow-up PR |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Q-C-01 | 6 | Product | Unanswered | — | G6-1, G6-2 | Gate **6** Ready sign-off | — |
-| Q-C-02 | 6 | Product | Unanswered | — | G6-3 | Gate **6** Ready sign-off | — |
-| Q-C-03 | 6 | Product | Unanswered | — | G6-4 | Gate **6** Ready sign-off | — |
-| Q-C-04 | 6 | Product | Unanswered | — | G6-5; M2 migration | Gate **6** Ready sign-off | — |
-| Q-C-05 | 6 | Product | Unanswered | — | G6-6 | Gate **6** Ready sign-off | — |
-| Q-C-06 | 6, 3 | Legal, Product | Unanswered | — | Gate **3** Ready; ASC/privacy-label answer still required | Gate **6** Ready sign-off | — |
-| Q-C-07 | 6, 9 | Product | Unanswered | — | G6-9; tester comms | Gate **6** Ready sign-off | — |
-| Q-C-08 | 6 | Product | Unanswered | — | G6-11 | Gate **6** Ready sign-off | — |
-| Q-C-09 | 7 | Product | Unanswered | — | G7-3; Q-B-05 | Gate **7** Ready sign-off | — |
-| Q-C-10 | 7 | Product | Unanswered | — | G7-2, G7-4 | Gate **7** Ready sign-off | — |
-| Q-C-11 | 7 | Product, Codex | Unanswered | — | G7-5 | Gate **7** Ready sign-off | — |
-| Q-C-12 | 7, 5 | Codex, Product | Unanswered | — | Gate **5** Ready; final device/copy mapping still required | Gate **7** Ready sign-off | — |
-| Q-C-13 | 7 | Product | Unanswered | — | G7-9 | Gate **7** Ready sign-off | — |
-| Q-C-14 | 7, 8 | Product | Unanswered | — | G7-11; Q-D-04 | Gate **7** + **8** Ready sign-off | — |
+| Q-C-01 | 6 | Product | Answered | [Batch C answer details](#batch-c-network-disclosure-and-device-expectation-answer-details-2026-06-06) | Gate 6 disclosure sign-off | Gate **6** Ready sign-off | This PR |
+| Q-C-02 | 6 | Product | Answered | [Batch C answer details](#batch-c-network-disclosure-and-device-expectation-answer-details-2026-06-06) | G6-3 | Gate **6** Ready sign-off | This PR |
+| Q-C-03 | 6 | Product | Answered | [Batch C answer details](#batch-c-network-disclosure-and-device-expectation-answer-details-2026-06-06) | G6-4 | Gate **6** Ready sign-off | This PR |
+| Q-C-04 | 6 | Product | Answered | [Batch C answer details](#batch-c-network-disclosure-and-device-expectation-answer-details-2026-06-06) | G6-5; M2 migration | Gate **6** Ready sign-off | This PR |
+| Q-C-05 | 6 | Product | Answered | [Batch C answer details](#batch-c-network-disclosure-and-device-expectation-answer-details-2026-06-06) | G6-6 | Gate **6** Ready sign-off | This PR |
+| Q-C-06 | 6, 3 | Legal, Product | Answered | [Batch C answer details](#batch-c-network-disclosure-and-device-expectation-answer-details-2026-06-06) | Gate **3** Ready; ASC/privacy-label re-check direction recorded | Gate **6** Ready sign-off | This PR |
+| Q-C-07 | 6, 9 | Product | Answered | [Batch C answer details](#batch-c-network-disclosure-and-device-expectation-answer-details-2026-06-06) | G6-9; tester comms | Gate **6** Ready sign-off | This PR |
+| Q-C-08 | 6 | Product | Answered | [Batch C answer details](#batch-c-network-disclosure-and-device-expectation-answer-details-2026-06-06) | G6-11 | Gate **6** Ready sign-off | This PR |
+| Q-C-09 | 7 | Product | Answered | [Batch C answer details](#batch-c-network-disclosure-and-device-expectation-answer-details-2026-06-06) | G7-3; Q-B-05 | Gate **7** Ready sign-off | This PR |
+| Q-C-10 | 7 | Product | Answered | [Batch C answer details](#batch-c-network-disclosure-and-device-expectation-answer-details-2026-06-06) | G7-2, G7-4 | Gate **7** Ready sign-off | This PR |
+| Q-C-11 | 7 | Product, Codex | Answered | [Batch C answer details](#batch-c-network-disclosure-and-device-expectation-answer-details-2026-06-06) | G7-5 | Gate **7** Ready sign-off | This PR |
+| Q-C-12 | 7, 5 | Codex, Product | Answered | [Batch C answer details](#batch-c-network-disclosure-and-device-expectation-answer-details-2026-06-06) | Gate **5** Ready; device/copy mapping recorded | Gate **7** Ready sign-off | This PR |
+| Q-C-13 | 7 | Product | Answered | [Batch C answer details](#batch-c-network-disclosure-and-device-expectation-answer-details-2026-06-06) | G7-9 | Gate **7** Ready sign-off | This PR |
+| Q-C-14 | 7, 8 | Product | Answered | [Batch C answer details](#batch-c-network-disclosure-and-device-expectation-answer-details-2026-06-06) | G7-11; Q-D-04 | Gate **7** + **8** Ready sign-off | This PR |
 
 **Question text:** [Batch C — Product / Codex question list](./qwon_m3_gate_readiness_review_plan.md#product--codex-question-list-batch-c--answer-to-unblock-ready-sign-off)
+
+### Batch C network disclosure and device expectation answer details (2026-06-06)
+
+**Source:** Product/Codex policy decision in Codex conversation, 2026-06-06.
+**Scope:** Gate **6–7** answers only. This records disclosure, user-initiated download, local-first positioning, M2 copy transition, ASC/privacy review direction, device-tier visibility, Matisse expectations, Diagnostics copy mapping, and M2 guided placement coexistence for Q-C-01…Q-C-14. It does **not** mark Gates **6–7** Ready, does **not** approve M3 spike, and does **not** approve Build `4`.
+
+| Question ID | Answer |
+| --- | --- |
+| **Q-C-01** | Pre-download disclosure must appear before any network fetch and require explicit user action. Approved direction: “Download the local model (~400 MB) to this iPhone. QWON uses the network for this one-time model download; local chats can run on device after the model is installed.” |
+| **Q-C-02** | M3 download is **user-initiated foreground only**. No first-launch fetch, no surprise background fetch, and no background URLSession policy for the first M3 spike. |
+| **Q-C-03** | Local-first positioning: QWON is **local-first, not offline-only**. Network use is for model acquisition; after verified install, the local route runs on device when supported. |
+| **Q-C-04** | M2 copy transition: replace “QWON does not download the GGUF in-app” only in builds that actually include download UX. Keep **Place GGUF via Mac** as a fallback path and preserve M2 docs for build `3`. |
+| **Q-C-05** | Onboarding disclosure is **Settings-first** for M3. Do not add persistent first-launch onboarding unless a later Product gate asks for it. |
+| **Q-C-06** | Gate **3** legal direction is sufficient for planning, but any build shipping download UX must perform release-time ASC/privacy/export re-check. This answer does **not** change privacy labels by itself. |
+| **Q-C-07** | TestFlight notes for any download build must say the local model download is optional, about 400 MB, user-initiated, and Build `4` remains separately gated. |
+| **Q-C-08** | Copy should mention **Wi-Fi recommended** and that cellular may use data if the user chooses to proceed. Do not auto-restrict to Wi-Fi in docs until implementation evidence exists. |
+| **Q-C-09** | Download entry point is **Wang-primary**. Matisse may show de-emphasized guidance or status copy, but must not be pressured to download. |
+| **Q-C-10** | Matisse copy must explicitly state Embedded Heuristic Runtime is expected and not a failure for this alpha. |
+| **Q-C-11** | If a GGUF is present on Matisse, copy must still say llama.cpp is not guaranteed on that hardware tier; Embedded Heuristic may remain the expected runtime. |
+| **Q-C-12** | Diagnostics mapping: `partial` = model download not installed yet; `corrupt` = verification failed and fallback remains available; success on Wang = `llama.cpp On-Device Runtime`; success/missing on Matisse may still show `Embedded Heuristic Runtime` as expected. |
+| **Q-C-13** | Chat fallback strip direction for Wang missing/corrupt model: “Local model not ready — answered with built-in fallback. Install the local model from Settings → Local Runtime.” Final wording can be polished in implementation PR, but must preserve that meaning. |
+| **Q-C-14** | **Place GGUF via Mac** remains visible as the manual fallback and support path. Download UX must be additive, not a replacement. Gate **8** still owns formal rollback readiness. |
+
+**Remaining dependencies:** Gates **6–7** still need a separate Ready sign-off PR before any M3 spike can be scoped.
 
 ---
 
@@ -220,9 +244,9 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | --- | --- | --- | --- |
 | **A** | 13 | **13** | 1–3 — **Ready** |
 | **B** | 11 | **11** | 4–5 — **Ready** |
-| **C** | 14 | **0** | 6–7 — **Pending** |
+| **C** | 14 | **14** | 6–7 — **Pending** |
 | **D** | 11 | **0** | 8–9 — **Pending** |
-| **Total** | **49** | **24** | Gates **1–5 Ready**; Gates **6–9 Pending** |
+| **Total** | **49** | **38** | Gates **1–5 Ready**; Gates **6–9 Pending** |
 
 ---
 
@@ -233,7 +257,7 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | 1 | Stakeholder provides **written** answer | Product / Legal / Codex / RE |
 | 2 | **Answer intake PR** — update row(s) in this ledger only | Docs agent |
 | 3 | When **all** questions for a batch are **Answered**, open **batch Ready sign-off PR** | Product + Codex |
-| 4 | Sign-off PR updates checklist row(s) to **Ready** with linked evidence. Batches **A/B** are complete; next candidate is Batch **C** after Q-C answers. | Product + Codex |
+| 4 | Sign-off PR updates checklist row(s) to **Ready** with linked evidence. Batches **A/B** are complete; next candidate is Batch **C** Ready sign-off after Q-C answers. | Product + Codex |
 | 5 | When **all nine** gates **Ready**, Codex may scope **M3 spike plan** | Codex |
 
 **M3 spike** and **Build `4`** remain **not approved** until step 5 and separate Gate **9** / Product release decisions respectively.
@@ -250,6 +274,7 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | Batch A Codex/Product legacy USB answer Q-A-08 | Gate Ready sign-off |
 | Batch A Legal answers Q-A-09…Q-A-13 | Gate Ready sign-off |
 | Batch B Product/Codex answers Q-B-01…Q-B-11 | Gate Ready sign-off |
+| Batch C Product/Codex answers Q-C-01…Q-C-14 | Gate Ready sign-off |
 | Workflow for future answer PRs | Gate Ready sign-off |
 | Ready impact mapping | Final URL / SHA / legal / UI / release values |
-| All gates **Pending** | Swift, spike, TestFlight upload |
+| Gates **6–9 Pending** | Swift, spike, TestFlight upload |
