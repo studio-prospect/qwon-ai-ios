@@ -4,7 +4,7 @@
 **Status:** **Intake ledger only** — Batch A Product answers **Q-A-01…Q-A-05**, Codex/Product legacy USB answer **Q-A-08**, and Legal answers **Q-A-09…Q-A-13 recorded**, **no gate Ready sign-off**, **not** M3 implementation approval, **not** Build `4` approval.
 **Purpose:** Track **Product / Codex / Legal / Release Engineering** answers to [Batch A–D review questions](./qwon_m3_gate_readiness_review_plan.md) and record what each answer **unblocks** toward a future **gate Ready sign-off PR**.
 
-Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) · [Batch A external questionnaire](./qwon_m3_batch_a_external_questionnaire.md) · [M3 checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Queue — M3 status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05)
+Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) · [Batch A external questionnaire](./qwon_m3_batch_a_external_questionnaire.md) · [Gate 2 artifact finalization runbook](./qwon_m3_gate2_artifact_finalization_runbook.md) · [M3 checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Queue — M3 status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05)
 
 ---
 
@@ -83,7 +83,7 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | --- | --- |
 | **Q-A-08** | Existing USB-placed `Documents/Models/prexus-local-mvp.gguf` files remain supported as **present-unverified** until a user or support workflow explicitly replaces them. M3 download must **not** silently overwrite an existing USB-placed GGUF. A future verified download may replace the file only through explicit user action or a documented support/recovery flow. If verification fails, the app should keep or return to the M2 **Place GGUF via Mac** rollback path instead of blocking manual recovery. |
 
-**Remaining dependencies:** Q-A-06 and Q-A-07 still need final byte size and SHA-256 values before Gate **2** can proceed to Ready sign-off.
+**Remaining dependencies:** Q-A-06 and Q-A-07 still need final byte size and SHA-256 values from the [Gate 2 artifact finalization runbook](./qwon_m3_gate2_artifact_finalization_runbook.md) before Gate **2** can proceed to Ready sign-off.
 
 ### Batch A legal answer details (2026-06-05)
 
@@ -98,7 +98,7 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | **Q-A-12** | Product / Legal / App Store Connect re-check is required before any TestFlight or product-facing build with in-app model download. App HTTPS/TLS answers and model weight distribution should be treated as separate compliance surfaces; existing export/privacy answers should not be assumed sufficient. |
 | **Q-A-13** | Hugging Face URLs may remain in docs for traceability / source reference unless a ToS issue is identified later. Hugging Face URLs should not be the product-facing download endpoint unless explicitly approved for that use. QWON-owned hosting remains the recommended product path. |
 
-**Remaining dependencies:** Gate **2** values (Q-A-06…Q-A-07) are still required before Batch A can proceed to a Ready sign-off PR.
+**Remaining dependencies:** Gate **2** values (Q-A-06…Q-A-07) are still required from the [artifact finalization runbook](./qwon_m3_gate2_artifact_finalization_runbook.md) before Batch A can proceed to a Ready sign-off PR.
 
 ---
 
