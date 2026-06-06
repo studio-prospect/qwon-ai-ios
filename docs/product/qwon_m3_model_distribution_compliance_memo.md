@@ -1,7 +1,7 @@
 # QWON — M3 Model Distribution Compliance Memo (Gate 3)
 
-**Last updated:** 2026-06-05 (Batch A review — Gate 3 still Pending)
-**Status:** **Investigation memo only** — **not** M3 implementation approval, **not** Gate 3 **Ready**, **not** Build `4` approval.
+**Last updated:** 2026-06-06 (Batch A sign-off — Gate 3 Ready)
+**Status:** **Evidence memo** — Gate **3 Ready** for M3 readiness tracking; **not** M3 implementation approval, **not** Build `4` approval.
 **Purpose:** Document open **license / redistribution / export compliance** questions for a future **M3 in-app download** spike of `prexus-local-mvp.gguf`.
 
 Related: [M3 readiness checklist — Gate 3](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Batch A review](./qwon_m3_gate_readiness_review_plan.md#batch-a-review-session-2026-06-05) · [GGUF UX plan](./qwon_model_download_gguf_ux_plan.md) · [models/README.md](../../models/README.md) · [TestFlight prep — export compliance](./qwon_text_alpha_testflight_prep.md#export-compliance-operator-gate)
@@ -130,26 +130,26 @@ Use these Hugging Face pages to review upstream license text and artifact proven
 | Field | Value |
 | --- | --- |
 | **Checklist row** | Gate 3 — License / redistribution / export compliance |
-| **Recommended status** | **Pending** — **needs product/legal confirmation** |
-| **Ready?** | **No** — open questions above remain |
+| **Recommended status** | **Ready** |
+| **Ready?** | **Yes** — Product/legal answers recorded in [answer intake](./qwon_m3_gate_answer_intake.md#batch-a-legal-answer-details-2026-06-05) |
 | **M3 implementation** | **Not approved** |
 | **Build `4` / TestFlight upload** | **Not approved** |
 
 ---
 
-## Batch A review status (2026-06-05)
+## Batch A review status (2026-06-06)
 
-**Review:** [Batch A session](./qwon_m3_gate_readiness_review_plan.md#batch-a-review-session-2026-06-05) — Product/legal confirmation **incomplete**; Gate **3** remains **Pending — needs product/legal confirmation**.
+**Review:** [Batch A session](./qwon_m3_gate_readiness_review_plan.md#batch-a-review-session-2026-06-05) documented open compliance questions; [Batch A Ready sign-off](./qwon_m3_gate_readiness_review_plan.md#batch-a-ready-sign-off-2026-06-06) closed Gate **3** for readiness tracking.
 
-### Gate 3 — unresolved (summary)
+### Gate 3 — resolved for readiness (summary)
 
 | Topic | Status |
 | --- | --- |
-| Qwen base license (on-device + re-download) | **Unconfirmed** |
-| bartowski GGUF redistribution to end users | **Unconfirmed** |
-| Attribution / NOTICE for in-app path | **Unknown** |
-| Export compliance (model weights vs app TLS) | **Unreviewed** |
-| App Store / privacy label for large download | **Unreviewed** |
+| Qwen base license (on-device + re-download) | Legal/Product approved Apache-2.0 direction with obligations preserved |
+| bartowski GGUF redistribution to end users | Conditionally approved via QWON-hosted mirror after confirming the base license path |
+| Attribution / NOTICE for in-app path | Required — identify Qwen2.5-0.5B-Instruct, bartowski GGUF quant source, Apache License 2.0, and upstream model/license links |
+| Export compliance (model weights vs app TLS) | Re-check required before product-facing download build; remains a Gate **9** / release step |
+| App Store / privacy label for large download | Re-check required before product-facing download build; remains a Gate **9** / release step |
 
 Full item list: [G3-1 … G3-9](./qwon_m3_gate_readiness_review_plan.md#gate-3--open-items-compliance--productlegal-confirmation-incomplete) · **Questions for legal:** [Product / legal question list](./qwon_m3_gate_readiness_review_plan.md#product--legal-question-list-batch-a--answer-to-unblock-ready-sign-off)
 

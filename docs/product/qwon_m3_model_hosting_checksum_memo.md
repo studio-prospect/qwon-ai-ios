@@ -1,7 +1,7 @@
 # QWON — M3 Model Hosting + Checksum Memo (Gates 1 & 2)
 
-**Last updated:** 2026-06-05 (Batch A review — Gates 1–2 still Pending)
-**Status:** **Investigation memo only** — **not** M3 implementation approval, **not** Gates 1/2 **Ready**, **not** Build `4` approval.
+**Last updated:** 2026-06-06 (Batch A sign-off — Gates 1–2 Ready)
+**Status:** **Evidence memo** — Gates **1–2 Ready** for M3 readiness tracking; **not** M3 implementation approval, **not** Build `4` approval.
 **Purpose:** Document open **hosting / URL ownership** (Gate 1) and **SHA-256 / byte size** (Gate 2) questions for a future **M3 in-app download** spike of `prexus-local-mvp.gguf`. Gate 1 and Gate 2 are coupled: the approved source artifact defines which checksum policy applies.
 
 Related: [M3 readiness checklist — Gates 1 & 2](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Batch A review](./qwon_m3_gate_readiness_review_plan.md#batch-a-review-session-2026-06-05) · [Gate 2 artifact finalization runbook](./qwon_m3_gate2_artifact_finalization_runbook.md) · [Artifact record template](./qwon_m3_gate2_artifact_record_template.md) · [Gate 3 compliance memo](./qwon_m3_model_distribution_compliance_memo.md) · [GGUF UX plan — integrity states](./qwon_model_download_gguf_ux_plan.md#integrity-and-storage-requirements) · [models/README.md](../../models/README.md)
@@ -67,11 +67,11 @@ Engineering today uses `tools/scripts/fetch_local_model.sh` on a developer Mac. 
 
 | Decision | Status |
 | --- | --- |
-| **Named storage/CDN owner** (Product / release engineering) | **Unassigned** |
-| **QWON-owned URL or contracted CDN path** | **Undecided** |
-| **Self-host** vs **mirror bartowski artifact** vs **QWON-built GGUF** | **Undecided** |
-| **Reproducibility plan** (version pin, immutable object key, rollback URL) | **Not documented** |
-| **Third-party HF URL as in-app fetch target** | **Not approved** as product promise |
+| **Named storage/CDN owner** (Product / release engineering) | Product owns distribution decision; Release Engineering owns storage/CDN operations |
+| **QWON-owned URL or contracted CDN path** | QWON-owned object storage/CDN selected |
+| **Self-host** vs **mirror bartowski artifact** vs **QWON-built GGUF** | QWON-hosted mirror of bartowski Qwen2.5 `Q4_K_M` GGUF selected |
+| **Reproducibility plan** (version pin, immutable object key, rollback URL) | QWON object key + exact byte size + SHA-256 recorded in [answer intake](./qwon_m3_gate_answer_intake.md#batch-a-artifact-record-details-2026-06-06) |
+| **Third-party HF URL as in-app fetch target** | **Not approved** as product promise; traceability/dev ops only |
 
 ### Hosting options (for Product/Codex review — not a recommendation)
 
@@ -86,9 +86,9 @@ Engineering today uses `tools/scripts/fetch_local_model.sh` on a developer Mac. 
 
 | Field | Value |
 | --- | --- |
-| **Recommended status** | **Pending** |
-| **Ready?** | **No** |
-| **Blocked by** | Product owner for hosting; Gate 3 legal/redistribution alignment |
+| **Recommended status** | **Ready** |
+| **Ready?** | **Yes** |
+| **Blocked by** | — |
 
 ---
 
@@ -106,14 +106,14 @@ Per [integrity and storage requirements](./qwon_model_download_gguf_ux_plan.md#i
 
 **Partial download, resume, temp filename, and atomic move** belong to **Gate 5** — referenced here only; not decided in this memo.
 
-### Final checksum — recorded for intake, not Ready sign-off
+### Final checksum — Ready sign-off input
 
 | Item | Status |
 | --- | --- |
 | **Published SHA-256 for `prexus-local-mvp.gguf`** | `6eb923e7d26e9cea28811e1a8e852009b21242fb157b26149d3b188f3a8c8653` — recorded in [answer intake ledger](./qwon_m3_gate_answer_intake.md#batch-a-artifact-record-details-2026-06-06) |
 | **Published expected byte size for M3 verification** | `397808192` bytes — recorded in [answer intake ledger](./qwon_m3_gate_answer_intake.md#batch-a-artifact-record-details-2026-06-06) |
 | **Hosted object identity** | `s3://qwon-094469122222-ap-northeast-1-an/models/qwen2.5-0.5b-instruct/q4_k_m/prexus-local-mvp.gguf`; ETag `"9027dfcbb8ab4852ad705c35c6c3ce29-48"` |
-| **In-app verification policy** | **Not approved** |
+| **In-app verification policy** | Gate **2** values are Ready; temp-file verification timing and atomic promotion remain Gate **5** |
 
 ### Observed file sizes (ops evidence — not Gate 2 final)
 
@@ -150,9 +150,9 @@ Store ops hash/size in `~/QWON-alpha-evidence/` if needed; **do not commit** GGU
 
 | Field | Value |
 | --- | --- |
-| **Recommended status** | **Pending** |
-| **Ready?** | **No** |
-| **Blocked by** | Gate 1 approved source artifact; Product/Codex sign-off on published SHA-256 + byte size |
+| **Recommended status** | **Ready** |
+| **Ready?** | **Yes** |
+| **Blocked by** | — |
 
 ---
 
@@ -167,42 +167,40 @@ Store ops hash/size in `~/QWON-alpha-evidence/` if needed; **do not commit** GGU
 
 ---
 
-## Batch A review status (2026-06-05)
+## Batch A review status (2026-06-06)
 
-**Review:** [Batch A session](./qwon_m3_gate_readiness_review_plan.md#batch-a-review-session-2026-06-05) — open items documented; Gates **1–2** remain **Pending**.
+**Review:** [Batch A session](./qwon_m3_gate_readiness_review_plan.md#batch-a-review-session-2026-06-05) documented open items; [Batch A Ready sign-off](./qwon_m3_gate_readiness_review_plan.md#batch-a-ready-sign-off-2026-06-06) closed Gates **1–2**.
 
-### Gate 1 — unresolved (summary)
+### Gate 1 — resolved (summary)
 
 | Topic | Status |
 | --- | --- |
-| Hosting owner | **Unassigned** |
-| Product URL / CDN | **Undecided** |
-| Artifact pin (bartowski vs QWON-built) | **Undecided** |
-| HF URL as product promise | **Not approved** |
+| Hosting owner | Product distribution decision owner; Release Engineering operational storage/CDN owner |
+| Product URL / CDN | QWON-owned object storage/CDN selected |
+| Artifact pin (bartowski vs QWON-built) | QWON-hosted mirror of bartowski Qwen2.5 `Q4_K_M` GGUF |
+| HF URL as product promise | **Not approved** — traceability/dev ops only |
 
 Full item list: [G1-1 … G1-8](./qwon_m3_gate_readiness_review_plan.md#gate-1--open-items-hosting--url-ownership)
 
-### Gate 2 — intake answered, Ready still pending
+### Gate 2 — resolved for checksum / size
 
 | Topic | Status |
 | --- | --- |
 | Final exact byte size | `397808192` bytes — recorded |
 | Published SHA-256 | `6eb923e7d26e9cea28811e1a8e852009b21242fb157b26149d3b188f3a8c8653` — recorded |
-| Verification policy | **Undecided** |
-| Gate Ready sign-off | **Pending** |
+| Verification policy | Gate **2** values are Ready; temp verification timing and atomic move remain Gate **5** |
+| Gate Ready sign-off | **Ready** — [Batch A Ready sign-off](./qwon_m3_gate_readiness_review_plan.md#batch-a-ready-sign-off-2026-06-06) |
 
 Full item list: [G2-1 … G2-8](./qwon_m3_gate_readiness_review_plan.md#gate-2--open-items-sha-256--byte-size--verification)
 
 ---
 
-## Recommended Product / Codex actions (before Gates 1/2 → Ready)
+## Remaining Product / Codex actions after Gates 1/2 Ready
 
-1. **Assign hosting owner** and choose among self-host / QWON-built artifact / defer M3 download.
-2. **Pin one immutable source artifact** (URL + object version or build ID).
-3. **Publish SHA-256 + exact byte size** for that artifact using the [Gate 2 artifact finalization runbook](./qwon_m3_gate2_artifact_finalization_runbook.md) and [artifact record template](./qwon_m3_gate2_artifact_record_template.md).
-4. **Confirm** third-party HF is **excluded** from in-app product promises unless explicitly approved with drift monitoring.
-5. **Align Gate 3** redistribution/NOTICE before any QWON CDN upload.
-6. **Record written sign-off** — this memo alone is **not** sign-off.
+1. Use byte size `397808192` in Batch **B** storage-threshold math.
+2. Use SHA-256 `6eb923e7d26e9cea28811e1a8e852009b21242fb157b26149d3b188f3a8c8653` in Batch **B** / Gate **5** verification policy.
+3. Keep M2 Mac + USB placement as rollback until Gate **8** is Ready.
+4. Do not expose third-party HF URLs as product download promises.
 
 ---
 
@@ -210,8 +208,8 @@ Full item list: [G2-1 … G2-8](./qwon_m3_gate_readiness_review_plan.md#gate-2--
 
 | Gate | Recommended status | M3 implementation | Build `4` |
 | --- | --- | --- | --- |
-| **1 — Hosting / URL ownership** | **Pending** | **Not approved** | **Not approved** |
-| **2 — SHA-256 / byte size** | **Pending** | **Not approved** | **Not approved** |
+| **1 — Hosting / URL ownership** | **Ready** | **Not approved** | **Not approved** |
+| **2 — SHA-256 / byte size** | **Ready** | **Not approved** | **Not approved** |
 
 ---
 
