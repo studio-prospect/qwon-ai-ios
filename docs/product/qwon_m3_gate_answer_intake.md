@@ -1,7 +1,7 @@
 # QWON — M3 Gate Answer Intake Ledger
 
 **Last updated:** 2026-06-06
-**Status:** **Intake ledger** — Batch A answers **Q-A-01…Q-A-13**, Batch B answers **Q-B-01…Q-B-11**, and Batch C answers **Q-C-01…Q-C-14** recorded. Batch A / Gates **1–3** and Batch B / Gates **4–5** have separate Ready sign-offs; Gates **6–9** remain Pending. **Not** M3 implementation approval, **not** Build `4` approval.
+**Status:** **Intake ledger** — Batch A answers **Q-A-01…Q-A-13**, Batch B answers **Q-B-01…Q-B-11**, and Batch C answers **Q-C-01…Q-C-14** recorded. Batch A / Gates **1–3**, Batch B / Gates **4–5**, and Batch C / Gates **6–7** have separate Ready sign-offs; Gates **8–9** remain Pending. **Not** M3 implementation approval, **not** Build `4` approval.
 **Purpose:** Track **Product / Codex / Legal / Release Engineering** answers to [Batch A–D review questions](./qwon_m3_gate_readiness_review_plan.md) and record what each answer **unblocks** toward a future **gate Ready sign-off PR**.
 
 Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) · [Batch A external questionnaire](./qwon_m3_batch_a_external_questionnaire.md) · [Gate 2 artifact finalization runbook](./qwon_m3_gate2_artifact_finalization_runbook.md) · [M3 checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Queue — M3 status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05)
@@ -24,7 +24,8 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | --- | --- |
 | **Gates 1–3** | **Ready** — Batch A Ready sign-off recorded 2026-06-06 |
 | **Gates 4–5** | **Ready** — Batch B Ready sign-off recorded 2026-06-06 |
-| **Gates 6–9** | **Pending** — this ledger does not approve downstream gates |
+| **Gates 6–7** | **Ready** — Batch C Ready sign-off recorded 2026-06-06 |
+| **Gates 8–9** | **Pending** — this ledger does not approve downstream release / rollback gates |
 
 ---
 
@@ -76,7 +77,7 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | **Q-A-04** | Reproducibility pinning direction: **QWON object key/version ID + SHA-256 + exact byte size**, to be recorded in a later Gate **2** sign-off PR after the hosted object is finalized. |
 | **Q-A-05** | Product stance: **No third-party Hugging Face URL for product/tester-facing builds unless Legal explicitly approves HF URL use**. Hugging Face may remain a traceability/source reference, not the default product URL. |
 
-**Ready sign-off:** Gate **1** is **Ready** as part of Batch A sign-off. Gates **4–5** are now Ready as part of Batch B sign-off; Gates **6–9** remain **Pending**.
+**Ready sign-off:** Gate **1** is **Ready** as part of Batch A sign-off. Gates **4–5** are Ready as part of Batch B sign-off, Gates **6–7** are Ready as part of Batch C sign-off, and Gates **8–9** remain **Pending**.
 
 ### Batch A artifact record details (2026-06-06)
 
@@ -195,7 +196,7 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 ### Batch C network disclosure and device expectation answer details (2026-06-06)
 
 **Source:** Product/Codex policy decision in Codex conversation, 2026-06-06.
-**Scope:** Gate **6–7** answers only. This records disclosure, user-initiated download, local-first positioning, M2 copy transition, ASC/privacy review direction, device-tier visibility, Matisse expectations, Diagnostics copy mapping, and M2 guided placement coexistence for Q-C-01…Q-C-14. It does **not** mark Gates **6–7** Ready, does **not** approve M3 spike, and does **not** approve Build `4`.
+**Scope:** Gate **6–7** answers only. This records disclosure, user-initiated download, local-first positioning, M2 copy transition, ASC/privacy review direction, device-tier visibility, Matisse expectations, Diagnostics copy mapping, and M2 guided placement coexistence for Q-C-01…Q-C-14. Gates **6–7** are marked Ready in the separate [Batch C Ready sign-off](./qwon_m3_gate_readiness_review_plan.md#batch-c-ready-sign-off-2026-06-06). This does **not** approve M3 spike and does **not** approve Build `4`.
 
 | Question ID | Answer |
 | --- | --- |
@@ -214,7 +215,7 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | **Q-C-13** | Chat fallback strip direction for Wang missing/corrupt model: “Local model not ready — answered with built-in fallback. Install the local model from Settings → Local Runtime.” Final wording can be polished in implementation PR, but must preserve that meaning. |
 | **Q-C-14** | **Place GGUF via Mac** remains visible as the manual fallback and support path. Download UX must be additive, not a replacement. Gate **8** still owns formal rollback readiness. |
 
-**Remaining dependencies:** Gates **6–7** still need a separate Ready sign-off PR before any M3 spike can be scoped.
+**Ready sign-off:** Gates **6–7** are **Ready** as part of Batch C sign-off. Rollback and release gates remain Gates **8–9**.
 
 ---
 
@@ -244,9 +245,9 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | --- | --- | --- | --- |
 | **A** | 13 | **13** | 1–3 — **Ready** |
 | **B** | 11 | **11** | 4–5 — **Ready** |
-| **C** | 14 | **14** | 6–7 — **Pending** |
+| **C** | 14 | **14** | 6–7 — **Ready** |
 | **D** | 11 | **0** | 8–9 — **Pending** |
-| **Total** | **49** | **38** | Gates **1–5 Ready**; Gates **6–9 Pending** |
+| **Total** | **49** | **38** | Gates **1–7 Ready**; Gates **8–9 Pending** |
 
 ---
 
@@ -269,12 +270,12 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | Included | Excluded |
 | --- | --- |
 | Question ID ledger (49 rows) | Fabricated answers |
-| Batch A Product answers Q-A-01…Q-A-05 | Gate Ready sign-off |
-| Batch A artifact answers Q-A-06…Q-A-07 | Gate Ready sign-off |
-| Batch A Codex/Product legacy USB answer Q-A-08 | Gate Ready sign-off |
-| Batch A Legal answers Q-A-09…Q-A-13 | Gate Ready sign-off |
-| Batch B Product/Codex answers Q-B-01…Q-B-11 | Gate Ready sign-off |
-| Batch C Product/Codex answers Q-C-01…Q-C-14 | Gate Ready sign-off |
+| Batch A Product answers Q-A-01…Q-A-05 | M3 implementation approval |
+| Batch A artifact answers Q-A-06…Q-A-07 | M3 implementation approval |
+| Batch A Codex/Product legacy USB answer Q-A-08 | M3 implementation approval |
+| Batch A Legal answers Q-A-09…Q-A-13 | M3 implementation approval |
+| Batch B Product/Codex answers Q-B-01…Q-B-11 | M3 implementation approval |
+| Batch C Product/Codex answers Q-C-01…Q-C-14 | M3 implementation approval |
 | Workflow for future answer PRs | Gate Ready sign-off |
 | Ready impact mapping | Final URL / SHA / legal / UI / release values |
-| Gates **6–9 Pending** | Swift, spike, TestFlight upload |
+| Gates **8–9 Pending** | Swift, spike, TestFlight upload |

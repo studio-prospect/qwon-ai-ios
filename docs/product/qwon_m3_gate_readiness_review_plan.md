@@ -1,8 +1,8 @@
 # QWON — M3 Gate Readiness Review Plan
 
-**Last updated:** 2026-06-06 (Batch A/B Gates 1–5 Ready; Gates 6–9 Pending)
-**Status:** **Review plan** — Batch A / Gates **1–3** and Batch B / Gates **4–5** Ready sign-offs recorded; **not** M3 implementation approval, **not** Build `4` approval.
-**Purpose:** Define **review order**, **owners**, **required evidence**, and **exit criteria** for moving M3 checklist Gates **1–9** from **Pending** to **Ready**. Evidence memos exist ([#91](https://github.com/studio-prospect/qwon-ai-ios/pull/91)–[#95](https://github.com/studio-prospect/qwon-ai-ios/pull/95)); Gates **6–9** remain **Pending**.
+**Last updated:** 2026-06-06 (Batch A–C Gates 1–7 Ready; Gates 8–9 Pending)
+**Status:** **Review plan** — Batch A / Gates **1–3**, Batch B / Gates **4–5**, and Batch C / Gates **6–7** Ready sign-offs recorded; **not** M3 implementation approval, **not** Build `4` approval.
+**Purpose:** Define **review order**, **owners**, **required evidence**, and **exit criteria** for moving M3 checklist Gates **1–9** from **Pending** to **Ready**. Evidence memos exist ([#91](https://github.com/studio-prospect/qwon-ai-ios/pull/91)–[#95](https://github.com/studio-prospect/qwon-ai-ios/pull/95)); Gates **8–9** remain **Pending**.
 
 Related: [M3 readiness checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Answer intake ledger](./qwon_m3_gate_answer_intake.md) · [Batch A external questionnaire](./qwon_m3_batch_a_external_questionnaire.md) · [Queue — M3 status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
 
@@ -14,7 +14,8 @@ Related: [M3 readiness checklist](./qwon_model_download_gguf_ux_plan.md#m3-readi
 | --- | --- |
 | **Gates 1–3** | **Ready** — Batch A sign-off recorded 2026-06-06 |
 | **Gates 4–5** | **Ready** — Batch B sign-off recorded 2026-06-06 |
-| **Gates 6–9** | Evidence memos linked — **Pending** |
+| **Gates 6–7** | **Ready** — Batch C sign-off recorded 2026-06-06 |
+| **Gates 8–9** | Evidence memos linked — **Pending** |
 | **M3 in-app download spike** | **Not approved** |
 | **Build `4` / TestFlight upload / tag / version bump** | **Not approved** |
 | **Active TestFlight** | **QWON `0.1.0 (3)`** |
@@ -43,7 +44,7 @@ Related: [M3 readiness checklist](./qwon_model_download_gguf_ux_plan.md#m3-readi
 | **C** | 6–7 | Network disclosure, device tiers | **3rd** | [Network + device expectation](./qwon_m3_network_device_expectation_memo.md) |
 | **D** | 8–9 | Rollback path, release gate | **4th** | [Rollback + release gate](./qwon_m3_rollback_release_gate_memo.md) |
 
-**Current disposition:** Batch **A** / Gates **1–3** and Batch **B** / Gates **4–5** are **Ready**; C–D / Gates **6–9** remain **Pending**.
+**Current disposition:** Batch **A** / Gates **1–3**, Batch **B** / Gates **4–5**, and Batch **C** / Gates **6–7** are **Ready**; Batch **D** / Gates **8–9** remain **Pending**.
 
 ---
 
@@ -217,7 +218,7 @@ Product and legal should answer **in writing** (future memo revision or sign-off
 | M3 spike approved | **No** |
 | Build `4` approved | **No** |
 
-**Next docs-only step:** Batch **C** / Gates **6–7** answer intake and Ready review may proceed. Gate **4** threshold and Gate **5** verification policy are Ready inputs for Batch C device/copy decisions. Gates **6–9** remain **Pending**.
+**Next docs-only step:** Batch **D** / Gates **8–9** answer intake may proceed. Gates **1–7** are Ready; Gates **8–9** remain **Pending**.
 
 ---
 
@@ -417,10 +418,10 @@ Answered in [Batch B storage and integrity answer details](./qwon_m3_gate_answer
 
 | Field | Value |
 | --- | --- |
-| **Status** | **Answered — Ready sign-off pending** |
-| **Ready?** | **No** |
+| **Status** | **Ready** |
+| **Ready?** | **Yes** |
 | **Batch C review (docs-only)** | **Documented** — [2026-06-05 session](#batch-c-review-session-2026-06-05) identified open items; [answer intake](./qwon_m3_gate_answer_intake.md#batch-c-network-disclosure-and-device-expectation-answer-details-2026-06-06) records Q-C-01…Q-C-14 |
-| **Blocked-by** | Gate **6–7** Ready sign-off |
+| **Sign-off** | [Batch C Ready sign-off](#batch-c-ready-sign-off-2026-06-06) |
 
 ---
 
@@ -428,7 +429,7 @@ Answered in [Batch B storage and integrity answer details](./qwon_m3_gate_answer
 
 **Type:** Docs-only readiness review — **not** gate Ready sign-off, **not** final UI copy approval, **not** privacy label / ASC final answers.
 
-**Outcome:** Gate **6–7** open items were **concretized** below and later answered in the [answer intake ledger](./qwon_m3_gate_answer_intake.md#batch-c-network-disclosure-and-device-expectation-answer-details-2026-06-06). Checklist rows remain **Pending** until a separate Gates **6–7** Ready sign-off PR.
+**Outcome:** Gate **6–7** open items were **concretized** below and later answered in the [answer intake ledger](./qwon_m3_gate_answer_intake.md#batch-c-network-disclosure-and-device-expectation-answer-details-2026-06-06). Checklist rows are **Ready** after the [Batch C Ready sign-off](#batch-c-ready-sign-off-2026-06-06).
 
 Related evidence: [Network + device memo — Batch C status](./qwon_m3_network_device_expectation_memo.md#batch-c-review-status-2026-06-05)
 
@@ -449,7 +450,7 @@ Related evidence: [Network + device memo — Batch C status](./qwon_m3_network_d
 | G6-11 | **Wi‑Fi vs cellular disclosure** | **Answered** — Wi-Fi recommended; cellular may use data if user proceeds | Gate **6** Ready sign-off |
 | G6-12 | **First-launch fetch prohibition** | **Answered** — no first-launch fetch; explicit Settings/user action only | Gate **6** Ready sign-off |
 
-**Gate 6 status:** **Pending** — **not Ready** — Batch C answers recorded; Ready sign-off still separate
+**Gate 6 status:** **Ready** — closed by [Batch C Ready sign-off](#batch-c-ready-sign-off-2026-06-06)
 
 ### Gate 7 — Open items (Wang / Matisse device expectation)
 
@@ -468,11 +469,11 @@ Related evidence: [Network + device memo — Batch C status](./qwon_m3_network_d
 | G7-11 | **M2 Place GGUF via Mac coexistence** | **Answered** — remains visible as manual fallback/support path | Gate **7** + **8** Ready sign-off |
 | G7-12 | **Verified vs present-unverified copy** | **Answered** — use Gate 2/5 verification states; final copy may be polished but meaning fixed | Gate **7** Ready sign-off |
 
-**Gate 7 status:** **Pending** — **not Ready** — Batch C answers recorded; Ready sign-off still separate
+**Gate 7 status:** **Ready** — closed by [Batch C Ready sign-off](#batch-c-ready-sign-off-2026-06-06)
 
 ### Product / Codex question list (Batch C — answer to unblock Ready sign-off)
 
-Answered in [Batch C network disclosure and device expectation answer details](./qwon_m3_gate_answer_intake.md#batch-c-network-disclosure-and-device-expectation-answer-details-2026-06-06). Gates **6–7** still need a separate Ready sign-off PR.
+Answered in [Batch C network disclosure and device expectation answer details](./qwon_m3_gate_answer_intake.md#batch-c-network-disclosure-and-device-expectation-answer-details-2026-06-06) and closed by [Batch C Ready sign-off](#batch-c-ready-sign-off-2026-06-06).
 
 #### Network disclosure (Gate 6 — Product + Legal via Product)
 
@@ -494,21 +495,32 @@ Answered in [Batch C network disclosure and device expectation answer details](.
 13. What **chat fallback strip** text is shown when Wang lacks a verified GGUF (G7-9)?
 14. How does **Place GGUF via Mac** appear alongside download UX (G7-11)?
 
-**Blocked-by summary:** Gate **3** and Gate **5** prerequisites are Ready. Batch **C** answers are recorded, but Gates **6–7** still require separate Ready sign-off. Gate **9** remains responsible for release-time ASC/export and TestFlight approval.
+**Blocked-by summary:** Gate **3** and Gate **5** prerequisites are Ready. Batch **C** answers and sign-off are recorded; Gate **9** remains responsible for release-time ASC/export and TestFlight approval.
 
-### Batch C review exit (not yet met)
+### Batch C review exit
 
 | Criterion | Met? |
 | --- | --- |
 | Open items documented | **Yes** (this section) |
 | Product/Codex questions issued | **Yes** (above) |
-| Gates 6–7 marked **Ready** | **No** |
-| Final UI copy approved | **Direction answered** — separate Ready sign-off still required |
+| Gates 6–7 marked **Ready** | **Yes** — [Batch C Ready sign-off](#batch-c-ready-sign-off-2026-06-06) |
+| Final UI copy approved | **Direction approved for M3 readiness** — exact Swift copy still reviewed in implementation PR |
 | Privacy label / ASC answered | **Direction answered** — release-time ASC/privacy-label re-check still required under Gate **9** |
 | M3 spike approved | **No** |
 | Build `4` approved | **No** |
 
-**Next docs-only step:** Open a separate Gates **6–7** Ready sign-off PR, or proceed to Batch **D** answer intake if Product/Codex wants to resolve rollback/release questions first. M3 spike remains forbidden until **all nine** gates Ready.
+### Batch C Ready sign-off (2026-06-06)
+
+| Criterion | Result |
+| --- | --- |
+| Batch C answers recorded | **Yes** — Q-C-01…Q-C-14 in the [answer intake ledger](./qwon_m3_gate_answer_intake.md#batch-c-network-disclosure-and-device-expectation-answer-details-2026-06-06) |
+| Gate **6** network disclosure direction | **Ready** — explicit user action, foreground-only model download, pre-download ~400 MB disclosure, local-first/not offline-only positioning, Settings-first disclosure |
+| Gate **7** device expectation direction | **Ready** — Wang-primary optional download, Matisse Embedded Heuristic Runtime expected/not failure, diagnostics mapping for partial/corrupt/success |
+| Release-time ASC/privacy/export re-check | **Deferred to Gate 9** — sign-off here does **not** approve a TestFlight build |
+| Final Swift/UI implementation | **Not approved** — exact copy and UI behavior still require a future M3 spike/implementation PR after all gates are Ready |
+| Gates 6–7 marked **Ready** | **Yes** |
+
+**Next docs-only step:** Proceed to Batch **D** answer intake for rollback/release questions. M3 spike remains forbidden until **all nine** gates Ready.
 
 ---
 
@@ -564,7 +576,7 @@ Answered in [Batch C network disclosure and device expectation answer details](.
 
 **Type:** Docs-only readiness review — **not** gate Ready sign-off, **not** Build `4` approval, **not** TestFlight upload / tag / version bump.
 
-**Outcome:** Gate **8–9** open items **concretized** below. Checklist rows remain **Pending** for Gates **8–9**. Batch **A/B** / Gates **1–5** are now Ready; Gates **6–9** remain Pending.
+**Outcome:** Gate **8–9** open items **concretized** below. Checklist rows remain **Pending** for Gates **8–9**. Batch **A/B/C** / Gates **1–7** are now Ready; Gates **8–9** remain Pending.
 
 Related evidence: [Rollback + release memo — Batch D status](./qwon_m3_rollback_release_gate_memo.md#batch-d-review-status-2026-06-05)
 
@@ -597,7 +609,7 @@ Related evidence: [Rollback + release memo — Batch D status](./qwon_m3_rollbac
 | G9-6 | **ASC export compliance re-check** | Documented for app TLS — download feature **unreviewed** | Ops + Gate **3** ([compliance memo](./qwon_m3_model_distribution_compliance_memo.md)) |
 | G9-7 | **Tester communication template** | GGUF not bundled (today) vs optional download — **undecided** | Product / support |
 | G9-8 | **Gate 9 Ready semantics** | Unclear: “Build `4` deferred” vs “Build `4` approved” as Ready evidence | Product clarifies sign-off PR format |
-| G9-9 | **Gates 1–8 Ready prerequisite** | All **Pending** | Batch A–C sign-off before any TestFlight ship with download |
+| G9-9 | **Gates 1–8 Ready prerequisite** | Gates **1–7 Ready**; Gate **8 Pending** | Gate **8** sign-off before any TestFlight ship with download |
 | G9-10 | **France / regional declarations** | Build `2` history — re-check if network download ships | Ops/Product |
 
 **Gate 9 status:** **Pending** — **not approved** — **Product release decision blocked**
@@ -638,7 +650,7 @@ Answer **in writing** in future sign-off PRs. **Do not** approve Build `4` or up
 | Build `4` / TestFlight approved | **No** |
 | M3 spike approved | **No** |
 
-**Next docs-only step:** Record real Batch **B** answers (Q-B-01…Q-B-11) in the [M3 gate answer intake ledger](./qwon_m3_gate_answer_intake.md), using Gate **2** byte size and SHA-256 where needed. After all Batch B answers exist, open a Gates **4–5** Ready sign-off PR — still docs-only, still **not** implementation. M3 spike remains **forbidden** until **all nine** gates Ready.
+**Next docs-only step:** Record real Batch **D** answers (Q-D-01…Q-D-11) in the [M3 gate answer intake ledger](./qwon_m3_gate_answer_intake.md), then open a Gates **8–9** disposition / Ready sign-off PR. M3 spike remains **forbidden** until **all nine** gates Ready.
 
 ---
 

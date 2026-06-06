@@ -1,7 +1,7 @@
 # QWON — M3 Network Disclosure + Device Expectation Memo (Gates 6 & 7)
 
-**Last updated:** 2026-06-06 (Batch C answers recorded — Gates 6–7 still Pending)
-**Status:** **Evidence memo** — Batch C answers recorded; **not** M3 implementation approval, **not** Gates 6/7 **Ready**, **not** Build `4` approval.
+**Last updated:** 2026-06-06 (Batch C / Gates 6–7 Ready)
+**Status:** **Evidence memo** — Batch C answers recorded and Gates **6–7 Ready** for M3 readiness tracking; **not** M3 implementation approval, **not** final Swift copy approval, **not** Build `4` approval.
 **Purpose:** Document open **privacy / network disclosure copy** (Gate 6) and **Wang / Matisse behavior expectation** (Gate 7) for a future **M3 in-app download** spike of `prexus-local-mvp.gguf`.
 
 Related: [M3 readiness checklist — Gates 6 & 7](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Batch C review](./qwon_m3_gate_readiness_review_plan.md#batch-c-review-session-2026-06-05) · [Settings / Diagnostics copy plan](./qwon_model_download_gguf_ux_plan.md#settings--diagnostics-copy-plan) · [Device expectations](./qwon_model_download_gguf_ux_plan.md#device-expectations) · [M2 guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement) · [Gate 3 compliance memo](./qwon_m3_model_distribution_compliance_memo.md) · [Gate 4/5 storage memo](./qwon_m3_storage_integrity_memo.md)
@@ -49,7 +49,7 @@ When M3 adds download UX, M2 **Place GGUF via Mac** remains ([Gate 8](./qwon_mod
 
 ## Gate 6 — Privacy / network disclosure copy
 
-### Requirements (answered direction — not Ready)
+### Requirements (Ready for M3 readiness)
 
 | Requirement | Status |
 | --- | --- |
@@ -68,12 +68,12 @@ When M3 adds download UX, M2 **Place GGUF via Mac** remains ([Gate 8](./qwon_mod
 | **Settings → Local Runtime** | Pre-download disclosure + link to Mac fallback |
 | **Download confirmation** | One-tap consent before URLSession/fetch starts |
 | **In-progress download** | Visible progress; no hidden retry loops |
-| **Privacy policy / ASC** | Product/legal — not decided in this memo |
+| **Privacy policy / ASC** | Release-time Product/Legal/RE re-check remains Gate **9** |
 | **Onboarding (if shown)** | Reuse Settings tone; avoid duplicate conflicting claims |
 
-### Candidate copy — **answered direction (not Swift approval)**
+### Candidate copy — **Ready direction (not Swift approval)**
 
-> **Label:** These strings record Product/Codex direction for Gate **6**. They still require a separate Gates **6–7** Ready sign-off before any M3 spike plan.
+> **Label:** These strings record Product/Codex direction for Gate **6**. A future implementation PR may polish exact Swift copy, but it must preserve this meaning.
 
 **Settings — before download (Wang-class, optional feature framing):**
 
@@ -96,9 +96,9 @@ When M3 adds download UX, M2 **Place GGUF via Mac** remains ([Gate 8](./qwon_mod
 
 | Field | Value |
 | --- | --- |
-| **Recommended status** | **Pending** |
-| **Ready?** | **No** — Batch C answers recorded; separate Gate 6 Ready sign-off still required |
-| **Blocked by** | Gate **6** Ready sign-off |
+| **Recommended status** | **Ready** |
+| **Ready?** | **Yes** — Batch C answers and sign-off are recorded for M3 readiness |
+| **Still gated by** | Gate **9** release-time ASC/privacy/export re-check before any TestFlight build with download UX |
 
 ---
 
@@ -159,9 +159,9 @@ Verified GGUF semantics tie to Gate 2/5 ([integrity states](./qwon_model_downloa
 
 | Field | Value |
 | --- | --- |
-| **Recommended status** | **Pending** |
-| **Ready?** | **No** — Batch C answers recorded; separate Gate 7 Ready sign-off still required |
-| **Blocked by** | Gate **7** Ready sign-off |
+| **Recommended status** | **Ready** |
+| **Ready?** | **Yes** — Batch C answers and sign-off are recorded for M3 readiness |
+| **Still gated by** | Gate **8** rollback path preservation and Gate **9** release decision before any TestFlight build |
 
 ---
 
@@ -190,9 +190,9 @@ Batch C answers record the migration direction: retire “does not download in-a
 
 ## Batch C review status (2026-06-05)
 
-**Review:** [Batch C session](./qwon_m3_gate_readiness_review_plan.md#batch-c-review-session-2026-06-05) documented open items; [answer intake](./qwon_m3_gate_answer_intake.md#batch-c-network-disclosure-and-device-expectation-answer-details-2026-06-06) records Q-C-01…Q-C-14. Gates **6–7** remain **Pending** until separate Ready sign-off.
+**Review:** [Batch C session](./qwon_m3_gate_readiness_review_plan.md#batch-c-review-session-2026-06-05) documented open items; [answer intake](./qwon_m3_gate_answer_intake.md#batch-c-network-disclosure-and-device-expectation-answer-details-2026-06-06) records Q-C-01…Q-C-14. Gates **6–7** are **Ready** for M3 readiness tracking after Batch C sign-off.
 
-### Gate 6 — answered, Ready sign-off pending (summary)
+### Gate 6 — Ready (summary)
 
 | Topic | Status |
 | --- | --- |
@@ -204,7 +204,7 @@ Batch C answers record the migration direction: retire “does not download in-a
 
 Full item list: [G6-1 … G6-12](./qwon_m3_gate_readiness_review_plan.md#gate-6--open-items-privacy--network-disclosure-copy)
 
-### Gate 7 — answered, Ready sign-off pending (summary)
+### Gate 7 — Ready (summary)
 
 | Topic | Status |
 | --- | --- |
@@ -221,7 +221,7 @@ Full item list: [G7-1 … G7-12](./qwon_m3_gate_readiness_review_plan.md#gate-7-
 
 ## Recommended Product / Codex actions before Gates 6/7 Ready sign-off
 
-1. Open a docs-only Gates **6–7** Ready sign-off PR if Product/Codex accepts the recorded Batch C answers.
+1. Proceed to Batch **D** answer intake for rollback and release-gate questions.
 2. Keep final UI implementation and copy polish out of scope until all gates are Ready and a separate M3 spike plan exists.
 3. Preserve release-time ASC/privacy/export re-check under Gate **9** before any TestFlight binary with download UX.
 
@@ -231,10 +231,10 @@ Full item list: [G7-1 … G7-12](./qwon_m3_gate_readiness_review_plan.md#gate-7-
 
 | Gate | Recommended status | M3 implementation | Build `4` |
 | --- | --- | --- | --- |
-| **6 — Privacy / network disclosure** | **Pending** | **Not approved** | **Not approved** |
-| **7 — Wang / Matisse expectation** | **Pending** | **Not approved** | **Not approved** |
+| **6 — Privacy / network disclosure** | **Ready** | **Not approved** | **Not approved** |
+| **7 — Wang / Matisse expectation** | **Ready** | **Not approved** | **Not approved** |
 
-Gates **1–5** are Ready; Gates **6–9** remain **Pending** until individually marked **Ready**. **Do not open M3 spike** until **all** gates are Ready.
+Gates **1–7** are Ready; Gates **8–9** remain **Pending**. **Do not open M3 spike** until **all** gates are Ready.
 
 ---
 
