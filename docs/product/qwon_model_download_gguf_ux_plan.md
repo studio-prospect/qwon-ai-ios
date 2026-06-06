@@ -1,6 +1,6 @@
 # QWON - Model Download / GGUF UX - Scoped Plan
 
-**Last updated:** 2026-06-05 (M3 checklist — all 9 gates documented, all Pending)
+**Last updated:** 2026-06-06 (M3 checklist — Batch A Gates 1–3 Ready; Gates 4–9 Pending)
 **Status:** **Scoped plan** - implementation, spike, Build `4`, TestFlight upload, tag, version bump, GGUF commit, and filename migration are **not approved** by this document.
 **Purpose:** Define the safe implementation boundary for reducing QWON text-alpha model acquisition friction after [Product selected Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md). This plan turns that lane decision into a staged UX/ops path without changing the current runtime contract.
 
@@ -564,7 +564,7 @@ M2 guided external placement is **verified on simulator** (reachability, placeme
 
 **Purpose:** After M1/M2 completion, record the **prerequisites** that must be satisfied before opening an **M3 in-app download spike**. This section is a **readiness gate only** — it does **not** approve M3 implementation, network fetch, storage schema work, or TestFlight upload.
 
-**Status (2026-06-05):** Gates **1–9** evidence memos + **Batch A–D review sessions** documented ([#91](https://github.com/studio-prospect/qwon-ai-ios/pull/91)–[#95](https://github.com/studio-prospect/qwon-ai-ios/pull/95), [review plan](./qwon_m3_gate_readiness_review_plan.md)). **All gates Pending** — **none Ready**. Gate **8** Ready blocked on **spike test plan**; Gate **9** on **Product release decision**. **Not** Ready sign-off. **Do not open M3 spike.** **Build `4` / TestFlight / tag / version bump not approved.** [Queue status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05).
+**Status (2026-06-06):** Gates **1–9** evidence memos + **Batch A–D review sessions** documented ([#91](https://github.com/studio-prospect/qwon-ai-ios/pull/91)–[#95](https://github.com/studio-prospect/qwon-ai-ios/pull/95), [review plan](./qwon_m3_gate_readiness_review_plan.md)). **Batch A / Gates 1–3 are Ready** after answer intake and hosted artifact record; **Gates 4–9 remain Pending**. **Do not open M3 spike.** **Build `4` / TestFlight / tag / version bump not approved.** [Queue status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05).
 
 **Base:** `origin/main` @ **`dc43e69`** — M3 evidence memos complete ([#91](https://github.com/studio-prospect/qwon-ai-ios/pull/91)–[#95](https://github.com/studio-prospect/qwon-ai-ios/pull/95)); M1/M2 merged ([#86](https://github.com/studio-prospect/qwon-ai-ios/pull/86)–[#89](https://github.com/studio-prospect/qwon-ai-ios/pull/89)).
 
@@ -574,16 +574,16 @@ M2 guided external placement is **verified on simulator** (reachability, placeme
 | --- | --- |
 | **M1 model status UX** | **Complete** — merged + verified |
 | **M2 guided placement** | **Complete** — merged + verified |
-| **M3 in-app download spike** | **Gated** — all 9 gates documented; **all Pending**; spike **not open** |
+| **M3 in-app download spike** | **Gated** — Gates **1–3 Ready**; Gates **4–9 Pending**; spike **not open** |
 | **Build `4` / TestFlight** | **Separate gate** — **not approved** by this checklist |
 
 ### Checklist (all required before M3 spike)
 
 | # | Gate | Required evidence / decision | Status |
 | --- | --- | --- | --- |
-| 1 | **Model hosting source / URL ownership** | [Hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md) — Gate 1 section; dev ops HF URL documented as **not** product hosting. Named owner for hosting; approved HTTPS source URL or CDN path; no unstable third-party URLs as product promises; reproducibility plan documented | **Pending** |
-| 2 | **SHA-256 checksum and expected byte size** | [Hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md) — Gate 2 section; [Gate 2 artifact finalization runbook](./qwon_m3_gate2_artifact_finalization_runbook.md) and intake ledger record Q-A-06/Q-A-07 values for the QWON-hosted object. Published SHA-256 for `prexus-local-mvp.gguf`; expected byte size for partial-file detection; verification policy after download/copy | **Pending** |
-| 3 | **License / redistribution / export compliance** | [Compliance memo](./qwon_m3_model_distribution_compliance_memo.md) — questions documented; **not** sign-off. Model license review; App Store / export compliance impact; redistribution rights for in-app fetch documented | **Pending** — needs product/legal confirmation |
+| 1 | **Model hosting source / URL ownership** | [Hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md) — Gate 1 section; Product owns distribution decision; Release Engineering owns QWON object storage/CDN operations; QWON-hosted mirror selected; third-party HF URL remains traceability/dev ops only. | **Ready** |
+| 2 | **SHA-256 checksum and expected byte size** | [Hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md) — Gate 2 section; [Gate 2 artifact finalization runbook](./qwon_m3_gate2_artifact_finalization_runbook.md) and intake ledger record Q-A-06/Q-A-07 values for the QWON-hosted object. Exact byte size: `397808192`; SHA-256: `6eb923e7d26e9cea28811e1a8e852009b21242fb157b26149d3b188f3a8c8653`. Download temp/atomic verification mechanics remain Gate **5**. | **Ready** |
+| 3 | **License / redistribution / export compliance** | [Compliance memo](./qwon_m3_model_distribution_compliance_memo.md) — Legal/Product approved the Apache-2.0 direction, conditional QWON-hosted bartowski `Q4_K_M` mirror, attribution requirement, HF traceability-only stance, and ASC/export re-check before any product-facing download build. | **Ready** |
 | 4 | **iOS storage budget and available-space check** | [Storage + integrity memo](./qwon_m3_storage_integrity_memo.md) — Gate 4 section; pre-download sandbox capacity check required in principle; **minimum threshold undecided**. Minimum free-space threshold before download starts; user-visible failure when space insufficient; no silent sandbox fill | **Pending** |
 | 5 | **Partial download / resume / atomic move plan** | [Storage + integrity memo](./qwon_m3_storage_integrity_memo.md) — Gate 5 section; temp/atomic/resume **undecided**; integrity → Diagnostics mapping documented. Temp filename strategy; resume or clean retry policy; atomic move to `Documents/Models/prexus-local-mvp.gguf`; corrupt/partial state handling per [integrity states](#integrity-and-storage-requirements) | **Pending** |
 | 6 | **Privacy / network disclosure copy** | [Network + device expectation memo](./qwon_m3_network_device_expectation_memo.md) — Gate 6 section; disclosure required in principle; **final** Settings/TestFlight/privacy label copy **undecided**. Settings/onboarding copy for network use; no surprise background fetch; alignment with local-first positioning | **Pending** |

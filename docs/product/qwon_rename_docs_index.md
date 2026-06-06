@@ -1,6 +1,6 @@
 # QWON Rename — Documentation Index
 
-**Last updated:** 2026-06-05 (M3 readiness — all 9 gates documented, all Pending)
+**Last updated:** 2026-06-06 (M3 readiness — Gates 1–3 Ready; Gates 4–9 Pending)
 **Purpose:** **Information architecture only** — where to start reading QWON rename / Phase 4 docs and in what order. Does **not** add new policy; it summarizes and links existing decisions.
 
 **Next decision (release vs post-alpha):** [QWON next work queue — decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) · [Model download / GGUF UX scoped plan](./qwon_model_download_gguf_ux_plan.md)
@@ -28,8 +28,8 @@
 | **Next decision** | [Decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) — **Stay** · build `4` gate · [Model download / GGUF UX decision](./qwon_model_download_gguf_ux_decision.md) |
 | **Post-alpha / v0.2 candidates** | [Option lanes](./qwon_post_alpha_options.md) · [Selection matrix](./qwon_post_alpha_options.md#selection-matrix) |
 | **First post-alpha lane** | **UI polish — complete** (UI-1 #80, #81) · UI-2 **deferred** (#82) |
-| **Selected next lane** | **[Model download / GGUF UX](./qwon_model_download_gguf_ux_plan.md)** — M1/M2 complete; M3 **all 9 gates documented · all Pending** · spike **not open** |
-| **M3 readiness** | Gates **1–9** evidence memos linked from [checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) — **none Ready** · [queue status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05) |
+| **Selected next lane** | **[Model download / GGUF UX](./qwon_model_download_gguf_ux_plan.md)** — M1/M2 complete; M3 Gates **1–3 Ready**, Gates **4–9 Pending** · spike **not open** |
+| **M3 readiness** | Gates **1–9** evidence memos linked from [checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) — Gates **1–3 Ready**, Gates **4–9 Pending** · [queue status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05) |
 | **Xcode project container** | **`PREXUS.xcodeproj`** — deferred; see [preserved inventory](./qwon_preserved_prexus_surface_inventory.md) |
 
 ---
@@ -58,7 +58,7 @@
 | **Should we open UI-2 (onboarding structure)?** | **Not now** — **defer / not opened** · [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) |
 | **Should I rename a PREXUS string?** | [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md) — default **no** unless listed as safe or product opens a scoped migration PR |
 | **Should we ship build `4`?** | **Not approved** — build **`3` stable alpha**; feedback **closed** · Gate 9 separate from M3 spike · [intake close](./qwon_text_alpha_feedback_intake.md#feedback-window-close-2026-06-03) |
-| **Can we start M3 in-app download?** | **No** — all 9 gates **Pending** · [M3 readiness status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05) · next: Product/Codex gate Ready sign-off |
+| **Can we start M3 in-app download?** | **No** — Gates **4–9 Pending** · [M3 readiness status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05) · next: Batch B / Gates 4–5 answers and Ready sign-off |
 | **Which app / Bundle ID is active?** | [QWON bundle memo](./qwon_bundle_id_decision_memo.md) + [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) — QWON `6775685841`; PREXUS `6775110218` is historical only |
 | **Can I edit PREXUS historical docs?** | **No** — [PREXUS alpha index](./qwen_text_only_alpha_docs_index.md); append-only QWON docs or link; never rewrite frozen rows |
 | **Where is Phase 4 implementation detail?** | [Phase 4 target rename plan](./qwon_phase4_target_rename_plan.md) PR table + [surface audit](./qwon_phase4_rename_surface_audit.md) |
@@ -83,9 +83,9 @@
 | [qwon_text_alpha_feedback_intake.md](./qwon_text_alpha_feedback_intake.md) | **Build `3` feedback template + triage log** — live intake entry point |
 | [qwon_post_alpha_options.md](./qwon_post_alpha_options.md) | **Post-alpha lane catalog** — UI polish complete; Model download / GGUF UX selected |
 | [qwon_model_download_gguf_ux_decision.md](./qwon_model_download_gguf_ux_decision.md) | **Second post-alpha lane decision** — scoped planning gate, Codex plan requirements |
-| [qwon_model_download_gguf_ux_plan.md](./qwon_model_download_gguf_ux_plan.md) | **Second post-alpha scoped plan** — M1/M2 complete; [M3 checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) all gates documented, all Pending |
-| [qwon_m3_model_hosting_checksum_memo.md](./qwon_m3_model_hosting_checksum_memo.md) | **M3 Gate 1–2 evidence** — hosting / checksum (Pending) |
-| [qwon_m3_model_distribution_compliance_memo.md](./qwon_m3_model_distribution_compliance_memo.md) | **M3 Gate 3 evidence** — license / redistribution / export (Pending) |
+| [qwon_model_download_gguf_ux_plan.md](./qwon_model_download_gguf_ux_plan.md) | **Second post-alpha scoped plan** — M1/M2 complete; [M3 checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) Gates **1–3 Ready**, Gates **4–9 Pending** |
+| [qwon_m3_model_hosting_checksum_memo.md](./qwon_m3_model_hosting_checksum_memo.md) | **M3 Gate 1–2 evidence** — hosting / checksum (**Ready**) |
+| [qwon_m3_model_distribution_compliance_memo.md](./qwon_m3_model_distribution_compliance_memo.md) | **M3 Gate 3 evidence** — license / redistribution / export (**Ready**) |
 | [qwon_m3_storage_integrity_memo.md](./qwon_m3_storage_integrity_memo.md) | **M3 Gate 4–5 evidence** — storage budget / partial download integrity (Pending) |
 | [qwon_m3_network_device_expectation_memo.md](./qwon_m3_network_device_expectation_memo.md) | **M3 Gate 6–7 evidence** — network disclosure / Wang–Matisse expectation (Pending) |
 | [qwon_m3_rollback_release_gate_memo.md](./qwon_m3_rollback_release_gate_memo.md) | **M3 Gate 8–9 evidence** — Mac+USB rollback / Build `4` release gate (Pending) |

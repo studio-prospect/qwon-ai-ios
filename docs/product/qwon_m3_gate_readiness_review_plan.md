@@ -1,8 +1,8 @@
 # QWON — M3 Gate Readiness Review Plan
 
-**Last updated:** 2026-06-05 (Batch A–D review documented — all gates Pending)
-**Status:** **Review plan only** — **not** gate Ready sign-off, **not** M3 implementation approval, **not** Build `4` approval.
-**Purpose:** Define **review order**, **owners**, **required evidence**, and **exit criteria** for moving M3 checklist Gates **1–9** from **Pending** to **Ready**. Evidence memos exist ([#91](https://github.com/studio-prospect/qwon-ai-ios/pull/91)–[#95](https://github.com/studio-prospect/qwon-ai-ios/pull/95)); this plan does **not** mark any gate **Ready**.
+**Last updated:** 2026-06-06 (Batch A Gates 1–3 Ready; Gates 4–9 Pending)
+**Status:** **Review plan** — Batch A / Gates **1–3** Ready sign-off recorded; **not** M3 implementation approval, **not** Build `4` approval.
+**Purpose:** Define **review order**, **owners**, **required evidence**, and **exit criteria** for moving M3 checklist Gates **1–9** from **Pending** to **Ready**. Evidence memos exist ([#91](https://github.com/studio-prospect/qwon-ai-ios/pull/91)–[#95](https://github.com/studio-prospect/qwon-ai-ios/pull/95)); Gates **4–9** remain **Pending**.
 
 Related: [M3 readiness checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Answer intake ledger](./qwon_m3_gate_answer_intake.md) · [Batch A external questionnaire](./qwon_m3_batch_a_external_questionnaire.md) · [Queue — M3 status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
 
@@ -12,7 +12,8 @@ Related: [M3 readiness checklist](./qwon_model_download_gguf_ux_plan.md#m3-readi
 
 | Field | Value |
 | --- | --- |
-| **Gates 1–9** | Evidence memos linked — **all Pending** |
+| **Gates 1–3** | **Ready** — Batch A sign-off recorded 2026-06-06 |
+| **Gates 4–9** | Evidence memos linked — **Pending** |
 | **M3 in-app download spike** | **Not approved** |
 | **Build `4` / TestFlight upload / tag / version bump** | **Not approved** |
 | **Active TestFlight** | **QWON `0.1.0 (3)`** |
@@ -41,7 +42,7 @@ Related: [M3 readiness checklist](./qwon_model_download_gguf_ux_plan.md#m3-readi
 | **C** | 6–7 | Network disclosure, device tiers | **3rd** | [Network + device expectation](./qwon_m3_network_device_expectation_memo.md) |
 | **D** | 8–9 | Rollback path, release gate | **4th** | [Rollback + release gate](./qwon_m3_rollback_release_gate_memo.md) |
 
-**All batches:** current disposition **Pending** — this plan does **not** change checklist rows.
+**Current disposition:** Batch **A** / Gates **1–3** are **Ready**; B–D / Gates **4–9** remain **Pending**.
 
 ---
 
@@ -90,9 +91,34 @@ Related: [M3 readiness checklist](./qwon_model_download_gguf_ux_plan.md#m3-readi
 
 | Field | Value |
 | --- | --- |
-| **Status** | **Pending** |
-| **Ready?** | **No** |
-| **Batch A review (docs-only)** | **Documented** — [2026-06-05 session](#batch-a-review-session-2026-06-05) — open items + Product/legal questions; **does not** mark Ready |
+| **Status** | **Ready** |
+| **Ready?** | **Yes** — Gates **1–3** only |
+| **Batch A review (docs-only)** | **Documented** — [2026-06-05 session](#batch-a-review-session-2026-06-05) identified open items; [2026-06-06 sign-off](#batch-a-ready-sign-off-2026-06-06) records closure |
+
+## Batch A Ready sign-off (2026-06-06)
+
+**Decision:** Gates **1–3** are **Ready** for M3 readiness tracking.
+
+**Scope:** Hosting source / ownership, checksum + exact byte size, and license / redistribution / export-compliance direction for the selected QWON-hosted Qwen2.5 `Q4_K_M` GGUF artifact.
+
+**Evidence:** [Answer intake ledger](./qwon_m3_gate_answer_intake.md#batch-a--gates-13-hosting--checksum--compliance) Q-A-01…Q-A-13; [artifact record details](./qwon_m3_gate_answer_intake.md#batch-a-artifact-record-details-2026-06-06); [hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md); [compliance memo](./qwon_m3_model_distribution_compliance_memo.md).
+
+| Gate | Ready basis |
+| --- | --- |
+| **1** | Product is the distribution decision owner; Release Engineering owns QWON object storage/CDN operations; QWON-hosted mirror is selected; third-party Hugging Face URL remains traceability/dev ops only. |
+| **2** | QWON-hosted object identity, exact byte size `397808192`, SHA-256 `6eb923e7d26e9cea28811e1a8e852009b21242fb157b26149d3b188f3a8c8653`, and legacy USB `present-unverified` policy are recorded. Download temp/atomic mechanics remain Gate **5**. |
+| **3** | Legal/Product approved the Apache-2.0 direction, conditional QWON-hosted bartowski `Q4_K_M` mirror, attribution requirement, HF traceability-only stance, and ASC/export re-check before product-facing download builds. |
+
+### Non-approvals
+
+| Item | Status |
+| --- | --- |
+| **Gates 4–9** | **Pending** |
+| **M3 in-app download spike** | **Not approved** |
+| **Swift / downloader / storage implementation** | **Not approved** |
+| **Build `4` / TestFlight upload / tag / version bump** | **Not approved** |
+
+**Next docs-only step:** Batch **B** / Gates **4–5** answer intake and Ready review may proceed using Gate **2** byte size and SHA-256 as inputs.
 
 ---
 
@@ -100,9 +126,9 @@ Related: [M3 readiness checklist](./qwon_model_download_gguf_ux_plan.md#m3-readi
 
 **Type:** Docs-only readiness review — **not** gate Ready sign-off, **not** legal approval, **not** hosting/checksum final values.
 
-**Outcome:** Gate **1–3** open items **concretized** below. Checklist rows remain **Pending**. Next step: Product/legal answers → future **Batch A Ready sign-off** docs-only PR.
+**Outcome:** Gate **1–3** open items were **concretized** below. They were later answered in the [answer intake ledger](./qwon_m3_gate_answer_intake.md) and closed by [Batch A Ready sign-off](#batch-a-ready-sign-off-2026-06-06). This section remains as historical review evidence.
 
-Related evidence: [Hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md#batch-a-review-status-2026-06-05) · [Compliance memo](./qwon_m3_model_distribution_compliance_memo.md#batch-a-review-status-2026-06-05)
+Related evidence: [Hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md#batch-a-review-status-2026-06-06) · [Compliance memo](./qwon_m3_model_distribution_compliance_memo.md#batch-a-review-status-2026-06-06)
 
 ### Gate 1 — Open items (hosting / URL ownership)
 
@@ -117,7 +143,7 @@ Related evidence: [Hosting + checksum memo](./qwon_m3_model_hosting_checksum_mem
 | G1-7 | **Third-party HF as in-app target** | **Not approved** today | Explicit Product + Gate 3 legal yes/no |
 | G1-8 | **Availability / SLA expectation** | None for M3 spike | Product defines minimum (best-effort vs contracted CDN) |
 
-**Gate 1 status:** **Pending** — **not Ready**
+**Gate 1 status:** **Ready** — closed by [Batch A Ready sign-off](#batch-a-ready-sign-off-2026-06-06)
 
 ### Gate 2 — Open items (SHA-256 / byte size / verification)
 
@@ -132,7 +158,7 @@ Related evidence: [Hosting + checksum memo](./qwon_m3_model_hosting_checksum_mem
 | G2-7 | **Mismatch with M2 USB-placed files** | M1 **Present (unverified)** today — no hash in alpha | Whether legacy unverified files remain valid or require re-download |
 | G2-8 | **Source label for Diagnostics** | Gate 2 memo mentions metadata — no user-facing label | Product-approved label (not raw HF URL) |
 
-**Gate 2 status:** **Pending** — **not Ready**
+**Gate 2 status:** **Ready** — exact hosted-object byte size and SHA-256 recorded; download temp/atomic mechanics remain Gate **5**
 
 ### Gate 3 — Open items (compliance — Product/legal confirmation incomplete)
 
@@ -148,7 +174,7 @@ Related evidence: [Hosting + checksum memo](./qwon_m3_model_hosting_checksum_mem
 | G3-8 | **Hugging Face ToS** | Not reviewed for embedded/production URL fetch | Legal review if G1-7 selects HF |
 | G3-9 | **Regional (e.g. France) declarations** | Build `2` export resubmission history | Ops/Product re-check if network download ships |
 
-**Gate 3 status:** **Pending** — **needs product/legal confirmation** — **not Ready**
+**Gate 3 status:** **Ready** — Product/legal direction recorded; ASC/export re-check before product-facing download build remains Gate **9** / release work
 
 ### Product / legal question list (Batch A — answer to unblock Ready sign-off)
 
@@ -176,20 +202,20 @@ Product and legal should answer **in writing** (future memo revision or sign-off
 12. Does in-app model download change **export compliance** or **App Store privacy label** answers (G3-5, G3-6)?
 13. If Gate 1 selects HF URL: any **Hugging Face ToS** constraints for production app fetch (G3-8)?
 
-### Batch A review exit (not yet met)
+### Batch A review exit (met by 2026-06-06 sign-off)
 
 | Criterion | Met? |
 | --- | --- |
 | Open items documented | **Yes** (this section) |
 | Product/legal questions issued | **Yes** (above) |
-| Gates 1–3 marked **Ready** | **No** |
-| Final hosting URL decided | **No** |
-| Final SHA-256 / byte size published | **No** |
-| Legal sign-off recorded | **No** |
+| Gates 1–3 marked **Ready** | **Yes** — [Batch A Ready sign-off](#batch-a-ready-sign-off-2026-06-06) |
+| Final hosting object decided | **Yes** — QWON S3 bucket + object key recorded in [answer intake](./qwon_m3_gate_answer_intake.md#batch-a-artifact-record-details-2026-06-06) |
+| Final SHA-256 / byte size published | **Yes** — `397808192` bytes; `6eb923e7d26e9cea28811e1a8e852009b21242fb157b26149d3b188f3a8c8653` |
+| Legal sign-off recorded | **Yes** — [legal answer details](./qwon_m3_gate_answer_intake.md#batch-a-legal-answer-details-2026-06-05) |
 | M3 spike approved | **No** |
 | Build `4` approved | **No** |
 
-**Next docs-only step:** Batch **B** review session (Gates 4–5) may proceed in parallel **only for planning** — Batch B **Ready** still blocked on Gate 2 final byte size. Recommended order: obtain Batch A answers → Batch A Ready sign-off PR → then Batch B review.
+**Next docs-only step:** Batch **B** / Gates **4–5** answer intake and Ready review may proceed. Gate **4** threshold math and Gate **5** verification policy must use the Gate **2** hosted-object byte size and SHA-256 above. Gates **4–9** remain **Pending**.
 
 ---
 
@@ -237,7 +263,7 @@ Product and legal should answer **in writing** (future memo revision or sign-off
 | **Status** | **Pending** |
 | **Ready?** | **No** |
 | **Batch B review (docs-only)** | **Documented** — [2026-06-05 session](#batch-b-review-session-2026-06-05) — open items + Product/Codex questions; **does not** mark Ready |
-| **Batch A blocked** | Gate **4–5 Ready** blocked on Gate **2** final byte size (and Gate **1** artifact) until Batch A sign-off |
+| **Batch A dependency** | **Resolved** — Gate **2** final byte size and SHA-256 are available; Batch **B** still needs its own answers |
 
 ---
 
@@ -245,7 +271,7 @@ Product and legal should answer **in writing** (future memo revision or sign-off
 
 **Type:** Docs-only readiness review — **not** gate Ready sign-off, **not** final threshold/temp path decisions, **not** downloader implementation.
 
-**Outcome:** Gate **4–5** open items **concretized** below. Checklist rows remain **Pending**. Several items are **Batch A blocked** until Gate **2** publishes exact byte size.
+**Outcome:** Gate **4–5** open items **concretized** below. Checklist rows remain **Pending**. Former Batch A dependencies now have Gate **2** byte size and SHA-256 inputs, but Batch B policy answers are still required.
 
 Related evidence: [Storage + integrity memo — Batch B status](./qwon_m3_storage_integrity_memo.md#batch-b-review-status-2026-06-05)
 
@@ -253,7 +279,7 @@ Related evidence: [Storage + integrity memo — Batch B status](./qwon_m3_storag
 
 | # | Open item | Current state | Blocks Ready until |
 | --- | --- | --- | --- |
-| G4-1 | **Minimum free-space threshold (bytes)** | **Undecided** — planning range ~379–400 MB artifact only | **Batch A blocked:** Gate **2** exact byte size + temp peak model |
+| G4-1 | **Minimum free-space threshold (bytes)** | **Undecided** — Gate **2** byte size is `397808192`; temp peak model and margin still unresolved | Batch B threshold math |
 | G4-2 | **Pre-download sandbox capacity check** | Required in principle — **API choice undecided** (`volumeAvailableCapacityForImportantUsage` vs equivalent) | Codex documents check timing (before URLSession start) |
 | G4-3 | **Temp peak size assumption** | Undecided: ~1× artifact (temp then replace) vs ~2× (temp + existing partial) | Gate **5** temp strategy; feeds G4-1 math |
 | G4-4 | **Safety margin above artifact + peak** | Fixed MB vs % vs tier-specific — **undecided** | Product policy |
@@ -263,7 +289,7 @@ Related evidence: [Storage + integrity memo — Batch B status](./qwon_m3_storag
 | G4-8 | **Re-check after failed download** | Undecided whether to re-query capacity on retry | Codex + Product |
 | G4-9 | **Lookup order / final path** | `Documents/Models/prexus-local-mvp.gguf` — **unchanged** | Confirm no schema migration in M3 spike |
 
-**Gate 4 status:** **Pending** — **not Ready** — **Batch A blocked** on G4-1 until Gate **2** final byte size
+**Gate 4 status:** **Pending** — **not Ready** — Gate **2** size is available; threshold policy still unanswered
 
 ### Gate 5 — Open items (partial download / integrity)
 
@@ -272,7 +298,7 @@ Related evidence: [Storage + integrity memo — Batch B status](./qwon_m3_storag
 | G5-1 | **Temp filename / path** | Examples only (`.part`, `.downloading`, `tmp/`) — **not selected** | Product/Codex pick one strategy |
 | G5-2 | **Runtime must not load temp file** | Required direction — enforcement mechanism **undecided** | Codex: placement resolver ignores non-final names |
 | G5-3 | **Atomic move to final path** | Required direction — `rename` vs copy+delete **undecided** | Codex spec; must land at `prexus-local-mvp.gguf` |
-| G5-4 | **Verify before promote** | Size + SHA-256 on temp — **Batch A blocked:** Gate **2** values | Gate **2** Ready |
+| G5-4 | **Verify before promote** | Size + SHA-256 values available from Gate **2**; temp verification timing still undecided | Batch B verification policy |
 | G5-5 | **Resume vs clean retry** | **Undecided** — full restart vs HTTP Range vs URLSession background | Product scope for M3 spike; Gate **1** server support if Range |
 | G5-6 | **Partial file cleanup on failure** | Delete temp vs quarantine — **undecided** | Codex policy; must not leave final path at partial size |
 | G5-7 | **Corrupt hash mismatch handling** | Fallback without crash — **undecided** quarantine vs delete | Align with [integrity states](./qwon_model_download_gguf_ux_plan.md#integrity-and-storage-requirements) |
@@ -280,7 +306,7 @@ Related evidence: [Storage + integrity memo — Batch B status](./qwon_m3_storag
 | G5-9 | **Diagnostics mapping — `partial`** | Direction in memo — **no final field names/copy** | Product + Codex strings |
 | G5-10 | **Diagnostics mapping — `corrupt`** | `primary_failure` / `fallback_reason` alignment **undecided** for download failures | Codex spec tied to Gate **7** |
 | G5-11 | **Settings → Local Runtime in-progress UI** | Must not show “installed” during download — **copy undecided** | Gate **6** overlap; Product |
-| G5-12 | **M2 USB-placed unverified files** | M1 **Present (unverified)** today — **Batch A blocked:** Gate **2-7** legacy policy | Batch A Gate **2** answer |
+| G5-12 | **M2 USB-placed unverified files** | M1 **Present (unverified)** remains supported; silent overwrite is disallowed; replacement consent/recovery details still unresolved | Batch B replacement policy |
 
 **Gate 5 status:** **Pending** — **not Ready**
 
@@ -305,7 +331,7 @@ Answer **in writing** in a future sign-off PR. Do **not** publish final threshol
 10. What **Diagnostics / Settings strings** map to `partial`, `corrupt`, and in-progress states (G5-9, G5-10, G5-11)?
 11. May a **new download** replace an existing **USB-placed unverified** GGUF without explicit user consent (G5-12)? *(Batch A Gate 2-7 dependency)*
 
-**Batch A blocked items (do not finalize in Batch B alone):** G4-1 threshold math, G5-4 verify constants, G5-12 legacy file policy — require Gate **2** (and Gate **1** artifact) from Batch A sign-off.
+**Batch A inputs now available:** G4-1 threshold math may use byte size `397808192`; G5-4 may use SHA-256 `6eb923e7d26e9cea28811e1a8e852009b21242fb157b26149d3b188f3a8c8653`; G5-12 starts from the recorded legacy USB policy. Batch **B** still must answer its own threshold, temp path, retry, cleanup, Diagnostics, and replacement-consent questions.
 
 ### Batch B review exit (not yet met)
 
@@ -316,7 +342,7 @@ Answer **in writing** in a future sign-off PR. Do **not** publish final threshol
 | Gates 4–5 marked **Ready** | **No** |
 | Final minimum free-space threshold | **No** |
 | Final temp filename/path | **No** |
-| Gate 2 byte size available | **No** — **Batch A blocked** |
+| Gate 2 byte size available | **Yes** — `397808192` bytes |
 | M3 spike approved | **No** |
 | Build `4` approved | **No** |
 
@@ -414,7 +440,7 @@ Related evidence: [Network + device memo — Batch C status](./qwon_m3_network_d
 | G7-9 | **Chat fallback strip copy** | Draft for Wang missing model — **not approved** | Product |
 | G7-10 | **Settings model status during download** | Must not show “installed” — overlaps G5-11 — **Gate 5 blocked** | Gate **5** + Product |
 | G7-11 | **M2 Place GGUF via Mac coexistence** | Must remain visible — copy priority **undecided** | Product ([Gate 8](./qwon_m3_rollback_release_gate_memo.md)) |
-| G7-12 | **Verified vs present-unverified copy** | Ties to Gate **2** verification — **Batch A blocked** | Gate **2** Ready |
+| G7-12 | **Verified vs present-unverified copy** | Gate **2** values available; final user-facing copy still tied to Gate **5** integrity state mapping | Gate **7** copy policy |
 
 **Gate 7 status:** **Pending** — **not Ready**
 
@@ -512,7 +538,7 @@ Answer **in writing** in a future sign-off PR. **Do not** treat memo drafts as f
 
 **Type:** Docs-only readiness review — **not** gate Ready sign-off, **not** Build `4` approval, **not** TestFlight upload / tag / version bump.
 
-**Outcome:** Gate **8–9** open items **concretized** below. Checklist rows remain **Pending**. Completes **A–D review documentation** for all nine gates — **none Ready**.
+**Outcome:** Gate **8–9** open items **concretized** below. Checklist rows remain **Pending** for Gates **8–9**. Batch **A** / Gates **1–3** are now Ready; Gates **4–9** remain Pending.
 
 Related evidence: [Rollback + release memo — Batch D status](./qwon_m3_rollback_release_gate_memo.md#batch-d-review-status-2026-06-05)
 
@@ -586,7 +612,7 @@ Answer **in writing** in future sign-off PRs. **Do not** approve Build `4` or up
 | Build `4` / TestFlight approved | **No** |
 | M3 spike approved | **No** |
 
-**Next docs-only step:** Share the [Batch A external questionnaire](./qwon_m3_batch_a_external_questionnaire.md) with Product/legal stakeholders, then record stakeholder answers in the [M3 gate answer intake ledger](./qwon_m3_gate_answer_intake.md) (**real answers only** — separate PR per batch or topic). After answers accumulate, open **gate Ready sign-off PR(s)** per batch — still docs-only, still **not** implementation. M3 spike remains **forbidden** until **all nine** gates Ready.
+**Next docs-only step:** Record real Batch **B** answers (Q-B-01…Q-B-11) in the [M3 gate answer intake ledger](./qwon_m3_gate_answer_intake.md), using Gate **2** byte size and SHA-256 where needed. After all Batch B answers exist, open a Gates **4–5** Ready sign-off PR — still docs-only, still **not** implementation. M3 spike remains **forbidden** until **all nine** gates Ready.
 
 ---
 
