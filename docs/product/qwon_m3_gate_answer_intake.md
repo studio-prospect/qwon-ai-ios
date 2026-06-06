@@ -1,7 +1,7 @@
 # QWON — M3 Gate Answer Intake Ledger
 
-**Last updated:** 2026-06-06
-**Status:** **Intake ledger** — Batch A answers **Q-A-01…Q-A-13**, Batch B answers **Q-B-01…Q-B-11**, and Batch C answers **Q-C-01…Q-C-14** recorded. Batch A / Gates **1–3**, Batch B / Gates **4–5**, and Batch C / Gates **6–7** have separate Ready sign-offs; Gates **8–9** remain Pending. **Not** M3 implementation approval, **not** Build `4` approval.
+**Last updated:** 2026-06-07
+**Status:** **Intake ledger** — Batch A answers **Q-A-01…Q-A-13**, Batch B answers **Q-B-01…Q-B-11**, Batch C answers **Q-C-01…Q-C-14**, and Batch D answers **Q-D-01…Q-D-11** recorded. Gates **1–9** have separate Ready / disposition sign-offs. **Not** M3 implementation approval, **not** Build `4` approval.
 **Purpose:** Track **Product / Codex / Legal / Release Engineering** answers to [Batch A–D review questions](./qwon_m3_gate_readiness_review_plan.md) and record what each answer **unblocks** toward a future **gate Ready sign-off PR**.
 
 Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) · [Batch A external questionnaire](./qwon_m3_batch_a_external_questionnaire.md) · [Gate 2 artifact finalization runbook](./qwon_m3_gate2_artifact_finalization_runbook.md) · [M3 checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Queue — M3 status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05)
@@ -25,7 +25,7 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | **Gates 1–3** | **Ready** — Batch A Ready sign-off recorded 2026-06-06 |
 | **Gates 4–5** | **Ready** — Batch B Ready sign-off recorded 2026-06-06 |
 | **Gates 6–7** | **Ready** — Batch C Ready sign-off recorded 2026-06-06 |
-| **Gates 8–9** | **Pending** — this ledger does not approve downstream release / rollback gates |
+| **Gates 8–9** | **Ready** — Batch D Ready / disposition sign-off recorded 2026-06-07; Build `4` remains **not approved** |
 
 ---
 
@@ -77,7 +77,7 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | **Q-A-04** | Reproducibility pinning direction: **QWON object key/version ID + SHA-256 + exact byte size**, to be recorded in a later Gate **2** sign-off PR after the hosted object is finalized. |
 | **Q-A-05** | Product stance: **No third-party Hugging Face URL for product/tester-facing builds unless Legal explicitly approves HF URL use**. Hugging Face may remain a traceability/source reference, not the default product URL. |
 
-**Ready sign-off:** Gate **1** is **Ready** as part of Batch A sign-off. Gates **4–5** are Ready as part of Batch B sign-off, Gates **6–7** are Ready as part of Batch C sign-off, and Gates **8–9** remain **Pending**.
+**Ready sign-off:** Gate **1** is **Ready** as part of Batch A sign-off. Gates **4–5** are Ready as part of Batch B sign-off, Gates **6–7** are Ready as part of Batch C sign-off, and Gates **8–9** are Ready as part of Batch D sign-off.
 
 ### Batch A artifact record details (2026-06-06)
 
@@ -267,8 +267,8 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | **A** | 13 | **13** | 1–3 — **Ready** |
 | **B** | 11 | **11** | 4–5 — **Ready** |
 | **C** | 14 | **14** | 6–7 — **Ready** |
-| **D** | 11 | **11** | 8–9 — **Pending** |
-| **Total** | **49** | **49** | Gates **1–7 Ready**; Gates **8–9 Pending** |
+| **D** | 11 | **11** | 8–9 — **Ready** |
+| **Total** | **49** | **49** | Gates **1–9 Ready**; M3 spike plan still separate |
 
 ---
 
@@ -279,10 +279,10 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | 1 | Stakeholder provides **written** answer | Product / Legal / Codex / RE |
 | 2 | **Answer intake PR** — update row(s) in this ledger only | Docs agent |
 | 3 | When **all** questions for a batch are **Answered**, open **batch Ready sign-off PR** | Product + Codex |
-| 4 | Sign-off PR updates checklist row(s) to **Ready** with linked evidence. Batches **A/B/C** are complete; next candidate is Batch **D** Ready / disposition sign-off after Q-D answers. | Product + Codex |
+| 4 | Sign-off PR updates checklist row(s) to **Ready** with linked evidence. Batches **A/B/C/D** are complete. | Product + Codex |
 | 5 | When **all nine** gates **Ready**, Codex may scope **M3 spike plan** | Codex |
 
-**M3 spike** and **Build `4`** remain **not approved** until step 5 and separate Gate **9** / Product release decisions respectively.
+**M3 implementation** remains **not approved** until Codex scopes and Product/Codex approves a separate spike plan. **Build `4`** remains **not approved** until a separate Product release decision.
 
 ---
 
@@ -297,7 +297,7 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | Batch A Legal answers Q-A-09…Q-A-13 | M3 implementation approval |
 | Batch B Product/Codex answers Q-B-01…Q-B-11 | M3 implementation approval |
 | Batch C Product/Codex answers Q-C-01…Q-C-14 | M3 implementation approval |
-| Batch D Product/Codex/RE answers Q-D-01…Q-D-11 | Gate Ready sign-off |
+| Batch D Product/Codex/RE answers Q-D-01…Q-D-11 | M3 implementation approval |
 | Workflow for future answer PRs | Gate Ready sign-off |
 | Ready impact mapping | Final URL / SHA / legal / UI / release values |
-| Gates **8–9 Pending** | Swift, spike, TestFlight upload |
+| Gates **1–9 Ready** | Swift implementation, TestFlight upload, Build `4` approval |
