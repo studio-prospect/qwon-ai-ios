@@ -1,7 +1,7 @@
 # QWON — M3 Gate Answer Intake Ledger
 
-**Last updated:** 2026-06-05
-**Status:** **Intake ledger only** — Batch A Product answers **Q-A-01…Q-A-05** and Legal answers **Q-A-09…Q-A-13 recorded**, **no gate Ready sign-off**, **not** M3 implementation approval, **not** Build `4` approval.
+**Last updated:** 2026-06-06
+**Status:** **Intake ledger only** — Batch A Product answers **Q-A-01…Q-A-05**, Codex/Product legacy USB answer **Q-A-08**, and Legal answers **Q-A-09…Q-A-13 recorded**, **no gate Ready sign-off**, **not** M3 implementation approval, **not** Build `4` approval.
 **Purpose:** Track **Product / Codex / Legal / Release Engineering** answers to [Batch A–D review questions](./qwon_m3_gate_readiness_review_plan.md) and record what each answer **unblocks** toward a future **gate Ready sign-off PR**.
 
 Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) · [Batch A external questionnaire](./qwon_m3_batch_a_external_questionnaire.md) · [M3 checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Queue — M3 status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05)
@@ -50,7 +50,7 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | Q-A-05 | 1, 3 | Product, Legal | Answered | [Product answer details](#batch-a-product-answer-details-2026-06-05) | G1-7; Q-A-13 | Gate **1** Ready sign-off | This PR |
 | Q-A-06 | 2 | Product, Codex | Unanswered | — | Q-B-01; G4-1, G5-4; Batch B threshold | Gate **2** Ready sign-off | — |
 | Q-A-07 | 2 | Product, Codex | Unanswered | — | G5-4; verify-before-promote | Gate **2** Ready sign-off | — |
-| Q-A-08 | 2 | Product, Codex | Unanswered | — | G5-12; Q-B-11; legacy USB files | Gate **2** Ready sign-off | — |
+| Q-A-08 | 2 | Product, Codex | Answered | [Legacy USB answer details](#batch-a-legacy-usb-answer-details-2026-06-06) | G5-12; Q-B-11; legacy USB files | Gate **2** Ready sign-off | This PR |
 | Q-A-09 | 3 | Legal | Answered | [Legal answer details](#batch-a-legal-answer-details-2026-06-05) | Q-A-10, G1-7 | Gate **3** Ready sign-off | This PR |
 | Q-A-10 | 3 | Legal | Answered | [Legal answer details](#batch-a-legal-answer-details-2026-06-05) | G1 hosting model; G3-2 | Gate **3** Ready sign-off | This PR |
 | Q-A-11 | 3 | Legal | Answered | [Legal answer details](#batch-a-legal-answer-details-2026-06-05) | G3-3, G3-4 | Gate **3** Ready sign-off | This PR |
@@ -72,7 +72,18 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | **Q-A-04** | Reproducibility pinning direction: **QWON object key/version ID + SHA-256 + exact byte size**, to be recorded in a later Gate **2** sign-off PR after the hosted object is finalized. |
 | **Q-A-05** | Product stance: **No third-party Hugging Face URL for product/tester-facing builds unless Legal explicitly approves HF URL use**. Hugging Face may remain a traceability/source reference, not the default product URL. |
 
-**Remaining dependencies:** Q-A-06…Q-A-08 still need Gate **2** byte-size/checksum decisions. Gates **1–3** remain **Pending** until a separate Batch A Ready sign-off PR.
+**Remaining dependencies:** Q-A-06…Q-A-07 still need Gate **2** byte-size/checksum decisions. Gates **1–3** remain **Pending** until a separate Batch A Ready sign-off PR.
+
+### Batch A legacy USB answer details (2026-06-06)
+
+**Source:** Codex/Product policy decision in Codex conversation, 2026-06-06.
+**Scope:** Gate **2** legacy USB policy for Q-A-08 only. This preserves the M2 manual placement contract while M3 remains gated. It does **not** mark Gate **2** Ready, does **not** approve M3 spike, and does **not** approve Build `4`.
+
+| Question ID | Answer |
+| --- | --- |
+| **Q-A-08** | Existing USB-placed `Documents/Models/prexus-local-mvp.gguf` files remain supported as **present-unverified** until a user or support workflow explicitly replaces them. M3 download must **not** silently overwrite an existing USB-placed GGUF. A future verified download may replace the file only through explicit user action or a documented support/recovery flow. If verification fails, the app should keep or return to the M2 **Place GGUF via Mac** rollback path instead of blocking manual recovery. |
+
+**Remaining dependencies:** Q-A-06 and Q-A-07 still need final byte size and SHA-256 values before Gate **2** can proceed to Ready sign-off.
 
 ### Batch A legal answer details (2026-06-05)
 
@@ -87,7 +98,7 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | **Q-A-12** | Product / Legal / App Store Connect re-check is required before any TestFlight or product-facing build with in-app model download. App HTTPS/TLS answers and model weight distribution should be treated as separate compliance surfaces; existing export/privacy answers should not be assumed sufficient. |
 | **Q-A-13** | Hugging Face URLs may remain in docs for traceability / source reference unless a ToS issue is identified later. Hugging Face URLs should not be the product-facing download endpoint unless explicitly approved for that use. QWON-owned hosting remains the recommended product path. |
 
-**Remaining dependencies:** Gate **2** values (Q-A-06…Q-A-08) are still required before Batch A can proceed to a Ready sign-off PR.
+**Remaining dependencies:** Gate **2** values (Q-A-06…Q-A-07) are still required before Batch A can proceed to a Ready sign-off PR.
 
 ---
 
@@ -158,11 +169,11 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 
 | Batch | Questions | Answered | Gates |
 | --- | --- | --- | --- |
-| **A** | 13 | **10** | 1–3 — **Pending** |
+| **A** | 13 | **11** | 1–3 — **Pending** |
 | **B** | 11 | **0** | 4–5 — **Pending** |
 | **C** | 14 | **0** | 6–7 — **Pending** |
 | **D** | 11 | **0** | 8–9 — **Pending** |
-| **Total** | **49** | **10** | **All Pending** |
+| **Total** | **49** | **11** | **All Pending** |
 
 ---
 
@@ -186,6 +197,7 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) �
 | --- | --- |
 | Question ID ledger (49 rows) | Fabricated answers |
 | Batch A Product answers Q-A-01…Q-A-05 | Gate Ready sign-off |
+| Batch A Codex/Product legacy USB answer Q-A-08 | Gate Ready sign-off |
 | Batch A Legal answers Q-A-09…Q-A-13 | Gate Ready sign-off |
 | Workflow for future answer PRs | Gate Ready sign-off |
 | Ready impact mapping | Final URL / SHA / legal / UI / release values |
