@@ -106,12 +106,13 @@ Per [integrity and storage requirements](./qwon_model_download_gguf_ux_plan.md#i
 
 **Partial download, resume, temp filename, and atomic move** belong to **Gate 5** — referenced here only; not decided in this memo.
 
-### Final checksum — not published
+### Final checksum — recorded for intake, not Ready sign-off
 
 | Item | Status |
 | --- | --- |
-| **Published SHA-256 for `prexus-local-mvp.gguf`** | **Not established** — do **not** treat any ops-computed hash as final until Product/Codex confirms the Gate 1 source artifact |
-| **Published expected byte size for M3 verification** | **Not established** |
+| **Published SHA-256 for `prexus-local-mvp.gguf`** | `6eb923e7d26e9cea28811e1a8e852009b21242fb157b26149d3b188f3a8c8653` — recorded in [answer intake ledger](./qwon_m3_gate_answer_intake.md#batch-a-artifact-record-details-2026-06-06) |
+| **Published expected byte size for M3 verification** | `397808192` bytes — recorded in [answer intake ledger](./qwon_m3_gate_answer_intake.md#batch-a-artifact-record-details-2026-06-06) |
+| **Hosted object identity** | `s3://qwon-094469122222-ap-northeast-1-an/models/qwen2.5-0.5b-instruct/q4_k_m/prexus-local-mvp.gguf`; ETag `"9027dfcbb8ab4852ad705c35c6c3ce29-48"` |
 | **In-app verification policy** | **Not approved** |
 
 ### Observed file sizes (ops evidence — not Gate 2 final)
@@ -181,14 +182,14 @@ Store ops hash/size in `~/QWON-alpha-evidence/` if needed; **do not commit** GGU
 
 Full item list: [G1-1 … G1-8](./qwon_m3_gate_readiness_review_plan.md#gate-1--open-items-hosting--url-ownership)
 
-### Gate 2 — unresolved (summary)
+### Gate 2 — intake answered, Ready still pending
 
 | Topic | Status |
 | --- | --- |
-| Final exact byte size | **Not established** (ops range only) |
-| Published SHA-256 | **Not published** |
+| Final exact byte size | `397808192` bytes — recorded |
+| Published SHA-256 | `6eb923e7d26e9cea28811e1a8e852009b21242fb157b26149d3b188f3a8c8653` — recorded |
 | Verification policy | **Undecided** |
-| Blocked by Gate 1 artifact | **Yes** |
+| Gate Ready sign-off | **Pending** |
 
 Full item list: [G2-1 … G2-8](./qwon_m3_gate_readiness_review_plan.md#gate-2--open-items-sha-256--byte-size--verification)
 
