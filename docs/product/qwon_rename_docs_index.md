@@ -58,7 +58,7 @@
 | **Should we open UI-2 (onboarding structure)?** | **Not now** — **defer / not opened** · [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) |
 | **Should I rename a PREXUS string?** | [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md) — default **no** unless listed as safe or product opens a scoped migration PR |
 | **Should we ship build `4`?** | **Not approved** — build **`3` stable alpha**; feedback **closed** · Gate 9 separate from M3 spike · [intake close](./qwon_text_alpha_feedback_intake.md#feedback-window-close-2026-06-03) |
-| **Can we start M3 in-app download?** | **No** — Gates **6–9 Pending** · [M3 readiness status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05) · next: Batch C answer intake |
+| **Can we start M3 in-app download?** | **No** — Gates **6–9 Pending** · [M3 readiness status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05) · next: Gates 6–7 Ready sign-off or Batch D answer intake |
 | **Which app / Bundle ID is active?** | [QWON bundle memo](./qwon_bundle_id_decision_memo.md) + [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) — QWON `6775685841`; PREXUS `6775110218` is historical only |
 | **Can I edit PREXUS historical docs?** | **No** — [PREXUS alpha index](./qwen_text_only_alpha_docs_index.md); append-only QWON docs or link; never rewrite frozen rows |
 | **Where is Phase 4 implementation detail?** | [Phase 4 target rename plan](./qwon_phase4_target_rename_plan.md) PR table + [surface audit](./qwon_phase4_rename_surface_audit.md) |
@@ -87,7 +87,7 @@
 | [qwon_m3_model_hosting_checksum_memo.md](./qwon_m3_model_hosting_checksum_memo.md) | **M3 Gate 1–2 evidence** — hosting / checksum (**Ready**) |
 | [qwon_m3_model_distribution_compliance_memo.md](./qwon_m3_model_distribution_compliance_memo.md) | **M3 Gate 3 evidence** — license / redistribution / export (**Ready**) |
 | [qwon_m3_storage_integrity_memo.md](./qwon_m3_storage_integrity_memo.md) | **M3 Gate 4–5 evidence** — storage budget / partial download integrity (**Ready**) |
-| [qwon_m3_network_device_expectation_memo.md](./qwon_m3_network_device_expectation_memo.md) | **M3 Gate 6–7 evidence** — network disclosure / Wang–Matisse expectation (Pending) |
+| [qwon_m3_network_device_expectation_memo.md](./qwon_m3_network_device_expectation_memo.md) | **M3 Gate 6–7 evidence** — network disclosure / Wang–Matisse expectation (answers recorded; Pending) |
 | [qwon_m3_rollback_release_gate_memo.md](./qwon_m3_rollback_release_gate_memo.md) | **M3 Gate 8–9 evidence** — Mac+USB rollback / Build `4` release gate (Pending) |
 | [qwon_ui_polish_onboarding_plan.md](./qwon_ui_polish_onboarding_plan.md) | **First post-alpha scoped plan** — UI-1 complete, [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) |
 

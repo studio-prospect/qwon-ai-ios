@@ -1,7 +1,7 @@
 # QWON — M3 Network Disclosure + Device Expectation Memo (Gates 6 & 7)
 
-**Last updated:** 2026-06-06 (Batch C review — Gates 6–7 still Pending; Gate 3/5 dependencies resolved)
-**Status:** **Investigation memo only** — **not** M3 implementation approval, **not** Gates 6/7 **Ready**, **not** Build `4` approval.
+**Last updated:** 2026-06-06 (Batch C answers recorded — Gates 6–7 still Pending)
+**Status:** **Evidence memo** — Batch C answers recorded; **not** M3 implementation approval, **not** Gates 6/7 **Ready**, **not** Build `4` approval.
 **Purpose:** Document open **privacy / network disclosure copy** (Gate 6) and **Wang / Matisse behavior expectation** (Gate 7) for a future **M3 in-app download** spike of `prexus-local-mvp.gguf`.
 
 Related: [M3 readiness checklist — Gates 6 & 7](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Batch C review](./qwon_m3_gate_readiness_review_plan.md#batch-c-review-session-2026-06-05) · [Settings / Diagnostics copy plan](./qwon_model_download_gguf_ux_plan.md#settings--diagnostics-copy-plan) · [Device expectations](./qwon_model_download_gguf_ux_plan.md#device-expectations) · [M2 guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement) · [Gate 3 compliance memo](./qwon_m3_model_distribution_compliance_memo.md) · [Gate 4/5 storage memo](./qwon_m3_storage_integrity_memo.md)
@@ -49,17 +49,17 @@ When M3 adds download UX, M2 **Place GGUF via Mac** remains ([Gate 8](./qwon_mod
 
 ## Gate 6 — Privacy / network disclosure copy
 
-### Requirements (directional — not Ready)
+### Requirements (answered direction — not Ready)
 
 | Requirement | Status |
 | --- | --- |
-| **Disclose network use** before model HTTPS fetch | **Required in principle** — exact copy **undecided** |
-| **No surprise background fetch** | **Required in principle** — user-initiated download only unless Product explicitly approves background transfer |
+| **Disclose network use** before model HTTPS fetch | **Answered direction** — disclose one-time ~400 MB model download before fetch |
+| **No surprise background fetch** | **Answered** — user-initiated foreground only for M3 |
 | **Local-first positioning** | Answers run on-device **after** model is installed; network is for **acquisition**, not every chat turn |
 | **Not offline-only claim** | Must **not** say “fully offline” or imply QWON never uses network if download exists |
-| **App Store privacy label** | **Undecided** — may need update when download ships; see [Gate 3 export/privacy angles](./qwon_m3_model_distribution_compliance_memo.md#app-store--testflight--export-compliance) |
-| **TestFlight tester notes** | **Undecided** — separate from in-app Settings copy |
-| **Settings / onboarding strings** | **Undecided** — candidate drafts below are **not approved** |
+| **App Store privacy label** | **Answered direction** — release-time ASC/privacy-label re-check required before any download build |
+| **TestFlight tester notes** | **Answered direction** — optional ~400 MB user-initiated local model download; Build `4` separately gated |
+| **Settings / onboarding strings** | **Answered direction** — Settings-first; no persistent first-launch onboarding by default |
 
 ### Surfaces to cover (when M3 exists)
 
@@ -71,9 +71,9 @@ When M3 adds download UX, M2 **Place GGUF via Mac** remains ([Gate 8](./qwon_mod
 | **Privacy policy / ASC** | Product/legal — not decided in this memo |
 | **Onboarding (if shown)** | Reuse Settings tone; avoid duplicate conflicting claims |
 
-### Candidate copy — **drafts only (not final UI approval)**
+### Candidate copy — **answered direction (not Swift approval)**
 
-> **Label:** All strings below are **investigation drafts**. Do **not** implement in Swift or treat as Product-approved.
+> **Label:** These strings record Product/Codex direction for Gate **6**. They still require a separate Gates **6–7** Ready sign-off before any M3 spike plan.
 
 **Settings — before download (Wang-class, optional feature framing):**
 
@@ -97,8 +97,8 @@ When M3 adds download UX, M2 **Place GGUF via Mac** remains ([Gate 8](./qwon_mod
 | Field | Value |
 | --- | --- |
 | **Recommended status** | **Pending** |
-| **Ready?** | **No** |
-| **Blocked by** | Product copy owner; privacy label review; Gate 3 compliance |
+| **Ready?** | **No** — Batch C answers recorded; separate Gate 6 Ready sign-off still required |
+| **Blocked by** | Gate **6** Ready sign-off |
 
 ---
 
@@ -118,12 +118,12 @@ Verified GGUF semantics tie to Gate 2/5 ([integrity states](./qwon_model_downloa
 
 | Requirement | Wang | Matisse |
 | --- | --- | --- |
-| Download availability | May offer **optional** model install on supported tier | Must **not** pressure install; heuristic is **expected** |
+| Download availability | **Wang-primary** optional model install | Must **not** pressure install; heuristic is **expected** |
 | Device failure framing | Missing model ≠ broken phone | Heuristic runtime ≠ failed download or unsupported device error |
 | Diagnostics | `primary_failure=model_asset_unavailable` + `fallback_reason=embedded_heuristic` explained plainly | `answered_by=Embedded Heuristic Runtime` = **normal** |
 | Post-download | llama.cpp when load succeeds | Download success must **not** imply Matisse “graduated” to llama.cpp if hardware unsupported |
 
-### Candidate copy — **drafts only (not final UI approval)**
+### Candidate copy — **answered direction (not Swift approval)**
 
 **Settings — Wang (aligned with M1/M2):**
 
@@ -160,12 +160,12 @@ Verified GGUF semantics tie to Gate 2/5 ([integrity states](./qwon_model_downloa
 | Field | Value |
 | --- | --- |
 | **Recommended status** | **Pending** |
-| **Ready?** | **No** |
-| **Blocked by** | Product approval of tier-specific download UX; hardware policy for Matisse download visibility |
+| **Ready?** | **No** — Batch C answers recorded; separate Gate 7 Ready sign-off still required |
+| **Blocked by** | Gate **7** Ready sign-off |
 
 ---
 
-## M2 ↔ M3 copy transition (undecided)
+## M2 ↔ M3 copy transition (answered direction)
 
 | M2 today | M3 must preserve |
 | --- | --- |
@@ -173,7 +173,7 @@ Verified GGUF semantics tie to Gate 2/5 ([integrity states](./qwon_model_downloa
 | **Place GGUF via Mac** | Remains visible as fallback ([Gate 8](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist)) |
 | Matisse “not a failure” | Must survive download feature — heuristic still expected |
 
-Product must publish a **copy migration checklist** before Gate 6/7 → Ready (which M2 strings retire vs remain).
+Batch C answers record the migration direction: retire “does not download in-app” only in builds that ship download UX, keep **Place GGUF via Mac**, and preserve Matisse “not a failure” copy. A later implementation PR may polish exact strings but must preserve this meaning.
 
 ---
 
@@ -190,43 +190,40 @@ Product must publish a **copy migration checklist** before Gate 6/7 → Ready (w
 
 ## Batch C review status (2026-06-05)
 
-**Review:** [Batch C session](./qwon_m3_gate_readiness_review_plan.md#batch-c-review-session-2026-06-05) — open items documented; Gates **6–7** remain **Pending**.
+**Review:** [Batch C session](./qwon_m3_gate_readiness_review_plan.md#batch-c-review-session-2026-06-05) documented open items; [answer intake](./qwon_m3_gate_answer_intake.md#batch-c-network-disclosure-and-device-expectation-answer-details-2026-06-06) records Q-C-01…Q-C-14. Gates **6–7** remain **Pending** until separate Ready sign-off.
 
-### Gate 6 — unresolved (summary)
+### Gate 6 — answered, Ready sign-off pending (summary)
 
 | Topic | Status |
 | --- | --- |
-| Network disclosure copy | **Undecided** (drafts only) |
-| No surprise background fetch | Required in principle — policy **undecided** |
-| Privacy label / ASC impact | **Undecided** — Gate **3** legal direction is Ready; release-time ASC/privacy-label answer still required |
-| TestFlight tester notes | **Undecided** |
-| Settings / onboarding strings | **Undecided**; M2 migration list **undecided** |
+| Network disclosure copy | One-time ~400 MB model download disclosed before fetch |
+| No surprise background fetch | Foreground user-initiated only for M3 |
+| Privacy label / ASC impact | Release-time ASC/privacy-label re-check required before any download build |
+| TestFlight tester notes | Optional ~400 MB user-initiated local model download; Build `4` separately gated |
+| Settings / onboarding strings | Settings-first; no persistent first-launch onboarding by default |
 
 Full item list: [G6-1 … G6-12](./qwon_m3_gate_readiness_review_plan.md#gate-6--open-items-privacy--network-disclosure-copy)
 
-### Gate 7 — unresolved (summary)
+### Gate 7 — answered, Ready sign-off pending (summary)
 
 | Topic | Status |
 | --- | --- |
-| Wang optional download framing | Draft only — **not approved** |
-| Matisse heuristic expected copy | Draft only — **not approved** |
-| Download visibility by tier | **Undecided** |
-| Diagnostics mapping (partial/corrupt) | Gate **5** integrity mapping is Ready; final Gate **7** device-facing copy still required |
-| Fallback / chat strip copy | **Undecided** |
-| Verified vs unverified copy | Gate **2** artifact record is Ready; final user-facing copy still required |
+| Wang optional download framing | Wang-primary optional local model download |
+| Matisse heuristic expected copy | Embedded Heuristic Runtime expected, not failure |
+| Download visibility by tier | Wang-primary; Matisse de-emphasized if visible |
+| Diagnostics mapping (partial/corrupt) | `partial` not installed; `corrupt` verification failed; fallback remains available |
+| Fallback / chat strip copy | Local model not ready; answered with built-in fallback; see Settings |
+| Verified vs unverified copy | Gate 2/5 verification states define the semantics |
 
 Full item list: [G7-1 … G7-12](./qwon_m3_gate_readiness_review_plan.md#gate-7--open-items-wang--matisse-device-expectation)
 
 ---
 
-## Recommended Product / Codex actions (before Gates 6/7 → Ready)
+## Recommended Product / Codex actions before Gates 6/7 Ready sign-off
 
-1. **Assign copy owner** for Settings, onboarding, and TestFlight tester notes.
-2. **Approve network disclosure** pattern (user-initiated, no background surprise).
-3. **Finalize tier matrix:** which surfaces show download on Wang only vs both tiers with Matisse de-emphasis.
-4. **Reconcile M2 strings** — explicit list of retired vs kept copy when download lands.
-5. **Privacy label / ASC review** using the Gate 3 legal direction plus release-time ASC context.
-6. **Record written sign-off** — drafts in this memo are **not** sign-off.
+1. Open a docs-only Gates **6–7** Ready sign-off PR if Product/Codex accepts the recorded Batch C answers.
+2. Keep final UI implementation and copy polish out of scope until all gates are Ready and a separate M3 spike plan exists.
+3. Preserve release-time ASC/privacy/export re-check under Gate **9** before any TestFlight binary with download UX.
 
 ---
 
@@ -237,7 +234,7 @@ Full item list: [G7-1 … G7-12](./qwon_m3_gate_readiness_review_plan.md#gate-7-
 | **6 — Privacy / network disclosure** | **Pending** | **Not approved** | **Not approved** |
 | **7 — Wang / Matisse expectation** | **Pending** | **Not approved** | **Not approved** |
 
-All M3 checklist gates remain **Pending** until individually marked **Ready**. Gate **8/9** evidence memos are still outstanding before the checklist is fully documented.
+Gates **1–5** are Ready; Gates **6–9** remain **Pending** until individually marked **Ready**. **Do not open M3 spike** until **all** gates are Ready.
 
 ---
 
@@ -246,7 +243,7 @@ All M3 checklist gates remain **Pending** until individually marked **Ready**. G
 | Included | Excluded |
 | --- | --- |
 | Gate 6/7 open questions and M2 alignment | Final UI copy approval |
-| Candidate copy labeled **draft** | Swift / UI implementation |
+| Gate 6/7 answer direction and candidate copy | Swift / UI implementation |
 | Diagnostic mapping reference | Privacy label final decision |
-| Links from M3 checklist | Gates 6/7 marked **Ready** |
-| | Network fetch prototype; GGUF commit |
+| Links from M3 checklist | Gate Ready sign-off |
+| — | Network fetch prototype; GGUF commit |
