@@ -1,12 +1,12 @@
 # QWON Text Alpha — Feedback Intake (Build `3`)
 
-**Last updated:** 2026-06-03 (feedback window closed — post #74)
-**Status:** **Feedback window closed** — build `3` **stable alpha**; logged reports **QWON-FB-001**, **QWON-FB-002** only (**Operational pass**); **no blockers**; **no new reports expected**.
+**Last updated:** 2026-06-07 (feedback window closed — Stay selected)
+**Status:** **Feedback window closed** — build `3` **stable alpha**; logged reports **QWON-FB-001**, **QWON-FB-002** only (**Operational pass**); **no blockers**; **no new reports expected**. **Not live intake.**
 **Active build:** TestFlight **QWON `0.1.0 (3)`** · ASC **`6775685841`** · Bundle **`jp.studio-prospect.qwon.ios`**
 
 Related: [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [Tier policy (Wang/Matisse)](./qwon_text_alpha_testflight_prep.md#physical-device-lab-tier-policy) · [QWON next work queue](./qwon_next_work_queue.md) · [QWON lab evidence — build `3`](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
 
-**Build `4`:** **Not approved.** Next binary and post-alpha work require a **separate product gate** — not this intake window.
+**Build `4`:** **Not approved.** **Stay selected** — docs hygiene only unless Product lifts Stay · [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record).
 
 ---
 

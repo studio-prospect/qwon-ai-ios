@@ -1,6 +1,6 @@
 # QWON Rename — Documentation Index
 
-**Last updated:** 2026-06-07 (Stay selected — post-M3)
+**Last updated:** 2026-06-07 (Stay selected — active docs wording audit)
 **Purpose:** **Information architecture only** — where to start reading QWON rename / Phase 4 docs and in what order. Does **not** add new policy; it summarizes and links existing decisions.
 
 **Next decision (release vs post-alpha):** [Post-M3 next lane decision](./qwon_post_m3_next_lane_decision.md) · [QWON next work queue — decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) · [M3 spike outcome decision](./qwon_m3_spike_outcome_decision.md)
@@ -41,7 +41,7 @@
 | **1** | [qwon_rename_migration_plan.md](./qwon_rename_migration_plan.md) | **Overall migration state** — naming decision, Apple gate, phase map, do-not rules |
 | **2** | [qwon_phase4_target_rename_plan.md](./qwon_phase4_target_rename_plan.md) | **Phase 4 PR split and status** — what was renamed (#59–#65), 4E gate, series closed |
 | **3** | [qwon_preserved_prexus_surface_inventory.md](./qwon_preserved_prexus_surface_inventory.md) | **What not to rename** — historical, runtime, model, eval, deferred infra |
-| **4** | [qwon_text_alpha_testflight_prep.md](./qwon_text_alpha_testflight_prep.md) | **TestFlight ops / build `3` gate** — active upload line, lab policy, next build criteria |
+| **4** | [qwon_text_alpha_testflight_prep.md](./qwon_text_alpha_testflight_prep.md) | **TestFlight ops / build `3` stable line** — **Stay selected**; build `4` not approved |
 | **5** | [qwon_text_alpha_lab_evidence.md](./qwon_text_alpha_lab_evidence.md) | **Lab evidence / frozen ledger** — Wang/Matisse sign-off, ops filenames |
 | **6** | [qwon_bundle_id_decision_memo.md](./qwon_bundle_id_decision_memo.md) | **Apple identity / signing** — App ID, profiles, ASC record vs historical PREXUS |
 
@@ -80,7 +80,7 @@
 | [qwon_bundle_id_decision_memo.md](./qwon_bundle_id_decision_memo.md) | QWON Bundle ID / signing / ASC app record |
 | [qwen_text_only_alpha_docs_index.md](./qwen_text_only_alpha_docs_index.md) | **Historical** PREXUS alpha index — separate product line |
 | [qwon_next_work_queue.md](./qwon_next_work_queue.md) | **Post-rename work queue** — ready vs gated vs deferred |
-| [qwon_text_alpha_feedback_intake.md](./qwon_text_alpha_feedback_intake.md) | **Build `3` feedback template + triage log** — live intake entry point |
+| [qwon_text_alpha_feedback_intake.md](./qwon_text_alpha_feedback_intake.md) | **Build `3` feedback — closed intake record + template** (not live intake) |
 | [qwon_post_m3_next_lane_decision.md](./qwon_post_m3_next_lane_decision.md) | **Post-M3 decision** — **Stay selected**; no third lane; lift Stay to open new lane |
 | [qwon_post_alpha_options.md](./qwon_post_alpha_options.md) | **Post-alpha lane catalog** — UI-1 complete; M3 closed; v0.2+ candidates |
 | [qwon_model_download_gguf_ux_decision.md](./qwon_model_download_gguf_ux_decision.md) | **Second post-alpha lane decision** — scoped planning gate, Codex plan requirements |
@@ -100,4 +100,4 @@
 
 ## Agent note
 
-This index does **not** authorize build **`4`**, default-on M3, project-container rename, or env/model migration without explicit product gates. **Current posture:** **Stay selected** per [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record).
+This index does **not** authorize build **`4`**, default-on M3, project-container rename, or env/model migration without explicit product gates. **Current posture:** **Stay selected** — docs hygiene only · [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record). Active docs wording audit **2026-06-07**.

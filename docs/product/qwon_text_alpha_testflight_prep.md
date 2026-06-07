@@ -1,11 +1,11 @@
 # QWON Text Alpha — TestFlight Preparation (Phase 3)
 
-**Last updated:** 2026-06-03 (feedback window closed)
-**Status:** **Stable alpha build `0.1.0 (3)`** on TestFlight — lab + feedback intake **complete**; **feedback window closed** (2026-06-03). Intentional Product / release engineering upload after Phase 4E docs gate (#65); ops executed outside repo before this record. Build `2` (keyboard fix) and build `1` + tag `qwon-text-alpha-0.1.0-rc1` are **previous active / historical**. ASC `6775685841`.
+**Last updated:** 2026-06-07 (Stay selected — build `3` stable line)
+**Status:** **Stable alpha build `0.1.0 (3)`** on TestFlight — lab + feedback intake **complete**; **feedback window closed** (2026-06-03). **Stay selected** — no Build `4` upload. Intentional Product / release engineering upload after Phase 4E docs gate (#65); ops executed outside repo before this record. Build `2` (keyboard fix) and build `1` + tag `qwon-text-alpha-0.1.0-rc1` are **previous active / historical**. ASC `6775685841`.
 
 **Historical line:** PREXUS alpha `0.1.0 (1)` on `jp.studio-prospect.prexus.ios` remains frozen — see [Qwen text-only alpha TestFlight prep](./qwen_text_only_alpha_testflight_prep.md). **Do not** upload QWON builds to ASC app **PREXUS** (Apple ID `6775110218`).
 
-**Related:** [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) · [QWON next work queue](./qwon_next_work_queue.md) · [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) · [QWON rename migration plan](./qwon_rename_migration_plan.md) · [QWON bundle memo](./qwon_bundle_id_decision_memo.md) · [QWON lab evidence](./qwon_text_alpha_lab_evidence.md) · [PREXUS bundle memo](./bundle_id_decision_memo.md) (historical)
+**Related:** [QWON rename docs index](./qwon_rename_docs_index.md) · [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record) · [Next decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) · [QWON next work queue](./qwon_next_work_queue.md) · [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) · [QWON rename migration plan](./qwon_rename_migration_plan.md) · [QWON bundle memo](./qwon_bundle_id_decision_memo.md) · [QWON lab evidence](./qwon_text_alpha_lab_evidence.md) · [PREXUS bundle memo](./bundle_id_decision_memo.md) (historical)
 
 ---
 

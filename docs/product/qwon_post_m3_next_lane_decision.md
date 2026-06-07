@@ -1,6 +1,6 @@
 # QWON — Post-M3 Next Lane Decision Checkpoint
 
-**Last updated:** 2026-06-07 (Stay selected — Product decision recorded)
+**Last updated:** 2026-06-07 (Stay selected — active docs wording audit)
 **Status:** **Stay selected** — no third post-alpha lane. M3 **Option A selected / lane closed**. **Build `4` not approved.** **TestFlight upload / tag / version bump not approved.**
 **Purpose:** After [Model download / GGUF UX](./qwon_model_download_gguf_ux_plan.md) M3 spike completion ([#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118), verification [#119](https://github.com/studio-prospect/qwon-ai-ios/pull/119), outcome [#120](https://github.com/studio-prospect/qwon-ai-ios/pull/120), Option A [#121](https://github.com/studio-prospect/qwon-ai-ios/pull/121)), give Product a **comparable view** of remaining post-alpha lanes. **Docs-only** — does **not** authorize implementation, spike, or release ops.
 
@@ -102,4 +102,10 @@ To **lift Stay** and open a new lane:
 | **Third post-alpha lane selected?** | **No** |
 | **Build `4` approved?** | **No** |
 | **Approver** | Product decision (docs record) |
-| **Notes** | No third post-alpha lane selected. QWON remains on TestFlight **`0.1.0 (3)`**. Allowed work is docs/readme/index/evidence hygiene only. Any future UI-2 / OCR / LiteRT / App Store / project-container rename / memory work requires lifting Stay, a new Product lane decision, and a Codex scoped plan. M3 Option A / lane closed unchanged ([#121](https://github.com/studio-prospect/qwon-ai-ios/pull/121)). Checkpoint [#122](https://github.com/studio-prospect/qwon-ai-ios/pull/122). |
+| **Notes** | No third post-alpha lane selected. QWON remains on TestFlight **`0.1.0 (3)`**. Allowed work is docs/readme/index/evidence hygiene only. Any future UI-2 / OCR / LiteRT / App Store / project-container rename / memory work requires lifting Stay, a new Product lane decision, and a Codex scoped plan. M3 Option A / lane closed unchanged ([#121](https://github.com/studio-prospect/qwon-ai-ios/pull/121)). Checkpoint [#122](https://github.com/studio-prospect/qwon-ai-ios/pull/122). Stay recorded [#123](https://github.com/studio-prospect/qwon-ai-ios/pull/123). |
+
+---
+
+## Active docs wording audit (2026-06-07)
+
+Cross-doc hygiene pass: active/current tables and entry points aligned to **Stay selected** / **feedback intake closed** / **Build `4` not approved**; historical sections left intact with **historical** or **superseded** labels where needed.
