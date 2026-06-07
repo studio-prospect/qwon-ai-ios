@@ -211,10 +211,11 @@ Simulator runtime-surface refreshes remain separate: `docs/design/runtime_surfac
 ## Related Docs
 
 - [qwon_rename_docs_index.md](./qwon_rename_docs_index.md) — QWON rename / Phase 4 doc entry point and reading order
-- [qwon_next_work_queue.md](./qwon_next_work_queue.md) — post-rename work queue (ready / gated / deferred)
-- [qwon_post_alpha_options.md](./qwon_post_alpha_options.md) — v0.2+ post-alpha option lanes; **selected first lane:** UI polish / onboarding ([product decision](./qwon_post_alpha_options.md#product-lane-decision))
-- [qwon_ui_polish_onboarding_plan.md](./qwon_ui_polish_onboarding_plan.md) — first post-alpha scoped plan; Cursor implements only after plan merge and only inside the UI-1 boundary unless Codex/Product expands scope
-- [qwon_text_alpha_feedback_intake.md](./qwon_text_alpha_feedback_intake.md) — QWON build `3` feedback template and triage log
+- [qwon_next_work_queue.md](./qwon_next_work_queue.md) — post-rename work queue (**Stay selected**; ready / gated / deferred)
+- [qwon_post_m3_next_lane_decision.md](./qwon_post_m3_next_lane_decision.md) — **Stay selected**; no third post-alpha lane; lift Stay to open implementation
+- [qwon_post_alpha_options.md](./qwon_post_alpha_options.md) — v0.2+ post-alpha lane catalog (future lane lift reference)
+- [qwon_ui_polish_onboarding_plan.md](./qwon_ui_polish_onboarding_plan.md) — first post-alpha scoped plan (**UI-1 complete**; UI-2 deferred)
+- [qwon_text_alpha_feedback_intake.md](./qwon_text_alpha_feedback_intake.md) — QWON build `3` **closed** feedback record + template (not live intake)
 - [AGENTS.md](../../AGENTS.md) — repository engineering rules
 - [device_install_and_screenshot_workflow.md](../design/device_install_and_screenshot_workflow.md) — physical device install and QA captures
 - [architecture.md](../requirements/architecture.md) — runtime architecture
@@ -225,3 +226,4 @@ Simulator runtime-surface refreshes remain separate: `docs/design/runtime_surfac
 - This workflow is intended to reduce design drift while keeping implementation throughput high.
 - It is acceptable for Codex to make small repo-local documentation or planning edits directly.
 - The default assumption is: **Codex plans and reviews, Cursor implements.**
+- **Current product posture (2026-06-07):** **Stay selected** on TestFlight **`0.1.0 (3)`** — Cursor **docs/readme/index/evidence hygiene only** unless Product lifts Stay or a **verified release blocker** on build **`3`** is confirmed. See [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record).

@@ -1,7 +1,7 @@
 # QWON — Next Work Queue
 
-**Last updated:** 2026-06-07 (Stay selected — post-M3)
-**Status:** **Queue / guardrail only** — no implementation authorization in this document.
+**Last updated:** 2026-06-07 (Stay selected — active docs wording audit)
+**Status:** **Queue / guardrail only** — **Stay selected**; docs/readme/index/evidence hygiene only; no implementation authorization.
 **Purpose:** After Phase 4 rename docs are complete, classify what agents **may** do next vs what requires **product gates**. Prevents drift into ungated **build `4`**, project-container rename, or blind PREXUS cleanup.
 
 Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision checkpoint](#next-decision-checkpoint) · [Post-M3 next lane decision](./qwon_post_m3_next_lane_decision.md) · [M3 spike outcome decision](./qwon_m3_spike_outcome_decision.md) · [Model download / GGUF UX plan](./qwon_model_download_gguf_ux_plan.md) · [Post-alpha option lanes](./qwon_post_alpha_options.md#post-m3-next-lane-checkpoint-2026-06-07) · [UI polish / onboarding plan](./qwon_ui_polish_onboarding_plan.md) · [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
@@ -63,6 +63,7 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 | Docs / README / index maintenance | [Ready / low-risk docs-ops](#ready--low-risk-docs-ops) |
 | **Product-approved build `4` planning** docs only (criteria, checklist, gate memo — **not** upload) | [Conditional — build `4`](#testflight-upload-build-4) |
 | Post-alpha — **next lane selection** | [Post-M3 next lane decision](./qwon_post_m3_next_lane_decision.md) · [Post-alpha options](./qwon_post_alpha_options.md) |
+| **Stay posture docs hygiene** | Index/queue/link fixes; closed-intake wording; **no** feature implementation | [Ready / low-risk docs-ops](#ready--low-risk-docs-ops) |
 | UI polish **UI-2** (gated) | [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) — **not opened** unless new evidence |
 | Minimal fix on build **`3`** | **Only** with [verified release blocker](#minimal-fix-pr-verified-release-blocker-only) + Codex/Product sign-off |
 
@@ -266,7 +267,7 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 **Not in the current work queue for agents.** Track for planning; do not pull forward without a new Codex plan.
 
-**Option catalog (v0.2+ lanes):** [QWON post-alpha option lanes](./qwon_post_alpha_options.md) — **selected:** [UI polish / onboarding](./qwon_post_alpha_options.md#product-lane-decision) with [scoped plan](./qwon_ui_polish_onboarding_plan.md).
+**Option catalog (v0.2+ lanes):** [QWON post-alpha option lanes](./qwon_post_alpha_options.md) — **Stay selected**; catalog for future lane lift only ([#123](https://github.com/studio-prospect/qwon-ai-ios/pull/123)).
 
 ### LiteRT adoption decision
 
@@ -290,10 +291,11 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 | Field | Detail |
 | --- | --- |
-| **Trigger** | Product prioritizes on-device model acquisition UX post-alpha |
-| **Required evidence** | UX/design memo; storage and battery constraints |
-| **First doc to read** | [models/README.md](../../models/README.md) · [local inference MVP](../requirements/local_inference_mvp.md) |
-| **Do not start if** | Requires renaming `prexus-local-mvp.gguf` without approved migration PR |
+| **Status** | **Lane closed** — M3 Option A ([#121](https://github.com/studio-prospect/qwon-ai-ios/pull/121)); compile-gated default-off |
+| **Trigger** | Product **lifts Stay** and reopens M3 or selects a new acquisition lane |
+| **Required evidence** | [M3 spike outcome decision](./qwon_m3_spike_outcome_decision.md) · Codex scoped plan |
+| **First doc to read** | [Model download / GGUF UX plan](./qwon_model_download_gguf_ux_plan.md) |
+| **Do not start if** | Treating merged spike as active implementation lane while **Stay** is selected |
 
 ### App Store public release
 
@@ -327,4 +329,4 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 ## Agent note
 
-Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **M3 Option A selected** — lane **closed**. **Stay selected** — no third post-alpha lane; docs/readme/index/evidence hygiene only. Build **`4`** / TestFlight upload / tag / version bump require **explicit product gate**. To start implementation, Product must **lift Stay** and select one lane + Codex scoped plan.
+Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **Stay selected** — docs/readme/index/evidence hygiene only; M3 Option A / lane **closed**. Build **`4`** / TestFlight upload / tag / version bump require **explicit product gate**. Active docs wording audit **2026-06-07** ([#123](https://github.com/studio-prospect/qwon-ai-ios/pull/123) series). To start implementation, Product must **lift Stay** and select one lane + Codex scoped plan.

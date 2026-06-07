@@ -1,6 +1,6 @@
 # QWON — Post-Alpha Option Lanes (v0.2+ Planning)
 
-**Last updated:** 2026-06-07 (Stay selected — post-M3)
+**Last updated:** 2026-06-07 (Stay selected — active docs wording audit)
 **Status:** **Stay selected** — Model download / GGUF UX **lane closed** (Option A). **No third post-alpha lane.** **Build `4` not approved.**
 **Purpose:** After **QWON `0.1.0 (3)` stable alpha**, [UI polish UI-1 complete](./qwon_ui_polish_onboarding_plan.md), and [M3 spike Option A](./qwon_m3_spike_outcome_decision.md#decision-record), outline **remaining v0.2 / post-alpha candidate lanes** and record lane selections. Does **not** approve build **`4`**, TestFlight upload, tag, version bump, or code work.
 
@@ -101,14 +101,9 @@ Same as [Post-M3 guardrails](./qwon_post_m3_next_lane_decision.md#4-guardrails):
 | **Build `4`** | **Not approved** — no TestFlight upload, tag, or version bump |
 | **Feedback intake** | **Closed** — no new **`QWON-FB-*`** rows without product re-open |
 
-### Recommended next decision
+### Recommended next decision (historical — superseded 2026-06-07)
 
-| Field | Value |
-| --- | --- |
-| **Product decision (2026-06-03)** | **[Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md)** selected for scoped planning |
-| **Default agent posture** | **Wait** — scoped plan available; Cursor **no** implementation/spike without assignment |
-| **After scoped plan merge** | Cursor may start **PR M1** only with explicit Product/Codex assignment |
-| **UI-2** | **Not opened** unless new evidence per [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) |
+**Superseded by [Post-M3 checkpoint (2026-06-07)](#post-m3-next-lane-checkpoint-2026-06-07) and [Stay decision record](./qwon_post_m3_next_lane_decision.md#decision-record).** Kept for audit.
 
 ### Next lane candidates (historical — selection closed 2026-06-03)
 
@@ -124,9 +119,9 @@ Same as [Post-M3 guardrails](./qwon_post_m3_next_lane_decision.md#4-guardrails):
 | [Project container rename](#4-project-container-rename-prexusxcodeproj) | **`PREXUS.xcodeproj`** → QWON-aligned container |
 | [App Store readiness](#5-public--app-store-readiness) | Exit TestFlight-only phase (long-term) |
 
-**Closed lanes:** [UI polish / onboarding](#7-ui-polish--onboarding) — **complete** (UI-1); UI-2 gated separately · **Model download / GGUF UX** — **selected** for scoped planning.
+**Closed lanes:** [UI polish / onboarding](#7-ui-polish--onboarding) — **complete** (UI-1); UI-2 gated separately · **Model download / GGUF UX** — **closed** (M3 Option A, 2026-06-07).
 
-### Candidate comparison (next lane selection)
+### Candidate comparison (historical — 2026-06-03)
 
 Qualitative scale matches [Selection matrix](#selection-matrix). Rows below **exclude** UI polish (lane closed).
 
@@ -160,7 +155,7 @@ Qualitative scale matches [Selection matrix](#selection-matrix). Rows below **ex
 | --- | --- | --- | --- | --- |
 | [LiteRT / local backend policy](#1-litert--local-backend-policy) | Decide non–llama.cpp on-device backend strategy | Better A12+ coverage; clearer routing | High — runtime swap, eval debt | **docs-only** → spike |
 | [OCR / camera input](#2-ocr--camera-input) | Multimodal text-from-scene input | Camera as sensor; new workflows | High — latency, privacy, routing | **docs-only** → spike |
-| [Model download / GGUF UX](#3-model-download--gguf-placement-ux) | Replace USB push with in-app model acquisition | Easier onboarding; fewer ops steps | Medium — storage, background, signing | **docs-only** → spike |
+| [Model download / GGUF UX](#3-model-download--gguf-placement-ux) | Replace USB push with in-app model acquisition | Easier onboarding; fewer ops steps | Medium — storage, background, signing | **Closed** — M3 Option A; compile-gated spike on `main` |
 | [Project container rename](#4-project-container-rename-prexusxcodeproj) | Rename **`PREXUS.xcodeproj`** container | None direct; dev/CI clarity | Medium — generator, CI, muscle memory | **docs-only** → scoped implementation |
 | [Public / App Store readiness](#5-public--app-store-readiness) | Exit TestFlight-only phase | Public availability | High — compliance, support, quality bar | **docs-only** only until product gate |
 | [Runtime memory / context retention](#6-runtime-memory--context-retention) | Durable cognitive layer; compression | Longer sessions; less re-explaining | High — privacy, battery, SQLite/vectors | **docs-only** → spike |
@@ -172,7 +167,7 @@ Qualitative scale matches [Selection matrix](#selection-matrix). Rows below **ex
 
 ## Selection matrix
 
-**Purpose:** Help **product** compare lanes. **First lane (UI polish) complete** — use [Next lane selection checkpoint](#next-lane-selection-checkpoint-2026-06-03) for remaining lanes. Matrix retained for audit.
+**Purpose:** Help **product** compare lanes. **Current routing:** [Post-M3 checkpoint (2026-06-07)](#post-m3-next-lane-checkpoint-2026-06-07) — **Stay selected**. Matrix retained for audit.
 
 **Scale (qualitative, 2026-06-03):**
 
@@ -196,11 +191,13 @@ Qualitative scale matches [Selection matrix](#selection-matrix). Rows below **ex
 
 ### Low-risk first candidate (historical — lane complete)
 
-**UI polish / onboarding** was the first post-alpha lane (2026-06-03). **UI-1 complete**; **UI-2 deferred**. For the **next** lane, use [Next lane selection checkpoint](#next-lane-selection-checkpoint-2026-06-03) — **no default implementation**.
+**UI polish / onboarding** was the first post-alpha lane (2026-06-03). **UI-1 complete**; **UI-2 deferred**. **Current posture:** **Stay selected** — see [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record).
 
-### After product selects a next lane
+### Lifting Stay (workflow reference)
 
-1. Product records **Stay** or **one lane** in [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record) (or linked decision memo).
+While **Stay** is selected, skip steps 1–3. When Product **lifts Stay** and picks one lane:
+
+1. Product records **one lane** in [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record) (or linked decision memo).
 2. **Codex opens a scoped plan** for that lane — **not** automatic.
 3. Cursor spikes/implements per [Recommended workflow](#recommended-workflow) — **only after plan merge**; **no** TestFlight upload/tag/bump unless a **separate** product gate approves.
 
@@ -363,7 +360,7 @@ Qualitative scale matches [Selection matrix](#selection-matrix). Rows below **ex
 | Item | Status |
 | --- | --- |
 | **TestFlight upload / next internal binary** | **Build `4` not approved** — see [decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) |
-| **Implementation PRs** | Require Codex scoped plan after product lane selection |
+| **Implementation PRs** | **Stay selected** — forbidden unless Product lifts Stay + Codex scoped plan |
 | **PREXUS historical docs** | Read-only — [PREXUS alpha index](./qwen_text_only_alpha_docs_index.md) |
 | **New feedback triage rows** | Intake **closed** — no **`QWON-FB-*`** append |
 
@@ -373,9 +370,9 @@ Qualitative scale matches [Selection matrix](#selection-matrix). Rows below **ex
 
 | Product question | Read |
 | --- | --- |
-| Which **next** lane should product pick? | **Decided** — [Model download / GGUF UX decision](./qwon_model_download_gguf_ux_decision.md) |
+| Which **next** lane should product pick? | **Stay selected** — no third lane · [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record) |
 | Is UI polish still the active lane? | **No** — **UI-1 complete**; UI-2 **deferred** · [UI polish plan](./qwon_ui_polish_onboarding_plan.md) |
-| What is the next agent step? | **Codex scoped plan** for Model download / GGUF UX — implementation **not** approved |
-| Can we ship code now? | **No** — [Recommended workflow](#recommended-workflow) |
-| Can we upload the next TestFlight build? | **Build `4` not approved** — [checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) |
-| Stay on build **`3`** only? | **Yes** — valid while scoped plan is drafted; no implementation without plan merge |
+| What is the next agent step? | **Stay** — docs/readme/index/evidence hygiene only |
+| Can we ship feature code now? | **No** — lift Stay + Codex scoped plan required |
+| Can we upload the next TestFlight build? | **Build `4` not approved** — [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record) |
+| Stay on build **`3`** only? | **Yes** — **Stay selected** (Product decision 2026-06-07) |
