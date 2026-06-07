@@ -649,11 +649,15 @@ M3 compile-gated downloader spike is **verified on `main` @ `a2a4f2a`**: default
 
 ---
 
-## M3 readiness gate checklist
+<a id="m3-readiness-gate-checklist"></a>
 
-**Purpose:** After M1/M2 completion, record the **prerequisites** that must be satisfied before opening an **M3 in-app download spike**. This section is a **readiness gate only** — it does **not** approve M3 implementation, network fetch, storage schema work, or TestFlight upload.
+## M3 readiness gate checklist (historical record)
 
-**Status (2026-06-07):** Gates **1–9** evidence memos + **Batch A–D review sessions** documented ([#91](https://github.com/studio-prospect/qwon-ai-ios/pull/91)–[#95](https://github.com/studio-prospect/qwon-ai-ios/pull/95), [review plan](./qwon_m3_gate_readiness_review_plan.md)). **Compile-gated M3 spike merged** ([#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118)); [post-merge verification](#pr-m3-post-merge-verification-2026-06-07) recorded. **Build `4` / TestFlight / tag / version bump not approved.** [Queue status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05).
+**Purpose:** Preserve the **pre-implementation readiness evidence** that had to be satisfied before opening the compile-gated M3 in-app download spike. Gates **1–9** were answered and signed off **before** [PR #118](https://github.com/studio-prospect/qwon-ai-ios/pull/118) merged on `main` @ `a2a4f2a`.
+
+**This section is a historical readiness record only.** It does **not** mean M3 implementation is still blocked, and it does **not** re-open spike prerequisites. For current spike status, see [PR M3 post-merge verification](#pr-m3-post-merge-verification-2026-06-07). **Build `4` / TestFlight / tag / version bump remain not approved** regardless of this checklist.
+
+**Status (2026-06-07):** Gates **1–9** evidence memos + **Batch A–D review sessions** documented ([#91](https://github.com/studio-prospect/qwon-ai-ios/pull/91)–[#95](https://github.com/studio-prospect/qwon-ai-ios/pull/95), [review plan](./qwon_m3_gate_readiness_review_plan.md)). **Compile-gated M3 spike merged** ([#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118)); [post-merge verification](#pr-m3-post-merge-verification-2026-06-07) recorded. [Queue status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05).
 
 **Base:** `origin/main` @ **`a2a4f2a`** — M3 spike merged ([#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118)); M1/M2 merged ([#86](https://github.com/studio-prospect/qwon-ai-ios/pull/86)–[#89](https://github.com/studio-prospect/qwon-ai-ios/pull/89)).
 
@@ -666,7 +670,7 @@ M3 compile-gated downloader spike is **verified on `main` @ `a2a4f2a`**: default
 | **M3 in-app download spike** | **Merged** ([#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118)) — compile-gated; [post-merge verification](./qwon_model_download_gguf_ux_plan.md#pr-m3-post-merge-verification-2026-06-07) |
 | **Build `4` / TestFlight** | **Separate gate** — **not approved** by this checklist |
 
-### Checklist (all required before M3 spike)
+### Checklist (satisfied before M3 spike — historical)
 
 | # | Gate | Required evidence / decision | Status |
 | --- | --- | --- | --- |
@@ -680,26 +684,30 @@ M3 compile-gated downloader spike is **verified on `main` @ `a2a4f2a`**: default
 | 8 | **Rollback to Mac + USB guided placement** | [Rollback + release gate memo](./qwon_m3_rollback_release_gate_memo.md) — Gate 8 section; Batch D sign-off records that M2 **Place GGUF via Mac**, `fetch_local_model.sh`, and `push_local_model_to_device.sh` must remain; post-spike regression and rollback runbook direction are required in the spike plan. | **Ready** |
 | 9 | **Build `4` / TestFlight gate (separate)** | [Rollback + release gate memo](./qwon_m3_rollback_release_gate_memo.md) — Gate 9 section; Batch D sign-off records that M3 spike **≠** Build `4` approval, Build `4` remains not approved, and TestFlight/tag/version bump require a separate Product gate. | **Ready** — Build `4` **not approved** |
 
-### Explicit non-approvals
+### Explicit non-approvals (still apply after #118)
+
+These boundaries remain in force for **future** M3 work and release ops. They are **not** spike-opening prerequisites anymore.
 
 | Item | Status |
 | --- | --- |
-| M3 Swift implementation outside [M3 spike plan](./qwon_m3_spike_plan.md) | **Not approved** |
-| Network fetch / downloader outside `QWON_M3_MODEL_DOWNLOAD_SPIKE` | **Not approved** |
+| M3 Swift changes outside the merged compile-gated spike scope / [M3 spike plan](./qwon_m3_spike_plan.md) | **Not approved** |
+| Default-on network fetch / downloader (outside `QWON_M3_MODEL_DOWNLOAD_SPIKE`) | **Not approved** |
 | Storage schema change beyond approved temp/final paths | **Not approved** |
 | `LocalGGUFModelPlacement` lookup order change | **Not approved** |
 | `prexus-local-mvp.gguf` rename | **Not approved** |
 | `PREXUS_*` env rename | **Not approved** |
 | GGUF or binary commit to git | **Not approved** |
 
-### Exit criteria to open M3 spike
+### Exit criteria to open M3 spike (satisfied — historical)
 
-1. All checklist rows marked **Ready** with linked Product/Codex evidence (docs or decision memo — no artifact commit).
-2. Codex scoped implementation plan for spike-only branch — [M3 spike plan](./qwon_m3_spike_plan.md).
-3. Rollback path verified: M2 guided placement + manual USB push remain usable.
-4. Build `4` decision remains a **separate** product gate even if M3 spike succeeds.
+All rows below were **met before** [#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118) merged. Kept for audit trail only.
 
-### Cursor / agent boundary
+1. All checklist rows marked **Ready** with linked Product/Codex evidence (docs or decision memo — no artifact commit). **Satisfied.**
+2. Codex scoped implementation plan for spike-only branch — [M3 spike plan](./qwon_m3_spike_plan.md). **Satisfied.**
+3. Rollback path verified: M2 guided placement + manual USB push remain usable. **Satisfied** — see [post-merge verification](#pr-m3-post-merge-verification-2026-06-07).
+4. Build `4` decision remains a **separate** product gate even if M3 spike succeeds. **Still applies** — Build `4` **not approved**.
 
-- **Allowed after spike plan merge:** compile-gated M3 spike implementation per [M3 spike plan](./qwon_m3_spike_plan.md).
-- **Still not allowed:** TestFlight upload, Build `4` ops, tag, version bump, GGUF commit, product-facing release changes, or changing `LocalGGUFModelPlacement` lookup order.
+### Cursor / agent boundary (post-#118)
+
+- **Merged on `main`:** compile-gated M3 spike per [M3 spike plan](./qwon_m3_spike_plan.md) ([#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118)); default-off unless `QWON_M3_MODEL_DOWNLOAD_SPIKE=1` at project generation.
+- **Still not allowed:** TestFlight upload, Build `4` ops, tag, version bump, GGUF commit, product-facing release changes, default-on downloader UX, or changing `LocalGGUFModelPlacement` lookup order.
