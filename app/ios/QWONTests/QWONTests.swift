@@ -1057,7 +1057,8 @@ final class QWONTests: XCTestCase {
             machineIdentifier: "iPhone11,6",
             isSimulator: false,
             resolvedFileName: nil,
-            expectedPathPresent: false
+            expectedPathPresent: false,
+            manifestVerified: false
         )
 
         XCTAssertEqual(QWONLocalModelStatusPresentation.tierChipLabel(for: status), "Matisse-class (A12)")
@@ -1073,7 +1074,8 @@ final class QWONTests: XCTestCase {
             machineIdentifier: "iPhone16,1",
             isSimulator: true,
             resolvedFileName: nil,
-            expectedPathPresent: false
+            expectedPathPresent: false,
+            manifestVerified: false
         )
 
         XCTAssertEqual(QWONLocalModelStatusPresentation.statusChipLabel(for: status), "Simulator")
@@ -1098,6 +1100,96 @@ final class QWONTests: XCTestCase {
         XCTAssertTrue(QWONUILabelCopy.GuidedPlacement.matisseExpectation.contains("Embedded Heuristic Runtime"))
         XCTAssertTrue(QWONUILabelCopy.GuidedPlacement.wangExpectation.contains("llama.cpp On-Device Runtime"))
     }
+
+    func testM3ModelDownloadManifestConstants() {
+        XCTAssertEqual(QWONM3ModelDownloadManifest.expectedByteSize, 397_808_192)
+        XCTAssertEqual(QWONM3ModelDownloadManifest.expectedSHA256Hex.count, 64)
+        XCTAssertEqual(QWONM3ModelDownloadManifest.minimumFreeBytes, 1_064_051_840)
+        XCTAssertEqual(QWONM3ModelDownloadManifest.tempFileName, "prexus-local-mvp.gguf.download")
+        XCTAssertEqual(
+            QWONM3ModelDownloadManifest.developmentDownloadURL.absoluteString,
+            "https://models.qwon.dev/models/qwen2.5-0.5b-instruct/q4_k_m/prexus-local-mvp.gguf"
+        )
+    }
+
+    #if QWON_M3_MODEL_DOWNLOAD_SPIKE
+    func testM3DownloaderBlocksExistingModelWithoutConfirmation() throws {
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: root) }
+
+        let finalURL = QWONM3ModelDownloadManifest.finalFileURL(in: root)
+        try FileManager.default.createDirectory(
+            at: QWONM3ModelDownloadManifest.modelsDirectoryURL(in: root),
+            withIntermediateDirectories: true
+        )
+        try Data(repeating: 0xAB, count: 16).write(to: finalURL)
+
+        let downloader = QWONM3ModelDownloader(
+            fileManager: .default,
+            documentsDirectory: root
+        )
+
+        XCTAssertThrowsError(try downloader.preflight(replaceExisting: false)) { error in
+            XCTAssertEqual(error as? QWONM3ModelDownloadError, .existingModelRequiresConfirmation)
+        }
+    }
+
+    func testM3DownloaderRejectsWrongByteSize() throws {
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: root) }
+
+        let tempURL = QWONM3ModelDownloadManifest.tempFileURL(in: root)
+        try FileManager.default.createDirectory(
+            at: QWONM3ModelDownloadManifest.modelsDirectoryURL(in: root),
+            withIntermediateDirectories: true
+        )
+        try Data(repeating: 0xCD, count: 32).write(to: tempURL)
+
+        let downloader = QWONM3ModelDownloader(
+            fileManager: .default,
+            documentsDirectory: root
+        )
+
+        XCTAssertThrowsError(try downloader.verifyTempFile(at: tempURL)) { error in
+            XCTAssertEqual(
+                error as? QWONM3ModelDownloadError,
+                .byteSizeMismatch(expected: QWONM3ModelDownloadManifest.expectedByteSize, actual: 32)
+            )
+        }
+    }
+
+    func testM3DownloaderSHA256Hex() throws {
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: root) }
+
+        let fileURL = root.appendingPathComponent("sample.bin")
+        try Data("qwon-m3-spike".utf8).write(to: fileURL)
+
+        let hash = try QWONM3ModelDownloader.sha256Hex(of: fileURL)
+        XCTAssertEqual(
+            hash,
+            "5fe4b42d784979f03016b4dcfd459d184191bb116375dd58a76b816e2166407a"
+        )
+    }
+
+    func testM3VerificationMarkerTracksVerifiedHash() {
+        let suiteName = "QWONTests.M3Verification.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+
+        XCTAssertFalse(QWONM3ModelVerificationMarker.isMarkedVerified(defaults: defaults))
+        QWONM3ModelVerificationMarker.markVerified(
+            expectedSHA256: QWONM3ModelDownloadManifest.expectedSHA256Hex,
+            defaults: defaults
+        )
+        XCTAssertTrue(QWONM3ModelVerificationMarker.isMarkedVerified(defaults: defaults))
+        QWONM3ModelVerificationMarker.clear(defaults: defaults)
+        XCTAssertFalse(QWONM3ModelVerificationMarker.isMarkedVerified(defaults: defaults))
+    }
+    #endif
 
     func testFallbackLocalModelClientUsesFallbackWhenPrimaryFails() async throws {
         struct FailingPrimary: LocalModelClient {

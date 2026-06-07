@@ -67,6 +67,10 @@ enum QWONUILabelCopy {
                 return "Matisse expected mapping: answered_by=Embedded Heuristic Runtime is normal on A12-class hardware for this alpha."
             case .a17ProOrNewer:
                 switch status.placementState {
+                #if QWON_M3_MODEL_DOWNLOAD_SPIKE
+                case .presentUnverified where status.manifestVerified:
+                    return "Wang mapping: verified local model — answered_by=llama.cpp On-Device Runtime when load succeeds."
+                #endif
                 case .presentUnverified where status.resolvedFileName == QWONLocalModelStatus.expectedFileName:
                     return "Wang mapping: answered_by=llama.cpp On-Device Runtime when load succeeds."
                 case .missing, .emptyFile:
@@ -100,4 +104,43 @@ enum QWONUILabelCopy {
         static let copyButtonTitle = "Copy"
         static let copiedButtonTitle = "Copied"
     }
+
+    #if QWON_M3_MODEL_DOWNLOAD_SPIKE
+    enum M3ModelDownload {
+        static let sectionDetail = "Internal spike only — compile-gated download from QWON-hosted development endpoint."
+        static let sectionFooter =
+            "One-time optional model download (~400 MB). Network is used once for acquisition; chat stays local-first after install. Place GGUF via Mac remains available."
+        static let downloadButtonTitle = "Download Local Model"
+        static let cancelButtonTitle = "Cancel Download"
+        static let replaceToggleTitle = "Replace existing USB-placed model file"
+        static let replaceToggleDetail =
+            "Required before download when prexus-local-mvp.gguf already exists. QWON will not silently overwrite an existing file."
+        static let matisseDetail =
+            "Matisse-class devices keep Embedded Heuristic Runtime as the expected path. Download entry is de-emphasized on this tier."
+        static let verifiedDetail =
+            "Local model matches the approved QWON-hosted byte size and SHA-256. llama.cpp On-Device Runtime is expected on Wang-class hardware."
+        static let failedDetailPrefix = "Download or verification failed. Place GGUF via Mac remains available."
+
+        static func progressDetail(for phase: QWONM3ModelDownloadPhase) -> String {
+            switch phase {
+            case .idle:
+                return "Ready for a user-initiated foreground download."
+            case let .downloading(receivedBytes):
+                if receivedBytes > 0 {
+                    let formatted = ByteCountFormatter.string(fromByteCount: receivedBytes, countStyle: .file)
+                    return "Downloading… \(formatted) received."
+                }
+                return "Downloading model from QWON development endpoint…"
+            case .verifying:
+                return "Verifying byte size and SHA-256 before install."
+            case .promoting:
+                return "Installing verified model to Documents/Models."
+            case .completed:
+                return verifiedDetail
+            case let .failed(message):
+                return "\(failedDetailPrefix) \(message)"
+            }
+        }
+    }
+    #endif
 }

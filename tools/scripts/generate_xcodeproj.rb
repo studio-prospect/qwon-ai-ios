@@ -11,6 +11,9 @@ require "xcodeproj"
 #
 # Optional LiteRT-LM debug prototype inside QWON (compile-gated, off by default):
 #   PREXUS_LITERT_LM_PROTOTYPE=1 ruby tools/scripts/generate_xcodeproj.rb
+#
+# Optional M3 in-app model download spike (compile-gated, off by default):
+#   QWON_M3_MODEL_DOWNLOAD_SPIKE=1 ruby tools/scripts/generate_xcodeproj.rb
 
 ROOT = Pathname.new(__dir__).join("..", "..").expand_path
 MAIN_BUNDLE_ID = "jp.studio-prospect.qwon.ios"
@@ -33,8 +36,16 @@ litert_prototype_only_source_names = %w[
   LocalStrictJSONBenchmarkRunner.swift
 ].freeze
 
+m3_spike_only_source_names = %w[
+  QWONM3ModelDownloader.swift
+  QWONM3ModelDownloadStore.swift
+  QWONM3ModelVerificationMarker.swift
+  QWONM3ModelDownloadSpikeSection.swift
+].freeze
+
 app_sources = Dir.glob(IOS_ROOT.join(APP_SOURCE_DIR, "**", "*.swift").to_s).reject do |path|
-  litert_prototype_only_source_names.include?(File.basename(path))
+  litert_prototype_only_source_names.include?(File.basename(path)) ||
+    m3_spike_only_source_names.include?(File.basename(path))
 end
 runtime_sources = Dir.glob(ROOT.join("runtime", "**", "*.swift").to_s)
 test_sources = Dir.glob(IOS_ROOT.join(UNIT_TEST_TARGET, "**", "*.swift").to_s)
@@ -322,6 +333,27 @@ if ENV["PREXUS_LITERT_LM_PROTOTYPE"] == "1"
   end
 
   puts "Linked LiteRT-LM Swift package into QWON (PREXUS_LITERT_LM_PROTOTYPE)."
+end
+
+if ENV["QWON_M3_MODEL_DOWNLOAD_SPIKE"] == "1"
+  m3_spike_sources = m3_spike_only_source_names.map do |name|
+    IOS_ROOT.join(APP_SOURCE_DIR, "**", name).to_s
+  end.flat_map { |pattern| Dir.glob(pattern) }
+
+  m3_spike_sources.each do |path|
+    next unless File.file?(path)
+    add_file(app_target, app_group, path, IOS_ROOT.join(APP_SOURCE_DIR))
+  end
+
+  [app_target, test_target].each do |target|
+    target.build_configurations.each do |config|
+      conditions = Array(config.build_settings["SWIFT_ACTIVE_COMPILATION_CONDITIONS"] || ["$(inherited)"])
+      conditions << "QWON_M3_MODEL_DOWNLOAD_SPIKE" unless conditions.include?("QWON_M3_MODEL_DOWNLOAD_SPIKE")
+      config.build_settings["SWIFT_ACTIVE_COMPILATION_CONDITIONS"] = conditions
+    end
+  end
+
+  puts "Enabled QWON M3 model download spike (QWON_M3_MODEL_DOWNLOAD_SPIKE)."
 end
 
 project.save
