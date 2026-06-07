@@ -1,10 +1,10 @@
 # QWON — Next Work Queue
 
-**Last updated:** 2026-06-07 (M3 spike plan added — docs-only)
+**Last updated:** 2026-06-07 (M3 spike merged — outcome decision checkpoint)
 **Status:** **Queue / guardrail only** — no implementation authorization in this document.
 **Purpose:** After Phase 4 rename docs are complete, classify what agents **may** do next vs what requires **product gates**. Prevents drift into ungated **build `4`**, project-container rename, or blind PREXUS cleanup.
 
-Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision checkpoint](#next-decision-checkpoint) · [Model download / GGUF UX plan](./qwon_model_download_gguf_ux_plan.md) · [Model download / GGUF UX decision](./qwon_model_download_gguf_ux_decision.md) · [Post-alpha next lane checkpoint](./qwon_post_alpha_options.md#next-lane-selection-checkpoint-2026-06-03) · [UI polish / onboarding plan](./qwon_ui_polish_onboarding_plan.md) · [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
+Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision checkpoint](#next-decision-checkpoint) · [M3 spike outcome decision](./qwon_m3_spike_outcome_decision.md) · [Model download / GGUF UX plan](./qwon_model_download_gguf_ux_plan.md) · [Model download / GGUF UX decision](./qwon_model_download_gguf_ux_decision.md) · [Post-alpha next lane checkpoint](./qwon_post_alpha_options.md#next-lane-selection-checkpoint-2026-06-03) · [UI polish / onboarding plan](./qwon_ui_polish_onboarding_plan.md) · [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
 
 ---
 
@@ -31,26 +31,26 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 
 **Start here** when choosing what to do after build **`3`** stable alpha — release vs post-alpha planning. This section is the **decision entry point**; lanes below are detail.
 
-### Current (2026-06-03)
+### Current (2026-06-07)
 
 | Field | Value |
 | --- | --- |
-| **TestFlight** | **QWON `0.1.0 (3)`** — **stable alpha** · ASC **`6775685841`** |
+| **TestFlight** | **QWON `0.1.0 (3)`** — **stable alpha** · ASC **`6775685841`** · **does not include** M3 downloader UI |
 | **Feedback** | **Closed** — **QWON-FB-001**, **QWON-FB-002** operational pass only; **no blockers** · [intake close](./qwon_text_alpha_feedback_intake.md#feedback-window-close-2026-06-03) |
 | **Build `4`** | **Not approved** — no upload, tag, or version bump without explicit product gate |
 | **Lab** | Wang + Matisse build `3` verified · [lab evidence](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) |
-| **First post-alpha lane** | **UI polish / onboarding — complete** (UI-1 #80, #81) · UI-2 **deferred** (#82) |
-| **Selected next lane** | **[Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md)** |
-| **Scoped plan** | **[qwon_model_download_gguf_ux_plan.md](./qwon_model_download_gguf_ux_plan.md)** — M1/M2 **complete** ([#86](https://github.com/studio-prospect/qwon-ai-ios/pull/86)–[#89](https://github.com/studio-prospect/qwon-ai-ios/pull/89)); M3 Gates **1–9 Ready**; [M3 spike plan](./qwon_m3_spike_plan.md) added |
-| **Next agent step** | **Implement M3 spike only after plan merge** — compile-gated implementation; **Build `4` not approved** |
+| **Model download / GGUF UX** | M1/M2 **complete** · M3 spike **merged** ([#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118), verification [#119](https://github.com/studio-prospect/qwon-ai-ios/pull/119)) |
+| **M3 compile gate** | `QWON_M3_MODEL_DOWNLOAD_SPIKE` — **default off** |
+| **Next Product decision** | **[M3 spike outcome decision](./qwon_m3_spike_outcome_decision.md)** — Option A (stay default-off) vs Build `4` paths |
+| **Next agent step** | **Docs / Product gate only** — no default-on M3 implementation; **Build `4` not approved** |
 
 ### Choose a branch
 
 | Branch | When | First doc | Agent default |
 | --- | --- | --- | --- |
-| **Stay** | Maintain build **`3`**; no new binary; docs/readme hygiene only | This queue — [Ready / low-risk docs-ops](#ready--low-risk-docs-ops) | **Yes** — M1/M2 complete; M3 Gates **1–9 Ready** |
-| **Product gate: build `4` decision** | Product explicitly evaluates whether a **new TestFlight binary** is warranted | [TestFlight prep — build `4` gate](./qwon_text_alpha_testflight_prep.md#phase-4-build-3-decision-gate) · [Conditional upload build `4`](#testflight-upload-build-4) | **No** — gate docs only until product approves |
-| **Post-alpha: Model download / GGUF UX** | M1/M2 complete; M3 checklist documented | [M3 readiness checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [M3 spike plan](./qwon_m3_spike_plan.md) | **Implementation next** — after spike plan merge; compile-gated only |
+| **Stay** | Maintain build **`3`**; no new binary; docs/readme hygiene only | This queue — [Ready / low-risk docs-ops](#ready--low-risk-docs-ops) | **Yes** — M3 spike merged; default-off |
+| **Product gate: build `4` decision** | Product explicitly evaluates whether a **new TestFlight binary** is warranted | [M3 spike outcome decision](./qwon_m3_spike_outcome_decision.md) · [TestFlight prep — build `4` gate](./qwon_text_alpha_testflight_prep.md#phase-4-build-3-decision-gate) · [Conditional upload build `4`](#testflight-upload-build-4) | **No** — gate docs only until product approves |
+| **Post-alpha: Model download / GGUF UX** | M3 spike merged; outcome decision pending | [M3 spike outcome decision](./qwon_m3_spike_outcome_decision.md) · [UX plan post-merge verification](./qwon_model_download_gguf_ux_plan.md#pr-m3-post-merge-verification-2026-06-07) | **Decision checkpoint** — no default-on implementation |
 
 **Build `4` decision ≠ build `4` approved.** Documenting criteria or opening a product discussion does **not** authorize archive, upload, tag, or `CFBundleVersion` bump.
 
@@ -76,7 +76,37 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 
 ---
 
-## M3 readiness status (2026-06-05)
+<a id="m3-spike-status-2026-06-07"></a>
+
+## M3 spike status (2026-06-07)
+
+**Spike merged · post-merge verification recorded · outcome decision pending · Build `4` not approved.**
+
+| Field | Value |
+| --- | --- |
+| **Implementation** | [#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118) merged — compile-gated downloader |
+| **Verification** | [#119](https://github.com/studio-prospect/qwon-ai-ios/pull/119) merged — Wang `m3_download` + Matisse `model_status` |
+| **Compile gate** | `QWON_M3_MODEL_DOWNLOAD_SPIKE` — **default off**; TestFlight **`0.1.0 (3)`** has no M3 downloader UI |
+| **Historical readiness** | [M3 readiness gate checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) — Gates **1–9 Ready** (pre-merge record) |
+| **Next decision** | **[M3 spike outcome decision](./qwon_m3_spike_outcome_decision.md)** — Options A–D; recommend **A** unless Product approves Build `4` |
+| **Build `4` / TestFlight upload / tag / version bump** | **Not approved** |
+| **M2 rollback** | **Place GGUF via Mac** + USB ops remain known-good path |
+
+### Next allowed work (M3 lane)
+
+| Action | Owner | Notes |
+| --- | --- | --- |
+| **Product outcome decision** | Product / Codex | [M3 spike outcome decision](./qwon_m3_spike_outcome_decision.md) — docs-only until signed |
+| **Internal debug spike builds** | RE / lab | `QWON_M3_MODEL_DOWNLOAD_SPIKE=1` — not TestFlight Release |
+| **Default-on M3 / Build `4` release work** | — | **Forbidden** until Product selects option + explicit Build `4` gate |
+
+---
+
+<a id="m3-readiness-status-2026-06-05"></a>
+
+## M3 readiness status (2026-06-05) — historical
+
+**Superseded by [M3 spike status (2026-06-07)](#m3-spike-status-2026-06-07).** Kept for audit trail.
 
 **Batch A Ready · Batch B Ready · Batch C Ready · Batch D Ready · Gates 1–9 Ready · M3 spike plan added · Build `4` not approved.**
 
@@ -84,7 +114,7 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 | --- | --- |
 | **Checklist** | [M3 readiness gate checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) — Gates **1–9** each have linked evidence memos ([#91](https://github.com/studio-prospect/qwon-ai-ios/pull/91)–[#95](https://github.com/studio-prospect/qwon-ai-ios/pull/95)) |
 | **Gate status** | Gates **1–9 Ready** |
-| **M3 in-app download spike** | **Compile-gated spike plan added** — implement only after plan merge; no release ops |
+| **M3 in-app download spike** | **Merged** ([#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118)) |
 | **Build `4` / TestFlight upload / tag / version bump** | **Not approved** — Gate 9 separate from spike |
 | **M2 rollback** | **Place GGUF via Mac** + USB ops remain known-good path |
 | **Review plan** | [M3 gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) — batches A–D documented; Batch **A/B/C/D** Ready sign-offs recorded |
@@ -102,11 +132,11 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 | 6–7 | [Network + device expectation](./qwon_m3_network_device_expectation_memo.md) |
 | 8–9 | [Rollback + release gate](./qwon_m3_rollback_release_gate_memo.md) |
 
-### Next allowed docs-only work (M3 lane)
+### Next allowed docs-only work (M3 lane) — historical
 
 | Action | Owner | Notes |
 | --- | --- | --- |
-| **M3 spike implementation PR** | Cursor / Codex review | Compile-gated per [M3 spike plan](./qwon_m3_spike_plan.md); **not** Build `4` |
+| ~~**M3 spike implementation PR**~~ | — | **Done** ([#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118)) |
 | **Build `4` release work** | — | **Forbidden** until separate Product release gate |
 
 ---
@@ -286,7 +316,7 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 | Clean up remaining PREXUS strings | **Stop** | [Inventory](./qwon_preserved_prexus_surface_inventory.md) first — default **preserve** |
 | Plan UI polish / onboarding | **Complete** (UI-1) | [UI polish plan](./qwon_ui_polish_onboarding_plan.md) · UI-2 **deferred** |
 | Select next post-alpha lane | **Done** — [Model download / GGUF UX decision](./qwon_model_download_gguf_ux_decision.md) |
-| Plan Model download / GGUF UX | **M1/M2 complete** · **M3 Gates 1–9 Ready** · spike plan added | [Review plan](./qwon_m3_gate_readiness_review_plan.md) · [M3 spike plan](./qwon_m3_spike_plan.md) |
+| Plan Model download / GGUF UX | **M3 spike merged** · outcome decision pending | [M3 spike outcome decision](./qwon_m3_spike_outcome_decision.md) · [UX plan](./qwon_model_download_gguf_ux_plan.md) |
 | Open UI-2 onboarding structure | **Deferred** | **Not approved** — [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) |
 | Add OCR / LiteRT / App Store | Deferred | [Selection matrix](./qwon_post_alpha_options.md#selection-matrix) |
 
@@ -294,4 +324,4 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 ## Agent note
 
-Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **UI polish UI-1 complete**; **UI-2 deferred**. **Model download / GGUF UX M1/M2 merged**; **M3 readiness: Gates 1–9 Ready** — [status section](#m3-readiness-status-2026-06-05); [M3 spike plan](./qwon_m3_spike_plan.md) defines the compile-gated implementation boundary. Build **`4`** / TestFlight upload / tag / version bump require **explicit product gate**. No release download UX, GGUF commit, or UI-2 without gates.
+Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **Model download / GGUF UX M1/M2/M3 spike merged** ([#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118), verification [#119](https://github.com/studio-prospect/qwon-ai-ios/pull/119)); M3 remains **compile-gated default-off**. **Next:** [M3 spike outcome decision](./qwon_m3_spike_outcome_decision.md). Build **`4`** / TestFlight upload / tag / version bump require **explicit product gate**. No default-on download UX, GGUF commit, or UI-2 without gates.
