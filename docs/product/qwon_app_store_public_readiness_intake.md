@@ -1,10 +1,10 @@
 # QWON — App Store Public Readiness Answer Intake Ledger
 
-**Last updated:** 2026-06-07 (Stay selected — intake ledger created; all questions **Unanswered**)
+**Last updated:** 2026-06-07 (Stay selected — G1 Product answer worksheet added; intake rows still **Unanswered**)
 **Status:** **Intake ledger** — **24 questions · 24 Unanswered · 0 Answered**. **Not** App Store public release approval. **Not** Build `4` approval. **TestFlight upload / tag / version bump not approved.**
 **Purpose:** Decompose [App Store public readiness checklist](./qwon_app_store_public_readiness_checklist.md) gates **G1–G10** into **answerable questions** for Product / Legal / Release Engineering. Record answers in **separate docs-only PRs** when stakeholders supply written responses.
 
-Related: [Public readiness checklist](./qwon_app_store_public_readiness_checklist.md) · [Next work queue — App Store readiness](./qwon_next_work_queue.md#app-store-public-release) · [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record) · [M3 gate answer intake (format reference)](./qwon_m3_gate_answer_intake.md) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
+Related: [G1 Product worksheet (EN)](./qwon_app_store_g1_product_worksheet.md) · [G1 Product 回答フォーム（日本語）](./qwon_app_store_g1_product_worksheet_ja.md) · [Public readiness checklist](./qwon_app_store_public_readiness_checklist.md) · [Next work queue — App Store readiness](./qwon_next_work_queue.md#app-store-public-release) · [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record) · [M3 gate answer intake (format reference)](./qwon_m3_gate_answer_intake.md) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
 
 ---
 
@@ -18,6 +18,7 @@ Related: [Public readiness checklist](./qwon_app_store_public_readiness_checklis
 | **Answer recorded ≠ public release approved** | Updating a row to **Answered** does **not** approve App Store submission, Build `4`, or TestFlight upload |
 | **Gate disposition** | Checklist gates **G1–G10** remain **Open** or **Partial** until Product records explicit gate sign-off — **separate** from intake answers |
 | **Agents on Stay** | May append **real** answers only when Product/Legal/RE explicitly supplies them; otherwise leave **Unanswered** |
+| **External worksheets** | [G1 Product worksheet](./qwon_app_store_g1_product_worksheet.md) / [日本語フォーム](./qwon_app_store_g1_product_worksheet_ja.md) — share with Product; **draft suggestions are not approved answers** |
 
 ### Intake summary
 
@@ -47,6 +48,8 @@ Related: [Public readiness checklist](./qwon_app_store_public_readiness_checklis
 ---
 
 ## G1 — Product positioning / value proposition
+
+**External share:** [G1 Product worksheet (EN)](./qwon_app_store_g1_product_worksheet.md) · [G1 Product 回答フォーム（日本語）](./qwon_app_store_g1_product_worksheet_ja.md) — Product fills worksheet; intake rows below stay **Unanswered** until a follow-up docs-only PR records approved answers.
 
 | Question ID | Gate | Owner | Question | Answer status | Answer source | Blocks | Follow-up PR |
 | --- | --- | --- | --- | --- | --- | --- | --- |
