@@ -1,7 +1,7 @@
 # QWON - Model Download / GGUF UX - Scoped Plan
 
-**Last updated:** 2026-06-07 (M3 spike merged — outcome decision checkpoint added)
-**Status:** **Scoped plan** - M1/M2/M3 spike complete on `main` ([#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118), verification [#119](https://github.com/studio-prospect/qwon-ai-ios/pull/119)). M3 downloader remains **compile-gated** (`QWON_M3_MODEL_DOWNLOAD_SPIKE`, default off). **Next:** [M3 spike outcome decision](./qwon_m3_spike_outcome_decision.md). Build `4`, TestFlight upload, tag, version bump, GGUF commit, and filename migration remain **not approved**.
+**Last updated:** 2026-06-07 (M3 Option A selected — lane closed)
+**Status:** **Scoped plan** - M1/M2/M3 spike complete ([#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118), verification [#119](https://github.com/studio-prospect/qwon-ai-ios/pull/119), checkpoint [#120](https://github.com/studio-prospect/qwon-ai-ios/pull/120)). **Option A selected** — M3 downloader remains **compile-gated** (`QWON_M3_MODEL_DOWNLOAD_SPIKE`, default off); M3 lane **closed** for implementation. Build `4`, TestFlight upload, tag, version bump, GGUF commit, and filename migration remain **not approved**.
 **Purpose:** Define the safe implementation boundary for reducing QWON text-alpha model acquisition friction after [Product selected Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md). This plan turns that lane decision into a staged UX/ops path without changing the current runtime contract.
 
 Related: [Decision memo](./qwon_model_download_gguf_ux_decision.md) · [M3 spike plan](./qwon_m3_spike_plan.md) · [M3 spike outcome decision](./qwon_m3_spike_outcome_decision.md) · [models/README.md](../../models/README.md) · [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [QWON lab evidence](./qwon_text_alpha_lab_evidence.md) · [UI polish / onboarding](./qwon_ui_polish_onboarding_plan.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md)
@@ -647,7 +647,7 @@ GGUF, logs, screenshots, xcresult, and DerivedData remain ops-side only.
 
 M3 compile-gated downloader spike is **verified on `main` @ `a2a4f2a`**: default project stays spike-off; spike-on build passes full `QWONTests`; live `models.qwon.dev` artifact matches Gate 2 byte size + SHA-256; Wang completes foreground download/promote with verified status; Matisse retains Embedded Heuristic expected path. **Build `4` / TestFlight / tag / version bump remain not approved.**
 
-**Next decision:** Product/Codex must choose how to treat the merged spike — see [M3 spike outcome decision checkpoint](./qwon_m3_spike_outcome_decision.md).
+**Next decision:** **Option A selected** (2026-06-07) — keep spike compile-gated default-off; M3 lane closed. See [M3 spike outcome decision record](./qwon_m3_spike_outcome_decision.md#decision-record).
 
 ---
 
@@ -711,6 +711,6 @@ All rows below were **met before** [#118](https://github.com/studio-prospect/qwo
 
 ### Cursor / agent boundary (post-#118)
 
-- **Merged on `main`:** compile-gated M3 spike per [M3 spike plan](./qwon_m3_spike_plan.md) ([#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118)); default-off unless `QWON_M3_MODEL_DOWNLOAD_SPIKE=1` at project generation.
-- **Next Product decision:** [M3 spike outcome decision checkpoint](./qwon_m3_spike_outcome_decision.md) — Build `4` vs stay default-off.
+- **Option A selected:** compile-gated M3 spike on `main` ([#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118)); default-off unless `QWON_M3_MODEL_DOWNLOAD_SPIKE=1` at project generation; M3 lane **closed** for implementation.
+- **Reopen only if:** Product explicitly approves Build `4` (Option B) or Option C hardening — see [decision record](./qwon_m3_spike_outcome_decision.md#decision-record).
 - **Still not allowed:** TestFlight upload, Build `4` ops, tag, version bump, GGUF commit, product-facing release changes, default-on downloader UX, or changing `LocalGGUFModelPlacement` lookup order.
