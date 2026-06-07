@@ -1,6 +1,6 @@
 # QWON — Post-Alpha Option Lanes (v0.2+ Planning)
 
-**Last updated:** 2026-06-07 (Stay selected — active docs wording audit)
+**Last updated:** 2026-06-07 (Stay selected — App Store public readiness checklist)
 **Status:** **Stay selected** — Model download / GGUF UX **lane closed** (Option A). **No third post-alpha lane.** **Build `4` not approved.**
 **Purpose:** After **QWON `0.1.0 (3)` stable alpha**, [UI polish UI-1 complete](./qwon_ui_polish_onboarding_plan.md), and [M3 spike Option A](./qwon_m3_spike_outcome_decision.md#decision-record), outline **remaining v0.2 / post-alpha candidate lanes** and record lane selections. Does **not** approve build **`4`**, TestFlight upload, tag, version bump, or code work.
 
@@ -75,7 +75,7 @@ See [Post-M3 next lane decision §2](./qwon_post_m3_next_lane_decision.md#2-next
 | **UI-2 reopen** | New evidence required |
 | **OCR / camera / multimodal** | Planning only → Codex plan |
 | **LiteRT follow-up** | Planning only → Codex plan |
-| **App Store readiness** | Long-term; separate from Build `4` |
+| **App Store readiness** | Long-term; separate from Build `4` · [checklist entry](./qwon_app_store_public_readiness_checklist.md) |
 | **`PREXUS.xcodeproj` rename** | Deferred infra — Product must explicitly want cleanup |
 | **Runtime memory / retention** | High impact — Codex plan required |
 
@@ -132,7 +132,7 @@ Qualitative scale matches [Selection matrix](#selection-matrix). Rows below **ex
 | **OCR / camera** | High (long term) | **High** | **High** — camera permission, vision, routing | Low — architecture sketches only | **docs-only** design memo → spike |
 | **LiteRT / local backend** | Medium–High | **High** | **High** — routing, Metal, tier policy | Medium — [research memo](../research/litert_lm_adoption_decision.md); eval incomplete | **docs-only** decision memo → spike |
 | **Project container rename** | **Low** (dev-only) | Medium | **Low** — infra only | **High** — Phase 4 audit + inventory | **docs-only** migration checklist → scoped implementation |
-| **App Store readiness** | High (long term) | **High** | Medium — compliance, support, labels | Low — TestFlight prep only | **docs-only** readiness checklist |
+| **App Store readiness** | High (long term) | **High** | Medium — compliance, support, labels | **Medium** — [public readiness checklist](./qwon_app_store_public_readiness_checklist.md) | **docs-only** readiness checklist |
 
 **Selected lane:** [Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md). Comparison table retained for audit.
 
@@ -185,7 +185,7 @@ Qualitative scale matches [Selection matrix](#selection-matrix). Rows below **ex
 | **OCR / camera** | High (long term) | **High** | Low — architecture sketches only | **High** — camera permission, vision pipeline, routing | Medium–Long — design memo before spike | Product commits to **multimodal sensor** roadmap | Text-alpha scope still primary; no Codex architecture plan |
 | **Model download / GGUF UX** | **High** (testers) | Medium | Medium — [models/README](../../models/README.md), USB push ops proven; no in-app UX | Medium — storage, network, file integrity | Medium — UX memo → download spike | Product wants to **remove USB push friction** for lab + future testers | Filename migration bundled; upload implied |
 | **Project container rename** | **Low** (dev-only) | Medium | High — [inventory](./qwon_preserved_prexus_surface_inventory.md), Phase 4 audit complete | **Low** — infra only | Medium — checklist then scoped PR | Product prioritizes **contributor/CI clarity** over user features | Any user-facing lane active; no migration plan |
-| **App Store readiness** | High (long term) | **High** | Low — TestFlight prep only; no public checklist | Medium — compliance, support, privacy labels | Long — checklist doc only at first | Product plans **public release horizon** explicitly | Conflated with build **`4`** gate; alpha still internal-only |
+| **App Store readiness** | High (long term) | **High** | **Medium** — [public readiness checklist](./qwon_app_store_public_readiness_checklist.md) | Medium — compliance, support, privacy labels | Long — checklist doc only at first | Product plans **public release horizon** explicitly | Conflated with build **`4`** gate; alpha still internal-only |
 | **Runtime memory / retention** | Medium–High | **High** | Low–Medium — architecture principles; no retention policy doc | **High** — SQLite/vectors, retention law, battery | Medium–Long — policy doc before schema | Product prioritizes **cognitive runtime** core thesis | Privacy/retention policy undefined; cloud dump acceptable shortcut |
 | **UI polish / onboarding** | **High** (near term) | **Low–Medium** | **High** — [FB-001/002 pass](./qwon_text_alpha_feedback_intake.md#triage-log-build-3) | **Low** | **Closed** — UI-1 done | **Lane complete** — do not re-select | UI-2 only with [new evidence](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) |
 
@@ -316,11 +316,11 @@ While **Stay** is selected, skip steps 1–3. When Product **lifts Stay** and pi
 | **Goal** | Define checklist to exit **TestFlight-only** text-alpha: compliance, support, quality bar, marketing version strategy (**not** build **`4`** approval). |
 | **User impact** | Public App Store availability; support burden; broader device matrix. |
 | **Technical risk** | **High** — export compliance at scale, crash/quality SLAs, privacy nutrition labels, model distribution policy. |
-| **Required evidence** | Release checklist doc; privacy review; support plan; explicit product gate — separate from alpha stable line. |
-| **Suggested first PR type** | **docs-only** (readiness checklist + gaps) — **no** upload/tag/bump from planning PRs. |
-| **Do not start if** | Conflated with internal alpha build **`4`** decision; unfinished stable alpha posture; PREXUS ASC `6775110218` confusion. |
+| **Required evidence** | [App Store public readiness checklist](./qwon_app_store_public_readiness_checklist.md) — gates G1–G10; Product/Legal/RE review; explicit product gate — separate from alpha stable line. |
+| **Suggested first PR type** | **docs-only** (readiness checklist + gaps) — **no** upload/tag/bump from planning PRs. **Checklist entry:** [qwon_app_store_public_readiness_checklist.md](./qwon_app_store_public_readiness_checklist.md) (2026-06-07). |
+| **Do not start if** | Conflated with internal alpha build **`4`** decision; unfinished stable alpha posture; PREXUS ASC `6775110218` confusion; **Stay** treated as public-release approval. |
 
-**First docs to read:** [QWON TestFlight prep — out of scope](./qwon_text_alpha_testflight_prep.md) · [QWON bundle memo](./qwon_bundle_id_decision_memo.md)
+**First docs to read:** [App Store public readiness checklist](./qwon_app_store_public_readiness_checklist.md) · [QWON TestFlight prep — out of scope](./qwon_text_alpha_testflight_prep.md) · [QWON bundle memo](./qwon_bundle_id_decision_memo.md)
 
 ---
 

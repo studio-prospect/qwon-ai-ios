@@ -5,7 +5,7 @@
 
 **Historical line:** PREXUS alpha `0.1.0 (1)` on `jp.studio-prospect.prexus.ios` remains frozen — see [Qwen text-only alpha TestFlight prep](./qwen_text_only_alpha_testflight_prep.md). **Do not** upload QWON builds to ASC app **PREXUS** (Apple ID `6775110218`).
 
-**Related:** [QWON rename docs index](./qwon_rename_docs_index.md) · [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record) · [Next decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) · [QWON next work queue](./qwon_next_work_queue.md) · [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) · [QWON rename migration plan](./qwon_rename_migration_plan.md) · [QWON bundle memo](./qwon_bundle_id_decision_memo.md) · [QWON lab evidence](./qwon_text_alpha_lab_evidence.md) · [PREXUS bundle memo](./bundle_id_decision_memo.md) (historical)
+**Related:** [QWON rename docs index](./qwon_rename_docs_index.md) · [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record) · [App Store public readiness checklist](./qwon_app_store_public_readiness_checklist.md) · [Next decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) · [QWON next work queue](./qwon_next_work_queue.md) · [QWON feedback intake](./qwon_text_alpha_feedback_intake.md) · [QWON rename migration plan](./qwon_rename_migration_plan.md) · [QWON bundle memo](./qwon_bundle_id_decision_memo.md) · [QWON lab evidence](./qwon_text_alpha_lab_evidence.md) · [PREXUS bundle memo](./bundle_id_decision_memo.md) (historical)
 
 ---
 
@@ -34,7 +34,7 @@
 
 **Active build:** marketing `0.1.0`, **`CFBundleVersion` `3`** on TestFlight. Committed `Info.plist` on `main` may still show `2` until a separate bump PR — upload binary is **`0.1.0 (3)`**.
 
-**Explicitly out of scope:** App Store public release; **PREXUS** alpha **build `2`** (separate product line — not this QWON build `2`); rewriting PREXUS frozen ledger or upload history; **build `4`** without product gate.
+**Explicitly out of scope:** App Store public release — see [App Store public readiness checklist](./qwon_app_store_public_readiness_checklist.md) (**not approved**); **PREXUS** alpha **build `2`** (separate product line — not this QWON build `2`); rewriting PREXUS frozen ledger or upload history; **build `4`** without product gate.
 
 ---
 

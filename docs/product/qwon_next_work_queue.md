@@ -1,6 +1,6 @@
 # QWON — Next Work Queue
 
-**Last updated:** 2026-06-07 (Stay selected — active docs wording audit)
+**Last updated:** 2026-06-07 (Stay selected — App Store public readiness checklist)
 **Status:** **Queue / guardrail only** — **Stay selected**; docs/readme/index/evidence hygiene only; no implementation authorization.
 **Purpose:** After Phase 4 rename docs are complete, classify what agents **may** do next vs what requires **product gates**. Prevents drift into ungated **build `4`**, project-container rename, or blind PREXUS cleanup.
 
@@ -63,7 +63,7 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 | Docs / README / index maintenance | [Ready / low-risk docs-ops](#ready--low-risk-docs-ops) |
 | **Product-approved build `4` planning** docs only (criteria, checklist, gate memo — **not** upload) | [Conditional — build `4`](#testflight-upload-build-4) |
 | Post-alpha — **next lane selection** | [Post-M3 next lane decision](./qwon_post_m3_next_lane_decision.md) · [Post-alpha options](./qwon_post_alpha_options.md) |
-| **Stay posture docs hygiene** | Index/queue/link fixes; closed-intake wording; **no** feature implementation | [Ready / low-risk docs-ops](#ready--low-risk-docs-ops) |
+| **Stay posture docs hygiene** | Index/queue/link fixes; closed-intake wording; App Store readiness checklist maintenance; **no** feature implementation | [Ready / low-risk docs-ops](#ready--low-risk-docs-ops) |
 | UI polish **UI-2** (gated) | [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) — **not opened** unless new evidence |
 | Minimal fix on build **`3`** | **Only** with [verified release blocker](#minimal-fix-pr-verified-release-blocker-only) + Codex/Product sign-off |
 
@@ -297,14 +297,26 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 | **First doc to read** | [Model download / GGUF UX plan](./qwon_model_download_gguf_ux_plan.md) |
 | **Do not start if** | Treating merged spike as active implementation lane while **Stay** is selected |
 
-### App Store public release
+<a id="app-store-public-release"></a>
+
+### App Store public release readiness (docs-only)
+
+| Field | Detail |
+| --- | --- |
+| **Status** | **Checklist entry** — gap visibility only; **public release not approved** |
+| **Trigger** | Product plans **public App Store horizon** (separate from Build `4`) |
+| **Required evidence** | Product/Legal/RE walk of gates G1–G10 — **no** submission or code from checklist PRs |
+| **First doc to read** | [App Store public readiness checklist](./qwon_app_store_public_readiness_checklist.md) |
+| **Do not start if** | Conflated with Build `4` / TestFlight upload; treating checklist as implementation authorization; **Stay** lifted without explicit lane record |
+
+### App Store public release (historical stub)
+
+**Superseded by [App Store public release readiness (docs-only)](#app-store-public-release-readiness-docs-only).** Kept for link compatibility.
 
 | Field | Detail |
 | --- | --- |
 | **Trigger** | Product exits text-alpha / TestFlight-only phase |
-| **Required evidence** | Full release checklist; compliance; marketing — **explicitly out of scope** today |
-| **First doc to read** | [QWON TestFlight prep — out of scope](./qwon_text_alpha_testflight_prep.md) |
-| **Do not start if** | Still in text-alpha; conflated with build `3` archive smoke |
+| **First doc to read** | [App Store public readiness checklist](./qwon_app_store_public_readiness_checklist.md) |
 
 ---
 
@@ -323,10 +335,10 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 | Select next post-alpha lane | **Stay selected** | [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record) |
 | Model download / GGUF UX (M3) | **Closed** (Option A) | [M3 spike outcome decision](./qwon_m3_spike_outcome_decision.md) · [UX plan](./qwon_model_download_gguf_ux_plan.md) |
 | Open UI-2 onboarding structure | **Deferred** | **Not approved** — [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) |
-| Add OCR / LiteRT / App Store | Deferred | [Selection matrix](./qwon_post_alpha_options.md#selection-matrix) |
+| Add OCR / LiteRT / App Store readiness | Stay — docs-only | [App Store public readiness checklist](./qwon_app_store_public_readiness_checklist.md) · [Selection matrix](./qwon_post_alpha_options.md#selection-matrix) |
 
 ---
 
 ## Agent note
 
-Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **Stay selected** — docs/readme/index/evidence hygiene only; M3 Option A / lane **closed**. Build **`4`** / TestFlight upload / tag / version bump require **explicit product gate**. Active docs wording audit **2026-06-07** ([#123](https://github.com/studio-prospect/qwon-ai-ios/pull/123) series). To start implementation, Product must **lift Stay** and select one lane + Codex scoped plan.
+Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **Stay selected** — docs/readme/index/evidence hygiene only; M3 Option A / lane **closed**. [App Store public readiness checklist](./qwon_app_store_public_readiness_checklist.md) added **2026-06-07** — **public release not approved**. Build **`4`** / TestFlight upload / tag / version bump require **explicit product gate**. Active docs wording audit **2026-06-07** ([#124](https://github.com/studio-prospect/qwon-ai-ios/pull/124)). To start implementation, Product must **lift Stay** and select one lane + Codex scoped plan.
