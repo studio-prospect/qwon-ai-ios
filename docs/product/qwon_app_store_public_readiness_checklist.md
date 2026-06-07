@@ -1,0 +1,90 @@
+# QWON — App Store Public Release Readiness Checklist
+
+**Last updated:** 2026-06-07 (Stay selected — docs-only checklist entry)
+**Status:** **Docs-only** — **Stay selected**. **App Store public release not approved.** **Build `4` not approved.** **TestFlight upload / tag / version bump not approved.**
+**Purpose:** While **Stay** remains in effect, make **open Product/Legal/RE decisions** visible for a future move from TestFlight **`0.1.0 (3)`** stable alpha to **public App Store availability**. This checklist does **not** authorize implementation, release engineering, App Store submission, or Build `4`.
+
+Related: [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record) · [Next work queue](./qwon_next_work_queue.md#app-store-public-release) · [Post-alpha option — App Store readiness](./qwon_post_alpha_options.md#5-public--app-store-readiness) · [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [QWON bundle memo](./qwon_bundle_id_decision_memo.md) · [M3 distribution compliance memo](./qwon_m3_model_distribution_compliance_memo.md) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
+
+---
+
+## 1. Status
+
+| Field | Value |
+| --- | --- |
+| **Work type** | **Docs-only** — checklist and gap visibility; no code or ASC ops from this doc |
+| **Product posture** | **Stay selected** — [decision record](./qwon_post_m3_next_lane_decision.md#decision-record) |
+| **App Store public release** | **Not approved** |
+| **Build `4`** | **Not approved** |
+| **TestFlight upload / tag / version bump** | **Not approved** |
+| **Implementation authorization** | **None** — lifting Stay + explicit public-release gate required before any lane opens |
+
+---
+
+## 2. Current baseline
+
+| Field | Value |
+| --- | --- |
+| **Active TestFlight** | **QWON `0.1.0 (3)`** — **stable alpha** |
+| **Bundle ID** | **`jp.studio-prospect.qwon.ios`** |
+| **ASC Apple ID** | **`6775685841`** (QWON line — not historical PREXUS **`6775110218`**) |
+| **Feedback intake** | **Closed** — **QWON-FB-001**, **QWON-FB-002** operational pass; **no blockers** |
+| **M3 model download spike** | **Option A selected** — compile-gated **default-off**; M3 lane **closed** · [decision record](./qwon_m3_spike_outcome_decision.md#decision-record) |
+| **Tester-visible model acquisition** | M2 **Place GGUF via Mac** + USB ops — unchanged on TestFlight **`0.1.0 (3)`** |
+| **Historical PREXUS alpha** | Frozen — [PREXUS alpha index](./qwen_text_only_alpha_docs_index.md); **do not** conflate with QWON public release |
+
+**Distinction:** Public release readiness is a **long-term product horizon** gate. It is **separate** from the internal **Build `4` / TestFlight binary** decision documented in [TestFlight prep — build `4` gate](./qwon_text_alpha_testflight_prep.md#phase-4-build-3-decision-gate).
+
+---
+
+## 3. Public readiness gates
+
+Each row is an **open decision or artifact** until Product/Legal/RE records completion. Status **Open** = not decided or not documented for public release.
+
+| # | Gate | Status | Notes / first doc |
+| --- | --- | --- | --- |
+| **G1** | **Product positioning / value proposition** | **Open** | What QWON is publicly (local-first cognitive runtime vs generic chat); audience; pricing if any |
+| **G2** | **App Store metadata and screenshots** | **Open** | Title, subtitle, description, keywords, age rating narrative, localized copy, screenshot set for supported devices |
+| **G3** | **Privacy nutrition labels** | **Open** | ASC privacy questionnaire aligned with on-device LLM, optional network (M3 if ever default-on), camera/OCR if added · [M3 network memo](./qwon_m3_network_device_expectation_memo.md) · [distribution compliance](./qwon_m3_model_distribution_compliance_memo.md) |
+| **G4** | **Export compliance / encryption declaration** | **Partial** | TestFlight build `2` export gate **done** for alpha · [TestFlight prep — export compliance](./qwon_text_alpha_testflight_prep.md#export-compliance-operator-gate) — **re-verify** for public release and any model-download UX |
+| **G5** | **Model distribution policy** | **Open** | Public story for GGUF: sideload vs in-app download vs bundled weights; license/redistribution · [M3 Gate 3 memo](./qwon_m3_model_distribution_compliance_memo.md) · [models/README](../../models/README.md) |
+| **G6** | **Support contact / website / terms / privacy policy** | **Open** | Public support URL or email; hosted privacy policy and terms; marketing site alignment |
+| **G7** | **Crash-free / device lab expectations** | **Partial** | Wang + Matisse build `3` **pass** · [lab evidence](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) — public bar needs broader matrix, crash analytics, and SLA definition |
+| **G8** | **Known limitations and App Review notes** | **Open** | Mac+USB model placement, local-only inference, heuristic fallback, offline behavior, preserved PREXUS filenames |
+| **G9** | **Release notes and versioning** | **Open** | Marketing version strategy beyond `0.1.0`; what ships in first public build vs deferred features |
+| **G10** | **Rollback / TestFlight fallback** | **Partial** | M3 rollback path documented for download spike · [rollback memo](./qwon_m3_rollback_release_gate_memo.md) — public release needs **product rollback plan** (pull listing vs hotfix vs TestFlight-only fallback) |
+
+**Review owners:** Product (G1, G2, G8, G9), Legal (G3, G4, G5, G6), Release engineering (G4, G7, G10).
+
+---
+
+## 4. Explicit non-goals (this checklist)
+
+| Do not do | Why |
+| --- | --- |
+| **App Store submission** or public listing go-live | **Public release not approved** |
+| **Build `4`**, TestFlight upload, tag, or **`CFBundleVersion` bump** | Separate RE gate — [TestFlight prep](./qwon_text_alpha_testflight_prep.md) |
+| **Swift / app / tools / pbxproj changes** from this checklist | Docs-only surface |
+| **M3 default-on** or M3 lane reopen without Product gate | Option A — compile-gated default-off |
+| **GGUF / IPA / logs / screenshots commit to git** | Ops storage only |
+| **PREXUS historical rewrite** (`qwen_text_only_alpha_*`, frozen ledger rows) | Immutable baseline |
+| **Conflate public release with Build `4`** | Internal TestFlight binary ≠ App Store availability |
+
+---
+
+## 5. Decision record
+
+| Field | Value |
+| --- | --- |
+| **Public release approved?** | **No** |
+| **Stay in effect?** | **Yes** — [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record) |
+| **Next action** | **Product / Legal / RE review only** — walk gates **G1–G10**, record decisions in linked memos or append rows here; **no** implementation or submission |
+| **To open implementation** | Product **lifts Stay**, selects **App Store public release readiness** (or combined horizon gate), records approval in this section, then Codex scoped plan → Cursor — **still no** upload/submission without explicit release gate |
+
+**Checklist created:** 2026-06-07 — Stay-allowed docs hygiene; does not change Product posture.
+
+---
+
+## Agent note
+
+This document is the **entry checklist** for [Post-alpha option §5 — Public / App Store readiness](./qwon_post_alpha_options.md#5-public--app-store-readiness). Agents on **Stay** may maintain this checklist (gap updates, links, decision-record append) under [Ready / low-risk docs-ops](./qwon_next_work_queue.md#ready--low-risk-docs-ops). Do **not** treat checklist maintenance as public-release or Build `4` approval.

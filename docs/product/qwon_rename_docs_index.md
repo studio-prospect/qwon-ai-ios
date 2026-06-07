@@ -1,6 +1,6 @@
 # QWON Rename — Documentation Index
 
-**Last updated:** 2026-06-07 (Stay selected — active docs wording audit)
+**Last updated:** 2026-06-07 (Stay selected — App Store public readiness checklist)
 **Purpose:** **Information architecture only** — where to start reading QWON rename / Phase 4 docs and in what order. Does **not** add new policy; it summarizes and links existing decisions.
 
 **Next decision (release vs post-alpha):** [Post-M3 next lane decision](./qwon_post_m3_next_lane_decision.md) · [QWON next work queue — decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) · [M3 spike outcome decision](./qwon_m3_spike_outcome_decision.md)
@@ -58,6 +58,7 @@
 | **Should we open UI-2 (onboarding structure)?** | **Not now** — **defer / not opened** · [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) |
 | **Should I rename a PREXUS string?** | [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md) — default **no** unless listed as safe or product opens a scoped migration PR |
 | **Should we ship build `4`?** | **Not approved** — build **`3` stable alpha**; see [M3 spike outcome decision](./qwon_m3_spike_outcome_decision.md) for Build `4` prerequisites |
+| **Public App Store release readiness?** | **Not approved** — [App Store public readiness checklist](./qwon_app_store_public_readiness_checklist.md); separate from Build `4` |
 | **What is M3 downloader status?** | **Option A selected** — merged compile-gated spike ([#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118)); **default off**; TestFlight **`0.1.0 (3)`** has no downloader UI; lane **closed** · [decision record](./qwon_m3_spike_outcome_decision.md#decision-record) |
 | **Which app / Bundle ID is active?** | [QWON bundle memo](./qwon_bundle_id_decision_memo.md) + [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) — QWON `6775685841`; PREXUS `6775110218` is historical only |
 | **Can I edit PREXUS historical docs?** | **No** — [PREXUS alpha index](./qwen_text_only_alpha_docs_index.md); append-only QWON docs or link; never rewrite frozen rows |
@@ -92,6 +93,7 @@
 | [qwon_m3_storage_integrity_memo.md](./qwon_m3_storage_integrity_memo.md) | **M3 Gate 4–5 evidence** — storage budget / partial download integrity (**Ready**) |
 | [qwon_m3_network_device_expectation_memo.md](./qwon_m3_network_device_expectation_memo.md) | **M3 Gate 6–7 evidence** — network disclosure / Wang–Matisse expectation (**Ready**) |
 | [qwon_m3_rollback_release_gate_memo.md](./qwon_m3_rollback_release_gate_memo.md) | **M3 Gate 8–9 evidence** — Mac+USB rollback / Build `4` release boundary (**Ready**; Build `4` not approved) |
+| [qwon_app_store_public_readiness_checklist.md](./qwon_app_store_public_readiness_checklist.md) | **App Store public readiness** — G1–G10 checklist; **public release not approved**; Stay-allowed docs hygiene |
 | [qwon_ui_polish_onboarding_plan.md](./qwon_ui_polish_onboarding_plan.md) | **First post-alpha scoped plan** — UI-1 complete, [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) |
 
 **Related (outside this index):** [models/README.md](../../models/README.md) (GGUF placement) · [agent_collaboration_workflow.md](./agent_collaboration_workflow.md) (Codex/Cursor roles) · [feedback intake](./qwon_text_alpha_feedback_intake.md) · [next work queue](./qwon_next_work_queue.md)
@@ -100,4 +102,4 @@
 
 ## Agent note
 
-This index does **not** authorize build **`4`**, default-on M3, project-container rename, or env/model migration without explicit product gates. **Current posture:** **Stay selected** — docs hygiene only · [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record). Active docs wording audit **2026-06-07**.
+This index does **not** authorize build **`4`**, default-on M3, project-container rename, or env/model migration without explicit product gates. **Current posture:** **Stay selected** — docs hygiene only · [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record). [App Store public readiness checklist](./qwon_app_store_public_readiness_checklist.md) — **public release not approved** (2026-06-07).
