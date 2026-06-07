@@ -1,7 +1,7 @@
 # QWON — M3 In-App Model Download Spike Plan
 
-**Last updated:** 2026-06-07
-**Status:** **Spike plan** — implementation may start only after this plan is merged. **Not** Build `4` approval, **not** TestFlight upload approval, **not** tag/version bump approval.
+**Last updated:** 2026-06-07 (post-merge verification recorded)
+**Status:** **Spike merged** — [#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118) on `main` @ `a2a4f2a`. Compile gate `QWON_M3_MODEL_DOWNLOAD_SPIKE` remains default **off**. **Not** Build `4` approval, **not** TestFlight upload approval, **not** tag/version bump approval.
 **Purpose:** Define the smallest safe M3 implementation spike for in-app acquisition of `prexus-local-mvp.gguf`, using the signed-off Gates **1–9** evidence while preserving the QWON `0.1.0 (3)` stable alpha release boundary.
 
 Related: [Model download / GGUF UX plan](./qwon_model_download_gguf_ux_plan.md) · [M3 checklist](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md) · [Storage + integrity memo](./qwon_m3_storage_integrity_memo.md) · [Network + device expectation memo](./qwon_m3_network_device_expectation_memo.md) · [Rollback + release gate memo](./qwon_m3_rollback_release_gate_memo.md)
@@ -197,3 +197,22 @@ M3 spike is complete only when:
 | Release boundary | Build `4` remains not approved |
 
 After spike completion, Codex/Product decide whether to keep iterating internally, defer, or open a separate Build `4` product release gate.
+
+---
+
+## Post-merge verification (2026-06-07)
+
+**Base:** `origin/main` @ **`a2a4f2a`** — [PR #118](https://github.com/studio-prospect/qwon-ai-ios/pull/118) merged.
+
+| Gate | Result |
+| --- | --- |
+| Default project (spike off) | **Pass** — no M3-only sources in `project.pbxproj` after `generate_xcodeproj.rb` |
+| Spike project (spike on) | **Pass** — full `QWONTests` including downloader/marker/promote tests |
+| `models.qwon.dev` HEAD + full artifact | **Pass** — `397808192` bytes; SHA-256 `6eb923e7…c8653` |
+| Wang `m3_download` device smoke | **Pass** — verified promote to `Documents/Models/prexus-local-mvp.gguf` |
+| Matisse `model_status` device smoke | **Pass** — Embedded Heuristic expected; missing GGUF not failure |
+| M2 USB rollback path | **Preserved** — no regression to guided placement / push scripts |
+
+Ops evidence: `~/QWON-alpha-evidence/qwon-m3-spike/` (not in git). Full ledger: [UX plan post-merge section](./qwon_model_download_gguf_ux_plan.md#pr-m3-post-merge-verification-2026-06-07).
+
+**Build `4` / TestFlight / tag / version bump:** **not approved**.

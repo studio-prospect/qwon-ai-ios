@@ -1,7 +1,7 @@
 # QWON - Model Download / GGUF UX - Scoped Plan
 
-**Last updated:** 2026-06-07 (M3 checklist — Gates 1–9 Ready; spike plan still separate)
-**Status:** **Scoped plan** - M1/M2 complete; M3 readiness Gates **1–9 Ready**. M3 implementation is controlled by the separate [M3 spike plan](./qwon_m3_spike_plan.md). Build `4`, TestFlight upload, tag, version bump, GGUF commit, and filename migration remain **not approved**.
+**Last updated:** 2026-06-07 (M3 spike merged — post-merge verification recorded)
+**Status:** **Scoped plan** - M1/M2/M3 spike complete on `main` @ `a2a4f2a` ([#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118)). M3 downloader remains **compile-gated** (`QWON_M3_MODEL_DOWNLOAD_SPIKE`, default off). Build `4`, TestFlight upload, tag, version bump, GGUF commit, and filename migration remain **not approved**.
 **Purpose:** Define the safe implementation boundary for reducing QWON text-alpha model acquisition friction after [Product selected Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md). This plan turns that lane decision into a staged UX/ops path without changing the current runtime contract.
 
 Related: [Decision memo](./qwon_model_download_gguf_ux_decision.md) · [M3 spike plan](./qwon_m3_spike_plan.md) · [models/README.md](../../models/README.md) · [QWON TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [QWON lab evidence](./qwon_text_alpha_lab_evidence.md) · [UI polish / onboarding](./qwon_ui_polish_onboarding_plan.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md)
@@ -248,13 +248,11 @@ Rollback principle: the current build `3` path remains the known-good baseline. 
 
 | Field | Requirement |
 | --- | --- |
-| Status | **Gated** — [M3 readiness checklist](#m3-readiness-gate-checklist) must be satisfied before any spike PR |
-| Scope | Prototype downloader only after hosting/checksum/legal/storage gates are answered. |
-| Allowed | Spike branch/PR with explicit Product/Codex gate **after checklist sign-off**. |
-| Forbidden | Shipping default UX, Build `4`, or TestFlight upload bundled with spike. |
-| Gate | All rows in [M3 readiness gate checklist](#m3-readiness-gate-checklist) answered; Product + Codex explicit approval. |
-
-**This checklist does not authorize M3 implementation.** It records prerequisites only.
+| Status | **Merged** — [#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118) · [post-merge verification](#pr-m3-post-merge-verification-2026-06-07) |
+| Scope | Compile-gated in-app downloader spike (`QWON_M3_MODEL_DOWNLOAD_SPIKE`); Settings download surface; verify/promote to `Documents/Models/prexus-local-mvp.gguf`. |
+| Allowed | Spike branch behind compile gate; unit/device evidence; ops scripts. |
+| Forbidden | Default-on download UX, Build `4`, TestFlight upload, tag, or version bump bundled with spike. |
+| Gate | [M3 readiness checklist](#m3-readiness-gate-checklist) Gates **1–9 Ready** + [M3 spike plan](./qwon_m3_spike_plan.md) — **met** |
 
 ---
 
@@ -556,7 +554,98 @@ Screenshots/JSON remain ops-side only.
 
 ### Outcome
 
-M2 guided external placement is **verified on simulator** (reachability, placement copy, no in-app download claims). **Physical device evidence in this pass:** debug install + model-status JSON only (Wang/Matisse M1 contract holds after M2 merge). **M3** in-app download remains **gated**. **Build `4` not approved**.
+M2 guided external placement is **verified on simulator** (reachability, placement copy, no in-app download claims). **Physical device evidence in this pass:** debug install + model-status JSON only (Wang/Matisse M1 contract holds after M2 merge). **M3** compile-gated spike **merged** ([#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118)); see [post-merge verification](#pr-m3-post-merge-verification-2026-06-07). **Build `4` not approved**.
+
+---
+
+## PR M3 post-merge verification (2026-06-07)
+
+**Purpose:** Confirm merged compile-gated M3 downloader spike from [PR #118](https://github.com/studio-prospect/qwon-ai-ios/pull/118) satisfies default-off / spike-on build gates, live `models.qwon.dev` endpoint contract, and Wang/Matisse device smoke. **Evidence-only** — **Build `4` / TestFlight / tag / version bump not approved**.
+
+**Base:** `origin/main` @ **`a2a4f2a`** — `feat(m3): Add compile-gated model download spike (#118)`.
+
+### Merge state
+
+| Field | Value |
+| --- | --- |
+| **PR** | [#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118) merged |
+| **Compile gate** | `QWON_M3_MODEL_DOWNLOAD_SPIKE` — default **off**; spike enabled via `QWON_M3_MODEL_DOWNLOAD_SPIKE=1 ruby tools/scripts/generate_xcodeproj.rb` |
+| **Scope delivered** | Manifest contract, compile-gated downloader/verification/store, Settings spike section, `m3_download` alpha smoke, ops helper `tools/scripts/m3_spike_device_evidence.sh` |
+| **M2 rollback path** | **Preserved** — **Place GGUF via Mac** + `fetch_local_model.sh` / `push_local_model_to_device.sh` unchanged |
+| **Build `4` / TestFlight / tag / version bump** | **Not approved** |
+
+### Default build gate (spike off)
+
+| Check | Result |
+| --- | --- |
+| `ruby tools/scripts/generate_xcodeproj.rb` | **Pass** |
+| `project.pbxproj` free of M3-only sources / `QWON_M3_MODEL_DOWNLOAD_SPIKE` | **Pass** — no `QWONM3ModelDownloader`, `QWONM3ModelDownloadStore`, `QWONM3ModelVerificationMarker`, or `QWONM3ModelDownloadSpikeSection` in committed project |
+| `QWONTests/testM3ModelDownloadManifestConstants` (manifest always built) | **Pass** |
+
+### Spike build gate (spike on)
+
+| Check | Result |
+| --- | --- |
+| `QWON_M3_MODEL_DOWNLOAD_SPIKE=1 ruby tools/scripts/generate_xcodeproj.rb` | **Pass** — M3 sources + compile flag present |
+| `xcodebuild … -scheme QWON … -only-testing:QWONTests test` | **Pass** — `** TEST SUCCEEDED **` (includes M3 gated downloader/marker/promote tests) |
+
+### Endpoint smoke (`models.qwon.dev`)
+
+| Check | Result |
+| --- | --- |
+| `curl -I https://models.qwon.dev/models/qwen2.5-0.5b-instruct/q4_k_m/prexus-local-mvp.gguf` | **Pass** — HTTP `200`, `content-length: 397808192` |
+| Full download to `/tmp/prexus-local-mvp.gguf.verify` | **Pass** — byte size `397808192`; SHA-256 `6eb923e7d26e9cea28811e1a8e852009b21242fb157b26149d3b188f3a8c8653` |
+
+### Device verification (debug build @ `a2a4f2a`, spike compile gate on)
+
+Spike-enabled debug build installed via `install_on_device.sh`; evidence captured with `tools/scripts/m3_spike_device_evidence.sh`.
+
+| Scenario | Device | Result |
+| --- | --- | --- |
+| `model_status` — Matisse Embedded Heuristic expected; missing GGUF not failure | Matisse (`iPhone11,6`) | **Pass** — `placementState: missing`, `expectedRuntimeLabel: Embedded Heuristic Runtime`, `statusChipLabel: Missing` |
+| `m3_download` — download → verify → promote → verified status | Wang (`iPhone18,3`) | **Pass** — `success: true`, `byteCount: 397808192`, `manifestVerified: true`, `statusChipLabel: Verified`, `expectedPathPresent: true` |
+
+### Commands run
+
+```sh
+git checkout main && git pull   # → a2a4f2a
+git diff --check main...HEAD    # pass (clean tree at merge base)
+
+ruby tools/scripts/generate_xcodeproj.rb
+# grep project.pbxproj for M3-only sources → none
+
+QWON_M3_MODEL_DOWNLOAD_SPIKE=1 ruby tools/scripts/generate_xcodeproj.rb
+xcodebuild test -project app/ios/PREXUS.xcodeproj -scheme QWON \
+  -destination 'platform=iOS Simulator,id=0DF15EA0-4595-4008-9F86-D2E3615F3FF8' \
+  -only-testing:QWONTests test
+
+curl -I https://models.qwon.dev/models/qwen2.5-0.5b-instruct/q4_k_m/prexus-local-mvp.gguf
+curl -sL …/prexus-local-mvp.gguf -o /tmp/prexus-local-mvp.gguf.verify
+wc -c /tmp/prexus-local-mvp.gguf.verify
+shasum -a 256 /tmp/prexus-local-mvp.gguf.verify
+
+QWON_M3_MODEL_DOWNLOAD_SPIKE=1 ruby tools/scripts/generate_xcodeproj.rb
+./tools/scripts/install_on_device.sh "Wang"
+./tools/scripts/install_on_device.sh "Matisse"
+./tools/scripts/m3_spike_device_evidence.sh "Wang" m3_download
+./tools/scripts/m3_spike_device_evidence.sh "Matisse" model_status
+```
+
+**Results:** all commands **pass**.
+
+### Ops artifacts (not in git)
+
+| Artifact | Location |
+| --- | --- |
+| Wang `m3_download` JSON | `~/QWON-alpha-evidence/qwon-m3-spike/wang-m3_download-20260607T112115Z.json` |
+| Matisse `model_status` JSON | `~/QWON-alpha-evidence/qwon-m3-spike/matisse-model_status-20260607T112128Z.json` |
+| Endpoint verify download (ops) | `/tmp/prexus-local-mvp.gguf.verify` |
+
+GGUF, logs, screenshots, xcresult, and DerivedData remain ops-side only.
+
+### Outcome
+
+M3 compile-gated downloader spike is **verified on `main` @ `a2a4f2a`**: default project stays spike-off; spike-on build passes full `QWONTests`; live `models.qwon.dev` artifact matches Gate 2 byte size + SHA-256; Wang completes foreground download/promote with verified status; Matisse retains Embedded Heuristic expected path. **Build `4` / TestFlight / tag / version bump remain not approved.**
 
 ---
 
@@ -564,9 +653,9 @@ M2 guided external placement is **verified on simulator** (reachability, placeme
 
 **Purpose:** After M1/M2 completion, record the **prerequisites** that must be satisfied before opening an **M3 in-app download spike**. This section is a **readiness gate only** — it does **not** approve M3 implementation, network fetch, storage schema work, or TestFlight upload.
 
-**Status (2026-06-07):** Gates **1–9** evidence memos + **Batch A–D review sessions** documented ([#91](https://github.com/studio-prospect/qwon-ai-ios/pull/91)–[#95](https://github.com/studio-prospect/qwon-ai-ios/pull/95), [review plan](./qwon_m3_gate_readiness_review_plan.md)). **Batch A / Gates 1–3**, **Batch B / Gates 4–5**, **Batch C / Gates 6–7**, and **Batch D / Gates 8–9** are Ready after answer intake and sign-off. **M3 spike is not opened by this checklist alone**; Codex must still scope a separate spike plan. **Build `4` / TestFlight / tag / version bump not approved.** [Queue status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05).
+**Status (2026-06-07):** Gates **1–9** evidence memos + **Batch A–D review sessions** documented ([#91](https://github.com/studio-prospect/qwon-ai-ios/pull/91)–[#95](https://github.com/studio-prospect/qwon-ai-ios/pull/95), [review plan](./qwon_m3_gate_readiness_review_plan.md)). **Compile-gated M3 spike merged** ([#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118)); [post-merge verification](#pr-m3-post-merge-verification-2026-06-07) recorded. **Build `4` / TestFlight / tag / version bump not approved.** [Queue status](./qwon_next_work_queue.md#m3-readiness-status-2026-06-05).
 
-**Base:** `origin/main` @ **`dc43e69`** — M3 evidence memos complete ([#91](https://github.com/studio-prospect/qwon-ai-ios/pull/91)–[#95](https://github.com/studio-prospect/qwon-ai-ios/pull/95)); M1/M2 merged ([#86](https://github.com/studio-prospect/qwon-ai-ios/pull/86)–[#89](https://github.com/studio-prospect/qwon-ai-ios/pull/89)).
+**Base:** `origin/main` @ **`a2a4f2a`** — M3 spike merged ([#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118)); M1/M2 merged ([#86](https://github.com/studio-prospect/qwon-ai-ios/pull/86)–[#89](https://github.com/studio-prospect/qwon-ai-ios/pull/89)).
 
 ### Lane status
 
@@ -574,7 +663,7 @@ M2 guided external placement is **verified on simulator** (reachability, placeme
 | --- | --- |
 | **M1 model status UX** | **Complete** — merged + verified |
 | **M2 guided placement** | **Complete** — merged + verified |
-| **M3 in-app download spike** | **Plan-gated** — Gates **1–9 Ready**; [M3 spike plan](./qwon_m3_spike_plan.md) defines compile-gated implementation boundary |
+| **M3 in-app download spike** | **Merged** ([#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118)) — compile-gated; [post-merge verification](./qwon_model_download_gguf_ux_plan.md#pr-m3-post-merge-verification-2026-06-07) |
 | **Build `4` / TestFlight** | **Separate gate** — **not approved** by this checklist |
 
 ### Checklist (all required before M3 spike)
