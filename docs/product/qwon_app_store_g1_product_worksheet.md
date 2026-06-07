@@ -134,7 +134,7 @@ What **pricing model** (free, paid, subscription, or TBD) applies to the first p
 
 ### Suggested draft — **draft / not approved**
 
-> **Pricing model:** TBD for first public release planning.  
+> **Pricing model:** TBD for first public release planning.
 > **Rationale (working hypothesis):** Text-alpha validated core runtime; monetization requires separate Product decision on support cost, model distribution, and App Store category expectations. **Not approved.**
 
 ### Unblocks
