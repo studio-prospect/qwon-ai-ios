@@ -1,6 +1,6 @@
 # QWON — App Store Public Readiness Answer Intake Ledger
 
-**Last updated:** 2026-06-07 (Stay selected — G1 Product answer worksheet added; intake rows still **Unanswered**)
+**Last updated:** 2026-06-07 (Stay selected — G1 answers prepared in worksheet, **not yet recorded** in intake)
 **Status:** **Intake ledger** — **24 questions · 24 Unanswered · 0 Answered**. **Not** App Store public release approval. **Not** Build `4` approval. **TestFlight upload / tag / version bump not approved.**
 **Purpose:** Decompose [App Store public readiness checklist](./qwon_app_store_public_readiness_checklist.md) gates **G1–G10** into **answerable questions** for Product / Legal / Release Engineering. Record answers in **separate docs-only PRs** when stakeholders supply written responses.
 
@@ -18,7 +18,7 @@ Related: [G1 Product worksheet (EN)](./qwon_app_store_g1_product_worksheet.md) �
 | **Answer recorded ≠ public release approved** | Updating a row to **Answered** does **not** approve App Store submission, Build `4`, or TestFlight upload |
 | **Gate disposition** | Checklist gates **G1–G10** remain **Open** or **Partial** until Product records explicit gate sign-off — **separate** from intake answers |
 | **Agents on Stay** | May append **real** answers only when Product/Legal/RE explicitly supplies them; otherwise leave **Unanswered** |
-| **External worksheets** | [G1 Product worksheet](./qwon_app_store_g1_product_worksheet.md) / [日本語フォーム](./qwon_app_store_g1_product_worksheet_ja.md) — share with Product; **draft suggestions are not approved answers** |
+| **External worksheets** | [G1 Product worksheet](./qwon_app_store_g1_product_worksheet.md) / [日本語フォーム](./qwon_app_store_g1_product_worksheet_ja.md) — **G1 Product decision draft prepared** ([EN](./qwon_app_store_g1_product_worksheet.md#product-decision-draft--awaiting-explicit-approval) / [JA](./qwon_app_store_g1_product_worksheet_ja.md#product-decision-draft--awaiting-explicit-approval)); **not yet recorded** in intake until Product explicit approval |
 
 ### Intake summary
 
@@ -29,6 +29,7 @@ Related: [G1 Product worksheet (EN)](./qwon_app_store_g1_product_worksheet.md) �
 | **Answered** | **0** |
 | **Public release approved?** | **No** |
 | **Stay in effect?** | **Yes** |
+| **G1 worksheet** | **Product decision draft prepared** — [worksheet](./qwon_app_store_g1_product_worksheet.md#product-decision-draft--awaiting-explicit-approval) · **not yet recorded** in intake (rows remain **Unanswered**) |
 
 ---
 
@@ -49,7 +50,9 @@ Related: [G1 Product worksheet (EN)](./qwon_app_store_g1_product_worksheet.md) �
 
 ## G1 — Product positioning / value proposition
 
-**External share:** [G1 Product worksheet (EN)](./qwon_app_store_g1_product_worksheet.md) · [G1 Product 回答フォーム（日本語）](./qwon_app_store_g1_product_worksheet_ja.md) — Product fills worksheet; intake rows below stay **Unanswered** until a follow-up docs-only PR records approved answers.
+**External share:** [G1 Product worksheet (EN)](./qwon_app_store_g1_product_worksheet.md) · [G1 Product 回答フォーム（日本語）](./qwon_app_store_g1_product_worksheet_ja.md)
+
+**G1 answers prepared in worksheet, not yet recorded:** [Product decision draft — awaiting explicit approval](./qwon_app_store_g1_product_worksheet.md#product-decision-draft--awaiting-explicit-approval) covers **Q-AS-01 … Q-AS-03**. Intake rows below remain **Unanswered** until Product **explicit approval** and a follow-up docs-only PR.
 
 | Question ID | Gate | Owner | Question | Answer status | Answer source | Blocks | Follow-up PR |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -147,7 +150,7 @@ Related: [G1 Product worksheet (EN)](./qwon_app_store_g1_product_worksheet.md) �
 
 | Gate | Checklist status | Intake questions | All answered? |
 | --- | --- | --- | --- |
-| **G1** | Open | Q-AS-01 … Q-AS-03 | **No** |
+| **G1** | Open | Q-AS-01 … Q-AS-03 | **No** — [worksheet draft prepared](./qwon_app_store_g1_product_worksheet.md#product-decision-draft--awaiting-explicit-approval), **not recorded** in intake |
 | **G2** | Open | Q-AS-04 … Q-AS-06 | **No** |
 | **G3** | Open | Q-AS-07 … Q-AS-08 | **No** |
 | **G4** | Partial | Q-AS-09 … Q-AS-10 | **No** |
