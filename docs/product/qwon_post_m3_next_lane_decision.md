@@ -1,7 +1,7 @@
 # QWON — Post-M3 Next Lane Decision Checkpoint
 
-**Last updated:** 2026-06-07
-**Status:** **Decision checkpoint** — **no next lane selected yet**. M3 **Option A selected / lane closed**. **Build `4` not approved.** **TestFlight upload / tag / version bump not approved.**
+**Last updated:** 2026-06-07 (Stay selected — Product decision recorded)
+**Status:** **Stay selected** — no third post-alpha lane. M3 **Option A selected / lane closed**. **Build `4` not approved.** **TestFlight upload / tag / version bump not approved.**
 **Purpose:** After [Model download / GGUF UX](./qwon_model_download_gguf_ux_plan.md) M3 spike completion ([#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118), verification [#119](https://github.com/studio-prospect/qwon-ai-ios/pull/119), outcome [#120](https://github.com/studio-prospect/qwon-ai-ios/pull/120), Option A [#121](https://github.com/studio-prospect/qwon-ai-ios/pull/121)), give Product a **comparable view** of remaining post-alpha lanes. **Docs-only** — does **not** authorize implementation, spike, or release ops.
 
 Related: [Post-alpha option lanes](./qwon_post_alpha_options.md) · [Next work queue](./qwon_next_work_queue.md#next-decision-checkpoint) · [M3 spike outcome decision](./qwon_m3_spike_outcome_decision.md) · [Rename docs index](./qwon_rename_docs_index.md) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
@@ -19,7 +19,7 @@ Related: [Post-alpha option lanes](./qwon_post_alpha_options.md) · [Next work q
 | **UI-2** | **Deferred / not opened** — [#82](https://github.com/studio-prospect/qwon-ai-ios/pull/82) · [need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) |
 | **Model download / GGUF UX** | M1/M2 **complete** · M3 spike **merged** · **Option A selected** — compile-gated **default-off** · lane **closed** · [decision record](./qwon_m3_spike_outcome_decision.md#decision-record) |
 | **Tester-visible model acquisition** | M2 **Place GGUF via Mac** + USB ops — unchanged on TestFlight **`0.1.0 (3)`** |
-| **Next lane selected** | **None yet** — Product must pick **Stay** or **exactly one** candidate below |
+| **Next lane selected** | **Stay** — no third post-alpha lane · [decision record](#decision-record) |
 
 **Closed lanes (do not re-select without new Product record):**
 
@@ -58,8 +58,10 @@ Product may choose **Stay** (recommended default) or **one** lane. Do **not** st
 | Recommendation | Rationale |
 | --- | --- |
 | **Stay** unless Product selects **exactly one** next lane | TestFlight **`0.1.0 (3)`** is stable; M3 spike evidence is complete; no verified release blocker |
-| **Do not start implementation from this checkpoint PR or memo** | Selection → Codex scoped plan → Cursor implementation/spike — in that order |
-| **Do not imply a lane is selected** until Product records **Stay** or one lane in the Decision record below |
+| **Do not start implementation while Stay is in effect** | Allowed work: docs/readme/index/evidence hygiene only |
+| **To start a new lane** | Product must **lift Stay** and record one candidate in the Decision record — then Codex scoped plan → Cursor implementation |
+
+**Current posture (2026-06-07):** **Stay selected** — recorded below.
 
 ---
 
@@ -80,8 +82,12 @@ Product may choose **Stay** (recommended default) or **one** lane. Do **not** st
 
 ## 5. Workflow after Product decides
 
-1. Product records **Stay** or **one lane** in the [Decision record](#decision-record) below (or linked decision memo).
-2. **Codex** opens a **scoped plan** for the selected lane — **not** automatic.
+While **Stay** is selected, agents follow [Ready / low-risk docs-ops](./qwon_next_work_queue.md#ready--low-risk-docs-ops) only.
+
+To **lift Stay** and open a new lane:
+
+1. Product records **one lane** (not Stay) in the [Decision record](#decision-record) below.
+2. **Codex** opens a **scoped plan** for that lane — **not** automatic.
 3. **Cursor** implements or spikes — only after plan merge and any required product gate.
 4. **Build `4`** remains a **separate** decision even if a lane is selected.
 
@@ -91,7 +97,9 @@ Product may choose **Stay** (recommended default) or **one** lane. Do **not** st
 
 | Field | Value |
 | --- | --- |
-| **Date** | *Pending Product sign-off* |
-| **Posture** | **Stay** or one lane from [§2](#2-next-lane-candidates) — **not yet selected** |
+| **Date** | **2026-06-07** |
+| **Posture** | **Stay** |
+| **Third post-alpha lane selected?** | **No** |
 | **Build `4` approved?** | **No** |
-| **Notes** | M3 Option A selected ([#121](https://github.com/studio-prospect/qwon-ai-ios/pull/121)); M3 lane closed. Awaiting third post-alpha lane selection (or explicit Stay). |
+| **Approver** | Product decision (docs record) |
+| **Notes** | No third post-alpha lane selected. QWON remains on TestFlight **`0.1.0 (3)`**. Allowed work is docs/readme/index/evidence hygiene only. Any future UI-2 / OCR / LiteRT / App Store / project-container rename / memory work requires lifting Stay, a new Product lane decision, and a Codex scoped plan. M3 Option A / lane closed unchanged ([#121](https://github.com/studio-prospect/qwon-ai-ios/pull/121)). Checkpoint [#122](https://github.com/studio-prospect/qwon-ai-ios/pull/122). |
