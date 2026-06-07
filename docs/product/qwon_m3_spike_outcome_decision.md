@@ -1,8 +1,8 @@
 # QWON — M3 Spike Outcome Decision Checkpoint
 
-**Last updated:** 2026-06-07
-**Status:** **Decision checkpoint** — Product/Codex must choose how to treat the merged M3 downloader spike before any Build `4` or default-on work. **Build `4` not approved.** **TestFlight upload / tag / version bump not approved.**
-**Purpose:** Record the **post-spike** state after [#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118) (implementation) and [#119](https://github.com/studio-prospect/qwon-ai-ios/pull/119) (post-merge verification), and define the **conditions** for moving toward Build `4` vs staying at compile-gated default-off.
+**Last updated:** 2026-06-07 (Option A selected — provisional Product/Codex)
+**Status:** **Option A selected** — keep M3 spike **compile-gated / default-off**; M3 lane **closed** for implementation until Product explicitly reopens Build `4` or Option C. **Build `4` not approved.** **TestFlight upload / tag / version bump not approved.**
+**Purpose:** Record the **post-spike** state after [#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118) (implementation), [#119](https://github.com/studio-prospect/qwon-ai-ios/pull/119) (post-merge verification), and [#120](https://github.com/studio-prospect/qwon-ai-ios/pull/120) (outcome checkpoint), and define the **conditions** for reopening Build `4` vs maintaining compile-gated default-off.
 
 Related: [Model download / GGUF UX plan](./qwon_model_download_gguf_ux_plan.md) · [M3 spike plan](./qwon_m3_spike_plan.md) · [Post-merge verification](./qwon_model_download_gguf_ux_plan.md#pr-m3-post-merge-verification-2026-06-07) · [Next work queue](./qwon_next_work_queue.md) · [TestFlight prep — Build `4` gate](./qwon_text_alpha_testflight_prep.md#phase-4-build-3-decision-gate) · [M3 rollback + release gate memo](./qwon_m3_rollback_release_gate_memo.md)
 
@@ -14,6 +14,8 @@ Related: [Model download / GGUF UX plan](./qwon_model_download_gguf_ux_plan.md) 
 | --- | --- |
 | **M3 spike implementation** | **Merged** — [#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118) on `main` @ `a2a4f2a` |
 | **Post-merge verification** | **Recorded** — [#119](https://github.com/studio-prospect/qwon-ai-ios/pull/119) on `main` @ `cb8ea51` |
+| **Outcome checkpoint** | **Recorded** — [#120](https://github.com/studio-prospect/qwon-ai-ios/pull/120) on `main` @ `9b13964` |
+| **Selected outcome** | **Option A** — keep spike default-off and stop here (provisional Product/Codex, 2026-06-07) |
 | **Compile gate** | `QWON_M3_MODEL_DOWNLOAD_SPIKE` — **default off**; spike enabled only at project generation time |
 | **Active TestFlight** | **QWON `0.1.0 (3)`** — stable alpha; **does not include** M3 downloader Settings UI |
 | **M1 / M2** | **Complete** — model status UX + **Place GGUF via Mac** guided placement remain the production-visible path on TestFlight |
@@ -60,14 +62,15 @@ Ops JSON filenames (not in git): `wang-m3_download-20260607T112115Z.json`, `mati
 
 Product/Codex must pick **one primary posture**. Options are **mutually exclusive** for the next release boundary unless explicitly re-opened.
 
-### Option A — Keep spike default-off and stop here (**recommended default**)
+### Option A — Keep spike default-off and stop here (**selected**)
 
 | Aspect | Detail |
 | --- | --- |
 | **Posture** | M3 code remains on `main` behind compile gate; TestFlight stays **`0.1.0 (3)`**; testers continue M2 USB/guided placement |
-| **When** | No verified release blocker; no Product appetite for Build `4`; spike evidence is sufficient for internal R&D |
+| **Status** | **Selected** (provisional Product/Codex, 2026-06-07) — M3 lane closed for implementation |
 | **Pros** | Lowest risk; preserves stable alpha; no tester-facing network download surface |
 | **Cons** | TestFlight testers still cannot self-serve model acquisition |
+| **When chosen** | No verified release blocker; no Product appetite for Build `4`; spike evidence sufficient for internal R&D |
 
 ### Option B — Prepare Build `4` candidate with M3 hidden or debug-gated only
 
@@ -105,7 +108,7 @@ Product/Codex must pick **one primary posture**. Options are **mutually exclusiv
 | **Option A** unless Product **explicitly approves Build `4`** | Spike succeeded on debug evidence; TestFlight `0.1.0 (3)` is stable; downloader UI is not in the shipped binary today |
 | If Product approves Build `4` | Prefer **Option B** first — new binary without default-on M3 — unless Product separately approves Option C hardening |
 
-**This memo does not approve any option.** It records the decision surface for Product/Codex sign-off.
+**Current posture (2026-06-07):** **Option A selected** — provisional Product/Codex sign-off recorded below. Options B–D remain documented for future re-open only.
 
 ---
 
@@ -141,16 +144,16 @@ Documenting Build `4` criteria **does not** approve Build `4`.
 
 ---
 
-## Agent boundary (until Product decides)
+## Agent boundary (Option A selected)
 
 | Allowed | Not allowed |
 | --- | --- |
-| Docs-only updates (this memo, queue, index) | Implementation PRs for default-on M3 |
-| Internal debug builds with `QWON_M3_MODEL_DOWNLOAD_SPIKE=1` for lab | TestFlight upload / tag / version bump |
-| M2 guided placement + USB ops | Treating spike merge as Build `4` approval |
-| Recording Product decision in this memo when signed off | `qwon.ai` endpoint switch without RE plan |
+| Docs-only updates (queue, index, evidence append) | Implementation PRs for default-on M3 or M3 lane reopen without Product gate |
+| Internal debug builds with `QWON_M3_MODEL_DOWNLOAD_SPIKE=1` for lab | TestFlight upload / tag / version bump / Build `4` |
+| M2 guided placement + USB ops | Treating spike merge ([#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118)) as Build `4` approval |
+| Recording a future Product re-open in this memo | `qwon.ai` endpoint switch without RE plan |
 
-When Product selects an option, append a **Decision record** subsection below (date, option chosen, approver, linked PR if any).
+Reopen M3 implementation only if Product **explicitly approves Build `4`** (Option B path) or **Option C hardening**.
 
 ---
 
@@ -158,7 +161,8 @@ When Product selects an option, append a **Decision record** subsection below (d
 
 | Field | Value |
 | --- | --- |
-| **Date** | *Pending Product/Codex sign-off* |
-| **Option chosen** | *A / B / C / D — not yet decided* |
+| **Date** | **2026-06-07** |
+| **Option chosen** | **A — Keep spike default-off and stop here** |
 | **Build `4` approved?** | **No** |
-| **Notes** | Spike merge ([#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118)) + verification ([#119](https://github.com/studio-prospect/qwon-ai-ios/pull/119)) complete; awaiting outcome decision |
+| **Approver** | Provisional Product/Codex sign-off (docs record) |
+| **Notes** | M3 spike is complete as internal/debug evidence ([#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118), verification [#119](https://github.com/studio-prospect/qwon-ai-ios/pull/119), checkpoint [#120](https://github.com/studio-prospect/qwon-ai-ios/pull/120)). TestFlight remains **`0.1.0 (3)`**. M2 **Place GGUF via Mac** guided placement remains the tester-visible acquisition path. Reopen only if Product explicitly approves Build `4` (Option B) or Option C hardening. |
