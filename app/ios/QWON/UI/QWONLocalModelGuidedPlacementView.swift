@@ -183,13 +183,14 @@ struct QWONLocalModelGuidedPlacementView: View {
     NavigationStack {
         QWONLocalModelGuidedPlacementView(
             status: QWONLocalModelStatus(
-                placementState: .missing,
-                chipTier: .a17ProOrNewer,
-                machineIdentifier: "iPhone16,1",
-                isSimulator: false,
-                resolvedFileName: nil,
-                expectedPathPresent: false
-            )
+            placementState: .missing,
+            chipTier: .a17ProOrNewer,
+            machineIdentifier: "iPhone16,1",
+            isSimulator: false,
+            resolvedFileName: nil,
+            expectedPathPresent: false,
+            manifestVerified: false
+        )
         )
     }
 }

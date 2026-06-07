@@ -123,7 +123,8 @@ struct QWONLocalModelStatusCard: View {
             machineIdentifier: "iPhone16,1",
             isSimulator: false,
             resolvedFileName: nil,
-            expectedPathPresent: false
+            expectedPathPresent: false,
+            manifestVerified: false
         )
     )
     .padding()
@@ -137,7 +138,8 @@ struct QWONLocalModelStatusCard: View {
             machineIdentifier: "iPhone11,6",
             isSimulator: false,
             resolvedFileName: nil,
-            expectedPathPresent: false
+            expectedPathPresent: false,
+            manifestVerified: false
         ),
         showsDiagnosticsMapping: true
     )

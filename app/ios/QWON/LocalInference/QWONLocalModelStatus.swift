@@ -23,6 +23,7 @@ struct QWONLocalModelStatus: Equatable {
     let isSimulator: Bool
     let resolvedFileName: String?
     let expectedPathPresent: Bool
+    let manifestVerified: Bool
 }
 
 struct QWONLocalModelStatusInspector {
@@ -72,15 +73,43 @@ struct QWONLocalModelStatusInspector {
             placementState = .missing
         }
 
+        #if QWON_M3_MODEL_DOWNLOAD_SPIKE
+        let manifestVerified = manifestVerified(
+            placementState: placementState,
+            resolvedURL: resolved?.url,
+            expectedDefaultModelURL: expectedDefaultModelURL
+        )
+        #else
+        let manifestVerified = false
+        #endif
+
         return QWONLocalModelStatus(
             placementState: placementState,
             chipTier: LocalInferenceDeviceGate.chipTier(machineIdentifier: machineIdentifier),
             machineIdentifier: machineIdentifier,
             isSimulator: isSimulatorProvider(),
             resolvedFileName: resolved?.url.lastPathComponent,
-            expectedPathPresent: expectedPathPresent
+            expectedPathPresent: expectedPathPresent,
+            manifestVerified: manifestVerified
         )
     }
+
+    #if QWON_M3_MODEL_DOWNLOAD_SPIKE
+    private func manifestVerified(
+        placementState: QWONLocalModelPlacementState,
+        resolvedURL: URL?,
+        expectedDefaultModelURL: URL?
+    ) -> Bool {
+        guard case let .presentUnverified(_, byteCount) = placementState else { return false }
+        guard let resolvedURL, let expectedDefaultModelURL else { return false }
+        guard resolvedURL.path == expectedDefaultModelURL.path else { return false }
+        guard byteCount == QWONM3ModelDownloadManifest.expectedByteSize else { return false }
+        return QWONM3ModelVerificationMarker.matchesManifestVerified(
+            fileURL: resolvedURL,
+            fileManager: fileManager
+        )
+    }
+    #endif
 
     static func current() -> QWONLocalModelStatus {
         QWONLocalModelStatusInspector().inspect()
@@ -140,6 +169,12 @@ enum QWONLocalModelStatusPresentation {
             return "Simulator"
         }
 
+        #if QWON_M3_MODEL_DOWNLOAD_SPIKE
+        if status.manifestVerified {
+            return "Verified"
+        }
+        #endif
+
         switch status.placementState {
         case .missing:
             return "Missing"
@@ -161,7 +196,11 @@ enum QWONLocalModelStatusPresentation {
         case .emptyFile:
             return .orange
         case .presentUnverified:
+            #if QWON_M3_MODEL_DOWNLOAD_SPIKE
+            return status.manifestVerified ? .blue : .green
+            #else
             return .green
+            #endif
         }
     }
 
@@ -188,6 +227,10 @@ enum QWONLocalModelStatusPresentation {
             return "Embedded Heuristic Runtime"
         case .a17ProOrNewer:
             switch status.placementState {
+            #if QWON_M3_MODEL_DOWNLOAD_SPIKE
+            case .presentUnverified where status.manifestVerified:
+                return "llama.cpp On-Device Runtime (verified)"
+            #endif
             case .presentUnverified where status.resolvedFileName == QWONLocalModelStatus.expectedFileName:
                 return "llama.cpp On-Device Runtime"
             case .presentUnverified:

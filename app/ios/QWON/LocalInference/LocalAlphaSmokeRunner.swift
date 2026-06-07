@@ -43,6 +43,18 @@ enum LocalAlphaSmokeRunner {
         let resolvedFileName: String?
         let expectedPathPresent: Bool
         let placementState: String
+        let manifestVerified: Bool?
+    }
+
+    struct M3DownloadSmokeResult: Encodable {
+        let scenario: String
+        let generatedAt: String
+        let success: Bool
+        let error: String?
+        let statusChipLabel: String?
+        let manifestVerified: Bool?
+        let expectedPathPresent: Bool?
+        let byteCount: Int64?
     }
 
     @MainActor
@@ -55,6 +67,10 @@ enum LocalAlphaSmokeRunner {
             await runSensitivityMatrix(environment: environment)
         case "model_status":
             writeModelStatusSnapshot()
+        #if QWON_M3_MODEL_DOWNLOAD_SPIKE
+        case "m3_download":
+            await runM3DownloadSmoke()
+        #endif
         default:
             await runSingleTurn(environment: environment, scenario: scenario)
         }
@@ -87,10 +103,78 @@ enum LocalAlphaSmokeRunner {
                 machineIdentifier: status.machineIdentifier,
                 resolvedFileName: status.resolvedFileName,
                 expectedPathPresent: status.expectedPathPresent,
-                placementState: placementState
+                placementState: placementState,
+                manifestVerified: status.manifestVerified
             )
         )
     }
+
+    #if QWON_M3_MODEL_DOWNLOAD_SPIKE
+    @MainActor
+    private static func runM3DownloadSmoke() async {
+        let downloader = QWONM3ModelDownloader()
+        let replaceExisting = (downloader.existingFinalFileByteCount() ?? 0) > 0
+
+        do {
+            if replaceExisting {
+                try downloader.verifyTempFile(at: downloader.finalFileURL)
+                try QWONM3ModelVerificationMarker.markVerified(
+                    fileURL: downloader.finalFileURL,
+                    fileManager: .default
+                )
+            } else {
+                try await downloader.download(replaceExisting: false)
+            }
+            let status = QWONLocalModelStatusInspector.current()
+            let byteCount: Int64?
+            if case let .presentUnverified(_, count) = status.placementState {
+                byteCount = count
+            } else {
+                byteCount = nil
+            }
+
+            writeM3Download(
+                M3DownloadSmokeResult(
+                    scenario: "m3_download",
+                    generatedAt: isoTimestamp(),
+                    success: true,
+                    error: nil,
+                    statusChipLabel: QWONLocalModelStatusPresentation.statusChipLabel(for: status),
+                    manifestVerified: status.manifestVerified,
+                    expectedPathPresent: status.expectedPathPresent,
+                    byteCount: byteCount
+                )
+            )
+        } catch {
+            writeM3Download(
+                M3DownloadSmokeResult(
+                    scenario: "m3_download",
+                    generatedAt: isoTimestamp(),
+                    success: false,
+                    error: String(describing: error),
+                    statusChipLabel: nil,
+                    manifestVerified: nil,
+                    expectedPathPresent: nil,
+                    byteCount: nil
+                )
+            )
+        }
+    }
+
+    private static func writeM3Download(_ payload: M3DownloadSmokeResult) {
+        guard let data = encode(payload),
+              let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        else {
+            return
+        }
+
+        let url = documents.appendingPathComponent(resultFileName(for: payload.scenario))
+        try? data.write(to: url, options: .atomic)
+        if let json = String(data: data, encoding: .utf8) {
+            print("[PREXUS][alpha-smoke]\n\(json)")
+        }
+    }
+    #endif
 
     private static func sourceLabel(_ source: QWONLocalModelFileSource) -> String {
         switch source {

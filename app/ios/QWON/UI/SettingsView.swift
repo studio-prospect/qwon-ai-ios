@@ -5,6 +5,10 @@ struct SettingsView: View {
     @ObservedObject var memoryLibrary: MemoryLibraryViewModel
     @ObservedObject var runtimeDiagnostics: RuntimeDiagnosticsStore
     @Environment(\.dismiss) private var dismiss
+    #if QWON_M3_MODEL_DOWNLOAD_SPIKE
+    @StateObject private var m3DownloadStore = QWONM3ModelDownloadStore()
+    @State private var modelStatusRefreshToken = UUID()
+    #endif
 
     var body: some View {
         NavigationStack {
@@ -145,6 +149,18 @@ struct SettingsView: View {
                             .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
                             .listRowBackground(Color.clear)
                             .accessibilityIdentifier(QWONAccessibilityID.Settings.modelStatus)
+                            #if QWON_M3_MODEL_DOWNLOAD_SPIKE
+                            .id(modelStatusRefreshToken)
+                            #endif
+
+                        #if QWON_M3_MODEL_DOWNLOAD_SPIKE
+                        QWONM3ModelDownloadSpikeSection(
+                            status: localModelStatus,
+                            store: m3DownloadStore,
+                            onStatusRefresh: { modelStatusRefreshToken = UUID() }
+                        )
+                        .accessibilityIdentifier(QWONAccessibilityID.Settings.m3DownloadSection)
+                        #endif
 
                         NavigationLink {
                             QWONLocalModelGuidedPlacementView(status: localModelStatus)
@@ -168,7 +184,11 @@ struct SettingsView: View {
                             detail: "Inspect local model placement, device tier, and on-device backend selection."
                         )
                     } footer: {
+                        #if QWON_M3_MODEL_DOWNLOAD_SPIKE
+                        Text(QWONUILabelCopy.M3ModelDownload.sectionFooter)
+                        #else
                         Text(QWONUILabelCopy.ModelStatus.settingsFooter)
+                        #endif
                     }
 
                     #if DEBUG && PREXUS_LITERT_LM_PROTOTYPE

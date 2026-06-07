@@ -20,6 +20,10 @@ enum QWONAccessibilityID {
         static let guidedPlacementScreen = "settings.guided-placement"
         static let guidedPlacementStep = "settings.guided-placement.step"
         static let guidedPlacementCopy = "settings.guided-placement.copy"
+        static let m3StartDownload = "settings.m3.start-download"
+        static let m3CancelDownload = "settings.m3.cancel-download"
+        static let m3RetryDownload = "settings.m3.retry-download"
+        static let m3DownloadSection = "settings.m3.download-section"
     }
 
     enum Diagnostics {
