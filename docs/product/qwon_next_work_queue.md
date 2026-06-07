@@ -1,6 +1,6 @@
 # QWON — Next Work Queue
 
-**Last updated:** 2026-06-07 (Stay selected — App Store readiness answer intake)
+**Last updated:** 2026-06-07 (Stay selected — G1 Product answer worksheet)
 **Status:** **Queue / guardrail only** — **Stay selected**; docs/readme/index/evidence hygiene only; no implementation authorization.
 **Purpose:** After Phase 4 rename docs are complete, classify what agents **may** do next vs what requires **product gates**. Prevents drift into ungated **build `4`**, project-container rename, or blind PREXUS cleanup.
 
@@ -63,7 +63,7 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 | Docs / README / index maintenance | [Ready / low-risk docs-ops](#ready--low-risk-docs-ops) |
 | **Product-approved build `4` planning** docs only (criteria, checklist, gate memo — **not** upload) | [Conditional — build `4`](#testflight-upload-build-4) |
 | Post-alpha — **next lane selection** | [Post-M3 next lane decision](./qwon_post_m3_next_lane_decision.md) · [Post-alpha options](./qwon_post_alpha_options.md) |
-| **Stay posture docs hygiene** | Index/queue/link fixes; closed-intake wording; App Store readiness checklist + [intake ledger](./qwon_app_store_public_readiness_intake.md) maintenance; **no** feature implementation | [Ready / low-risk docs-ops](#ready--low-risk-docs-ops) |
+| **Stay posture docs hygiene** | Index/queue/link fixes; App Store checklist + intake + **G1 worksheet** maintenance; **no** feature implementation | [Ready / low-risk docs-ops](#ready--low-risk-docs-ops) |
 | UI polish **UI-2** (gated) | [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) — **not opened** unless new evidence |
 | Minimal fix on build **`3`** | **Only** with [verified release blocker](#minimal-fix-pr-verified-release-blocker-only) + Codex/Product sign-off |
 
@@ -306,7 +306,7 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 | **Status** | **Checklist + intake ledger** — gap visibility only; **24 Unanswered**; **public release not approved** |
 | **Trigger** | Product plans **public App Store horizon** (separate from Build `4`) |
 | **Required evidence** | Product/Legal/RE answers recorded in [intake ledger](./qwon_app_store_public_readiness_intake.md) via separate docs PRs — **no** submission or code |
-| **First doc to read** | [App Store public readiness checklist](./qwon_app_store_public_readiness_checklist.md) → [Answer intake ledger](./qwon_app_store_public_readiness_intake.md) |
+| **First doc to read** | [App Store public readiness checklist](./qwon_app_store_public_readiness_checklist.md) → [Intake ledger](./qwon_app_store_public_readiness_intake.md) → [G1 Product worksheet](./qwon_app_store_g1_product_worksheet.md) / [日本語フォーム](./qwon_app_store_g1_product_worksheet_ja.md) |
 | **Do not start if** | Conflated with Build `4` / TestFlight upload; treating checklist as implementation authorization; **Stay** lifted without explicit lane record |
 
 ### App Store public release (historical stub)
