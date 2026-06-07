@@ -74,7 +74,7 @@ struct QWONLocalModelStatusInspector {
         }
 
         #if QWON_M3_MODEL_DOWNLOAD_SPIKE
-        let manifestVerified = Self.manifestVerified(
+        let manifestVerified = manifestVerified(
             placementState: placementState,
             resolvedURL: resolved?.url,
             expectedDefaultModelURL: expectedDefaultModelURL
@@ -95,7 +95,7 @@ struct QWONLocalModelStatusInspector {
     }
 
     #if QWON_M3_MODEL_DOWNLOAD_SPIKE
-    private static func manifestVerified(
+    private func manifestVerified(
         placementState: QWONLocalModelPlacementState,
         resolvedURL: URL?,
         expectedDefaultModelURL: URL?
@@ -104,7 +104,10 @@ struct QWONLocalModelStatusInspector {
         guard let resolvedURL, let expectedDefaultModelURL else { return false }
         guard resolvedURL.path == expectedDefaultModelURL.path else { return false }
         guard byteCount == QWONM3ModelDownloadManifest.expectedByteSize else { return false }
-        return QWONM3ModelVerificationMarker.isMarkedVerified()
+        return QWONM3ModelVerificationMarker.matchesManifestVerified(
+            fileURL: resolvedURL,
+            fileManager: fileManager
+        )
     }
     #endif
 

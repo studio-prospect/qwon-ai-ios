@@ -69,6 +69,10 @@ struct QWONM3ModelDownloader {
         QWONM3ModelDownloadManifest.finalFileURL(in: documentsDirectory)
     }
 
+    var backupFileURL: URL {
+        QWONM3ModelDownloadManifest.promoteBackupFileURL(in: documentsDirectory)
+    }
+
     func existingFinalFileByteCount() -> Int64? {
         guard fileManager.fileExists(atPath: finalFileURL.path) else { return nil }
         return fileByteCount(at: finalFileURL)
@@ -111,19 +115,39 @@ struct QWONM3ModelDownloader {
     func promoteVerifiedTempFile(replaceExisting: Bool) throws {
         try preflight(replaceExisting: replaceExisting)
 
-        try fileManager.createDirectory(
-            at: QWONM3ModelDownloadManifest.modelsDirectoryURL(in: documentsDirectory),
-            withIntermediateDirectories: true
-        )
+        let modelsDirectory = QWONM3ModelDownloadManifest.modelsDirectoryURL(in: documentsDirectory)
+        try fileManager.createDirectory(at: modelsDirectory, withIntermediateDirectories: true)
 
+        var movedExistingToBackup = false
         if fileManager.fileExists(atPath: finalFileURL.path) {
-            try fileManager.removeItem(at: finalFileURL)
+            if fileManager.fileExists(atPath: backupFileURL.path) {
+                try fileManager.removeItem(at: backupFileURL)
+            }
+            try fileManager.moveItem(at: finalFileURL, to: backupFileURL)
+            movedExistingToBackup = true
         }
-        try fileManager.moveItem(at: tempFileURL, to: finalFileURL)
 
-        QWONM3ModelVerificationMarker.markVerified(
-            expectedSHA256: QWONM3ModelDownloadManifest.expectedSHA256Hex
-        )
+        do {
+            try fileManager.moveItem(at: tempFileURL, to: finalFileURL)
+        } catch {
+            if movedExistingToBackup, fileManager.fileExists(atPath: backupFileURL.path) {
+                try? fileManager.moveItem(at: backupFileURL, to: finalFileURL)
+            }
+            throw QWONM3ModelDownloadError.promoteFailed(error.localizedDescription)
+        }
+
+        do {
+            try QWONM3ModelVerificationMarker.markVerified(fileURL: finalFileURL, fileManager: fileManager)
+            if movedExistingToBackup {
+                try? fileManager.removeItem(at: backupFileURL)
+            }
+        } catch {
+            if movedExistingToBackup, fileManager.fileExists(atPath: backupFileURL.path) {
+                try? fileManager.removeItem(at: finalFileURL)
+                try? fileManager.moveItem(at: backupFileURL, to: finalFileURL)
+            }
+            throw error
+        }
     }
 
     func download(
@@ -131,10 +155,10 @@ struct QWONM3ModelDownloader {
         progress: ProgressHandler? = nil
     ) async throws {
         try preflight(replaceExisting: replaceExisting)
-        try fileManager.createDirectory(
-            at: QWONM3ModelDownloadManifest.modelsDirectoryURL(in: documentsDirectory),
-            withIntermediateDirectories: true
-        )
+        try removeStaleTempFile()
+
+        let modelsDirectory = QWONM3ModelDownloadManifest.modelsDirectoryURL(in: documentsDirectory)
+        try fileManager.createDirectory(at: modelsDirectory, withIntermediateDirectories: true)
 
         progress?(.downloading(receivedBytes: 0))
 
@@ -154,9 +178,6 @@ struct QWONM3ModelDownloader {
 
         defer { try? fileManager.removeItem(at: temporaryLocation) }
 
-        if fileManager.fileExists(atPath: tempFileURL.path) {
-            try fileManager.removeItem(at: tempFileURL)
-        }
         try fileManager.copyItem(at: temporaryLocation, to: tempFileURL)
 
         progress?(.downloading(receivedBytes: fileByteCount(at: tempFileURL)))
@@ -170,13 +191,7 @@ struct QWONM3ModelDownloader {
         }
 
         progress?(.promoting)
-        do {
-            try promoteVerifiedTempFile(replaceExisting: replaceExisting)
-        } catch {
-            try? fileManager.removeItem(at: tempFileURL)
-            throw QWONM3ModelDownloadError.promoteFailed(error.localizedDescription)
-        }
-
+        try promoteVerifiedTempFile(replaceExisting: replaceExisting)
         progress?(.completed)
     }
 

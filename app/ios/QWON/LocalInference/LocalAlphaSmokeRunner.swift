@@ -118,8 +118,9 @@ enum LocalAlphaSmokeRunner {
         do {
             if replaceExisting {
                 try downloader.verifyTempFile(at: downloader.finalFileURL)
-                QWONM3ModelVerificationMarker.markVerified(
-                    expectedSHA256: QWONM3ModelDownloadManifest.expectedSHA256Hex
+                try QWONM3ModelVerificationMarker.markVerified(
+                    fileURL: downloader.finalFileURL,
+                    fileManager: .default
                 )
             } else {
                 try await downloader.download(replaceExisting: false)

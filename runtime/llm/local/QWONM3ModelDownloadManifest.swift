@@ -15,16 +15,21 @@ enum QWONM3ModelDownloadManifest {
 
     static let finalFileName = LocalGGUFModelPlacement.defaultModelFileName
     static let tempFileName = "prexus-local-mvp.gguf.download"
+    static let promoteBackupFileName = "prexus-local-mvp.gguf.promote-backup"
 
     static func modelsDirectoryURL(in documentsDirectory: URL) -> URL {
         documentsDirectory.appendingPathComponent("Models", isDirectory: true)
     }
 
     static func tempFileURL(in documentsDirectory: URL) -> URL {
-        documentsDirectory.appendingPathComponent(tempFileName)
+        modelsDirectoryURL(in: documentsDirectory).appendingPathComponent(tempFileName)
     }
 
     static func finalFileURL(in documentsDirectory: URL) -> URL {
         modelsDirectoryURL(in: documentsDirectory).appendingPathComponent(finalFileName)
+    }
+
+    static func promoteBackupFileURL(in documentsDirectory: URL) -> URL {
+        modelsDirectoryURL(in: documentsDirectory).appendingPathComponent(promoteBackupFileName)
     }
 }

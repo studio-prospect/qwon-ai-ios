@@ -1110,6 +1110,14 @@ final class QWONTests: XCTestCase {
             QWONM3ModelDownloadManifest.developmentDownloadURL.absoluteString,
             "https://models.qwon.dev/models/qwen2.5-0.5b-instruct/q4_k_m/prexus-local-mvp.gguf"
         )
+        let documents = FileManager.default.temporaryDirectory
+        XCTAssertEqual(
+            QWONM3ModelDownloadManifest.tempFileURL(in: documents).lastPathComponent,
+            "prexus-local-mvp.gguf.download"
+        )
+        XCTAssertTrue(
+            QWONM3ModelDownloadManifest.tempFileURL(in: documents).path.contains("/Models/")
+        )
     }
 
     #if QWON_M3_MODEL_DOWNLOAD_SPIKE
@@ -1175,19 +1183,69 @@ final class QWONTests: XCTestCase {
         )
     }
 
-    func testM3VerificationMarkerTracksVerifiedHash() {
+    func testM3VerificationMarkerTracksVerifiedRecord() throws {
         let suiteName = "QWONTests.M3Verification.\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: suiteName)!
         defer { defaults.removePersistentDomain(forName: suiteName) }
 
-        XCTAssertFalse(QWONM3ModelVerificationMarker.isMarkedVerified(defaults: defaults))
-        QWONM3ModelVerificationMarker.markVerified(
-            expectedSHA256: QWONM3ModelDownloadManifest.expectedSHA256Hex,
-            defaults: defaults
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: root) }
+
+        let fileURL = root.appendingPathComponent("sample.gguf")
+        try Data("qwon-m3-spike".utf8).write(to: fileURL)
+
+        XCTAssertFalse(
+            QWONM3ModelVerificationMarker.matchesManifestVerified(
+                fileURL: fileURL,
+                fileManager: .default,
+                defaults: defaults
+            )
         )
-        XCTAssertTrue(QWONM3ModelVerificationMarker.isMarkedVerified(defaults: defaults))
-        QWONM3ModelVerificationMarker.clear(defaults: defaults)
-        XCTAssertFalse(QWONM3ModelVerificationMarker.isMarkedVerified(defaults: defaults))
+
+        XCTAssertThrowsError(
+            try QWONM3ModelVerificationMarker.markVerified(
+                fileURL: fileURL,
+                fileManager: .default,
+                defaults: defaults
+            )
+        )
+
+        try Data("qwon-m3-spike-v2".utf8).write(to: fileURL)
+        XCTAssertFalse(
+            QWONM3ModelVerificationMarker.matchesManifestVerified(
+                fileURL: fileURL,
+                fileManager: .default,
+                defaults: defaults
+            )
+        )
+    }
+
+    func testM3PromoteRestoresExistingWhenTempMissing() throws {
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: root) }
+
+        let modelsDirectory = QWONM3ModelDownloadManifest.modelsDirectoryURL(in: root)
+        try FileManager.default.createDirectory(at: modelsDirectory, withIntermediateDirectories: true)
+
+        let finalURL = QWONM3ModelDownloadManifest.finalFileURL(in: root)
+        let original = Data("original-model-data".utf8)
+        try original.write(to: finalURL)
+
+        let downloader = QWONM3ModelDownloader(
+            fileManager: .default,
+            documentsDirectory: root
+        )
+
+        XCTAssertThrowsError(try downloader.promoteVerifiedTempFile(replaceExisting: true)) { error in
+            guard case QWONM3ModelDownloadError.promoteFailed = error else {
+                return XCTFail("Expected promoteFailed, got \(error)")
+            }
+        }
+
+        XCTAssertEqual(try Data(contentsOf: finalURL), original)
+        XCTAssertFalse(FileManager.default.fileExists(atPath: downloader.backupFileURL.path))
     }
     #endif
 
