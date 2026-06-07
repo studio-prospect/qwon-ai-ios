@@ -1,10 +1,10 @@
 # QWON — Post-Alpha Option Lanes (v0.2+ Planning)
 
-**Last updated:** 2026-06-03 (Model download / GGUF UX lane selected)
-**Status:** **Second post-alpha lane selected** — [Model download / GGUF UX decision](./qwon_model_download_gguf_ux_decision.md); **scoped planning only**; **no implementation or spike approved**.
-**Purpose:** After **QWON `0.1.0 (3)` stable alpha** and [UI polish / onboarding UI-1 complete](./qwon_ui_polish_onboarding_plan.md), outline **remaining v0.2 / post-alpha candidate lanes** and record lane selections. Does **not** approve build **`4`**, TestFlight upload, tag, version bump, or code work.
+**Last updated:** 2026-06-07 (post-M3 next lane checkpoint)
+**Status:** **Post-M3 planning** — Model download / GGUF UX **lane closed** (Option A). **No third lane selected yet.** **Build `4` not approved.**
+**Purpose:** After **QWON `0.1.0 (3)` stable alpha**, [UI polish UI-1 complete](./qwon_ui_polish_onboarding_plan.md), and [M3 spike Option A](./qwon_m3_spike_outcome_decision.md#decision-record), outline **remaining v0.2 / post-alpha candidate lanes** and record lane selections. Does **not** approve build **`4`**, TestFlight upload, tag, version bump, or code work.
 
-Related: [Model download / GGUF UX scoped plan](./qwon_model_download_gguf_ux_plan.md) · [Model download / GGUF UX decision](./qwon_model_download_gguf_ux_decision.md) · [Next lane selection checkpoint](#next-lane-selection-checkpoint-2026-06-03) · [UI polish / onboarding plan](./qwon_ui_polish_onboarding_plan.md) · [Next decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) · [QWON next work queue — deferred](./qwon_next_work_queue.md#deferred--post-alpha) · [Agent collaboration workflow](./agent_collaboration_workflow.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md)
+Related: [Post-M3 next lane decision](./qwon_post_m3_next_lane_decision.md) · [Model download / GGUF UX scoped plan](./qwon_model_download_gguf_ux_plan.md) · [M3 spike outcome decision](./qwon_m3_spike_outcome_decision.md) · [Next lane selection checkpoint (2026-06-03)](#next-lane-selection-checkpoint-2026-06-03) · [UI polish / onboarding plan](./qwon_ui_polish_onboarding_plan.md) · [Next decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) · [QWON next work queue — deferred](./qwon_next_work_queue.md#deferred--post-alpha) · [Agent collaboration workflow](./agent_collaboration_workflow.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md)
 
 ---
 
@@ -16,9 +16,9 @@ Related: [Model download / GGUF UX scoped plan](./qwon_model_download_gguf_ux_pl
 | **Feedback** | **Closed** — **QWON-FB-001**, **QWON-FB-002** operational pass; **no blockers** |
 | **Build `4`** | **Not approved** |
 | **First post-alpha lane** | **UI polish / onboarding** — **complete** (#80 UI-1, #81 verification) · [UI-2 deferred](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) (#82) |
-| **Selected next lane** | **[Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md)** |
-| **Scoped plan** | **[qwon_model_download_gguf_ux_plan.md](./qwon_model_download_gguf_ux_plan.md)** |
-| **Next agent step** | PR M1 only after explicit Product/Codex assignment |
+| **Second post-alpha lane** | **Model download / GGUF UX** — M1/M2/M3 spike **closed** (Option A) · [decision record](./qwon_m3_spike_outcome_decision.md#decision-record) |
+| **Selected next lane** | **None yet** — see [Post-M3 next lane decision](./qwon_post_m3_next_lane_decision.md) |
+| **Next agent step** | **Stay** (default) — docs/readme hygiene; **no** implementation without Product lane selection + Codex plan |
 | **This doc** | Lane catalog + decisions — selection does **not** authorize implementation or spike |
 
 **v0.2** below means **post-alpha product direction candidates**, not an approved release or marketing version bump.
@@ -39,9 +39,53 @@ Planning PRs for this doc are **docs-only**. First engineering PR after a **new*
 
 ---
 
-## Next lane selection checkpoint (2026-06-03)
+<a id="post-m3-next-lane-checkpoint-2026-06-07"></a>
 
-**Purpose:** Close the **UI polish / onboarding** lane as **first lane complete** and give product a **comparable view** of remaining post-alpha lanes. **Docs-only checkpoint** — **not** implementation, spike, or build **`4`** approval.
+## Post-M3 next lane selection checkpoint (2026-06-07)
+
+**Purpose:** Refresh post-alpha lane selection after **M3 Option A / lane closed**. **Docs-only checkpoint** — **not** implementation, spike, or build **`4`** approval.
+
+**Canonical memo:** [qwon_post_m3_next_lane_decision.md](./qwon_post_m3_next_lane_decision.md)
+
+### Current state (summary)
+
+| Field | Value |
+| --- | --- |
+| **TestFlight** | **`0.1.0 (3)`** stable alpha |
+| **M3** | **Option A selected** — compile-gated default-off; lane **closed** |
+| **UI-1 / UI-2** | UI-1 **complete** · UI-2 **deferred** |
+| **Next lane** | **Not selected** — Product chooses **Stay** or one candidate |
+| **Build `4`** | **Not approved** |
+
+### Recommended default
+
+**Stay** on build **`3`** unless Product selects exactly one lane in [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record). Do **not** start implementation from this checkpoint.
+
+### Next lane candidates (2026-06-07)
+
+See [Post-M3 next lane decision §2](./qwon_post_m3_next_lane_decision.md#2-next-lane-candidates) for the full table. Summary:
+
+| Candidate | Notes |
+| --- | --- |
+| **Stay / docs-ops** | **Recommended default** |
+| **UI-2 reopen** | New evidence required |
+| **OCR / camera / multimodal** | Planning only → Codex plan |
+| **LiteRT follow-up** | Planning only → Codex plan |
+| **App Store readiness** | Long-term; separate from Build `4` |
+| **`PREXUS.xcodeproj` rename** | Deferred infra — Product must explicitly want cleanup |
+| **Runtime memory / retention** | High impact — Codex plan required |
+
+**Closed:** Model download / GGUF UX (M3 Option A) · UI-1 complete.
+
+### Guardrails
+
+Same as [Post-M3 guardrails](./qwon_post_m3_next_lane_decision.md#4-guardrails): no Build `4`, no TestFlight upload/tag/bump, no default-on M3, no PREXUS historical rewrite, no GGUF commit, no app/tools changes from this checkpoint.
+
+---
+
+## Next lane selection checkpoint (2026-06-03) — historical
+
+**Purpose:** Close the **UI polish / onboarding** lane as **first lane complete** and give product a **comparable view** of remaining post-alpha lanes (2026-06-03). **Superseded for current routing by [Post-M3 checkpoint (2026-06-07)](#post-m3-next-lane-checkpoint-2026-06-07).** Kept for audit trail.
 
 ### Current state
 
@@ -152,7 +196,7 @@ Qualitative scale matches [Selection matrix](#selection-matrix). Rows below **ex
 
 ### After product selects a next lane
 
-1. Product records **Stay** or **one lane** in docs (checkpoint update or decision memo).
+1. Product records **Stay** or **one lane** in [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record) (or linked decision memo).
 2. **Codex opens a scoped plan** for that lane — **not** automatic.
 3. Cursor spikes/implements per [Recommended workflow](#recommended-workflow) — **only after plan merge**; **no** TestFlight upload/tag/bump unless a **separate** product gate approves.
 
@@ -187,18 +231,18 @@ Qualitative scale matches [Selection matrix](#selection-matrix). Rows below **ex
 
 ---
 
-## Product lane decision (2026-06-03) — second lane (selected)
+## Product lane decision (2026-06-03) — second lane (closed)
 
 **Recorded by:** Product
-**Scope:** Second post-alpha lane on build **`3`** stable alpha — **scoped planning only**.
+**Scope:** Second post-alpha lane on build **`3`** stable alpha — **lane closed** (M3 Option A, 2026-06-07).
 
 | Field | Value |
 | --- | --- |
 | **Lane** | **[Model download / GGUF UX](./qwon_model_download_gguf_ux_decision.md)** |
-| **Status** | **Selected for scoped planning** — Codex plan is **next** |
+| **Status** | **Closed** — M1/M2 complete; M3 spike merged; **Option A selected** · [decision record](./qwon_m3_spike_outcome_decision.md#decision-record) |
 | **Build `4`** | **Not approved** |
 
-**Full memo:** [qwon_model_download_gguf_ux_decision.md](./qwon_model_download_gguf_ux_decision.md)
+**Full memo:** [qwon_model_download_gguf_ux_plan.md](./qwon_model_download_gguf_ux_plan.md) · **Next:** [Post-M3 next lane decision](./qwon_post_m3_next_lane_decision.md)
 
 ---
 
