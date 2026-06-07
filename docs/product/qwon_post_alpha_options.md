@@ -1,7 +1,7 @@
 # QWON — Post-Alpha Option Lanes (v0.2+ Planning)
 
-**Last updated:** 2026-06-07 (post-M3 next lane checkpoint)
-**Status:** **Post-M3 planning** — Model download / GGUF UX **lane closed** (Option A). **No third lane selected yet.** **Build `4` not approved.**
+**Last updated:** 2026-06-07 (Stay selected — post-M3)
+**Status:** **Stay selected** — Model download / GGUF UX **lane closed** (Option A). **No third post-alpha lane.** **Build `4` not approved.**
 **Purpose:** After **QWON `0.1.0 (3)` stable alpha**, [UI polish UI-1 complete](./qwon_ui_polish_onboarding_plan.md), and [M3 spike Option A](./qwon_m3_spike_outcome_decision.md#decision-record), outline **remaining v0.2 / post-alpha candidate lanes** and record lane selections. Does **not** approve build **`4`**, TestFlight upload, tag, version bump, or code work.
 
 Related: [Post-M3 next lane decision](./qwon_post_m3_next_lane_decision.md) · [Model download / GGUF UX scoped plan](./qwon_model_download_gguf_ux_plan.md) · [M3 spike outcome decision](./qwon_m3_spike_outcome_decision.md) · [Next lane selection checkpoint (2026-06-03)](#next-lane-selection-checkpoint-2026-06-03) · [UI polish / onboarding plan](./qwon_ui_polish_onboarding_plan.md) · [Next decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) · [QWON next work queue — deferred](./qwon_next_work_queue.md#deferred--post-alpha) · [Agent collaboration workflow](./agent_collaboration_workflow.md) · [Preserved PREXUS inventory](./qwon_preserved_prexus_surface_inventory.md)
@@ -17,8 +17,8 @@ Related: [Post-M3 next lane decision](./qwon_post_m3_next_lane_decision.md) · [
 | **Build `4`** | **Not approved** |
 | **First post-alpha lane** | **UI polish / onboarding** — **complete** (#80 UI-1, #81 verification) · [UI-2 deferred](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) (#82) |
 | **Second post-alpha lane** | **Model download / GGUF UX** — M1/M2/M3 spike **closed** (Option A) · [decision record](./qwon_m3_spike_outcome_decision.md#decision-record) |
-| **Selected next lane** | **None yet** — see [Post-M3 next lane decision](./qwon_post_m3_next_lane_decision.md) |
-| **Next agent step** | **Stay** (default) — docs/readme hygiene; **no** implementation without Product lane selection + Codex plan |
+| **Third post-alpha posture** | **Stay selected** — no new lane · [decision record](./qwon_post_m3_next_lane_decision.md#decision-record) |
+| **Next agent step** | **Stay** — docs/readme/index/evidence hygiene only |
 | **This doc** | Lane catalog + decisions — selection does **not** authorize implementation or spike |
 
 **v0.2** below means **post-alpha product direction candidates**, not an approved release or marketing version bump.
@@ -54,12 +54,16 @@ Planning PRs for this doc are **docs-only**. First engineering PR after a **new*
 | **TestFlight** | **`0.1.0 (3)`** stable alpha |
 | **M3** | **Option A selected** — compile-gated default-off; lane **closed** |
 | **UI-1 / UI-2** | UI-1 **complete** · UI-2 **deferred** |
-| **Next lane** | **Not selected** — Product chooses **Stay** or one candidate |
+| **Next lane** | **Stay selected** — no third post-alpha lane |
 | **Build `4`** | **Not approved** |
 
-### Recommended default
+### Product decision (2026-06-07)
 
-**Stay** on build **`3`** unless Product selects exactly one lane in [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record). Do **not** start implementation from this checkpoint.
+**Stay selected** — see [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record). To open UI-2, OCR, LiteRT, App Store, project-container rename, or memory lanes, Product must **lift Stay** and record one candidate.
+
+### Recommended default (historical checkpoint text)
+
+**Stay** on build **`3`**. Product decision recorded 2026-06-07. Do **not** start implementation while Stay is in effect.
 
 ### Next lane candidates (2026-06-07)
 
@@ -67,7 +71,7 @@ See [Post-M3 next lane decision §2](./qwon_post_m3_next_lane_decision.md#2-next
 
 | Candidate | Notes |
 | --- | --- |
-| **Stay / docs-ops** | **Recommended default** |
+| **Stay / docs-ops** | **Selected** — Product decision 2026-06-07 |
 | **UI-2 reopen** | New evidence required |
 | **OCR / camera / multimodal** | Planning only → Codex plan |
 | **LiteRT follow-up** | Planning only → Codex plan |
