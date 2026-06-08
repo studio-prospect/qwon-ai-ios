@@ -18,7 +18,7 @@ Related: [Intake ledger — G2](./qwon_app_store_public_readiness_intake.md#g2--
 | **G2 worksheet ≠ Build `4` approval** | No TestFlight upload, tag, or **`CFBundleVersion` bump** |
 | **G2 worksheet ≠ App Store metadata upload** | No ASC metadata upload, screenshot upload, or submission ops from this doc |
 | **Stay selected** | Worksheet maintenance does **not** lift Stay or authorize implementation |
-| **Draft suggestions** | Blocks marked **draft / not approved** — Product must replace or reject before intake recording |
+| **Draft suggestions** | Superseded by the **approved Product decision draft** below; keep as **historical rationale only** |
 | **Recording answers** | Product **approved for intake recording** 2026-06-08 — intake **Answered** (This PR); **G2 gate sign-off** still **Open** |
 
 ---

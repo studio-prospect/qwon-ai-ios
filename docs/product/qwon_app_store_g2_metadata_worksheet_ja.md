@@ -18,7 +18,7 @@ English worksheet: [G2 Metadata Worksheet](./qwon_app_store_g2_metadata_workshee
 | **G2 worksheet ≠ Build `4` 承認** | TestFlight upload / tag / version bump なし |
 | **G2 worksheet ≠ メタデータ upload** | ASC への metadata / screenshot upload なし |
 | **Stay selected** | Stay 解除・実装承認にはならない |
-| **推奨案は draft** | **draft / not approved** — intake **Answered** にしない |
+| **推奨案は draft** | 下記の **intake 記録承認済み Product decision draft** に置き換え済み。**履歴・根拠としてのみ保持** |
 | **記録** | Product **intake 記録承認済**（2026-06-08）— intake **Answered**（This PR）；**G2 gate sign-off** は **Open** のまま |
 
 ---
