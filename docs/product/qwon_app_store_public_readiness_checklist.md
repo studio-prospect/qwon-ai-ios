@@ -1,6 +1,6 @@
 # QWON — App Store Public Release Readiness Checklist
 
-**Last updated:** 2026-06-07 (Stay selected — G1 Product answer worksheet)
+**Last updated:** 2026-06-07 (Stay selected — G1 intake Q-AS-01…03 **Answered**; gate **Open**)
 **Status:** **Docs-only** — **Stay selected**. **App Store public release not approved.** **Build `4` not approved.** **TestFlight upload / tag / version bump not approved.**
 **Purpose:** While **Stay** remains in effect, make **open Product/Legal/RE decisions** visible for a future move from TestFlight **`0.1.0 (3)`** stable alpha to **public App Store availability**. This checklist does **not** authorize implementation, release engineering, App Store submission, or Build `4`.
 
@@ -39,11 +39,11 @@ Related: [Answer intake ledger](./qwon_app_store_public_readiness_intake.md) · 
 
 ## 3. Public readiness gates
 
-Each row is an **open decision or artifact** until Product/Legal/RE records completion. Status **Open** = not decided or not documented for public release. **Answerable questions:** [App Store readiness intake ledger](./qwon_app_store_public_readiness_intake.md) — **24 Unanswered** (2026-06-07).
+Each row is an **open decision or artifact** until Product/Legal/RE records completion. Status **Open** = not decided or not documented for public release. **Answerable questions:** [App Store readiness intake ledger](./qwon_app_store_public_readiness_intake.md) — **21 Unanswered · 3 Answered** (G1 intake complete; gate **Open**).
 
 | # | Gate | Status | Notes / first doc |
 | --- | --- | --- | --- |
-| **G1** | **Product positioning / value proposition** | **Open** | [Q-AS-01 … Q-AS-03](./qwon_app_store_public_readiness_intake.md#g1--product-positioning--value-proposition) · [G1 worksheet](./qwon_app_store_g1_product_worksheet.md) · [日本語フォーム](./qwon_app_store_g1_product_worksheet_ja.md) |
+| **G1** | **Product positioning / value proposition** | **Open** | Intake **Q-AS-01 … Q-AS-03 Answered** (This PR) — gate sign-off still **Open** · [intake G1](./qwon_app_store_public_readiness_intake.md#g1--product-positioning--value-proposition) · [G1 worksheet](./qwon_app_store_g1_product_worksheet.md) |
 | **G2** | **App Store metadata and screenshots** | **Open** | [Q-AS-04 … Q-AS-06](./qwon_app_store_public_readiness_intake.md#g2--app-store-metadata--screenshots--localization) |
 | **G3** | **Privacy nutrition labels** | **Open** | [Q-AS-07 … Q-AS-08](./qwon_app_store_public_readiness_intake.md#g3--privacy-nutrition-labels) · [M3 network memo](./qwon_m3_network_device_expectation_memo.md) |
 | **G4** | **Export compliance / encryption declaration** | **Partial** | [Q-AS-09 … Q-AS-10](./qwon_app_store_public_readiness_intake.md#g4--export-compliance--encryption-declaration) · [TestFlight prep — export compliance](./qwon_text_alpha_testflight_prep.md#export-compliance-operator-gate) |
@@ -78,7 +78,7 @@ Each row is an **open decision or artifact** until Product/Legal/RE records comp
 | --- | --- |
 | **Public release approved?** | **No** |
 | **Stay in effect?** | **Yes** — [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record) |
-| **Next action** | **Product / Legal / RE review only** — Product may start with [G1 worksheet](./qwon_app_store_g1_product_worksheet.md) / [日本語フォーム](./qwon_app_store_g1_product_worksheet_ja.md); record approved answers in [intake ledger](./qwon_app_store_public_readiness_intake.md) via follow-up docs PR (**24 Unanswered**); **no** implementation or submission |
+| **Next action** | **Product / Legal / RE review only** — G1 intake **Answered**; next: **G1 explicit gate sign-off** or **G2 worksheet preparation** · [intake ledger](./qwon_app_store_public_readiness_intake.md) (**21 Unanswered**) · **no** implementation or submission |
 | **To open implementation** | Product **lifts Stay**, selects **App Store public release readiness** (or combined horizon gate), records approval in this section, then Codex scoped plan → Cursor — **still no** upload/submission without explicit release gate |
 
 **Checklist created:** 2026-06-07 — Stay-allowed docs hygiene; does not change Product posture.
