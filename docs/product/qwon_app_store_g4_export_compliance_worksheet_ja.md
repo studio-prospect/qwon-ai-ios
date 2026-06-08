@@ -1,8 +1,8 @@
 # QWON — App Store G4 輸出コンプライアンス回答フォーム（日本語）
 
-**最終更新:** 2026-06-08（G4 Legal/RE decision draft 準備済 — intake **Unanswered**）
-**状態:** **Legal/RE decision draft / awaiting explicit approval 付き worksheet** — [intake ledger](./qwon_app_store_public_readiness_intake.md) の **Q-AS-09 … Q-AS-10** は **Unanswered** のまま。**export compliance final submission ではない**。**App Store 公開承認ではない**。**Build `4` 承認ではない**。**TestFlight upload / tag / version bump / ASC submission 承認ではない**。
-**目的:** **Legal / Release Engineering** が **G4 — Export compliance / encryption declaration** に回答し、別 docs-only PR で intake に記録する前の合意形成用日本語フォーム。
+**最終更新:** 2026-06-08（G4 Legal/RE **approved for intake recording** — gate sign-off **Open**）
+**状態:** **Legal/RE decision draft — approved for intake recording 付き worksheet** — [intake ledger](./qwon_app_store_public_readiness_intake.md) の **Q-AS-09 … Q-AS-10** は **Answered**（This PR）。**export compliance final submission ではない**。**App Store 公開承認ではない**。**Build `4` 承認ではない**。**TestFlight upload / tag / version bump / ASC submission 承認ではない**。
+**目的:** **Legal / Release Engineering** 向け G4 intake 回答記録済み；**G4 gate sign-off** は **Open**（別 worksheet）。
 
 English worksheet: [G4 Export Compliance Worksheet](./qwon_app_store_g4_export_compliance_worksheet.md)
 
@@ -20,22 +20,22 @@ English worksheet: [G4 Export Compliance Worksheet](./qwon_app_store_g4_export_c
 | **G4 worksheet ≠ ASC submission** | App Store Connect upload / compliance 提出 ops なし |
 | **Stay selected** | Stay 解除・実装承認にはならない |
 | **コード変更なし** | app コード・暗号化挙動・compliance plist の変更なし |
-| **推奨案は draft** | **draft / not approved** — Legal / RE が差し替え・却下するまで intake **Answered** にしない |
-| **記録** | Legal / RE **明示承認** 後に **別 docs-only PR** で intake を **Answered** に更新 |
+| **推奨案は draft** | [approved for intake recording](#legal-re-decision-draft--awaiting-explicit-approval) に置換済 — 下記は履歴用 |
+| **記録** | Legal / RE **approved for intake recording** 2026-06-08 — intake **Answered**（This PR）；**G4 gate sign-off** は **Open** |
 
 ---
 
 <a id="legal-re-decision-draft--awaiting-explicit-approval"></a>
 
-## Legal / Release Engineering decision draft — **awaiting explicit approval（明示承認待ち）**
+## Legal / Release Engineering decision draft — **approved for intake recording（intake 記録承認済）**
 
-**ラベル:** **Legal/RE decision draft / awaiting explicit Legal/RE approval** — 推奨案・TestFlight export compliance 履歴・build `3` エビデンスをベースに整理。**intake Answered ではない**。**G4 Closed/Ready ではない**。**export compliance final submission / 公開承認ではない**。
+**ラベル:** **Legal/RE decision draft — approved for intake recording (2026-06-08)** — [intake ledger — G4 answer details](./qwon_app_store_public_readiness_intake.md#g4-legalre-answer-details-2026-06-08) に記録（This PR；worksheet prep [#143](https://github.com/studio-prospect/qwon-ai-ios/pull/143)）。**G4 Closed/Ready ではない**。**export compliance final submission ではない**。**公開 / Build `4` 承認ではない**。
 
 | 項目 | 値 |
 | --- | --- |
 | **準備日** | 2026-06-08 — Stay 下 docs-only hygiene（[#142](https://github.com/studio-prospect/qwon-ai-ios/pull/142)） |
-| **Intake ledger** | **Q-AS-09 … Q-AS-10** は Legal / RE 明示承認 + follow-up PR まで **Unanswered** |
-| **次の段階** | Legal / RE が各 draft を確認・編集・却下 → docs-only PR で [intake ledger](./qwon_app_store_public_readiness_intake.md) を **Answered** に更新 |
+| **Approved for intake recording** | 2026-06-08 — Legal / RE 明示承認 → intake **Answered**（This PR） |
+| **次の段階** | **G4 gate sign-off worksheet** 準備 → Legal / RE 承認後、別 docs-only PR で checklist gate **G4 Closed/Ready** |
 
 ### Q-AS-09 — TestFlight build `2` attestation との export compliance 差分
 
@@ -46,9 +46,9 @@ English worksheet: [G4 Export Compliance Worksheet](./qwon_app_store_g4_export_c
 | **暗号化 posture 変更（draft）** | **計画前提:** TestFlight **`0.1.0 (3)`** クラス binary で material change なし — **RE/Legal が public-release candidate で検証**；build **`3`** export compliance **docs 未再検証** は submit 前に解消。 |
 | **build `3` doc gap（draft）** | doc gap を解消 — 候補 binary の encryption use を RE/Legal が検証；installability から compliance を推論しない。 |
 | **public-release binary vs TestFlight（draft）** | submit binary は TestFlight **`0.1.0 (3)`** と異なる場合あり — compliance 回答は **submit binary** を参照。 |
-| **判断 owner** | Legal（draft — **明示承認待ち**） |
+| **判断 owner** | Legal（**approved for intake recording** — 2026-06-08） |
 | **出典** | 推奨案 § Q-AS-09 · [TestFlight prep export compliance gate](./qwon_text_alpha_testflight_prep.md#export-compliance-operator-gate) |
-| **制約** | **compliance 提出ではない**；follow-up PR まで intake **Answered** にしない |
+| **制約** | **compliance 提出ではない**；**G4 gate sign-off** は **Open** |
 
 ### Q-AS-10 — ASC export compliance sign-off owner と re-verification
 
@@ -60,7 +60,7 @@ English worksheet: [G4 Export Compliance Worksheet](./qwon_app_store_g4_export_c
 | **Re-verification steps（draft）** | (1) public-release candidate binary 特定 · (2) encryption use 検証（app、llama.cpp、HTTPS/TLS、non-exempt crypto）· (3) TestFlight build **`2`** attestation と比較 · (4) **public submission build** 向け ASC export compliance 完了 — TestFlight 自動引き継ぎ想定しない · (5) attestation audit trail 記録 · (6) submit 前 Legal sign-off |
 | **Pre-submit checklist（draft）** | [TestFlight prep operator checklist](./qwon_text_alpha_testflight_prep.md#export-compliance-operator-gate) を **App Store public submit** 向けに適応 — internal TestFlight upload ops とは別 |
 | **Documentation location（draft）** | 承認後 intake + 本 worksheet；ASC attestation evidence は ops record（git 外） |
-| **判断 owner** | Release Engineering（draft — **明示承認待ち**） |
+| **判断 owner** | Release Engineering（**approved for intake recording** — 2026-06-08） |
 | **出典** | 推奨案 § Q-AS-10 |
 | **制約** | **ASC compliance 提出ではない**；**G4 Closed/Ready ではない** |
 
@@ -73,10 +73,10 @@ English worksheet: [G4 Export Compliance Worksheet](./qwon_app_store_g4_export_c
 | **Checklist gate G1** | **Closed/Ready** — [sign-off Approved](./qwon_app_store_g1_gate_signoff_worksheet.md#sign-off-record-product) ([#131](https://github.com/studio-prospect/qwon-ai-ios/pull/131)) |
 | **Checklist gate G2** | **Closed/Ready** — [sign-off Approved](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) ([#136](https://github.com/studio-prospect/qwon-ai-ios/pull/136)) |
 | **Checklist gate G3** | **Closed/Ready** — [sign-off Approved](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) ([#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)) |
-| **Intake ledger total** | **24 questions · 16 Unanswered · 8 Answered** |
+| **Intake ledger total** | **24 questions · 14 Unanswered · 10 Answered** |
 | **Active TestFlight** | **QWON `0.1.0 (3)`** — stable alpha · ASC **`6775685841`** |
-| **G4 intake** | **Q-AS-09 … Q-AS-10** — **Unanswered** |
-| **Checklist gate G4** | **Partial** |
+| **G4 intake** | **Q-AS-09 … Q-AS-10 Answered**（This PR） |
+| **Checklist gate G4** | **Partial** — gate sign-off **Open** |
 | **TestFlight export compliance 実績** | [TestFlight prep — export compliance operator gate](./qwon_text_alpha_testflight_prep.md#export-compliance-operator-gate) — build `1` upload 時完了；build `2` **re-submission 必要** → 2026-06-02 提出；build `3` **docs 上未再検証** |
 | **Public release approved?** | **No** |
 | **Build `4` approved?** | **No** |
@@ -98,7 +98,7 @@ English worksheet: [G4 Export Compliance Worksheet](./qwon_app_store_g4_export_c
 | --- | --- |
 | **Gate** | G4 |
 | **Owner** | Legal |
-| **Intake 状態** | **Unanswered** |
+| **Intake 状態** | **Answered**（This PR） |
 
 ### 質問
 
@@ -106,19 +106,21 @@ English worksheet: [G4 Export Compliance Worksheet](./qwon_app_store_g4_export_c
 
 ### Legal 記入欄
 
-**[Legal/RE decision draft](#legal-re-decision-draft--awaiting-explicit-approval)** を参照 — **draft / awaiting explicit Legal/RE approval**；intake は **Unanswered** のまま。
+**[approved for intake recording](#legal-re-decision-draft--awaiting-explicit-approval)** を参照 — intake **Answered**（This PR）；**G4 gate sign-off** は **Open**。
 
 | 項目 | 記入 |
 | --- | --- |
-| **承認回答** | **Yes** — public submit 前に updated export compliance / encryption declaration レビュー必要；TestFlight build **`2`** attestation のみに依存不可。（*draft — 明示承認待ち*） |
-| **暗号化 posture 変更** | TestFlight **`0.1.0 (3)`** 対比 material change なし想定 — **RE/Legal 検証**。（*draft*） |
-| **build `3` doc gap 影響** | doc gap 解消 — 候補 binary 検証；installability から推論しない。（*draft*） |
-| **public-release binary vs TestFlight** | submit binary は異なる場合あり — submit binary を参照。（*draft*） |
-| **判断 owner** | Legal（draft） |
-| **出典** | [Legal/RE decision draft § Q-AS-09](#legal-re-decision-draft--awaiting-explicit-approval) |
-| **制約** | compliance **提出** ではない |
+| **承認回答** | **Yes** — public submit 前に updated export compliance / encryption declaration レビュー必要；TestFlight build **`2`** attestation のみに依存不可。（*approved for intake recording*） |
+| **暗号化 posture 変更** | TestFlight **`0.1.0 (3)`** 対比 material change なし想定 — **RE/Legal 検証**。（*approved for intake recording*） |
+| **build `3` doc gap 影響** | doc gap 解消 — 候補 binary 検証；installability から推論しない。（*approved for intake recording*） |
+| **public-release binary vs TestFlight** | submit binary は異なる場合あり — submit binary を参照。（*approved for intake recording*） |
+| **判断 owner** | Legal（approved for intake recording） |
+| **出典** | [Intake ledger — G4 answer details](./qwon_app_store_public_readiness_intake.md#g4-legalre-answer-details-2026-06-08) |
+| **制約** | compliance **提出** ではない；**G4 gate sign-off** は **Open** |
 
-### 推奨回答案（draft / not approved）
+### 推奨回答案（superseded / historical）
+
+> *Superseded by [approved for intake recording](#legal-re-decision-draft--awaiting-explicit-approval) — トレーサビリティ用に残す。*
 
 > **public release vs TestFlight build `2` attestation（計画 draft）:**
 > - TestFlight build **`2`** export compliance は 2026-06-02 **re-submission 後完了**（[operator gate](./qwon_text_alpha_testflight_prep.md#export-compliance-operator-gate)）；build **`3`** compliance は **docs 上未再検証**（Wang installable だが public-readiness 用に **未文書化**）。
@@ -137,7 +139,7 @@ Legal が編集・差し替え・却下すること。**export compliance final 
 | --- | --- |
 | **Gate** | G4 |
 | **Owner** | Release Engineering |
-| **Intake 状態** | **Unanswered** |
+| **Intake 状態** | **Answered**（This PR） |
 
 ### 質問
 
@@ -145,20 +147,22 @@ public App Store submission の **ASC export compliance sign-off** owner は誰�
 
 ### RE / Legal 記入欄
 
-**[Legal/RE decision draft](#legal-re-decision-draft--awaiting-explicit-approval)** を参照 — **draft / awaiting explicit Legal/RE approval**；intake は **Unanswered** のまま。
+**[approved for intake recording](#legal-re-decision-draft--awaiting-explicit-approval)** を参照 — intake **Answered**（This PR）；**G4 gate sign-off** は **Open**。
 
 | 項目 | 記入 |
 | --- | --- |
-| **Sign-off owner** | **Release Engineering**（primary）；**Legal** が ASC 回答 review/approve。（*draft — 明示承認待ち*） |
-| **Legal レビュー役割** | submit 前 Legal が final ASC export compliance 回答を approve。（*draft*） |
-| **Re-verification steps** | 候補 binary 特定 → encryption use 検証 → build **`2`** attestation 比較 → public submit 向け ASC 完了 → audit trail → Legal sign-off。（*draft*） |
-| **Pre-submit checklist** | TestFlight operator checklist を App Store public submit 向けに適応。（*draft*） |
-| **Documentation location** | 承認後 intake + worksheet；ASC evidence は ops record。（*draft*） |
-| **判断 owner** | Release Engineering（draft） |
-| **出典** | [Legal/RE decision draft § Q-AS-10](#legal-re-decision-draft--awaiting-explicit-approval) |
+| **Sign-off owner** | **Release Engineering**（primary）；**Legal** が ASC 回答 review/approve。（*approved for intake recording*） |
+| **Legal レビュー役割** | submit 前 Legal が final ASC export compliance 回答を approve。（*approved for intake recording*） |
+| **Re-verification steps** | 候補 binary 特定 → encryption use 検証 → build **`2`** attestation 比較 → public submit 向け ASC 完了 → audit trail → Legal sign-off。（*approved for intake recording*） |
+| **Pre-submit checklist** | TestFlight operator checklist を App Store public submit 向けに適応。（*approved for intake recording*） |
+| **Documentation location** | 承認後 intake + worksheet；ASC evidence は ops record。（*approved for intake recording*） |
+| **判断 owner** | Release Engineering（approved for intake recording） |
+| **出典** | [Intake ledger — G4 answer details](./qwon_app_store_public_readiness_intake.md#g4-legalre-answer-details-2026-06-08) |
 | **制約** | ASC compliance **提出** ではない |
 
-### 推奨回答案（draft / not approved）
+### 推奨回答案（superseded / historical）
+
+> *Superseded by [approved for intake recording](#legal-re-decision-draft--awaiting-explicit-approval) — トレーサビリティ用に残す。*
 
 > **ASC export compliance sign-off（計画 draft）:**
 > - **Primary owner（draft）:** **Release Engineering** が **public submission build** の ASC export compliance questionnaire を完了；**Legal** が App Store submit 前に回答を review/approve。
@@ -180,10 +184,11 @@ RE/Legal が編集・差し替え・却下すること。**ASC compliance final 
 
 | 項目 | 状態 |
 | --- | --- |
-| Q-AS-09 Legal/RE decision draft 準備 | **Done** — [明示承認待ち](#legal-re-decision-draft--awaiting-explicit-approval) |
-| Q-AS-10 Legal/RE decision draft 準備 | **Done** — 明示承認待ち |
-| Legal / RE **明示承認** | **Pending** |
-| follow-up docs-only PR で intake **Answered** | **Pending** |
+| Q-AS-09 Legal/RE decision draft 準備 | **Done** — [approved for intake recording](#legal-re-decision-draft--awaiting-explicit-approval) |
+| Q-AS-10 Legal/RE decision draft 準備 | **Done** — approved for intake recording |
+| Legal / RE **approved for intake recording** | **Done** — 2026-06-08（This PR） |
+| follow-up docs-only PR で intake **Answered** | **Done** — This PR |
+| **G4 gate sign-off worksheet** | **Pending** — 次段階 |
 | checklist G4 Closed/Ready | **No** |
 | Export compliance final submission | **No** |
 | Public release approved | **No** |
@@ -193,4 +198,4 @@ RE/Legal が編集・差し替え・却下すること。**ASC compliance final 
 
 ## Agent note
 
-**Legal / Release Engineering** 向け **明示承認** 用。**Legal/RE decision draft を intake Answered にコピーしたり ASC export compliance を提出したりしない** — 明示承認 + follow-up docs-only PR まで **Unanswered** を維持すること。
+**Legal / Release Engineering** 向け **G4 gate sign-off**（次 worksheet）用。intake **Answered**（This PR）は ASC export compliance 提出・公開承認・**G4 Closed/Ready** ではない。
