@@ -1,7 +1,7 @@
 # QWON — App Store G2 Metadata Worksheet (External Share)
 
-**Last updated:** 2026-06-08 (Stay selected — G2 worksheet entry; intake **Unanswered**)
-**Status:** **Worksheet only** — intake rows **Q-AS-04 … Q-AS-06** remain **Unanswered** in the [intake ledger](./qwon_app_store_public_readiness_intake.md). **Not** App Store public release approval. **Not** Build `4` approval. **TestFlight upload / tag / version bump not approved.**
+**Last updated:** 2026-06-08 (G2 Product decision draft prepared — intake still **Unanswered**)
+**Status:** **Worksheet with Product decision draft / awaiting explicit approval** — intake rows **Q-AS-04 … Q-AS-06** remain **Unanswered** in the [intake ledger](./qwon_app_store_public_readiness_intake.md). **Not** App Store public release approval. **Not** Build `4` approval. **TestFlight upload / tag / version bump not approved.**
 **Purpose:** Shareable English worksheet for Product to answer **G2 — App Store metadata / screenshots / localization** before answers are recorded in the intake ledger via a separate docs-only PR.
 
 日本語版: [G2 メタデータ回答フォーム（日本語）](./qwon_app_store_g2_metadata_worksheet_ja.md)
@@ -19,6 +19,54 @@ Related: [Intake ledger — G2](./qwon_app_store_public_readiness_intake.md#g2--
 | **G2 worksheet ≠ App Store metadata upload** | No ASC metadata upload, screenshot upload, or submission ops from this doc |
 | **Stay selected** | Worksheet maintenance does **not** lift Stay or authorize implementation |
 | **Draft suggestions** | Blocks marked **draft / not approved** — Product must replace or reject before intake recording |
+| **Recording answers** | After Product **explicit approval**, open a **separate docs-only PR** to set intake rows to **Answered** |
+
+---
+
+<a id="product-decision-draft--awaiting-explicit-approval"></a>
+
+## Product decision draft — **awaiting explicit approval**
+
+**Label:** **Product decision draft / awaiting explicit Product approval** — prepared from recommended worksheet drafts and G1 inputs. **Not** intake **Answered**. **Not** G2 Closed/Ready. **Not** public release approval.
+
+| Field | Value |
+| --- | --- |
+| **Prepared** | 2026-06-08 — docs-only hygiene under Stay |
+| **Intake ledger** | **Q-AS-04 … Q-AS-06** remain **Unanswered** until Product explicit approval + follow-up PR |
+| **Next step** | Product confirms, edits, or rejects each draft → docs-only PR records **Answered** in [intake ledger](./qwon_app_store_public_readiness_intake.md) |
+
+### Q-AS-04 — App Store title, subtitle, primary description
+
+| Field | Product decision draft |
+| --- | --- |
+| **Question ID** | Q-AS-04 |
+| **Title (draft)** | QWON |
+| **Subtitle (draft)** | Local-first AI on your iPhone |
+| **Primary description (draft)** | QWON is a local-first cognitive runtime for iPhone. Keep inference and context on-device by default — not a cloud-only chat wrapper. Built for privacy-conscious users who want on-device AI assistance without default cloud dependency. |
+| **Decision owner** | Product (draft — **awaiting explicit approval**) |
+| **Source** | Elaborated from [recommended draft § Q-AS-04](#q-as-04--app-store-title-subtitle-primary-description); aligned with [G1 Q-AS-01…03](./qwon_app_store_public_readiness_intake.md#g1-product-answer-details-2026-06-07) |
+| **Constraints** | **Not** approved App Store listing copy; **not** intake **Answered** until follow-up PR |
+
+### Q-AS-05 — Screenshot set and device sizes
+
+| Field | Product decision draft |
+| --- | --- |
+| **Question ID** | Q-AS-05 |
+| **Approved answer (draft)** | **Device sizes:** iPhone 6.7" and 6.5" display classes (verify current ASC required sizes at submission time). **Orientation:** Portrait only for v1. **Set:** 3–5 screenshots — (1) chat/home, (2) on-device/local indicator or model placement note, (3) privacy/local-first value prop. |
+| **Decision owner** | Product (draft — **awaiting explicit approval**) |
+| **Source** | Elaborated from [recommended draft § Q-AS-05](#q-as-05--screenshot-set-and-device-sizes) |
+| **Constraints** | No ASC screenshot upload from this worksheet; asset creation out of scope |
+
+### Q-AS-06 — Locales for metadata and screenshots
+
+| Field | Product decision draft |
+| --- | --- |
+| **Question ID** | Q-AS-06 |
+| **Primary locale(s) (draft)** | English (U.S.) — `en-US` metadata and screenshots |
+| **Deferred locales (draft)** | Japanese (`ja`) and additional locales — **TBD** |
+| **Decision owner** | Product (draft — **awaiting explicit approval**) |
+| **Source** | Elaborated from [recommended draft § Q-AS-06](#q-as-06--locales-for-metadata-and-screenshots) |
+| **Constraints** | Localized metadata/screenshots **not** approved for creation or upload |
 
 ---
 
@@ -72,14 +120,16 @@ What **App Store title, subtitle, and primary description** copy are approved fo
 
 ### Product answer (fill in)
 
+**See [Product decision draft](#product-decision-draft--awaiting-explicit-approval)** — **draft / awaiting explicit Product approval**; intake row remains **Unanswered**.
+
 | Field | Your answer |
 | --- | --- |
-| **App name / title** | |
-| **Subtitle** | |
-| **Primary description** | |
-| **Decision owner** | |
-| **Source** | |
-| **Constraints** | |
+| **App name / title** | QWON *(draft — awaiting explicit approval)* |
+| **Subtitle** | Local-first AI on your iPhone *(draft)* |
+| **Primary description** | QWON is a local-first cognitive runtime for iPhone. Keep inference and context on-device by default — not a cloud-only chat wrapper. Built for privacy-conscious users who want on-device AI assistance without default cloud dependency. *(draft)* |
+| **Decision owner** | Product (draft) |
+| **Source** | [Product decision draft § Q-AS-04](#product-decision-draft--awaiting-explicit-approval) |
+| **Constraints** | Not approved App Store copy; not intake **Answered** |
 
 ### Suggested draft — **draft / not approved**
 
@@ -111,14 +161,16 @@ What **screenshot set and device sizes** (iPhone models, orientations) are requi
 
 ### Product answer (fill in)
 
+**See [Product decision draft](#product-decision-draft--awaiting-explicit-approval)** — **draft / awaiting explicit Product approval**; intake row remains **Unanswered**.
+
 | Field | Your answer |
 | --- | --- |
-| **Required device sizes** | |
-| **Orientations** | |
-| **Screenshot count / narrative** | |
-| **Decision owner** | |
-| **Source** | |
-| **Constraints** | |
+| **Required device sizes** | iPhone 6.7" and 6.5" display classes *(draft — verify ASC at submission)* |
+| **Orientations** | Portrait only for v1 *(draft)* |
+| **Screenshot count / narrative** | 3–5 screenshots — chat/home; on-device/local; privacy/local-first value prop *(draft)* |
+| **Decision owner** | Product (draft) |
+| **Source** | [Product decision draft § Q-AS-05](#product-decision-draft--awaiting-explicit-approval) |
+| **Constraints** | No ASC upload; not intake **Answered** |
 
 ### Suggested draft — **draft / not approved**
 
@@ -146,13 +198,15 @@ Which **locales** are in scope for metadata and screenshots at first public laun
 
 ### Product answer (fill in)
 
+**See [Product decision draft](#product-decision-draft--awaiting-explicit-approval)** — **draft / awaiting explicit Product approval**; intake row remains **Unanswered**.
+
 | Field | Your answer |
 | --- | --- |
-| **Primary locale(s)** | |
-| **Deferred locales** | |
-| **Decision owner** | |
-| **Source** | |
-| **Constraints** | |
+| **Primary locale(s)** | English (U.S.) — `en-US` *(draft — awaiting explicit approval)* |
+| **Deferred locales** | Japanese (`ja`) and additional locales — **TBD** *(draft)* |
+| **Decision owner** | Product (draft) |
+| **Source** | [Product decision draft § Q-AS-06](#product-decision-draft--awaiting-explicit-approval) |
+| **Constraints** | No localized asset/upload approval; not intake **Answered** |
 
 ### Suggested draft — **draft / not approved**
 
@@ -169,10 +223,10 @@ G2 sign-off
 
 | Item | Status |
 | --- | --- |
-| Q-AS-04 Product answer written | **Pending** |
-| Q-AS-05 Product answer written | **Pending** |
-| Q-AS-06 Product answer written | **Pending** |
-| Product **explicit approval** of G2 answers | **Pending** |
+| Q-AS-04 Product decision draft prepared | **Done** — [awaiting explicit approval](#product-decision-draft--awaiting-explicit-approval) |
+| Q-AS-05 Product decision draft prepared | **Done** — awaiting explicit approval |
+| Q-AS-06 Product decision draft prepared | **Done** — awaiting explicit approval |
+| Product **explicit approval** of G2 drafts | **Pending** |
 | Follow-up docs-only PR updates intake to **Answered** | **Pending** |
 | Checklist gate G2 marked Closed/Ready | **No** — separate sign-off gate |
 | Public release approved | **No** |
@@ -182,4 +236,4 @@ G2 sign-off
 
 ## Agent note
 
-Share this worksheet with Product for G2 review. **Do not** copy draft suggestions into the intake ledger as **Answered** without Product explicit approval and a follow-up docs-only PR. Stay-allowed hygiene only.
+Share with Product for **explicit approval**. **Do not** copy Product decision drafts into the intake ledger as **Answered** until Product confirms and a follow-up docs-only PR records them. Stay-allowed hygiene only.

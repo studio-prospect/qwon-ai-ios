@@ -1,7 +1,7 @@
 # QWON — App Store G2 メタデータ回答フォーム（日本語）
 
-**最終更新:** 2026-06-08
-**状態:** **記入フォームのみ** — [intake ledger](./qwon_app_store_public_readiness_intake.md) の **Q-AS-04 … Q-AS-06** は **Unanswered** のまま。**App Store 公開承認ではない**。**Build `4` 承認ではない**。**TestFlight upload / tag / version bump 承認ではない**。
+**最終更新:** 2026-06-08（G2 Product decision draft 準備済 — intake は **Unanswered** のまま）
+**状態:** **Product decision draft / awaiting explicit approval 付き worksheet** — [intake ledger](./qwon_app_store_public_readiness_intake.md) の **Q-AS-04 … Q-AS-06** は **Unanswered** のまま。**App Store 公開承認ではない**。**Build `4` 承認ではない**。**TestFlight upload / tag / version bump 承認ではない**。
 **目的:** Product が **G2 — App Store メタデータ / スクリーンショット / ローカライズ** の 3 問に記入し、合意形成に使う日本語フォーム。
 
 English worksheet: [G2 Metadata Worksheet](./qwon_app_store_g2_metadata_worksheet.md)
@@ -19,6 +19,56 @@ English worksheet: [G2 Metadata Worksheet](./qwon_app_store_g2_metadata_workshee
 | **G2 worksheet ≠ メタデータ upload** | ASC への metadata / screenshot upload なし |
 | **Stay selected** | Stay 解除・実装承認にはならない |
 | **推奨案は draft** | **draft / not approved** — intake **Answered** にしない |
+
+| **推奨案は draft** | **draft / not approved** — intake **Answered** にしない |
+| **記録** | Product **明示承認** 後に **別 docs-only PR** で intake を **Answered** に更新 |
+
+---
+
+<a id="product-decision-draft--awaiting-explicit-approval"></a>
+
+## Product decision draft — **awaiting explicit approval（明示承認待ち）**
+
+**ラベル:** **Product decision draft / awaiting explicit Product approval** — 推奨案と G1 入力をベースに整理。**intake Answered ではない**。**G2 Closed/Ready ではない**。**公開承認ではない**。
+
+| 項目 | 値 |
+| --- | --- |
+| **準備日** | 2026-06-08 — Stay 下の docs-only hygiene |
+| **Intake ledger** | **Q-AS-04 … Q-AS-06** は Product 明示承認 + follow-up PR まで **Unanswered** |
+| **次の段階** | Product が各 draft を確認・編集・却下 → docs-only PR で [intake ledger](./qwon_app_store_public_readiness_intake.md) を **Answered** に更新 |
+
+### Q-AS-04 — タイトル / サブタイトル / 説明文
+
+| 項目 | Product decision draft |
+| --- | --- |
+| **Question ID** | Q-AS-04 |
+| **タイトル（draft）** | QWON |
+| **サブタイトル（draft）** | Local-first AI on your iPhone |
+| **説明文（draft）** | QWON is a local-first cognitive runtime for iPhone. Keep inference and context on-device by default — not a cloud-only chat wrapper. Built for privacy-conscious users who want on-device AI assistance without default cloud dependency. |
+| **判断 owner** | Product（draft — **明示承認待ち**） |
+| **出典** | [推奨案 § Q-AS-04](#q-as-04--タイトル--サブタイトル--説明文) · [G1 回答](./qwon_app_store_public_readiness_intake.md#g1-product-answer-details-2026-06-07) |
+| **制約** | **承認済み App Store 文案ではない**；follow-up PR まで intake **Answered** にしない |
+
+### Q-AS-05 — スクリーンショット / デバイスサイズ
+
+| 項目 | Product decision draft |
+| --- | --- |
+| **Question ID** | Q-AS-05 |
+| **承認回答（draft）** | **デバイスサイズ:** iPhone 6.7" / 6.5" クラス（提出時 ASC 必須サイズ要確認)。**向き:** v1 は縦のみ。**セット:** 3–5 枚 — (1) チャット/ホーム、(2) オンデバイス/ローカル訴求、(3) プライバシー/local-first 価値。 |
+| **判断 owner** | Product（draft — **明示承認待ち**） |
+| **出典** | [推奨案 § Q-AS-05](#q-as-05--スクリーンショットセット--デバイスサイズ) |
+| **制約** | 本 worksheet から ASC screenshot upload なし |
+
+### Q-AS-06 — ロケール
+
+| 項目 | Product decision draft |
+| --- | --- |
+| **Question ID** | Q-AS-06 |
+| **主要ロケール（draft）** | English (U.S.) — `en-US` metadata / screenshots |
+| **延期ロケール（draft）** | 日本語（`ja`）および追加ロケール — **TBD** |
+| **判断 owner** | Product（draft — **明示承認待ち**） |
+| **出典** | [推奨案 § Q-AS-06](#q-as-06--メタデータ--スクリーンショットのロケール) |
+| **制約** | ローカライズ資産の作成/upload 承認ではない |
 
 ---
 
@@ -59,14 +109,16 @@ English worksheet: [G2 Metadata Worksheet](./qwon_app_store_g2_metadata_workshee
 
 ### Product 記入欄
 
+**[Product decision draft](#product-decision-draft--awaiting-explicit-approval)** を参照 — **draft / awaiting explicit Product approval**；intake は **Unanswered** のまま。
+
 | 項目 | 記入 |
 | --- | --- |
-| **タイトル** | |
-| **サブタイトル** | |
-| **説明文** | |
-| **判断 owner** | |
-| **出典** | |
-| **制約** | |
+| **タイトル** | QWON（*draft — 明示承認待ち*） |
+| **サブタイトル** | Local-first AI on your iPhone（*draft*） |
+| **説明文** | QWON is a local-first cognitive runtime for iPhone. Keep inference and context on-device by default — not a cloud-only chat wrapper. Built for privacy-conscious users who want on-device AI assistance without default cloud dependency.（*draft*） |
+| **判断 owner** | Product（draft） |
+| **出典** | [Product decision draft § Q-AS-04](#product-decision-draft--awaiting-explicit-approval) |
+| **制約** | 承認済み App Store 文案ではない |
 
 ### 推奨回答案（draft / not approved）
 
@@ -94,14 +146,16 @@ Product が編集・差し替え・却下すること。**承認済み App Store
 
 ### Product 記入欄
 
+**[Product decision draft](#product-decision-draft--awaiting-explicit-approval)** を参照 — **draft / awaiting explicit Product approval**；intake は **Unanswered** のまま。
+
 | 項目 | 記入 |
 | --- | --- |
-| **必要デバイスサイズ** | |
-| **向き** | |
-| **枚数 / 訴求内容** | |
-| **判断 owner** | |
-| **出典** | |
-| **制約** | |
+| **必要デバイスサイズ** | iPhone 6.7" / 6.5" クラス（*draft — 提出時 ASC 要確認*） |
+| **向き** | v1 は縦のみ（*draft*） |
+| **枚数 / 訴求内容** | 3–5 枚 — チャット/ホーム；オンデバイス/ローカル；プライバシー/local-first（*draft*） |
+| **判断 owner** | Product（draft） |
+| **出典** | [Product decision draft § Q-AS-05](#product-decision-draft--awaiting-explicit-approval) |
+| **制約** | intake **Answered** にしない |
 
 ### 推奨回答案（draft / not approved）
 
@@ -125,13 +179,15 @@ Product が編集・差し替え・却下すること。**承認済み App Store
 
 ### Product 記入欄
 
+**[Product decision draft](#product-decision-draft--awaiting-explicit-approval)** を参照 — **draft / awaiting explicit Product approval**；intake は **Unanswered** のまま。
+
 | 項目 | 記入 |
 | --- | --- |
-| **主要ロケール** | |
-| **延期ロケール** | |
-| **判断 owner** | |
-| **出典** | |
-| **制約** | |
+| **主要ロケール** | English (U.S.) — `en-US`（*draft — 明示承認待ち*） |
+| **延期ロケール** | 日本語（`ja`）および追加ロケール — **TBD**（*draft*） |
+| **判断 owner** | Product（draft） |
+| **出典** | [Product decision draft § Q-AS-06](#product-decision-draft--awaiting-explicit-approval) |
+| **制約** | intake **Answered** にしない |
 
 ### 推奨回答案（draft / not approved）
 
@@ -144,11 +200,11 @@ Product が編集・差し替え・却下すること。**承認済み App Store
 
 | 項目 | 状態 |
 | --- | --- |
-| Q-AS-04 Product 回答記入 | **Pending** |
-| Q-AS-05 Product 回答記入 | **Pending** |
-| Q-AS-06 Product 回答記入 | **Pending** |
-| Product 明示承認 | **Pending** |
-| follow-up PR で intake **Answered** | **Pending** |
+| Q-AS-04 Product decision draft 準備 | **Done** — [明示承認待ち](#product-decision-draft--awaiting-explicit-approval) |
+| Q-AS-05 Product decision draft 準備 | **Done** — 明示承認待ち |
+| Q-AS-06 Product decision draft 準備 | **Done** — 明示承認待ち |
+| Product **明示承認** | **Pending** |
+| follow-up docs-only PR で intake **Answered** | **Pending** |
 | checklist G2 Closed/Ready | **No** |
 | Public release approved | **No** |
 
@@ -156,4 +212,4 @@ Product が編集・差し替え・却下すること。**承認済み App Store
 
 ## Agent note
 
-推奨案を intake **Answered** にコピーしないこと。Product 明示承認後に別 docs-only PR で反映。
+Product **明示承認**後に follow-up PR で intake **Answered** へ反映。それまでは **Unanswered** を維持すること。
