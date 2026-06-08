@@ -1,6 +1,6 @@
 # QWON — Next Work Queue
 
-**Last updated:** 2026-06-08 (Stay selected — G2 metadata worksheet)
+**Last updated:** 2026-06-08 (Stay selected — G2 worksheet drafts prepared, awaiting Product approval)
 **Status:** **Queue / guardrail only** — **Stay selected**; docs/readme/index/evidence hygiene only; no implementation authorization.
 **Purpose:** After Phase 4 rename docs are complete, classify what agents **may** do next vs what requires **product gates**. Prevents drift into ungated **build `4`**, project-container rename, or blind PREXUS cleanup.
 
@@ -303,11 +303,11 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 | Field | Detail |
 | --- | --- |
-| **Status** | **Checklist + intake ledger** — G1 **Closed/Ready**; G2 [worksheet](./qwon_app_store_g2_metadata_worksheet.md) entry; **21 Unanswered**; **public release not approved** |
+| **Status** | **Checklist + intake ledger** — G1 **Closed/Ready**; G2 [Product decision draft prepared](./qwon_app_store_g2_metadata_worksheet.md#product-decision-draft--awaiting-explicit-approval); **21 Unanswered**; **public release not approved** |
 | **Trigger** | Product plans **public App Store horizon** (separate from Build `4`) |
-| **Required evidence** | G2 worksheet review / answer preparation — **no** submission or code |
-| **Next stage** | **G2 worksheet review / answer preparation** (Q-AS-04 … Q-AS-06) — [G2 metadata worksheet](./qwon_app_store_g2_metadata_worksheet.md) · [intake G2](./qwon_app_store_public_readiness_intake.md#g2--app-store-metadata--screenshots--localization) |
-| **First doc to read** | [G2 metadata worksheet](./qwon_app_store_g2_metadata_worksheet.md) · [G2 メタデータフォーム（日本語）](./qwon_app_store_g2_metadata_worksheet_ja.md) · [Checklist G2](./qwon_app_store_public_readiness_checklist.md#3-public-readiness-gates) |
+| **Required evidence** | Product **explicit approval** of G2 worksheet drafts → follow-up docs-only PR sets intake **Q-AS-04 … Q-AS-06** to **Answered** — **no** submission or code |
+| **Next stage** | Product reviews [G2 Product decision draft](./qwon_app_store_g2_metadata_worksheet.md#product-decision-draft--awaiting-explicit-approval) / [日本語フォーム](./qwon_app_store_g2_metadata_worksheet_ja.md#product-decision-draft--awaiting-explicit-approval) → on explicit approval, docs-only PR records **Answered** in [intake ledger](./qwon_app_store_public_readiness_intake.md) |
+| **First doc to read** | [G2 metadata worksheet — decision draft](./qwon_app_store_g2_metadata_worksheet.md#product-decision-draft--awaiting-explicit-approval) · [Intake ledger — G2 note](./qwon_app_store_public_readiness_intake.md#g2--app-store-metadata--screenshots--localization) |
 | **Do not start if** | Conflated with Build `4` / TestFlight upload; treating checklist as implementation authorization; **Stay** lifted without explicit lane record |
 
 ### App Store public release (historical stub)
@@ -342,4 +342,4 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 ## Agent note
 
-Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **Stay selected** — docs/readme/index/evidence hygiene only; M3 Option A / lane **closed**. App Store **G1 Closed/Ready**; **G2 worksheet** for Q-AS-04…06 — intake **21 Unanswered**; **public release not approved**. Build **`4`** / TestFlight upload / tag / version bump require **explicit product gate**. To start implementation, Product must **lift Stay** and select one lane + Codex scoped plan.
+Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **Stay selected** — docs/readme/index/evidence hygiene only; M3 Option A / lane **closed**. App Store **G1 Closed/Ready**; [G2 Product decision draft](./qwon_app_store_g2_metadata_worksheet.md#product-decision-draft--awaiting-explicit-approval) prepared — intake **21 Unanswered** until Product explicit approval; **public release not approved**. Build **`4`** / TestFlight upload / tag / version bump require **explicit product gate**. To start implementation, Product must **lift Stay** and select one lane + Codex scoped plan.

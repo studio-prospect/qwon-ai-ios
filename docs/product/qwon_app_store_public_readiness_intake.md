@@ -1,6 +1,6 @@
 # QWON — App Store Public Readiness Answer Intake Ledger
 
-**Last updated:** 2026-06-08 (Stay selected — G2 metadata worksheet added; Q-AS-04…06 **Unanswered**)
+**Last updated:** 2026-06-08 (Stay selected — G2 answers prepared in worksheet, **not yet recorded**)
 **Status:** **Intake ledger** — **24 questions · 21 Unanswered · 3 Answered**. **Not** App Store public release approval. **Not** Build `4` approval. **TestFlight upload / tag / version bump not approved.**
 **Purpose:** Decompose [App Store public readiness checklist](./qwon_app_store_public_readiness_checklist.md) gates **G1–G10** into **answerable questions** for Product / Legal / Release Engineering. Record answers in **separate docs-only PRs** when stakeholders supply written responses.
 
@@ -29,7 +29,8 @@ Related: [G2 metadata worksheet (EN)](./qwon_app_store_g2_metadata_worksheet.md)
 | **Answered** | **3** |
 | **Public release approved?** | **No** |
 | **Stay in effect?** | **Yes** |
-| **G1 intake** | **Q-AS-01 … Q-AS-03 Answered** — checklist gate **G1 Closed/Ready** ([sign-off](./qwon_app_store_g1_gate_signoff_worksheet.md#sign-off-record-product) This PR) |
+| **G1 intake** | **Q-AS-01 … Q-AS-03 Answered** — checklist gate **G1 Closed/Ready** |
+| **G2 worksheet** | **Product decision draft prepared** — [worksheet](./qwon_app_store_g2_metadata_worksheet.md#product-decision-draft--awaiting-explicit-approval) · **not yet recorded** in intake (Q-AS-04…06 **Unanswered**) |
 
 ---
 
@@ -80,7 +81,9 @@ Related: [G2 metadata worksheet (EN)](./qwon_app_store_g2_metadata_worksheet.md)
 
 ## G2 — App Store metadata / screenshots / localization
 
-**External share:** [G2 metadata worksheet (EN)](./qwon_app_store_g2_metadata_worksheet.md) · [G2 メタデータフォーム（日本語）](./qwon_app_store_g2_metadata_worksheet_ja.md) — Product fill-in; intake rows below stay **Unanswered** until follow-up docs-only PR.
+**External share:** [G2 metadata worksheet (EN)](./qwon_app_store_g2_metadata_worksheet.md) · [G2 メタデータフォーム（日本語）](./qwon_app_store_g2_metadata_worksheet_ja.md)
+
+**G2 answers prepared in worksheet, not yet recorded:** [Product decision draft — awaiting explicit approval](./qwon_app_store_g2_metadata_worksheet.md#product-decision-draft--awaiting-explicit-approval) covers **Q-AS-04 … Q-AS-06**. Intake rows below remain **Unanswered** until Product **explicit approval** and a follow-up docs-only PR.
 
 | Question ID | Gate | Owner | Question | Answer status | Answer source | Blocks | Follow-up PR |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -169,7 +172,7 @@ Related: [G2 metadata worksheet (EN)](./qwon_app_store_g2_metadata_worksheet.md)
 | Gate | Checklist status | Intake questions | All answered? |
 | --- | --- | --- | --- |
 | **G1** | Closed/Ready | Q-AS-01 … Q-AS-03 | **Yes** — intake **Answered**; gate sign-off **Approved** · [worksheet](./qwon_app_store_g1_gate_signoff_worksheet.md#sign-off-record-product) |
-| **G2** | Open | Q-AS-04 … Q-AS-06 | **No** |
+| **G2** | Open | Q-AS-04 … Q-AS-06 | **No** — [worksheet draft prepared](./qwon_app_store_g2_metadata_worksheet.md#product-decision-draft--awaiting-explicit-approval), **not recorded** in intake |
 | **G3** | Open | Q-AS-07 … Q-AS-08 | **No** |
 | **G4** | Partial | Q-AS-09 … Q-AS-10 | **No** |
 | **G5** | Open | Q-AS-11 … Q-AS-12 | **No** |
