@@ -1,7 +1,7 @@
 # QWON — App Store G1 Gate Sign-Off Worksheet
 
-**Last updated:** 2026-06-07 (Stay selected — sign-off worksheet created; gate **G1 Open**)
-**Status:** **Sign-off worksheet only** — checklist gate **G1** remains **Open**. **Not** App Store public release approval. **Not** Build `4` approval. **TestFlight upload / tag / version bump not approved.**
+**Last updated:** 2026-06-08 (Stay selected — G1 sign-off **Approved**; checklist gate **Closed/Ready**)
+**Status:** **Sign-off recorded** — checklist gate **G1** **Closed/Ready** (This PR). **Not** App Store public release approval. **Not** Build `4` approval. **TestFlight upload / tag / version bump not approved.**
 **Purpose:** Product decision surface to record whether checklist gate **G1 — Product positioning / value proposition** may move from **Open** to **Closed/Ready** after intake **Q-AS-01 … Q-AS-03** are **Answered**.
 
 Related: [Public readiness checklist — G1](./qwon_app_store_public_readiness_checklist.md#3-public-readiness-gates) · [Intake ledger — G1](./qwon_app_store_public_readiness_intake.md#g1--product-positioning--value-proposition) · [G1 Product worksheet](./qwon_app_store_g1_product_worksheet.md) · [Next work queue — App Store readiness](./qwon_next_work_queue.md#app-store-public-release) · [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record)
@@ -24,7 +24,7 @@ Related: [Public readiness checklist — G1](./qwon_app_store_public_readiness_c
 
 | Field | Value |
 | --- | --- |
-| **Checklist gate** | **G1 — Product positioning / value proposition** — **Open** |
+| **Checklist gate** | **G1 — Product positioning / value proposition** — **Closed/Ready** (This PR) |
 | **Intake questions** | **Q-AS-01 … Q-AS-03** — **Answered** ([#129](https://github.com/studio-prospect/qwon-ai-ios/pull/129)) |
 | **Intake ledger total** | **24 questions · 21 Unanswered · 3 Answered** |
 | **Answer detail** | [G1 Product answer details](./qwon_app_store_public_readiness_intake.md#g1-product-answer-details-2026-06-07) |
@@ -58,15 +58,13 @@ If **Needs revision**, record what must change and **do not** mark gate **G1** C
 
 ## Sign-off record (Product)
 
-**Do not pre-fill.** Record only after Product supplies written decision. A follow-up **docs-only PR** updates [checklist G1 status](./qwon_app_store_public_readiness_checklist.md#3-public-readiness-gates) when **Decision: Approved**.
-
 | Field | Record |
 | --- | --- |
-| **Decision** | *(Pending — choose one: **Approved** / **Not approved** / **Needs revision**)* |
-| **Owner** | |
-| **Date** | |
-| **Source** | *(meeting / email / memo / PR)* |
-| **Notes** | |
+| **Decision** | **Approved** |
+| **Owner** | Product |
+| **Date** | 2026-06-08 |
+| **Source** | This PR |
+| **Notes** | G1 positioning / audience / pricing direction is sufficient for public-readiness planning; this does **not** approve public release or Build `4`. |
 
 ### Decision guide
 
@@ -78,13 +76,13 @@ If **Needs revision**, record what must change and **do not** mark gate **G1** C
 
 ---
 
-## Sign-off checklist (worksheet — not yet complete)
+## Sign-off checklist
 
 | Item | Status |
 | --- | --- |
 | Q-AS-01 … Q-AS-03 **Answered** in intake | **Done** ([#129](https://github.com/studio-prospect/qwon-ai-ios/pull/129)) |
-| Product **Decision** recorded above | **Pending** |
-| Follow-up docs-only PR updates checklist **G1** to Closed/Ready | **Pending** — only if **Approved** |
+| Product **Decision** recorded above | **Done** — **Approved** (2026-06-08) |
+| Follow-up docs-only PR updates checklist **G1** to Closed/Ready | **Done** — This PR |
 | Public release approved | **No** |
 | Build `4` / TestFlight upload approved | **No** |
 
@@ -92,4 +90,4 @@ If **Needs revision**, record what must change and **do not** mark gate **G1** C
 
 ## Agent note
 
-This worksheet is **Stay-allowed docs hygiene**. **Do not** mark checklist gate **G1** Closed/Ready from this PR alone. **Do not** create G2 answers or worksheets unless scoped in a separate task.
+Gate **G1** sign-off **Approved** — next docs-only step: **G2 worksheet preparation** ([intake G2](./qwon_app_store_public_readiness_intake.md#g2--app-store-metadata--screenshots--localization)). **Do not** create G2 answers unless scoped in a separate task.
