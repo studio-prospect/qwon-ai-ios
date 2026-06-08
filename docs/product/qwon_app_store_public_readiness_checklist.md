@@ -1,6 +1,6 @@
 # QWON — App Store Public Release Readiness Checklist
 
-**Last updated:** 2026-06-08 (Stay selected — G5 model distribution worksheet added)
+**Last updated:** 2026-06-08 (Stay selected — G5 intake **Q-AS-11 … Q-AS-12 Answered**; gate sign-off **Open**)
 **Status:** **Docs-only** — **Stay selected**. **App Store public release not approved.** **Build `4` not approved.** **TestFlight upload / tag / version bump not approved.**
 **Purpose:** While **Stay** remains in effect, make **open Product/Legal/RE decisions** visible for a future move from TestFlight **`0.1.0 (3)`** stable alpha to **public App Store availability**. This checklist does **not** authorize implementation, release engineering, App Store submission, or Build `4`.
 
@@ -39,7 +39,7 @@ Related: [Answer intake ledger](./qwon_app_store_public_readiness_intake.md) · 
 
 ## 3. Public readiness gates
 
-Each row is an **open decision or artifact** until Product/Legal/RE records completion. Status **Open** = not decided or not documented for public release. **Answerable questions:** [App Store readiness intake ledger](./qwon_app_store_public_readiness_intake.md) — **14 Unanswered · 10 Answered** (G1 + G2 + G3 + G4 gates **Closed/Ready** — This PR).
+Each row is an **open decision or artifact** until Product/Legal/RE records completion. Status **Open** = not decided or not documented for public release. **Answerable questions:** [App Store readiness intake ledger](./qwon_app_store_public_readiness_intake.md) — **12 Unanswered · 12 Answered** (G1 + G2 + G3 + G4 gates **Closed/Ready**; G5 intake **Answered**, gate sign-off **Open**).
 
 | # | Gate | Status | Notes / first doc |
 | --- | --- | --- | --- |
@@ -47,7 +47,7 @@ Each row is an **open decision or artifact** until Product/Legal/RE records comp
 | **G2** | **App Store metadata and screenshots** | **Closed/Ready** | Intake **Q-AS-04 … Q-AS-06 Answered** · [G2 sign-off Approved](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) (This PR) · [intake G2](./qwon_app_store_public_readiness_intake.md#g2--app-store-metadata--screenshots--localization) |
 | **G3** | **Privacy nutrition labels** | **Closed/Ready** | Intake **Q-AS-07 … Q-AS-08 Answered** · [G3 sign-off Approved](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) (This PR) · [intake G3](./qwon_app_store_public_readiness_intake.md#g3--privacy-nutrition-labels) · **Not** final ASC privacy label publish / public release / Build `4` |
 | **G4** | **Export compliance / encryption declaration** | **Closed/Ready** | Intake **Q-AS-09 … Q-AS-10 Answered** · [G4 sign-off Approved](./qwon_app_store_g4_gate_signoff_worksheet.md#sign-off-record-legal-re) (This PR) · [intake G4](./qwon_app_store_public_readiness_intake.md#g4--export-compliance--encryption-declaration) · **Not** export compliance final submission / public release / Build `4` |
-| **G5** | **Model distribution policy** | **Open** | [Q-AS-11 … Q-AS-12](./qwon_app_store_public_readiness_intake.md#g5--model-distribution-policy) · [G5 model distribution worksheet](./qwon_app_store_g5_model_distribution_worksheet.md) · [日本語フォーム](./qwon_app_store_g5_model_distribution_worksheet_ja.md) · [M3 Gate 3 memo](./qwon_m3_model_distribution_compliance_memo.md) · [M3 hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md) |
+| **G5** | **Model distribution policy** | **Open** | Intake **Q-AS-11 … Q-AS-12 Answered**; gate sign-off still **Open** · [intake G5](./qwon_app_store_public_readiness_intake.md#g5--model-distribution-policy) · [G5 model distribution worksheet](./qwon_app_store_g5_model_distribution_worksheet.md) · [日本語フォーム](./qwon_app_store_g5_model_distribution_worksheet_ja.md) · [M3 Gate 3 memo](./qwon_m3_model_distribution_compliance_memo.md) · [M3 hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md) · **Not** in-app download / M3 reopen / hosted distribution / bundled weights / public release / Build `4` |
 | **G6** | **Support contact / website / terms / privacy policy** | **Open** | [Q-AS-13 … Q-AS-15](./qwon_app_store_public_readiness_intake.md#g6--support--website--terms--privacy-policy) |
 | **G7** | **Crash-free / device lab expectations** | **Partial** | [Q-AS-16 … Q-AS-18](./qwon_app_store_public_readiness_intake.md#g7--device-lab--crash-free-bar) · [lab evidence](./qwon_text_alpha_lab_evidence.md#build-3-lab-verification-2026-06-03) |
 | **G8** | **Known limitations and App Review notes** | **Open** | [Q-AS-19 … Q-AS-20](./qwon_app_store_public_readiness_intake.md#g8--known-limitations--app-review-notes) |
@@ -78,7 +78,7 @@ Each row is an **open decision or artifact** until Product/Legal/RE records comp
 | --- | --- |
 | **Public release approved?** | **No** |
 | **Stay in effect?** | **Yes** — [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record) |
-| **Next action** | **Product / Legal / RE review only** — **G5 worksheet review / answer preparation** · [G5 model distribution worksheet](./qwon_app_store_g5_model_distribution_worksheet.md) · [intake G5](./qwon_app_store_public_readiness_intake.md#g5--model-distribution-policy) (**14 Unanswered**) · **no** implementation or submission |
+| **Next action** | **Product / Legal / RE review only** — **G5 gate sign-off worksheet preparation** · [G5 model distribution worksheet](./qwon_app_store_g5_model_distribution_worksheet.md) · [intake G5](./qwon_app_store_public_readiness_intake.md#g5--model-distribution-policy) (**12 Unanswered**) · **no** implementation or submission |
 | **To open implementation** | Product **lifts Stay**, selects **App Store public release readiness** (or combined horizon gate), records approval in this section, then Codex scoped plan → Cursor — **still no** upload/submission without explicit release gate |
 
 **Checklist created:** 2026-06-07 — Stay-allowed docs hygiene; does not change Product posture.

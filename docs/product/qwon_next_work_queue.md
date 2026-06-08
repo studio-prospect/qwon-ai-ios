@@ -1,6 +1,6 @@
 # QWON — Next Work Queue
 
-**Last updated:** 2026-06-08 (Stay selected — G5 Legal/Product decision draft prepared)
+**Last updated:** 2026-06-08 (Stay selected — G5 intake **Q-AS-11 … Q-AS-12 Answered**; gate sign-off **Open**)
 **Status:** **Queue / guardrail only** — **Stay selected**; docs/readme/index/evidence hygiene only; no implementation authorization.
 **Purpose:** After Phase 4 rename docs are complete, classify what agents **may** do next vs what requires **product gates**. Prevents drift into ungated **build `4`**, project-container rename, or blind PREXUS cleanup.
 
@@ -303,11 +303,11 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 | Field | Detail |
 | --- | --- |
-| **Status** | **Checklist + intake ledger** — G1 + G2 + G3 + G4 **Closed/Ready**; G5 [Legal/Product decision draft prepared](./qwon_app_store_g5_model_distribution_worksheet.md#legal-product-decision-draft--awaiting-explicit-approval); **14 Unanswered**; **public release not approved** |
+| **Status** | **Checklist + intake ledger** — G1 + G2 + G3 + G4 **Closed/Ready**; G5 intake **Q-AS-11 … Q-AS-12 Answered** (This PR); checklist gate **G5 Open**; **12 Unanswered**; **public release not approved** |
 | **Trigger** | Product plans **public App Store horizon** (separate from Build `4`) |
-| **Required evidence** | Legal / Product **explicit approval** of G5 worksheet drafts → follow-up docs-only PR sets intake **Q-AS-11 … Q-AS-12** to **Answered** — **no** submission or code |
-| **Next stage** | **Legal / Product explicit approval → intake Answered PR** · [G5 decision draft](./qwon_app_store_g5_model_distribution_worksheet.md#legal-product-decision-draft--awaiting-explicit-approval) / [日本語フォーム](./qwon_app_store_g5_model_distribution_worksheet_ja.md#legal-product-decision-draft--awaiting-explicit-approval) |
-| **First doc to read** | [G5 model distribution worksheet — decision draft](./qwon_app_store_g5_model_distribution_worksheet.md#legal-product-decision-draft--awaiting-explicit-approval) · [Intake ledger — G5 note](./qwon_app_store_public_readiness_intake.md#g5--model-distribution-policy) |
+| **Required evidence** | **G5 gate sign-off worksheet** preparation → Legal / Product approval → separate docs-only PR sets checklist gate **G5 Closed/Ready** — **no** submission or code |
+| **Next stage** | **G5 gate sign-off worksheet preparation** · [G5 worksheet — approved for intake recording](./qwon_app_store_g5_model_distribution_worksheet.md#legal-product-decision-draft--awaiting-explicit-approval) / [日本語フォーム](./qwon_app_store_g5_model_distribution_worksheet_ja.md#legal-product-decision-draft--awaiting-explicit-approval) · [Intake ledger — G5](./qwon_app_store_public_readiness_intake.md#g5--model-distribution-policy) |
+| **First doc to read** | [G5 model distribution worksheet — approved for intake recording](./qwon_app_store_g5_model_distribution_worksheet.md#legal-product-decision-draft--awaiting-explicit-approval) · [Intake ledger — G5 answer details](./qwon_app_store_public_readiness_intake.md#g5-legalproduct-answer-details-2026-06-08) |
 | **Do not start if** | Conflated with Build `4` / TestFlight upload; treating checklist as implementation authorization; **Stay** lifted without explicit lane record |
 
 ### App Store public release (historical stub)
@@ -342,4 +342,4 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 ## Agent note
 
-Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **Stay selected** — docs/readme/index/evidence hygiene only; M3 Option A / lane **closed**. App Store **G1 + G2 + G3 + G4 Closed/Ready**; [G5 Legal/Product decision draft prepared](./qwon_app_store_g5_model_distribution_worksheet.md#legal-product-decision-draft--awaiting-explicit-approval); intake **14 Unanswered**; **public release not approved**. Build **`4`** / TestFlight upload / tag / version bump require **explicit product gate**. To start implementation, Product must **lift Stay** and select one lane + Codex scoped plan.
+Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **Stay selected** — docs/readme/index/evidence hygiene only; M3 Option A / lane **closed**. App Store **G1 + G2 + G3 + G4 Closed/Ready**; G5 intake **Q-AS-11 … Q-AS-12 Answered**; checklist gate **G5 Open**; intake **12 Unanswered**; **public release not approved**. Build **`4`** / TestFlight upload / tag / version bump require **explicit product gate**. To start implementation, Product must **lift Stay** and select one lane + Codex scoped plan.

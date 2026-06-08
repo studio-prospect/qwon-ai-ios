@@ -1,8 +1,8 @@
 # QWON — App Store G5 モデル配布ポリシー回答フォーム（日本語）
 
-**最終更新:** 2026-06-08（G5 Legal/Product decision draft 準備済 — intake **Unanswered**）
-**状態:** **Legal/Product decision draft / awaiting explicit approval 付き worksheet** — [intake ledger](./qwon_app_store_public_readiness_intake.md) の **Q-AS-11 … Q-AS-12** は **Unanswered** のまま。**final model distribution policy 承認ではない**。**in-app download / M3 reopen / hosted distribution 承認ではない**。**App Store 公開承認ではない**。**Build `4` 承認ではない**。**TestFlight upload / tag / version bump / ASC submission 承認ではない**。
-**目的:** **Legal / Product** が **G5 — Model distribution policy** に回答し、別 docs-only PR で intake に記録する前の合意形成用日本語フォーム。
+**最終更新:** 2026-06-08（G5 Legal/Product **approved for intake recording** — gate sign-off **Open**）
+**状態:** **Legal/Product decision draft — approved for intake recording 付き worksheet** — [intake ledger](./qwon_app_store_public_readiness_intake.md) の **Q-AS-11 … Q-AS-12** は **Answered**（This PR）。**final model distribution policy 承認ではない**。**in-app download / M3 reopen / hosted distribution 承認ではない**。**App Store 公開承認ではない**。**Build `4` 承認ではない**。**TestFlight upload / tag / version bump / ASC submission 承認ではない**。
+**目的:** **Legal / Product** 向け — G5 intake **Answered** 記録済；**G5 gate sign-off** は **Open**（別 worksheet）。
 
 English worksheet: [G5 Model Distribution Policy Worksheet](./qwon_app_store_g5_model_distribution_worksheet.md)
 
@@ -21,22 +21,22 @@ English worksheet: [G5 Model Distribution Policy Worksheet](./qwon_app_store_g5_
 | **G5 worksheet ≠ ASC submission** | App Store Connect upload / hosting ops / submission なし |
 | **Stay selected** | Stay 解除・実装承認にはならない |
 | **コード変更なし** | app コード、download UX、hosting pipeline、model bundling の変更なし |
-| **推奨案は draft** | **draft / not approved** — Legal / Product が差し替え・却下するまで intake **Answered** にしない |
-| **記録** | Legal / Product **明示承認** 後に **別 docs-only PR** で intake を **Answered** に更新 |
+| **推奨案は draft** | [approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval) により superseded — 以下は historical |
+| **記録** | Legal / Product **approved for intake recording** 2026-06-08 — intake **Answered**（This PR）；**G5 gate sign-off** は **Open** |
 
 ---
 
 <a id="legal-product-decision-draft--awaiting-explicit-approval"></a>
 
-## Legal / Product decision draft — **awaiting explicit approval（明示承認待ち）**
+## Legal / Product decision draft — **approved for intake recording（intake 記録承認済）**
 
-**ラベル:** **Legal/Product decision draft / awaiting explicit Legal/Product approval** — 推奨案・G1–G4 Closed/Ready・M3 Option A posture・M2/M3 compliance memos をベースに整理。**intake Answered ではない**。**G5 Closed/Ready ではない**。**final model distribution policy / in-app download / hosted distribution / bundled weights / 公開 / Build `4` 承認ではない**。
+**ラベル:** **Legal/Product decision draft — approved for intake recording (2026-06-08)** — [intake ledger — G5 answer details](./qwon_app_store_public_readiness_intake.md#g5-legalproduct-answer-details-2026-06-08) に記録（This PR；worksheet prep [#148](https://github.com/studio-prospect/qwon-ai-ios/pull/148)）。**G5 Closed/Ready ではない**。**final model distribution policy / in-app download / hosted distribution / bundled weights / 公開 / Build `4` 承認ではない**。
 
 | 項目 | 値 |
 | --- | --- |
-| **準備日** | 2026-06-08 — Stay 下 docs-only hygiene（This PR；base worksheet [#147](https://github.com/studio-prospect/qwon-ai-ios/pull/147)） |
-| **Intake ledger** | **Q-AS-11 … Q-AS-12** は Legal / Product 明示承認 + follow-up PR まで **Unanswered** |
-| **次の段階** | Legal / Product が各 draft を確認・編集・却下 → docs-only PR で [intake ledger](./qwon_app_store_public_readiness_intake.md) を **Answered** に更新 |
+| **準備日** | 2026-06-08 — Stay 下 docs-only hygiene（[#147](https://github.com/studio-prospect/qwon-ai-ios/pull/147)；decision draft [#148](https://github.com/studio-prospect/qwon-ai-ios/pull/148)） |
+| **Intake ledger** | **Q-AS-11 … Q-AS-12 Answered**（This PR） |
+| **次の段階** | **G5 gate sign-off worksheet 準備** → Legal / Product 承認後、別 docs-only PR で checklist gate **G5 Closed/Ready** |
 
 ### Q-AS-11 — Public model distribution policy
 
@@ -50,9 +50,9 @@ English worksheet: [G5 Model Distribution Policy Worksheet](./qwon_app_store_g5_
 | **Phased combination（draft）** | **Deferred** — 将来 Pursue 時は phase 境界定義と **Place GGUF via Mac** fallback 維持。 |
 | **M3 posture（draft）** | **変更なし** — Option A；spike 完了；本 draft から **M3 reopen / default-on ではない**。 |
 | **build `3` 整合（draft）** | **`0.1.0 (3)`** の M2 path と一致 — **Build `4` / 公開承認ではない**。 |
-| **判断 owner** | Legal / Product（draft — **明示承認待ち**） |
+| **判断 owner** | Legal / Product（**approved for intake recording** — 2026-06-08） |
 | **出典** | 推奨案 § Q-AS-11 · [M3 spike outcome](./qwon_m3_spike_outcome_decision.md#decision-record) |
-| **制約** | **in-app download / hosted distribution / bundled weights 承認ではない**；follow-up PR まで intake **Answered** にしない |
+| **制約** | **in-app download / hosted distribution / bundled weights 承認ではない**；**G5 Closed/Ready ではない** |
 
 ### Q-AS-12 — License and redistribution constraints
 
@@ -66,7 +66,7 @@ English worksheet: [G5 Model Distribution Policy Worksheet](./qwon_app_store_g5_
 | **App Review narrative（draft）** | **User-managed side data** — optional on-device ML asset；Option A 時 IPA 非同梱；Mac+USB-only posture 下 app binary は weights を redistribute しない。 |
 | **User-facing copy（draft）** | 別途取得 compatible GGUF の開示；**third-party model attribution / notices** を計画；Legal レビューなし official Qwen / bartowski endorsement を claim しない。 |
 | **Hosted distribution（draft）** | In-app download / QWON-hosted mirror は QWON を **distribution channel** に — 本 draft では **未承認**。 |
-| **判断 owner** | Legal（draft — **明示承認待ち**） |
+| **判断 owner** | Legal（**approved for intake recording** — 2026-06-08） |
 | **出典** | 推奨案 § Q-AS-12 |
 | **制約** | **final Legal 結論ではない**；**hosted distribution 承認ではない**；**G5 Closed/Ready ではない** |
 
@@ -80,12 +80,12 @@ English worksheet: [G5 Model Distribution Policy Worksheet](./qwon_app_store_g5_
 | **Checklist gate G2** | **Closed/Ready** — [sign-off Approved](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) ([#136](https://github.com/studio-prospect/qwon-ai-ios/pull/136)) |
 | **Checklist gate G3** | **Closed/Ready** — [sign-off Approved](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) ([#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)) |
 | **Checklist gate G4** | **Closed/Ready** — [sign-off Approved](./qwon_app_store_g4_gate_signoff_worksheet.md#sign-off-record-legal-re) ([#146](https://github.com/studio-prospect/qwon-ai-ios/pull/146)) |
-| **Intake ledger total** | **24 questions · 14 Unanswered · 10 Answered** |
+| **Intake ledger total** | **24 questions · 12 Unanswered · 12 Answered** |
 | **Active TestFlight** | **QWON `0.1.0 (3)`** — stable alpha · ASC **`6775685841`** · shipped binary に **GGUF 同梱なし** |
 | **M3 posture** | **Option A selected** — compile-gated **default-off**；M3 lane **closed** · [decision record](./qwon_m3_spike_outcome_decision.md#decision-record) |
 | **Tester-visible model path** | M2 **Place GGUF via Mac** + USB — [guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement)；build `3` 上 in-app GGUF download なし |
-| **G5 intake** | **Q-AS-11 … Q-AS-12** — **Unanswered** |
-| **Checklist gate G5** | **Open** |
+| **G5 intake** | **Q-AS-11 … Q-AS-12 Answered**（This PR） |
+| **Checklist gate G5** | **Open** — gate sign-off pending |
 | **Public release approved?** | **No** |
 | **Build `4` approved?** | **No** |
 
@@ -111,7 +111,7 @@ English worksheet: [G5 Model Distribution Policy Worksheet](./qwon_app_store_g5_
 | --- | --- |
 | **Gate** | G5 |
 | **Owner** | Legal, Product |
-| **Intake 状態** | **Unanswered** |
+| **Intake 状態** | **Answered**（This PR） |
 
 ### 質問
 
@@ -119,22 +119,24 @@ approved **public model distribution policy** は何か — Mac+USB **Place GGUF
 
 ### Legal / Product 記入欄
 
-**[Legal/Product decision draft](#legal-product-decision-draft--awaiting-explicit-approval)** を参照 — **draft / awaiting explicit Legal/Product approval**；intake は **Unanswered** のまま。
+**[approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval)** を参照 — intake **Answered**（This PR）；**G5 gate sign-off** は **Open**。
 
 | 項目 | 記入 |
 | --- | --- |
-| **承認回答** | First public-readiness planning は Mac+USB Place GGUF via Mac only（Option A）— in-app download / bundled weights / phased combination **deferred**。（*draft — 明示承認待ち*） |
-| **First public release posture** | Option A 暫定推奨 — TestFlight **`0.1.0 (3)`** と整合。（*draft*） |
-| **Mac+USB Place GGUF via Mac** | **暫定推奨** — M2 guided placement + USB。（*draft*） |
-| **In-app download（M3 or successor）** | **Deferred** — M3 Option A / default-off / lane closed 維持。（*draft*） |
-| **Bundled weights in App Store binary** | **Deferred**。（*draft*） |
-| **Phased combination（if any）** | **Deferred**。（*draft*） |
-| **build `3` baseline 整合** | **`0.1.0 (3)`** M2 path と一致 — **Build `4` 承認ではない**。（*draft*） |
-| **判断 owner** | Legal / Product（draft） |
-| **出典** | [Legal/Product decision draft § Q-AS-11](#legal-product-decision-draft--awaiting-explicit-approval) |
-| **制約** | final policy 承認ではない |
+| **承認回答** | First public-readiness planning は Mac+USB Place GGUF via Mac only（Option A）— in-app download / bundled weights / phased combination **deferred**。（*approved for intake recording*） |
+| **First public release posture** | Option A 暫定推奨 — TestFlight **`0.1.0 (3)`** と整合。（*approved for intake recording*） |
+| **Mac+USB Place GGUF via Mac** | **暫定推奨** — M2 guided placement + USB。（*approved for intake recording*） |
+| **In-app download（M3 or successor）** | **Deferred** — M3 Option A / default-off / lane closed 維持。（*approved for intake recording*） |
+| **Bundled weights in App Store binary** | **Deferred**。（*approved for intake recording*） |
+| **Phased combination（if any）** | **Deferred**。（*approved for intake recording*） |
+| **build `3` baseline 整合** | **`0.1.0 (3)`** M2 path と一致 — **Build `4` 承認ではない**。（*approved for intake recording*） |
+| **判断 owner** | Legal / Product（approved for intake recording） |
+| **出典** | [Intake ledger — G5 answer details](./qwon_app_store_public_readiness_intake.md#g5-legalproduct-answer-details-2026-06-08) |
+| **制約** | final policy 承認ではない；G5 Closed/Ready ではない |
 
-### 推奨回答案（draft / not approved）
+### 推奨回答案 — **superseded (historical)**
+
+> *Superseded by [approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval) — traceability 用に保持。*
 
 > **Public model distribution policy（計画 draft）:**
 >
@@ -163,7 +165,7 @@ Legal / Product が編集・差し替え・却下すること。**final model di
 | --- | --- |
 | **Gate** | G5 |
 | **Owner** | Legal |
-| **Intake 状態** | **Unanswered** |
+| **Intake 状態** | **Answered**（This PR） |
 
 ### 質問
 
@@ -171,22 +173,24 @@ Legal / Product が編集・差し替え・却下すること。**final model di
 
 ### Legal 記入欄
 
-**[Legal/Product decision draft](#legal-product-decision-draft--awaiting-explicit-approval)** を参照 — **draft / awaiting explicit Legal/Product approval**；intake は **Unanswered** のまま。
+**[approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval)** を参照 — intake **Answered**（This PR）；**G5 gate sign-off** は **Open**。
 
 | 項目 | 記入 |
 | --- | --- |
-| **承認回答** | Qwen / bartowski / QWON-hosted mirror の license + redistribution を Legal が確認；draft: **user-managed side data** + **third-party model attribution / notices**。（*draft — 明示承認待ち*） |
-| **Qwen base model license posture** | HF 上 Apache-2.0 — Legal が attribution / notices 確認。（*draft*） |
-| **bartowski GGUF redistribution** | Third-party repack — redistribution 権 **未確認**。（*draft*） |
-| **QWON-hosted mirror（if any）** | public release 向け draft では **未承認**。（*draft*） |
-| **Attribution / notices required** | third-party model attribution / notices を計画 — Legal が finalize。（*draft*） |
-| **App Review narrative** | User-managed side data；Option A 時 IPA 非同梱。（*draft*） |
-| **User-facing copy constraints** | 別途取得 GGUF 開示；official Qwen/bartowski endorsement は Legal レビュー後。（*draft*） |
-| **判断 owner** | Legal（draft） |
-| **出典** | [Legal/Product decision draft § Q-AS-12](#legal-product-decision-draft--awaiting-explicit-approval) |
+| **承認回答** | Qwen / bartowski / QWON-hosted mirror の license + redistribution を Legal が確認；draft: **user-managed side data** + **third-party model attribution / notices**。（*approved for intake recording*） |
+| **Qwen base model license posture** | HF 上 Apache-2.0 — Legal が attribution / notices 確認。（*approved for intake recording*） |
+| **bartowski GGUF redistribution** | Third-party repack — redistribution 権 **未確認**。（*approved for intake recording*） |
+| **QWON-hosted mirror（if any）** | public release 向け draft では **未承認**。（*approved for intake recording*） |
+| **Attribution / notices required** | third-party model attribution / notices を計画 — Legal が finalize。（*approved for intake recording*） |
+| **App Review narrative** | User-managed side data；Option A 時 IPA 非同梱。（*approved for intake recording*） |
+| **User-facing copy constraints** | 別途取得 GGUF 開示；official Qwen/bartowski endorsement は Legal レビュー後。（*approved for intake recording*） |
+| **判断 owner** | Legal（approved for intake recording） |
+| **出典** | [Intake ledger — G5 answer details](./qwon_app_store_public_readiness_intake.md#g5-legalproduct-answer-details-2026-06-08) |
 | **制約** | final Legal 結論ではない |
 
-### 推奨回答案（draft / not approved）
+### 推奨回答案 — **superseded (historical)**
+
+> *Superseded by [approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval) — traceability 用に保持。*
 
 > **License / redistribution constraints（計画 draft）:**
 >
@@ -220,10 +224,11 @@ Legal が編集・差し替え・却下すること。**final license sign-off �
 
 | 項目 | 状態 |
 | --- | --- |
-| Q-AS-11 Legal/Product decision draft 準備 | **Done** — [明示承認待ち](#legal-product-decision-draft--awaiting-explicit-approval) |
-| Q-AS-12 Legal/Product decision draft 準備 | **Done** — 明示承認待ち |
-| Legal / Product **明示承認** | **Pending** |
-| follow-up docs-only PR で intake **Answered** | **Pending** |
+| Q-AS-11 Legal/Product decision draft 準備 | **Done** — [approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval) |
+| Q-AS-12 Legal/Product decision draft 準備 | **Done** — approved for intake recording |
+| Legal / Product **approved for intake recording** | **Done** — 2026-06-08（This PR） |
+| follow-up docs-only PR で intake **Answered** | **Done** — This PR |
+| **G5 gate sign-off worksheet** 準備 | **Next** |
 | checklist G5 Closed/Ready | **No** |
 | In-app download / M3 reopen / hosted distribution | **No** |
 | Public release approved | **No** |
@@ -233,4 +238,4 @@ Legal が編集・差し替え・却下すること。**final license sign-off �
 
 ## Agent note
 
-**Legal / Product** 向け **明示承認** 用。**Legal/Product decision draft を intake Answered にコピーしたり M3 を reopen したり in-app download / hosted distribution を承認したりしない** — 明示承認 + follow-up docs-only PR まで **Unanswered** を維持すること。
+**Legal / Product** 向け **G5 gate sign-off** 用。**G5 Closed/Ready**、M3 reopen、in-app download / hosted distribution を intake 記録だけで承認しない。Stay 下 hygiene のみ。

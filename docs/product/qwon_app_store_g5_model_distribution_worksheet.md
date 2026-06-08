@@ -1,8 +1,8 @@
 # QWON — App Store G5 Model Distribution Policy Worksheet (External Share)
 
-**Last updated:** 2026-06-08 (G5 Legal/Product decision draft prepared — intake **Unanswered**)
-**Status:** **Worksheet with Legal/Product decision draft / awaiting explicit approval** — intake rows **Q-AS-11 … Q-AS-12** remain **Unanswered** in the [intake ledger](./qwon_app_store_public_readiness_intake.md). **Not** final model distribution policy approval. **Not** in-app download / M3 reopen approval. **Not** App Store public release approval. **Not** Build `4` approval. **TestFlight upload / tag / version bump / ASC submission not approved.**
-**Purpose:** Shareable English worksheet for **Legal / Product** to answer **G5 — Model distribution policy** before answers are recorded in the intake ledger via a separate docs-only PR.
+**Last updated:** 2026-06-08 (G5 Legal/Product **approved for intake recording** — gate sign-off **Open**)
+**Status:** **Worksheet with Legal/Product decision draft — approved for intake recording** — intake rows **Q-AS-11 … Q-AS-12** are **Answered** in the [intake ledger](./qwon_app_store_public_readiness_intake.md) (This PR). **Not** final model distribution policy approval. **Not** in-app download / M3 reopen approval. **Not** App Store public release approval. **Not** Build `4` approval. **TestFlight upload / tag / version bump / ASC submission not approved.**
+**Purpose:** Shareable English worksheet for **Legal / Product** — G5 intake answers recorded; **G5 gate sign-off** remains **Open** (separate worksheet).
 
 日本語版: [G5 モデル配布ポリシー回答フォーム（日本語）](./qwon_app_store_g5_model_distribution_worksheet_ja.md)
 
@@ -21,22 +21,22 @@ Related: [Intake ledger — G5](./qwon_app_store_public_readiness_intake.md#g5--
 | **G5 worksheet ≠ ASC submission** | No App Store Connect upload, hosting ops, or submission from this doc |
 | **Stay selected** | Worksheet maintenance does **not** lift Stay or authorize implementation |
 | **No product/code changes** | **No** app code, download UX, hosting pipeline, or model bundling changes from this doc |
-| **Draft suggestions** | Blocks marked **draft / not approved** — Legal / Product must replace or reject before intake recording |
-| **Recording answers** | After Legal / Product **explicit approval**, open a **separate docs-only PR** to set intake rows to **Answered** |
+| **Draft suggestions** | Superseded by [approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval) — historical suggested drafts below |
+| **Recording answers** | Legal / Product **approved for intake recording** 2026-06-08 — intake **Answered** (This PR); **G5 gate sign-off** still **Open** |
 
 ---
 
 <a id="legal-product-decision-draft--awaiting-explicit-approval"></a>
 
-## Legal / Product decision draft — **awaiting explicit approval**
+## Legal / Product decision draft — **approved for intake recording**
 
-**Label:** **Legal/Product decision draft / awaiting explicit Legal/Product approval** — prepared from suggested worksheet drafts, G1–G4 closed gates, M3 Option A posture, and M2/M3 compliance memos. **Not** intake **Answered**. **Not** G5 Closed/Ready. **Not** final model distribution policy, in-app download, hosted distribution, bundled weights, public release, or Build `4` approval.
+**Label:** **Legal/Product decision draft — approved for intake recording (2026-06-08)** — recorded in [intake ledger — G5 answer details](./qwon_app_store_public_readiness_intake.md#g5-legalproduct-answer-details-2026-06-08) (This PR; worksheet prep [#148](https://github.com/studio-prospect/qwon-ai-ios/pull/148)). **Not** G5 Closed/Ready. **Not** final model distribution policy, in-app download, hosted distribution, bundled weights, public release, or Build `4` approval.
 
 | Field | Value |
 | --- | --- |
-| **Prepared** | 2026-06-08 — docs-only hygiene under Stay (This PR; base worksheet [#147](https://github.com/studio-prospect/qwon-ai-ios/pull/147)) |
-| **Intake ledger** | **Q-AS-11 … Q-AS-12** remain **Unanswered** until Legal / Product explicit approval + follow-up PR |
-| **Next step** | Legal / Product confirms, edits, or rejects each draft → docs-only PR records **Answered** in [intake ledger](./qwon_app_store_public_readiness_intake.md) |
+| **Prepared** | 2026-06-08 — docs-only hygiene under Stay ([#147](https://github.com/studio-prospect/qwon-ai-ios/pull/147); decision draft [#148](https://github.com/studio-prospect/qwon-ai-ios/pull/148)) |
+| **Intake ledger** | **Q-AS-11 … Q-AS-12 Answered** (This PR) |
+| **Next step** | **G5 gate sign-off worksheet preparation** → on Legal / Product approval, separate docs-only PR sets checklist gate **G5 Closed/Ready** |
 
 ### Q-AS-11 — Public model distribution policy
 
@@ -50,9 +50,9 @@ Related: [Intake ledger — G5](./qwon_app_store_public_readiness_intake.md#g5--
 | **Phased combination (draft)** | **Deferred** — if pursued later, Product must define phase boundaries and keep **Place GGUF via Mac** fallback visible per [M3 rollback memo](./qwon_m3_rollback_release_gate_memo.md). |
 | **M3 posture (draft)** | **Unchanged** — Option A selected; spike complete; **not** M3 reopen or default-on from this draft. |
 | **Build `3` alignment (draft)** | Consistent with tester-visible M2 path on **`0.1.0 (3)`** — **not** Build `4` or public release approval. |
-| **Decision owner** | Legal / Product (draft — **awaiting explicit Legal/Product approval**) |
+| **Decision owner** | Legal / Product (**approved for intake recording** — 2026-06-08) |
 | **Source** | Elaborated from [suggested draft § Q-AS-11](#q-as-11--public-model-distribution-policy); [M3 spike outcome](./qwon_m3_spike_outcome_decision.md#decision-record) |
-| **Constraints** | **Not** in-app download / hosted distribution / bundled weights **approved**; **not** intake **Answered** until follow-up PR |
+| **Constraints** | **Not** in-app download / hosted distribution / bundled weights **approved**; **not** G5 Closed/Ready |
 
 ### Q-AS-12 — License and redistribution constraints
 
@@ -66,7 +66,7 @@ Related: [Intake ledger — G5](./qwon_app_store_public_readiness_intake.md#g5--
 | **App Review narrative (draft)** | **User-managed side data** — optional on-device ML asset; model file not bundled in IPA when Option A applies; QWON does not redistribute weights in app binary under Mac+USB-only posture. |
 | **User-facing copy (draft)** | Disclose user-provided / separately acquired compatible GGUF; plan **third-party model attribution / notices**; do **not** claim official Qwen / bartowski endorsement without Legal review. |
 | **Hosted distribution (draft)** | In-app download or QWON-hosted mirror makes QWON a **distribution channel** — **not approved** by this draft; separate Legal gate. |
-| **Decision owner** | Legal (draft — **awaiting explicit Legal/Product approval**) |
+| **Decision owner** | Legal (**approved for intake recording** — 2026-06-08) |
 | **Source** | Elaborated from [suggested draft § Q-AS-12](#q-as-12--license-and-redistribution-constraints) |
 | **Constraints** | **Not** final Legal conclusion; **not** hosted distribution **approved**; **not** G5 Closed/Ready |
 
@@ -80,12 +80,12 @@ Related: [Intake ledger — G5](./qwon_app_store_public_readiness_intake.md#g5--
 | **Checklist gate G2** | **Closed/Ready** — [sign-off Approved](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) ([#136](https://github.com/studio-prospect/qwon-ai-ios/pull/136)) |
 | **Checklist gate G3** | **Closed/Ready** — [sign-off Approved](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) ([#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)) |
 | **Checklist gate G4** | **Closed/Ready** — [sign-off Approved](./qwon_app_store_g4_gate_signoff_worksheet.md#sign-off-record-legal-re) ([#146](https://github.com/studio-prospect/qwon-ai-ios/pull/146)) |
-| **Intake ledger total** | **24 questions · 14 Unanswered · 10 Answered** |
+| **Intake ledger total** | **24 questions · 12 Unanswered · 12 Answered** |
 | **Active TestFlight** | **QWON `0.1.0 (3)`** — stable alpha · ASC **`6775685841`** · **GGUF not bundled** in shipped binary |
 | **M3 posture** | **Option A selected** — compile-gated **default-off**; M3 lane **closed** · [decision record](./qwon_m3_spike_outcome_decision.md#decision-record) |
 | **Tester-visible model path** | M2 **Place GGUF via Mac** + USB — [guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement); app does **not** download GGUF in-app on build `3` |
-| **G5 intake** | **Q-AS-11 … Q-AS-12** — **Unanswered** |
-| **Checklist gate G5** | **Open** |
+| **G5 intake** | **Q-AS-11 … Q-AS-12 Answered** (This PR) |
+| **Checklist gate G5** | **Open** — gate sign-off pending |
 | **Public release approved?** | **No** |
 | **Build `4` approved?** | **No** |
 
@@ -124,7 +124,7 @@ Constraints or deferrals:
 | --- | --- |
 | **Gate** | G5 |
 | **Owner** | Legal, Product |
-| **Intake status** | **Unanswered** (unchanged until follow-up PR) |
+| **Intake status** | **Answered** (This PR) |
 
 ### Question
 
@@ -132,22 +132,24 @@ What is the approved **public model distribution policy** — Mac+USB **Place GG
 
 ### Legal / Product answer (fill in)
 
-**See [Legal/Product decision draft](#legal-product-decision-draft--awaiting-explicit-approval)** — **draft / awaiting explicit Legal/Product approval**; intake row remains **Unanswered**.
+**See [approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval)** — intake **Answered** (This PR); **G5 gate sign-off** still **Open**.
 
 | Field | Your answer |
 | --- | --- |
-| **Approved answer** | **Mac+USB Place GGUF via Mac only (Option A)** for first public-readiness planning — in-app download, bundled weights, phased combination **deferred**. *(draft — awaiting explicit approval)* |
-| **First public release posture** | Option A interim recommendation — aligned with TestFlight **`0.1.0 (3)`**. *(draft)* |
-| **Mac+USB Place GGUF via Mac** | **Interim recommended** — M2 guided placement + USB; app does not redistribute weights. *(draft)* |
-| **In-app download (M3 or successor)** | **Deferred** — M3 Option A / default-off / lane closed unchanged. *(draft)* |
-| **Bundled weights in App Store binary** | **Deferred** — separate Legal / RE review if pursued. *(draft)* |
-| **Phased combination (if any)** | **Deferred** — phase boundaries TBD if Product scopes later. *(draft)* |
-| **Build `3` baseline alignment** | Consistent with M2 path on **`0.1.0 (3)`** — **not** Build `4` approval. *(draft)* |
-| **Decision owner** | Legal / Product (draft) |
-| **Source** | [Legal/Product decision draft § Q-AS-11](#legal-product-decision-draft--awaiting-explicit-approval) |
-| **Constraints** | Not final policy approval; not intake **Answered** |
+| **Approved answer** | **Mac+USB Place GGUF via Mac only (Option A)** for first public-readiness planning — in-app download, bundled weights, phased combination **deferred**. *(approved for intake recording)* |
+| **First public release posture** | Option A interim recommendation — aligned with TestFlight **`0.1.0 (3)`**. *(approved for intake recording)* |
+| **Mac+USB Place GGUF via Mac** | **Interim recommended** — M2 guided placement + USB; app does not redistribute weights. *(approved for intake recording)* |
+| **In-app download (M3 or successor)** | **Deferred** — M3 Option A / default-off / lane closed unchanged. *(approved for intake recording)* |
+| **Bundled weights in App Store binary** | **Deferred** — separate Legal / RE review if pursued. *(approved for intake recording)* |
+| **Phased combination (if any)** | **Deferred** — phase boundaries TBD if Product scopes later. *(approved for intake recording)* |
+| **Build `3` baseline alignment** | Consistent with M2 path on **`0.1.0 (3)`** — **not** Build `4` approval. *(approved for intake recording)* |
+| **Decision owner** | Legal / Product (approved for intake recording) |
+| **Source** | [Intake ledger — G5 answer details](./qwon_app_store_public_readiness_intake.md#g5-legalproduct-answer-details-2026-06-08) |
+| **Constraints** | Not final policy approval; not G5 Closed/Ready |
 
-### Suggested draft — **draft / not approved**
+### Suggested draft — **superseded (historical)**
+
+> *Superseded by [approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval) — retained for traceability.*
 
 > **Public model distribution policy (planning draft):**
 >
@@ -164,7 +166,7 @@ What is the approved **public model distribution policy** — Mac+USB **Place GG
 >
 > **Not** M3 reopen. **Not** Build `4`. **Not** public release approval.
 
-Legal / Product must edit, replace, or reject. **Not** final model distribution policy. **Not** intake **Answered** until follow-up PR.
+Legal / Product must edit, replace, or reject. **Not** final model distribution policy.
 
 ### Unblocks
 
@@ -180,7 +182,7 @@ Q-AS-12, Q-AS-19 (partial), G5 sign-off
 | --- | --- |
 | **Gate** | G5 |
 | **Owner** | Legal |
-| **Intake status** | **Unanswered** |
+| **Intake status** | **Answered** (This PR) |
 
 ### Question
 
@@ -188,22 +190,24 @@ What **license and redistribution constraints** (e.g. bartowski GGUF, QWON-hoste
 
 ### Legal answer (fill in)
 
-**See [Legal/Product decision draft](#legal-product-decision-draft--awaiting-explicit-approval)** — **draft / awaiting explicit Legal/Product approval**; intake row remains **Unanswered**.
+**See [approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval)** — intake **Answered** (This PR); **G5 gate sign-off** still **Open**.
 
 | Field | Your answer |
 | --- | --- |
-| **Approved answer** | Legal must confirm Qwen / bartowski / QWON-hosted mirror license + redistribution; planning draft: **user-managed side data** + **third-party model attribution / notices**. *(draft — awaiting explicit approval)* |
-| **Qwen base model license posture** | Apache-2.0 cited on HF — Legal confirms attribution and notices. *(draft)* |
-| **bartowski GGUF redistribution** | Third-party repack — redistribution rights **unconfirmed**; Legal review required. *(draft)* |
-| **QWON-hosted mirror (if any)** | **Not approved** for public release in draft; Legal review if pursued. *(draft)* |
-| **Attribution / notices required** | Plan third-party model attribution / notices — Legal to finalize. *(draft)* |
-| **App Review narrative** | User-managed side data; optional on-device ML asset not bundled in IPA (Option A). *(draft)* |
-| **User-facing copy constraints** | Disclose separately acquired GGUF; no official Qwen/bartowski endorsement without Legal review. *(draft)* |
-| **Decision owner** | Legal (draft) |
-| **Source** | [Legal/Product decision draft § Q-AS-12](#legal-product-decision-draft--awaiting-explicit-approval) |
+| **Approved answer** | Legal must confirm Qwen / bartowski / QWON-hosted mirror license + redistribution; planning draft: **user-managed side data** + **third-party model attribution / notices**. *(approved for intake recording)* |
+| **Qwen base model license posture** | Apache-2.0 cited on HF — Legal confirms attribution and notices. *(approved for intake recording)* |
+| **bartowski GGUF redistribution** | Third-party repack — redistribution rights **unconfirmed**; Legal review required. *(approved for intake recording)* |
+| **QWON-hosted mirror (if any)** | **Not approved** for public release in draft; Legal review if pursued. *(approved for intake recording)* |
+| **Attribution / notices required** | Plan third-party model attribution / notices — Legal to finalize. *(approved for intake recording)* |
+| **App Review narrative** | User-managed side data; optional on-device ML asset not bundled in IPA (Option A). *(approved for intake recording)* |
+| **User-facing copy constraints** | Disclose separately acquired GGUF; no official Qwen/bartowski endorsement without Legal review. *(approved for intake recording)* |
+| **Decision owner** | Legal (approved for intake recording) |
+| **Source** | [Intake ledger — G5 answer details](./qwon_app_store_public_readiness_intake.md#g5-legalproduct-answer-details-2026-06-08) |
 | **Constraints** | Not final Legal conclusion; not hosted distribution approved |
 
-### Suggested draft — **draft / not approved**
+### Suggested draft — **superseded (historical)**
+
+> *Superseded by [approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval) — retained for traceability.*
 
 > **License / redistribution constraints (planning draft):**
 >
@@ -241,10 +245,11 @@ G5 sign-off; informs Q-AS-19
 
 | Item | Status |
 | --- | --- |
-| Q-AS-11 Legal/Product decision draft prepared | **Done** — [awaiting explicit approval](#legal-product-decision-draft--awaiting-explicit-approval) |
-| Q-AS-12 Legal/Product decision draft prepared | **Done** — awaiting explicit approval |
-| Legal / Product **explicit approval** of G5 drafts | **Pending** |
-| Follow-up docs-only PR updates intake to **Answered** | **Pending** |
+| Q-AS-11 Legal/Product decision draft prepared | **Done** — [approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval) |
+| Q-AS-12 Legal/Product decision draft prepared | **Done** — approved for intake recording |
+| Legal / Product **approved for intake recording** | **Done** — 2026-06-08 (This PR) |
+| Follow-up docs-only PR updates intake to **Answered** | **Done** — This PR |
+| **G5 gate sign-off worksheet** preparation | **Next** |
 | Checklist gate G5 marked Closed/Ready | **No** — separate sign-off gate |
 | In-app download / M3 reopen / hosted distribution approved | **No** |
 | Public release approved | **No** |
@@ -254,4 +259,4 @@ G5 sign-off; informs Q-AS-19
 
 ## Agent note
 
-Share with **Legal / Product** for **explicit approval**. **Do not** copy Legal/Product decision drafts into the intake ledger as **Answered**, reopen M3, or approve in-app download / hosted distribution until stakeholders confirm and a follow-up docs-only PR records them. Stay-allowed hygiene only.
+Share with **Legal / Product** for **G5 gate sign-off**. **Do not** mark **G5 Closed/Ready**, reopen M3, or approve in-app download / hosted distribution from intake recording alone. Stay-allowed hygiene only.
