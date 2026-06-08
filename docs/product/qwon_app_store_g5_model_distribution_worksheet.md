@@ -34,7 +34,7 @@ Related: [Intake ledger — G5](./qwon_app_store_public_readiness_intake.md#g5--
 
 | Field | Value |
 | --- | --- |
-| **Prepared** | 2026-06-08 — docs-only hygiene under Stay ([#147](https://github.com/studio-prospect/qwon-ai-ios/pull/147)) |
+| **Prepared** | 2026-06-08 — docs-only hygiene under Stay (This PR; base worksheet [#147](https://github.com/studio-prospect/qwon-ai-ios/pull/147)) |
 | **Intake ledger** | **Q-AS-11 … Q-AS-12** remain **Unanswered** until Legal / Product explicit approval + follow-up PR |
 | **Next step** | Legal / Product confirms, edits, or rejects each draft → docs-only PR records **Answered** in [intake ledger](./qwon_app_store_public_readiness_intake.md) |
 

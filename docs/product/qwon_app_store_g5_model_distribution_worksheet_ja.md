@@ -34,7 +34,7 @@ English worksheet: [G5 Model Distribution Policy Worksheet](./qwon_app_store_g5_
 
 | 項目 | 値 |
 | --- | --- |
-| **準備日** | 2026-06-08 — Stay 下 docs-only hygiene（[#147](https://github.com/studio-prospect/qwon-ai-ios/pull/147)） |
+| **準備日** | 2026-06-08 — Stay 下 docs-only hygiene（This PR；base worksheet [#147](https://github.com/studio-prospect/qwon-ai-ios/pull/147)） |
 | **Intake ledger** | **Q-AS-11 … Q-AS-12** は Legal / Product 明示承認 + follow-up PR まで **Unanswered** |
 | **次の段階** | Legal / Product が各 draft を確認・編集・却下 → docs-only PR で [intake ledger](./qwon_app_store_public_readiness_intake.md) を **Answered** に更新 |
 
