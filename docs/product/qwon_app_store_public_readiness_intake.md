@@ -1,6 +1,6 @@
 # QWON — App Store Public Readiness Answer Intake Ledger
 
-**Last updated:** 2026-06-08 (Stay selected — G2 gate sign-off worksheet added; gate **Open**)
+**Last updated:** 2026-06-08 (Stay selected — G2 gate **Closed/Ready** — This PR)
 **Status:** **Intake ledger** — **24 questions · 18 Unanswered · 6 Answered**. **Not** App Store public release approval. **Not** Build `4` approval. **TestFlight upload / tag / version bump not approved.**
 **Purpose:** Decompose [App Store public readiness checklist](./qwon_app_store_public_readiness_checklist.md) gates **G1–G10** into **answerable questions** for Product / Legal / Release Engineering. Record answers in **separate docs-only PRs** when stakeholders supply written responses.
 
@@ -16,9 +16,9 @@ Related: [G2 gate sign-off worksheet](./qwon_app_store_g2_gate_signoff_worksheet
 | **How to record an answer** | **Separate docs-only PR** after stakeholder provides written response; link PR in **Answer source** and **Follow-up PR** |
 | **Do not** | Infer, draft, or commit final App Store copy, legal conclusions, privacy label answers, or release decisions without stakeholder source |
 | **Answer recorded ≠ public release approved** | Updating a row to **Answered** does **not** approve App Store submission, Build `4`, or TestFlight upload |
-| **Gate disposition** | **G1 Closed/Ready** ([sign-off](./qwon_app_store_g1_gate_signoff_worksheet.md#sign-off-record-product) This PR). **G2–G10** remain **Open** or **Partial** until Product records explicit gate sign-off — separate from intake answers |
+| **Gate disposition** | **G1 Closed/Ready** ([sign-off](./qwon_app_store_g1_gate_signoff_worksheet.md#sign-off-record-product) [#131](https://github.com/studio-prospect/qwon-ai-ios/pull/131)). **G2 Closed/Ready** ([sign-off](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) This PR). **G3–G10** remain **Open** or **Partial** until Product records explicit gate sign-off — separate from intake answers |
 | **Agents on Stay** | May append **real** answers only when Product/Legal/RE explicitly supplies them; otherwise leave **Unanswered** |
-| **External worksheets** | [G1 gate sign-off](./qwon_app_store_g1_gate_signoff_worksheet.md) — **Approved** 2026-06-08 ([#131](https://github.com/studio-prospect/qwon-ai-ios/pull/131)); checklist gate **G1 Closed/Ready** · [G2 gate sign-off](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) — **Pending** (This PR) · [G1 Product worksheet](./qwon_app_store_g1_product_worksheet.md) |
+| **External worksheets** | [G1 gate sign-off](./qwon_app_store_g1_gate_signoff_worksheet.md) — **Approved** 2026-06-08 ([#131](https://github.com/studio-prospect/qwon-ai-ios/pull/131)); checklist gate **G1 Closed/Ready** · [G2 gate sign-off](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) — **Approved** 2026-06-08 (This PR); checklist gate **G2 Closed/Ready** · [G1 Product worksheet](./qwon_app_store_g1_product_worksheet.md) |
 
 ### Intake summary
 
@@ -30,7 +30,7 @@ Related: [G2 gate sign-off worksheet](./qwon_app_store_g2_gate_signoff_worksheet
 | **Public release approved?** | **No** |
 | **Stay in effect?** | **Yes** |
 | **G1 intake** | **Q-AS-01 … Q-AS-03 Answered** — checklist gate **G1 Closed/Ready** |
-| **G2 intake** | **Q-AS-04 … Q-AS-06 Answered** ([#134](https://github.com/studio-prospect/qwon-ai-ios/pull/134)) — checklist gate **G2 Open** · [gate sign-off worksheet](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) **Pending** |
+| **G2 intake** | **Q-AS-04 … Q-AS-06 Answered** ([#134](https://github.com/studio-prospect/qwon-ai-ios/pull/134)) — checklist gate **G2 Closed/Ready** |
 
 ---
 
@@ -83,24 +83,29 @@ Related: [G2 gate sign-off worksheet](./qwon_app_store_g2_gate_signoff_worksheet
 
 **External share:** [G2 metadata worksheet (EN)](./qwon_app_store_g2_metadata_worksheet.md) · [G2 メタデータフォーム（日本語）](./qwon_app_store_g2_metadata_worksheet_ja.md) · [G2 gate sign-off worksheet](./qwon_app_store_g2_gate_signoff_worksheet.md)
 
-**G2 intake (2026-06-08):** **Q-AS-04 … Q-AS-06 Answered** ([#134](https://github.com/studio-prospect/qwon-ai-ios/pull/134)). Product approval recorded from [G2 worksheet — approved for intake recording](./qwon_app_store_g2_metadata_worksheet.md#product-decision-draft--awaiting-explicit-approval) ([#133](https://github.com/studio-prospect/qwon-ai-ios/pull/133) worksheet prep). Checklist gate **G2** remains **Open** — [gate sign-off worksheet](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) **Pending** (This PR). **Not** public release, Build `4`, or ASC metadata upload approval.
+**G2 intake + gate (2026-06-08):** **Q-AS-04 … Q-AS-06 Answered** ([#134](https://github.com/studio-prospect/qwon-ai-ios/pull/134)). Checklist gate **G2 Closed/Ready** — [sign-off Approved](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) (This PR). **Not** public release, Build `4`, or ASC metadata upload approval.
 
 | Question ID | Gate | Owner | Question | Answer status | Answer source | Blocks | Follow-up PR |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Q-AS-04 | G2 | Product | What **App Store title, subtitle, and primary description** copy are approved for the first public listing? | Answered | [G2 worksheet — Product decision draft § Q-AS-04](./qwon_app_store_g2_metadata_worksheet.md#q-as-04--app-store-title-subtitle-primary-description) | — | This PR |
-| Q-AS-05 | G2 | Product | What **screenshot set and device sizes** (iPhone models, orientations) are required for the first public listing? | Answered | [G2 worksheet — Product decision draft § Q-AS-05](./qwon_app_store_g2_metadata_worksheet.md#q-as-05--screenshot-set-and-device-sizes) | G2 sign-off | This PR |
-| Q-AS-06 | G2 | Product | Which **locales** are in scope for metadata and screenshots at first public launch? | Answered | [G2 worksheet — Product decision draft § Q-AS-06](./qwon_app_store_g2_metadata_worksheet.md#q-as-06--locales-for-metadata-and-screenshots) | G2 sign-off | This PR |
+| Q-AS-04 | G2 | Product | What **App Store title, subtitle, and primary description** copy are approved for the first public listing? | Answered | [G2 worksheet — Product decision draft § Q-AS-04](./qwon_app_store_g2_metadata_worksheet.md#q-as-04--app-store-title-subtitle-primary-description) | — | [#134](https://github.com/studio-prospect/qwon-ai-ios/pull/134) |
+| Q-AS-05 | G2 | Product | What **screenshot set and device sizes** (iPhone models, orientations) are required for the first public listing? | Answered | [G2 worksheet — Product decision draft § Q-AS-05](./qwon_app_store_g2_metadata_worksheet.md#q-as-05--screenshot-set-and-device-sizes) | — | [#134](https://github.com/studio-prospect/qwon-ai-ios/pull/134) |
+| Q-AS-06 | G2 | Product | Which **locales** are in scope for metadata and screenshots at first public launch? | Answered | [G2 worksheet — Product decision draft § Q-AS-06](./qwon_app_store_g2_metadata_worksheet.md#q-as-06--locales-for-metadata-and-screenshots) | — | [#134](https://github.com/studio-prospect/qwon-ai-ios/pull/134) |
 
 ### G2 Product answer details (2026-06-08)
 
-**Source:** Product approval of [G2 worksheet — approved for intake recording](./qwon_app_store_g2_metadata_worksheet.md#product-decision-draft--awaiting-explicit-approval) ([#133](https://github.com/studio-prospect/qwon-ai-ios/pull/133) worksheet prep; intake recorded This PR).
-**Scope (This PR):** Recorded **Answered** intake rows only; **G2 gate sign-off** and checklist **Closed/Ready** remain **pending** — separate docs-only PR.
+**Source:** Product approval of [G2 worksheet — approved for intake recording](./qwon_app_store_g2_metadata_worksheet.md#product-decision-draft--awaiting-explicit-approval) ([#133](https://github.com/studio-prospect/qwon-ai-ios/pull/133) worksheet prep; intake recorded [#134](https://github.com/studio-prospect/qwon-ai-ios/pull/134)).
+**Scope (historical — #134):** Recorded **Answered** intake rows only; gate sign-off followed in This PR ([#135](https://github.com/studio-prospect/qwon-ai-ios/pull/135) worksheet prep).
 
 | Question ID | Answer |
 | --- | --- |
 | **Q-AS-04** | **Title:** QWON. **Subtitle:** Local-first AI on your iPhone. **Primary description:** QWON is a local-first cognitive runtime for iPhone. Keep inference and context on-device by default — not a cloud-only chat wrapper. Built for privacy-conscious users who want on-device AI assistance without default cloud dependency. |
 | **Q-AS-05** | **Device sizes:** iPhone 6.7" and 6.5" display classes (verify current ASC required sizes at submission time). **Orientation:** Portrait only for v1. **Set:** 3–5 screenshots — (1) chat/home, (2) on-device/local indicator or model placement note, (3) privacy/local-first value prop. |
 | **Q-AS-06** | **Primary:** English (U.S.) — `en-US` metadata and screenshots. **Deferred:** Japanese (`ja`) and additional locales — **TBD**. |
+
+### G2 gate sign-off (2026-06-08)
+
+**Source:** [G2 gate sign-off worksheet — Approved](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) (This PR).
+**Scope:** Records G2 sign-off only. Checklist gate **G2 Closed/Ready**; public release, Build `4`, TestFlight upload, tag, version bump, and ASC metadata upload remain **not approved**.
 
 ---
 
@@ -183,7 +188,7 @@ Related: [G2 gate sign-off worksheet](./qwon_app_store_g2_gate_signoff_worksheet
 | Gate | Checklist status | Intake questions | All answered? |
 | --- | --- | --- | --- |
 | **G1** | Closed/Ready | Q-AS-01 … Q-AS-03 | **Yes** — intake **Answered**; gate sign-off **Approved** · [worksheet](./qwon_app_store_g1_gate_signoff_worksheet.md#sign-off-record-product) |
-| **G2** | Open | Q-AS-04 … Q-AS-06 | **Yes** — intake **Answered** ([#134](https://github.com/studio-prospect/qwon-ai-ios/pull/134)); **gate sign-off Pending** · [worksheet](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) |
+| **G2** | Closed/Ready | Q-AS-04 … Q-AS-06 | **Yes** — intake **Answered**; gate sign-off **Approved** · [worksheet](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) |
 | **G3** | Open | Q-AS-07 … Q-AS-08 | **No** |
 | **G4** | Partial | Q-AS-09 … Q-AS-10 | **No** |
 | **G5** | Open | Q-AS-11 … Q-AS-12 | **No** |
@@ -199,4 +204,4 @@ Related: [G2 gate sign-off worksheet](./qwon_app_store_g2_gate_signoff_worksheet
 
 ## Agent note
 
-This ledger is **Stay-allowed docs hygiene**. Maintain question text and links only unless Product/Legal/RE supplies answers. **G2 intake Answered** (This PR) does **not** mark checklist gate **G2 Closed/Ready**. Do **not** mark checklist gates **G3–G10 Closed/Ready** or public release **approved** from intake updates alone.
+This ledger is **Stay-allowed docs hygiene**. Maintain question text and links only unless Product/Legal/RE supplies answers. **G2 Closed/Ready** (This PR) does **not** mark **G3–G10 Closed/Ready** or approve public release.
