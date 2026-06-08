@@ -1,6 +1,6 @@
 # QWON — Next Work Queue
 
-**Last updated:** 2026-06-08 (Stay selected — G1 gate Closed/Ready; next G2 worksheet)
+**Last updated:** 2026-06-08 (Stay selected — G2 metadata worksheet)
 **Status:** **Queue / guardrail only** — **Stay selected**; docs/readme/index/evidence hygiene only; no implementation authorization.
 **Purpose:** After Phase 4 rename docs are complete, classify what agents **may** do next vs what requires **product gates**. Prevents drift into ungated **build `4`**, project-container rename, or blind PREXUS cleanup.
 
@@ -63,7 +63,7 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 | Docs / README / index maintenance | [Ready / low-risk docs-ops](#ready--low-risk-docs-ops) |
 | **Product-approved build `4` planning** docs only (criteria, checklist, gate memo — **not** upload) | [Conditional — build `4`](#testflight-upload-build-4) |
 | Post-alpha — **next lane selection** | [Post-M3 next lane decision](./qwon_post_m3_next_lane_decision.md) · [Post-alpha options](./qwon_post_alpha_options.md) |
-| **Stay posture docs hygiene** | Index/queue/link fixes; App Store checklist + intake + **G1 worksheet** maintenance; **no** feature implementation | [Ready / low-risk docs-ops](#ready--low-risk-docs-ops) |
+| **Stay posture docs hygiene** | Index/queue/link fixes; App Store checklist + intake + **G2 worksheet** maintenance; **no** feature implementation | [Ready / low-risk docs-ops](#ready--low-risk-docs-ops) |
 | UI polish **UI-2** (gated) | [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) — **not opened** unless new evidence |
 | Minimal fix on build **`3`** | **Only** with [verified release blocker](#minimal-fix-pr-verified-release-blocker-only) + Codex/Product sign-off |
 
@@ -303,11 +303,11 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 | Field | Detail |
 | --- | --- |
-| **Status** | **Checklist + intake ledger** — G1 gate **Closed/Ready**; **21 Unanswered**; **public release not approved** |
+| **Status** | **Checklist + intake ledger** — G1 **Closed/Ready**; G2 [worksheet](./qwon_app_store_g2_metadata_worksheet.md) entry; **21 Unanswered**; **public release not approved** |
 | **Trigger** | Product plans **public App Store horizon** (separate from Build `4`) |
-| **Required evidence** | G1 sign-off **Approved** — **no** submission or code; G2 worksheet is next docs-only step |
-| **Next stage** | **G2 worksheet preparation** (Q-AS-04 … Q-AS-06) — [intake G2](./qwon_app_store_public_readiness_intake.md#g2--app-store-metadata--screenshots--localization) |
-| **First doc to read** | [Intake ledger — G2](./qwon_app_store_public_readiness_intake.md#g2--app-store-metadata--screenshots--localization) · [Checklist G2](./qwon_app_store_public_readiness_checklist.md#3-public-readiness-gates) · [G1 sign-off record](./qwon_app_store_g1_gate_signoff_worksheet.md#sign-off-record-product) |
+| **Required evidence** | G2 worksheet review / answer preparation — **no** submission or code |
+| **Next stage** | **G2 worksheet review / answer preparation** (Q-AS-04 … Q-AS-06) — [G2 metadata worksheet](./qwon_app_store_g2_metadata_worksheet.md) · [intake G2](./qwon_app_store_public_readiness_intake.md#g2--app-store-metadata--screenshots--localization) |
+| **First doc to read** | [G2 metadata worksheet](./qwon_app_store_g2_metadata_worksheet.md) · [G2 メタデータフォーム（日本語）](./qwon_app_store_g2_metadata_worksheet_ja.md) · [Checklist G2](./qwon_app_store_public_readiness_checklist.md#3-public-readiness-gates) |
 | **Do not start if** | Conflated with Build `4` / TestFlight upload; treating checklist as implementation authorization; **Stay** lifted without explicit lane record |
 
 ### App Store public release (historical stub)
@@ -342,4 +342,4 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 ## Agent note
 
-Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **Stay selected** — docs/readme/index/evidence hygiene only; M3 Option A / lane **closed**. App Store checklist **G1 Closed/Ready**; intake **21 Unanswered** — next **G2 worksheet**; **public release not approved**. Build **`4`** / TestFlight upload / tag / version bump require **explicit product gate**. To start implementation, Product must **lift Stay** and select one lane + Codex scoped plan.
+Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **Stay selected** — docs/readme/index/evidence hygiene only; M3 Option A / lane **closed**. App Store **G1 Closed/Ready**; **G2 worksheet** for Q-AS-04…06 — intake **21 Unanswered**; **public release not approved**. Build **`4`** / TestFlight upload / tag / version bump require **explicit product gate**. To start implementation, Product must **lift Stay** and select one lane + Codex scoped plan.
