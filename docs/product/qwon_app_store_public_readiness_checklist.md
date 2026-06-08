@@ -1,6 +1,6 @@
 # QWON — App Store Public Release Readiness Checklist
 
-**Last updated:** 2026-06-08 (Stay selected — G3 privacy worksheet added)
+**Last updated:** 2026-06-08 (Stay selected — G3 intake **Answered**; gate sign-off **Open**)
 **Status:** **Docs-only** — **Stay selected**. **App Store public release not approved.** **Build `4` not approved.** **TestFlight upload / tag / version bump not approved.**
 **Purpose:** While **Stay** remains in effect, make **open Product/Legal/RE decisions** visible for a future move from TestFlight **`0.1.0 (3)`** stable alpha to **public App Store availability**. This checklist does **not** authorize implementation, release engineering, App Store submission, or Build `4`.
 
@@ -39,13 +39,13 @@ Related: [Answer intake ledger](./qwon_app_store_public_readiness_intake.md) · 
 
 ## 3. Public readiness gates
 
-Each row is an **open decision or artifact** until Product/Legal/RE records completion. Status **Open** = not decided or not documented for public release. **Answerable questions:** [App Store readiness intake ledger](./qwon_app_store_public_readiness_intake.md) — **18 Unanswered · 6 Answered** (G1 + G2 gates **Closed/Ready** — This PR).
+Each row is an **open decision or artifact** until Product/Legal/RE records completion. Status **Open** = not decided or not documented for public release. **Answerable questions:** [App Store readiness intake ledger](./qwon_app_store_public_readiness_intake.md) — **16 Unanswered · 8 Answered** (G1 + G2 gates **Closed/Ready**; G3 intake **Answered**, gate sign-off **Open** — This PR).
 
 | # | Gate | Status | Notes / first doc |
 | --- | --- | --- | --- |
 | **G1** | **Product positioning / value proposition** | **Closed/Ready** | Intake **Q-AS-01 … Q-AS-03 Answered** · [G1 sign-off Approved](./qwon_app_store_g1_gate_signoff_worksheet.md#sign-off-record-product) (This PR) · [intake G1](./qwon_app_store_public_readiness_intake.md#g1--product-positioning--value-proposition) |
 | **G2** | **App Store metadata and screenshots** | **Closed/Ready** | Intake **Q-AS-04 … Q-AS-06 Answered** · [G2 sign-off Approved](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) (This PR) · [intake G2](./qwon_app_store_public_readiness_intake.md#g2--app-store-metadata--screenshots--localization) |
-| **G3** | **Privacy nutrition labels** | **Open** | [Q-AS-07 … Q-AS-08](./qwon_app_store_public_readiness_intake.md#g3--privacy-nutrition-labels) · [G3 privacy worksheet](./qwon_app_store_g3_privacy_worksheet.md) · [日本語フォーム](./qwon_app_store_g3_privacy_worksheet_ja.md) · [M3 network memo](./qwon_m3_network_device_expectation_memo.md) |
+| **G3** | **Privacy nutrition labels** | **Open** | Intake **Q-AS-07 … Q-AS-08 Answered** (This PR) · **gate sign-off still Open** · [G3 privacy worksheet — approved for intake recording](./qwon_app_store_g3_privacy_worksheet.md#legal-product-decision-draft--awaiting-explicit-approval) · [intake G3](./qwon_app_store_public_readiness_intake.md#g3--privacy-nutrition-labels) · [M3 network memo](./qwon_m3_network_device_expectation_memo.md) |
 | **G4** | **Export compliance / encryption declaration** | **Partial** | [Q-AS-09 … Q-AS-10](./qwon_app_store_public_readiness_intake.md#g4--export-compliance--encryption-declaration) · [TestFlight prep — export compliance](./qwon_text_alpha_testflight_prep.md#export-compliance-operator-gate) |
 | **G5** | **Model distribution policy** | **Open** | [Q-AS-11 … Q-AS-12](./qwon_app_store_public_readiness_intake.md#g5--model-distribution-policy) · [M3 Gate 3 memo](./qwon_m3_model_distribution_compliance_memo.md) |
 | **G6** | **Support contact / website / terms / privacy policy** | **Open** | [Q-AS-13 … Q-AS-15](./qwon_app_store_public_readiness_intake.md#g6--support--website--terms--privacy-policy) |
@@ -78,7 +78,7 @@ Each row is an **open decision or artifact** until Product/Legal/RE records comp
 | --- | --- |
 | **Public release approved?** | **No** |
 | **Stay in effect?** | **Yes** — [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record) |
-| **Next action** | **Product / Legal / RE review only** — **G3 worksheet review / answer preparation** · [G3 privacy worksheet](./qwon_app_store_g3_privacy_worksheet.md) · [intake G3](./qwon_app_store_public_readiness_intake.md#g3--privacy-nutrition-labels) (**18 Unanswered**) · **no** implementation or submission |
+| **Next action** | **Product / Legal / RE review only** — **G3 gate sign-off worksheet preparation** · [intake G3](./qwon_app_store_public_readiness_intake.md#g3--privacy-nutrition-labels) (**16 Unanswered**) · **no** implementation or submission |
 | **To open implementation** | Product **lifts Stay**, selects **App Store public release readiness** (or combined horizon gate), records approval in this section, then Codex scoped plan → Cursor — **still no** upload/submission without explicit release gate |
 
 **Checklist created:** 2026-06-07 — Stay-allowed docs hygiene; does not change Product posture.
