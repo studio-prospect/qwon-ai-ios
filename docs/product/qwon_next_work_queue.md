@@ -1,6 +1,6 @@
 # QWON — Next Work Queue
 
-**Last updated:** 2026-06-08 (Stay selected — G3 gate **Closed/Ready**)
+**Last updated:** 2026-06-08 (Stay selected — G4 export compliance worksheet added)
 **Status:** **Queue / guardrail only** — **Stay selected**; docs/readme/index/evidence hygiene only; no implementation authorization.
 **Purpose:** After Phase 4 rename docs are complete, classify what agents **may** do next vs what requires **product gates**. Prevents drift into ungated **build `4`**, project-container rename, or blind PREXUS cleanup.
 
@@ -305,9 +305,9 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 | --- | --- |
 | **Status** | **Checklist + intake ledger** — G1 + G2 + G3 **Closed/Ready**; **16 Unanswered**; **public release not approved** |
 | **Trigger** | Product plans **public App Store horizon** (separate from Build `4`) |
-| **Required evidence** | **G4 worksheet preparation** / export compliance (Q-AS-09 … Q-AS-10) — **no** submission or code |
-| **Next stage** | **G4 worksheet preparation / export compliance** · [intake G4](./qwon_app_store_public_readiness_intake.md#g4--export-compliance--encryption-declaration) |
-| **First doc to read** | [Intake ledger — G4 export compliance](./qwon_app_store_public_readiness_intake.md#g4--export-compliance--encryption-declaration) · [TestFlight prep — export compliance](./qwon_text_alpha_testflight_prep.md#export-compliance-operator-gate) |
+| **Required evidence** | Legal / RE review of [G4 export compliance worksheet](./qwon_app_store_g4_export_compliance_worksheet.md) — **no** submission or code |
+| **Next stage** | **G4 worksheet review / answer preparation** · [intake G4](./qwon_app_store_public_readiness_intake.md#g4--export-compliance--encryption-declaration) |
+| **First doc to read** | [G4 export compliance worksheet](./qwon_app_store_g4_export_compliance_worksheet.md) · [TestFlight prep — export compliance](./qwon_text_alpha_testflight_prep.md#export-compliance-operator-gate) |
 | **Do not start if** | Conflated with Build `4` / TestFlight upload; treating checklist as implementation authorization; **Stay** lifted without explicit lane record |
 
 ### App Store public release (historical stub)
@@ -342,4 +342,4 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 ## Agent note
 
-Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **Stay selected** — docs/readme/index/evidence hygiene only; M3 Option A / lane **closed**. App Store **G1 + G2 + G3 Closed/Ready**; intake **16 Unanswered**; **public release not approved**. Build **`4`** / TestFlight upload / tag / version bump require **explicit product gate**. To start implementation, Product must **lift Stay** and select one lane + Codex scoped plan.
+Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **Stay selected** — docs/readme/index/evidence hygiene only; M3 Option A / lane **closed**. App Store **G1 + G2 + G3 Closed/Ready**; **G4 export compliance worksheet added**; intake **16 Unanswered**; **public release not approved**. Build **`4`** / TestFlight upload / tag / version bump require **explicit product gate**. To start implementation, Product must **lift Stay** and select one lane + Codex scoped plan.
