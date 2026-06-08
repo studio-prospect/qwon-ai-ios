@@ -1,7 +1,7 @@
 # QWON — App Store G2 メタデータ回答フォーム（日本語）
 
-**最終更新:** 2026-06-08（G2 Product decision draft 準備済 — intake は **Unanswered** のまま）
-**状態:** **Product decision draft / awaiting explicit approval 付き worksheet** — [intake ledger](./qwon_app_store_public_readiness_intake.md) の **Q-AS-04 … Q-AS-06** は **Unanswered** のまま。**App Store 公開承認ではない**。**Build `4` 承認ではない**。**TestFlight upload / tag / version bump 承認ではない**。
+**最終更新:** 2026-06-08（G2 intake **Q-AS-04 … Q-AS-06 Answered** — This PR；gate sign-off **Open**）
+**状態:** **Product decision draft 承認済** — [intake ledger](./qwon_app_store_public_readiness_intake.md) の **Q-AS-04 … Q-AS-06** を **Answered** に記録（This PR）。checklist gate **G2** は **Open** のまま。**App Store 公開承認ではない**。**Build `4` 承認ではない**。**TestFlight upload / tag / version bump 承認ではない**。
 **目的:** Product が **G2 — App Store メタデータ / スクリーンショット / ローカライズ** の 3 問に記入し、合意形成に使う日本語フォーム。
 
 English worksheet: [G2 Metadata Worksheet](./qwon_app_store_g2_metadata_worksheet.md)
@@ -27,13 +27,14 @@ English worksheet: [G2 Metadata Worksheet](./qwon_app_store_g2_metadata_workshee
 
 ## Product decision draft — **awaiting explicit approval（明示承認待ち）**
 
-**ラベル:** **Product decision draft / awaiting explicit Product approval** — 推奨案と G1 入力をベースに整理。**intake Answered ではない**。**G2 Closed/Ready ではない**。**公開承認ではない**。
+**ラベル:** **Product decision draft — Product 承認 2026-06-08** — [intake ledger](./qwon_app_store_public_readiness_intake.md#g2-product-answer-details-2026-06-08) に記録（This PR）。**G2 Closed/Ready ではない**。**公開承認ではない**。
 
 | 項目 | 値 |
 | --- | --- |
-| **準備日** | 2026-06-08 — Stay 下の docs-only hygiene |
-| **Intake ledger** | **Q-AS-04 … Q-AS-06** は Product 明示承認 + follow-up PR まで **Unanswered** |
-| **次の段階** | Product が各 draft を確認・編集・却下 → docs-only PR で [intake ledger](./qwon_app_store_public_readiness_intake.md) を **Answered** に更新 |
+| **準備日** | 2026-06-08 — Stay 下の docs-only hygiene（[#133](https://github.com/studio-prospect/qwon-ai-ios/pull/133)） |
+| **Product 明示承認** | **2026-06-08** — draft を intake 回答として受理 |
+| **Intake ledger** | **Q-AS-04 … Q-AS-06** — **Answered**（This PR） |
+| **次の段階** | **G2 gate sign-off worksheet** — checklist **Closed/Ready** は別 docs-only PR |
 
 ### Q-AS-04 — タイトル / サブタイトル / 説明文
 
@@ -77,8 +78,8 @@ English worksheet: [G2 Metadata Worksheet](./qwon_app_store_g2_metadata_workshee
 | **Checklist gate G1** | **Closed/Ready** — [sign-off Approved](./qwon_app_store_g1_gate_signoff_worksheet.md#sign-off-record-product) ([#131](https://github.com/studio-prospect/qwon-ai-ios/pull/131)) |
 | **G1 intake** | **Q-AS-01 … Q-AS-03** — **Answered** ([#129](https://github.com/studio-prospect/qwon-ai-ios/pull/129)) |
 | **Active TestFlight** | **QWON `0.1.0 (3)`** — stable alpha |
-| **G2 intake** | **Q-AS-04 … Q-AS-06** — **Unanswered** |
-| **Checklist gate G2** | **Open** |
+| **G2 intake** | **Q-AS-04 … Q-AS-06** — **Answered**（This PR） |
+| **Checklist gate G2** | **Open** — gate sign-off 待ち |
 | **Public release approved?** | **No** |
 
 ### G1 入力（G2 参照用）
@@ -201,13 +202,13 @@ Product が編集・差し替え・却下すること。**承認済み App Store
 | Q-AS-04 Product decision draft 準備 | **Done** — [明示承認待ち](#product-decision-draft--awaiting-explicit-approval) |
 | Q-AS-05 Product decision draft 準備 | **Done** — 明示承認待ち |
 | Q-AS-06 Product decision draft 準備 | **Done** — 明示承認待ち |
-| Product **明示承認** | **Pending** |
-| follow-up docs-only PR で intake **Answered** | **Pending** |
-| checklist G2 Closed/Ready | **No** |
+| Product **明示承認** | **Approved** — 2026-06-08 |
+| follow-up docs-only PR で intake **Answered** | **Done** — This PR |
+| checklist G2 Closed/Ready | **No** — gate sign-off 別 PR 待ち |
 | Public release approved | **No** |
 
 ---
 
 ## Agent note
 
-Product **明示承認**後に follow-up PR で intake **Answered** へ反映。それまでは **Unanswered** を維持すること。
+G2 intake **Answered**（This PR）。intake 記録だけでは checklist gate **G2 Closed/Ready** や公開承認にならない。Stay 下の docs hygiene のみ。

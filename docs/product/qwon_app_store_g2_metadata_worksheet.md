@@ -1,7 +1,7 @@
 # QWON — App Store G2 Metadata Worksheet (External Share)
 
-**Last updated:** 2026-06-08 (G2 Product decision draft prepared — intake still **Unanswered**)
-**Status:** **Worksheet with Product decision draft / awaiting explicit approval** — intake rows **Q-AS-04 … Q-AS-06** remain **Unanswered** in the [intake ledger](./qwon_app_store_public_readiness_intake.md). **Not** App Store public release approval. **Not** Build `4` approval. **TestFlight upload / tag / version bump not approved.**
+**Last updated:** 2026-06-08 (G2 intake **Q-AS-04 … Q-AS-06 Answered** — This PR; gate sign-off **Open**)
+**Status:** **Product decision draft approved** — intake rows **Q-AS-04 … Q-AS-06** recorded **Answered** in the [intake ledger](./qwon_app_store_public_readiness_intake.md) (This PR). Checklist gate **G2** remains **Open**. **Not** App Store public release approval. **Not** Build `4` approval. **TestFlight upload / tag / version bump not approved.**
 **Purpose:** Shareable English worksheet for Product to answer **G2 — App Store metadata / screenshots / localization** before answers are recorded in the intake ledger via a separate docs-only PR.
 
 日本語版: [G2 メタデータ回答フォーム（日本語）](./qwon_app_store_g2_metadata_worksheet_ja.md)
@@ -27,13 +27,14 @@ Related: [Intake ledger — G2](./qwon_app_store_public_readiness_intake.md#g2--
 
 ## Product decision draft — **awaiting explicit approval**
 
-**Label:** **Product decision draft / awaiting explicit Product approval** — prepared from recommended worksheet drafts and G1 inputs. **Not** intake **Answered**. **Not** G2 Closed/Ready. **Not** public release approval.
+**Label:** **Product decision draft — Product approved 2026-06-08** — recorded in [intake ledger](./qwon_app_store_public_readiness_intake.md#g2-product-answer-details-2026-06-08) (This PR). **Not** G2 Closed/Ready. **Not** public release approval.
 
 | Field | Value |
 | --- | --- |
-| **Prepared** | 2026-06-08 — docs-only hygiene under Stay |
-| **Intake ledger** | **Q-AS-04 … Q-AS-06** remain **Unanswered** until Product explicit approval + follow-up PR |
-| **Next step** | Product confirms, edits, or rejects each draft → docs-only PR records **Answered** in [intake ledger](./qwon_app_store_public_readiness_intake.md) |
+| **Prepared** | 2026-06-08 — docs-only hygiene under Stay ([#133](https://github.com/studio-prospect/qwon-ai-ios/pull/133)) |
+| **Product explicit approval** | **2026-06-08** — drafts accepted as intake answers |
+| **Intake ledger** | **Q-AS-04 … Q-AS-06** — **Answered** (This PR) |
+| **Next step** | **G2 gate sign-off worksheet** — separate docs-only PR for checklist **Closed/Ready** |
 
 ### Q-AS-04 — App Store title, subtitle, primary description
 
@@ -77,8 +78,8 @@ Related: [Intake ledger — G2](./qwon_app_store_public_readiness_intake.md#g2--
 | **Checklist gate G1** | **Closed/Ready** — [sign-off Approved](./qwon_app_store_g1_gate_signoff_worksheet.md#sign-off-record-product) ([#131](https://github.com/studio-prospect/qwon-ai-ios/pull/131)) |
 | **G1 intake** | **Q-AS-01 … Q-AS-03** — **Answered** ([#129](https://github.com/studio-prospect/qwon-ai-ios/pull/129)) |
 | **Active TestFlight** | **QWON `0.1.0 (3)`** — stable alpha · ASC **`6775685841`** |
-| **G2 intake** | **Q-AS-04 … Q-AS-06** — **Unanswered** |
-| **Checklist gate G2** | **Open** |
+| **G2 intake** | **Q-AS-04 … Q-AS-06** — **Answered** (This PR) |
+| **Checklist gate G2** | **Open** — gate sign-off pending |
 | **Public release approved?** | **No** |
 | **Build `4` approved?** | **No** |
 
@@ -226,9 +227,9 @@ G2 sign-off
 | Q-AS-04 Product decision draft prepared | **Done** — [awaiting explicit approval](#product-decision-draft--awaiting-explicit-approval) |
 | Q-AS-05 Product decision draft prepared | **Done** — awaiting explicit approval |
 | Q-AS-06 Product decision draft prepared | **Done** — awaiting explicit approval |
-| Product **explicit approval** of G2 drafts | **Pending** |
-| Follow-up docs-only PR updates intake to **Answered** | **Pending** |
-| Checklist gate G2 marked Closed/Ready | **No** — separate sign-off gate |
+| Product **explicit approval** of G2 drafts | **Approved** — 2026-06-08 |
+| Follow-up docs-only PR updates intake to **Answered** | **Done** — This PR |
+| Checklist gate G2 marked Closed/Ready | **No** — separate sign-off gate pending |
 | Public release approved | **No** |
 | Build `4` / ASC metadata upload approved | **No** |
 
@@ -236,4 +237,4 @@ G2 sign-off
 
 ## Agent note
 
-Share with Product for **explicit approval**. **Do not** copy Product decision drafts into the intake ledger as **Answered** until Product confirms and a follow-up docs-only PR records them. Stay-allowed hygiene only.
+G2 intake **Answered** (This PR). **Do not** mark checklist gate **G2 Closed/Ready** or approve public release from intake recording alone. Stay-allowed hygiene only.
