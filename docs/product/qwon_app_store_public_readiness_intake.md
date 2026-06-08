@@ -1,7 +1,7 @@
 # QWON — App Store Public Readiness Answer Intake Ledger
 
-**Last updated:** 2026-06-08 (Stay selected — G4 answers prepared in worksheet, **not yet recorded**)
-**Status:** **Intake ledger** — **24 questions · 16 Unanswered · 8 Answered**. **Not** App Store public release approval. **Not** Build `4` approval. **TestFlight upload / tag / version bump not approved.**
+**Last updated:** 2026-06-08 (Stay selected — G4 intake **Q-AS-09 … Q-AS-10 Answered**; gate sign-off **Open**)
+**Status:** **Intake ledger** — **24 questions · 14 Unanswered · 10 Answered**. **Not** App Store public release approval. **Not** Build `4` approval. **TestFlight upload / tag / version bump not approved.**
 **Purpose:** Decompose [App Store public readiness checklist](./qwon_app_store_public_readiness_checklist.md) gates **G1–G10** into **answerable questions** for Product / Legal / Release Engineering. Record answers in **separate docs-only PRs** when stakeholders supply written responses.
 
 Related: [G4 export compliance worksheet (EN)](./qwon_app_store_g4_export_compliance_worksheet.md) · [G4 輸出コンプライアンス回答フォーム（日本語）](./qwon_app_store_g4_export_compliance_worksheet_ja.md) · [G3 gate sign-off worksheet](./qwon_app_store_g3_gate_signoff_worksheet.md) · [G3 privacy worksheet (EN)](./qwon_app_store_g3_privacy_worksheet.md) · [G3 プライバシー回答フォーム（日本語）](./qwon_app_store_g3_privacy_worksheet_ja.md) · [G2 gate sign-off worksheet](./qwon_app_store_g2_gate_signoff_worksheet.md) · [G2 metadata worksheet (EN)](./qwon_app_store_g2_metadata_worksheet.md) · [G2 メタデータフォーム（日本語）](./qwon_app_store_g2_metadata_worksheet_ja.md) · [G1 gate sign-off worksheet](./qwon_app_store_g1_gate_signoff_worksheet.md) · [G1 Product worksheet (EN)](./qwon_app_store_g1_product_worksheet.md) · [G1 Product 回答フォーム（日本語）](./qwon_app_store_g1_product_worksheet_ja.md) · [Public readiness checklist](./qwon_app_store_public_readiness_checklist.md) · [Next work queue — App Store readiness](./qwon_next_work_queue.md#app-store-public-release) · [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record) · [M3 gate answer intake (format reference)](./qwon_m3_gate_answer_intake.md) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
@@ -18,21 +18,21 @@ Related: [G4 export compliance worksheet (EN)](./qwon_app_store_g4_export_compli
 | **Answer recorded ≠ public release approved** | Updating a row to **Answered** does **not** approve App Store submission, Build `4`, or TestFlight upload |
 | **Gate disposition** | **G1 Closed/Ready** ([sign-off](./qwon_app_store_g1_gate_signoff_worksheet.md#sign-off-record-product) [#131](https://github.com/studio-prospect/qwon-ai-ios/pull/131)). **G2 Closed/Ready** ([sign-off](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) [#136](https://github.com/studio-prospect/qwon-ai-ios/pull/136)). **G3 Closed/Ready** ([sign-off](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) This PR). **G4–G10** remain **Open** or **Partial** until Product / Legal / RE records explicit gate sign-off — separate from intake answers |
 | **Agents on Stay** | May append **real** answers only when Product/Legal/RE explicitly supplies them; otherwise leave **Unanswered** |
-| **External worksheets** | [G1 gate sign-off](./qwon_app_store_g1_gate_signoff_worksheet.md) — **Approved** 2026-06-08 ([#131](https://github.com/studio-prospect/qwon-ai-ios/pull/131)); checklist gate **G1 Closed/Ready** · [G2 gate sign-off](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) — **Approved** 2026-06-08 ([#136](https://github.com/studio-prospect/qwon-ai-ios/pull/136)); checklist gate **G2 Closed/Ready** · [G3 gate sign-off](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) — **Approved** 2026-06-08 ([#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)); checklist gate **G3 Closed/Ready** · [G4 export compliance worksheet](./qwon_app_store_g4_export_compliance_worksheet.md#legal-re-decision-draft--awaiting-explicit-approval) — draft prepared (This PR) · [G1 Product worksheet](./qwon_app_store_g1_product_worksheet.md) |
+| **External worksheets** | [G1 gate sign-off](./qwon_app_store_g1_gate_signoff_worksheet.md) — **Approved** 2026-06-08 ([#131](https://github.com/studio-prospect/qwon-ai-ios/pull/131)); checklist gate **G1 Closed/Ready** · [G2 gate sign-off](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) — **Approved** 2026-06-08 ([#136](https://github.com/studio-prospect/qwon-ai-ios/pull/136)); checklist gate **G2 Closed/Ready** · [G3 gate sign-off](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) — **Approved** 2026-06-08 ([#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)); checklist gate **G3 Closed/Ready** · [G4 export compliance worksheet](./qwon_app_store_g4_export_compliance_worksheet.md#legal-re-decision-draft--awaiting-explicit-approval) — **approved for intake recording** (This PR) · [G1 Product worksheet](./qwon_app_store_g1_product_worksheet.md) |
 
 ### Intake summary
 
 | Metric | Value |
 | --- | --- |
 | **Total questions** | **24** |
-| **Unanswered** | **16** |
-| **Answered** | **8** |
+| **Unanswered** | **14** |
+| **Answered** | **10** |
 | **Public release approved?** | **No** |
 | **Stay in effect?** | **Yes** |
 | **G1 intake** | **Q-AS-01 … Q-AS-03 Answered** — checklist gate **G1 Closed/Ready** |
 | **G2 intake** | **Q-AS-04 … Q-AS-06 Answered** ([#134](https://github.com/studio-prospect/qwon-ai-ios/pull/134)) — checklist gate **G2 Closed/Ready** |
 | **G3 intake** | **Q-AS-07 … Q-AS-08 Answered** ([#139](https://github.com/studio-prospect/qwon-ai-ios/pull/139)) — checklist gate **G3 Closed/Ready** |
-| **G4 worksheet** | **Legal/RE decision draft prepared** — [worksheet](./qwon_app_store_g4_export_compliance_worksheet.md#legal-re-decision-draft--awaiting-explicit-approval) · **not yet recorded** in intake (Q-AS-09…10 **Unanswered**) |
+| **G4 intake** | **Q-AS-09 … Q-AS-10 Answered** (This PR) — checklist gate **G4 Partial** (gate sign-off pending) |
 
 ---
 
@@ -143,12 +143,22 @@ Related: [G4 export compliance worksheet (EN)](./qwon_app_store_g4_export_compli
 
 **External share:** [G4 export compliance worksheet (EN)](./qwon_app_store_g4_export_compliance_worksheet.md) · [G4 輸出コンプライアンス回答フォーム（日本語）](./qwon_app_store_g4_export_compliance_worksheet_ja.md) · [TestFlight prep — export compliance gate](./qwon_text_alpha_testflight_prep.md#export-compliance-operator-gate)
 
-**G4 answers prepared in worksheet, not yet recorded:** [Legal/RE decision draft — awaiting explicit approval](./qwon_app_store_g4_export_compliance_worksheet.md#legal-re-decision-draft--awaiting-explicit-approval) covers **Q-AS-09 … Q-AS-10**. Intake rows below remain **Unanswered** until Legal / RE **explicit approval** and a follow-up docs-only PR. **Not** export compliance final submission. **Not** G4 Closed/Ready.
+**G4 intake (2026-06-08):** **Q-AS-09 … Q-AS-10 Answered** (This PR). Legal / RE approval recorded from [G4 worksheet — approved for intake recording](./qwon_app_store_g4_export_compliance_worksheet.md#legal-re-decision-draft--awaiting-explicit-approval) ([#143](https://github.com/studio-prospect/qwon-ai-ios/pull/143) worksheet prep). Checklist gate **G4** remains **Partial** — gate sign-off pending. **Not** export compliance final submission, public release, Build `4`, or ASC submission approval.
 
 | Question ID | Gate | Owner | Question | Answer status | Answer source | Blocks | Follow-up PR |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Q-AS-09 | G4 | Legal | Does **public release** require updated **export compliance / encryption declaration** vs the TestFlight build `2` attestation documented in [TestFlight prep](./qwon_text_alpha_testflight_prep.md#export-compliance-operator-gate)? | Unanswered | — | Q-AS-10, G4 sign-off | — |
-| Q-AS-10 | G4 | Release Engineering | Who owns **ASC export compliance sign-off** for public App Store submission, and what re-verification steps are required before submit? | Unanswered | — | G4 sign-off | — |
+| Q-AS-09 | G4 | Legal | Does **public release** require updated **export compliance / encryption declaration** vs the TestFlight build `2` attestation documented in [TestFlight prep](./qwon_text_alpha_testflight_prep.md#export-compliance-operator-gate)? | Answered | [G4 worksheet — Legal/RE decision draft § Q-AS-09](./qwon_app_store_g4_export_compliance_worksheet.md#q-as-09--export-compliance-vs-testflight-build-2-attestation) | — | This PR |
+| Q-AS-10 | G4 | Release Engineering | Who owns **ASC export compliance sign-off** for public App Store submission, and what re-verification steps are required before submit? | Answered | [G4 worksheet — Legal/RE decision draft § Q-AS-10](./qwon_app_store_g4_export_compliance_worksheet.md#q-as-10--asc-export-compliance-sign-off-owner-and-re-verification) | G4 sign-off | This PR |
+
+### G4 Legal/RE answer details (2026-06-08)
+
+**Source:** Legal / RE approval of [G4 worksheet — approved for intake recording](./qwon_app_store_g4_export_compliance_worksheet.md#legal-re-decision-draft--awaiting-explicit-approval) ([#143](https://github.com/studio-prospect/qwon-ai-ios/pull/143) worksheet prep; intake recorded This PR).
+**Scope (This PR):** Recorded **Answered** intake rows only; **G4 gate sign-off** and checklist **Closed/Ready** remain **pending** — separate docs-only PR. **Not** export compliance final submission.
+
+| Question ID | Answer |
+| --- | --- |
+| **Q-AS-09** | **Yes — updated review required:** Public App Store submit requires **updated export compliance / encryption declaration review** vs relying on TestFlight build **`2`** attestation alone. Public release ships a **public submission binary** — treat as a **new compliance event** even if encryption use matches TestFlight **`0.1.0 (3)`**. **Planning assumption:** no material encryption change vs TestFlight **`0.1.0 (3)`** for build `3` class binary — **RE/Legal verify** on public-release candidate. **Build `3` doc gap:** export compliance **not re-verified in docs** — close gap before submit; do **not** infer compliance from installability alone. **Public-release binary** may differ from TestFlight **`0.1.0 (3)`** — compliance answers must reference **submit binary**. Legal must confirm standard exemption paths (e.g. exempt encryption / HTTPS-only) and whether build `2` TestFlight answers may be reused or must be re-attested. |
+| **Q-AS-10** | **Sign-off owner:** **Release Engineering** (primary) completes ASC export compliance questionnaire for the **public submission build**; **Legal** reviews and approves answers before App Store submit. **Re-verification (required even if matching build `2` attestation):** (1) Identify public-release candidate binary · (2) Verify encryption use — app binary, linked libraries (e.g. llama.cpp), HTTPS/TLS, non-exempt crypto · (3) Compare vs TestFlight build **`2`** attestation — document deltas or reuse rationale · (4) Complete ASC export compliance for **public submission build** — do **not** assume TestFlight carry-forward · (5) Record attestation audit trail (ops record, not git) · (6) **Legal sign-off** before submit. **Pre-submit checklist:** Adapt [TestFlight prep operator checklist](./qwon_text_alpha_testflight_prep.md#export-compliance-operator-gate) for App Store public submit — separate from internal TestFlight upload ops. |
 
 ---
 
@@ -215,7 +225,7 @@ Related: [G4 export compliance worksheet (EN)](./qwon_app_store_g4_export_compli
 | **G1** | Closed/Ready | Q-AS-01 … Q-AS-03 | **Yes** — intake **Answered**; gate sign-off **Approved** · [worksheet](./qwon_app_store_g1_gate_signoff_worksheet.md#sign-off-record-product) |
 | **G2** | Closed/Ready | Q-AS-04 … Q-AS-06 | **Yes** — intake **Answered**; gate sign-off **Approved** · [worksheet](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) |
 | **G3** | Closed/Ready | Q-AS-07 … Q-AS-08 | **Yes** — intake **Answered**; gate sign-off **Approved** · [worksheet](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) |
-| **G4** | Partial | Q-AS-09 … Q-AS-10 | **No** — [worksheet draft prepared](./qwon_app_store_g4_export_compliance_worksheet.md#legal-re-decision-draft--awaiting-explicit-approval), **not recorded** in intake |
+| **G4** | Partial | Q-AS-09 … Q-AS-10 | **Yes** — intake **Answered** (This PR); **gate sign-off still Open** · [worksheet](./qwon_app_store_g4_export_compliance_worksheet.md#legal-re-decision-draft--awaiting-explicit-approval) |
 | **G5** | Open | Q-AS-11 … Q-AS-12 | **No** |
 | **G6** | Open | Q-AS-13 … Q-AS-15 | **No** |
 | **G7** | Partial | Q-AS-16 … Q-AS-18 | **No** |
@@ -229,4 +239,4 @@ Related: [G4 export compliance worksheet (EN)](./qwon_app_store_g4_export_compli
 
 ## Agent note
 
-This ledger is **Stay-allowed docs hygiene**. Maintain question text and links only unless Product/Legal/RE supplies answers. **G4 worksheet draft prepared** (This PR) does **not** mark intake **Answered** or **G4 Closed/Ready**. Do **not** mark **G5–G10 Closed/Ready** or approve public release from worksheet updates alone.
+This ledger is **Stay-allowed docs hygiene**. Maintain question text and links only unless Product/Legal/RE supplies answers. **G4 intake Answered** (This PR) does **not** mark checklist gate **G4 Closed/Ready** or submit export compliance. Do **not** mark **G5–G10 Closed/Ready** or approve public release from intake updates alone.

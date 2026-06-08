@@ -1,6 +1,6 @@
 # QWON — Next Work Queue
 
-**Last updated:** 2026-06-08 (Stay selected — G4 Legal/RE decision draft prepared)
+**Last updated:** 2026-06-08 (Stay selected — G4 intake **Answered**; gate sign-off **Open**)
 **Status:** **Queue / guardrail only** — **Stay selected**; docs/readme/index/evidence hygiene only; no implementation authorization.
 **Purpose:** After Phase 4 rename docs are complete, classify what agents **may** do next vs what requires **product gates**. Prevents drift into ungated **build `4`**, project-container rename, or blind PREXUS cleanup.
 
@@ -303,11 +303,11 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 | Field | Detail |
 | --- | --- |
-| **Status** | **Checklist + intake ledger** — G1 + G2 + G3 **Closed/Ready**; G4 [Legal/RE decision draft prepared](./qwon_app_store_g4_export_compliance_worksheet.md#legal-re-decision-draft--awaiting-explicit-approval); **16 Unanswered**; **public release not approved** |
+| **Status** | **Checklist + intake ledger** — G1 + G2 + G3 **Closed/Ready**; G4 intake **Q-AS-09 … Q-AS-10 Answered** (This PR); gate **Partial**; **14 Unanswered**; **public release not approved** |
 | **Trigger** | Product plans **public App Store horizon** (separate from Build `4`) |
-| **Required evidence** | Legal / RE **explicit approval** of G4 worksheet drafts → follow-up docs-only PR sets intake **Q-AS-09 … Q-AS-10** to **Answered** — **no** submission or code |
-| **Next stage** | **Legal / RE explicit approval → intake Answered PR** · [G4 decision draft](./qwon_app_store_g4_export_compliance_worksheet.md#legal-re-decision-draft--awaiting-explicit-approval) / [日本語フォーム](./qwon_app_store_g4_export_compliance_worksheet_ja.md#legal-re-decision-draft--awaiting-explicit-approval) |
-| **First doc to read** | [G4 export compliance worksheet — decision draft](./qwon_app_store_g4_export_compliance_worksheet.md#legal-re-decision-draft--awaiting-explicit-approval) · [Intake ledger — G4 note](./qwon_app_store_public_readiness_intake.md#g4--export-compliance--encryption-declaration) |
+| **Required evidence** | **G4 gate sign-off worksheet** preparation — **no** submission or code |
+| **Next stage** | **G4 gate sign-off worksheet preparation** → on Legal / RE approval, docs-only PR sets checklist gate **G4 Closed/Ready** |
+| **First doc to read** | [Intake ledger — G4 answer details](./qwon_app_store_public_readiness_intake.md#g4-legalre-answer-details-2026-06-08) · [G4 export compliance worksheet](./qwon_app_store_g4_export_compliance_worksheet.md) |
 | **Do not start if** | Conflated with Build `4` / TestFlight upload; treating checklist as implementation authorization; **Stay** lifted without explicit lane record |
 
 ### App Store public release (historical stub)
@@ -342,4 +342,4 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 ## Agent note
 
-Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **Stay selected** — docs/readme/index/evidence hygiene only; M3 Option A / lane **closed**. App Store **G1 + G2 + G3 Closed/Ready**; [G4 Legal/RE decision draft prepared](./qwon_app_store_g4_export_compliance_worksheet.md#legal-re-decision-draft--awaiting-explicit-approval); intake **16 Unanswered**; **public release not approved**. Build **`4`** / TestFlight upload / tag / version bump require **explicit product gate**. To start implementation, Product must **lift Stay** and select one lane + Codex scoped plan.
+Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **Stay selected** — docs/readme/index/evidence hygiene only; M3 Option A / lane **closed**. App Store **G1 + G2 + G3 Closed/Ready**; **G4 intake Answered** (This PR) — gate sign-off **Open**; intake **14 Unanswered**; **public release not approved**. Build **`4`** / TestFlight upload / tag / version bump require **explicit product gate**. To start implementation, Product must **lift Stay** and select one lane + Codex scoped plan.
