@@ -1,10 +1,10 @@
 # QWON — App Store Public Readiness Answer Intake Ledger
 
-**Last updated:** 2026-06-08 (Stay selected — G4 gate **Closed/Ready** — This PR)
+**Last updated:** 2026-06-08 (Stay selected — G5 model distribution worksheet added; Q-AS-11…12 **Unanswered**)
 **Status:** **Intake ledger** — **24 questions · 14 Unanswered · 10 Answered**. **Not** App Store public release approval. **Not** Build `4` approval. **TestFlight upload / tag / version bump not approved.**
 **Purpose:** Decompose [App Store public readiness checklist](./qwon_app_store_public_readiness_checklist.md) gates **G1–G10** into **answerable questions** for Product / Legal / Release Engineering. Record answers in **separate docs-only PRs** when stakeholders supply written responses.
 
-Related: [G4 gate sign-off worksheet](./qwon_app_store_g4_gate_signoff_worksheet.md) · [G4 export compliance worksheet (EN)](./qwon_app_store_g4_export_compliance_worksheet.md) · [G4 輸出コンプライアンス回答フォーム（日本語）](./qwon_app_store_g4_export_compliance_worksheet_ja.md) · [G3 gate sign-off worksheet](./qwon_app_store_g3_gate_signoff_worksheet.md) · [G3 privacy worksheet (EN)](./qwon_app_store_g3_privacy_worksheet.md) · [G3 プライバシー回答フォーム（日本語）](./qwon_app_store_g3_privacy_worksheet_ja.md) · [G2 gate sign-off worksheet](./qwon_app_store_g2_gate_signoff_worksheet.md) · [G2 metadata worksheet (EN)](./qwon_app_store_g2_metadata_worksheet.md) · [G2 メタデータフォーム（日本語）](./qwon_app_store_g2_metadata_worksheet_ja.md) · [G1 gate sign-off worksheet](./qwon_app_store_g1_gate_signoff_worksheet.md) · [G1 Product worksheet (EN)](./qwon_app_store_g1_product_worksheet.md) · [G1 Product 回答フォーム（日本語）](./qwon_app_store_g1_product_worksheet_ja.md) · [Public readiness checklist](./qwon_app_store_public_readiness_checklist.md) · [Next work queue — App Store readiness](./qwon_next_work_queue.md#app-store-public-release) · [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record) · [M3 gate answer intake (format reference)](./qwon_m3_gate_answer_intake.md) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
+Related: [G5 model distribution worksheet (EN)](./qwon_app_store_g5_model_distribution_worksheet.md) · [G5 モデル配布ポリシー回答フォーム（日本語）](./qwon_app_store_g5_model_distribution_worksheet_ja.md) · [G4 gate sign-off worksheet](./qwon_app_store_g4_gate_signoff_worksheet.md) · [G4 export compliance worksheet (EN)](./qwon_app_store_g4_export_compliance_worksheet.md) · [G4 輸出コンプライアンス回答フォーム（日本語）](./qwon_app_store_g4_export_compliance_worksheet_ja.md) · [G3 gate sign-off worksheet](./qwon_app_store_g3_gate_signoff_worksheet.md) · [G3 privacy worksheet (EN)](./qwon_app_store_g3_privacy_worksheet.md) · [G3 プライバシー回答フォーム（日本語）](./qwon_app_store_g3_privacy_worksheet_ja.md) · [G2 gate sign-off worksheet](./qwon_app_store_g2_gate_signoff_worksheet.md) · [G2 metadata worksheet (EN)](./qwon_app_store_g2_metadata_worksheet.md) · [G2 メタデータフォーム（日本語）](./qwon_app_store_g2_metadata_worksheet_ja.md) · [G1 gate sign-off worksheet](./qwon_app_store_g1_gate_signoff_worksheet.md) · [G1 Product worksheet (EN)](./qwon_app_store_g1_product_worksheet.md) · [G1 Product 回答フォーム（日本語）](./qwon_app_store_g1_product_worksheet_ja.md) · [Public readiness checklist](./qwon_app_store_public_readiness_checklist.md) · [Next work queue — App Store readiness](./qwon_next_work_queue.md#app-store-public-release) · [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record) · [M3 gate answer intake (format reference)](./qwon_m3_gate_answer_intake.md) · [Agent collaboration workflow](./agent_collaboration_workflow.md)
 
 ---
 
@@ -18,7 +18,7 @@ Related: [G4 gate sign-off worksheet](./qwon_app_store_g4_gate_signoff_worksheet
 | **Answer recorded ≠ public release approved** | Updating a row to **Answered** does **not** approve App Store submission, Build `4`, or TestFlight upload |
 | **Gate disposition** | **G1 Closed/Ready** ([sign-off](./qwon_app_store_g1_gate_signoff_worksheet.md#sign-off-record-product) [#131](https://github.com/studio-prospect/qwon-ai-ios/pull/131)). **G2 Closed/Ready** ([sign-off](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) [#136](https://github.com/studio-prospect/qwon-ai-ios/pull/136)). **G3 Closed/Ready** ([sign-off](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) [#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)). **G4 Closed/Ready** ([sign-off](./qwon_app_store_g4_gate_signoff_worksheet.md#sign-off-record-legal-re) This PR). **G5–G10** remain **Open** or **Partial** until Product / Legal / RE records explicit gate sign-off — separate from intake answers |
 | **Agents on Stay** | May append **real** answers only when Product/Legal/RE explicitly supplies them; otherwise leave **Unanswered** |
-| **External worksheets** | [G1 gate sign-off](./qwon_app_store_g1_gate_signoff_worksheet.md) — **Approved** 2026-06-08 ([#131](https://github.com/studio-prospect/qwon-ai-ios/pull/131)); checklist gate **G1 Closed/Ready** · [G2 gate sign-off](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) — **Approved** 2026-06-08 ([#136](https://github.com/studio-prospect/qwon-ai-ios/pull/136)); checklist gate **G2 Closed/Ready** · [G3 gate sign-off](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) — **Approved** 2026-06-08 ([#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)); checklist gate **G3 Closed/Ready** · [G4 gate sign-off](./qwon_app_store_g4_gate_signoff_worksheet.md#sign-off-record-legal-re) — **Approved** 2026-06-08 (This PR); checklist gate **G4 Closed/Ready** · [G4 export compliance worksheet](./qwon_app_store_g4_export_compliance_worksheet.md#legal-re-decision-draft--awaiting-explicit-approval) — **approved for intake recording** ([#144](https://github.com/studio-prospect/qwon-ai-ios/pull/144)) · [G1 Product worksheet](./qwon_app_store_g1_product_worksheet.md) |
+| **External worksheets** | [G1 gate sign-off](./qwon_app_store_g1_gate_signoff_worksheet.md) — **Approved** 2026-06-08 ([#131](https://github.com/studio-prospect/qwon-ai-ios/pull/131)); checklist gate **G1 Closed/Ready** · [G2 gate sign-off](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) — **Approved** 2026-06-08 ([#136](https://github.com/studio-prospect/qwon-ai-ios/pull/136)); checklist gate **G2 Closed/Ready** · [G3 gate sign-off](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) — **Approved** 2026-06-08 ([#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)); checklist gate **G3 Closed/Ready** · [G4 gate sign-off](./qwon_app_store_g4_gate_signoff_worksheet.md#sign-off-record-legal-re) — **Approved** 2026-06-08 ([#146](https://github.com/studio-prospect/qwon-ai-ios/pull/146)); checklist gate **G4 Closed/Ready** · [G5 model distribution worksheet](./qwon_app_store_g5_model_distribution_worksheet.md) — **Pending** (This PR) · [G4 export compliance worksheet](./qwon_app_store_g4_export_compliance_worksheet.md#legal-re-decision-draft--awaiting-explicit-approval) — **approved for intake recording** ([#144](https://github.com/studio-prospect/qwon-ai-ios/pull/144)) · [G1 Product worksheet](./qwon_app_store_g1_product_worksheet.md) |
 
 ### Intake summary
 
@@ -32,7 +32,8 @@ Related: [G4 gate sign-off worksheet](./qwon_app_store_g4_gate_signoff_worksheet
 | **G1 intake** | **Q-AS-01 … Q-AS-03 Answered** — checklist gate **G1 Closed/Ready** |
 | **G2 intake** | **Q-AS-04 … Q-AS-06 Answered** ([#134](https://github.com/studio-prospect/qwon-ai-ios/pull/134)) — checklist gate **G2 Closed/Ready** |
 | **G3 intake** | **Q-AS-07 … Q-AS-08 Answered** ([#139](https://github.com/studio-prospect/qwon-ai-ios/pull/139)) — checklist gate **G3 Closed/Ready** |
-| **G4 intake** | **Q-AS-09 … Q-AS-10 Answered** ([#144](https://github.com/studio-prospect/qwon-ai-ios/pull/144)) — checklist gate **G4 Closed/Ready** |
+| **G4 intake** | **Q-AS-09 … Q-AS-10 Answered** ([#144](https://github.com/studio-prospect/qwon-ai-ios/pull/144)) — checklist gate **G4 Closed/Ready** ([#146](https://github.com/studio-prospect/qwon-ai-ios/pull/146)) |
+| **G5 worksheet** | **Q-AS-11 … Q-AS-12 Unanswered** — [worksheet](./qwon_app_store_g5_model_distribution_worksheet.md) added (This PR); checklist gate **G5 Open** |
 
 ---
 
@@ -169,6 +170,10 @@ Related: [G4 gate sign-off worksheet](./qwon_app_store_g4_gate_signoff_worksheet
 
 ## G5 — Model distribution policy
 
+**External share:** [G5 model distribution worksheet (EN)](./qwon_app_store_g5_model_distribution_worksheet.md) · [G5 モデル配布ポリシー回答フォーム（日本語）](./qwon_app_store_g5_model_distribution_worksheet_ja.md) · [M3 distribution compliance memo](./qwon_m3_model_distribution_compliance_memo.md) · [M3 hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md) · [M2 guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement)
+
+**G5 worksheet (This PR):** Shareable form for Legal / Product — **Q-AS-11 … Q-AS-12** remain **Unanswered** until explicit approval and follow-up docs-only PR. **Not** final model distribution policy approval. **Not** in-app download / M3 reopen. **Not** G5 Closed/Ready.
+
 | Question ID | Gate | Owner | Question | Answer status | Answer source | Blocks | Follow-up PR |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Q-AS-11 | G5 | Legal, Product | What is the approved **public model distribution policy** — Mac+USB **Place GGUF via Mac** only, in-app download, bundled weights, or a phased combination? | Unanswered | — | Q-AS-08, Q-AS-12, Q-AS-19, G5 sign-off | — |
@@ -231,7 +236,7 @@ Related: [G4 gate sign-off worksheet](./qwon_app_store_g4_gate_signoff_worksheet
 | **G2** | Closed/Ready | Q-AS-04 … Q-AS-06 | **Yes** — intake **Answered**; gate sign-off **Approved** · [worksheet](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) |
 | **G3** | Closed/Ready | Q-AS-07 … Q-AS-08 | **Yes** — intake **Answered**; gate sign-off **Approved** · [worksheet](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) |
 | **G4** | Closed/Ready | Q-AS-09 … Q-AS-10 | **Yes** — intake **Answered**; gate sign-off **Approved** · [worksheet](./qwon_app_store_g4_gate_signoff_worksheet.md#sign-off-record-legal-re) |
-| **G5** | Open | Q-AS-11 … Q-AS-12 | **No** |
+| **G5** | Open | Q-AS-11 … Q-AS-12 | **No** — [worksheet draft prepared](./qwon_app_store_g5_model_distribution_worksheet.md), **not recorded** in intake |
 | **G6** | Open | Q-AS-13 … Q-AS-15 | **No** |
 | **G7** | Partial | Q-AS-16 … Q-AS-18 | **No** |
 | **G8** | Open | Q-AS-19 … Q-AS-20 | **No** |
@@ -244,4 +249,4 @@ Related: [G4 gate sign-off worksheet](./qwon_app_store_g4_gate_signoff_worksheet
 
 ## Agent note
 
-This ledger is **Stay-allowed docs hygiene**. Maintain question text and links only unless Product/Legal/RE supplies answers. **G4 gate sign-off Approved** (This PR) does **not** submit export compliance or approve public release. Do **not** mark **G5–G10 Closed/Ready** or approve Build `4` from gate closure alone.
+This ledger is **Stay-allowed docs hygiene**. Maintain question text and links only unless Product/Legal/RE supplies answers. **G5 worksheet added** (This PR) does **not** mark intake **Answered** or **G5 Closed/Ready**. Do **not** mark **G6–G10 Closed/Ready**, reopen M3, or approve public release from worksheet creation alone.
