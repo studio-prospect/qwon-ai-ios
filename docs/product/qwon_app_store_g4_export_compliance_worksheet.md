@@ -42,7 +42,7 @@ Related: [Intake ledger — G4](./qwon_app_store_public_readiness_intake.md#g4--
 | Field | Legal/RE decision draft |
 | --- | --- |
 | **Question ID** | Q-AS-09 |
-| **Approved answer (draft)** | **Yes — updated export compliance / encryption declaration review is required** before public App Store submit vs relying on TestFlight build **`2`** attestation alone. Public release ships a **public submission binary** — treat as a **new compliance event** even if encryption use matches TestFlight **`0.1.0 (3)`**. Legal must confirm standard exemption paths (e.g. exempt encryption / HTTPS-only) for the **public-release candidate** and whether build `2` answers may be reused or must be re-attested. |
+| **Draft answer** | **Yes — updated export compliance / encryption declaration review is required** before public App Store submit vs relying on TestFlight build **`2`** attestation alone. Public release ships a **public submission binary** — treat as a **new compliance event** even if encryption use matches TestFlight **`0.1.0 (3)`**. Legal must confirm standard exemption paths (e.g. exempt encryption / HTTPS-only) for the **public-release candidate** and whether build `2` answers may be reused or must be re-attested. |
 | **Encryption posture changed? (draft)** | **Planning assumption:** no material encryption change vs TestFlight **`0.1.0 (3)`** for build `3` class binary — **RE/Legal verify** on public-release candidate; build **`3`** export compliance **not re-verified in docs** must be closed before submit. |
 | **Build `3` doc gap (draft)** | Close documentation gap — RE/Legal verify encryption use on candidate binary; do **not** infer compliance from Wang installability alone. |
 | **Public-release binary vs TestFlight (draft)** | Public submission binary may differ from TestFlight **`0.1.0 (3)`** — compliance answers must reference **submit binary**, not TestFlight history alone. |
@@ -55,7 +55,7 @@ Related: [Intake ledger — G4](./qwon_app_store_public_readiness_intake.md#g4--
 | Field | Legal/RE decision draft |
 | --- | --- |
 | **Question ID** | Q-AS-10 |
-| **Approved answer (draft)** | **Release Engineering** owns ASC export compliance questionnaire completion for the **public submission build**; **Legal** reviews and approves answers before App Store submit. Re-verification required even if answers match TestFlight build **`2`** attestation. |
+| **Draft answer** | **Release Engineering** owns ASC export compliance questionnaire completion for the **public submission build**; **Legal** reviews and approves answers before App Store submit. Re-verification required even if answers match TestFlight build **`2`** attestation. |
 | **Sign-off owner (draft)** | **Release Engineering** (primary) · **Legal** (review/approve ASC answers) |
 | **Re-verification steps (draft)** | (1) Identify public-release candidate binary · (2) Verify encryption use (app, llama.cpp, HTTPS/TLS, non-exempt crypto) · (3) Compare vs TestFlight build **`2`** attestation · (4) Complete ASC export compliance for **public submission build** — do **not** assume TestFlight carry-forward · (5) Record attestation audit trail · (6) Legal sign-off before submit |
 | **Pre-submit checklist (draft)** | Adapt [TestFlight prep operator checklist](./qwon_text_alpha_testflight_prep.md#export-compliance-operator-gate) for **App Store public submit** — separate from internal TestFlight upload ops |

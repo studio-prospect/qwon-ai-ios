@@ -42,7 +42,7 @@ English worksheet: [G4 Export Compliance Worksheet](./qwon_app_store_g4_export_c
 | 項目 | Legal/RE decision draft |
 | --- | --- |
 | **Question ID** | Q-AS-09 |
-| **承認回答（draft）** | **Yes — public App Store submit 前に updated export compliance / encryption declaration レビューが必要** — TestFlight build **`2`** attestation だけに依存不可。public release は **public submission binary** を出荷 — 暗号化 use が TestFlight **`0.1.0 (3)`** と同一でも **新規 compliance イベント** として扱う。Legal が standard exemption（exempt encryption / HTTPS-only 等）と build `2` 回答の **再利用 vs 再 attestation** を確認。 |
+| **回答案** | **Yes — public App Store submit 前に updated export compliance / encryption declaration レビューが必要** — TestFlight build **`2`** attestation だけに依存不可。public release は **public submission binary** を出荷 — 暗号化 use が TestFlight **`0.1.0 (3)`** と同一でも **新規 compliance イベント** として扱う。Legal が standard exemption（exempt encryption / HTTPS-only 等）と build `2` 回答の **再利用 vs 再 attestation** を確認。 |
 | **暗号化 posture 変更（draft）** | **計画前提:** TestFlight **`0.1.0 (3)`** クラス binary で material change なし — **RE/Legal が public-release candidate で検証**；build **`3`** export compliance **docs 未再検証** は submit 前に解消。 |
 | **build `3` doc gap（draft）** | doc gap を解消 — 候補 binary の encryption use を RE/Legal が検証；installability から compliance を推論しない。 |
 | **public-release binary vs TestFlight（draft）** | submit binary は TestFlight **`0.1.0 (3)`** と異なる場合あり — compliance 回答は **submit binary** を参照。 |
@@ -55,7 +55,7 @@ English worksheet: [G4 Export Compliance Worksheet](./qwon_app_store_g4_export_c
 | 項目 | Legal/RE decision draft |
 | --- | --- |
 | **Question ID** | Q-AS-10 |
-| **承認回答（draft）** | **Release Engineering** が **public submission build** の ASC export compliance questionnaire を完了；**Legal** が App Store submit 前に回答を review/approve。TestFlight build **`2`** attestation と一致しても re-verification 必須。 |
+| **回答案** | **Release Engineering** が **public submission build** の ASC export compliance questionnaire を完了；**Legal** が App Store submit 前に回答を review/approve。TestFlight build **`2`** attestation と一致しても re-verification 必須。 |
 | **Sign-off owner（draft）** | **Release Engineering**（primary）· **Legal**（ASC 回答 review/approve） |
 | **Re-verification steps（draft）** | (1) public-release candidate binary 特定 · (2) encryption use 検証（app、llama.cpp、HTTPS/TLS、non-exempt crypto）· (3) TestFlight build **`2`** attestation と比較 · (4) **public submission build** 向け ASC export compliance 完了 — TestFlight 自動引き継ぎ想定しない · (5) attestation audit trail 記録 · (6) submit 前 Legal sign-off |
 | **Pre-submit checklist（draft）** | [TestFlight prep operator checklist](./qwon_text_alpha_testflight_prep.md#export-compliance-operator-gate) を **App Store public submit** 向けに適応 — internal TestFlight upload ops とは別 |
