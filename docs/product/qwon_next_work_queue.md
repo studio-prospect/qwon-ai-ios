@@ -1,6 +1,6 @@
 # QWON — Next Work Queue
 
-**Last updated:** 2026-06-08 (Stay selected — G3 privacy worksheet added)
+**Last updated:** 2026-06-08 (Stay selected — G3 Legal/Product decision draft prepared)
 **Status:** **Queue / guardrail only** — **Stay selected**; docs/readme/index/evidence hygiene only; no implementation authorization.
 **Purpose:** After Phase 4 rename docs are complete, classify what agents **may** do next vs what requires **product gates**. Prevents drift into ungated **build `4`**, project-container rename, or blind PREXUS cleanup.
 
@@ -303,11 +303,11 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 | Field | Detail |
 | --- | --- |
-| **Status** | **Checklist + intake ledger** — G1 + G2 **Closed/Ready**; [G3 privacy worksheet](./qwon_app_store_g3_privacy_worksheet.md) added; **18 Unanswered**; **public release not approved** |
+| **Status** | **Checklist + intake ledger** — G1 + G2 **Closed/Ready**; G3 [Legal/Product decision draft prepared](./qwon_app_store_g3_privacy_worksheet.md#legal-product-decision-draft--awaiting-explicit-approval); **18 Unanswered**; **public release not approved** |
 | **Trigger** | Product plans **public App Store horizon** (separate from Build `4`) |
-| **Required evidence** | Legal / Product review of **G3 privacy worksheet** (Q-AS-07 … Q-AS-08) — **no** submission or code |
-| **Next stage** | **G3 worksheet review / answer preparation** · [G3 privacy worksheet](./qwon_app_store_g3_privacy_worksheet.md) / [日本語フォーム](./qwon_app_store_g3_privacy_worksheet_ja.md) |
-| **First doc to read** | [G3 privacy worksheet](./qwon_app_store_g3_privacy_worksheet.md) · [Intake ledger — G3](./qwon_app_store_public_readiness_intake.md#g3--privacy-nutrition-labels) |
+| **Required evidence** | Legal / Product **explicit approval** of G3 worksheet drafts → follow-up docs-only PR sets intake **Q-AS-07 … Q-AS-08** to **Answered** — **no** submission or code |
+| **Next stage** | Legal / Product reviews [G3 Legal/Product decision draft](./qwon_app_store_g3_privacy_worksheet.md#legal-product-decision-draft--awaiting-explicit-approval) / [日本語フォーム](./qwon_app_store_g3_privacy_worksheet_ja.md#legal-product-decision-draft--awaiting-explicit-approval) → on explicit approval, docs-only PR records **Answered** in [intake ledger](./qwon_app_store_public_readiness_intake.md) |
+| **First doc to read** | [G3 privacy worksheet — decision draft](./qwon_app_store_g3_privacy_worksheet.md#legal-product-decision-draft--awaiting-explicit-approval) · [Intake ledger — G3 note](./qwon_app_store_public_readiness_intake.md#g3--privacy-nutrition-labels) |
 | **Do not start if** | Conflated with Build `4` / TestFlight upload; treating checklist as implementation authorization; **Stay** lifted without explicit lane record |
 
 ### App Store public release (historical stub)
@@ -342,4 +342,4 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 ## Agent note
 
-Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **Stay selected** — docs/readme/index/evidence hygiene only; M3 Option A / lane **closed**. App Store **G1 + G2 Closed/Ready**; [G3 privacy worksheet](./qwon_app_store_g3_privacy_worksheet.md) added — intake **18 Unanswered**; **public release not approved**. Build **`4`** / TestFlight upload / tag / version bump require **explicit product gate**. To start implementation, Product must **lift Stay** and select one lane + Codex scoped plan.
+Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **Stay selected** — docs/readme/index/evidence hygiene only; M3 Option A / lane **closed**. App Store **G1 + G2 Closed/Ready**; [G3 Legal/Product decision draft](./qwon_app_store_g3_privacy_worksheet.md#legal-product-decision-draft--awaiting-explicit-approval) prepared — intake **18 Unanswered** until explicit approval; **public release not approved**. Build **`4`** / TestFlight upload / tag / version bump require **explicit product gate**. To start implementation, Product must **lift Stay** and select one lane + Codex scoped plan.
