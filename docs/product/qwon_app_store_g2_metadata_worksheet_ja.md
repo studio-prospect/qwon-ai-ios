@@ -19,8 +19,6 @@ English worksheet: [G2 Metadata Worksheet](./qwon_app_store_g2_metadata_workshee
 | **G2 worksheet ≠ メタデータ upload** | ASC への metadata / screenshot upload なし |
 | **Stay selected** | Stay 解除・実装承認にはならない |
 | **推奨案は draft** | **draft / not approved** — intake **Answered** にしない |
-
-| **推奨案は draft** | **draft / not approved** — intake **Answered** にしない |
 | **記録** | Product **明示承認** 後に **別 docs-only PR** で intake を **Answered** に更新 |
 
 ---
