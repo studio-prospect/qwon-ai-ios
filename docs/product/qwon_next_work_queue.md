@@ -1,6 +1,6 @@
 # QWON — Next Work Queue
 
-**Last updated:** 2026-06-08 (Stay selected — G3 intake **Answered**; gate sign-off **Open**)
+**Last updated:** 2026-06-08 (Stay selected — G3 gate sign-off worksheet added)
 **Status:** **Queue / guardrail only** — **Stay selected**; docs/readme/index/evidence hygiene only; no implementation authorization.
 **Purpose:** After Phase 4 rename docs are complete, classify what agents **may** do next vs what requires **product gates**. Prevents drift into ungated **build `4`**, project-container rename, or blind PREXUS cleanup.
 
@@ -303,11 +303,11 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 | Field | Detail |
 | --- | --- |
-| **Status** | **Checklist + intake ledger** — G1 + G2 **Closed/Ready**; G3 intake **Q-AS-07 … Q-AS-08 Answered** (This PR); gate **Open**; **16 Unanswered**; **public release not approved** |
+| **Status** | **Checklist + intake ledger** — G1 + G2 **Closed/Ready**; G3 intake **Q-AS-07 … Q-AS-08 Answered** ([#139](https://github.com/studio-prospect/qwon-ai-ios/pull/139)); gate **Open**; sign-off worksheet **Pending**; **16 Unanswered**; **public release not approved** |
 | **Trigger** | Product plans **public App Store horizon** (separate from Build `4`) |
-| **Required evidence** | **G3 gate sign-off worksheet** preparation — **no** submission or code |
-| **Next stage** | **G3 gate sign-off worksheet preparation** → on Legal / Product approval, docs-only PR sets checklist gate **G3 Closed/Ready** |
-| **First doc to read** | [Intake ledger — G3 answer details](./qwon_app_store_public_readiness_intake.md#g3-legalproduct-answer-details-2026-06-08) · [G3 privacy worksheet](./qwon_app_store_g3_privacy_worksheet.md) |
+| **Required evidence** | Legal / Product **explicit G3 gate sign-off** on [worksheet](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) — **no** submission or code |
+| **Next stage** | **G3 sign-off decision** → on Legal / Product **Approved**, docs-only PR sets checklist gate **G3 Closed/Ready** |
+| **First doc to read** | [G3 gate sign-off worksheet](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) · [Intake ledger — G3 answer details](./qwon_app_store_public_readiness_intake.md#g3-legalproduct-answer-details-2026-06-08) |
 | **Do not start if** | Conflated with Build `4` / TestFlight upload; treating checklist as implementation authorization; **Stay** lifted without explicit lane record |
 
 ### App Store public release (historical stub)
@@ -342,4 +342,4 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 ## Agent note
 
-Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **Stay selected** — docs/readme/index/evidence hygiene only; M3 Option A / lane **closed**. App Store **G1 + G2 Closed/Ready**; **G3 intake Answered** (This PR) — gate sign-off **Open**; intake **16 Unanswered**; **public release not approved**. Build **`4`** / TestFlight upload / tag / version bump require **explicit product gate**. To start implementation, Product must **lift Stay** and select one lane + Codex scoped plan.
+Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **Stay selected** — docs/readme/index/evidence hygiene only; M3 Option A / lane **closed**. App Store **G1 + G2 Closed/Ready**; **G3 gate sign-off worksheet added** — gate **Open**; intake **16 Unanswered**; **public release not approved**. Build **`4`** / TestFlight upload / tag / version bump require **explicit product gate**. To start implementation, Product must **lift Stay** and select one lane + Codex scoped plan.
