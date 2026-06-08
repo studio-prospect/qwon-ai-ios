@@ -83,7 +83,7 @@ Related: [G2 metadata worksheet (EN)](./qwon_app_store_g2_metadata_worksheet.md)
 
 **External share:** [G2 metadata worksheet (EN)](./qwon_app_store_g2_metadata_worksheet.md) · [G2 メタデータフォーム（日本語）](./qwon_app_store_g2_metadata_worksheet_ja.md)
 
-**G2 intake (2026-06-08):** **Q-AS-04 … Q-AS-06 Answered** (This PR). Product explicit approval of [G2 Product decision draft](./qwon_app_store_g2_metadata_worksheet.md#product-decision-draft--awaiting-explicit-approval) ([#133](https://github.com/studio-prospect/qwon-ai-ios/pull/133) worksheet prep). Checklist gate **G2** remains **Open** — gate sign-off pending. **Not** public release, Build `4`, or ASC metadata upload approval.
+**G2 intake (2026-06-08):** **Q-AS-04 … Q-AS-06 Answered** (This PR). Product approval recorded from [G2 worksheet — approved for intake recording](./qwon_app_store_g2_metadata_worksheet.md#product-decision-draft--awaiting-explicit-approval) ([#133](https://github.com/studio-prospect/qwon-ai-ios/pull/133) worksheet prep). Checklist gate **G2** remains **Open** — gate sign-off pending. **Not** public release, Build `4`, or ASC metadata upload approval.
 
 | Question ID | Gate | Owner | Question | Answer status | Answer source | Blocks | Follow-up PR |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -93,7 +93,7 @@ Related: [G2 metadata worksheet (EN)](./qwon_app_store_g2_metadata_worksheet.md)
 
 ### G2 Product answer details (2026-06-08)
 
-**Source:** Product explicit approval of [G2 Product decision draft](./qwon_app_store_g2_metadata_worksheet.md#product-decision-draft--awaiting-explicit-approval) ([#133](https://github.com/studio-prospect/qwon-ai-ios/pull/133) worksheet prep; intake recorded This PR).
+**Source:** Product approval of [G2 worksheet — approved for intake recording](./qwon_app_store_g2_metadata_worksheet.md#product-decision-draft--awaiting-explicit-approval) ([#133](https://github.com/studio-prospect/qwon-ai-ios/pull/133) worksheet prep; intake recorded This PR).
 **Scope (This PR):** Recorded **Answered** intake rows only; **G2 gate sign-off** and checklist **Closed/Ready** remain **pending** — separate docs-only PR.
 
 | Question ID | Answer |
