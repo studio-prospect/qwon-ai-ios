@@ -16,7 +16,7 @@ Related: [G1 gate sign-off worksheet](./qwon_app_store_g1_gate_signoff_worksheet
 | **How to record an answer** | **Separate docs-only PR** after stakeholder provides written response; link PR in **Answer source** and **Follow-up PR** |
 | **Do not** | Infer, draft, or commit final App Store copy, legal conclusions, privacy label answers, or release decisions without stakeholder source |
 | **Answer recorded ≠ public release approved** | Updating a row to **Answered** does **not** approve App Store submission, Build `4`, or TestFlight upload |
-| **Gate disposition** | Checklist gates **G1–G10** remain **Open** or **Partial** until Product records explicit gate sign-off — **separate** from intake answers |
+| **Gate disposition** | **G1 Closed/Ready** ([sign-off](./qwon_app_store_g1_gate_signoff_worksheet.md#sign-off-record-product) This PR). **G2–G10** remain **Open** or **Partial** until Product records explicit gate sign-off — separate from intake answers |
 | **Agents on Stay** | May append **real** answers only when Product/Legal/RE explicitly supplies them; otherwise leave **Unanswered** |
 | **External worksheets** | [G1 gate sign-off](./qwon_app_store_g1_gate_signoff_worksheet.md) — **Approved** 2026-06-08 (This PR); checklist gate **G1 Closed/Ready** · [G1 Product worksheet](./qwon_app_store_g1_product_worksheet.md) |
 
@@ -62,14 +62,19 @@ Related: [G1 gate sign-off worksheet](./qwon_app_store_g1_gate_signoff_worksheet
 
 ### G1 Product answer details (2026-06-07)
 
-**Source:** Product explicit approval of [G1 Product decision draft](./qwon_app_store_g1_product_worksheet.md#product-decision-draft--awaiting-explicit-approval) ([#128](https://github.com/studio-prospect/qwon-ai-ios/pull/128) worksheet prep).
-**Scope:** Records **Answered** intake rows only. **Does not** mark checklist gate **G1** Closed/Ready. **Does not** approve App Store public release, Build `4`, or TestFlight upload.
+**Source:** Product explicit approval of [G1 Product decision draft](./qwon_app_store_g1_product_worksheet.md#product-decision-draft--awaiting-explicit-approval) ([#128](https://github.com/studio-prospect/qwon-ai-ios/pull/128) worksheet prep; intake recorded [#129](https://github.com/studio-prospect/qwon-ai-ios/pull/129)).
+**Scope (historical — #129):** Recorded **Answered** intake rows only; gate sign-off followed in [#131](https://github.com/studio-prospect/qwon-ai-ios/pull/131) / This PR.
 
 | Question ID | Answer |
 | --- | --- |
 | **Q-AS-01** | QWON is a local-first cognitive runtime for iPhone that keeps inference and context on-device by default — not a cloud-only chat wrapper. |
 | **Q-AS-02** | **Primary:** privacy-conscious iPhone users and early adopters who want on-device AI assistance without default cloud dependency. **Secondary:** developers and power users evaluating local LLM workflows. |
 | **Q-AS-03** | **Pricing model:** TBD for first public release planning. **Rationale:** Text-alpha validated core runtime; monetization requires separate Product decision on support cost, model distribution, and App Store category expectations. |
+
+### G1 gate sign-off (2026-06-08)
+
+**Source:** [G1 gate sign-off worksheet — Approved](./qwon_app_store_g1_gate_signoff_worksheet.md#sign-off-record-product) (This PR).
+**Scope:** Records G1 sign-off only. Checklist gate **G1 Closed/Ready**; public release, Build `4`, TestFlight upload, tag, and version bump remain **not approved**.
 
 ---
 
@@ -178,4 +183,4 @@ Related: [G1 gate sign-off worksheet](./qwon_app_store_g1_gate_signoff_worksheet
 
 ## Agent note
 
-This ledger is **Stay-allowed docs hygiene**. Maintain question text and links only unless Product/Legal/RE supplies answers. Do **not** mark checklist gates **Closed** or public release **approved** from intake updates alone.
+This ledger is **Stay-allowed docs hygiene**. Maintain question text and links only unless Product/Legal/RE supplies answers. Do **not** mark checklist gates **G2–G10 Closed/Ready** or public release **approved** from intake updates alone.
