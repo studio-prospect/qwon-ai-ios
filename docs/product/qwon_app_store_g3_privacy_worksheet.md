@@ -88,6 +88,7 @@ Related: [Intake ledger — G3](./qwon_app_store_public_readiness_intake.md#g3--
 ### G1 + G2 inputs for G3 (reference)
 
 | Source | Summary |
+| --- | --- |
 | **G1 Q-AS-01** | Local-first cognitive runtime — on-device inference/context by default |
 | **G1 Q-AS-02** | Primary: privacy-conscious early adopters |
 | **G2 Q-AS-04** | App Store copy emphasizes local-first / privacy-conscious positioning |
