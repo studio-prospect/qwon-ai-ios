@@ -307,22 +307,22 @@ A first PR is mergeable if it is **docs-only** and provides:
 - A next-step task for Cursor that starts with runtime feasibility rather than app integration.
 - `git diff --check` passes.
 
-## Cursor Task After This Plan
+## Cursor Task After E4B-1
 
-Prepare a follow-up **research/eval-only** PR for **Phase E4B-1**.
+Prepare a follow-up **research/eval-only** PR for **Phase E4B-2** runtime-path decision.
 
 Scope:
 
 1. Do not change QWON app code unless a later Codex plan explicitly allows it.
 2. Do not commit model artifacts.
-3. Create or update a gitignored ops path for local evidence if needed.
-4. Collect model metadata: file list, exact sizes, revision, local hash if downloaded.
-5. Attempt desktop-only load/generate if dependencies and local hardware allow.
-6. Update this document with results or blocker classification.
+3. Treat the E4B-1 desktop result as **inconclusive** until retried on a torch >= 2.4-capable host.
+4. Decide whether the exact mobile-optimized Safetensors artifact has a realistic iOS runtime path through LiteRT-LM / Google AI Edge, Core ML, MLX Swift, ExecuTorch, or another upstream-supported route.
+5. Record official/upstream evidence for any selected or rejected runtime path.
+6. Update this document with the Phase E4B-2 runtime decision, blockers, and the next isolated iOS eval task if a viable runtime exists.
 
 Suggested PR title:
 
-`docs(research): Record Gemma 4 E4B Mobile metadata and runtime feasibility notes`
+`docs(research): Decide Gemma 4 E4B Mobile runtime feasibility path`
 
 ## Review Gate
 
