@@ -2,7 +2,7 @@
 
 **Status:** Evaluation planning — docs-only. Not implementation approval. Not a QWON default-model change.
 
-**Last updated:** 2026-06-11 (Phase E4B-1 metadata + desktop feasibility recorded)
+**Last updated:** 2026-06-11 (Phase E4B-2 runtime-path decision recorded) (Phase E4B-1 metadata + desktop feasibility recorded)
 
 Related: [Gemma-4-E2B-it evaluation](./gemma4_e2b_evaluation_plan.md) · [LiteRT-LM evaluation](./litert_lm_evaluation_plan.md) · [Local LLM notes](./local_llm_notes.md) · [M3 model download UX plan](../product/qwon_model_download_gguf_ux_plan.md)
 
@@ -257,45 +257,101 @@ Transformers log on this host: `[transformers] Disabling PyTorch because PyTorch
 | --- | --- | --- |
 | **dependency** | **Primary blocker** | `transformers` 5.11 + Gemma 4 classes require **torch ≥ 2.4**; eval host (x86_64 macOS) capped at **torch 2.2.2** on PyPI — desktop load/generate could not proceed |
 | **artifact schema** | Observed, not blocking alone | Single **3.28 GiB** `model.safetensors`; **wNa8o8** mobile QAT / `quant_method: gemma` — requires current Transformers Gemma4 code path |
-| **runtime support** | Open | iOS-capable runtime still unknown (Phase E4B-2); desktop baseline **inconclusive** on this host |
+| **runtime support** | Resolved in E4B-2 | Exact mobile-transformers Safetensors has **no direct iOS path**; see [Phase E4B-2](#phase-e4b-2--runtime-path-decision-2026-06-11) |
 | **memory** | Not measured | Load did not reach weight materialization |
 | **model behavior** | Not measured | No generation run |
 
 #### Phase E4B-1 exit verdict
 
-**Concrete blocker documented.** Retry desktop load/generate on a host with **torch ≥ 2.4** (e.g. Apple Silicon macOS or Linux CUDA) before Phase E4B-2 runtime-path decision.
+**Concrete blocker documented** on x86_64 eval host. Desktop Transformers load/generate remains **inconclusive** until retried on **torch ≥ 2.4** — this does **not** block the E4B-2 iOS runtime decision because Transformers is a desktop research path only.
 
 **Unchanged:** QWON default model remains Qwen GGUF; `prexus-local-mvp.gguf` unchanged; no M3 / Build `4` / TestFlight scope.
 
-Before iOS work, decide the feasible runtime candidate:
+### Phase E4B-2 — Runtime path decision (2026-06-11)
 
-| Candidate path | Question |
+Research/eval-only. Official/upstream evidence review — no app integration.
+
+#### Decision question
+
+Does the **exact** [`google/gemma-4-E4B-it-qat-mobile-transformers`](https://huggingface.co/google/gemma-4-E4B-it-qat-mobile-transformers) Safetensors artifact (~3.28 GiB, **wNa8o8** mobile QAT) have a realistic **iOS** runtime path for QWON?
+
+#### Decision summary
+
+| Question | Answer |
 | --- | --- |
-| Transformers only | Useful for desktop baseline but not enough for QWON iOS integration |
-| LiteRT-LM / Google AI Edge | Does this exact mobile artifact map to a LiteRT-supported package? |
-| Core ML conversion | Is conversion available and practical for 3.5GB-class artifact? |
-| MLX / MLX Swift | Is iPhone deployment realistic, or Mac-only research? |
-| ExecuTorch / other | Only if supported by official/upstream docs and worth investigation |
+| **Exact mobile-transformers Safetensors on iOS?** | **No** — no official upstream iOS runtime loads this artifact directly |
+| **Gemma 4 E4B on iOS at all?** | **Yes (alternate artifact)** — official path is **LiteRT-LM + `.litertlm`** from [`litert-community/gemma-4-E4B-it-litert-lm`](https://huggingface.co/litert-community/gemma-4-E4B-it-litert-lm) |
+| **E4B-3 isolated iOS eval?** | **Proceed** — reuse PREXUS LiteRT eval lane pattern; **not** the mobile-transformers Safetensors file |
 
-Exit:
+#### Artifact map (do not conflate)
 
-- One runtime path is selected for isolated iOS feasibility, or all paths are blocked with evidence.
+Google publishes **separate** QAT packaging for the same E4B instruction-tuned model family:
+
+| HF repo | Format | Primary upstream runtime | iOS path? |
+| --- | --- | --- | --- |
+| [`google/gemma-4-E4B-it-qat-mobile-transformers`](https://huggingface.co/google/gemma-4-E4B-it-qat-mobile-transformers) | Single `model.safetensors` (~3.28 GiB), **wNa8o8** | **Transformers** (`AutoModelForMultimodalLM`) — desktop / Python | **No** |
+| [`litert-community/gemma-4-E4B-it-litert-lm`](https://huggingface.co/litert-community/gemma-4-E4B-it-litert-lm) | `gemma-4-E4B-it.litertlm` (~3.66 GiB) | **LiteRT-LM** Swift API (iOS / Android / desktop) | **Yes** (official) |
+| [`google/gemma-4-E4B-it`](https://huggingface.co/google/gemma-4-E4B-it) | Base bfloat16 / other QAT variants | Conversion source for `litert-torch export_hf` | Indirect |
+
+[QAT blog](https://blog.google/innovation-and-ai/technology/developers-tools/quantization-aware-training-gemma-4/) lists mobile weights on Hugging Face and routes **on-device deployment** to **LiteRT-LM**, while the **mobile-transformers** repo documents **Transformers** usage only.
+
+#### Runtime path matrix
+
+| Candidate path | Verdict | Primary evidence | Blocker / notes |
+| --- | --- | --- | --- |
+| **Transformers + exact mobile-transformers artifact** | **Rejected (iOS)** | [Model README](https://huggingface.co/google/gemma-4-E4B-it-qat-mobile-transformers/blob/main/README.md) — `pip install transformers torch`; `AutoModelForMultimodalLM` | Python/desktop only; not an iOS embedding path. E4B-1 desktop probe **inconclusive** (torch ≥ 2.4 host needed) — orthogonal to iOS decision |
+| **LiteRT-LM + exact mobile-transformers Safetensors** | **Rejected** | [LiteRT-LM Gemma 4 models](https://ai.google.dev/edge/litert-lm/models/gemma-4) — prebuilt `.litertlm` from `litert-community/*`; [Deploy from Safetensors](https://ai.google.dev/edge/litert-lm/models/gemma-4) uses `litert-torch export_hf` from **base** `google/gemma-4-E2B-it` / `google/gemma-4-E4B-it`, not mobile-transformers wNa8o8 | No documented conversion from `qat-mobile-transformers` → `.litertlm` |
+| **LiteRT-LM + `litert-community/gemma-4-E4B-it-litert-lm`** | **Selected for E4B-3** | [LiteRT-LM Gemma 4 — E4B 3.65 GB](https://ai.google.dev/edge/litert-lm/models/gemma-4); [HF litert-community card](https://huggingface.co/litert-community/gemma-4-E4B-it-litert-lm); [LiteRT-LM Swift API](https://ai.google.dev/edge/litert-lm/swift); [Google Developers Blog](https://developers.googleblog.com/blazing-fast-on-device-genai-with-litert-lm/) — iPhone 17 Pro GPU benchmarks for E4B | **Different artifact** than E4B-1 source; PREXUS E2B `.litertlm` feasibility already proven on Wang — see [LiteRT-LM evaluation plan](./litert_lm_evaluation_plan.md) |
+| **Core ML (Apple / official tooling)** | **Rejected (exact artifact)** | No Apple/Google doc linking `qat-mobile-transformers` → Core ML. [Optimum ExecuTorch](https://docs.pytorch.org/executorch/stable/llm/export-llm-optimum.html) supports `--recipe coreml` for generic HF export, not this wNa8o8 schema | Community [CoreML-LLM](https://github.com/john-rocky/CoreML-LLM) converts **base** Gemma 4 E4B — separate research fork, not this Safetensors artifact |
+| **MLX / MLX Swift** | **Rejected (exact artifact)** | [QAT blog](https://blog.google/innovation-and-ai/technology/developers-tools/quantization-aware-training-gemma-4/) mentions MLX for Q4_0 / general checkpoints, not `qat-mobile-transformers`. [ExecuTorch MLX issue #18928](https://github.com/pytorch/executorch/issues/18928) validated **`google/gemma-4-E2B-it` only** | No official wNa8o8 mobile-transformers iOS path; E4B MLX coverage unvalidated |
+| **ExecuTorch** | **Rejected (exact artifact)** | [ExecuTorch PR #18695](https://github.com/pytorch/executorch/pull/18695) — native export for `google/gemma-4-E2B` / `google/gemma-4-E4B` base checkpoints; [Optimum ExecuTorch](https://docs.pytorch.org/executorch/stable/llm/export-llm-optimum.html) generic Gemma support | Export targets **base** HF repos, not `qat-mobile-transformers`; conversion of wNa8o8 schema **unproven**; PREXUS has no ExecuTorch integration |
+
+#### LiteRT-LM E4B artifact inventory (official iOS path)
+
+| Field | Value |
+| --- | --- |
+| **HF repo** | [`litert-community/gemma-4-E4B-it-litert-lm`](https://huggingface.co/litert-community/gemma-4-E4B-it-litert-lm) |
+| **iOS artifact** | `gemma-4-E4B-it.litertlm` — **3,659,530,240 bytes** (~3.41 GiB) per HF files API (2026-06-11) |
+| **Web variant** | `gemma-4-E4B-it-web.litertlm` (~2.97 GiB) — web-optimized; **not** the iOS eval target |
+| **Official model size** | **3.65 GB** per [LiteRT-LM Gemma 4 docs](https://ai.google.dev/edge/litert-lm/models/gemma-4) |
+| **iOS benchmarks (Google-published)** | iPhone 17 Pro GPU: prefill 1189 tk/s, decode 25 tk/s, TTFT 0.9 s, peak CPU memory 3380 MB |
+
+#### Phase E4B-2 exit verdict
+
+**Exact `google/gemma-4-E4B-it-qat-mobile-transformers` Safetensors: no realistic direct iOS runtime path.**
+
+**Selected next step:** isolated iOS eval (Phase E4B-3) using **`litert-community/gemma-4-E4B-it-litert-lm` → `gemma-4-E4B-it.litertlm`**, extending the existing PREXUS LiteRT eval lane — **not** shipping or bundling the mobile-transformers Safetensors artifact.
+
+**Unchanged:** QWON default model, M3 closure, Build `4` / TestFlight / public release gates.
 
 ### Phase E4B-3 — Isolated iOS eval only
 
-Only after Phase E4B-2 identifies an iOS-capable runtime.
+**Prerequisite:** Phase E4B-2 **selected LiteRT-LM + `.litertlm`** (alternate official artifact — not mobile-transformers Safetensors).
 
 Constraints:
 
-- Use an isolated eval app/target or compile-gated path.
+- Use an isolated eval app/target or compile-gated path (extend `PREXUSLiteRTEval` / `PREXUS_LITERT_LM_EVAL=1` pattern — see [LiteRT-LM evaluation plan](./litert_lm_evaluation_plan.md)).
+- Artifact: **`litert-community/gemma-4-E4B-it-litert-lm` → `gemma-4-E4B-it.litertlm`** — gitignored ops path (e.g. `models/prexus-eval-gemma4-e4b.litertlm`).
+- **Do not** load `google/gemma-4-E4B-it-qat-mobile-transformers` Safetensors on device.
 - Do not change QWON production default.
 - Do not expose user-facing TestFlight UI.
 - Do not upload TestFlight.
-- Keep Wang as primary target; Matisse expected to be unsupported unless proven otherwise.
+- Keep Wang as primary target; Matisse expected to be unsupported unless proven otherwise (E2B precedent).
+
+#### E4B-3 tasks (next isolated iOS eval)
+
+1. Add gitignored fetch script or ops note for `gemma-4-E4B-it.litertlm` (~3.66 GB) — mirror `fetch_litert_lm_eval_model.sh` pattern for E2B.
+2. Push artifact to Wang via existing LiteRT eval install/push scripts; point eval app at E4B `.litertlm`.
+3. Run fixed prompt set from [this plan](#fixed-prompt-set) — text-only first (Japanese short, strict JSON, summary).
+4. Record: cold load, first-token latency, decode tk/s, peak memory proxy, thermal notes — same metrics table as E4B-1 / LiteRT plan.
+5. Compare against E2B `.litertlm` Wang baseline from [LiteRT-LM evaluation plan](./litert_lm_evaluation_plan.md#wang-class-device-evidence-a17-pro).
+6. Classify blockers if load fails: dependency, memory, artifact schema, runtime support, model behavior.
 
 Exit:
 
 - Wang load/generation succeeds with metrics, or a concrete iOS blocker is recorded.
+
+**Requires:** Codex-scoped plan before any app/target code changes; docs-only prep PRs may precede implementation.
 
 ## Acceptance Criteria for the First PR
 
@@ -307,22 +363,20 @@ A first PR is mergeable if it is **docs-only** and provides:
 - A next-step task for Cursor that starts with runtime feasibility rather than app integration.
 - `git diff --check` passes.
 
-## Cursor Task After E4B-1
+## Cursor Task After E4B-2
 
-Prepare a follow-up **research/eval-only** PR for **Phase E4B-2** runtime-path decision.
+Prepare **Phase E4B-3** isolated iOS eval (Codex plan required before app changes).
 
 Scope:
 
-1. Do not change QWON app code unless a later Codex plan explicitly allows it.
-2. Do not commit model artifacts.
-3. Treat the E4B-1 desktop result as **inconclusive** until retried on a torch >= 2.4-capable host.
-4. Decide whether the exact mobile-optimized Safetensors artifact has a realistic iOS runtime path through LiteRT-LM / Google AI Edge, Core ML, MLX Swift, ExecuTorch, or another upstream-supported route.
-5. Record official/upstream evidence for any selected or rejected runtime path.
-6. Update this document with the Phase E4B-2 runtime decision, blockers, and the next isolated iOS eval task if a viable runtime exists.
+1. Fetch `litert-community/gemma-4-E4B-it-litert-lm` → gitignored `models/prexus-eval-gemma4-e4b.litertlm`.
+2. Extend PREXUS LiteRT eval lane for E4B — **not** mobile-transformers Safetensors.
+3. Wang device smoke with fixed prompts; record metrics in docs / `.eval-logs` (gitignored).
+4. Optional parallel: retry E4B-1 desktop Transformers on torch ≥ 2.4 host (behavior baseline only).
 
-Suggested PR title:
+Suggested PR title (implementation, after Codex plan):
 
-`docs(research): Decide Gemma 4 E4B Mobile runtime feasibility path`
+`eval(litert): Isolated Gemma 4 E4B litertlm device smoke on Wang`
 
 ## Review Gate
 
