@@ -101,7 +101,7 @@ Research questions:
 
 ### Gemma 4 E4B Mobile direction
 
-Current status: **E4B-2 runtime decision recorded** — exact `qat-mobile-transformers` Safetensors has **no direct iOS path**; isolated iOS eval (E4B-3) proceeds via **LiteRT-LM `.litertlm`** ([`litert-community/gemma-4-E4B-it-litert-lm`](https://huggingface.co/litert-community/gemma-4-E4B-it-litert-lm)) if scoped. Not default. See [Gemma 4 E4B Mobile Evaluation Plan](./gemma4_e4b_mobile_evaluation_plan.md#phase-e4b-2--runtime-path-decision-2026-06-11).
+Current status: **E4B-3 eval lane implemented** — `fetch_litert_lm_e4b_eval_model.sh` + `eval_litert_lm_e4b_on_device.sh`; Wang artifact pushed (3.41 GiB); smoke **pending** (device locked at launch). Not default. See [Gemma 4 E4B Mobile Evaluation Plan](./gemma4_e4b_mobile_evaluation_plan.md#e4b-3-implementation-2026-06-11).
 
 Potential value:
 
