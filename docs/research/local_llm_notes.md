@@ -99,6 +99,23 @@ Research questions:
 - Japanese short-form quality and deterministic JSON behavior under compact prompts
 - whether LiteRT-LM should become a separate backend evaluation if llama.cpp is unstable
 
+### Gemma 4 E4B Mobile direction
+
+Current status: evaluation planning only, not default. See [Gemma 4 E4B Mobile Evaluation Plan](./gemma4_e4b_mobile_evaluation_plan.md).
+
+Potential value:
+
+- mobile-optimized Gemma 4 E4B candidate for future high-end iPhone local runtime research
+- larger reasoning / coding / control-plane candidate than Qwen 0.5B, if runtime and memory are practical
+- possible bridge toward multimodal local understanding after text-only viability is proven
+
+Research questions:
+
+- which iOS-capable runtime can execute the `google/gemma-4-E4B-it-qat-mobile-transformers` artifact
+- whether a ~3.5 GB mobile-optimized Safetensors artifact is practical on Wang-class hardware
+- cold load, memory pressure, thermal behavior, Japanese response quality, and strict JSON reliability
+- whether any product distribution path is acceptable under QWON's App Store / model distribution gates
+
 ### LiteRT-LM / Google AI Edge direction
 
 Current status: backend feasibility **proven on A17 Pro+** (Wang); **not adopted** for production. See [LiteRT-LM Evaluation Plan](./litert_lm_evaluation_plan.md) and [LiteRT-LM Adoption Decision Memo](./litert_lm_adoption_decision.md).
