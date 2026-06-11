@@ -251,7 +251,7 @@ Related: [G5 gate sign-off worksheet](./qwon_app_store_g5_gate_signoff_worksheet
 | **G2** | Closed/Ready | Q-AS-04 … Q-AS-06 | **Yes** — intake **Answered**; gate sign-off **Approved** · [worksheet](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) |
 | **G3** | Closed/Ready | Q-AS-07 … Q-AS-08 | **Yes** — intake **Answered**; gate sign-off **Approved** · [worksheet](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) |
 | **G4** | Closed/Ready | Q-AS-09 … Q-AS-10 | **Yes** — intake **Answered**; gate sign-off **Approved** · [worksheet](./qwon_app_store_g4_gate_signoff_worksheet.md#sign-off-record-legal-re) |
-| **G5** | Open | Q-AS-11 … Q-AS-12 | **Yes** — intake **Answered** ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)); **gate sign-off Pending** · [worksheet](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product) |
+| **G5** | Closed/Ready | Q-AS-11 … Q-AS-12 | **Yes** — intake **Answered** ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)); gate sign-off **Approved** · [worksheet](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product) |
 | **G6** | Open | Q-AS-13 … Q-AS-15 | **No** |
 | **G7** | Partial | Q-AS-16 … Q-AS-18 | **No** |
 | **G8** | Open | Q-AS-19 … Q-AS-20 | **No** |
@@ -264,4 +264,4 @@ Related: [G5 gate sign-off worksheet](./qwon_app_store_g5_gate_signoff_worksheet
 
 ## Agent note
 
-This ledger is **Stay-allowed docs hygiene**. Maintain question text and links only unless Product/Legal/RE supplies answers. **G5 gate sign-off worksheet added** (This PR) does **not** mark **G5 Closed/Ready**. Do **not** mark **G6–G10 Closed/Ready**, reopen M3, or approve public release from worksheet creation alone.
+This ledger is **Stay-allowed docs hygiene**. Maintain question text and links only unless Product/Legal/RE supplies answers. **G5 gate sign-off Approved** (This PR) — checklist gate **G5 Closed/Ready**; **Option A Mac+USB** interim only — **not** in-app download / M3 reopen / hosted distribution / bundled weights / public release / Build `4`. Do **not** mark **G6–G10 Closed/Ready** without explicit gate sign-off, reopen M3, or approve public release from G5 closure alone.

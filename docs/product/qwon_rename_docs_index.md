@@ -96,7 +96,7 @@
 | [qwon_m3_network_device_expectation_memo.md](./qwon_m3_network_device_expectation_memo.md) | **M3 Gate 6–7 evidence** — network disclosure / Wang–Matisse expectation (**Ready**) |
 | [qwon_m3_rollback_release_gate_memo.md](./qwon_m3_rollback_release_gate_memo.md) | **M3 Gate 8–9 evidence** — Mac+USB rollback / Build `4` release boundary (**Ready**; Build `4` not approved) |
 | [qwon_app_store_public_readiness_checklist.md](./qwon_app_store_public_readiness_checklist.md) | **App Store public readiness** — G1–G10 checklist; **public release not approved**; Stay-allowed docs hygiene |
-| [qwon_app_store_public_readiness_intake.md](./qwon_app_store_public_readiness_intake.md) | **App Store readiness intake** — Q-AS-01…24 answer ledger; **all Unanswered**; not release approval |
+| [qwon_app_store_public_readiness_intake.md](./qwon_app_store_public_readiness_intake.md) | **App Store readiness intake** — Q-AS-01…24 answer ledger; **12 Answered · 12 Unanswered** (G1–G5 **Closed/Ready**); not release approval |
 | [qwon_ui_polish_onboarding_plan.md](./qwon_ui_polish_onboarding_plan.md) | **First post-alpha scoped plan** — UI-1 complete, [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) |
 
 **Related (outside this index):** [models/README.md](../../models/README.md) (GGUF placement) · [Gemma 4 E4B Mobile evaluation plan](../research/gemma4_e4b_mobile_evaluation_plan.md) (research/eval candidate only — **not default**) · [local LLM notes](../research/local_llm_notes.md) · [agent_collaboration_workflow.md](./agent_collaboration_workflow.md) (Codex/Cursor roles) · [feedback intake](./qwon_text_alpha_feedback_intake.md) · [next work queue](./qwon_next_work_queue.md)
@@ -105,4 +105,4 @@
 
 ## Agent note
 
-This index does **not** authorize build **`4`**, default-on M3, project-container rename, or env/model migration without explicit product gates. **Current posture:** **Stay selected** — docs hygiene only · [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record). [App Store readiness intake](./qwon_app_store_public_readiness_intake.md) — **24 Unanswered**; **public release not approved** (2026-06-07).
+This index does **not** authorize build **`4`**, default-on M3, project-container rename, or env/model migration without explicit product gates. **Current posture:** **Stay selected** — docs hygiene only · [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record). [App Store readiness intake](./qwon_app_store_public_readiness_intake.md) — G1–G5 **Closed/Ready**; **12 Unanswered** (G6–G10); **public release not approved** (2026-06-11).
