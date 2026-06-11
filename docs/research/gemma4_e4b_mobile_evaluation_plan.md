@@ -2,7 +2,7 @@
 
 **Status:** Evaluation planning — docs-only. Not implementation approval. Not a QWON default-model change.
 
-**Last updated:** 2026-06-11 (Phase E4B-3 isolated eval lane implemented; Wang smoke pending unlock) (Phase E4B-1 metadata + desktop feasibility recorded)
+**Last updated:** 2026-06-11 (Phase E4B-3 Wang smoke complete — feasibility pass) (Phase E4B-1 metadata + desktop feasibility recorded)
 
 Related: [Gemma-4-E2B-it evaluation](./gemma4_e2b_evaluation_plan.md) · [LiteRT-LM evaluation](./litert_lm_evaluation_plan.md) · [Local LLM notes](./local_llm_notes.md) · [M3 model download UX plan](../product/qwon_model_download_gguf_ux_plan.md)
 
@@ -359,47 +359,30 @@ Isolated eval lane extended — **no QWON production changes**.
 | Size | **3,659,530,240 bytes** (~3.41 GiB) |
 | SHA-256 | `0b2a8980ce155fd97673d8e820b4d29d9c7d99b8fa6806f425d969b145bd52e0` |
 
-**Wang prep (2026-06-11):**
+#### E4B-3 Wang device results (2026-06-11)
 
-| Step | Result |
-| --- | --- |
-| `PREXUSLiteRTEval` build | **Pass** (`PREXUS_LITERT_LM_EVAL=1`) |
-| Install to Wang (`iPhone18,3`) | **Pass** |
-| Push `prexus-eval-gemma4-e4b.litertlm` | **Pass** — 3.41 GiB in `Documents/Models/` |
-| Launch + smoke eval | **Blocked** — `device_locked` (Wang screen locked; `devicectl` launch denied) |
-
-**Failure class:** `dependency` (operator — device must be unlocked and awake for `devicectl` launch).
-
-**To complete smoke:** unlock Wang, then:
-
-```bash
-./tools/scripts/eval_litert_lm_e4b_on_device.sh "Wang"
-# or if app + model already on device:
-xcrun devicectl device process launch --device "$(xcrun devicectl list devices | rg Wang -m1)" \
-  --environment-variables '{"PREXUS_LITERT_EVAL_MODEL_FILENAME":"prexus-eval-gemma4-e4b.litertlm"}' \
-  jp.studio-prospect.qwon.ios.literteval
-sleep 240
-PREXUS_LITERT_EVAL_LOG_OUTPUT=.eval-logs/litert-e4b-device-eval-Wang.log \
-  ./tools/scripts/fetch_litert_device_eval_log.sh "Wang"
-```
-
-#### E4B-3 Wang metrics (pending smoke completion)
+Captured via `PREXUSLiteRTEval` → `Documents/prexus-litert-device-eval.log` → `./tools/scripts/eval_litert_lm_e4b_on_device.sh "Wang"` → `.eval-logs/litert-e4b-device-eval-Wang.log` (gitignored).
 
 | Metric | E4B (Wang) | E2B Wang baseline ([LiteRT plan](./litert_lm_evaluation_plan.md)) |
 | --- | --- | --- |
-| Model on device | `prexus-eval-gemma4-e4b.litertlm` (3.41 GiB) | `prexus-eval-gemma4-e2b.litertlm` (2.41 GiB) |
-| Cold load | *pending* | **6952 ms** |
-| JA first-token | *pending* | **754 ms** |
-| JA decode t/s | *pending* | **~0.9 t/s** |
-| Memory footprint | *pending* (`memory_footprint_mb` in log) | not recorded in E2B smoke |
-| Routing JSON | *pending* | **Valid** |
-| Control-plane summary | *pending* | not in E2B smoke |
-| Thermal notes | *pending* | not recorded in E2B smoke |
+| Device | iPhone 17 (Wang), `iPhone18,3`, A19-class | same |
+| LiteRT-LM | v0.12.0 (local shallow vendor) | same |
+| Model on device | `prexus-eval-gemma4-e4b.litertlm` (**3.41 GiB**) | `prexus-eval-gemma4-e2b.litertlm` (**2.41 GiB**) |
+| Backend | `.gpu` / Metal | same |
+| Cold load | **11,363 ms** | **6952 ms** |
+| JA first-token | **2061 ms** | **754 ms** |
+| JA total / decode | **3556 ms**, **~0.3 t/s** | **1091 ms**, **~0.9 t/s** |
+| Memory footprint proxy | **546 MB** (`phys_footprint` post-init; underestimates peak model RAM) | not recorded |
+| Japanese smoke | **Coherent** — まず、**「何のための予定か」**… | Coherent |
+| Routing JSON | **Valid** (`intent`, `confidence`, `needs_cloud`; markdown-wrapped) | Valid compact JSON |
+| Control-plane summary | **Pass** — 3 bullets, no added facts | not in E2B smoke |
+| App stability | **Pass** (`eval-complete`) | Pass |
+| Thermal notes | Not recorded (bounded ~18 s session) | not recorded |
 | Google-published E4B ref | TTFT 0.9 s, decode 25 tk/s, peak 3380 MB (iPhone 17 Pro GPU) | — |
 
-Exit (open until smoke completes):
+**Wang conclusion (E4B):** LiteRT-LM + Gemma 4 E4B `.litertlm` **passes isolated iOS feasibility** on A19-class Wang — load, Japanese answer, routing JSON, and control-plane summary all succeed. Trade-offs vs E2B: **~1.6× cold load** (11.4 s vs 7.0 s), **~1.4× artifact size** (3.41 vs 2.41 GiB), **slower first-token and decode** on this smoke path. **Do not adopt as default**; QWON production remains Qwen MVP.
 
-- Wang load/generation succeeds with metrics, or a concrete iOS blocker is recorded beyond `device_locked`.
+**Phase E4B-3 exit verdict:** Wang load/generation **succeeds** with metrics recorded. No iOS runtime blocker for official `.litertlm` path.
 
 ## Acceptance Criteria for the First PR
 
@@ -413,16 +396,14 @@ A first PR is mergeable if it is **docs-only** and provides:
 
 ## Cursor Task After E4B-3
 
-Complete Wang smoke and record metrics (device must be **unlocked**):
+E4B-3 Wang smoke **complete** — see [device results](#e4b-3-wang-device-results-2026-06-11).
 
-1. Run `./tools/scripts/eval_litert_lm_e4b_on_device.sh "Wang"` (or manual launch + fetch log — see [E4B-3 implementation](#e4b-3-implementation-2026-06-11)).
-2. Fill [E4B-3 Wang metrics](#e4b-3-wang-metrics-pending-smoke-completion) table from `.eval-logs/litert-e4b-device-eval-Wang.log`.
-3. Compare against E2B Wang baseline; classify adoption blockers if load/generation fails.
-4. Optional: retry E4B-1 desktop Transformers on torch ≥ 2.4 host (behavior baseline only).
+Optional follow-ups (not blocking):
 
-Suggested follow-up PR (docs-only, after smoke):
-
-`docs(research): Record Gemma 4 E4B Mobile Wang device smoke results`
+1. Matisse blocked repro (expected — E2B precedent on A12).
+2. Bounded thermal/memory session (5–10 min) for E4B vs E2B comparison.
+3. E4B-1 desktop Transformers retry on torch ≥ 2.4 host (behavior baseline only).
+4. Adoption review if product wants E4B as a second local backend candidate.
 
 ## Review Gate
 
