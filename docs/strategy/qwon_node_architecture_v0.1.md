@@ -1,5 +1,26 @@
 # QWON Node Architecture v0.1
 
+**Document type:** Strategy RFC
+**Version:** 0.1
+**Date:** 2026-06-09
+**Status:** Working Draft — **not** implementation approval. Does **not** authorize app, runtime, or node-integration code.
+
+**Apple context:** Platform facts live in [Strategic Memo — Apple primary sources](./qwon_strategic_memo_after_wwdc26.md#apple-primary-sources-wwdc26). This doc is **QWON-side design inference** only.
+
+Related: [Strategic Memo after WWDC26](./qwon_strategic_memo_after_wwdc26.md) · [Job Scheduler v0.1](./job_scheduler_architecture_v0.1.md)
+
+---
+
+## Document boundaries
+
+| Boundary | Meaning |
+| --- | --- |
+| **RFC ≠ implementation** | Node roles and selection algorithm are design sketches — not shipped architecture |
+| **RFC ≠ Apple API spec** | Apple Foundation Models / Language Model protocol behavior is defined by Apple docs, not this file |
+| **Stay selected** | RFC maintenance does **not** lift Stay or approve Build / release gates |
+
+---
+
 ## Overview
 
 QWON NodeはAgent実行環境である。
@@ -117,3 +138,9 @@ Cloud
 ```
 
 を単一のAIチームとして扱う。
+
+---
+
+## Agent note
+
+QWON-side RFC only. Verify Apple on-device / PCC / third-party model placement against [Apple Developer — Foundation Models](https://developer.apple.com/apple-intelligence/) before implementation.

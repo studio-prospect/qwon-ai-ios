@@ -1,5 +1,26 @@
 # QIL Specification v0.1
 
+**Document type:** Strategy RFC
+**Version:** 0.1
+**Date:** 2026-06-09
+**Status:** Working Draft — **not** implementation approval. Does **not** authorize QIL parser, validator, or prompt pipeline code.
+
+**Apple context:** [Strategic Memo — Apple primary sources](./qwon_strategic_memo_after_wwdc26.md#apple-primary-sources-wwdc26). QIL is **QWON-side intermediate representation** — not Apple Guided Generation / `@Generable` schema.
+
+Related: [Strategic Memo after WWDC26](./qwon_strategic_memo_after_wwdc26.md) · [Agent Mailbox Protocol v0.1](./agent_mailbox_protocol_v0.1.md)
+
+---
+
+## Document boundaries
+
+| Boundary | Meaning |
+| --- | --- |
+| **RFC ≠ implementation** | QIL structure and validation rules are proposals — not shipped runtime contract |
+| **RFC ≠ Apple Guided Generation** | Apple structured output is defined by Foundation Models framework; QIL is a separate QWON layer |
+| **Stay selected** | RFC maintenance does **not** lift Stay |
+
+---
+
 ## Overview
 
 QIL (QWON Intermediate Language) は、人間の自然言語を AI が実行可能な構造化タスクへ変換するための中間表現である。
@@ -89,3 +110,9 @@ Agent Execution
 * execution budget
 * security classification
 * multi-language support
+
+---
+
+## Agent note
+
+QWON-side RFC only. If QIL maps to Apple guided generation at implementation time, map explicitly in a future design doc — do not conflate schemas without review.
