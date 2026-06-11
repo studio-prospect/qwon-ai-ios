@@ -126,3 +126,15 @@ cmake --build build-mac -j --target llama-bench llama-cli
 
 See [LiteRT-LM Evaluation Plan](../docs/research/litert_lm_evaluation_plan.md). **Default remains Qwen 0.5B + llama.cpp in QWON.**
 
+### LiteRT-LM E4B evaluation (not production)
+
+| Property | Value |
+| --- | --- |
+| File name | `prexus-eval-gemma4-e4b.litertlm` |
+| Model | `litert-community/gemma-4-E4B-it-litert-lm` → `gemma-4-E4B-it.litertlm` |
+| Download | `./tools/scripts/fetch_litert_lm_e4b_eval_model.sh` |
+| Device eval app | `PREXUSLiteRTEval` (same isolated target; E4B filename via launch env) |
+| Full workflow | `./tools/scripts/eval_litert_lm_e4b_on_device.sh "Wang"` |
+
+**Not** the `google/gemma-4-E4B-it-qat-mobile-transformers` Safetensors artifact. See [Gemma 4 E4B Mobile Evaluation Plan](../docs/research/gemma4_e4b_mobile_evaluation_plan.md).
+

@@ -17,7 +17,8 @@ trap 'rm -f "$DEVICE_JSON"' EXIT
 
 if [[ ! -f "$MODEL" ]]; then
   echo "error: model not found at $MODEL" >&2
-  echo "Run: ./tools/scripts/fetch_litert_lm_eval_model.sh" >&2
+  echo "Run: ./tools/scripts/fetch_litert_lm_eval_model.sh (E2B)" >&2
+  echo " or: ./tools/scripts/fetch_litert_lm_e4b_eval_model.sh (E4B)" >&2
   exit 1
 fi
 

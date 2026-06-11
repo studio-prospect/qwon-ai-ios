@@ -101,7 +101,7 @@ Research questions:
 
 ### Gemma 4 E4B Mobile direction
 
-Current status: **E4B-2 runtime decision recorded** — exact `qat-mobile-transformers` Safetensors has **no direct iOS path**; isolated iOS eval (E4B-3) proceeds via **LiteRT-LM `.litertlm`** ([`litert-community/gemma-4-E4B-it-litert-lm`](https://huggingface.co/litert-community/gemma-4-E4B-it-litert-lm)) if scoped. Not default. See [Gemma 4 E4B Mobile Evaluation Plan](./gemma4_e4b_mobile_evaluation_plan.md#phase-e4b-2--runtime-path-decision-2026-06-11).
+Current status: **E4B-3 runtime feasibility pass** — LiteRT-LM + `prexus-eval-gemma4-e4b.litertlm` loads and generates on A19-class Wang (cold ~11.4 s, JA coherent). Routing JSON is **extractable but fenced**; strict JSON contract not met. Not default. See [Gemma 4 E4B Mobile Evaluation Plan](./gemma4_e4b_mobile_evaluation_plan.md#e4b-3-wang-device-results-2026-06-11).
 
 Potential value:
 

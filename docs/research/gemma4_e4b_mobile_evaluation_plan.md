@@ -2,7 +2,7 @@
 
 **Status:** Evaluation planning — docs-only. Not implementation approval. Not a QWON default-model change.
 
-**Last updated:** 2026-06-11 (Phase E4B-2 runtime-path decision recorded) (Phase E4B-1 metadata + desktop feasibility recorded)
+**Last updated:** 2026-06-11 (Phase E4B-3 Wang smoke complete — feasibility pass) (Phase E4B-1 metadata + desktop feasibility recorded)
 
 Related: [Gemma-4-E2B-it evaluation](./gemma4_e2b_evaluation_plan.md) · [LiteRT-LM evaluation](./litert_lm_evaluation_plan.md) · [Local LLM notes](./local_llm_notes.md) · [M3 model download UX plan](../product/qwon_model_download_gguf_ux_plan.md)
 
@@ -338,20 +338,51 @@ Constraints:
 - Do not upload TestFlight.
 - Keep Wang as primary target; Matisse expected to be unsupported unless proven otherwise (E2B precedent).
 
-#### E4B-3 tasks (next isolated iOS eval)
+#### E4B-3 implementation (2026-06-11)
 
-1. Add gitignored fetch script or ops note for `gemma-4-E4B-it.litertlm` (~3.66 GB) — mirror `fetch_litert_lm_eval_model.sh` pattern for E2B.
-2. Push artifact to Wang via existing LiteRT eval install/push scripts; point eval app at E4B `.litertlm`.
-3. Run fixed prompt set from [this plan](#fixed-prompt-set) — text-only first (Japanese short, strict JSON, summary).
-4. Record: cold load, first-token latency, decode tk/s, peak memory proxy, thermal notes — same metrics table as E4B-1 / LiteRT plan.
-5. Compare against E2B `.litertlm` Wang baseline from [LiteRT-LM evaluation plan](./litert_lm_evaluation_plan.md#wang-class-device-evidence-a17-pro).
-6. Classify blockers if load fails: dependency, memory, artifact schema, runtime support, model behavior.
+Isolated eval lane extended — **no QWON production changes**.
 
-Exit:
+| Item | Value |
+| --- | --- |
+| Fetch script | `./tools/scripts/fetch_litert_lm_e4b_eval_model.sh` → `models/prexus-eval-gemma4-e4b.litertlm` (gitignored) |
+| Device workflow | `./tools/scripts/eval_litert_lm_e4b_on_device.sh "Wang"` |
+| Eval app | `PREXUSLiteRTEval` — E4B filename via launch env `PREXUS_LITERT_EVAL_MODEL_FILENAME=prexus-eval-gemma4-e4b.litertlm` |
+| Prompts | E4B [fixed prompt set](#fixed-prompt-set) — Japanese short, strict routing JSON, control-plane summary |
+| Log output | `.eval-logs/litert-e4b-device-eval-Wang.log` (gitignored) |
 
-- Wang load/generation succeeds with metrics, or a concrete iOS blocker is recorded.
+**Artifact fetched (Mac, 2026-06-11):**
 
-**Requires:** Codex-scoped plan before any app/target code changes; docs-only prep PRs may precede implementation.
+| Field | Value |
+| --- | --- |
+| Source | [`litert-community/gemma-4-E4B-it-litert-lm`](https://huggingface.co/litert-community/gemma-4-E4B-it-litert-lm) → `gemma-4-E4B-it.litertlm` |
+| Local path | `models/prexus-eval-gemma4-e4b.litertlm` |
+| Size | **3,659,530,240 bytes** (~3.41 GiB) |
+| SHA-256 | `0b2a8980ce155fd97673d8e820b4d29d9c7d99b8fa6806f425d969b145bd52e0` |
+
+#### E4B-3 Wang device results (2026-06-11)
+
+Captured via `PREXUSLiteRTEval` → `Documents/prexus-litert-device-eval.log` → `./tools/scripts/eval_litert_lm_e4b_on_device.sh "Wang"` → `.eval-logs/litert-e4b-device-eval-Wang.log` (gitignored).
+
+| Metric | E4B (Wang) | E2B Wang baseline ([LiteRT plan](./litert_lm_evaluation_plan.md)) |
+| --- | --- | --- |
+| Device | iPhone 17 (Wang), `iPhone18,3`, A19-class | same |
+| LiteRT-LM | v0.12.0 (local shallow vendor) | same |
+| Model on device | `prexus-eval-gemma4-e4b.litertlm` (**3.41 GiB**) | `prexus-eval-gemma4-e2b.litertlm` (**2.41 GiB**) |
+| Backend | `.gpu` / Metal | same |
+| Cold load | **11,363 ms** | **6952 ms** |
+| JA first-token | **2061 ms** | **754 ms** |
+| JA total / decode | **3556 ms**, **~0.3 t/s** | **1091 ms**, **~0.9 t/s** |
+| Memory footprint proxy | **546 MB** (`phys_footprint` post-init; underestimates peak model RAM) | not recorded |
+| Japanese smoke | **Coherent** — まず、**「何のための予定か」**… | Coherent |
+| Routing JSON | **Extractable JSON (fenced); strict JSON contract not met** — response wrapped in ` ```json ` fences; keys `intent`, `confidence`, `needs_cloud` parseable after strip | Valid compact JSON (no fences) |
+| Control-plane summary | **Pass** — 3 bullets, no added facts | not in E2B smoke |
+| App stability | **Pass** (`eval-complete`) | Pass |
+| Thermal notes | Not recorded (bounded ~18 s session) | not recorded |
+| Google-published E4B ref | TTFT 0.9 s, decode 25 tk/s, peak 3380 MB (iPhone 17 Pro GPU) | — |
+
+**Wang conclusion (E4B):** LiteRT-LM + Gemma 4 E4B `.litertlm` **passes isolated iOS runtime feasibility** on A19-class Wang — cold load, Japanese answer, and control-plane summary succeed. **Control-plane JSON reliability:** routing output is **extractable but fenced**; does **not** meet the strict JSON-only contract (contrast E2B Wang baseline). Trade-offs vs E2B: **~1.6× cold load** (11.4 s vs 7.0 s), **~1.4× artifact size** (3.41 vs 2.41 GiB), **slower first-token and decode** on this smoke path. **Do not adopt as default**; QWON production remains Qwen MVP.
+
+**Phase E4B-3 exit verdict:** Wang load/generation **succeeds** (runtime feasibility pass). No iOS runtime blocker for official `.litertlm` path. Strict routing JSON contract **not** demonstrated on this smoke.
 
 ## Acceptance Criteria for the First PR
 
@@ -363,20 +394,16 @@ A first PR is mergeable if it is **docs-only** and provides:
 - A next-step task for Cursor that starts with runtime feasibility rather than app integration.
 - `git diff --check` passes.
 
-## Cursor Task After E4B-2
+## Cursor Task After E4B-3
 
-Prepare **Phase E4B-3** isolated iOS eval (Codex plan required before app changes).
+E4B-3 Wang smoke **complete** — see [device results](#e4b-3-wang-device-results-2026-06-11).
 
-Scope:
+Optional follow-ups (not blocking):
 
-1. Fetch `litert-community/gemma-4-E4B-it-litert-lm` → gitignored `models/prexus-eval-gemma4-e4b.litertlm`.
-2. Extend PREXUS LiteRT eval lane for E4B — **not** mobile-transformers Safetensors.
-3. Wang device smoke with fixed prompts; record metrics in docs / `.eval-logs` (gitignored).
-4. Optional parallel: retry E4B-1 desktop Transformers on torch ≥ 2.4 host (behavior baseline only).
-
-Suggested PR title (implementation, after Codex plan):
-
-`eval(litert): Isolated Gemma 4 E4B litertlm device smoke on Wang`
+1. Matisse blocked repro (expected — E2B precedent on A12).
+2. Bounded thermal/memory session (5–10 min) for E4B vs E2B comparison.
+3. E4B-1 desktop Transformers retry on torch ≥ 2.4 host (behavior baseline only).
+4. Adoption review if product wants E4B as a second local backend candidate.
 
 ## Review Gate
 
