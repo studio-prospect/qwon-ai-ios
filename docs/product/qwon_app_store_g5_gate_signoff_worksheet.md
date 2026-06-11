@@ -1,7 +1,7 @@
 # QWON — App Store G5 Model Distribution Policy Gate Sign-off Worksheet
 
-**Last updated:** 2026-06-08 (Stay selected — G5 gate sign-off worksheet added; checklist gate **G5 Open**)
-**Status:** **Sign-off pending** — intake **Q-AS-11 … Q-AS-12 Answered** ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)); checklist gate **G5** remains **Open** (gate sign-off **Pending**). **Not** in-app download / M3 reopen approval. **Not** hosted distribution approval. **Not** bundled weights approval. **Not** App Store public release approval. **Not** Build `4` approval. **TestFlight upload / tag / version bump / ASC submission not approved.**
+**Last updated:** 2026-06-11 (Stay selected — G5 gate sign-off **Approved**; checklist gate **G5 Closed/Ready**)
+**Status:** **Sign-off Approved** — intake **Q-AS-11 … Q-AS-12 Answered** ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)); checklist gate **G5 Closed/Ready** (This PR). **Not** in-app download / M3 reopen approval. **Not** hosted distribution approval. **Not** bundled weights approval. **Not** App Store public release approval. **Not** Build `4` approval. **TestFlight upload / tag / version bump / ASC submission not approved.**
 **Purpose:** Legal / Product decision surface to record whether checklist gate **G5 — Model distribution policy** may move from **Open** to **Closed/Ready** after intake **Q-AS-11 … Q-AS-12** are **Answered**.
 
 Related: [Public readiness checklist — G5](./qwon_app_store_public_readiness_checklist.md#3-public-readiness-gates) · [Intake ledger — G5](./qwon_app_store_public_readiness_intake.md#g5--model-distribution-policy) · [G5 model distribution worksheet](./qwon_app_store_g5_model_distribution_worksheet.md) · [G5 モデル配布ポリシー回答フォーム（日本語）](./qwon_app_store_g5_model_distribution_worksheet_ja.md) · [G4 gate sign-off](./qwon_app_store_g4_gate_signoff_worksheet.md#sign-off-record-legal-re) · [G3 gate sign-off](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) · [G2 gate sign-off](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) · [G1 gate sign-off](./qwon_app_store_g1_gate_signoff_worksheet.md#sign-off-record-product) · [M3 distribution compliance memo](./qwon_m3_model_distribution_compliance_memo.md) · [M3 hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md) · [M2 guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement) · [M3 spike outcome — Option A](./qwon_m3_spike_outcome_decision.md#decision-record) · [Next work queue — App Store readiness](./qwon_next_work_queue.md#app-store-public-release) · [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record)
@@ -27,12 +27,12 @@ Related: [Public readiness checklist — G5](./qwon_app_store_public_readiness_c
 
 | Field | Value |
 | --- | --- |
-| **Checklist gate** | **G5 — Model distribution policy** — **Open** (gate sign-off **Pending**) |
+| **Checklist gate** | **G5 — Model distribution policy** — **Closed/Ready** |
 | **Intake questions** | **Q-AS-11 … Q-AS-12** — **Answered** ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)) |
 | **Intake ledger total** | **24 questions · 12 Unanswered · 12 Answered** |
 | **Answer detail** | [G5 Legal/Product answer details](./qwon_app_store_public_readiness_intake.md#g5-legalproduct-answer-details-2026-06-08) |
 | **Source worksheets** | [G5 model distribution worksheet](./qwon_app_store_g5_model_distribution_worksheet.md) · [日本語フォーム](./qwon_app_store_g5_model_distribution_worksheet_ja.md) |
-| **Checklist gates G1 + G2 + G3 + G4** | **Closed/Ready** — [G1 sign-off Approved](./qwon_app_store_g1_gate_signoff_worksheet.md#sign-off-record-product) · [G2 sign-off Approved](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) · [G3 sign-off Approved](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) · [G4 sign-off Approved](./qwon_app_store_g4_gate_signoff_worksheet.md#sign-off-record-legal-re) |
+| **Checklist gates G1 + G2 + G3 + G4 + G5** | **Closed/Ready** — [G1 sign-off Approved](./qwon_app_store_g1_gate_signoff_worksheet.md#sign-off-record-product) · [G2 sign-off Approved](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) · [G3 sign-off Approved](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) · [G4 sign-off Approved](./qwon_app_store_g4_gate_signoff_worksheet.md#sign-off-record-legal-re) · [G5 sign-off Approved](#sign-off-record-legal-product) (This PR) |
 | **M3 posture** | **Option A selected** — compile-gated **default-off**; M3 lane **closed** · [decision record](./qwon_m3_spike_outcome_decision.md#decision-record) |
 | **Tester-visible model path** | M2 **Place GGUF via Mac** + USB — [guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement); app does **not** download GGUF in-app on build `3` |
 | **Active TestFlight** | **QWON `0.1.0 (3)`** — stable alpha · ASC **`6775685841`** · **GGUF not bundled** in shipped binary |
@@ -53,14 +53,7 @@ Related: [Public readiness checklist — G5](./qwon_app_store_public_readiness_c
 
 **Can G5 be marked Closed/Ready for public-readiness planning while keeping distribution implementation and release ops unapproved?**
 
-Legal / Product should confirm:
-
-1. **Q-AS-11 … Q-AS-12** answers in the [intake ledger](./qwon_app_store_public_readiness_intake.md#g5--model-distribution-policy) are **final enough** for public-readiness planning (not necessarily final Legal license conclusions, App Review copy, or distribution implementation).
-2. **Option A (Mac+USB Place GGUF via Mac only)** interim posture is acceptable for first public-readiness planning aligned with TestFlight **`0.1.0 (3)`** — without approving in-app download, hosted distribution, bundled weights, M3 reopen, or Build `4`.
-3. **G6** and downstream gates may proceed using G5 model distribution direction without reopening G5.
-4. **Legal verification** items noted in intake (e.g. bartowski redistribution rights, QWON-hosted mirror, final attribution / notices) are acknowledged as **pre-submission verify** — not waived by gate closure.
-
-If **Needs revision**, record what must change and **do not** mark gate **G5** Closed/Ready until intake rows are updated via a separate docs-only PR.
+**Answer (2026-06-11):** **Yes** — Legal / Product **Approved** sign-off below. **Option A (Mac+USB Place GGUF via Mac only)** interim posture is acceptable for first public-readiness planning aligned with TestFlight **`0.1.0 (3)`** — without approving in-app download, hosted distribution, bundled weights, M3 reopen, or Build `4`. **G6** may proceed using G5 model distribution direction. Legal verification items (e.g. bartowski redistribution rights, QWON-hosted mirror, final attribution / notices) remain **pre-submission verify** — not waived by gate closure.
 
 ---
 
@@ -70,11 +63,11 @@ If **Needs revision**, record what must change and **do not** mark gate **G5** C
 
 | Field | Record |
 | --- | --- |
-| **Decision** | **Pending** |
+| **Decision** | **Approved** |
 | **Owner** | Legal / Product |
-| **Date** | Pending |
-| **Source** | Pending |
-| **Notes** | Pending |
+| **Date** | 2026-06-11 |
+| **Source** | This PR |
+| **Notes** | G5 model distribution direction (Option A Mac+USB interim) is sufficient for public-readiness planning; in-app download, hosted distribution, bundled weights, M3 reopen, final public release, and Build `4` remain **not approved**. |
 
 ### Decision guide
 
@@ -91,8 +84,8 @@ If **Needs revision**, record what must change and **do not** mark gate **G5** C
 | Item | Status |
 | --- | --- |
 | Q-AS-11 … Q-AS-12 **Answered** in intake | **Done** ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)) |
-| Legal / Product **Decision** recorded above | **Pending** |
-| Follow-up docs-only PR updates checklist **G5** to Closed/Ready | **Pending** |
+| Legal / Product **Decision** recorded above | **Done** — **Approved** (2026-06-11) |
+| Follow-up docs-only PR updates checklist **G5** to Closed/Ready | **Done** — This PR |
 | In-app download / M3 reopen / hosted distribution approved | **No** |
 | Bundled weights approved | **No** |
 | Public release approved | **No** |
@@ -102,4 +95,4 @@ If **Needs revision**, record what must change and **do not** mark gate **G5** C
 
 ## Agent note
 
-Share this worksheet with **Legal / Product** for **explicit G5 gate sign-off**. **Do not** mark checklist gate **G5 Closed/Ready**, reopen M3, approve in-app download / hosted distribution / bundled weights, or approve public release from worksheet creation alone. Stay-allowed hygiene only.
+Gate **G5** sign-off **Approved** — checklist gate **G5 Closed/Ready**. Next docs-only step: **G6 worksheet preparation / support–website–terms–privacy** · [intake G6](./qwon_app_store_public_readiness_intake.md#g6--support--website--terms--privacy-policy) (Q-AS-13 … Q-AS-15) when Product scopes next gate. **Do not** reopen M3, approve in-app download / hosted distribution / bundled weights, approve public release, or approve Build `4` from gate closure alone. Stay-allowed hygiene only.
