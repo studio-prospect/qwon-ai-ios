@@ -1,6 +1,6 @@
 # QWON Rename — Documentation Index
 
-**Last updated:** 2026-06-07 (Stay selected — App Store readiness answer intake)
+**Last updated:** 2026-06-11 (Stay selected — Gemma 4 E4B Mobile research complete; **not default**)
 **Purpose:** **Information architecture only** — where to start reading QWON rename / Phase 4 docs and in what order. Does **not** add new policy; it summarizes and links existing decisions.
 
 **Next decision (release vs post-alpha):** [Post-M3 next lane decision](./qwon_post_m3_next_lane_decision.md) · [QWON next work queue — decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) · [M3 spike outcome decision](./qwon_m3_spike_outcome_decision.md)
@@ -31,6 +31,7 @@
 | **Second post-alpha lane** | **Model download / GGUF UX — closed** (M3 Option A) · [decision record](./qwon_m3_spike_outcome_decision.md#decision-record) |
 | **Third post-alpha posture** | **Stay selected** — no new lane · [decision record](./qwon_post_m3_next_lane_decision.md#decision-record) |
 | **Xcode project container** | **`PREXUS.xcodeproj`** — deferred; see [preserved inventory](./qwon_preserved_prexus_surface_inventory.md) |
+| **Gemma 4 E4B Mobile** | **E4B-0〜E4B-3 complete** on `main` — **research/eval candidate only**; **not QWON default** · [next work queue § E4B](./qwon_next_work_queue.md#gemma4-e4b-mobile-research-2026-06-11) |
 
 ---
 
@@ -65,6 +66,7 @@
 | **Where is Phase 4 implementation detail?** | [Phase 4 target rename plan](./qwon_phase4_target_rename_plan.md) PR table + [surface audit](./qwon_phase4_rename_surface_audit.md) |
 | **Ordinary feature work — global replace OK?** | **No** — [inventory agent guardrail](./qwon_preserved_prexus_surface_inventory.md#agent-guardrail-read-first) |
 | **Submit or triage tester feedback?** | **Window closed** — [QWON feedback intake](./qwon_text_alpha_feedback_intake.md#feedback-window-close-2026-06-03); final rows **QWON-FB-001**, **QWON-FB-002** |
+| **Is Gemma 4 E4B adopted or default?** | **No** — research **complete**; Wang runtime feasibility **pass**; strict JSON **not** proven (fenced); Qwen MVP unchanged · [E4B evaluation plan](../research/gemma4_e4b_mobile_evaluation_plan.md) |
 
 ---
 
@@ -97,7 +99,7 @@
 | [qwon_app_store_public_readiness_intake.md](./qwon_app_store_public_readiness_intake.md) | **App Store readiness intake** — Q-AS-01…24 answer ledger; **all Unanswered**; not release approval |
 | [qwon_ui_polish_onboarding_plan.md](./qwon_ui_polish_onboarding_plan.md) | **First post-alpha scoped plan** — UI-1 complete, [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) |
 
-**Related (outside this index):** [models/README.md](../../models/README.md) (GGUF placement) · [agent_collaboration_workflow.md](./agent_collaboration_workflow.md) (Codex/Cursor roles) · [feedback intake](./qwon_text_alpha_feedback_intake.md) · [next work queue](./qwon_next_work_queue.md)
+**Related (outside this index):** [models/README.md](../../models/README.md) (GGUF placement) · [Gemma 4 E4B Mobile evaluation plan](../research/gemma4_e4b_mobile_evaluation_plan.md) (research/eval candidate only — **not default**) · [local LLM notes](../research/local_llm_notes.md) · [agent_collaboration_workflow.md](./agent_collaboration_workflow.md) (Codex/Cursor roles) · [feedback intake](./qwon_text_alpha_feedback_intake.md) · [next work queue](./qwon_next_work_queue.md)
 
 ---
 

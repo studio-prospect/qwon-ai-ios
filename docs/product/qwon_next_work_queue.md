@@ -1,6 +1,6 @@
 # QWON — Next Work Queue
 
-**Last updated:** 2026-06-08 (Stay selected — G5 gate sign-off worksheet added; gate **Open**)
+**Last updated:** 2026-06-11 (Stay selected — Gemma 4 E4B Mobile research E4B-0〜E4B-3 complete on `main`; **not default**)
 **Status:** **Queue / guardrail only** — **Stay selected**; docs/readme/index/evidence hygiene only; no implementation authorization.
 **Purpose:** After Phase 4 rename docs are complete, classify what agents **may** do next vs what requires **product gates**. Prevents drift into ungated **build `4`**, project-container rename, or blind PREXUS cleanup.
 
@@ -22,8 +22,9 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 | **Build `4`** | **Not approved** |
 | **Project container rename** | **`PREXUS.xcodeproj`** — **deferred** |
 | **Preserved PREXUS surfaces** | [Inventory](./qwon_preserved_prexus_surface_inventory.md) — env vars, model filenames, eval target, historical docs |
+| **Gemma 4 E4B Mobile (research)** | **E4B-0〜E4B-3 complete** on `main` ([#153](https://github.com/studio-prospect/qwon-ai-ios/pull/153)–[#155](https://github.com/studio-prospect/qwon-ai-ios/pull/155)) — **research/eval candidate only**; **not QWON default** |
 
-**Default posture:** Stay on TestFlight **`0.1.0 (3)`** as **stable alpha**. Feedback intake is **closed** — no new reports expected. Code work requires a **verified release blocker** on build **`3`** or an **explicit product-approved build `4` gate** — not “waiting for feedback.”
+**Default posture:** Stay on TestFlight **`0.1.0 (3)`** as **stable alpha**. **Production local model:** Qwen MVP + current GGUF / llama.cpp path — unchanged by Gemma 4 E4B research. Feedback intake is **closed** — no new reports expected. Code work requires a **verified release blocker** on build **`3`** or an **explicit product-approved build `4` gate** — not “waiting for feedback.”
 
 ---
 
@@ -76,6 +77,35 @@ Related: [QWON rename docs index](./qwon_rename_docs_index.md) · [Next decision
 | Edit PREXUS historical docs (`qwen_text_only_alpha_*`) or frozen ledger rows | Immutable baseline — link from QWON docs only |
 | Append **`QWON-FB-*`** triage rows while intake is closed | [Feedback window closed](./qwon_text_alpha_feedback_intake.md#feedback-window-close-2026-06-03) |
 | Commit PNG / logs / GGUF / IPA to git | Ops storage only (`~/QWON-alpha-evidence/`) |
+
+---
+
+<a id="gemma4-e4b-mobile-research-2026-06-11"></a>
+
+## Gemma 4 E4B Mobile research — complete (2026-06-11)
+
+**Research/eval track closed on `main`.** Does **not** authorize a product lane, Build `4`, TestFlight, M3 reopen, downloader, or user-facing UI.
+
+| Field | Value |
+| --- | --- |
+| **Phases** | **E4B-0〜E4B-3 complete** — planning ([#153](https://github.com/studio-prospect/qwon-ai-ios/pull/153)), runtime-path decision ([#154](https://github.com/studio-prospect/qwon-ai-ios/pull/154)), isolated iOS eval + Wang smoke ([#155](https://github.com/studio-prospect/qwon-ai-ios/pull/155)) |
+| **Official eval artifact** | `litert-community/gemma-4-E4B-it-litert-lm` → `prexus-eval-gemma4-e4b.litertlm` (gitignored ops) — **not** `google/gemma-4-E4B-it-qat-mobile-transformers` Safetensors |
+| **Wang smoke (A19-class)** | **Runtime feasibility pass** — cold load, Japanese short answer, control-plane summary succeed via isolated `PREXUSLiteRTEval` |
+| **Routing JSON** | **Extractable (fenced); strict JSON-only contract not met** — do not treat as strict JSON success |
+| **Adoption** | **Not adopted** as QWON default; **not** adoption approval |
+| **QWON production / alpha** | **Qwen MVP** + current GGUF path unchanged |
+| **Build `4` / TestFlight / tag / version bump** | **Not authorized** by this research |
+| **M3 downloader / default-on** | **Not authorized** — M3 lane remains **closed** (Option A) |
+| **First doc to read** | [Gemma 4 E4B Mobile evaluation plan](../research/gemma4_e4b_mobile_evaluation_plan.md) · [local LLM notes](../research/local_llm_notes.md) |
+
+### Not allowed (E4B research result)
+
+| Action | Why |
+| --- | --- |
+| Switch QWON default local model to Gemma 4 E4B | Research/eval candidate only — **not default** |
+| Treat runtime feasibility as LiteRT adoption approval | Separate Product gate + [adoption decision](../research/litert_lm_adoption_decision.md) |
+| Open Build `4`, TestFlight upload, or M3 reopen from E4B pass | Research does not authorize release or downloader lanes |
+| Commit `.litertlm`, eval logs, or device PNGs to git | Ops/gitignored paths only |
 
 ---
 
@@ -273,10 +303,11 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 | Field | Detail |
 | --- | --- |
-| **Trigger** | Product requests eval → production path decision |
-| **Required evidence** | Device eval results; decision memo update |
-| **First doc to read** | [LiteRT adoption decision](../research/litert_lm_adoption_decision.md) · [PREXUSLiteRTEval preserve note](./qwon_preserved_prexus_surface_inventory.md) |
-| **Do not start if** | Conflated with QWON rename cleanup or build `3` |
+| **Status** | **E2B + E4B research/eval complete** on `main` — Wang runtime feasibility for Gemma 4 `.litertlm` (E2B [LiteRT evaluation plan](../research/litert_lm_evaluation_plan.md); E4B [device results](../research/gemma4_e4b_mobile_evaluation_plan.md#e4b-3-wang-device-results-2026-06-11)). **Not default**; strict JSON contract **not** proven for E4B (fenced routing JSON). |
+| **Trigger** | Product requests eval → **production** path decision (separate from research closure) |
+| **Required evidence** | Updated adoption memo; Product gate; no conflation with [E4B research closure](#gemma4-e4b-mobile-research-2026-06-11) |
+| **First doc to read** | [LiteRT adoption decision](../research/litert_lm_adoption_decision.md) · [Gemma 4 E4B evaluation plan](../research/gemma4_e4b_mobile_evaluation_plan.md) · [PREXUSLiteRTEval preserve note](./qwon_preserved_prexus_surface_inventory.md) |
+| **Do not start if** | Conflated with QWON rename cleanup or build `3`; treating E4B runtime feasibility as adoption approval |
 
 ### OCR / multimodal
 
@@ -337,9 +368,10 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 | Model download / GGUF UX (M3) | **Closed** (Option A) | [M3 spike outcome decision](./qwon_m3_spike_outcome_decision.md) · [UX plan](./qwon_model_download_gguf_ux_plan.md) |
 | Open UI-2 onboarding structure | **Deferred** | **Not approved** — [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) |
 | Add OCR / LiteRT / App Store readiness | Stay — docs-only | [Checklist](./qwon_app_store_public_readiness_checklist.md) · [Intake ledger](./qwon_app_store_public_readiness_intake.md) · [Selection matrix](./qwon_post_alpha_options.md#selection-matrix) |
+| Check Gemma 4 E4B Mobile status | **Research complete** — **not default** | [E4B research closure](#gemma4-e4b-mobile-research-2026-06-11) · [Evaluation plan](../research/gemma4_e4b_mobile_evaluation_plan.md) |
 
 ---
 
 ## Agent note
 
-Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **Stay selected** — docs/readme/index/evidence hygiene only; M3 Option A / lane **closed**. App Store **G1 + G2 + G3 + G4 Closed/Ready**; G5 intake **Q-AS-11 … Q-AS-12 Answered** ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)) — gate sign-off worksheet **Pending**; intake **12 Unanswered**; **public release not approved**. Build **`4`** / TestFlight upload / tag / version bump require **explicit product gate**. To start implementation, Product must **lift Stay** and select one lane + Codex scoped plan.
+Phase 4 rename **documentation is complete**. Build **`3`** is **stable alpha** on TestFlight; **feedback intake closed** (2026-06-03). **Stay selected** — docs/readme/index/evidence hygiene only; M3 Option A / lane **closed**. **Gemma 4 E4B Mobile E4B-0〜E4B-3** research is **complete on `main`** ([#153](https://github.com/studio-prospect/qwon-ai-ios/pull/153)–[#155](https://github.com/studio-prospect/qwon-ai-ios/pull/155)) — Wang LiteRT-LM `.litertlm` **runtime feasibility pass**; routing JSON **extractable (fenced)** / strict JSON contract **not met**; **research/eval candidate only**, **not QWON default**; does **not** authorize Build `4`, TestFlight, M3 reopen, or downloader. App Store **G1 + G2 + G3 + G4 Closed/Ready**; G5 intake **Q-AS-11 … Q-AS-12 Answered** ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)) — gate sign-off worksheet **Pending**; intake **12 Unanswered**; **public release not approved**. Build **`4`** / TestFlight upload / tag / version bump require **explicit product gate**. To start implementation, Product must **lift Stay** and select one lane + Codex scoped plan.

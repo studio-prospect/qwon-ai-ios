@@ -1,6 +1,6 @@
 # QWON — Post-M3 Next Lane Decision Checkpoint
 
-**Last updated:** 2026-06-07 (Stay selected — active docs wording audit)
+**Last updated:** 2026-06-11 (Stay selected — Gemma 4 E4B Mobile research complete; **not default**)
 **Status:** **Stay selected** — no third post-alpha lane. M3 **Option A selected / lane closed**. **Build `4` not approved.** **TestFlight upload / tag / version bump not approved.**
 **Purpose:** After [Model download / GGUF UX](./qwon_model_download_gguf_ux_plan.md) M3 spike completion ([#118](https://github.com/studio-prospect/qwon-ai-ios/pull/118), verification [#119](https://github.com/studio-prospect/qwon-ai-ios/pull/119), outcome [#120](https://github.com/studio-prospect/qwon-ai-ios/pull/120), Option A [#121](https://github.com/studio-prospect/qwon-ai-ios/pull/121)), give Product a **comparable view** of remaining post-alpha lanes. **Docs-only** — does **not** authorize implementation, spike, or release ops.
 
@@ -20,6 +20,7 @@ Related: [Post-alpha option lanes](./qwon_post_alpha_options.md) · [Next work q
 | **Model download / GGUF UX** | M1/M2 **complete** · M3 spike **merged** · **Option A selected** — compile-gated **default-off** · lane **closed** · [decision record](./qwon_m3_spike_outcome_decision.md#decision-record) |
 | **Tester-visible model acquisition** | M2 **Place GGUF via Mac** + USB ops — unchanged on TestFlight **`0.1.0 (3)`** |
 | **Next lane selected** | **Stay** — no third post-alpha lane · [decision record](#decision-record) |
+| **Gemma 4 E4B Mobile research** | **E4B-0〜E4B-3 complete** on `main` ([#153](https://github.com/studio-prospect/qwon-ai-ios/pull/153)–[#155](https://github.com/studio-prospect/qwon-ai-ios/pull/155)) — **research/eval candidate only**; Wang LiteRT-LM `.litertlm` runtime feasibility **pass**; routing JSON **extractable (fenced)** / strict JSON contract **not met**; **not QWON default** |
 
 **Closed lanes (do not re-select without new Product record):**
 
@@ -39,7 +40,7 @@ Product may choose **Stay** (recommended default) or **one** lane. Do **not** st
 | **0** | **Stay / docs-ops hygiene** | Maintain TestFlight **`0.1.0 (3)`**; index/queue/evidence docs only | [Ready / low-risk docs-ops](./qwon_next_work_queue.md#ready--low-risk-docs-ops) | **Default** — no product gate for docs |
 | **1** | **UI-2 reopen** | Structural onboarding — **not opened** since UI-1 | [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) | **New evidence required** — Product re-open only |
 | **2** | **OCR / camera / multimodal planning** | Camera/OCR as orchestrator input — planning only | [OCR / camera option](./qwon_post_alpha_options.md#2-ocr--camera-input) · Codex design memo | Product selects lane → Codex scoped plan |
-| **3** | **LiteRT follow-up planning** | Local backend policy beyond llama.cpp + Embedded Heuristic | [LiteRT option](./qwon_post_alpha_options.md#1-litert--local-backend-policy) · [research memo](../research/litert_lm_adoption_decision.md) | Product selects lane → Codex scoped plan |
+| **3** | **LiteRT follow-up planning** | Local backend policy beyond llama.cpp + Embedded Heuristic — **E2B/E4B research/eval complete**; adoption **not** approved | [LiteRT option](./qwon_post_alpha_options.md#1-litert--local-backend-policy) · [adoption memo](../research/litert_lm_adoption_decision.md) · [E4B evaluation plan](../research/gemma4_e4b_mobile_evaluation_plan.md) | Product selects lane → Codex scoped plan — **do not** treat E4B runtime feasibility as adoption approval |
 | **4** | **App Store public release readiness** | Long-term exit from TestFlight-only — checklist only | [App Store public readiness checklist](./qwon_app_store_public_readiness_checklist.md) | **Separate** from Build `4`; product horizon gate |
 | **5** | **Phase 4 residual cleanup** | e.g. **`PREXUS.xcodeproj`** container rename — **deferred** | [Preserved inventory](./qwon_preserved_prexus_surface_inventory.md) · [project container option](./qwon_post_alpha_options.md#4-project-container-rename-prexusxcodeproj) | Product **explicitly** wants infra cleanup — not default hygiene |
 | **6** | **Runtime memory / context retention** | Durable cognitive layer — high privacy/runtime impact | [Memory option](./qwon_post_alpha_options.md#6-runtime-memory--context-retention) | Product selects lane → Codex scoped plan |
@@ -77,6 +78,8 @@ Product may choose **Stay** (recommended default) or **one** lane. Do **not** st
 | **Global PREXUS string cleanup** outside scoped migration PR | [Preserved inventory](./qwon_preserved_prexus_surface_inventory.md) |
 | **Open UI-2** without new evidence | [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) |
 | **Start implementation/spike** without Codex scoped plan merge | Checkpoint is **selection only** |
+| **Adopt Gemma 4 E4B** or switch QWON default model from E4B research | Research/eval candidate only — **not default**; Qwen MVP + GGUF unchanged |
+| **Open Build `4`, TestFlight, M3 reopen, or downloader** from E4B Wang pass | Research does not authorize release or acquisition lanes |
 
 ---
 
