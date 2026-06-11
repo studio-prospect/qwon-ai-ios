@@ -116,6 +116,8 @@ Research questions:
 - cold load, memory pressure, thermal behavior, Japanese response quality, and strict JSON reliability
 - whether any product distribution path is acceptable under QWON's App Store / model distribution gates
 
+**E4B-1 desktop probe (2026-06-11):** HF revision `6637cff…` + file hashes recorded; full snapshot in gitignored `models/prexus-eval-gemma4-e4b-mobile-transformers/`. Desktop load/generate **blocked** on x86_64 eval host — **dependency**: `transformers` 5.11 requires **torch ≥ 2.4**, PyPI max **2.2.2** on that host. See [Gemma 4 E4B Mobile Evaluation Plan — Phase E4B-1 results](./gemma4_e4b_mobile_evaluation_plan.md#phase-e4b-1-results-2026-06-11).
+
 ### LiteRT-LM / Google AI Edge direction
 
 Current status: backend feasibility **proven on A17 Pro+** (Wang); **not adopted** for production. See [LiteRT-LM Evaluation Plan](./litert_lm_evaluation_plan.md) and [LiteRT-LM Adoption Decision Memo](./litert_lm_adoption_decision.md).

@@ -2,7 +2,7 @@
 
 **Status:** Evaluation planning — docs-only. Not implementation approval. Not a QWON default-model change.
 
-**Last updated:** 2026-06-11
+**Last updated:** 2026-06-11 (Phase E4B-1 metadata + desktop feasibility recorded)
 
 Related: [Gemma-4-E2B-it evaluation](./gemma4_e2b_evaluation_plan.md) · [LiteRT-LM evaluation](./litert_lm_evaluation_plan.md) · [Local LLM notes](./local_llm_notes.md) · [M3 model download UX plan](../product/qwon_model_download_gguf_ux_plan.md)
 
@@ -179,7 +179,93 @@ Exit:
 
 - Either one text generation succeeds on desktop, or a concrete blocker is documented.
 
-### Phase E4B-2 — Runtime path decision
+**Phase E4B-1 status (2026-06-11):** **Blocker documented** — artifact metadata + local hashes recorded; desktop load/generate **not successful** on eval host. See [Phase E4B-1 results](#phase-e4b-1-results-2026-06-11).
+
+### Phase E4B-1 results (2026-06-11)
+
+Research/eval-only. No QWON app integration. No default-model change.
+
+#### Hugging Face revision and file inventory
+
+| Field | Value |
+| --- | --- |
+| **Repository** | [`google/gemma-4-E4B-it-qat-mobile-transformers`](https://huggingface.co/google/gemma-4-E4B-it-qat-mobile-transformers) |
+| **Revision (SHA)** | `6637cffd8d4cd55fb1461d280f7299c4998daf63` |
+| **Last modified (HF API)** | 2026-06-05T20:32:13Z |
+| **Listed license (HF)** | Apache-2.0 — QWON redistribution still requires Legal/Product confirmation |
+
+| Path | Bytes | SHA-256 (local download) |
+| --- | ---: | --- |
+| `model.safetensors` | 3,525,094,516 (~3.28 GiB) | `391946da2e0bec22288e9fe50a4d31d2401c9570ba3baaf0ba43d644dadeb1d4` |
+| `tokenizer.json` | 32,169,626 (~30.7 MiB) | `cc8d3a0ce36466ccc1278bf987df5f71db1719b9ca6b4118264f45cb627bfe0f` |
+| `tokenizer_config.json` | 2,095 | `68e2ea668d2b18a3c9b2868cccc1911e3c3b432c8f786557b17f164b346d9667` |
+| `config.json` | 6,305 | `c4847fd621d80f160945b62f4a2d9413fc82b81f17955b49ae32ea9feb00c5c6` |
+| `chat_template.jinja` | 17,336 | `2f1b4d75d067bae3fe44e676721c7f077d243bc007156cb9c2f8b5836613d082` |
+| `processor_config.json` | 1,689 | `32bdf45d2ad4cc29a0822ddd157a182de76644f0419a6228d151495256e9813c` |
+| `preprocessor_config.json` | 511 | `ea2ae257e901064abdd98dceb19f2b0da06af600bed15e0f99f5c85c37ee9d78` |
+| `generation_config.json` | 209 | `fb53f4c64e58896a63472e8eb304397db4a39453e1da0f5d57625ec5a8c1050e` |
+| `README.md` | 28,470 | `5cfed04d82b65e9eaa671593f6e3a0925eebb56795a0e876234147f9e4288bcc` |
+| `.gitattributes` | 1,570 | `34448b82c17d60fec9b65b1f093c115ddbaadc04beb1b0140b6bfed2e012a930` |
+
+**Repo total (top-level artifacts):** ~**3.56 GB** (`model.safetensors` dominates).
+
+**Artifact schema notes (from `config.json` + model card):**
+
+- `model_type`: **`gemma4`** (multimodal — text / image / audio towers in config).
+- Mobile QAT variant: model card labels format **mobile-optimized (wNa8o8)** — custom schema for mobile hardware efficiency (2-bit decode layers, optimized KV cache, static activations).
+- `quantization_config.quant_method`: **`gemma`** with per-module `module_quant_configs` (10 patterns) and 7 `modules_to_not_convert` entries (vision/audio towers, embeddings, etc.).
+
+#### Local ops paths (gitignored — not in git)
+
+| Path | Purpose |
+| --- | --- |
+| `models/prexus-eval-gemma4-e4b-mobile-transformers/` | Full HF snapshot at revision `6637cff…` |
+| `.eval-logs/gemma4-e4b-mobile-e4b1-manifest.json` | Local SHA-256 manifest (ops only) |
+| `.eval-venv/gemma4-e4b/` | Isolated Python 3.12 venv for desktop probe |
+
+Download command (ops): `huggingface_hub.snapshot_download` pinned to revision `6637cffd8d4cd55fb1461d280f7299c4998daf63`.
+
+#### Desktop eval host
+
+| Field | Value |
+| --- | --- |
+| **OS** | macOS 15.7.7 (Build 24G720) |
+| **Arch** | **x86_64** |
+| **RAM** | 32 GiB |
+| **Python** | 3.12 (venv) |
+| **transformers** | 5.11.0 |
+| **torch (installed max on host)** | 2.2.2 — **PyPI has no torch ≥ 2.4 wheel for this x86_64 macOS host** |
+| **MPS** | Available (`True`) but unused — Transformers disables PyTorch backend below 2.4 |
+
+Upstream README requires: `pip install -U transformers torch accelerate` and `AutoModelForMultimodalLM.from_pretrained(...)` ([model README](https://huggingface.co/google/gemma-4-E4B-it-qat-mobile-transformers/blob/main/README.md)).
+
+#### Runtime probe results
+
+| Step | Result | Notes |
+| --- | --- | --- |
+| `AutoConfig.from_pretrained` | **Pass** | `model_type=gemma4` |
+| `AutoTokenizer.from_pretrained` | **Pass** | Loads from local snapshot |
+| `AutoProcessor.from_pretrained` | **Fail** | `ModuleNotFoundError: Could not import module 'Gemma4Processor'` — Transformers reports PyTorch unavailable (requires torch ≥ 2.4) |
+| `AutoModelForMultimodalLM.from_pretrained` | **Fail** | `ImportError`: PyTorch library not found in Transformers backend (same torch ≥ 2.4 gate) |
+| `model.generate` (text) | **Not run** | Blocked by model load failure |
+
+Transformers log on this host: `[transformers] Disabling PyTorch because PyTorch >= 2.4 is required but found 2.2.2`.
+
+#### Blocker classification
+
+| Class | Status | Detail |
+| --- | --- | --- |
+| **dependency** | **Primary blocker** | `transformers` 5.11 + Gemma 4 classes require **torch ≥ 2.4**; eval host (x86_64 macOS) capped at **torch 2.2.2** on PyPI — desktop load/generate could not proceed |
+| **artifact schema** | Observed, not blocking alone | Single **3.28 GiB** `model.safetensors`; **wNa8o8** mobile QAT / `quant_method: gemma` — requires current Transformers Gemma4 code path |
+| **runtime support** | Open | iOS-capable runtime still unknown (Phase E4B-2); desktop baseline **inconclusive** on this host |
+| **memory** | Not measured | Load did not reach weight materialization |
+| **model behavior** | Not measured | No generation run |
+
+#### Phase E4B-1 exit verdict
+
+**Concrete blocker documented.** Retry desktop load/generate on a host with **torch ≥ 2.4** (e.g. Apple Silicon macOS or Linux CUDA) before Phase E4B-2 runtime-path decision.
+
+**Unchanged:** QWON default model remains Qwen GGUF; `prexus-local-mvp.gguf` unchanged; no M3 / Build `4` / TestFlight scope.
 
 Before iOS work, decide the feasible runtime candidate:
 
@@ -221,22 +307,22 @@ A first PR is mergeable if it is **docs-only** and provides:
 - A next-step task for Cursor that starts with runtime feasibility rather than app integration.
 - `git diff --check` passes.
 
-## Cursor Task After This Plan
+## Cursor Task After E4B-1
 
-Prepare a follow-up **research/eval-only** PR for **Phase E4B-1**.
+Prepare a follow-up **research/eval-only** PR for **Phase E4B-2** runtime-path decision.
 
 Scope:
 
 1. Do not change QWON app code unless a later Codex plan explicitly allows it.
 2. Do not commit model artifacts.
-3. Create or update a gitignored ops path for local evidence if needed.
-4. Collect model metadata: file list, exact sizes, revision, local hash if downloaded.
-5. Attempt desktop-only load/generate if dependencies and local hardware allow.
-6. Update this document with results or blocker classification.
+3. Treat the E4B-1 desktop result as **inconclusive** until retried on a torch >= 2.4-capable host.
+4. Decide whether the exact mobile-optimized Safetensors artifact has a realistic iOS runtime path through LiteRT-LM / Google AI Edge, Core ML, MLX Swift, ExecuTorch, or another upstream-supported route.
+5. Record official/upstream evidence for any selected or rejected runtime path.
+6. Update this document with the Phase E4B-2 runtime decision, blockers, and the next isolated iOS eval task if a viable runtime exists.
 
 Suggested PR title:
 
-`docs(research): Record Gemma 4 E4B Mobile metadata and runtime feasibility notes`
+`docs(research): Decide Gemma 4 E4B Mobile runtime feasibility path`
 
 ## Review Gate
 
