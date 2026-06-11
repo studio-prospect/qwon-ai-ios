@@ -101,7 +101,7 @@ Research questions:
 
 ### Gemma 4 E4B Mobile direction
 
-Current status: **E4B-3 Wang smoke pass** — LiteRT-LM + `prexus-eval-gemma4-e4b.litertlm` loads and generates on A19-class Wang (cold ~11.4 s, JA coherent, routing JSON valid). Not default. See [Gemma 4 E4B Mobile Evaluation Plan](./gemma4_e4b_mobile_evaluation_plan.md#e4b-3-wang-device-results-2026-06-11).
+Current status: **E4B-3 runtime feasibility pass** — LiteRT-LM + `prexus-eval-gemma4-e4b.litertlm` loads and generates on A19-class Wang (cold ~11.4 s, JA coherent). Routing JSON is **extractable but fenced**; strict JSON contract not met. Not default. See [Gemma 4 E4B Mobile Evaluation Plan](./gemma4_e4b_mobile_evaluation_plan.md#e4b-3-wang-device-results-2026-06-11).
 
 Potential value:
 
