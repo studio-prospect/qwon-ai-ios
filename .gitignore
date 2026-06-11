@@ -21,6 +21,8 @@ tmp/
 .eval-logs/
 models/*.gguf
 models/*.litertlm
+models/prexus-eval-gemma4-e4b-mobile-transformers/
+.eval-venv/
 vendor/LiteRT-LM/
 vendor/llama-cpp-artifacts/
 vendor/llama.cpp/build-*/
