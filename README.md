@@ -2,8 +2,6 @@
 
 QWON is a local-first mobile AI runtime for iPhone.
 
-**Website:** [https://qwon.ai](https://qwon.ai)
-
 ## Focus
 
 - On-device intelligence
