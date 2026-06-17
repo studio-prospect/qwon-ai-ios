@@ -15,10 +15,16 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 IOS="$ROOT/app/ios"
 DERIVED="$ROOT/.derivedData"
-TEAM="${DEVELOPMENT_TEAM:-BWSS94LH28}"
+TEAM="${DEVELOPMENT_TEAM:-}"
 BUNDLE_ID="jp.studio-prospect.qwon.ios"
 APP="$DERIVED/Build/Products/Debug-iphoneos/QWON.app"
 DEVICE_FILTER="${1:-}"
+
+if [[ -z "$TEAM" ]]; then
+  echo "error: set DEVELOPMENT_TEAM to your Apple Developer Team ID." >&2
+  echo "usage: DEVELOPMENT_TEAM=YOUR_TEAM_ID ./tools/scripts/install_on_device.sh" >&2
+  exit 1
+fi
 
 echo "==> Building for device (DEVELOPMENT_TEAM=$TEAM)"
 cd "$IOS"

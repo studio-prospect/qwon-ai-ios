@@ -3,7 +3,7 @@ import Foundation
 /// Signed-off M3 development artifact contract (Gate 2 / spike plan).
 enum QWONM3ModelDownloadManifest {
     static let hostedObjectIdentity =
-        "s3://qwon-094469122222-ap-northeast-1-an/models/qwen2.5-0.5b-instruct/q4_k_m/prexus-local-mvp.gguf"
+        "QWON-hosted development object; concrete bucket identity stays in ops evidence outside git"
 
     static let developmentDownloadURL = URL(
         string: "https://models.qwon.dev/models/qwen2.5-0.5b-instruct/q4_k_m/prexus-local-mvp.gguf"

@@ -49,7 +49,7 @@ ruby tools/scripts/generate_xcodeproj.rb
 
 ### Team ID
 
-The install script defaults to `DEVELOPMENT_TEAM=BWSS94LH28`. Override when needed:
+The install script requires `DEVELOPMENT_TEAM` so the Apple Developer Team ID stays out of git:
 
 ```bash
 DEVELOPMENT_TEAM=YOUR_TEAM_ID ./tools/scripts/install_on_device.sh

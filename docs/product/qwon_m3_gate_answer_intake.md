@@ -86,7 +86,7 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) Â
 
 | Field | Value |
 | --- | --- |
-| **Bucket** | `qwon-094469122222-ap-northeast-1-an` |
+| **Bucket** | Redacted from git; concrete bucket identity stays in ops evidence outside git |
 | **Object key** | `models/qwen2.5-0.5b-instruct/q4_k_m/prexus-local-mvp.gguf` |
 | **Development HTTPS endpoint** | `https://models.qwon.dev/models/qwen2.5-0.5b-instruct/q4_k_m/prexus-local-mvp.gguf` â€” selected QWON-owned development URL; DNS/CDN/object routing verification remains a Release Engineering operation before downloader network code is exercised. `qwon.ai` remains reserved for production/marketing use. |
 | **LastModified** | `2026-06-06T04:11:44+00:00` |
@@ -99,7 +99,7 @@ Related: [Gate readiness review plan](./qwon_m3_gate_readiness_review_plan.md) Â
 
 | Question ID | Answer |
 | --- | --- |
-| **Q-A-06** | Exact expected byte size is `397808192` bytes for hosted object `s3://qwon-094469122222-ap-northeast-1-an/models/qwen2.5-0.5b-instruct/q4_k_m/prexus-local-mvp.gguf`. |
+| **Q-A-06** | Exact expected byte size is `397808192` bytes for hosted object path class `models/qwen2.5-0.5b-instruct/q4_k_m/prexus-local-mvp.gguf`; concrete bucket identity stays in ops evidence outside git. |
 | **Q-A-07** | SHA-256 is `6eb923e7d26e9cea28811e1a8e852009b21242fb157b26149d3b188f3a8c8653` for the same hosted object. |
 
 **Ready sign-off:** Gate **2** is **Ready** as part of Batch A sign-off. Download temp/atomic verification mechanics remain Gate **5**.

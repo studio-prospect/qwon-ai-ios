@@ -45,7 +45,7 @@ This spike is allowed to answer: “Can QWON safely download, verify, promote, a
 
 | Field | Value |
 | --- | --- |
-| **Hosted object identity** | `s3://qwon-094469122222-ap-northeast-1-an/models/qwen2.5-0.5b-instruct/q4_k_m/prexus-local-mvp.gguf` |
+| **Hosted object identity** | Concrete bucket identity stays in ops evidence outside git; public docs retain only the object path class `models/qwen2.5-0.5b-instruct/q4_k_m/prexus-local-mvp.gguf` |
 | **Expected byte size** | `397808192` |
 | **SHA-256** | `6eb923e7d26e9cea28811e1a8e852009b21242fb157b26149d3b188f3a8c8653` |
 | **Final sandbox path** | `Documents/Models/prexus-local-mvp.gguf` |

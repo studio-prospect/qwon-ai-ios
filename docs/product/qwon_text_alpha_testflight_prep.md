@@ -238,7 +238,7 @@ cd app/ios
 xcodebuild -project PREXUS.xcodeproj -scheme QWON \
   -destination 'generic/platform=iOS' -configuration Release \
   -archivePath ../../.archive/QWON-0.1.0.xcarchive \
-  DEVELOPMENT_TEAM=BWSS94LH28 CODE_SIGN_STYLE=Automatic \
+  DEVELOPMENT_TEAM=<TEAM_ID> CODE_SIGN_STYLE=Automatic \
   -allowProvisioningUpdates archive
 
 xcodebuild -exportArchive \
@@ -248,7 +248,7 @@ xcodebuild -exportArchive \
   -allowProvisioningUpdates
 ```
 
-`ExportOptions-appstore.plist` (local, not in git): `method` = `app-store-connect`, `teamID` = `BWSS94LH28`, `signingStyle` = `automatic`.
+`ExportOptions-appstore.plist` (local, not in git): `method` = `app-store-connect`, `teamID` = `<TEAM_ID>`, `signingStyle` = `automatic`.
 
 | Check | Result |
 | --- | --- |
@@ -258,7 +258,7 @@ xcodebuild -exportArchive \
 | Display name | **QWON** |
 | Version / build | `0.1.0` / `1` |
 | Embedded llama | `llama.framework` present |
-| IPA signature | `Apple Distribution: studio PROSPECT, Inc (BWSS94LH28)` — cert expires **2026-10-07** |
+| IPA signature | Apple Distribution certificate for the studio PROSPECT team (Team ID redacted from git) — cert expires **2026-10-07** |
 | Export profile (automatic) | `iOS Team Store Provisioning Profile: jp.studio-prospect.qwon.ios` |
 | Named profiles (gate) | `AppStoreQWON_20260602` / `DevelopmentQWON_20260602` registered locally |
 | IPA path (ops, not in git) | `.archive/QWON-Export/PREXUS.ipa` — uploaded 2026-06-02 via [TestFlight upload](#testflight-upload-2026-06-02) |
@@ -279,7 +279,7 @@ xcodebuild -exportArchive \
   -allowProvisioningUpdates
 ```
 
-`ExportOptions-upload.plist` (local, not in git): `destination` = `upload`, `method` = `app-store-connect`, `teamID` = `BWSS94LH28`.
+`ExportOptions-upload.plist` (local, not in git): `destination` = `upload`, `method` = `app-store-connect`, `teamID` = `<TEAM_ID>`.
 
 | Field | Value |
 | --- | --- |
