@@ -125,7 +125,7 @@ Constraints or deferrals:
 | --- | --- |
 | **Gate** | G5 |
 | **Owner** | Legal, Product |
-| **Intake status** | **Answered** (This PR) |
+| **Intake status** | **Answered** ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)) |
 
 ### Question
 
@@ -183,7 +183,7 @@ Q-AS-12, Q-AS-19 (partial) — *historical; G5 gate sign-off completed 2026-06-1
 | --- | --- |
 | **Gate** | G5 |
 | **Owner** | Legal |
-| **Intake status** | **Answered** (This PR) |
+| **Intake status** | **Answered** ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)) |
 
 ### Question
 

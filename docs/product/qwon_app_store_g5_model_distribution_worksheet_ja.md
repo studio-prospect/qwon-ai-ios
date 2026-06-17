@@ -112,7 +112,7 @@ English worksheet: [G5 Model Distribution Policy Worksheet](./qwon_app_store_g5_
 | --- | --- |
 | **Gate** | G5 |
 | **Owner** | Legal, Product |
-| **Intake 状態** | **Answered**（This PR） |
+| **Intake 状態** | **Answered** ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)) |
 
 ### 質問
 
@@ -166,7 +166,7 @@ Legal / Product が編集・差し替え・却下すること。**final model di
 | --- | --- |
 | **Gate** | G5 |
 | **Owner** | Legal |
-| **Intake 状態** | **Answered**（This PR） |
+| **Intake 状態** | **Answered** ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)) |
 
 ### 質問
 
