@@ -170,7 +170,7 @@ Related: [G5 gate sign-off worksheet](./qwon_app_store_g5_gate_signoff_worksheet
 
 ## G5 — Model distribution policy
 
-**External share:** [G5 model distribution worksheet (EN)](./qwon_app_store_g5_model_distribution_worksheet.md) · [G5 モデル配布ポリシー回答フォーム（日本語）](./qwon_app_store_g5_model_distribution_worksheet_ja.md) · [G5 gate sign-off worksheet](./qwon_app_store_g5_gate_signoff_worksheet.md) · [M3 distribution compliance memo](./qwon_m3_model_distribution_compliance_memo.md) · [M3 hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md) · [M2 guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement)
+**External share:** [G5 model distribution worksheet (EN)](./qwon_app_store_g5_model_distribution_worksheet.md) *(historical intake source — superseded by [G5 gate sign-off](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product))* · [G5 モデル配布ポリシー回答フォーム（日本語）](./qwon_app_store_g5_model_distribution_worksheet_ja.md) *(historical)* · [G5 gate sign-off worksheet](./qwon_app_store_g5_gate_signoff_worksheet.md) · [M3 distribution compliance memo](./qwon_m3_model_distribution_compliance_memo.md) · [M3 hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md) · [M2 guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement)
 
 **G5 intake + gate (2026-06-11):** **Q-AS-11 … Q-AS-12 Answered** ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)). Checklist gate **G5 Closed/Ready** — [sign-off Approved](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product) (This PR). **Option A Mac+USB interim** for public-readiness planning. **Not** in-app download / M3 reopen / hosted distribution / bundled weights. **Not** public release, Build `4`, or ASC submission approval.
 
@@ -181,7 +181,7 @@ Related: [G5 gate sign-off worksheet](./qwon_app_store_g5_gate_signoff_worksheet
 
 ### G5 Legal/Product answer details (2026-06-08)
 
-**Source:** Legal / Product approval of [G5 worksheet — approved for intake recording](./qwon_app_store_g5_model_distribution_worksheet.md#legal-product-decision-draft--awaiting-explicit-approval) ([#148](https://github.com/studio-prospect/qwon-ai-ios/pull/148) worksheet prep; intake recorded This PR).
+**Source:** Legal / Product approval of [G5 worksheet — approved for intake recording](./qwon_app_store_g5_model_distribution_worksheet.md#legal-product-decision-draft--awaiting-explicit-approval) ([#148](https://github.com/studio-prospect/qwon-ai-ios/pull/148) worksheet prep; intake recorded [#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)). Worksheet is **historical source** — current gate authority: [G5 gate sign-off](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product) ([#157](https://github.com/studio-prospect/qwon-ai-ios/pull/157)).
 **Scope (historical — #149):** Recorded **Answered** intake rows only; gate sign-off followed in This PR.
 
 | Question ID | Answer |

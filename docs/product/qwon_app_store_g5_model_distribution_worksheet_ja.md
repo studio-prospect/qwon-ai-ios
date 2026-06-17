@@ -1,12 +1,12 @@
 # QWON — App Store G5 モデル配布ポリシー回答フォーム（日本語）
 
-**最終更新:** 2026-06-08（G5 Legal/Product **approved for intake recording** — gate sign-off **Open**）
-**状態:** **Legal/Product decision draft — approved for intake recording 付き worksheet** — [intake ledger](./qwon_app_store_public_readiness_intake.md) の **Q-AS-11 … Q-AS-12** は **Answered**（This PR）。**final model distribution policy 承認ではない**。**in-app download / M3 reopen / hosted distribution 承認ではない**。**App Store 公開承認ではない**。**Build `4` 承認ではない**。**TestFlight upload / tag / version bump / ASC submission 承認ではない**。
-**目的:** **Legal / Product** 向け — G5 intake **Answered** 記録済；**G5 gate sign-off** は **Open**（別 worksheet）。
+**最終更新:** 2026-06-11（G5 gate sign-off **Approved** 2026-06-11 — **historical source worksheet**）
+**状態:** **Historical / source worksheet** — intake **Q-AS-11 … Q-AS-12** の記録元（[#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)）。**現行 gate 状態の正本は** [G5 gate sign-off worksheet](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product) ([#157](https://github.com/studio-prospect/qwon-ai-ios/pull/157))：checklist gate **G5 Closed/Ready**；sign-off **Approved**；承認 interim path **Option A Mac+USB**。**公開 / Build `4` / TestFlight upload / M3 reopen / in-app download / hosted distribution / bundled weights 承認ではない**。
+**目的:** **2026-06-08 Legal/Product decision draft**（G5 intake 記録用）を保持。**現行 G5 gate 状態は本フォームではなく** [G5 gate sign-off record](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product) を参照。
 
 English worksheet: [G5 Model Distribution Policy Worksheet](./qwon_app_store_g5_model_distribution_worksheet.md)
 
-関連: [Intake ledger — G5](./qwon_app_store_public_readiness_intake.md#g5--model-distribution-policy) · [Checklist — G5](./qwon_app_store_public_readiness_checklist.md#3-public-readiness-gates) · [M3 distribution compliance memo](./qwon_m3_model_distribution_compliance_memo.md) · [M3 hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md) · [M2 guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement) · [M3 spike outcome — Option A](./qwon_m3_spike_outcome_decision.md#decision-record) · [G3 privacy worksheet](./qwon_app_store_g3_privacy_worksheet.md) · [G4 gate sign-off](./qwon_app_store_g4_gate_signoff_worksheet.md#sign-off-record-legal-re) · [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record)
+関連: [G5 gate sign-off worksheet — 現行正本](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product) · [Intake ledger — G5](./qwon_app_store_public_readiness_intake.md#g5--model-distribution-policy) · [Checklist — G5](./qwon_app_store_public_readiness_checklist.md#3-public-readiness-gates) · [M3 distribution compliance memo](./qwon_m3_model_distribution_compliance_memo.md) · [M3 hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md) · [M2 guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement) · [M3 spike outcome — Option A](./qwon_m3_spike_outcome_decision.md#decision-record) · [G3 privacy worksheet](./qwon_app_store_g3_privacy_worksheet.md) · [G4 gate sign-off](./qwon_app_store_g4_gate_signoff_worksheet.md#sign-off-record-legal-re) · [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record)
 
 ---
 
@@ -22,21 +22,22 @@ English worksheet: [G5 Model Distribution Policy Worksheet](./qwon_app_store_g5_
 | **Stay selected** | Stay 解除・実装承認にはならない |
 | **コード変更なし** | app コード、download UX、hosting pipeline、model bundling の変更なし |
 | **推奨案は draft** | [approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval) により superseded — 以下は historical |
-| **記録** | Legal / Product **approved for intake recording** 2026-06-08 — intake **Answered**（This PR）；**G5 gate sign-off** は **Open** |
+| **記録** | Legal / Product **approved for intake recording** 2026-06-08 — intake **Answered** ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149))；**G5 gate sign-off Approved** 2026-06-11 ([#157](https://github.com/studio-prospect/qwon-ai-ios/pull/157)) — [sign-off record](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product) |
 
 ---
 
 <a id="legal-product-decision-draft--awaiting-explicit-approval"></a>
 
-## Legal / Product decision draft — **approved for intake recording（intake 記録承認済）**
+## Legal / Product decision draft — **approved for intake recording（historical source）**
 
-**ラベル:** **Legal/Product decision draft — approved for intake recording (2026-06-08)** — [intake ledger — G5 answer details](./qwon_app_store_public_readiness_intake.md#g5-legalproduct-answer-details-2026-06-08) に記録（This PR；worksheet prep [#148](https://github.com/studio-prospect/qwon-ai-ios/pull/148)）。**G5 Closed/Ready ではない**。**final model distribution policy / in-app download / hosted distribution / bundled weights / 公開 / Build `4` 承認ではない**。
+**ラベル:** **Legal/Product decision draft — approved for intake recording (2026-06-08)** — [intake ledger — G5 answer details](./qwon_app_store_public_readiness_intake.md#g5-legalproduct-answer-details-2026-06-08) に記録（[#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)；worksheet prep [#148](https://github.com/studio-prospect/qwon-ai-ios/pull/148)）。**gate 状態の正本は** [G5 gate sign-off — Approved (2026-06-11)](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product)。**公開 / in-app download / hosted distribution / bundled weights / Build `4` 承認ではない**。
 
 | 項目 | 値 |
 | --- | --- |
 | **準備日** | 2026-06-08 — Stay 下 docs-only hygiene（[#147](https://github.com/studio-prospect/qwon-ai-ios/pull/147)；decision draft [#148](https://github.com/studio-prospect/qwon-ai-ios/pull/148)） |
-| **Intake ledger** | **Q-AS-11 … Q-AS-12 Answered**（This PR） |
-| **次の段階** | **G5 gate sign-off worksheet 準備** → Legal / Product 承認後、別 docs-only PR で checklist gate **G5 Closed/Ready** |
+| **Intake ledger** | **Q-AS-11 … Q-AS-12 Answered** ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)) |
+| **Gate sign-off（現行）** | **Approved** 2026-06-11 — checklist gate **G5 Closed/Ready** · [sign-off record](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product) ([#157](https://github.com/studio-prospect/qwon-ai-ios/pull/157)) |
+| **承認 interim path** | **Option A Mac+USB Place GGUF via Mac only** — in-app download / bundled weights / phased combination **deferred** |
 
 ### Q-AS-11 — Public model distribution policy
 
@@ -52,7 +53,7 @@ English worksheet: [G5 Model Distribution Policy Worksheet](./qwon_app_store_g5_
 | **build `3` 整合（draft）** | **`0.1.0 (3)`** の M2 path と一致 — **Build `4` / 公開承認ではない**。 |
 | **判断 owner** | Legal / Product（**approved for intake recording** — 2026-06-08） |
 | **出典** | 推奨案 § Q-AS-11 · [M3 spike outcome](./qwon_m3_spike_outcome_decision.md#decision-record) |
-| **制約** | **in-app download / hosted distribution / bundled weights 承認ではない**；**G5 Closed/Ready ではない** |
+| **制約** | **in-app download / hosted distribution / bundled weights 承認ではない**；*historical draft constraint（pre-sign-off 2026-06-08）* |
 
 ### Q-AS-12 — License and redistribution constraints
 
@@ -68,7 +69,7 @@ English worksheet: [G5 Model Distribution Policy Worksheet](./qwon_app_store_g5_
 | **Hosted distribution（draft）** | In-app download / QWON-hosted mirror は QWON を **distribution channel** に — 本 draft では **未承認**。 |
 | **判断 owner** | Legal（**approved for intake recording** — 2026-06-08） |
 | **出典** | 推奨案 § Q-AS-12 |
-| **制約** | **final Legal 結論ではない**；**hosted distribution 承認ではない**；**G5 Closed/Ready ではない** |
+| **制約** | **final Legal 結論ではない**；**hosted distribution 承認ではない**；*historical draft constraint（pre-sign-off 2026-06-08）* |
 
 ---
 
@@ -80,12 +81,12 @@ English worksheet: [G5 Model Distribution Policy Worksheet](./qwon_app_store_g5_
 | **Checklist gate G2** | **Closed/Ready** — [sign-off Approved](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) ([#136](https://github.com/studio-prospect/qwon-ai-ios/pull/136)) |
 | **Checklist gate G3** | **Closed/Ready** — [sign-off Approved](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) ([#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)) |
 | **Checklist gate G4** | **Closed/Ready** — [sign-off Approved](./qwon_app_store_g4_gate_signoff_worksheet.md#sign-off-record-legal-re) ([#146](https://github.com/studio-prospect/qwon-ai-ios/pull/146)) |
+| **Checklist gate G5** | **Closed/Ready** — [sign-off Approved](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product) ([#157](https://github.com/studio-prospect/qwon-ai-ios/pull/157)) |
 | **Intake ledger total** | **24 questions · 12 Unanswered · 12 Answered** |
 | **Active TestFlight** | **QWON `0.1.0 (3)`** — stable alpha · ASC **`6775685841`** · shipped binary に **GGUF 同梱なし** |
 | **M3 posture** | **Option A selected** — compile-gated **default-off**；M3 lane **closed** · [decision record](./qwon_m3_spike_outcome_decision.md#decision-record) |
 | **Tester-visible model path** | M2 **Place GGUF via Mac** + USB — [guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement)；build `3` 上 in-app GGUF download なし |
-| **G5 intake** | **Q-AS-11 … Q-AS-12 Answered**（This PR） |
-| **Checklist gate G5** | **Open** — gate sign-off pending |
+| **G5 intake** | **Q-AS-11 … Q-AS-12 Answered** ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)) |
 | **Public release approved?** | **No** |
 | **Build `4` approved?** | **No** |
 
@@ -111,7 +112,7 @@ English worksheet: [G5 Model Distribution Policy Worksheet](./qwon_app_store_g5_
 | --- | --- |
 | **Gate** | G5 |
 | **Owner** | Legal, Product |
-| **Intake 状態** | **Answered**（This PR） |
+| **Intake 状態** | **Answered** ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)) |
 
 ### 質問
 
@@ -119,7 +120,7 @@ approved **public model distribution policy** は何か — Mac+USB **Place GGUF
 
 ### Legal / Product 記入欄
 
-**[approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval)** を参照 — intake **Answered**（This PR）；**G5 gate sign-off** は **Open**。
+**[approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval)** を参照 — intake **Answered** ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149))；**現行 gate 状態:** [G5 sign-off Approved](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product)（2026-06-11）。
 
 | 項目 | 記入 |
 | --- | --- |
@@ -132,7 +133,7 @@ approved **public model distribution policy** は何か — Mac+USB **Place GGUF
 | **build `3` baseline 整合** | **`0.1.0 (3)`** M2 path と一致 — **Build `4` 承認ではない**。（*approved for intake recording*） |
 | **判断 owner** | Legal / Product（approved for intake recording） |
 | **出典** | [Intake ledger — G5 answer details](./qwon_app_store_public_readiness_intake.md#g5-legalproduct-answer-details-2026-06-08) |
-| **制約** | final policy 承認ではない；G5 Closed/Ready ではない |
+| **制約** | historical intake source のみ；現行正本は [G5 sign-off record](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product) — **公開 / Build `4` 承認ではない** |
 
 ### 推奨回答案 — **superseded (historical)**
 
@@ -165,7 +166,7 @@ Legal / Product が編集・差し替え・却下すること。**final model di
 | --- | --- |
 | **Gate** | G5 |
 | **Owner** | Legal |
-| **Intake 状態** | **Answered**（This PR） |
+| **Intake 状態** | **Answered** ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)) |
 
 ### 質問
 
@@ -173,7 +174,7 @@ Legal / Product が編集・差し替え・却下すること。**final model di
 
 ### Legal 記入欄
 
-**[approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval)** を参照 — intake **Answered**（This PR）；**G5 gate sign-off** は **Open**。
+**[approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval)** を参照 — intake **Answered** ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149))；**現行 gate 状態:** [G5 sign-off Approved](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product)（2026-06-11）。
 
 | 項目 | 記入 |
 | --- | --- |
@@ -220,16 +221,15 @@ Legal が編集・差し替え・却下すること。**final license sign-off �
 
 ---
 
-## G5 完了チェックリスト（gate sign-off ではない）
+## G5 完了チェックリスト（historical intake worksheet — superseded）
 
 | 項目 | 状態 |
 | --- | --- |
 | Q-AS-11 Legal/Product decision draft 準備 | **Done** — [approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval) |
 | Q-AS-12 Legal/Product decision draft 準備 | **Done** — approved for intake recording |
-| Legal / Product **approved for intake recording** | **Done** — 2026-06-08（This PR） |
-| follow-up docs-only PR で intake **Answered** | **Done** — This PR |
-| **G5 gate sign-off worksheet** 準備 | **Next** |
-| checklist G5 Closed/Ready | **No** |
+| Legal / Product **approved for intake recording** | **Done** — 2026-06-08 ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)) |
+| **G5 gate sign-off worksheet** | **Done** — [Approved](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product) 2026-06-11 ([#157](https://github.com/studio-prospect/qwon-ai-ios/pull/157)) |
+| checklist G5 Closed/Ready | **Done** — [sign-off record](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product) |
 | In-app download / M3 reopen / hosted distribution | **No** |
 | Public release approved | **No** |
 | Build `4` / TestFlight upload / ASC submission | **No** |
@@ -238,4 +238,4 @@ Legal が編集・差し替え・却下すること。**final license sign-off �
 
 ## Agent note
 
-**Legal / Product** 向け **G5 gate sign-off** 用。**G5 Closed/Ready**、M3 reopen、in-app download / hosted distribution を intake 記録だけで承認しない。Stay 下 hygiene のみ。
+**Historical source worksheet のみ。**現行 G5 正本: [G5 gate sign-off worksheet — Approved (2026-06-11)](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product)。本フォームから **M3 reopen**、**in-app download / hosted distribution / bundled weights**、**公開 / Build `4`** を承認しない。次 gate: **G6**（Q-AS-13 … Q-AS-15）。Stay 下 hygiene のみ。
