@@ -1,7 +1,9 @@
 .DS_Store
 DerivedData/
 .derivedData/
+.derivedData*/
 .derivedData-litert-eval/
+*.xcresult
 build/
 .build/
 *.xcuserstate
@@ -18,6 +20,7 @@ node_modules/
 coverage/
 dist/
 tmp/
+.archive/
 .eval-logs/
 models/*.gguf
 models/*.litertlm

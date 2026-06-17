@@ -112,7 +112,7 @@ Per [integrity and storage requirements](./qwon_model_download_gguf_ux_plan.md#i
 | --- | --- |
 | **Published SHA-256 for `prexus-local-mvp.gguf`** | `6eb923e7d26e9cea28811e1a8e852009b21242fb157b26149d3b188f3a8c8653` — recorded in [answer intake ledger](./qwon_m3_gate_answer_intake.md#batch-a-artifact-record-details-2026-06-06) |
 | **Published expected byte size for M3 verification** | `397808192` bytes — recorded in [answer intake ledger](./qwon_m3_gate_answer_intake.md#batch-a-artifact-record-details-2026-06-06) |
-| **Hosted object identity** | `s3://qwon-094469122222-ap-northeast-1-an/models/qwen2.5-0.5b-instruct/q4_k_m/prexus-local-mvp.gguf`; ETag `"9027dfcbb8ab4852ad705c35c6c3ce29-48"` |
+| **Hosted object identity** | Concrete bucket identity and ETag are kept in ops evidence outside git; public docs retain only the object path class `models/qwen2.5-0.5b-instruct/q4_k_m/prexus-local-mvp.gguf` |
 | **In-app verification policy** | Gate **2** values are Ready; temp-file verification timing and atomic promotion remain Gate **5** |
 
 ### Observed file sizes (ops evidence — not Gate 2 final)

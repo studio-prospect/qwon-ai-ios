@@ -122,7 +122,7 @@ cd app/ios
 xcodebuild -project PREXUS.xcodeproj -scheme PREXUS \
   -destination 'generic/platform=iOS' -configuration Release \
   -archivePath ../../.archive/PREXUS-Release.xcarchive \
-  DEVELOPMENT_TEAM=BWSS94LH28 CODE_SIGN_STYLE=Automatic \
+  DEVELOPMENT_TEAM=<TEAM_ID> CODE_SIGN_STYLE=Automatic \
   -allowProvisioningUpdates archive
 
 xcodebuild -exportArchive \
@@ -132,14 +132,14 @@ xcodebuild -exportArchive \
   -allowProvisioningUpdates
 ```
 
-`ExportOptions-appstore.plist` (local, not in git): `method` = `app-store-connect`, `teamID` = `BWSS94LH28`, `signingStyle` = `automatic`.
+`ExportOptions-appstore.plist` (local, not in git): `method` = `app-store-connect`, `teamID` = `<TEAM_ID>`, `signingStyle` = `automatic`.
 
 | Check | Result |
 | --- | --- |
 | Archive | **ARCHIVE SUCCEEDED** |
 | Export | **EXPORT SUCCEEDED** |
 | Bundle ID in archive | `jp.studio-prospect.prexus.ios` |
-| IPA signature | `Apple Distribution: studio PROSPECT, Inc (BWSS94LH28)` |
+| IPA signature | Apple Distribution certificate for the studio PROSPECT team (Team ID redacted from git) |
 
 Re-run after version bumps or runtime changes intended for TestFlight.
 

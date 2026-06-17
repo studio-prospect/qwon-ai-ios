@@ -11,7 +11,7 @@ ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 DEVICE_FILTER="${1:-Wang}"
 IOS="$ROOT/app/ios"
 DERIVED="$ROOT/.derivedData-alpha-smoke"
-TEAM="${DEVELOPMENT_TEAM:-BWSS94LH28}"
+TEAM="${DEVELOPMENT_TEAM:-}"
 APP="$DERIVED/Build/Products/Debug-iphoneos/QWON.app"
 BUNDLE_ID="jp.studio-prospect.qwon.ios"
 LOG_DIR="$ROOT/.eval-logs"
@@ -32,6 +32,11 @@ fi
 ruby "$ROOT/tools/scripts/generate_xcodeproj.rb"
 
 if [[ "${PREXUS_SKIP_BUILD:-0}" != "1" ]]; then
+  if [[ -z "$TEAM" ]]; then
+    echo "error: set DEVELOPMENT_TEAM to your Apple Developer Team ID, or set PREXUS_SKIP_BUILD=1 after a prior signed build." >&2
+    exit 1
+  fi
+
   echo "==> Build Debug QWON for device"
   cd "$IOS"
   xcodebuild \

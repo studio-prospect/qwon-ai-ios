@@ -15,7 +15,7 @@ ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 DEVICE_FILTER="${1:-Wang}"
 IOS="$ROOT/app/ios"
 DERIVED="$ROOT/.derivedData-litert-prototype"
-TEAM="${DEVELOPMENT_TEAM:-BWSS94LH28}"
+TEAM="${DEVELOPMENT_TEAM:-}"
 APP="$DERIVED/Build/Products/Debug-iphoneos/QWON.app"
 BUNDLE_ID="jp.studio-prospect.qwon.ios"
 LOG_OUT="$ROOT/.eval-logs/litert-backend-comparison-${DEVICE_FILTER}.log"
@@ -27,6 +27,11 @@ fi
 
 if [[ ! -f "$ROOT/models/prexus-local-mvp.gguf" ]]; then
   echo "error: missing Qwen MVP — run ./tools/scripts/fetch_local_model.sh" >&2
+  exit 1
+fi
+
+if [[ -z "$TEAM" ]]; then
+  echo "error: set DEVELOPMENT_TEAM to your Apple Developer Team ID." >&2
   exit 1
 fi
 
