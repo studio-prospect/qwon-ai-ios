@@ -1,12 +1,12 @@
 # QWON — App Store G5 Model Distribution Policy Worksheet (External Share)
 
-**Last updated:** 2026-06-08 (G5 Legal/Product **approved for intake recording** — gate sign-off **Open**)
-**Status:** **Worksheet with Legal/Product decision draft — approved for intake recording** — intake rows **Q-AS-11 … Q-AS-12** are **Answered** in the [intake ledger](./qwon_app_store_public_readiness_intake.md) (This PR). **Not** final model distribution policy approval. **Not** in-app download / M3 reopen approval. **Not** App Store public release approval. **Not** Build `4` approval. **TestFlight upload / tag / version bump / ASC submission not approved.**
-**Purpose:** Shareable English worksheet for **Legal / Product** — G5 intake answers recorded; **G5 gate sign-off** remains **Open** (separate worksheet).
+**Last updated:** 2026-06-11 (G5 gate sign-off **Approved** 2026-06-11 — **historical source worksheet**)
+**Status:** **Historical / source worksheet** — intake source for **Q-AS-11 … Q-AS-12** (recorded [#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)). **Superseded for current gate status** by [G5 gate sign-off worksheet](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product) ([#157](https://github.com/studio-prospect/qwon-ai-ios/pull/157)): checklist gate **G5 Closed/Ready**; sign-off **Approved**; approved interim path **Option A Mac+USB**. **Not** public release / Build `4` / TestFlight upload / M3 reopen / in-app download / hosted distribution / bundled weights approval.
+**Purpose:** Preserve the **2026-06-08 Legal/Product decision draft** used to record G5 intake answers. **Do not** read this worksheet for current G5 gate status — use the [G5 gate sign-off record](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product).
 
 日本語版: [G5 モデル配布ポリシー回答フォーム（日本語）](./qwon_app_store_g5_model_distribution_worksheet_ja.md)
 
-Related: [Intake ledger — G5](./qwon_app_store_public_readiness_intake.md#g5--model-distribution-policy) · [Checklist — G5](./qwon_app_store_public_readiness_checklist.md#3-public-readiness-gates) · [M3 distribution compliance memo](./qwon_m3_model_distribution_compliance_memo.md) · [M3 hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md) · [M2 guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement) · [M3 spike outcome — Option A](./qwon_m3_spike_outcome_decision.md#decision-record) · [G3 privacy worksheet](./qwon_app_store_g3_privacy_worksheet.md) · [G4 gate sign-off](./qwon_app_store_g4_gate_signoff_worksheet.md#sign-off-record-legal-re) · [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record)
+Related: [G5 gate sign-off worksheet — current authority](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product) · [Intake ledger — G5](./qwon_app_store_public_readiness_intake.md#g5--model-distribution-policy) · [Checklist — G5](./qwon_app_store_public_readiness_checklist.md#3-public-readiness-gates) · [M3 distribution compliance memo](./qwon_m3_model_distribution_compliance_memo.md) · [M3 hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md) · [M2 guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement) · [M3 spike outcome — Option A](./qwon_m3_spike_outcome_decision.md#decision-record) · [G3 privacy worksheet](./qwon_app_store_g3_privacy_worksheet.md) · [G4 gate sign-off](./qwon_app_store_g4_gate_signoff_worksheet.md#sign-off-record-legal-re) · [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record)
 
 ---
 
@@ -22,21 +22,22 @@ Related: [Intake ledger — G5](./qwon_app_store_public_readiness_intake.md#g5--
 | **Stay selected** | Worksheet maintenance does **not** lift Stay or authorize implementation |
 | **No product/code changes** | **No** app code, download UX, hosting pipeline, or model bundling changes from this doc |
 | **Draft suggestions** | Superseded by [approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval) — historical suggested drafts below |
-| **Recording answers** | Legal / Product **approved for intake recording** 2026-06-08 — intake **Answered** (This PR); **G5 gate sign-off** still **Open** |
+| **Recording answers** | Legal / Product **approved for intake recording** 2026-06-08 — intake **Answered** ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)); **G5 gate sign-off Approved** 2026-06-11 ([#157](https://github.com/studio-prospect/qwon-ai-ios/pull/157)) — see [sign-off record](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product) |
 
 ---
 
 <a id="legal-product-decision-draft--awaiting-explicit-approval"></a>
 
-## Legal / Product decision draft — **approved for intake recording**
+## Legal / Product decision draft — **approved for intake recording (historical source)**
 
-**Label:** **Legal/Product decision draft — approved for intake recording (2026-06-08)** — recorded in [intake ledger — G5 answer details](./qwon_app_store_public_readiness_intake.md#g5-legalproduct-answer-details-2026-06-08) (This PR; worksheet prep [#148](https://github.com/studio-prospect/qwon-ai-ios/pull/148)). **Not** G5 Closed/Ready. **Not** final model distribution policy, in-app download, hosted distribution, bundled weights, public release, or Build `4` approval.
+**Label:** **Legal/Product decision draft — approved for intake recording (2026-06-08)** — recorded in [intake ledger — G5 answer details](./qwon_app_store_public_readiness_intake.md#g5-legalproduct-answer-details-2026-06-08) ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149); worksheet prep [#148](https://github.com/studio-prospect/qwon-ai-ios/pull/148)). **Superseded for gate status** by [G5 gate sign-off — Approved (2026-06-11)](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product). **Not** public release, in-app download, hosted distribution, bundled weights, or Build `4` approval.
 
 | Field | Value |
 | --- | --- |
 | **Prepared** | 2026-06-08 — docs-only hygiene under Stay ([#147](https://github.com/studio-prospect/qwon-ai-ios/pull/147); decision draft [#148](https://github.com/studio-prospect/qwon-ai-ios/pull/148)) |
-| **Intake ledger** | **Q-AS-11 … Q-AS-12 Answered** (This PR) |
-| **Next step** | **G5 gate sign-off worksheet preparation** → on Legal / Product approval, separate docs-only PR sets checklist gate **G5 Closed/Ready** |
+| **Intake ledger** | **Q-AS-11 … Q-AS-12 Answered** ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)) |
+| **Gate sign-off (current)** | **Approved** 2026-06-11 — checklist gate **G5 Closed/Ready** · [sign-off record](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product) ([#157](https://github.com/studio-prospect/qwon-ai-ios/pull/157)) |
+| **Approved interim path** | **Option A Mac+USB Place GGUF via Mac only** — in-app download / bundled weights / phased combination **deferred** |
 
 ### Q-AS-11 — Public model distribution policy
 
@@ -52,7 +53,7 @@ Related: [Intake ledger — G5](./qwon_app_store_public_readiness_intake.md#g5--
 | **Build `3` alignment (draft)** | Consistent with tester-visible M2 path on **`0.1.0 (3)`** — **not** Build `4` or public release approval. |
 | **Decision owner** | Legal / Product (**approved for intake recording** — 2026-06-08) |
 | **Source** | Elaborated from [suggested draft § Q-AS-11](#q-as-11--public-model-distribution-policy); [M3 spike outcome](./qwon_m3_spike_outcome_decision.md#decision-record) |
-| **Constraints** | **Not** in-app download / hosted distribution / bundled weights **approved**; **not** G5 Closed/Ready |
+| **Constraints** | **Not** in-app download / hosted distribution / bundled weights **approved**; *historical draft constraint (pre-sign-off 2026-06-08)* |
 
 ### Q-AS-12 — License and redistribution constraints
 
@@ -68,7 +69,7 @@ Related: [Intake ledger — G5](./qwon_app_store_public_readiness_intake.md#g5--
 | **Hosted distribution (draft)** | In-app download or QWON-hosted mirror makes QWON a **distribution channel** — **not approved** by this draft; separate Legal gate. |
 | **Decision owner** | Legal (**approved for intake recording** — 2026-06-08) |
 | **Source** | Elaborated from [suggested draft § Q-AS-12](#q-as-12--license-and-redistribution-constraints) |
-| **Constraints** | **Not** final Legal conclusion; **not** hosted distribution **approved**; **not** G5 Closed/Ready |
+| **Constraints** | **Not** final Legal conclusion; **not** hosted distribution **approved**; *historical draft constraint (pre-sign-off 2026-06-08)* |
 
 ---
 
@@ -80,12 +81,12 @@ Related: [Intake ledger — G5](./qwon_app_store_public_readiness_intake.md#g5--
 | **Checklist gate G2** | **Closed/Ready** — [sign-off Approved](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) ([#136](https://github.com/studio-prospect/qwon-ai-ios/pull/136)) |
 | **Checklist gate G3** | **Closed/Ready** — [sign-off Approved](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) ([#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)) |
 | **Checklist gate G4** | **Closed/Ready** — [sign-off Approved](./qwon_app_store_g4_gate_signoff_worksheet.md#sign-off-record-legal-re) ([#146](https://github.com/studio-prospect/qwon-ai-ios/pull/146)) |
+| **Checklist gate G5** | **Closed/Ready** — [sign-off Approved](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product) ([#157](https://github.com/studio-prospect/qwon-ai-ios/pull/157)) |
 | **Intake ledger total** | **24 questions · 12 Unanswered · 12 Answered** |
 | **Active TestFlight** | **QWON `0.1.0 (3)`** — stable alpha · ASC **`6775685841`** · **GGUF not bundled** in shipped binary |
 | **M3 posture** | **Option A selected** — compile-gated **default-off**; M3 lane **closed** · [decision record](./qwon_m3_spike_outcome_decision.md#decision-record) |
 | **Tester-visible model path** | M2 **Place GGUF via Mac** + USB — [guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement); app does **not** download GGUF in-app on build `3` |
-| **G5 intake** | **Q-AS-11 … Q-AS-12 Answered** (This PR) |
-| **Checklist gate G5** | **Open** — gate sign-off pending |
+| **G5 intake** | **Q-AS-11 … Q-AS-12 Answered** ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)) |
 | **Public release approved?** | **No** |
 | **Build `4` approved?** | **No** |
 
@@ -132,7 +133,7 @@ What is the approved **public model distribution policy** — Mac+USB **Place GG
 
 ### Legal / Product answer (fill in)
 
-**See [approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval)** — intake **Answered** (This PR); **G5 gate sign-off** still **Open**.
+**See [approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval)** — intake **Answered** ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)); **current gate status:** [G5 sign-off Approved](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product) (2026-06-11).
 
 | Field | Your answer |
 | --- | --- |
@@ -145,7 +146,7 @@ What is the approved **public model distribution policy** — Mac+USB **Place GG
 | **Build `3` baseline alignment** | Consistent with M2 path on **`0.1.0 (3)`** — **not** Build `4` approval. *(approved for intake recording)* |
 | **Decision owner** | Legal / Product (approved for intake recording) |
 | **Source** | [Intake ledger — G5 answer details](./qwon_app_store_public_readiness_intake.md#g5-legalproduct-answer-details-2026-06-08) |
-| **Constraints** | Not final policy approval; not G5 Closed/Ready |
+| **Constraints** | Historical intake source only; current authority is [G5 sign-off record](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product) — **not** public release / Build `4` approval |
 
 ### Suggested draft — **superseded (historical)**
 
@@ -170,7 +171,7 @@ Legal / Product must edit, replace, or reject. **Not** final model distribution 
 
 ### Unblocks
 
-Q-AS-12, Q-AS-19 (partial), G5 sign-off
+Q-AS-12, Q-AS-19 (partial) — *historical; G5 gate sign-off completed 2026-06-11*
 
 ---
 
@@ -190,7 +191,7 @@ What **license and redistribution constraints** (e.g. bartowski GGUF, QWON-hoste
 
 ### Legal answer (fill in)
 
-**See [approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval)** — intake **Answered** (This PR); **G5 gate sign-off** still **Open**.
+**See [approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval)** — intake **Answered** ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)); **current gate status:** [G5 sign-off Approved](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product) (2026-06-11).
 
 | Field | Your answer |
 | --- | --- |
@@ -237,20 +238,19 @@ Legal must edit, replace, or reject. **Not** final license sign-off.
 
 ### Unblocks
 
-G5 sign-off; informs Q-AS-19
+*Historical — G5 gate sign-off completed 2026-06-11*; informs Q-AS-19
 
 ---
 
-## G5 completion checklist (worksheet — not gate sign-off)
+## G5 completion checklist (historical intake worksheet — superseded)
 
 | Item | Status |
 | --- | --- |
 | Q-AS-11 Legal/Product decision draft prepared | **Done** — [approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval) |
 | Q-AS-12 Legal/Product decision draft prepared | **Done** — approved for intake recording |
-| Legal / Product **approved for intake recording** | **Done** — 2026-06-08 (This PR) |
-| Follow-up docs-only PR updates intake to **Answered** | **Done** — This PR |
-| **G5 gate sign-off worksheet** preparation | **Next** |
-| Checklist gate G5 marked Closed/Ready | **No** — separate sign-off gate |
+| Legal / Product **approved for intake recording** | **Done** — 2026-06-08 ([#149](https://github.com/studio-prospect/qwon-ai-ios/pull/149)) |
+| **G5 gate sign-off worksheet** | **Done** — [Approved](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product) 2026-06-11 ([#157](https://github.com/studio-prospect/qwon-ai-ios/pull/157)) |
+| Checklist gate G5 marked Closed/Ready | **Done** — see [sign-off record](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product) |
 | In-app download / M3 reopen / hosted distribution approved | **No** |
 | Public release approved | **No** |
 | Build `4` / TestFlight upload / ASC submission approved | **No** |
@@ -259,4 +259,4 @@ G5 sign-off; informs Q-AS-19
 
 ## Agent note
 
-Share with **Legal / Product** for **G5 gate sign-off**. **Do not** mark **G5 Closed/Ready**, reopen M3, or approve in-app download / hosted distribution from intake recording alone. Stay-allowed hygiene only.
+**Historical source worksheet only.** Current G5 authority: [G5 gate sign-off worksheet — Approved (2026-06-11)](./qwon_app_store_g5_gate_signoff_worksheet.md#sign-off-record-legal-product). **Do not** reopen M3, approve in-app download / hosted distribution / bundled weights, or approve public release / Build `4` from this worksheet. Next gate: **G6** (Q-AS-13 … Q-AS-15). Stay-allowed hygiene only.
