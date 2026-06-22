@@ -130,7 +130,7 @@ English worksheet: [G2 Metadata Worksheet](./qwon_app_store_g2_metadata_workshee
 | **サブタイトル** | Local-first AI on your iPhone |
 | **説明文** | QWON is a local-first cognitive runtime for iPhone. Keep inference and context on-device by default — not a cloud-only chat wrapper. Built for privacy-conscious users who want on-device AI assistance without default cloud dependency. |
 
-Product が編集・差し替え・却下すること。**承認済み App Store 文案ではない。**
+Historical at worksheet time: Product が編集・差し替え・却下する必要があった。**承認済み App Store 文案ではない。** Intake **Answered** ([#134](https://github.com/studio-prospect/qwon-ai-ios/pull/134))；現行 G2 gate は [sign-off Approved](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product)（[#136](https://github.com/studio-prospect/qwon-ai-ios/pull/136)）。
 
 ---
 

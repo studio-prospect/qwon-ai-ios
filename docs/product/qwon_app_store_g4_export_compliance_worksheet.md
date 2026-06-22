@@ -145,11 +145,11 @@ Does **public release** require updated **export compliance / encryption declara
 > - **Build `3` gap:** Close the documentation gap — RE/Legal verify encryption use on the candidate binary before relying on any prior TestFlight attestation.
 > - **Not** a final Legal conclusion; **not** ASC submission.
 
-Legal must edit, replace, or reject. **Not** export compliance final submission.
+Historical at worksheet time: Legal had to edit, replace, or reject before sign-off. **Not** export compliance final submission. Intake **Answered** ([#144](https://github.com/studio-prospect/qwon-ai-ios/pull/144)); current G4 gate readiness is recorded only by sign-off [#146](https://github.com/studio-prospect/qwon-ai-ios/pull/146).
 
-### Unblocks
+### Historically unblocked
 
-G4 sign-off
+*Historical at worksheet time:* gate sign-off followed intake recording. **Current:** G4 **Closed/Ready** — [sign-off Approved](./qwon_app_store_g4_gate_signoff_worksheet.md#sign-off-record-legal-re) ([#146](https://github.com/studio-prospect/qwon-ai-ios/pull/146)).
 
 ---
 
@@ -196,11 +196,11 @@ Who owns **ASC export compliance sign-off** for public App Store submission, and
 > - **Build `3` note:** Close doc gap — formalize whether build `3` encryption posture matches build `2` for planning purposes.
 > - **Not** operator execution of submit; **not** export compliance **submitted** from this worksheet.
 
-RE/Legal must edit, replace, or reject. **Not** ASC compliance final approval.
+Historical at worksheet time: RE/Legal had to edit, replace, or reject before sign-off. **Not** ASC compliance final approval. Intake **Answered** ([#144](https://github.com/studio-prospect/qwon-ai-ios/pull/144)); current G4 gate readiness is recorded only by sign-off [#146](https://github.com/studio-prospect/qwon-ai-ios/pull/146).
 
-### Unblocks
+### Historically unblocked
 
-G4 sign-off
+*Historical at worksheet time:* gate sign-off followed intake recording. **Current:** G4 **Closed/Ready** — [sign-off Approved](./qwon_app_store_g4_gate_signoff_worksheet.md#sign-off-record-legal-re) ([#146](https://github.com/studio-prospect/qwon-ai-ios/pull/146)).
 
 ---
 

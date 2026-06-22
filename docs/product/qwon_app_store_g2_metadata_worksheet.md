@@ -145,9 +145,9 @@ What **App Store title, subtitle, and primary description** copy are approved fo
 
 Historical at worksheet time: Product had to edit, replace, or reject before sign-off. **Not** approved App Store listing copy. Intake **Answered** ([#134](https://github.com/studio-prospect/qwon-ai-ios/pull/134)); current G2 gate readiness is recorded only by sign-off [#136](https://github.com/studio-prospect/qwon-ai-ios/pull/136).
 
-### Unblocks
+### Historically unblocked
 
-Q-AS-05, Q-AS-06, G2 sign-off
+*Historical at worksheet time:* intake rows Q-AS-05, Q-AS-06; gate sign-off followed separately. **Current:** G2 **Closed/Ready** — [sign-off Approved](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) ([#136](https://github.com/studio-prospect/qwon-ai-ios/pull/136)).
 
 ---
 
@@ -182,9 +182,9 @@ What **screenshot set and device sizes** (iPhone models, orientations) are requi
 > **Orientation:** Portrait only for v1.
 > **Set:** 3–5 screenshots — (1) chat/home, (2) on-device/local indicator or model placement note, (3) privacy/local-first value prop. No ASC upload from this worksheet.
 
-### Unblocks
+### Historically unblocked
 
-G2 sign-off
+*Historical at worksheet time:* gate sign-off followed intake recording. **Current:** G2 **Closed/Ready** — [sign-off Approved](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) ([#136](https://github.com/studio-prospect/qwon-ai-ios/pull/136)).
 
 ---
 
@@ -217,9 +217,9 @@ Which **locales** are in scope for metadata and screenshots at first public laun
 > **Primary:** English (U.S.) — `en-US` metadata and screenshots for first public release planning.
 > **Deferred:** Japanese (`ja`) and additional locales — **TBD**; not required for initial G2 intake unless Product selects otherwise.
 
-### Unblocks
+### Historically unblocked
 
-G2 sign-off
+*Historical at worksheet time:* gate sign-off followed intake recording. **Current:** G2 **Closed/Ready** — [sign-off Approved](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) ([#136](https://github.com/studio-prospect/qwon-ai-ios/pull/136)).
 
 ---
 
