@@ -1,7 +1,7 @@
 # QWON — App Store G3 Gate Sign-Off Worksheet
 
-**Last updated:** 2026-06-08 (Stay selected — G3 sign-off **Approved**; checklist gate **G3 Closed/Ready**)
-**Status:** **Sign-off recorded** — checklist gate **G3** **Closed/Ready** (This PR). **Not** final ASC privacy nutrition label publish. **Not** App Store public release approval. **Not** Build `4` approval. **TestFlight upload / tag / version bump / ASC submission not approved.**
+**Last updated:** 2026-06-22 (Post-merge PR reference hygiene — G3 sign-off **Approved**; checklist gate **G3 Closed/Ready**)
+**Status:** **Sign-off recorded** — checklist gate **G3** **Closed/Ready** ([#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)). **Not** final ASC privacy nutrition label publish. **Not** App Store public release approval. **Not** Build `4` approval. **TestFlight upload / tag / version bump / ASC submission not approved.**
 **Purpose:** Legal / Product decision surface to record whether checklist gate **G3 — Privacy nutrition labels** may move from **Open** to **Closed/Ready** after intake **Q-AS-07 … Q-AS-08** are **Answered**.
 
 Related: [Public readiness checklist — G3](./qwon_app_store_public_readiness_checklist.md#3-public-readiness-gates) · [Intake ledger — G3](./qwon_app_store_public_readiness_intake.md#g3--privacy-nutrition-labels) · [G3 privacy worksheet](./qwon_app_store_g3_privacy_worksheet.md) · [G3 プライバシー回答フォーム（日本語）](./qwon_app_store_g3_privacy_worksheet_ja.md) · [G2 gate sign-off](./qwon_app_store_g2_gate_signoff_worksheet.md#sign-off-record-product) · [G1 gate sign-off](./qwon_app_store_g1_gate_signoff_worksheet.md#sign-off-record-product) · [Next work queue — App Store readiness](./qwon_next_work_queue.md#app-store-public-release) · [M3 network memo](./qwon_m3_network_device_expectation_memo.md) · [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record)
@@ -25,7 +25,7 @@ Related: [Public readiness checklist — G3](./qwon_app_store_public_readiness_c
 
 | Field | Value |
 | --- | --- |
-| **Checklist gate** | **G3 — Privacy nutrition labels** — **Closed/Ready** (This PR) |
+| **Checklist gate** | **G3 — Privacy nutrition labels** — **Closed/Ready** ([#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)) |
 | **Intake questions** | **Q-AS-07 … Q-AS-08** — **Answered** ([#139](https://github.com/studio-prospect/qwon-ai-ios/pull/139)) |
 | **Intake ledger total** | **24 questions · 16 Unanswered · 8 Answered** |
 | **Answer detail** | [G3 Legal/Product answer details](./qwon_app_store_public_readiness_intake.md#g3-legalproduct-answer-details-2026-06-08) |
@@ -68,7 +68,7 @@ If **Needs revision**, record what must change and **do not** mark gate **G3** C
 | **Decision** | **Approved** |
 | **Owner** | Legal / Product |
 | **Date** | 2026-06-08 |
-| **Source** | This PR |
+| **Source** | [#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141) |
 | **Notes** | G3 privacy / nutrition label direction is sufficient for public-readiness planning; final ASC privacy label publish / public release / Build `4` / TestFlight upload / tag / version bump remain **not approved**. |
 
 ### Decision guide
@@ -87,7 +87,7 @@ If **Needs revision**, record what must change and **do not** mark gate **G3** C
 | --- | --- |
 | Q-AS-07 … Q-AS-08 **Answered** in intake | **Done** ([#139](https://github.com/studio-prospect/qwon-ai-ios/pull/139)) |
 | Legal / Product **Decision** recorded above | **Done** — **Approved** (2026-06-08) |
-| Follow-up docs-only PR updates checklist **G3** to Closed/Ready | **Done** — This PR |
+| Follow-up docs-only PR updates checklist **G3** to Closed/Ready | **Done** — [#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141) |
 | Final ASC privacy label publish approved | **No** |
 | Public release approved | **No** |
 | Build `4` / TestFlight upload / ASC submission approved | **No** |
