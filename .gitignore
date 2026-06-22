@@ -8,6 +8,7 @@ build/
 .build/
 *.xcuserstate
 *.xcworkspace/xcuserdata/
+*.code-workspace
 *.xcodeproj/xcuserdata/
 app/ios/PREXUS.xcodeproj/xcuserdata/
 app/ios/PREXUS.xcodeproj/xcshareddata/xcschemes/PREXUSLiteRTEval.xcscheme
