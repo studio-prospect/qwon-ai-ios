@@ -1,6 +1,6 @@
 # QWON — Next Work Queue
 
-**Last updated:** 2026-06-11 (Stay selected — G5 gate **Closed/Ready**; Gemma 4 E4B research complete; **not default**)
+**Last updated:** 2026-06-22 (Post-merge PR reference hygiene — G5 gate **Closed/Ready**; Gemma 4 E4B research complete; **not default**)
 **Status:** **Queue / guardrail only** — **Stay selected**; docs/readme/index/evidence hygiene only; no implementation authorization.
 **Purpose:** After Phase 4 rename docs are complete, classify what agents **may** do next vs what requires **product gates**. Prevents drift into ungated **build `4`**, project-container rename, or blind PREXUS cleanup.
 
@@ -334,7 +334,7 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 
 | Field | Detail |
 | --- | --- |
-| **Status** | **Checklist + intake ledger** — G1 + G2 + G3 + G4 + G5 **Closed/Ready**; G5 sign-off **Approved** (This PR); **Option A Mac+USB** interim posture; **12 Unanswered** (G6–G10); **public release not approved** |
+| **Status** | **Checklist + intake ledger** — G1 + G2 + G3 + G4 + G5 **Closed/Ready**; G5 sign-off **Approved** ([#157](https://github.com/studio-prospect/qwon-ai-ios/pull/157)); **Option A Mac+USB** interim posture; **12 Unanswered** (G6–G10); **public release not approved** |
 | **Trigger** | Product plans **public App Store horizon** (separate from Build `4`) |
 | **Required evidence** | **G6 intake** (Q-AS-13 … Q-AS-15) when scoped — **no** submission or code |
 | **Next stage** | **G6 worksheet preparation / intake** when Product scopes support–website–terms–privacy gate |

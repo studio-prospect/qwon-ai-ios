@@ -1,7 +1,7 @@
 # QWON — App Store G2 Gate Sign-Off Worksheet
 
-**Last updated:** 2026-06-08 (Stay selected — G2 sign-off **Approved**; checklist gate **G2 Closed/Ready**)
-**Status:** **Sign-off recorded** — checklist gate **G2** **Closed/Ready** (This PR). **Not** App Store public release approval. **Not** Build `4` approval. **TestFlight upload / tag / version bump not approved.**
+**Last updated:** 2026-06-22 (Post-merge PR reference hygiene — G2 sign-off **Approved**; checklist gate **G2 Closed/Ready**)
+**Status:** **Sign-off recorded** — checklist gate **G2** **Closed/Ready** ([#136](https://github.com/studio-prospect/qwon-ai-ios/pull/136)). **Not** App Store public release approval. **Not** Build `4` approval. **TestFlight upload / tag / version bump not approved.**
 **Purpose:** Product decision surface to record whether checklist gate **G2 — App Store metadata / screenshots / localization** may move from **Open** to **Closed/Ready** after intake **Q-AS-04 … Q-AS-06** are **Answered**.
 
 Related: [Public readiness checklist — G2](./qwon_app_store_public_readiness_checklist.md#3-public-readiness-gates) · [Intake ledger — G2](./qwon_app_store_public_readiness_intake.md#g2--app-store-metadata--screenshots--localization) · [G2 metadata worksheet](./qwon_app_store_g2_metadata_worksheet.md) · [G2 メタデータフォーム（日本語）](./qwon_app_store_g2_metadata_worksheet_ja.md) · [G1 gate sign-off](./qwon_app_store_g1_gate_signoff_worksheet.md#sign-off-record-product) · [Next work queue — App Store readiness](./qwon_next_work_queue.md#app-store-public-release) · [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record)
@@ -24,7 +24,7 @@ Related: [Public readiness checklist — G2](./qwon_app_store_public_readiness_c
 
 | Field | Value |
 | --- | --- |
-| **Checklist gate** | **G2 — App Store metadata and screenshots** — **Closed/Ready** (This PR) |
+| **Checklist gate** | **G2 — App Store metadata and screenshots** — **Closed/Ready** ([#136](https://github.com/studio-prospect/qwon-ai-ios/pull/136)) |
 | **Intake questions** | **Q-AS-04 … Q-AS-06** — **Answered** ([#134](https://github.com/studio-prospect/qwon-ai-ios/pull/134)) |
 | **Intake ledger total** | **24 questions · 18 Unanswered · 6 Answered** |
 | **Answer detail** | [G2 Product answer details](./qwon_app_store_public_readiness_intake.md#g2-product-answer-details-2026-06-08) |
@@ -65,7 +65,7 @@ If **Needs revision**, record what must change and **do not** mark gate **G2** C
 | **Decision** | **Approved** |
 | **Owner** | Product |
 | **Date** | 2026-06-08 |
-| **Source** | This PR |
+| **Source** | [#136](https://github.com/studio-prospect/qwon-ai-ios/pull/136) |
 | **Notes** | G2 metadata/screenshot/localization direction is sufficient for public-readiness planning; public release / Build `4` / ASC upload remain **not approved**. |
 
 ### Decision guide
@@ -84,7 +84,7 @@ If **Needs revision**, record what must change and **do not** mark gate **G2** C
 | --- | --- |
 | Q-AS-04 … Q-AS-06 **Answered** in intake | **Done** ([#134](https://github.com/studio-prospect/qwon-ai-ios/pull/134)) |
 | Product **Decision** recorded above | **Done** — **Approved** (2026-06-08) |
-| Follow-up docs-only PR updates checklist **G2** to Closed/Ready | **Done** — This PR |
+| Follow-up docs-only PR updates checklist **G2** to Closed/Ready | **Done** — [#136](https://github.com/studio-prospect/qwon-ai-ios/pull/136) |
 | Public release approved | **No** |
 | Build `4` / TestFlight upload / ASC metadata upload approved | **No** |
 
