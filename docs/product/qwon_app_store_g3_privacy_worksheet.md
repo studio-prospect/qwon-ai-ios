@@ -1,12 +1,15 @@
 # QWON — App Store G3 Privacy Nutrition Labels Worksheet (External Share)
 
-**Last updated:** 2026-06-08 (G3 Legal/Product **approved for intake recording** — gate sign-off **Open**)
-**Status:** **Worksheet with Legal/Product decision draft — approved for intake recording** — intake rows **Q-AS-07 … Q-AS-08** are **Answered** in the [intake ledger](./qwon_app_store_public_readiness_intake.md) (This PR). **Not** final App Store privacy nutrition label answers. **Not** ASC privacy label publish. **Not** App Store public release approval. **Not** Build `4` approval. **TestFlight upload / tag / version bump not approved.**
-**Purpose:** Shareable English worksheet for **Legal / Product** — G3 intake answers recorded; **G3 gate sign-off** remains **Open** (separate worksheet).
+**Last updated:** 2026-06-22 (Historical G3 intake source — Legal/Product **approved for intake recording** in [#139](https://github.com/studio-prospect/qwon-ai-ios/pull/139); current gate sign-off **Closed/Ready** in [#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141))
+**Status:** **Historical intake worksheet** with Legal/Product decision draft — intake rows **Q-AS-07 … Q-AS-08** are **Answered** in the [intake ledger](./qwon_app_store_public_readiness_intake.md) ([#139](https://github.com/studio-prospect/qwon-ai-ios/pull/139)). Current checklist gate **G3** is **Closed/Ready** in the [G3 gate sign-off worksheet](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) ([#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)). **Not** final App Store privacy nutrition label answers. **Not** ASC privacy label publish. **Not** App Store public release approval. **Not** Build `4` approval. **TestFlight upload / tag / version bump not approved.**
+**Purpose:** Historical shareable English worksheet for **Legal / Product** — G3 intake answers recorded in [#139](https://github.com/studio-prospect/qwon-ai-ios/pull/139); current gate readiness is governed by [G3 gate sign-off](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) ([#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)).
 
 日本語版: [G3 プライバシー回答フォーム（日本語）](./qwon_app_store_g3_privacy_worksheet_ja.md)
 
-Related: [Intake ledger — G3](./qwon_app_store_public_readiness_intake.md#g3--privacy-nutrition-labels) · [Checklist — G3](./qwon_app_store_public_readiness_checklist.md#3-public-readiness-gates) · [M3 network memo](./qwon_m3_network_device_expectation_memo.md) · [M3 distribution compliance memo](./qwon_m3_model_distribution_compliance_memo.md) · [M2 guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement) · [M3 spike outcome — Option A](./qwon_m3_spike_outcome_decision.md#decision-record) · [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record)
+Related: [Intake ledger — G3](./qwon_app_store_public_readiness_intake.md#g3--privacy-nutrition-labels) · [Checklist — G3](./qwon_app_store_public_readiness_checklist.md#3-public-readiness-gates) · [M3 network memo](./qwon_m3_network_device_expectation_memo.md) · [M3 distribution compliance memo](./qwon_m3_model_distribution_compliance_memo.md) · [M2 guided placement](./qwon_model_download_gguf_ux_plan.md#pr-m2-post-merge-verification-2026-06-04) · [M3 spike outcome — Option A](./qwon_m3_spike_outcome_decision.md#decision-record) · [Post-M3 decision record](./qwon_post_m3_next_lane_decision.md#decision-record)
+
+
+**Historical source note:** This worksheet is a **historical intake source** for G3 intake [#139](https://github.com/studio-prospect/qwon-ai-ios/pull/139). The current canonical gate decision is the [G3 gate sign-off worksheet](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) ([#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)), where checklist gate **G3** is **Closed/Ready**. Worksheet-time gate status references below are marked **historical at worksheet time**.
 
 ---
 
@@ -21,7 +24,7 @@ Related: [Intake ledger — G3](./qwon_app_store_public_readiness_intake.md#g3--
 | **Stay selected** | Worksheet maintenance does **not** lift Stay or authorize implementation |
 | **No product/code changes** | **No** app code, analytics SDK, diagnostics SDK, or data-collection behavior changes from this doc |
 | **Draft suggestions** | Superseded by [approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval) — historical suggested drafts below |
-| **Recording answers** | Legal / Product **approved for intake recording** 2026-06-08 — intake **Answered** (This PR); **G3 gate sign-off** still **Open** |
+| **Recording answers** | Legal / Product **approved for intake recording** 2026-06-08 — intake **Answered** ([#139](https://github.com/studio-prospect/qwon-ai-ios/pull/139)); historical at worksheet time: **Open** before sign-off; current **G3 Closed/Ready** ([#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)) |
 
 ---
 
@@ -29,13 +32,13 @@ Related: [Intake ledger — G3](./qwon_app_store_public_readiness_intake.md#g3--
 
 ## Legal/Product decision draft — **approved for intake recording**
 
-**Label:** **Legal/Product decision draft — approved for intake recording (2026-06-08)** — recorded in [intake ledger — G3 answer details](./qwon_app_store_public_readiness_intake.md#g3-legalproduct-answer-details-2026-06-08) (This PR; worksheet prep [#138](https://github.com/studio-prospect/qwon-ai-ios/pull/138)). **Not** G3 Closed/Ready. **Not** final ASC privacy label publish. **Not** public release or Build `4` approval.
+**Label:** **Legal/Product decision draft — approved for intake recording (2026-06-08)** — recorded in [intake ledger — G3 answer details](./qwon_app_store_public_readiness_intake.md#g3-legalproduct-answer-details-2026-06-08) ([#139](https://github.com/studio-prospect/qwon-ai-ios/pull/139); worksheet prep [#138](https://github.com/studio-prospect/qwon-ai-ios/pull/138)). Historical at worksheet time: **not** G3 Closed/Ready; current **G3 Closed/Ready** ([#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)). **Not** final ASC privacy label publish. **Not** public release or Build `4` approval.
 
 | Field | Value |
 | --- | --- |
 | **Prepared** | 2026-06-08 — docs-only hygiene under Stay ([#137](https://github.com/studio-prospect/qwon-ai-ios/pull/137); decision draft [#138](https://github.com/studio-prospect/qwon-ai-ios/pull/138)) |
-| **Intake ledger** | **Q-AS-07 … Q-AS-08 Answered** (This PR) |
-| **Next step** | **G3 gate sign-off worksheet preparation** → on Legal / Product approval, separate docs-only PR sets checklist gate **G3 Closed/Ready** |
+| **Intake ledger** | **Q-AS-07 … Q-AS-08 Answered** ([#139](https://github.com/studio-prospect/qwon-ai-ios/pull/139)) |
+| **Gate sign-off** | **Done** — preparation [#140](https://github.com/studio-prospect/qwon-ai-ios/pull/140) led to [G3 sign-off](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) ([#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)); checklist gate **G3 Closed/Ready** |
 
 ### Q-AS-07 — ASC privacy nutrition labels (build `3` posture)
 
@@ -50,7 +53,7 @@ Related: [Intake ledger — G3](./qwon_app_store_public_readiness_intake.md#g3--
 | **Diagnostics / crash data (draft)** | In-app runtime diagnostics **local-only** on build `3`; **no** crash-analytics SDK — **RE verify**. |
 | **Decision owner** | Legal (**approved for intake recording** — 2026-06-08) |
 | **Source** | Elaborated from [suggested draft § Q-AS-07](#q-as-07--asc-privacy-nutrition-labels-build-3-posture); aligned with [G1/G2 inputs](#g1--g2-inputs-for-g3-reference) |
-| **Constraints** | **Not** final ASC privacy label publish; **not** G3 Closed/Ready |
+| **Constraints** | **Not** final ASC privacy label publish; historical at worksheet time: **not** G3 Closed/Ready; current **G3 Closed/Ready** ([#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)) |
 
 ### Q-AS-08 — Privacy label impact of model download / cloud / diagnostics
 
@@ -66,7 +69,7 @@ Related: [Intake ledger — G3](./qwon_app_store_public_readiness_intake.md#g3--
 | **Dependency (draft)** | [Q-AS-11](./qwon_app_store_public_readiness_intake.md#g5--model-distribution-policy) model distribution policy; build `3` answers **do not automatically transfer**. |
 | **Decision owner** | Legal (**approved for intake recording** — 2026-06-08) |
 | **Source** | Elaborated from [suggested draft § Q-AS-08](#q-as-08--privacy-label-impact-of-model-download--cloud--diagnostics) · [M3 gate answers](./qwon_m3_gate_answer_intake.md) |
-| **Constraints** | **Not** final privacy label approval; **not** G3 Closed/Ready |
+| **Constraints** | **Not** final privacy label approval; historical at worksheet time: **not** G3 Closed/Ready; current **G3 Closed/Ready** ([#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)) |
 
 ---
 
@@ -79,12 +82,12 @@ Related: [Intake ledger — G3](./qwon_app_store_public_readiness_intake.md#g3--
 | **Intake ledger total** | **24 questions · 16 Unanswered · 8 Answered** |
 | **Active TestFlight** | **QWON `0.1.0 (3)`** — stable alpha · ASC **`6775685841`** · **no M3 downloader UI** |
 | **M3 posture** | **Option A selected** — compile-gated **default-off**; M3 lane **closed** · [decision record](./qwon_m3_spike_outcome_decision.md#decision-record) |
-| **Tester-visible model path** | M2 **Place GGUF via Mac** + USB — [guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement); app does **not** download GGUF in-app on build `3` |
+| **Tester-visible model path** | M2 **Place GGUF via Mac** + USB — [guided placement](./qwon_model_download_gguf_ux_plan.md#pr-m2-post-merge-verification-2026-06-04); app does **not** download GGUF in-app on build `3` |
 | **Public release approved?** | **No** |
 | **Build `4` approved?** | **No** |
 | **ASC privacy label publish approved?** | **No** |
-| **Checklist gate G3** | **Open** — gate sign-off pending |
-| **G3 intake** | **Q-AS-07 … Q-AS-08 Answered** (This PR) |
+| **Checklist gate G3** | **Closed/Ready** — [sign-off Approved](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) ([#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)) |
+| **G3 intake** | **Q-AS-07 … Q-AS-08 Answered** ([#139](https://github.com/studio-prospect/qwon-ai-ios/pull/139)) |
 
 ### G1 + G2 inputs for G3 (reference)
 
@@ -116,7 +119,7 @@ Constraints or deferrals:
 | --- | --- |
 | **Gate** | G3 |
 | **Owner** | Legal |
-| **Intake status** | **Answered** (This PR) |
+| **Intake status** | **Answered** ([#139](https://github.com/studio-prospect/qwon-ai-ios/pull/139)) |
 
 ### Question
 
@@ -124,7 +127,7 @@ What **ASC privacy nutrition label** answers apply for on-device LLM inference o
 
 ### Legal / Product answer (fill in)
 
-**See [approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval)** — intake **Answered** (This PR); **G3 gate sign-off** still **Open**.
+**See [approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval)** — intake **Answered** ([#139](https://github.com/studio-prospect/qwon-ai-ios/pull/139)); historical at worksheet time: **Open** before sign-off; current **G3 Closed/Ready** ([#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)).
 
 | Field | Your answer |
 | --- | --- |
@@ -136,7 +139,7 @@ What **ASC privacy nutrition label** answers apply for on-device LLM inference o
 | **Diagnostics / crash data** | Local-only runtime diagnostics; no crash-analytics SDK — RE verify. *(approved for intake recording)* |
 | **Decision owner** | Legal (approved for intake recording) |
 | **Source** | [Intake ledger — G3 answer details](./qwon_app_store_public_readiness_intake.md#g3-legalproduct-answer-details-2026-06-08) |
-| **Constraints** | Not final ASC publish; not G3 Closed/Ready |
+| **Constraints** | Not final ASC publish; historical at worksheet time: not G3 Closed/Ready; current G3 Closed/Ready ([#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)) |
 
 ### Suggested draft — **superseded (historical)**
 
@@ -150,11 +153,11 @@ What **ASC privacy nutrition label** answers apply for on-device LLM inference o
 > - **Diagnostics:** In-app runtime diagnostics are **local-only** on build `3`; no crash-analytics SDK assumed — **RE verify**.
 > - **Support contact:** In-app PII collection not assumed — deferred to [Q-AS-13](./qwon_app_store_public_readiness_intake.md#g6--support--website--terms--privacy-policy).
 
-Legal must edit, replace, or reject. **Not** final App Store privacy nutrition label answers.
+Historical at worksheet time: Legal had to edit, replace, or reject before sign-off. **Not** final App Store privacy nutrition label answers. Intake **Answered** ([#139](https://github.com/studio-prospect/qwon-ai-ios/pull/139)); current G3 gate readiness is recorded only by sign-off [#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141).
 
-### Unblocks
+### Historically unblocked
 
-Q-AS-08, G3 sign-off
+*Historical at worksheet time:* intake row Q-AS-08; gate sign-off followed separately. **Current:** G3 **Closed/Ready** — [sign-off Approved](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) ([#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)).
 
 ---
 
@@ -164,7 +167,7 @@ Q-AS-08, G3 sign-off
 | --- | --- |
 | **Gate** | G3 |
 | **Owner** | Legal |
-| **Intake status** | **Answered** (This PR) |
+| **Intake status** | **Answered** ([#139](https://github.com/studio-prospect/qwon-ai-ios/pull/139)) |
 
 ### Question
 
@@ -172,7 +175,7 @@ If a future **public build** includes in-app model download (M3 or successor), w
 
 ### Legal / Product answer (fill in)
 
-**See [approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval)** — intake **Answered** (This PR); **G3 gate sign-off** still **Open**.
+**See [approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval)** — intake **Answered** ([#139](https://github.com/studio-prospect/qwon-ai-ios/pull/139)); historical at worksheet time: **Open** before sign-off; current **G3 Closed/Ready** ([#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)).
 
 | Field | Your answer |
 | --- | --- |
@@ -184,7 +187,7 @@ If a future **public build** includes in-app model download (M3 or successor), w
 | **Diagnostics / support impact** | Additional label updates if crash analytics or support PII added — out of build `3` baseline. *(approved for intake recording)* |
 | **Decision owner** | Legal (approved for intake recording) |
 | **Source** | [Intake ledger — G3 answer details](./qwon_app_store_public_readiness_intake.md#g3-legalproduct-answer-details-2026-06-08) |
-| **Constraints** | Depends on Q-AS-11; not G3 Closed/Ready |
+| **Constraints** | Depends on Q-AS-11; historical at worksheet time: not G3 Closed/Ready; current G3 Closed/Ready ([#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)) |
 
 ### Suggested draft — **superseded (historical)**
 
@@ -199,11 +202,11 @@ If a future **public build** includes in-app model download (M3 or successor), w
 > - **Dependency:** [Q-AS-11](./qwon_app_store_public_readiness_intake.md#g5--model-distribution-policy) model distribution policy; **release-time ASC/privacy re-check** before any download build ([M3 gate answers](./qwon_m3_gate_answer_intake.md)).
 > - **Build `3` answers do not automatically transfer** — separate Legal review required.
 
-Legal must edit, replace, or reject. **Not** final privacy label approval.
+Historical at worksheet time: Legal had to edit, replace, or reject before sign-off. **Not** final privacy label approval. Intake **Answered** ([#139](https://github.com/studio-prospect/qwon-ai-ios/pull/139)); current G3 gate readiness is recorded only by sign-off [#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141).
 
-### Unblocks
+### Historically unblocked
 
-G3 sign-off; informs Q-AS-11 (model distribution)
+*Historical at worksheet time:* gate sign-off completed; informed Q-AS-11 (model distribution). **Current:** G3 **Closed/Ready** — [sign-off Approved](./qwon_app_store_g3_gate_signoff_worksheet.md#sign-off-record-legal) ([#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141)).
 
 ---
 
@@ -213,10 +216,10 @@ G3 sign-off; informs Q-AS-11 (model distribution)
 | --- | --- |
 | Q-AS-07 Legal/Product decision draft prepared | **Done** — [approved for intake recording](#legal-product-decision-draft--awaiting-explicit-approval) |
 | Q-AS-08 Legal/Product decision draft prepared | **Done** — approved for intake recording |
-| Legal / Product **approved for intake recording** | **Done** — 2026-06-08 (This PR) |
-| Follow-up docs-only PR updates intake to **Answered** | **Done** — This PR |
-| **G3 gate sign-off worksheet** preparation | **Next** |
-| Checklist gate G3 marked Closed/Ready | **No** — separate sign-off gate |
+| Legal / Product **approved for intake recording** | **Done** — 2026-06-08 ([#139](https://github.com/studio-prospect/qwon-ai-ios/pull/139)) |
+| Follow-up docs-only PR updates intake to **Answered** | **Done** — [#139](https://github.com/studio-prospect/qwon-ai-ios/pull/139) |
+| **G3 gate sign-off worksheet** preparation | **Done** — [#140](https://github.com/studio-prospect/qwon-ai-ios/pull/140) |
+| Checklist gate G3 marked Closed/Ready | **Done** — [#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141) |
 | Public release approved | **No** |
 | Build `4` / ASC privacy label publish approved | **No** |
 
@@ -224,4 +227,4 @@ G3 sign-off; informs Q-AS-11 (model distribution)
 
 ## Agent note
 
-Share with **Legal / Product** for **G3 gate sign-off** (next worksheet). Intake **Answered** (This PR) does **not** publish ASC privacy labels, approve public release, or mark **G3 Closed/Ready**. Stay-allowed hygiene only.
+Historical worksheet for **Legal / Product** G3 intake. Intake **Answered** ([#139](https://github.com/studio-prospect/qwon-ai-ios/pull/139)) did not publish ASC privacy labels, approve public release, Build `4`, ASC submission, or TestFlight operations; current checklist gate **G3 Closed/Ready** is recorded only by gate sign-off [#141](https://github.com/studio-prospect/qwon-ai-ios/pull/141). Stay-allowed hygiene only.
