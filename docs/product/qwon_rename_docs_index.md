@@ -98,6 +98,8 @@
 | [qwon_m3_rollback_release_gate_memo.md](./qwon_m3_rollback_release_gate_memo.md) | **M3 Gate 8–9 evidence** — Mac+USB rollback / Build `4` release boundary (**Ready**; Build `4` not approved) |
 | [qwon_app_store_public_readiness_checklist.md](./qwon_app_store_public_readiness_checklist.md) | **App Store public readiness** — G1–G10 checklist; **public release not approved**; Stay-allowed docs hygiene |
 | [qwon_app_store_public_readiness_intake.md](./qwon_app_store_public_readiness_intake.md) | **App Store readiness intake** — Q-AS-01…24 answer ledger; **12 Answered · 12 Unanswered** (G1–G5 **Closed/Ready**); not release approval |
+| [qwon_app_store_g6_support_web_policy_worksheet.md](./qwon_app_store_g6_support_web_policy_worksheet.md) | **G6 intake worksheet (EN)** — support / website / terms / privacy policy; **Working Draft / Awaiting Product + Legal answers**; gate **Open** |
+| [qwon_app_store_g6_support_web_policy_worksheet_ja.md](./qwon_app_store_g6_support_web_policy_worksheet_ja.md) | **G6 intake worksheet (JA)** — サポート・Web・ポリシー回答フォーム；**Unanswered**；gate sign-off は別 PR |
 | [public_repo_security_hardening.md](../requirements/public_repo_security_hardening.md) | **Public-repo security hygiene** — tracked identifier boundaries, ignored local artifacts, and pre-release security follow-ups |
 | [qwon_ui_polish_onboarding_plan.md](./qwon_ui_polish_onboarding_plan.md) | **First post-alpha scoped plan** — UI-1 complete, [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) |
 
