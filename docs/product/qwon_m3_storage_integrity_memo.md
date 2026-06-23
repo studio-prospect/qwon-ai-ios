@@ -4,7 +4,7 @@
 **Status:** **Evidence memo** — Batch B answers recorded and Gates **4–5** marked **Ready** for readiness tracking; **not** M3 implementation approval, **not** Build `4` approval.
 **Purpose:** Document open **iOS storage budget / available-space check** (Gate 4) and **partial download / resume / atomic move** (Gate 5) questions for a future **M3 in-app download** spike of `prexus-local-mvp.gguf`.
 
-Related: [M3 readiness checklist — Gates 4 & 5](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Batch B review](./qwon_m3_gate_readiness_review_plan.md#batch-b-review-session-2026-06-05) · [Integrity states](./qwon_model_download_gguf_ux_plan.md#integrity-and-storage-requirements) · [Gate 1/2 hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md) · [Gate 3 compliance memo](./qwon_m3_model_distribution_compliance_memo.md) · [M2 guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement) · [models/README.md](../../models/README.md)
+Related: [M3 readiness checklist — Gates 4 & 5](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Batch B review](./qwon_m3_gate_readiness_review_plan.md#batch-b-review-session-2026-06-05) · [Integrity states](./qwon_model_download_gguf_ux_plan.md#integrity-and-storage-requirements) · [Gate 1/2 hosting + checksum memo](./qwon_m3_model_hosting_checksum_memo.md) · [Gate 3 compliance memo](./qwon_m3_model_distribution_compliance_memo.md) · [M2 guided placement](./qwon_model_download_gguf_ux_plan.md#pr-m2-post-merge-verification-2026-06-04) · [models/README.md](../../models/README.md)
 
 ---
 
@@ -171,7 +171,7 @@ M3 spike must **not** remove or regress the known-good manual path:
 
 | Fallback | How |
 | --- | --- |
-| **Settings → Place GGUF via Mac** | M2 guided placement ([M2 section](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement)) |
+| **Settings → Place GGUF via Mac** | M2 guided placement ([M2 section](./qwon_model_download_gguf_ux_plan.md#pr-m2-post-merge-verification-2026-06-04)) |
 | **`push_local_model_to_device.sh`** | USB copy to `Documents/Models/prexus-local-mvp.gguf` |
 | **`fetch_local_model.sh`** | Mac-side fetch (dev ops; not in-app) |
 | **Gate 8 checklist row** | Formal rollback gate — see [M3 checklist Gate 8](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) |
