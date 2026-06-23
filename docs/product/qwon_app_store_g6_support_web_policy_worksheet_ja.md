@@ -2,7 +2,7 @@
 
 **最終更新:** 2026-06-22（G6 worksheet 準備 — intake **Unanswered**）
 **状態:** **Working Draft / Awaiting Product + Legal answers** — [intake ledger](./qwon_app_store_public_readiness_intake.md) の **Q-AS-13 … Q-AS-15** は **Unanswered** のまま。checklist gate **G6** は **Open**。**G6 Closed/Ready ではない**。**App Store 公開承認ではない**。**Build `4` 承認ではない**。**TestFlight upload / tag / version bump / ASC submission 承認ではない**。
-**目的:** **Product** と **Legal** 向け — **G6 — サポート連絡先 / website / terms / privacy policy** の回答収集用 historical intake worksheet。intake 記録は **別 docs-only PR**。**G6 gate sign-off** は回答確定後の **さらに別 docs-only PR**（本 PR では行わない）。
+**目的:** **Product** と **Legal** 向け — **G6 — サポート連絡先 / website / terms / privacy policy** の回答収集用 **現行 worksheet**（collection surface）。**正本の gate 状態は** [intake ledger — G6](./qwon_app_store_public_readiness_intake.md#g6--support--website--terms--privacy-policy) を参照。intake **Answered** 記録は **別 docs-only PR**。**G6 gate sign-off** は回答確定後の **さらに別 docs-only PR**（worksheet prep [#163](https://github.com/studio-prospect/qwon-ai-ios/pull/163) では行わない）。
 
 English worksheet: [G6 Support / Website / Terms / Privacy Policy Worksheet](./qwon_app_store_g6_support_web_policy_worksheet.md)
 

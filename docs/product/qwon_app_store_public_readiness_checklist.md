@@ -54,7 +54,7 @@ Each row is an **open decision or artifact** until Product/Legal/RE records comp
 | **G9** | **Release notes and versioning** | **Open** | [Q-AS-21 … Q-AS-22](./qwon_app_store_public_readiness_intake.md#g9--release-notes--versioning) |
 | **G10** | **Rollback / TestFlight fallback** | **Partial** | [Q-AS-23 … Q-AS-24](./qwon_app_store_public_readiness_intake.md#g10--rollback--testflight-fallback) · [rollback memo](./qwon_m3_rollback_release_gate_memo.md) |
 
-**Review owners:** Product (G1, G2, G8, G9), Legal (G3, G4, G5, G6), Release engineering (G4, G7, G10).
+**Review owners:** Product (G1, G2, G6, G8, G9), Legal (G3, G4, G5, G6), Release engineering (G4, G7, G10).
 
 ---
 

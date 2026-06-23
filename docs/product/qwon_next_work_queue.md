@@ -336,9 +336,9 @@ Each item below lists: **trigger**, **required evidence**, **first doc to read**
 | --- | --- |
 | **Status** | **Checklist + intake ledger** — G1 + G2 + G3 + G4 + G5 **Closed/Ready**; G5 sign-off **Approved** ([#157](https://github.com/studio-prospect/qwon-ai-ios/pull/157)); **Option A Mac+USB** interim posture; **12 Unanswered** (G6–G10); **public release not approved** |
 | **Trigger** | Product plans **public App Store horizon** (separate from Build `4`) |
-| **Required evidence** | [G6 worksheet](./qwon_app_store_g6_support_web_policy_worksheet.md) — Product / Legal stakeholder answers for Q-AS-13 … Q-AS-15 (**Unanswered**); **no** submission or code |
-| **Next stage** | Product / Legal complete G6 worksheet → follow-up docs-only PR records intake **Answered** → **G6 gate sign-off worksheet** in separate PR |
-| **First doc to read** | [G6 worksheet (EN)](./qwon_app_store_g6_support_web_policy_worksheet.md) · [G6 フォーム（日本語）](./qwon_app_store_g6_support_web_policy_worksheet_ja.md) · [Intake ledger — G6](./qwon_app_store_public_readiness_intake.md#g6--support--website--terms--privacy-policy) |
+| **Required evidence** | [Intake ledger — G6](./qwon_app_store_public_readiness_intake.md#g6--support--website--terms--privacy-policy) (**authoritative state** — Q-AS-13 … Q-AS-15 **Unanswered**) · [G6 worksheet](./qwon_app_store_g6_support_web_policy_worksheet.md) (Product / Legal collection surface only); **no** submission or code |
+| **Next stage** | Product / Legal complete [G6 worksheet](./qwon_app_store_g6_support_web_policy_worksheet.md) → follow-up docs-only PR records **Answered** in [intake ledger](./qwon_app_store_public_readiness_intake.md) → **G6 gate sign-off worksheet** in separate PR |
+| **First doc to read** | [Intake ledger — G6](./qwon_app_store_public_readiness_intake.md#g6--support--website--terms--privacy-policy) (canonical) · [G6 worksheet (EN)](./qwon_app_store_g6_support_web_policy_worksheet.md) · [G6 フォーム（日本語）](./qwon_app_store_g6_support_web_policy_worksheet_ja.md) (collection surface) |
 | **Do not start if** | Conflated with Build `4` / TestFlight upload; treating checklist as implementation authorization; **Stay** lifted without explicit lane record |
 
 ### App Store public release (historical stub)
