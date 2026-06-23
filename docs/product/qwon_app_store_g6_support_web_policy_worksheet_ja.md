@@ -31,7 +31,7 @@ English worksheet: [G6 Support / Website / Terms / Privacy Policy Worksheet](./q
 | 項目 | 値 |
 | --- | --- |
 | **準備日** | 2026-06-22 — Stay 下 docs-only hygiene |
-| **Intake ledger** | **Q-AS-13 … Q-AS-15** — **Unanswered**（本 PR では変更なし） |
+| **Intake ledger** | **Q-AS-13 … Q-AS-15** — **Unanswered**（follow-up answer-recording PR まで変更なし） |
 | **Checklist gate G6** | **Open** |
 | **Gate sign-off** | **未着手** — intake **Answered** 確定後の **別 docs-only PR** |
 | **次の段階** | Product / Legal が下記 stakeholder answer 欄を記入 → follow-up docs-only PR で [intake ledger](./qwon_app_store_public_readiness_intake.md) に **Answered** 記録 |

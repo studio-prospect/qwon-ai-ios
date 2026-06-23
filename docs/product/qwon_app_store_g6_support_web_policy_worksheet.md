@@ -31,7 +31,7 @@ Related: [Intake ledger — G6](./qwon_app_store_public_readiness_intake.md#g6--
 | Field | Value |
 | --- | --- |
 | **Prepared** | 2026-06-22 — docs-only hygiene under Stay |
-| **Intake ledger** | **Q-AS-13 … Q-AS-15** — **Unanswered** (unchanged by this PR) |
+| **Intake ledger** | **Q-AS-13 … Q-AS-15** — **Unanswered** (unchanged until the follow-up answer-recording PR) |
 | **Checklist gate G6** | **Open** |
 | **Gate sign-off** | **Not started** — follows confirmed intake answers in a **separate docs-only PR** |
 | **Next step** | Product / Legal complete stakeholder answer fields below → follow-up docs-only PR records **Answered** in [intake ledger](./qwon_app_store_public_readiness_intake.md) |
