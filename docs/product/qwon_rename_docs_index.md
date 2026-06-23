@@ -1,6 +1,6 @@
 # QWON Rename — Documentation Index
 
-**Last updated:** 2026-06-17 (Stay selected — public-repo security hardening linked; **not release approval**)
+**Last updated:** 2026-06-22 (G6 support / web / policy worksheet indexed — **not release approval**)
 **Purpose:** **Information architecture only** — where to start reading QWON rename / Phase 4 docs and in what order. Does **not** add new policy; it summarizes and links existing decisions.
 
 **Next decision (release vs post-alpha):** [Post-M3 next lane decision](./qwon_post_m3_next_lane_decision.md) · [QWON next work queue — decision checkpoint](./qwon_next_work_queue.md#next-decision-checkpoint) · [M3 spike outcome decision](./qwon_m3_spike_outcome_decision.md)
@@ -98,6 +98,8 @@
 | [qwon_m3_rollback_release_gate_memo.md](./qwon_m3_rollback_release_gate_memo.md) | **M3 Gate 8–9 evidence** — Mac+USB rollback / Build `4` release boundary (**Ready**; Build `4` not approved) |
 | [qwon_app_store_public_readiness_checklist.md](./qwon_app_store_public_readiness_checklist.md) | **App Store public readiness** — G1–G10 checklist; **public release not approved**; Stay-allowed docs hygiene |
 | [qwon_app_store_public_readiness_intake.md](./qwon_app_store_public_readiness_intake.md) | **App Store readiness intake** — Q-AS-01…24 answer ledger; **12 Answered · 12 Unanswered** (G1–G5 **Closed/Ready**); not release approval |
+| [qwon_app_store_g6_support_web_policy_worksheet.md](./qwon_app_store_g6_support_web_policy_worksheet.md) | **G6 collection worksheet (EN)** — Product / Legal answer surface; authoritative state remains [intake ledger — G6](./qwon_app_store_public_readiness_intake.md#g6--support--website--terms--privacy-policy); **Unanswered**; gate **Open** |
+| [qwon_app_store_g6_support_web_policy_worksheet_ja.md](./qwon_app_store_g6_support_web_policy_worksheet_ja.md) | **G6 collection worksheet (JA)** — 回答収集フォーム；正本は [intake ledger — G6](./qwon_app_store_public_readiness_intake.md#g6--support--website--terms--privacy-policy)；**Unanswered**；gate sign-off は別 PR |
 | [public_repo_security_hardening.md](../requirements/public_repo_security_hardening.md) | **Public-repo security hygiene** — tracked identifier boundaries, ignored local artifacts, and pre-release security follow-ups |
 | [qwon_ui_polish_onboarding_plan.md](./qwon_ui_polish_onboarding_plan.md) | **First post-alpha scoped plan** — UI-1 complete, [UI-2 need assessment](./qwon_ui_polish_onboarding_plan.md#ui-2-need-assessment-2026-06-03) |
 
