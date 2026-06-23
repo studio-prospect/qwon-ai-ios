@@ -4,7 +4,7 @@
 **Status:** **Evidence memo** — Batch D answers recorded and Gates **8–9** Ready for M3 spike planning; **not** M3 implementation approval, **not** Build `4` approval.
 **Purpose:** Document **Mac + USB rollback** requirements (Gate 8) and the **Build `4` / TestFlight release gate** (Gate 9) for M3 readiness. Evidence memos exist for all nine checklist rows; Gates **1–9** are Ready. M3 spike still requires a separate Codex scoped plan.
 
-Related: [M3 readiness checklist — Gates 8 & 9](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Batch D review](./qwon_m3_gate_readiness_review_plan.md#batch-d-review-session-2026-06-05) · [Fallback and rollback](./qwon_model_download_gguf_ux_plan.md#fallback-and-rollback) · [M2 guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement) · [TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [models/README.md](../../models/README.md)
+Related: [M3 readiness checklist — Gates 8 & 9](./qwon_model_download_gguf_ux_plan.md#m3-readiness-gate-checklist) · [Batch D review](./qwon_m3_gate_readiness_review_plan.md#batch-d-review-session-2026-06-05) · [Fallback and rollback](./qwon_model_download_gguf_ux_plan.md#fallback-and-rollback) · [M2 guided placement](./qwon_model_download_gguf_ux_plan.md#pr-m2-post-merge-verification-2026-06-04) · [TestFlight prep](./qwon_text_alpha_testflight_prep.md) · [models/README.md](../../models/README.md)
 
 ---
 
@@ -65,7 +65,7 @@ M3 in-app download — if ever implemented — is **additive**. The following M2
 | Check | Status |
 | --- | --- |
 | Guided placement screen reachable | **Verified** on simulator (M2 post-merge [#89](https://github.com/studio-prospect/qwon-ai-ios/pull/89)) |
-| Push script + fetch script documented | **Yes** — [models/README.md](../../models/README.md), M2 section in [UX plan](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement) |
+| Push script + fetch script documented | **Yes** — [models/README.md](../../models/README.md), M2 section in [UX plan](./qwon_model_download_gguf_ux_plan.md#pr-m2-post-merge-verification-2026-06-04) |
 | M3 spike must re-verify after any Settings/Local Runtime change | **Signed off direction** — include guided placement reachability, copy commands, model path, and Wang/Matisse expectations |
 | Spike must not change `LocalGGUFModelPlacement` lookup order | **Not approved** to change |
 

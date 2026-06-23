@@ -403,7 +403,7 @@ Answered in [Batch B storage and integrity answer details](./qwon_m3_gate_answer
 ### Exit criteria (batch C complete)
 
 1. Gates **6–7** marked **Ready** in sign-off PR.
-2. Gate **6** copy **consistent** with M2 [guided placement](./qwon_model_download_gguf_ux_plan.md#m2-guided-external-placement) — no contradictory “never uses network” claims after download ships.
+2. Gate **6** copy **consistent** with M2 [guided placement](./qwon_model_download_gguf_ux_plan.md#pr-m2-post-merge-verification-2026-06-04) — no contradictory “never uses network” claims after download ships.
 3. Gate **7** drafts in memo **replaced or adopted** as Product-approved final copy list (still docs-only until UI PR gated separately).
 4. Matisse download prompts do **not** imply device failure.
 
